@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 OPR/114.0.0.0" version="25.0.3">
+  <diagram name="Diagrama de Estados para Gerenciamento de Imóveis" id="zcBT7ApXurKBSQW9CrZ-">
+    <mxGraphModel dx="1159" dy="628" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="z9OsJITNBQ5fd6RahBxx-365" style="ellipse;whiteSpace=wrap;html=1;fillColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="205" y="90" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="z9OsJITNBQ5fd6RahBxx-366" value="Disponível" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="160" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="z9OsJITNBQ5fd6RahBxx-385" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="z9OsJITNBQ5fd6RahBxx-367" target="z9OsJITNBQ5fd6RahBxx-383">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="z9OsJITNBQ5fd6RahBxx-367" value="Reservado" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="350" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="z9OsJITNBQ5fd6RahBxx-368" value="Vendido" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="430" y="435" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="z9OsJITNBQ5fd6RahBxx-382" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="z9OsJITNBQ5fd6RahBxx-369" target="z9OsJITNBQ5fd6RahBxx-378">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="z9OsJITNBQ5fd6RahBxx-369" value="Inativo" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="230" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="z9OsJITNBQ5fd6RahBxx-371" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="z9OsJITNBQ5fd6RahBxx-365" target="z9OsJITNBQ5fd6RahBxx-366">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="z9OsJITNBQ5fd6RahBxx-372" value="Proposta Recebida" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="z9OsJITNBQ5fd6RahBxx-366" target="z9OsJITNBQ5fd6RahBxx-367">
+          <mxGeometry x="-0.0667" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="z9OsJITNBQ5fd6RahBxx-373" value="Pagamento Confirmado" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="z9OsJITNBQ5fd6RahBxx-383" target="z9OsJITNBQ5fd6RahBxx-368">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="340" y="480" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="z9OsJITNBQ5fd6RahBxx-374" value="Retirado do Mercado" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="z9OsJITNBQ5fd6RahBxx-366" target="z9OsJITNBQ5fd6RahBxx-369">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="z9OsJITNBQ5fd6RahBxx-375" value="Contrato Encerrado" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="z9OsJITNBQ5fd6RahBxx-368" target="z9OsJITNBQ5fd6RahBxx-369">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="z9OsJITNBQ5fd6RahBxx-376" value="Reativado" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="z9OsJITNBQ5fd6RahBxx-369" target="z9OsJITNBQ5fd6RahBxx-366">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="320" y="220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="z9OsJITNBQ5fd6RahBxx-378" value="" style="ellipse;html=1;shape=endState;fillColor=strokeColor;" vertex="1" parent="1">
+          <mxGeometry x="750" y="235" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="z9OsJITNBQ5fd6RahBxx-386" value="Transação cancelada" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="z9OsJITNBQ5fd6RahBxx-383" target="z9OsJITNBQ5fd6RahBxx-366">
+          <mxGeometry x="0.2174" relative="1" as="geometry">
+            <mxPoint x="50" y="180" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="90" y="455" />
+              <mxPoint x="90" y="180" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="z9OsJITNBQ5fd6RahBxx-383" value="" style="rhombus;" vertex="1" parent="1">
+          <mxGeometry x="205" y="440" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="z9OsJITNBQ5fd6RahBxx-388" value="Diagrama de Estado do Imóvel" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="80" y="50" width="190" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
