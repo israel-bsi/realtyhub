@@ -3,8 +3,36 @@
   "WorkspaceRootPath": "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7C0BDC08-6A4E-4C8B-8346-151C3D9B9F58}|RealtyHub.ApiService\\RealtyHub.ApiService.csproj|c:\\users\\maste\\source\\repos\\realtyhub\\src\\realtyhub\\realtyhub.apiservice\\handlers\\customerhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7C0BDC08-6A4E-4C8B-8346-151C3D9B9F58}|RealtyHub.ApiService\\RealtyHub.ApiService.csproj|solutionrelative:realtyhub.apiservice\\handlers\\customerhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7C0BDC08-6A4E-4C8B-8346-151C3D9B9F58}|RealtyHub.ApiService\\RealtyHub.ApiService.csproj|c:\\users\\maste\\source\\repos\\realtyhub\\src\\realtyhub\\realtyhub.apiservice\\data\\mappings\\propertyimagemapping.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7C0BDC08-6A4E-4C8B-8346-151C3D9B9F58}|RealtyHub.ApiService\\RealtyHub.ApiService.csproj|solutionrelative:realtyhub.apiservice\\data\\mappings\\propertyimagemapping.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4CAB8F0F-8228-436A-B50D-498B1421D31E}|RealtyHub.Core\\RealtyHub.Core.csproj|c:\\users\\maste\\source\\repos\\realtyhub\\src\\realtyhub\\realtyhub.core\\models\\propertyimage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4CAB8F0F-8228-436A-B50D-498B1421D31E}|RealtyHub.Core\\RealtyHub.Core.csproj|solutionrelative:realtyhub.core\\models\\propertyimage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7C0BDC08-6A4E-4C8B-8346-151C3D9B9F58}|RealtyHub.ApiService\\RealtyHub.ApiService.csproj|c:\\users\\maste\\source\\repos\\realtyhub\\src\\realtyhub\\realtyhub.apiservice\\data\\mappings\\customermapping.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7C0BDC08-6A4E-4C8B-8346-151C3D9B9F58}|RealtyHub.ApiService\\RealtyHub.ApiService.csproj|solutionrelative:realtyhub.apiservice\\data\\mappings\\customermapping.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7C0BDC08-6A4E-4C8B-8346-151C3D9B9F58}|RealtyHub.ApiService\\RealtyHub.ApiService.csproj|c:\\users\\maste\\source\\repos\\realtyhub\\src\\realtyhub\\realtyhub.apiservice\\data\\mappings\\propertymapping.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7C0BDC08-6A4E-4C8B-8346-151C3D9B9F58}|RealtyHub.ApiService\\RealtyHub.ApiService.csproj|solutionrelative:realtyhub.apiservice\\data\\mappings\\propertymapping.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4CAB8F0F-8228-436A-B50D-498B1421D31E}|RealtyHub.Core\\RealtyHub.Core.csproj|c:\\users\\maste\\source\\repos\\realtyhub\\src\\realtyhub\\realtyhub.core\\models\\entity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4CAB8F0F-8228-436A-B50D-498B1421D31E}|RealtyHub.Core\\RealtyHub.Core.csproj|solutionrelative:realtyhub.core\\models\\entity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4CAB8F0F-8228-436A-B50D-498B1421D31E}|RealtyHub.Core\\RealtyHub.Core.csproj|c:\\users\\maste\\source\\repos\\realtyhub\\src\\realtyhub\\realtyhub.core\\enums\\epropertytype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4CAB8F0F-8228-436A-B50D-498B1421D31E}|RealtyHub.Core\\RealtyHub.Core.csproj|solutionrelative:realtyhub.core\\enums\\epropertytype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4CAB8F0F-8228-436A-B50D-498B1421D31E}|RealtyHub.Core\\RealtyHub.Core.csproj|c:\\users\\maste\\source\\repos\\realtyhub\\src\\realtyhub\\realtyhub.core\\requests\\properties\\updatepropertyrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4CAB8F0F-8228-436A-B50D-498B1421D31E}|RealtyHub.Core\\RealtyHub.Core.csproj|solutionrelative:realtyhub.core\\requests\\properties\\updatepropertyrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4CAB8F0F-8228-436A-B50D-498B1421D31E}|RealtyHub.Core\\RealtyHub.Core.csproj|c:\\users\\maste\\source\\repos\\realtyhub\\src\\realtyhub\\realtyhub.core\\requests\\properties\\createpropertyrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4CAB8F0F-8228-436A-B50D-498B1421D31E}|RealtyHub.Core\\RealtyHub.Core.csproj|solutionrelative:realtyhub.core\\requests\\properties\\createpropertyrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,8 +42,99 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PropertyImage.cs",
+              "DocumentMoniker": "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.Core\\Models\\PropertyImage.cs",
+              "RelativeDocumentMoniker": "RealtyHub.Core\\Models\\PropertyImage.cs",
+              "ToolTip": "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.Core\\Models\\PropertyImage.cs",
+              "RelativeToolTip": "RealtyHub.Core\\Models\\PropertyImage.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-28T22:12:19.716Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PropertyImageMapping.cs",
+              "DocumentMoniker": "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.ApiService\\Data\\Mappings\\PropertyImageMapping.cs",
+              "RelativeDocumentMoniker": "RealtyHub.ApiService\\Data\\Mappings\\PropertyImageMapping.cs",
+              "ToolTip": "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.ApiService\\Data\\Mappings\\PropertyImageMapping.cs",
+              "RelativeToolTip": "RealtyHub.ApiService\\Data\\Mappings\\PropertyImageMapping.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-28T22:12:15.306Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CustomerMapping.cs",
+              "DocumentMoniker": "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.ApiService\\Data\\Mappings\\CustomerMapping.cs",
+              "RelativeDocumentMoniker": "RealtyHub.ApiService\\Data\\Mappings\\CustomerMapping.cs",
+              "ToolTip": "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.ApiService\\Data\\Mappings\\CustomerMapping.cs",
+              "RelativeToolTip": "RealtyHub.ApiService\\Data\\Mappings\\CustomerMapping.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-28T22:12:12.434Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PropertyMapping.cs",
+              "DocumentMoniker": "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.ApiService\\Data\\Mappings\\PropertyMapping.cs",
+              "RelativeDocumentMoniker": "RealtyHub.ApiService\\Data\\Mappings\\PropertyMapping.cs",
+              "ToolTip": "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.ApiService\\Data\\Mappings\\PropertyMapping.cs",
+              "RelativeToolTip": "RealtyHub.ApiService\\Data\\Mappings\\PropertyMapping.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAgwC8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-28T22:11:37.904Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Entity.cs",
+              "DocumentMoniker": "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.Core\\Models\\Entity.cs",
+              "RelativeDocumentMoniker": "RealtyHub.Core\\Models\\Entity.cs",
+              "ToolTip": "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.Core\\Models\\Entity.cs",
+              "RelativeToolTip": "RealtyHub.Core\\Models\\Entity.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-28T22:11:17.608Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "EPropertyType.cs",
+              "DocumentMoniker": "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.Core\\Enums\\EPropertyType.cs",
+              "RelativeDocumentMoniker": "RealtyHub.Core\\Enums\\EPropertyType.cs",
+              "ToolTip": "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.Core\\Enums\\EPropertyType.cs",
+              "RelativeToolTip": "RealtyHub.Core\\Enums\\EPropertyType.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-28T22:08:15.68Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "UpdatePropertyRequest.cs",
+              "DocumentMoniker": "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.Core\\Requests\\Properties\\UpdatePropertyRequest.cs",
+              "RelativeDocumentMoniker": "RealtyHub.Core\\Requests\\Properties\\UpdatePropertyRequest.cs",
+              "ToolTip": "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.Core\\Requests\\Properties\\UpdatePropertyRequest.cs",
+              "RelativeToolTip": "RealtyHub.Core\\Requests\\Properties\\UpdatePropertyRequest.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAtwBYAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-28T22:06:04.469Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
@@ -26,15 +145,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "CustomerHandler.cs",
-              "DocumentMoniker": "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.ApiService\\Handlers\\CustomerHandler.cs",
-              "RelativeDocumentMoniker": "RealtyHub.ApiService\\Handlers\\CustomerHandler.cs",
-              "ToolTip": "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.ApiService\\Handlers\\CustomerHandler.cs",
-              "RelativeToolTip": "RealtyHub.ApiService\\Handlers\\CustomerHandler.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAIUAAAABAAAAAAAAAA==",
+              "DocumentIndex": 7,
+              "Title": "CreatePropertyRequest.cs",
+              "DocumentMoniker": "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.Core\\Requests\\Properties\\CreatePropertyRequest.cs",
+              "RelativeDocumentMoniker": "RealtyHub.Core\\Requests\\Properties\\CreatePropertyRequest.cs",
+              "ToolTip": "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.Core\\Requests\\Properties\\CreatePropertyRequest.cs",
+              "RelativeToolTip": "RealtyHub.Core\\Requests\\Properties\\CreatePropertyRequest.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAQwCgAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-28T19:15:28.117Z",
+              "WhenOpened": "2024-12-28T22:05:07.379Z",
               "EditorCaption": ""
             }
           ]

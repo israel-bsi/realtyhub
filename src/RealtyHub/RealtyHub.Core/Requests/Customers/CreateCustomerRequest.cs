@@ -7,7 +7,7 @@ namespace RealtyHub.Core.Requests.Customers;
 public class CreateCustomerRequest : Request
 {
     [Required(ErrorMessage = "Nome é um campo obrigatório")]
-    [MaxLength(80, ErrorMessage = "O título deve conter até 80 caracteres")]
+    [MaxLength(80, ErrorMessage = "O nome deve conter até 80 caracteres")]
     public string Name { get; set; } = string.Empty;
     [Required(ErrorMessage = "Email é um campo obrigatório")]
     [EmailAddress(ErrorMessage = "Email inválido")]

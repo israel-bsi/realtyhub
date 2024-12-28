@@ -31,7 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <InternalsVisibleTo Include="RealtyHub.Tests"/>
+    <InternalsVisibleTo Include="RealtyHub.Tests" />
   </ItemGroup>
 
 </Project>

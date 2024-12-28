@@ -7,7 +7,7 @@ using RealtyHub.ApiService.Data;
 
 namespace RealtyHub.Tests;
 
-public class RealtyHubApiTests : WebApplicationFactory<Program>
+public class RealtyHubApiTests : WebApplicationFactory<ApiService.Program>
 {
     protected override IHost CreateHost(IHostBuilder builder)
     {

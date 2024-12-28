@@ -1,8 +1,8 @@
+using System.Globalization;
 using RealtyHub.ApiService;
 using RealtyHub.ApiService.Common.Api;
 using RealtyHub.ApiService.Endpoints;
 using RealtyHub.ServiceDefaults;
-using System.Globalization;
 
 CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("pt-BR");
 CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("pt-BR");
@@ -31,4 +31,7 @@ app.MapDefaultEndpoints();
 
 app.Run();
 
-public partial class Program {}
+namespace RealtyHub.ApiService
+{
+    public partial class Program;
+}

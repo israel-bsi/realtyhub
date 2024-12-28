@@ -21,6 +21,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) :
     >(options)
 {
     public DbSet<Customer> Customers { get; set; } = null!;
+    public DbSet<Property> Properties { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

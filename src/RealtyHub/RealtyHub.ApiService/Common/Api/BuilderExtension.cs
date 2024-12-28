@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using RealtyHub.ApiService.Data;
 using RealtyHub.ApiService.Handlers;
 using RealtyHub.ApiService.Models;
@@ -25,7 +26,11 @@ public static class BuilderExtension
     public static void AddDocumentation(this WebApplicationBuilder builder)
     {
         builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen(x => { x.CustomSchemaIds(n => n.FullName); });
+        builder.Services.AddSwaggerGen(options =>
+        {
+            options.OrderActionsBy((apiDesc) => apiDesc.HttpMethod);
+            options.CustomSchemaIds(n => n.FullName);
+        });
     }
     
     public static void AddSecurity(this WebApplicationBuilder builder)
@@ -81,5 +86,6 @@ public static class BuilderExtension
         builder.Services.AddProblemDetails();
 
         builder.Services.AddTransient<ICustomerHandler, CustomerHandler>();
+        builder.Services.AddTransient<IPropertyHandler, PropertyHandler>();
     }
 }
