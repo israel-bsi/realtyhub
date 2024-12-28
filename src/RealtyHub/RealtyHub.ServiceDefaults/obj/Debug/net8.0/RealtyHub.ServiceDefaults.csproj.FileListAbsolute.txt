@@ -1,0 +1,13 @@
+C:\Users\maste\source\repos\RealtyHub\src\RealtyHub\RealtyHub.ServiceDefaults\bin\Debug\net8.0\RealtyHub.ServiceDefaults.deps.json
+C:\Users\maste\source\repos\RealtyHub\src\RealtyHub\RealtyHub.ServiceDefaults\bin\Debug\net8.0\RealtyHub.ServiceDefaults.dll
+C:\Users\maste\source\repos\RealtyHub\src\RealtyHub\RealtyHub.ServiceDefaults\bin\Debug\net8.0\RealtyHub.ServiceDefaults.pdb
+C:\Users\maste\source\repos\RealtyHub\src\RealtyHub\RealtyHub.ServiceDefaults\obj\Debug\net8.0\RealtyHub.ServiceDefaults.csproj.AssemblyReference.cache
+C:\Users\maste\source\repos\RealtyHub\src\RealtyHub\RealtyHub.ServiceDefaults\obj\Debug\net8.0\RealtyHub.ServiceDefaults.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\maste\source\repos\RealtyHub\src\RealtyHub\RealtyHub.ServiceDefaults\obj\Debug\net8.0\RealtyHub.ServiceDefaults.AssemblyInfoInputs.cache
+C:\Users\maste\source\repos\RealtyHub\src\RealtyHub\RealtyHub.ServiceDefaults\obj\Debug\net8.0\RealtyHub.ServiceDefaults.AssemblyInfo.cs
+C:\Users\maste\source\repos\RealtyHub\src\RealtyHub\RealtyHub.ServiceDefaults\obj\Debug\net8.0\RealtyHub.ServiceDefaults.csproj.CoreCompileInputs.cache
+C:\Users\maste\source\repos\RealtyHub\src\RealtyHub\RealtyHub.ServiceDefaults\obj\Debug\net8.0\RealtyHub.ServiceDefaults.sourcelink.json
+C:\Users\maste\source\repos\RealtyHub\src\RealtyHub\RealtyHub.ServiceDefaults\obj\Debug\net8.0\RealtyHub.ServiceDefaults.dll
+C:\Users\maste\source\repos\RealtyHub\src\RealtyHub\RealtyHub.ServiceDefaults\obj\Debug\net8.0\refint\RealtyHub.ServiceDefaults.dll
+C:\Users\maste\source\repos\RealtyHub\src\RealtyHub\RealtyHub.ServiceDefaults\obj\Debug\net8.0\RealtyHub.ServiceDefaults.pdb
+C:\Users\maste\source\repos\RealtyHub\src\RealtyHub\RealtyHub.ServiceDefaults\obj\Debug\net8.0\ref\RealtyHub.ServiceDefaults.dll
