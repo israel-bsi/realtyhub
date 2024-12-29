@@ -2,6 +2,7 @@
 using RealtyHub.ApiService.Endpoints.Customers;
 using RealtyHub.ApiService.Endpoints.Identity;
 using RealtyHub.ApiService.Endpoints.Properties;
+using RealtyHub.ApiService.Endpoints.Viewings;
 using RealtyHub.ApiService.Models;
 
 namespace RealtyHub.ApiService.Endpoints;
@@ -43,6 +44,15 @@ public static class Endpoint
             .MapEndpoint<DeletePropertyEndpoint>()
             .MapEndpoint<GetPropertyByIdEndpoint>()
             .MapEndpoint<GetAllPropertiesEndpoint>();
+
+        endpoints.MapGroup("v1/viewings")
+            .WithTags("Viewings")
+            .RequireAuthorization()
+            .MapEndpoint<CreateViewingEndpoint>()
+            .MapEndpoint<UpdateViewingEndpoint>()
+            .MapEndpoint<DeleteViewingEndpoint>()
+            .MapEndpoint<GetViewingByIdEndpoint>()
+            .MapEndpoint<GetAllViewingsEndpoint>();
     }
 
     private static IEndpointRouteBuilder MapEndpoint<TEndpoint>(this IEndpointRouteBuilder app)

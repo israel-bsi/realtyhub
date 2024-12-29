@@ -1,0 +1,36 @@
+﻿using System.Security.Claims;
+using RealtyHub.ApiService.Common.Api;
+using RealtyHub.Core.Handlers;
+using RealtyHub.Core.Models;
+using RealtyHub.Core.Requests.Viewings;
+using RealtyHub.Core.Responses;
+
+namespace RealtyHub.ApiService.Endpoints.Viewings;
+
+public class DeleteViewingEndpoint : IEndpoint
+{
+    public static void Map(IEndpointRouteBuilder app)
+        => app.MapDelete("/{id:long}", HandlerAsync)
+            .WithName("Viewings: Delete")
+            .WithSummary("Deleta uma visita")
+            .WithDescription("Deleta uma visita")
+            .WithOrder(3)
+            .Produces<Response<Viewing?>>();
+
+    private static async Task<IResult> HandlerAsync(
+        ClaimsPrincipal user,
+        IViewingHandler handler,
+        long id)
+    {
+        var request = new DeleteViewingRequest
+        {
+            Id = id,
+            UserId = user.Identity?.Name ?? string.Empty
+        };
+        var result = await handler.DeleteAsync(request);
+
+        return result.IsSuccess
+            ? Results.Ok(result)
+            : Results.BadRequest(result);
+    }
+}

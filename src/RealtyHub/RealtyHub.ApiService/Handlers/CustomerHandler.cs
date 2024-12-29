@@ -43,9 +43,9 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
         {
             var customer = await context
                 .Customers
-                .FirstOrDefaultAsync(c => c.Id == request.Id);
+                .FirstOrDefaultAsync(c => c.Id == request.Id && c.IsActive);
 
-            if (customer is null || customer.IsActive == false)
+            if (customer is null)
                 return new Response<Customer?>(null, 404, "Cliente não encontrado");
 
             customer.Name = request.Name;
@@ -60,6 +60,7 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
 
             context.Customers.Update(customer);
             await context.SaveChangesAsync();
+
             return new Response<Customer?>(customer, message: "Cliente atualizado com sucesso");
         }
         catch (Exception ex)
@@ -74,13 +75,15 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
         {
             var customer = await context
                 .Customers
-                .FirstOrDefaultAsync(c => c.Id == request.Id);
+                .FirstOrDefaultAsync(c => c.Id == request.Id && c.IsActive);
 
-            if (customer is null || customer.IsActive == false)
+            if (customer is null)
                 return new Response<Customer?>(null, 404, "Cliente não encontrado");
 
             customer.IsActive = false;
+
             await context.SaveChangesAsync();
+
             return new Response<Customer?>(customer, message: "Cliente excluído com sucesso");
         }
         catch (Exception ex)
@@ -95,9 +98,9 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
         {
             var customer = await context
                 .Customers
-                .FirstOrDefaultAsync(c => c.Id == request.Id);
+                .FirstOrDefaultAsync(c => c.Id == request.Id && c.IsActive);
 
-            return customer is null || customer.IsActive == false
+            return customer is null
                 ? new Response<Customer?>(null, 404, "Cliente não encontrado")
                 : new Response<Customer?>(customer);
         }
