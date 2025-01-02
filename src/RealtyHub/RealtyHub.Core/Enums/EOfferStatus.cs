@@ -2,8 +2,7 @@
 
 public enum EOfferStatus
 {
-    Recieved = 1,
+    Analysis = 1,
     Accepted = 2,
-    Analysis = 3,
-    Rejected = 4
+    Rejected = 3
 }

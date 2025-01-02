@@ -90,6 +90,7 @@ public static class BuilderExtension
         builder.Services.AddTransient<ICustomerHandler, CustomerHandler>();
         builder.Services.AddTransient<IPropertyHandler, PropertyHandler>();
         builder.Services.AddTransient<IViewingHandler, ViewingHandler>();
+        builder.Services.AddTransient<IOfferHandler, OfferHandler>();
 
         builder.Services.AddTransient<IViaCepService, ViaCepService>();
     }

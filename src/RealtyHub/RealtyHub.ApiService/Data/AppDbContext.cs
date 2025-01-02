@@ -23,6 +23,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) :
     public DbSet<Customer> Customers { get; set; } = null!;
     public DbSet<Property> Properties { get; set; } = null!;
     public DbSet<Viewing> Viewing { get; set; } = null!;
+    public DbSet<Offer> Offers { get; set; } = null!;
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

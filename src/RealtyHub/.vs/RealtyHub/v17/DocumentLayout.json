@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4CAB8F0F-8228-436A-B50D-498B1421D31E}|RealtyHub.Core\\RealtyHub.Core.csproj|c:\\users\\maste\\source\\repos\\realtyhub\\src\\realtyhub\\realtyhub.core\\handlers\\iofferhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4CAB8F0F-8228-436A-B50D-498B1421D31E}|RealtyHub.Core\\RealtyHub.Core.csproj|solutionrelative:realtyhub.core\\handlers\\iofferhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7C0BDC08-6A4E-4C8B-8346-151C3D9B9F58}|RealtyHub.ApiService\\RealtyHub.ApiService.csproj|c:\\users\\maste\\source\\repos\\realtyhub\\src\\realtyhub\\realtyhub.apiservice\\handlers\\offerhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7C0BDC08-6A4E-4C8B-8346-151C3D9B9F58}|RealtyHub.ApiService\\RealtyHub.ApiService.csproj|solutionrelative:realtyhub.apiservice\\handlers\\offerhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4CAB8F0F-8228-436A-B50D-498B1421D31E}|RealtyHub.Core\\RealtyHub.Core.csproj|c:\\users\\maste\\source\\repos\\realtyhub\\src\\realtyhub\\realtyhub.core\\models\\offer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4CAB8F0F-8228-436A-B50D-498B1421D31E}|RealtyHub.Core\\RealtyHub.Core.csproj|solutionrelative:realtyhub.core\\models\\offer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4CAB8F0F-8228-436A-B50D-498B1421D31E}|RealtyHub.Core\\RealtyHub.Core.csproj|c:\\users\\maste\\source\\repos\\realtyhub\\src\\realtyhub\\realtyhub.core\\enums\\eofferstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4CAB8F0F-8228-436A-B50D-498B1421D31E}|RealtyHub.Core\\RealtyHub.Core.csproj|solutionrelative:realtyhub.core\\enums\\eofferstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,50 +34,12 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
             },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "IOfferHandler.cs",
-              "DocumentMoniker": "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.Core\\Handlers\\IOfferHandler.cs",
-              "RelativeDocumentMoniker": "RealtyHub.Core\\Handlers\\IOfferHandler.cs",
-              "ToolTip": "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.Core\\Handlers\\IOfferHandler.cs",
-              "RelativeToolTip": "RealtyHub.Core\\Handlers\\IOfferHandler.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-02T13:49:06.287Z",
-              "EditorCaption": ""
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "Orientation": 0,
-      "VerticalTabListWidth": 256,
-      "FloatingWindowState": {
-        "Id": "95d2ceab-68b4-4d75-8773-27de8cd01ee9",
-        "Display": 1,
-        "X": 695,
-        "Y": 252,
-        "Width": 1565,
-        "Height": 957,
-        "WindowState": 0
-      },
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 0,
-          "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 1,
@@ -84,7 +50,33 @@
               "RelativeToolTip": "RealtyHub.Core\\Models\\Offer.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-02T13:48:49.766Z",
+              "WhenOpened": "2025-01-02T16:30:11.063Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "EOfferStatus.cs",
+              "DocumentMoniker": "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.Core\\Enums\\EOfferStatus.cs",
+              "RelativeDocumentMoniker": "RealtyHub.Core\\Enums\\EOfferStatus.cs",
+              "ToolTip": "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.Core\\Enums\\EOfferStatus.cs",
+              "RelativeToolTip": "RealtyHub.Core\\Enums\\EOfferStatus.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-02T16:29:46.863Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "OfferHandler.cs",
+              "DocumentMoniker": "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.ApiService\\Handlers\\OfferHandler.cs",
+              "RelativeDocumentMoniker": "RealtyHub.ApiService\\Handlers\\OfferHandler.cs",
+              "ToolTip": "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.ApiService\\Handlers\\OfferHandler.cs",
+              "RelativeToolTip": "RealtyHub.ApiService\\Handlers\\OfferHandler.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAQwJgAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-02T16:18:30.828Z",
               "EditorCaption": ""
             }
           ]

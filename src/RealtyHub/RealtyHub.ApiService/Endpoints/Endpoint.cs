@@ -1,6 +1,7 @@
 ﻿using RealtyHub.ApiService.Common.Api;
 using RealtyHub.ApiService.Endpoints.Customers;
 using RealtyHub.ApiService.Endpoints.Identity;
+using RealtyHub.ApiService.Endpoints.Offers;
 using RealtyHub.ApiService.Endpoints.Properties;
 using RealtyHub.ApiService.Endpoints.Viewings;
 using RealtyHub.ApiService.Models;
@@ -54,6 +55,18 @@ public static class Endpoint
             .MapEndpoint<GetViewingByIdEndpoint>()
             .MapEndpoint<GetAllViewingsEndpoint>()
             .MapEndpoint<DoneViewingEndpoint>();
+
+        endpoints.MapGroup("v1/offers")
+            .WithTags("Offers")
+            .RequireAuthorization()
+            .MapEndpoint<CreateOfferEndpoint>()
+            .MapEndpoint<UpdateOfferEndpoint>()
+            .MapEndpoint<AcceptOfferEndpoint>()
+            .MapEndpoint<RejectOfferEndpoint>()
+            .MapEndpoint<GetOfferByIdEndpoint>()
+            .MapEndpoint<GetAllOffersByPropertyEndpoint>()
+            .MapEndpoint<GetAllOffersByCustomerEndpoint>()
+            .MapEndpoint<GetAllOffersEndpoint>();
     }
 
     private static IEndpointRouteBuilder MapEndpoint<TEndpoint>(this IEndpointRouteBuilder app)
