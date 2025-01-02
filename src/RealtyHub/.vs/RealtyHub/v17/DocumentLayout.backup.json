@@ -1,14 +1,42 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\",
+  "WorkspaceRootPath": "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4CAB8F0F-8228-436A-B50D-498B1421D31E}|RealtyHub.Core\\RealtyHub.Core.csproj|c:\\users\\maste\\source\\repos\\realtyhub\\src\\realtyhub\\realtyhub.core\\requests\\request.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4CAB8F0F-8228-436A-B50D-498B1421D31E}|RealtyHub.Core\\RealtyHub.Core.csproj|solutionrelative:realtyhub.core\\requests\\request.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4CAB8F0F-8228-436A-B50D-498B1421D31E}|RealtyHub.Core\\RealtyHub.Core.csproj|c:\\users\\maste\\source\\repos\\realtyhub\\src\\realtyhub\\realtyhub.core\\requests\\offers\\getalloffersbyidpropetyrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4CAB8F0F-8228-436A-B50D-498B1421D31E}|RealtyHub.Core\\RealtyHub.Core.csproj|solutionrelative:realtyhub.core\\requests\\offers\\getalloffersbyidpropetyrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7C0BDC08-6A4E-4C8B-8346-151C3D9B9F58}|RealtyHub.ApiService\\RealtyHub.ApiService.csproj|c:\\users\\maste\\source\\repos\\realtyhub\\src\\realtyhub\\realtyhub.apiservice\\handlers\\viewinghandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7C0BDC08-6A4E-4C8B-8346-151C3D9B9F58}|RealtyHub.ApiService\\RealtyHub.ApiService.csproj|solutionrelative:realtyhub.apiservice\\handlers\\viewinghandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4CAB8F0F-8228-436A-B50D-498B1421D31E}|RealtyHub.Core\\RealtyHub.Core.csproj|c:\\users\\maste\\source\\repos\\realtyhub\\src\\realtyhub\\realtyhub.core\\requests\\offers\\getalloffersrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4CAB8F0F-8228-436A-B50D-498B1421D31E}|RealtyHub.Core\\RealtyHub.Core.csproj|solutionrelative:realtyhub.core\\requests\\offers\\getalloffersrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4CAB8F0F-8228-436A-B50D-498B1421D31E}|RealtyHub.Core\\RealtyHub.Core.csproj|c:\\users\\maste\\source\\repos\\realtyhub\\src\\realtyhub\\realtyhub.core\\requests\\pagedrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4CAB8F0F-8228-436A-B50D-498B1421D31E}|RealtyHub.Core\\RealtyHub.Core.csproj|solutionrelative:realtyhub.core\\requests\\pagedrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4CAB8F0F-8228-436A-B50D-498B1421D31E}|RealtyHub.Core\\RealtyHub.Core.csproj|c:\\users\\maste\\source\\repos\\realtyhub\\src\\realtyhub\\realtyhub.core\\requests\\offers\\getofferbyidrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4CAB8F0F-8228-436A-B50D-498B1421D31E}|RealtyHub.Core\\RealtyHub.Core.csproj|solutionrelative:realtyhub.core\\requests\\offers\\getofferbyidrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4CAB8F0F-8228-436A-B50D-498B1421D31E}|RealtyHub.Core\\RealtyHub.Core.csproj|c:\\users\\maste\\source\\repos\\realtyhub\\src\\realtyhub\\realtyhub.core\\requests\\offers\\deleteofferrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4CAB8F0F-8228-436A-B50D-498B1421D31E}|RealtyHub.Core\\RealtyHub.Core.csproj|solutionrelative:realtyhub.core\\requests\\offers\\deleteofferrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4CAB8F0F-8228-436A-B50D-498B1421D31E}|RealtyHub.Core\\RealtyHub.Core.csproj|c:\\users\\maste\\source\\repos\\realtyhub\\src\\realtyhub\\realtyhub.core\\requests\\offers\\updateofferrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4CAB8F0F-8228-436A-B50D-498B1421D31E}|RealtyHub.Core\\RealtyHub.Core.csproj|solutionrelative:realtyhub.core\\requests\\offers\\updateofferrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4CAB8F0F-8228-436A-B50D-498B1421D31E}|RealtyHub.Core\\RealtyHub.Core.csproj|c:\\users\\maste\\source\\repos\\realtyhub\\src\\realtyhub\\realtyhub.core\\requests\\offers\\createofferrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4CAB8F0F-8228-436A-B50D-498B1421D31E}|RealtyHub.Core\\RealtyHub.Core.csproj|solutionrelative:realtyhub.core\\requests\\offers\\createofferrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4CAB8F0F-8228-436A-B50D-498B1421D31E}|RealtyHub.Core\\RealtyHub.Core.csproj|c:\\users\\maste\\source\\repos\\realtyhub\\src\\realtyhub\\realtyhub.core\\models\\offer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4CAB8F0F-8228-436A-B50D-498B1421D31E}|RealtyHub.Core\\RealtyHub.Core.csproj|solutionrelative:realtyhub.core\\models\\offer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4CAB8F0F-8228-436A-B50D-498B1421D31E}|RealtyHub.Core\\RealtyHub.Core.csproj|c:\\users\\maste\\source\\repos\\realtyhub\\src\\realtyhub\\realtyhub.core\\enums\\eofferstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4CAB8F0F-8228-436A-B50D-498B1421D31E}|RealtyHub.Core\\RealtyHub.Core.csproj|solutionrelative:realtyhub.core\\enums\\eofferstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,40 +46,164 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+              "Name": "ST:0:0:{e506b91c-c606-466a-90a9-123d1d1e12b3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PagedRequest.cs",
+              "DocumentMoniker": "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.Core\\Requests\\PagedRequest.cs",
+              "RelativeDocumentMoniker": "RealtyHub.Core\\Requests\\PagedRequest.cs",
+              "ToolTip": "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.Core\\Requests\\PagedRequest.cs",
+              "RelativeToolTip": "RealtyHub.Core\\Requests\\PagedRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-02T13:48:20.379Z",
+              "EditorCaption": ""
+            },
+            {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Request.cs",
-              "DocumentMoniker": "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.Core\\Requests\\Request.cs",
-              "RelativeDocumentMoniker": "RealtyHub.Core\\Requests\\Request.cs",
-              "ToolTip": "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.Core\\Requests\\Request.cs",
-              "RelativeToolTip": "RealtyHub.Core\\Requests\\Request.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Title": "GetAllOffersByIdPropetyRequest.cs",
+              "DocumentMoniker": "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.Core\\Requests\\Offers\\GetAllOffersByIdPropetyRequest.cs",
+              "RelativeDocumentMoniker": "RealtyHub.Core\\Requests\\Offers\\GetAllOffersByIdPropetyRequest.cs",
+              "ToolTip": "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.Core\\Requests\\Offers\\GetAllOffersByIdPropetyRequest.cs",
+              "RelativeToolTip": "RealtyHub.Core\\Requests\\Offers\\GetAllOffersByIdPropetyRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-31T22:37:23.193Z",
+              "WhenOpened": "2025-01-02T13:48:01.909Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ViewingHandler.cs",
-              "DocumentMoniker": "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.ApiService\\Handlers\\ViewingHandler.cs",
-              "RelativeDocumentMoniker": "RealtyHub.ApiService\\Handlers\\ViewingHandler.cs",
-              "ToolTip": "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.ApiService\\Handlers\\ViewingHandler.cs",
-              "RelativeToolTip": "RealtyHub.ApiService\\Handlers\\ViewingHandler.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAKYAAAABAAAAAAAAAA==",
+              "Title": "GetAllOffersRequest.cs",
+              "DocumentMoniker": "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.Core\\Requests\\Offers\\GetAllOffersRequest.cs",
+              "RelativeDocumentMoniker": "RealtyHub.Core\\Requests\\Offers\\GetAllOffersRequest.cs",
+              "ToolTip": "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.Core\\Requests\\Offers\\GetAllOffersRequest.cs",
+              "RelativeToolTip": "RealtyHub.Core\\Requests\\Offers\\GetAllOffersRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-31T22:37:05.519Z",
+              "WhenOpened": "2025-01-02T13:47:26.575Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "GetOfferByIdRequest.cs",
+              "DocumentMoniker": "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.Core\\Requests\\Offers\\GetOfferByIdRequest.cs",
+              "RelativeDocumentMoniker": "RealtyHub.Core\\Requests\\Offers\\GetOfferByIdRequest.cs",
+              "ToolTip": "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.Core\\Requests\\Offers\\GetOfferByIdRequest.cs",
+              "RelativeToolTip": "RealtyHub.Core\\Requests\\Offers\\GetOfferByIdRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-02T13:47:07.067Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "DeleteOfferRequest.cs",
+              "DocumentMoniker": "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.Core\\Requests\\Offers\\DeleteOfferRequest.cs",
+              "RelativeDocumentMoniker": "RealtyHub.Core\\Requests\\Offers\\DeleteOfferRequest.cs",
+              "ToolTip": "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.Core\\Requests\\Offers\\DeleteOfferRequest.cs",
+              "RelativeToolTip": "RealtyHub.Core\\Requests\\Offers\\DeleteOfferRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-02T13:46:43.538Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "UpdateOfferRequest.cs",
+              "DocumentMoniker": "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.Core\\Requests\\Offers\\UpdateOfferRequest.cs",
+              "RelativeDocumentMoniker": "RealtyHub.Core\\Requests\\Offers\\UpdateOfferRequest.cs",
+              "ToolTip": "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.Core\\Requests\\Offers\\UpdateOfferRequest.cs",
+              "RelativeToolTip": "RealtyHub.Core\\Requests\\Offers\\UpdateOfferRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-02T13:45:54.877Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CreateOfferRequest.cs",
+              "DocumentMoniker": "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.Core\\Requests\\Offers\\CreateOfferRequest.cs",
+              "RelativeDocumentMoniker": "RealtyHub.Core\\Requests\\Offers\\CreateOfferRequest.cs",
+              "ToolTip": "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.Core\\Requests\\Offers\\CreateOfferRequest.cs",
+              "RelativeToolTip": "RealtyHub.Core\\Requests\\Offers\\CreateOfferRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-02T13:43:13.947Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "EOfferStatus.cs",
+              "DocumentMoniker": "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.Core\\Enums\\EOfferStatus.cs",
+              "RelativeDocumentMoniker": "RealtyHub.Core\\Enums\\EOfferStatus.cs",
+              "ToolTip": "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.Core\\Enums\\EOfferStatus.cs",
+              "RelativeToolTip": "RealtyHub.Core\\Enums\\EOfferStatus.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-02T13:38:34.564Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "FloatingWindowState": {
+        "Id": "14d7fb28-b5fd-4b57-832b-aad32f751a9b",
+        "Display": 1,
+        "X": 481,
+        "Y": 313,
+        "Width": 1565,
+        "Height": 957,
+        "WindowState": 2
+      },
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Offer.cs",
+              "DocumentMoniker": "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.Core\\Models\\Offer.cs",
+              "RelativeDocumentMoniker": "RealtyHub.Core\\Models\\Offer.cs",
+              "ToolTip": "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.Core\\Models\\Offer.cs",
+              "RelativeToolTip": "RealtyHub.Core\\Models\\Offer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-02T13:33:51.155Z",
               "EditorCaption": ""
             }
           ]
