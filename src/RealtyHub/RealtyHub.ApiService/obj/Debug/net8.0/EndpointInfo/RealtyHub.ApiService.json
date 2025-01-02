@@ -5,120 +5,7 @@
     "version": "1.0"
   },
   "paths": {
-    "/v1/customers": {
-      "post": {
-        "tags": [
-          "Customers"
-        ],
-        "summary": "Cria um novo cliente",
-        "description": "Cria um novo cliente",
-        "operationId": "Customers: Create",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RealtyHub.Core.Requests.Customers.CreateCustomerRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RealtyHub.Core.Responses.Response`1[[RealtyHub.Core.Models.Customer, RealtyHub.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
-                }
-              }
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "Customers"
-        ],
-        "summary": "Recupera todos os clientes",
-        "description": "Recupera todos os clientes",
-        "operationId": "Customers: Get All",
-        "parameters": [
-          {
-            "name": "pageNumber",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32",
-              "default": 1
-            }
-          },
-          {
-            "name": "pageSize",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32",
-              "default": 25
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RealtyHub.Core.Responses.PagedResponse`1[[System.Collections.Generic.List`1[[RealtyHub.Core.Models.Customer, RealtyHub.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/v1/customers/{id}": {
-      "put": {
-        "tags": [
-          "Customers"
-        ],
-        "summary": "Atualiza um cliente",
-        "description": "Atualiza um cliente",
-        "operationId": "Customers: Update",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RealtyHub.Core.Requests.Customers.UpdateCustomerRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RealtyHub.Core.Responses.Response`1[[RealtyHub.Core.Models.Customer, RealtyHub.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
-                }
-              }
-            }
-          }
-        }
-      },
       "delete": {
         "tags": [
           "Customers"
@@ -180,6 +67,257 @@
             }
           }
         }
+      },
+      "put": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Atualiza um cliente",
+        "description": "Atualiza um cliente",
+        "operationId": "Customers: Update",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RealtyHub.Core.Requests.Customers.UpdateCustomerRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RealtyHub.Core.Responses.Response`1[[RealtyHub.Core.Models.Customer, RealtyHub.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/properties/{id}": {
+      "delete": {
+        "tags": [
+          "Properties"
+        ],
+        "summary": "Deleta um imóvel",
+        "description": "Deleta um imóvel",
+        "operationId": "Properties: Delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RealtyHub.Core.Responses.Response`1[[RealtyHub.Core.Models.Property, RealtyHub.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Properties"
+        ],
+        "summary": "Recupera um imóvel",
+        "description": "Recupera um imóvel",
+        "operationId": "Properties: Get by Id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RealtyHub.Core.Responses.Response`1[[RealtyHub.Core.Models.Property, RealtyHub.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Properties"
+        ],
+        "summary": "Atualiza um imóvel",
+        "description": "Atualiza um imóvel",
+        "operationId": "Properties: Update",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RealtyHub.Core.Requests.Properties.UpdatePropertyRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RealtyHub.Core.Responses.Response`1[[RealtyHub.Core.Models.Property, RealtyHub.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/viewings/{id}": {
+      "delete": {
+        "tags": [
+          "Viewings"
+        ],
+        "summary": "Deleta uma visita",
+        "description": "Deleta uma visita",
+        "operationId": "Viewings: Delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RealtyHub.Core.Responses.Response`1[[RealtyHub.Core.Models.Viewing, RealtyHub.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Viewings"
+        ],
+        "summary": "Recupera uma visita",
+        "description": "Recupera uma visita",
+        "operationId": "Viewings: Get by Id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RealtyHub.Core.Responses.Response`1[[RealtyHub.Core.Models.Viewing, RealtyHub.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Viewings"
+        ],
+        "summary": "Atualiza uma visita",
+        "description": "Atualiza uma visita",
+        "operationId": "Viewings: Update",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RealtyHub.Core.Requests.Viewings.UpdateViewingRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RealtyHub.Core.Responses.Response`1[[RealtyHub.Core.Models.Viewing, RealtyHub.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/": {
@@ -194,6 +332,341 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/<>f__AnonymousType3`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/identity/confirmEmail": {
+      "get": {
+        "tags": [
+          "Identity"
+        ],
+        "operationId": "MapIdentityApi-/v1/identity/confirmEmail",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "code",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "changedEmail",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/identity/manage/info": {
+      "get": {
+        "tags": [
+          "Identity"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Identity.Data.InfoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Http.HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Identity"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Microsoft.AspNetCore.Identity.Data.InfoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Identity.Data.InfoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Http.HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/v1/identity/roles": {
+      "get": {
+        "tags": [
+          "Identity"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/customers": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Recupera todos os clientes",
+        "description": "Recupera todos os clientes",
+        "operationId": "Customers: Get All",
+        "parameters": [
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 25
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RealtyHub.Core.Responses.PagedResponse`1[[System.Collections.Generic.List`1[[RealtyHub.Core.Models.Customer, RealtyHub.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Cria um novo cliente",
+        "description": "Cria um novo cliente",
+        "operationId": "Customers: Create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RealtyHub.Core.Requests.Customers.CreateCustomerRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RealtyHub.Core.Responses.Response`1[[RealtyHub.Core.Models.Customer, RealtyHub.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/properties": {
+      "get": {
+        "tags": [
+          "Properties"
+        ],
+        "summary": "Recupera todos os imóvels",
+        "description": "Recupera todos os imóvels",
+        "operationId": "Properties: Get All",
+        "parameters": [
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 25
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RealtyHub.Core.Responses.PagedResponse`1[[System.Collections.Generic.List`1[[RealtyHub.Core.Models.Property, RealtyHub.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Properties"
+        ],
+        "summary": "Cria um novo imóvel",
+        "description": "Cria um novo imóvel",
+        "operationId": "Properties: Create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RealtyHub.Core.Requests.Properties.CreatePropertyRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RealtyHub.Core.Responses.Response`1[[RealtyHub.Core.Models.Property, RealtyHub.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/viewings": {
+      "get": {
+        "tags": [
+          "Viewings"
+        ],
+        "summary": "Recupera todas as visitas",
+        "description": "Recupera todas as visitas",
+        "operationId": "Viewings: Get All",
+        "parameters": [
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 25
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RealtyHub.Core.Responses.PagedResponse`1[[System.Collections.Generic.List`1[[RealtyHub.Core.Models.Viewing, RealtyHub.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Viewings"
+        ],
+        "summary": "Cria uma nova visita",
+        "description": "Cria uma nova visita",
+        "operationId": "Viewings: Create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RealtyHub.Core.Requests.Viewings.CreateViewingRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RealtyHub.Core.Responses.Response`1[[RealtyHub.Core.Models.Viewing, RealtyHub.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
                 }
               }
             }
@@ -300,42 +773,6 @@
                 }
               }
             }
-          }
-        }
-      }
-    },
-    "/v1/identity/confirmEmail": {
-      "get": {
-        "tags": [
-          "Identity"
-        ],
-        "operationId": "MapIdentityApi-/v1/identity/confirmEmail",
-        "parameters": [
-          {
-            "name": "userId",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "code",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "changedEmail",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
           }
         }
       }
@@ -464,91 +901,8 @@
         }
       }
     },
-    "/v1/identity/manage/info": {
-      "get": {
-        "tags": [
-          "Identity"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Identity.Data.InfoResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Http.HttpValidationProblemDetails"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Identity"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Microsoft.AspNetCore.Identity.Data.InfoRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Identity.Data.InfoResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Http.HttpValidationProblemDetails"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
-    },
     "/v1/identity/logout": {
       "post": {
-        "tags": [
-          "Identity"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/v1/identity/roles": {
-      "get": {
         "tags": [
           "Identity"
         ],
@@ -850,11 +1204,38 @@
         "type": "integer",
         "format": "int32"
       },
+      "RealtyHub.Core.Enums.EPropertyType": {
+        "enum": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "RealtyHub.Core.Enums.EViewingStatus": {
+        "enum": [
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
       "RealtyHub.Core.Models.Address": {
         "required": [
           "city",
           "country",
           "neighborhood",
+          "number",
           "state",
           "street",
           "zipCode"
@@ -868,6 +1249,10 @@
           "neighborhood": {
             "minLength": 1,
             "type": "string"
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
           },
           "city": {
             "minLength": 1,
@@ -902,6 +1287,9 @@
           "updatedAt": {
             "type": "string",
             "format": "date-time"
+          },
+          "isActive": {
+            "type": "boolean"
           },
           "id": {
             "type": "integer",
@@ -939,9 +1327,149 @@
           "businessName": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RealtyHub.Core.Models.Property": {
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
           },
           "isActive": {
             "type": "boolean"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "price": {
+            "type": "number",
+            "format": "double"
+          },
+          "propertyType": {
+            "$ref": "#/components/schemas/RealtyHub.Core.Enums.EPropertyType"
+          },
+          "bedroom": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "bathroom": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "garage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "area": {
+            "type": "number",
+            "format": "double"
+          },
+          "transactionsDetails": {
+            "type": "string",
+            "nullable": true
+          },
+          "isNew": {
+            "type": "boolean"
+          },
+          "propertyImage": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RealtyHub.Core.Models.PropertyImage"
+            },
+            "nullable": true
+          },
+          "address": {
+            "$ref": "#/components/schemas/RealtyHub.Core.Models.Address"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RealtyHub.Core.Models.PropertyImage": {
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "filePath": {
+            "type": "string",
+            "nullable": true
+          },
+          "propertyId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "property": {
+            "$ref": "#/components/schemas/RealtyHub.Core.Models.Property"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RealtyHub.Core.Models.Viewing": {
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "viewingStatus": {
+            "$ref": "#/components/schemas/RealtyHub.Core.Enums.EViewingStatus"
+          },
+          "customerId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "customer": {
+            "$ref": "#/components/schemas/RealtyHub.Core.Models.Customer"
+          },
+          "propertyId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "property": {
+            "$ref": "#/components/schemas/RealtyHub.Core.Models.Property"
           }
         },
         "additionalProperties": false
@@ -955,10 +1483,6 @@
         ],
         "type": "object",
         "properties": {
-          "userId": {
-            "type": "string",
-            "nullable": true
-          },
           "name": {
             "maxLength": 80,
             "minLength": 1,
@@ -1007,10 +1531,6 @@
         ],
         "type": "object",
         "properties": {
-          "userId": {
-            "type": "string",
-            "nullable": true
-          },
           "id": {
             "type": "integer",
             "format": "int64"
@@ -1054,6 +1574,196 @@
         },
         "additionalProperties": false
       },
+      "RealtyHub.Core.Requests.Properties.CreatePropertyRequest": {
+        "required": [
+          "address",
+          "area",
+          "bathroom",
+          "bedroom",
+          "description",
+          "garage",
+          "isNew",
+          "price",
+          "propertyType",
+          "title",
+          "transactionsDetails"
+        ],
+        "type": "object",
+        "properties": {
+          "title": {
+            "maxLength": 120,
+            "minLength": 1,
+            "type": "string"
+          },
+          "description": {
+            "maxLength": 80,
+            "minLength": 1,
+            "type": "string"
+          },
+          "price": {
+            "minimum": 0,
+            "type": "number",
+            "format": "double"
+          },
+          "propertyType": {
+            "$ref": "#/components/schemas/RealtyHub.Core.Enums.EPropertyType"
+          },
+          "bedroom": {
+            "maximum": 2147483647,
+            "minimum": 0,
+            "type": "integer",
+            "format": "int32"
+          },
+          "bathroom": {
+            "maximum": 2147483647,
+            "minimum": 0,
+            "type": "integer",
+            "format": "int32"
+          },
+          "garage": {
+            "maximum": 2147483647,
+            "minimum": 0,
+            "type": "integer",
+            "format": "int32"
+          },
+          "area": {
+            "minimum": 0,
+            "type": "number",
+            "format": "double"
+          },
+          "transactionsDetails": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "address": {
+            "$ref": "#/components/schemas/RealtyHub.Core.Models.Address"
+          },
+          "isNew": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RealtyHub.Core.Requests.Properties.UpdatePropertyRequest": {
+        "required": [
+          "address",
+          "area",
+          "bathroom",
+          "bedroom",
+          "description",
+          "garage",
+          "isNew",
+          "price",
+          "propertyType",
+          "title",
+          "transactionsDetails"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "title": {
+            "maxLength": 120,
+            "minLength": 1,
+            "type": "string"
+          },
+          "description": {
+            "maxLength": 80,
+            "minLength": 1,
+            "type": "string"
+          },
+          "price": {
+            "minimum": 0,
+            "type": "number",
+            "format": "double"
+          },
+          "propertyType": {
+            "$ref": "#/components/schemas/RealtyHub.Core.Enums.EPropertyType"
+          },
+          "bedroom": {
+            "maximum": 2147483647,
+            "minimum": 0,
+            "type": "integer",
+            "format": "int32"
+          },
+          "bathroom": {
+            "maximum": 2147483647,
+            "minimum": 0,
+            "type": "integer",
+            "format": "int32"
+          },
+          "garage": {
+            "maximum": 2147483647,
+            "minimum": 0,
+            "type": "integer",
+            "format": "int32"
+          },
+          "area": {
+            "minimum": 0,
+            "type": "number",
+            "format": "double"
+          },
+          "transactionsDetails": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "address": {
+            "$ref": "#/components/schemas/RealtyHub.Core.Models.Address"
+          },
+          "isNew": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RealtyHub.Core.Requests.Viewings.CreateViewingRequest": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "viewingStatus": {
+            "$ref": "#/components/schemas/RealtyHub.Core.Enums.EViewingStatus"
+          },
+          "customerId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "propertyId": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RealtyHub.Core.Requests.Viewings.UpdateViewingRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "viewingStatus": {
+            "$ref": "#/components/schemas/RealtyHub.Core.Enums.EViewingStatus"
+          },
+          "customerId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "propertyId": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "additionalProperties": false
+      },
       "RealtyHub.Core.Responses.PagedResponse`1[[System.Collections.Generic.List`1[[RealtyHub.Core.Models.Customer, RealtyHub.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]": {
         "type": "object",
         "properties": {
@@ -1088,11 +1798,105 @@
         },
         "additionalProperties": false
       },
+      "RealtyHub.Core.Responses.PagedResponse`1[[System.Collections.Generic.List`1[[RealtyHub.Core.Models.Property, RealtyHub.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RealtyHub.Core.Models.Property"
+            },
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "currentPage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RealtyHub.Core.Responses.PagedResponse`1[[System.Collections.Generic.List`1[[RealtyHub.Core.Models.Viewing, RealtyHub.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RealtyHub.Core.Models.Viewing"
+            },
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "currentPage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
       "RealtyHub.Core.Responses.Response`1[[RealtyHub.Core.Models.Customer, RealtyHub.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
         "type": "object",
         "properties": {
           "data": {
             "$ref": "#/components/schemas/RealtyHub.Core.Models.Customer"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RealtyHub.Core.Responses.Response`1[[RealtyHub.Core.Models.Property, RealtyHub.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/RealtyHub.Core.Models.Property"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RealtyHub.Core.Responses.Response`1[[RealtyHub.Core.Models.Viewing, RealtyHub.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/RealtyHub.Core.Models.Viewing"
           },
           "message": {
             "type": "string",

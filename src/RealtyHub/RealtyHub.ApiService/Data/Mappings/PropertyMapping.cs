@@ -62,6 +62,10 @@ public class PropertyMapping : IEntityTypeConfiguration<Property>
                 .HasColumnName("Neighborhood")
                 .HasMaxLength(80);
 
+            address.Property(a => a.Number)
+                .IsRequired()
+                .HasColumnName("Number");
+
             address.Property(a => a.City)
                 .IsRequired()
                 .HasColumnName("City")

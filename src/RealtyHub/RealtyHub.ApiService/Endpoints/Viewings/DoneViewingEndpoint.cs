@@ -7,25 +7,25 @@ using RealtyHub.Core.Responses;
 
 namespace RealtyHub.ApiService.Endpoints.Viewings;
 
-public class UpdateViewingEndpoint : IEndpoint
+public class DoneViewingEndpoint : IEndpoint
 {
     public static void Map(IEndpointRouteBuilder app)
-        => app.MapPut("/{id:long}", HandlerAsync)
-            .WithName("Viewings: Update")
-            .WithSummary("Atualiza uma visita")
-            .WithDescription("Atualiza uma visita")
-            .WithOrder(2)
+        => app.MapPut("/done/{id:long}", HandlerAsync)
+            .WithName("Viewings: Done")
+            .WithSummary("Finaliza uma visita")
+            .WithDescription("Finaliza uma visita")
+            .WithOrder(6)
             .Produces<Response<Viewing?>>();
 
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
         IViewingHandler handler,
-        UpdateViewingRequest request,
+        DoneViewingRequest request,
         long id)
     {
         request.Id = id;
         request.UserId = user.Identity?.Name ?? string.Empty;
-        var result = await handler.UpdateAsync(request);
+        var result = await handler.DoneAsync(request);
 
         return result.IsSuccess
             ? Results.Ok(result)

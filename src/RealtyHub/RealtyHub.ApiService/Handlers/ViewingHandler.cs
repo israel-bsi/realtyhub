@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RealtyHub.ApiService.Data;
+using RealtyHub.Core.Enums;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.Viewings;
@@ -9,7 +10,7 @@ namespace RealtyHub.ApiService.Handlers;
 
 public class ViewingHandler(AppDbContext context) : IViewingHandler
 {
-    public async Task<Response<Viewing?>> CreateAsync(CreateViewingRequest request)
+    public async Task<Response<Viewing?>> ScheduleAsync(ScheduleViewingRequest request)
     {
         try
         {
@@ -27,6 +28,17 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
             if (property is null)
                 return new Response<Viewing?>(null, 404, "Imóvel não encontrado");
 
+            var isViewingExits = await context
+                .Viewing
+                .AnyAsync(v => 
+                    v.CustomerId == request.CustomerId 
+                    && v.PropertyId == request.PropertyId 
+                    && v.IsActive);
+
+            if (isViewingExits)
+                return new Response<Viewing?>(null, 400,
+                $"Já existe uma visita do cliente {customer.Name} para o imóvel {property.Title}");
+
             var viewing = new Viewing
             {
                 Date = request.Date,
@@ -42,58 +54,90 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
         }
         catch (Exception ex)
         {
-            return new Response<Viewing?>(null, 500,$"Não foi possível agendar a visita\n{ex.Message}");
+            return new Response<Viewing?>(null, 500, $"Não foi possível agendar a visita\n{ex.Message}");
         }
     }
 
-    public async Task<Response<Viewing?>> UpdateAsync(UpdateViewingRequest request)
+    public async Task<Response<Viewing?>> RescheduleAsync(RescheduleViewingRequest request)
     {
         try
         {
             var viewing = await context
                 .Viewing
+                .Include(v => v.Customer)
+                .Include(v => v.Property)
                 .FirstOrDefaultAsync(v => v.Id == request.Id && v.IsActive);
 
             if (viewing is null)
                 return new Response<Viewing?>(null, 404, "Visita não encontrada");
 
             viewing.Date = request.Date;
-            viewing.ViewingStatus = request.ViewingStatus;
-            viewing.CustomerId = request.CustomerId;
-            viewing.PropertyId = request.PropertyId;
             viewing.UpdatedAt = DateTime.UtcNow;
 
             context.Viewing.Update(viewing);
             await context.SaveChangesAsync();
 
-            return new Response<Viewing?>(viewing, message: "Visita atualizada com sucesso");
+            return new Response<Viewing?>(viewing, message: "Visita reagendada com sucesso");
         }
         catch (Exception ex)
         {
-            return new Response<Viewing?>(null, 500, $"Não foi possível atualizar a visita\n{ex.Message}");
+            return new Response<Viewing?>(null, 500, $"Não foi possível reagendar a visita\n{ex.Message}");
         }
     }
 
-    public async Task<Response<Viewing?>> DeleteAsync(DeleteViewingRequest request)
+    public async Task<Response<Viewing?>> DoneAsync(DoneViewingRequest request)
     {
         try
         {
             var viewing = await context
                 .Viewing
+                .Include(v => v.Customer)
+                .Include(v => v.Property)
                 .FirstOrDefaultAsync(v => v.Id == request.Id && v.IsActive);
 
             if (viewing is null)
                 return new Response<Viewing?>(null, 404, "Visita não encontrada");
 
-            viewing.IsActive = false;
+            if (viewing.ViewingStatus == EViewingStatus.Done)
+                return new Response<Viewing?>(null, 400, "Visita já finalizada");
+
+            viewing.ViewingStatus = EViewingStatus.Done;
 
             await context.SaveChangesAsync();
 
-            return new Response<Viewing?>(viewing, message: "Visita excluída com sucesso");
+            return new Response<Viewing?>(viewing, message: "Visita finalizada com sucesso");
         }
         catch (Exception ex)
         {
-            return new Response<Viewing?>(null, 500, $"Não foi possível excluir a visita\n{ex.Message}");
+            return new Response<Viewing?>(null, 500, $"Não foi possível finalizar a visita\n{ex.Message}");
+        }
+    }
+
+    public async Task<Response<Viewing?>> CancelAsync(CancelViewingRequest request)
+    {
+        try
+        {
+            var viewing = await context
+                .Viewing
+                .Include(v => v.Customer)
+                .Include(v => v.Property)
+                .FirstOrDefaultAsync(v => v.Id == request.Id && v.IsActive);
+
+            if (viewing is null)
+                return new Response<Viewing?>(null, 404, "Visita não encontrada");
+
+            if (viewing.ViewingStatus == EViewingStatus.Canceled)
+                return new Response<Viewing?>(null, 400, "Visita já cancelada");
+
+            viewing.ViewingStatus = EViewingStatus.Canceled;
+
+            await context.SaveChangesAsync();
+
+            return new Response<Viewing?>(viewing, message: "Visita cancelada com sucesso");
+        }
+        catch (Exception ex)
+        {
+            return new Response<Viewing?>(null, 500, $"Não foi possível cancelar a visita\n{ex.Message}");
         }
     }
 

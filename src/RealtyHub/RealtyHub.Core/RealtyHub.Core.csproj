@@ -9,7 +9,6 @@
   <ItemGroup>
     <Folder Include="Requests\PropertiesImages\" />
     <Folder Include="Utilities\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

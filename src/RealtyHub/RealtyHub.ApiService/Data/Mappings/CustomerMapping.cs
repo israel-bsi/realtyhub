@@ -62,6 +62,10 @@ public class CustomerMapping : IEntityTypeConfiguration<Customer>
                 .HasColumnName("City")
                 .HasMaxLength(80);
 
+            address.Property(a => a.Number)
+                .IsRequired()
+                .HasColumnName("Number");
+
             address.Property(a => a.State)
                 .IsRequired()
                 .HasColumnName("State")

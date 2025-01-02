@@ -1,6 +1,6 @@
 ﻿namespace RealtyHub.Core.Requests.Viewings;
 
-public class DeleteViewingRequest : Request
+public class CancelViewingRequest : Request
 {
     public long Id { get; set; }
 }

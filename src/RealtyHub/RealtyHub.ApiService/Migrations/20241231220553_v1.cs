@@ -25,6 +25,7 @@ namespace RealtyHub.ApiService.Migrations
                     DocumentType = table.Column<int>(type: "integer", nullable: false),
                     Street = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: false),
                     Neighborhood = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: false),
+                    Number = table.Column<int>(type: "integer", nullable: false),
                     City = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: false),
                     State = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: false),
                     Country = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: false),
@@ -32,9 +33,9 @@ namespace RealtyHub.ApiService.Migrations
                     Complement = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: true),
                     Rg = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: true),
                     BusinessName = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: true),
-                    IsActive = table.Column<bool>(type: "boolean", nullable: false, defaultValue: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()"),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()")
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()"),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false, defaultValue: true)
                 },
                 constraints: table =>
                 {
@@ -80,6 +81,39 @@ namespace RealtyHub.ApiService.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_IdentityUser", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Property",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Title = table.Column<string>(type: "character varying(120)", maxLength: 120, nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: false),
+                    Price = table.Column<decimal>(type: "numeric", nullable: false),
+                    PropertyType = table.Column<int>(type: "integer", nullable: false),
+                    Bedroom = table.Column<int>(type: "integer", nullable: false),
+                    Bathroom = table.Column<int>(type: "integer", nullable: false),
+                    Garage = table.Column<int>(type: "integer", nullable: false),
+                    Area = table.Column<double>(type: "double precision", nullable: false),
+                    TransactionsDetails = table.Column<string>(type: "text", nullable: false),
+                    IsNew = table.Column<bool>(type: "boolean", nullable: false),
+                    Street = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: false),
+                    Neighborhood = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: false),
+                    Number = table.Column<int>(type: "integer", nullable: false),
+                    City = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: false),
+                    State = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: false),
+                    Country = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: false),
+                    ZipCode = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
+                    Complement = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()"),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()"),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Property", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -182,6 +216,60 @@ namespace RealtyHub.ApiService.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "PropertyImage",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    FilePath = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    PropertyId = table.Column<long>(type: "bigint", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()"),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()"),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PropertyImage", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PropertyImage_Property_PropertyId",
+                        column: x => x.PropertyId,
+                        principalTable: "Property",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Viewing",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    ViewingStatus = table.Column<int>(type: "integer", nullable: false),
+                    CustomerId = table.Column<long>(type: "bigint", nullable: false),
+                    PropertyId = table.Column<long>(type: "bigint", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()"),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()"),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Viewing", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Viewing_Customer_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customer",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Viewing_Property_PropertyId",
+                        column: x => x.PropertyId,
+                        principalTable: "Property",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_IdentityClaim_UserId",
                 table: "IdentityClaim",
@@ -214,14 +302,26 @@ namespace RealtyHub.ApiService.Migrations
                 name: "IX_IdentityUserLogin_UserId",
                 table: "IdentityUserLogin",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PropertyImage_PropertyId",
+                table: "PropertyImage",
+                column: "PropertyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Viewing_CustomerId",
+                table: "Viewing",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Viewing_PropertyId",
+                table: "Viewing",
+                column: "PropertyId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Customer");
-
             migrationBuilder.DropTable(
                 name: "IdentityClaim");
 
@@ -241,7 +341,19 @@ namespace RealtyHub.ApiService.Migrations
                 name: "IdentityUserToken");
 
             migrationBuilder.DropTable(
+                name: "PropertyImage");
+
+            migrationBuilder.DropTable(
+                name: "Viewing");
+
+            migrationBuilder.DropTable(
                 name: "IdentityUser");
+
+            migrationBuilder.DropTable(
+                name: "Customer");
+
+            migrationBuilder.DropTable(
+                name: "Property");
         }
     }
 }

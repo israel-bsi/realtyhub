@@ -500,6 +500,10 @@ namespace RealtyHub.ApiService.Migrations
                                 .HasColumnType("character varying(80)")
                                 .HasColumnName("Neighborhood");
 
+                            b1.Property<int>("Number")
+                                .HasColumnType("integer")
+                                .HasColumnName("Number");
+
                             b1.Property<string>("State")
                                 .IsRequired()
                                 .HasMaxLength(80)
@@ -559,6 +563,10 @@ namespace RealtyHub.ApiService.Migrations
                                 .HasMaxLength(80)
                                 .HasColumnType("character varying(80)")
                                 .HasColumnName("Neighborhood");
+
+                            b1.Property<int>("Number")
+                                .HasColumnType("integer")
+                                .HasColumnName("Number");
 
                             b1.Property<string>("State")
                                 .IsRequired()

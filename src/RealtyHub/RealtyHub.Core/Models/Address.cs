@@ -8,6 +8,8 @@ public class Address
     public string Street { get; set; } = string.Empty;
     [Required(ErrorMessage = "Bairro é um campo obrigatório")]
     public string Neighborhood { get; set; } = string.Empty;
+    [Required(ErrorMessage = "Número é um campo obrigatório")]
+    public int Number { get; set; }
     [Required(ErrorMessage = "Cidade é um campo obrigatório")]
     public string City { get; set; } = string.Empty;
     [Required(ErrorMessage = "Estado é um campo obrigatório")]

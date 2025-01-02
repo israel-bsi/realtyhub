@@ -7,13 +7,13 @@ using RealtyHub.Core.Responses;
 
 namespace RealtyHub.ApiService.Endpoints.Viewings;
 
-public class DeleteViewingEndpoint : IEndpoint
+public class CancelViewingEndpoint : IEndpoint
 {
     public static void Map(IEndpointRouteBuilder app)
         => app.MapDelete("/{id:long}", HandlerAsync)
-            .WithName("Viewings: Delete")
-            .WithSummary("Deleta uma visita")
-            .WithDescription("Deleta uma visita")
+            .WithName("Viewings: Cancel")
+            .WithSummary("Cancela uma visita")
+            .WithDescription("Cancela uma visita")
             .WithOrder(3)
             .Produces<Response<Viewing?>>();
 
@@ -22,12 +22,12 @@ public class DeleteViewingEndpoint : IEndpoint
         IViewingHandler handler,
         long id)
     {
-        var request = new DeleteViewingRequest
+        var request = new CancelViewingRequest
         {
             Id = id,
             UserId = user.Identity?.Name ?? string.Empty
         };
-        var result = await handler.DeleteAsync(request);
+        var result = await handler.CancelAsync(request);
 
         return result.IsSuccess
             ? Results.Ok(result)

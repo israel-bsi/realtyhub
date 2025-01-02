@@ -6,9 +6,10 @@ namespace RealtyHub.Core.Handlers;
 
 public interface IViewingHandler
 {
-    Task<Response<Viewing?>> CreateAsync(CreateViewingRequest request);
-    Task<Response<Viewing?>> UpdateAsync(UpdateViewingRequest request);
-    Task<Response<Viewing?>> DeleteAsync(DeleteViewingRequest request);
+    Task<Response<Viewing?>> ScheduleAsync(ScheduleViewingRequest request);
+    Task<Response<Viewing?>> RescheduleAsync(RescheduleViewingRequest request);
+    Task<Response<Viewing?>> DoneAsync(DoneViewingRequest request);
+    Task<Response<Viewing?>> CancelAsync(CancelViewingRequest request);
     Task<Response<Viewing?>> GetByIdAsync(GetViewingByIdRequest request);
     Task<PagedResponse<List<Viewing>?>> GetAllAsync(GetAllViewingsRequest request);
 }

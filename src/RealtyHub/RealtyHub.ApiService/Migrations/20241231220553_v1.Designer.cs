@@ -12,8 +12,8 @@ using RealtyHub.ApiService.Data;
 namespace RealtyHub.ApiService.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241228221302_v3")]
-    partial class v3
+    [Migration("20241231220553_v1")]
+    partial class v1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -388,6 +388,48 @@ namespace RealtyHub.ApiService.Migrations
                     b.ToTable("PropertyImage", (string)null);
                 });
 
+            modelBuilder.Entity("RealtyHub.Core.Models.Viewing", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasDefaultValueSql("NOW()");
+
+                    b.Property<long>("CustomerId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<long>("PropertyId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasDefaultValueSql("NOW()");
+
+                    b.Property<int>("ViewingStatus")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("PropertyId");
+
+                    b.ToTable("Viewing", (string)null);
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<long>", b =>
                 {
                     b.HasOne("RealtyHub.ApiService.Models.User", null)
@@ -461,6 +503,10 @@ namespace RealtyHub.ApiService.Migrations
                                 .HasColumnType("character varying(80)")
                                 .HasColumnName("Neighborhood");
 
+                            b1.Property<int>("Number")
+                                .HasColumnType("integer")
+                                .HasColumnName("Number");
+
                             b1.Property<string>("State")
                                 .IsRequired()
                                 .HasMaxLength(80)
@@ -521,6 +567,10 @@ namespace RealtyHub.ApiService.Migrations
                                 .HasColumnType("character varying(80)")
                                 .HasColumnName("Neighborhood");
 
+                            b1.Property<int>("Number")
+                                .HasColumnType("integer")
+                                .HasColumnName("Number");
+
                             b1.Property<string>("State")
                                 .IsRequired()
                                 .HasMaxLength(80)
@@ -558,6 +608,25 @@ namespace RealtyHub.ApiService.Migrations
                         .HasForeignKey("PropertyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Property");
+                });
+
+            modelBuilder.Entity("RealtyHub.Core.Models.Viewing", b =>
+                {
+                    b.HasOne("RealtyHub.Core.Models.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RealtyHub.Core.Models.Property", "Property")
+                        .WithMany()
+                        .HasForeignKey("PropertyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
 
                     b.Navigation("Property");
                 });

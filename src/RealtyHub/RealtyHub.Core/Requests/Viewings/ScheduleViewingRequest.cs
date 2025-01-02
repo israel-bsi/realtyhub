@@ -2,7 +2,7 @@
 
 namespace RealtyHub.Core.Requests.Viewings;
 
-public class CreateViewingRequest : Request
+public class ScheduleViewingRequest : Request
 {
     public DateTime Date { get; set; }
     public EViewingStatus ViewingStatus { get; set; }

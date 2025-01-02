@@ -48,11 +48,12 @@ public static class Endpoint
         endpoints.MapGroup("v1/viewings")
             .WithTags("Viewings")
             .RequireAuthorization()
-            .MapEndpoint<CreateViewingEndpoint>()
-            .MapEndpoint<UpdateViewingEndpoint>()
-            .MapEndpoint<DeleteViewingEndpoint>()
+            .MapEndpoint<ScheduleViewingEndpoint>()
+            .MapEndpoint<RescheduleViewingEndpoint>()
+            .MapEndpoint<CancelViewingEndpoint>()
             .MapEndpoint<GetViewingByIdEndpoint>()
-            .MapEndpoint<GetAllViewingsEndpoint>();
+            .MapEndpoint<GetAllViewingsEndpoint>()
+            .MapEndpoint<DoneViewingEndpoint>();
     }
 
     private static IEndpointRouteBuilder MapEndpoint<TEndpoint>(this IEndpointRouteBuilder app)
