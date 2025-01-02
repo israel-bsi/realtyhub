@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "eRMZvmVCMHM=",
+  "dgSpecHash": "XVHQLtjdBzE=",
   "success": true,
-  "projectFilePath": "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.ApiService\\RealtyHub.ApiService.csproj",
+  "projectFilePath": "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.ApiService\\RealtyHub.ApiService.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\maste\\.nuget\\packages\\google.protobuf\\3.22.5\\google.protobuf.3.22.5.nupkg.sha512",
     "C:\\Users\\maste\\.nuget\\packages\\grpc.core.api\\2.52.0\\grpc.core.api.2.52.0.nupkg.sha512",

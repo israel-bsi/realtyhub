@@ -2966,11 +2966,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.AppHost\\RealtyHub.AppHost.csproj",
+      "projectUniqueName": "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.AppHost\\RealtyHub.AppHost.csproj",
       "projectName": "RealtyHub.AppHost",
-      "projectPath": "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.AppHost\\RealtyHub.AppHost.csproj",
+      "projectPath": "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.AppHost\\RealtyHub.AppHost.csproj",
       "packagesPath": "C:\\Users\\maste\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.AppHost\\obj\\",
+      "outputPath": "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.AppHost\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -2985,7 +2985,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

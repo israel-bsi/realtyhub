@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.Web\\RealtyHub.Web.csproj": {}
+    "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.Web\\RealtyHub.Web.csproj": {}
   },
   "projects": {
-    "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.Core\\RealtyHub.Core.csproj": {
+    "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.Core\\RealtyHub.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.Core\\RealtyHub.Core.csproj",
+        "projectUniqueName": "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.Core\\RealtyHub.Core.csproj",
         "projectName": "RealtyHub.Core",
-        "projectPath": "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.Core\\RealtyHub.Core.csproj",
+        "projectPath": "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.Core\\RealtyHub.Core.csproj",
         "packagesPath": "C:\\Users\\maste\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.Core\\obj\\",
+        "outputPath": "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -26,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -70,14 +69,14 @@
         }
       }
     },
-    "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.ServiceDefaults\\RealtyHub.ServiceDefaults.csproj": {
+    "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.ServiceDefaults\\RealtyHub.ServiceDefaults.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.ServiceDefaults\\RealtyHub.ServiceDefaults.csproj",
+        "projectUniqueName": "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.ServiceDefaults\\RealtyHub.ServiceDefaults.csproj",
         "projectName": "RealtyHub.ServiceDefaults",
-        "projectPath": "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.ServiceDefaults\\RealtyHub.ServiceDefaults.csproj",
+        "projectPath": "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.ServiceDefaults\\RealtyHub.ServiceDefaults.csproj",
         "packagesPath": "C:\\Users\\maste\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.ServiceDefaults\\obj\\",
+        "outputPath": "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.ServiceDefaults\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -92,7 +91,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -169,14 +167,14 @@
         }
       }
     },
-    "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.Web\\RealtyHub.Web.csproj": {
+    "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.Web\\RealtyHub.Web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.Web\\RealtyHub.Web.csproj",
+        "projectUniqueName": "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.Web\\RealtyHub.Web.csproj",
         "projectName": "RealtyHub.Web",
-        "projectPath": "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.Web\\RealtyHub.Web.csproj",
+        "projectPath": "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.Web\\RealtyHub.Web.csproj",
         "packagesPath": "C:\\Users\\maste\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.Web\\obj\\",
+        "outputPath": "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.Web\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -191,18 +189,17 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.Core\\RealtyHub.Core.csproj": {
-                "projectPath": "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.Core\\RealtyHub.Core.csproj"
+              "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.Core\\RealtyHub.Core.csproj": {
+                "projectPath": "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.Core\\RealtyHub.Core.csproj"
               },
-              "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.ServiceDefaults\\RealtyHub.ServiceDefaults.csproj": {
-                "projectPath": "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.ServiceDefaults\\RealtyHub.ServiceDefaults.csproj"
+              "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.ServiceDefaults\\RealtyHub.ServiceDefaults.csproj": {
+                "projectPath": "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.ServiceDefaults\\RealtyHub.ServiceDefaults.csproj"
               }
             }
           }

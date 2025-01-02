@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 OPR/114.0.0.0" version="25.0.3">
-  <diagram name="Relatórios de Desempenho de Imóveis e Transações" id="ZbG5wvwLEGetIgq_qELn">
+  <diagram name="Caso de Uso Gerenciamento de Contratos" id="ZbG5wvwLEGetIgq_qELn">
     <mxGraphModel dx="132" dy="519" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
@@ -32,7 +32,7 @@
             <mxPoint x="1200" y="570" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="BIcqiFiI8pwl1ZrPckTt-78" value="Caso de Uso Gerenciamento de Contratros" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+        <mxCell id="BIcqiFiI8pwl1ZrPckTt-78" value="Caso de Uso Gerenciamento de Contratos" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="900" y="260" width="250" height="30" as="geometry" />
         </mxCell>
         <mxCell id="BIcqiFiI8pwl1ZrPckTt-79" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="endArrow=open;startArrow=none;endFill=0;startFill=0;endSize=8;html=1;verticalAlign=bottom;dashed=1;labelBackgroundColor=none;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="BIcqiFiI8pwl1ZrPckTt-68" target="BIcqiFiI8pwl1ZrPckTt-70">
