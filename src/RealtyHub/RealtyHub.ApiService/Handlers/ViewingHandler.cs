@@ -19,14 +19,16 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
                 .FirstOrDefaultAsync(c => c.Id == request.CustomerId && c.IsActive);
 
             if (customer is null)
-                return new Response<Viewing?>(null, 404, "Cliente não encontrado");
+                return new Response<Viewing?>(null, 404, 
+                    "Cliente não encontrado");
 
             var property = await context
                 .Properties
                 .FirstOrDefaultAsync(p => p.Id == request.PropertyId && p.IsActive);
 
             if (property is null)
-                return new Response<Viewing?>(null, 404, "Imóvel não encontrado");
+                return new Response<Viewing?>(null, 404, 
+                    "Imóvel não encontrado");
 
             var isViewingExits = await context
                 .Viewing
@@ -37,12 +39,13 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
 
             if (isViewingExits)
                 return new Response<Viewing?>(null, 400,
-                $"Já existe uma visita do cliente {customer.Name} para o imóvel {property.Title}");
+                $"Já existe uma visita do cliente {customer.Name} " +
+                $"para o imóvel {property.Title}");
 
             var viewing = new Viewing
             {
                 Date = request.Date,
-                ViewingStatus = request.ViewingStatus,
+                Status = request.ViewingStatus,
                 CustomerId = request.CustomerId,
                 Customer = customer,
                 PropertyId = request.PropertyId,
@@ -52,11 +55,13 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
             context.Viewing.Add(viewing);
             await context.SaveChangesAsync();
 
-            return new Response<Viewing?>(viewing, 201, "Visita agendada com sucesso");
+            return new Response<Viewing?>(viewing, 201, 
+                "Visita agendada com sucesso");
         }
         catch (Exception ex)
         {
-            return new Response<Viewing?>(null, 500, $"Não foi possível agendar a visita\n{ex.Message}");
+            return new Response<Viewing?>(null, 500, 
+                $"Não foi possível agendar a visita\n{ex.Message}");
         }
     }
 
@@ -71,7 +76,8 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
                 .FirstOrDefaultAsync(v => v.Id == request.Id && v.IsActive);
 
             if (viewing is null)
-                return new Response<Viewing?>(null, 404, "Visita não encontrada");
+                return new Response<Viewing?>(null, 404, 
+                    "Visita não encontrada");
 
             viewing.Date = request.Date;
             viewing.UpdatedAt = DateTime.UtcNow;
@@ -83,7 +89,8 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
         }
         catch (Exception ex)
         {
-            return new Response<Viewing?>(null, 500, $"Não foi possível reagendar a visita\n{ex.Message}");
+            return new Response<Viewing?>(null, 500, 
+                $"Não foi possível reagendar a visita\n{ex.Message}");
         }
     }
 
@@ -98,12 +105,20 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
                 .FirstOrDefaultAsync(v => v.Id == request.Id && v.IsActive);
 
             if (viewing is null)
-                return new Response<Viewing?>(null, 404, "Visita não encontrada");
+                return new Response<Viewing?>(null, 404, 
+                    "Visita não encontrada");
 
-            if (viewing.ViewingStatus == EViewingStatus.Done)
-                return new Response<Viewing?>(null, 400, "Visita já finalizada");
+            switch (viewing.Status)
+            {
+                case EViewingStatus.Canceled:
+                    return new Response<Viewing?>(null, 400, 
+                        "Não é possível finalizar uma visita cancelada");
+                case EViewingStatus.Done:
+                    return new Response<Viewing?>(null, 400, 
+                        "Visita já finalizada");
+            }
 
-            viewing.ViewingStatus = EViewingStatus.Done;
+            viewing.Status = EViewingStatus.Done;
 
             await context.SaveChangesAsync();
 
@@ -111,7 +126,8 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
         }
         catch (Exception ex)
         {
-            return new Response<Viewing?>(null, 500, $"Não foi possível finalizar a visita\n{ex.Message}");
+            return new Response<Viewing?>(null, 500, 
+                $"Não foi possível finalizar a visita\n{ex.Message}");
         }
     }
 
@@ -126,20 +142,30 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
                 .FirstOrDefaultAsync(v => v.Id == request.Id && v.IsActive);
 
             if (viewing is null)
-                return new Response<Viewing?>(null, 404, "Visita não encontrada");
+                return new Response<Viewing?>(null, 404, 
+                    "Visita não encontrada");
 
-            if (viewing.ViewingStatus == EViewingStatus.Canceled)
-                return new Response<Viewing?>(null, 400, "Visita já cancelada");
+            switch (viewing.Status)
+            {
+                case EViewingStatus.Done:
+                    return new Response<Viewing?>(null, 400, 
+                        "Não é possível cancelar uma visita finalizada");
+                case EViewingStatus.Canceled:
+                    return new Response<Viewing?>(null, 400, 
+                        "Visita já cancelada");
+            }
 
-            viewing.ViewingStatus = EViewingStatus.Canceled;
+            viewing.Status = EViewingStatus.Canceled;
 
             await context.SaveChangesAsync();
 
-            return new Response<Viewing?>(viewing, message: "Visita cancelada com sucesso");
+            return new Response<Viewing?>(viewing, message: 
+                "Visita cancelada com sucesso");
         }
         catch (Exception ex)
         {
-            return new Response<Viewing?>(null, 500, $"Não foi possível cancelar a visita\n{ex.Message}");
+            return new Response<Viewing?>(null, 500, 
+                $"Não foi possível cancelar a visita\n{ex.Message}");
         }
     }
 
@@ -160,7 +186,8 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
         }
         catch (Exception ex)
         {
-            return new Response<Viewing?>(null, 500, $"Não foi possível retornar a visita\n{ex.Message}");
+            return new Response<Viewing?>(null, 500, 
+                $"Não foi possível retornar a visita\n{ex.Message}");
         }
     }
 
@@ -182,11 +209,13 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
 
             var count = await query.CountAsync();
 
-            return new PagedResponse<List<Viewing>?>(viewings, count, request.PageNumber, request.PageSize);
+            return new PagedResponse<List<Viewing>?>(
+                viewings, count, request.PageNumber, request.PageSize);
         }
         catch (Exception ex)
         {
-            return new PagedResponse<List<Viewing>?>(null, 500, message: $"Não foi possível retornar as visitas\n{ex.Message}");
+            return new PagedResponse<List<Viewing>?>(null, 500, 
+                message: $"Não foi possível retornar as visitas\n{ex.Message}");
         }
     }
 }

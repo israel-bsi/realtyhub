@@ -15,7 +15,7 @@ public class ViewingMapping : IEntityTypeConfiguration<Viewing>
         builder.Property(v => v.Date)
             .IsRequired();
 
-        builder.Property(v => v.ViewingStatus)
+        builder.Property(v => v.Status)
             .IsRequired();
 
         builder.Property(v => v.CustomerId)
