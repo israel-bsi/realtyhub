@@ -20,7 +20,9 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
                 Email = request.Email,
                 Phone = request.Phone,
                 DocumentNumber = request.DocumentNumber,
-                DocumentType = request.CustomerType == ECustomerType.Individual ? EDocumentType.Cpf : EDocumentType.Cnpj,
+                DocumentType = request.CustomerType == ECustomerType.Individual 
+                    ? EDocumentType.Cpf
+                    : EDocumentType.Cnpj,
                 Address = request.Address,
                 Rg = request.Rg,
                 BusinessName = request.BusinessName
@@ -29,11 +31,13 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
             await context.Customers.AddAsync(customer);
             await context.SaveChangesAsync();
 
-            return new Response<Customer?>(customer, 201, "Cliente criado com sucesso");
+            return new Response<Customer?>(customer, 201, 
+                "Cliente criado com sucesso");
         }
         catch (Exception ex)
         {
-            return new Response<Customer?>(null, 500, $"Não foi possível criar o cliente\n{ex.Message}");
+            return new Response<Customer?>(null, 500, 
+                $"Não foi possível criar o cliente\n{ex.Message}");
         }
     }
 
@@ -46,13 +50,16 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
                 .FirstOrDefaultAsync(c => c.Id == request.Id && c.IsActive);
 
             if (customer is null)
-                return new Response<Customer?>(null, 404, "Cliente não encontrado");
+                return new Response<Customer?>(null, 404, 
+                    "Cliente não encontrado");
 
             customer.Name = request.Name;
             customer.Email = request.Email;
             customer.Phone = request.Phone;
             customer.DocumentNumber = request.DocumentNumber;
-            customer.DocumentType = request.CustomerType == ECustomerType.Individual ? EDocumentType.Cpf : EDocumentType.Cnpj;
+            customer.DocumentType = request.CustomerType == ECustomerType.Individual 
+                ? EDocumentType.Cpf 
+                : EDocumentType.Cnpj;
             customer.Address = request.Address;
             customer.Rg = request.Rg;
             customer.BusinessName = request.BusinessName;
@@ -61,11 +68,13 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
             context.Customers.Update(customer);
             await context.SaveChangesAsync();
 
-            return new Response<Customer?>(customer, message: "Cliente atualizado com sucesso");
+            return new Response<Customer?>(customer, message: 
+                "Cliente atualizado com sucesso");
         }
         catch (Exception ex)
         {
-            return new Response<Customer?>(null, 500, $"Não foi possível atualizar o cliente\n{ex.Message}");
+            return new Response<Customer?>(null, 500, 
+                $"Não foi possível atualizar o cliente\n{ex.Message}");
         }
     }
 
@@ -78,17 +87,20 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
                 .FirstOrDefaultAsync(c => c.Id == request.Id && c.IsActive);
 
             if (customer is null)
-                return new Response<Customer?>(null, 404, "Cliente não encontrado");
+                return new Response<Customer?>(null, 404, 
+                    "Cliente não encontrado");
 
             customer.IsActive = false;
 
             await context.SaveChangesAsync();
 
-            return new Response<Customer?>(customer, message: "Cliente excluído com sucesso");
+            return new Response<Customer?>(customer, message: 
+                "Cliente excluído com sucesso");
         }
         catch (Exception ex)
         {
-            return new Response<Customer?>(null, 500, $"Não foi possível excluir o cliente\n{ex.Message}");
+            return new Response<Customer?>(null, 500, 
+                $"Não foi possível excluir o cliente\n{ex.Message}");
         }
     }
 
@@ -102,12 +114,14 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
                 .FirstOrDefaultAsync(c => c.Id == request.Id && c.IsActive);
 
             return customer is null
-                ? new Response<Customer?>(null, 404, "Cliente não encontrado")
+                ? new Response<Customer?>(null, 404, 
+                    "Cliente não encontrado")
                 : new Response<Customer?>(customer);
         }
         catch (Exception ex)
         {
-            return new Response<Customer?>(null, 500, $"Não foi possível retornar o cliente\n{ex.Message}");
+            return new Response<Customer?>(null, 500, 
+                $"Não foi possível retornar o cliente\n{ex.Message}");
         }
     }
 
@@ -128,11 +142,13 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
 
             var count = await query.CountAsync();
 
-            return new PagedResponse<List<Customer>?>(customers, count, request.PageNumber, request.PageSize);
+            return new PagedResponse<List<Customer>?>(
+                customers, count, request.PageNumber, request.PageSize);
         }
         catch
         {
-            return new PagedResponse<List<Customer>?>(null, 500, "Não foi possível consultar os clientes");
+            return new PagedResponse<List<Customer>?>(null, 500, 
+                "Não foi possível consultar os clientes");
         }
     }
 }
