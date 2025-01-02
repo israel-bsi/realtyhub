@@ -32,11 +32,13 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
             await context.Properties.AddAsync(property);
             await context.SaveChangesAsync();
 
-            return new Response<Property?>(property, 201, "Imóvel criado com sucesso");
+            return new Response<Property?>(property, 201, 
+                "Imóvel criado com sucesso");
         }
         catch (Exception ex)
         {
-            return new Response<Property?>(null, 500, $"Não foi possível criar o imóvel\n{ex.Message}");
+            return new Response<Property?>(null, 500, 
+                $"Não foi possível criar o imóvel\n{ex.Message}");
         }
     }
 
@@ -49,7 +51,8 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
                 .FirstOrDefaultAsync(p => p.Id == request.Id && p.IsActive);
 
             if (property is null)
-                return new Response<Property?>(null, 404, "Imóvel não encontrado");
+                return new Response<Property?>(null, 404, 
+                    "Imóvel não encontrado");
 
             property.Title = request.Title;
             property.Description = request.Description;
@@ -67,11 +70,13 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
             context.Properties.Update(property);
             await context.SaveChangesAsync();
 
-            return new Response<Property?>(property, 200, "Imóvel atualizado com sucesso");
+            return new Response<Property?>(property, 200, 
+                "Imóvel atualizado com sucesso");
         }
         catch (Exception ex)
         {
-            return new Response<Property?>(null, 500, $"Não foi possível atualizar o imóvel\n{ex.Message}");
+            return new Response<Property?>(null, 500, 
+                $"Não foi possível atualizar o imóvel\n{ex.Message}");
         }
     }
 
@@ -84,18 +89,21 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
                 .FirstOrDefaultAsync(p => p.Id == request.Id && p.IsActive);
 
             if (property is null)
-                return new Response<Property?>(null, 404, "Imóvel não encontrado");
+                return new Response<Property?>(null, 404, 
+                    "Imóvel não encontrado");
 
             property.IsActive = false;
             property.UpdatedAt = DateTime.UtcNow;
 
             await context.SaveChangesAsync();
 
-            return new Response<Property?>(property, 200, "Imóvel deletado com sucesso");
+            return new Response<Property?>(property, 200, 
+                "Imóvel deletado com sucesso");
         }
         catch (Exception ex)
         {
-            return new Response<Property?>(null, 500, $"Não foi possível deletar o imóvel\n{ex.Message}");
+            return new Response<Property?>(null, 500, 
+                $"Não foi possível deletar o imóvel\n{ex.Message}");
         }
     }
 
@@ -109,12 +117,14 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
                 .FirstOrDefaultAsync(p => p.Id == request.Id && p.IsActive);
 
             return property is null
-                ? new Response<Property?>(null, 404, "Imóvel não encontrado")
+                ? new Response<Property?>(null, 404, 
+                    "Imóvel não encontrado")
                 : new Response<Property?>(property);
         }
         catch (Exception ex)
         {
-            return new Response<Property?>(null, 500, $"Não foi possível retornar o imóvel\n{ex.Message}");
+            return new Response<Property?>(null, 500, 
+                $"Não foi possível retornar o imóvel\n{ex.Message}");
         }
     }
 
@@ -135,11 +145,13 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
 
             var count = await query.CountAsync();
 
-            return new PagedResponse<List<Property>?>(properties, count, request.PageNumber, request.PageSize);
+            return new PagedResponse<List<Property>?>(
+                properties, count, request.PageNumber, request.PageSize);
         }
         catch (Exception ex)
         {
-            return new PagedResponse<List<Property>?>(null, 500, $"Não foi possível retornar os imóveis\n{ex.Message}");
+            return new PagedResponse<List<Property>?>(null, 500, 
+                $"Não foi possível retornar os imóveis\n{ex.Message}");
         }
     }
 }
