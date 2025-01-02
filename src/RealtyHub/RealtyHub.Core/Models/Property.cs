@@ -17,4 +17,5 @@ public class Property : Entity
     public bool IsNew { get; set; }
     public List<PropertyImage> PropertyImage { get; set; } = [];
     public Address Address { get; set; } = new();
+    public bool IsActive { get; set; }
 }

@@ -6,4 +6,5 @@ public class PropertyImage : Entity
     public string FilePath { get; set; } = string.Empty;
     public long PropertyId { get; set; }
      public Property Property { get; set; } = new();
+     public bool IsActive { get; set; }
 }

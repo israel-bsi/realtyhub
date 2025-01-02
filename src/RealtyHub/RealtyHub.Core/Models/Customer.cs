@@ -19,4 +19,5 @@ public class Customer : Entity
     public Address Address { get; set; } = new();
     public string? Rg { get; set; }
     public string? BusinessName { get; set; }
+    public bool IsActive { get; set; }
 }

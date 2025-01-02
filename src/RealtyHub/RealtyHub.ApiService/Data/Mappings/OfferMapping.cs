@@ -35,8 +35,6 @@ public class OfferMapping : IEntityTypeConfiguration<Offer>
             .IsRequired()
             .HasDefaultValueSql("NOW()");
 
-        builder.Ignore(x => x.IsActive);
-
         builder.HasOne(x => x.Property)
             .WithMany()
             .HasForeignKey(x => x.PropertyId);
