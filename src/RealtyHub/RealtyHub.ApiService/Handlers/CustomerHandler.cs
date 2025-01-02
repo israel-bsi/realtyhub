@@ -98,6 +98,7 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
         {
             var customer = await context
                 .Customers
+                .AsNoTracking()
                 .FirstOrDefaultAsync(c => c.Id == request.Id && c.IsActive);
 
             return customer is null

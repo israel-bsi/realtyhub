@@ -105,6 +105,7 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
         {
             var property = await context
                 .Properties
+                .AsNoTracking()
                 .FirstOrDefaultAsync(p => p.Id == request.Id && p.IsActive);
 
             return property is null
@@ -123,6 +124,7 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
         {
             var query = context
                 .Properties
+                .AsNoTracking()
                 .Where(p => p.IsActive)
                 .OrderBy(p => p.Title);
 

@@ -43,7 +43,9 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
             {
                 Date = request.Date,
                 ViewingStatus = request.ViewingStatus,
+                CustomerId = request.CustomerId,
                 Customer = customer,
+                PropertyId = request.PropertyId,
                 Property = property
             };
 
@@ -147,6 +149,7 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
         {
             var viewing = await context
                 .Viewing
+                .AsNoTracking()
                 .Include(v => v.Customer)
                 .Include(v => v.Property)
                 .FirstOrDefaultAsync(v => v.Id == request.Id && v.IsActive);
