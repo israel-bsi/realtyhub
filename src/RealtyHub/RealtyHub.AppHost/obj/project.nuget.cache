@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "TOoj/0LY6EA=",
+  "dgSpecHash": "lPvvZM84eWw=",
   "success": true,
-  "projectFilePath": "C:\\Users\\maste\\source\\repos\\realtyhub\\src\\RealtyHub\\RealtyHub.AppHost\\RealtyHub.AppHost.csproj",
+  "projectFilePath": "C:\\Users\\maste\\source\\repos\\RealtyHub\\src\\RealtyHub\\RealtyHub.AppHost\\RealtyHub.AppHost.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\maste\\.nuget\\packages\\aspire.dashboard.sdk.win-x64\\9.0.0\\aspire.dashboard.sdk.win-x64.9.0.0.nupkg.sha512",
     "C:\\Users\\maste\\.nuget\\packages\\aspire.hosting\\9.0.0\\aspire.hosting.9.0.0.nupkg.sha512",
