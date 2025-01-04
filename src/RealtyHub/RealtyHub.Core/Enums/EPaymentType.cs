@@ -8,5 +8,7 @@ public enum EPaymentType
     Dinheiro = 4,
     Pix = 5,
     Financiamento = 6,
-    Outros = 7
+    CartaoDeCredito = 7,
+    Fgts = 8,
+    Outros = 9
 }

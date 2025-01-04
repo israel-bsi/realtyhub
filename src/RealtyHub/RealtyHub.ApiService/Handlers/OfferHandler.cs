@@ -54,15 +54,35 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
 
         try
         {
+            var payments = new List<Payment>();
+            foreach (var paymentRequest in request.CreatePaymentRequests)
+            {
+                var payment = new Payment
+                {
+                    PaymentDate = paymentRequest.PaymentDate,
+                    Amount = paymentRequest.Amount,
+                    PaymentType = paymentRequest.PaymentType,
+                    PaymentStatus = paymentRequest.PaymentStatus,
+                    IsActive = true
+                };
+                payments.Add(payment);
+            }
+
+            var total = payments.Sum(p => p.Amount);
+            if (total < request.Amount)
+                return new Response<Offer?>(null, 400,
+                    "O valor total dos pagamentos não corresponde ao valor da proposta");
+
             var offer = new Offer
             {
                 Submission = request.Submission,
                 Amount = request.Amount,
-                Status = EOfferStatus.Analysis,
+                OfferStatus = request.OfferStatus,
                 CustomerId = request.CustomerId,
                 Customer = customer,
                 PropertyId = request.PropertyId,
-                Property = property
+                Property = property,
+                Payments = payments
             };
 
             await context.Offers.AddAsync(offer);
@@ -86,20 +106,38 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .Offers
                 .Include(o => o.Customer)
                 .Include(o => o.Property)
+                .Include(o => o.Payments)
                 .FirstOrDefaultAsync(o => o.Id == request.Id);
 
             if (offer is null)
                 return new Response<Offer?>(null, 404, 
                     "Proposta não encontrada");
 
-            if (offer.Status is EOfferStatus.Accepted or EOfferStatus.Rejected)
+            if (offer.OfferStatus is EOfferStatus.Accepted or EOfferStatus.Rejected)
                 return new Response<Offer?>(null, 400,
                     "Não é possível atualizar uma proposta aceita ou rejeitada");
 
+            var total = request.UpdatePaymentRequests.Sum(p => p.Amount);
+            if (total < request.Amount)
+                return new Response<Offer?>(null, 400,
+                    "O valor total dos pagamentos não corresponde ao valor da proposta");
+
             offer.Submission = request.Submission;
             offer.Amount = request.Amount;
+            offer.PropertyId = request.PropertyId;
+            offer.CustomerId = request.CustomerId;
+            offer.OfferStatus = request.OfferStatus;
+            offer.Payments = request.UpdatePaymentRequests.Select(p => new Payment
+            {
+                Id = p.Id,
+                PaymentDate = p.PaymentDate,
+                Amount = p.Amount,
+                PaymentType = p.PaymentType,
+                PaymentStatus = p.PaymentStatus,
+                IsActive = true
+            }).ToList();
             offer.UpdatedAt = DateTime.UtcNow;
-
+            
             context.Offers.Update(offer);
             await context.SaveChangesAsync();
 
@@ -121,13 +159,14 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .Offers
                 .Include(o => o.Customer)
                 .Include(o => o.Property)
+                .Include(o => o.Payments)
                 .FirstOrDefaultAsync(o => o.Id == request.Id);
 
             if (offer is null)
                 return new Response<Offer?>(null, 404, 
                     "Proposta não encontrada");
 
-            switch (offer.Status)
+            switch (offer.OfferStatus)
             {
                 case EOfferStatus.Accepted:
                     return new Response<Offer?>(null, 400,
@@ -137,7 +176,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                         "Proposta já está recusada");
             }
 
-            offer.Status = EOfferStatus.Rejected;
+            offer.OfferStatus = EOfferStatus.Rejected;
             offer.UpdatedAt = DateTime.UtcNow;
 
             context.Offers.Update(offer);
@@ -161,13 +200,14 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .Offers
                 .Include(o => o.Customer)
                 .Include(o => o.Property)
+                .Include(o => o.Payments)
                 .FirstOrDefaultAsync(o => o.Id == request.Id);
 
             if (offer is null)
                 return new Response<Offer?>(null, 404, 
                     "Proposta não encontrada");
 
-            switch (offer.Status)
+            switch (offer.OfferStatus)
             {
                 case EOfferStatus.Accepted:
                     return new Response<Offer?>(null, 400,
@@ -177,7 +217,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                         "Não é possível aceitar uma proposta recusada");
             }
 
-            offer.Status = EOfferStatus.Accepted;
+            offer.OfferStatus = EOfferStatus.Accepted;
             offer.UpdatedAt = DateTime.UtcNow;
 
             context.Offers.Update(offer);
@@ -202,6 +242,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .AsNoTracking()
                 .Include(o => o.Customer)
                 .Include(o => o.Property)
+                .Include(o => o.Payments)
                 .FirstOrDefaultAsync(o => o.Id == request.Id);
 
             return offer == null
@@ -233,6 +274,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .AsNoTracking()
                 .Include(o => o.Customer)
                 .Include(o => o.Property)
+                .Include(o => o.Payments)
                 .Where(o => o.PropertyId == request.PropertyId)
                 .ToListAsync();
 
@@ -269,6 +311,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .AsNoTracking()
                 .Include(o => o.Customer)
                 .Include(o => o.Property)
+                .Include(o => o.Payments)
                 .Where(o => o.CustomerId == request.CustomerId)
                 .ToListAsync();
 
@@ -295,7 +338,8 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .Offers
                 .AsNoTracking()
                 .Include(o => o.Customer)
-                .Include(o => o.Property);
+                .Include(o => o.Property)
+                .Include(o => o.Payments);
 
             var offers = await query
                 .Skip((request.PageNumber - 1) * request.PageSize)

@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using RealtyHub.Core.Enums;
+using RealtyHub.Core.Requests.Payments;
 
 namespace RealtyHub.Core.Requests.Offers;
 
@@ -12,4 +14,7 @@ public class CreateOfferRequest : Request
     public long PropertyId { get; set; }
     [Required(ErrorMessage = "O cliente é obrigatório")]
     public long CustomerId { get; set; }
+    [Required(ErrorMessage = "O status da proposta é obrigatório")]
+    public EOfferStatus OfferStatus { get; set; }
+    public List<CreatePaymentRequest> CreatePaymentRequests { get; set; } = [];
 }

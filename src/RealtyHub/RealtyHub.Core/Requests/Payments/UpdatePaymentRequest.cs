@@ -11,7 +11,7 @@ public class UpdatePaymentRequest : Request
     [Required(ErrorMessage = "O valor do pagamento é obrigatório")]
     public decimal Amount { get; set; }
     [Required(ErrorMessage = "O tipo de pagamento é obrigatório")]
-    public EPaymentType Type { get; set; }
+    public EPaymentType PaymentType { get; set; }
     [Required(ErrorMessage = "O status do pagamento é obrigatório")]
-    public EPaymentStatus Status { get; set; }
+    public EPaymentStatus PaymentStatus { get; set; }
 }
