@@ -14,5 +14,4 @@ public class CreateContractRequest : Request
     public DateTime TermEndDate { get; set; }
     [Required(ErrorMessage = "O contrato é obrigatório")]
     public long OfferId { get; set; }
-    public bool IsActive { get; set; }
 }

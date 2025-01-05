@@ -15,21 +15,16 @@ public class UpdatePropertyRequest : Request
     [MaxLength(80, ErrorMessage = "A descrição deve conter até 80 caracteres")]
     public string Description { get; set; } = string.Empty;
     [Required(ErrorMessage = "Preço é um campo obrigatório")]
-    [Range(0, double.MaxValue, ErrorMessage = "Preço inválido")]
     public decimal Price { get; set; }
     [Required(ErrorMessage = "Tipo de propriedade é um campo obrigatório")]
     public EPropertyType PropertyType { get; set; }
     [Required(ErrorMessage = "Quartos é um campo obrigatório")]
-    [Range(0, int.MaxValue, ErrorMessage = "Quartos inválidos")]
     public int Bedroom { get; set; }
     [Required(ErrorMessage = "Banheiros é um campo obrigatório")]
-    [Range(0, int.MaxValue, ErrorMessage = "Banheiros inválidos")]
     public int Bathroom { get; set; }
     [Required(ErrorMessage = "Garagem é um campo obrigatório")]
-    [Range(0, int.MaxValue, ErrorMessage = "Garagem inválida")]
     public int Garage { get; set; }
     [Required(ErrorMessage = "Área é um campo obrigatório")]
-    [Range(0, double.MaxValue, ErrorMessage = "Área inválida")]
     public double Area { get; set; }
     [Required(ErrorMessage = "Detalhes de transações é um campo obrigatório")]
     public string TransactionsDetails { get; set; } = string.Empty;

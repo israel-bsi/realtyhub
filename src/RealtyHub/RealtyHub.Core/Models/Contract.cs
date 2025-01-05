@@ -7,7 +7,7 @@ public class Contract : Entity
     public DateTime SignatureDate { get; set; }
     public DateTime EffectiveDate { get; set; }
     public DateTime TermEndDate { get; set; }
-    public byte[] Content { get; set; } = [];
+    public string Content { get; set; } = string.Empty;
     public long OfferId { get; set; }
     public Offer Offer { get; set; } = new();
     public bool IsActive { get; set; }

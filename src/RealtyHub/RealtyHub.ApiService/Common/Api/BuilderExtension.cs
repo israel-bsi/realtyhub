@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
 using RealtyHub.ApiService.Data;
 using RealtyHub.ApiService.Handlers;
 using RealtyHub.ApiService.Models;
@@ -91,6 +90,7 @@ public static class BuilderExtension
         builder.Services.AddTransient<IPropertyHandler, PropertyHandler>();
         builder.Services.AddTransient<IViewingHandler, ViewingHandler>();
         builder.Services.AddTransient<IOfferHandler, OfferHandler>();
+        builder.Services.AddTransient<IContractHandler, ContractHandler>();
 
         builder.Services.AddTransient<IViaCepService, ViaCepService>();
     }

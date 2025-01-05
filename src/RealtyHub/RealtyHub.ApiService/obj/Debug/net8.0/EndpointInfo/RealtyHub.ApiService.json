@@ -320,6 +320,111 @@
         }
       }
     },
+    "/v1/contracts/{id}": {
+      "delete": {
+        "tags": [
+          "Contracts"
+        ],
+        "summary": "Deleta um contrato",
+        "description": "Deleta um contrato",
+        "operationId": "Contracts: Delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RealtyHub.Core.Responses.Response`1[[RealtyHub.Core.Models.Contract, RealtyHub.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Contracts"
+        ],
+        "summary": "Recupera um contrato",
+        "description": "Recupera um contrato",
+        "operationId": "Contracts: Get by Id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RealtyHub.Core.Responses.Response`1[[RealtyHub.Core.Models.Contract, RealtyHub.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Contracts"
+        ],
+        "summary": "Atualiza um contrato",
+        "description": "Atualiza um contrato",
+        "operationId": "Contracts: Update",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RealtyHub.Core.Requests.Contracts.UpdateContractRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RealtyHub.Core.Responses.Response`1[[RealtyHub.Core.Models.Contract, RealtyHub.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/": {
       "get": {
         "tags": [
@@ -879,6 +984,78 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/RealtyHub.Core.Responses.Response`1[[RealtyHub.Core.Models.Offer, RealtyHub.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/contracts": {
+      "get": {
+        "tags": [
+          "Contracts"
+        ],
+        "summary": "Recupera todos os contratos",
+        "description": "Recupera todos os contratos",
+        "operationId": "Contracts: Get All",
+        "parameters": [
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 25
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RealtyHub.Core.Responses.PagedResponse`1[[System.Collections.Generic.List`1[[RealtyHub.Core.Models.Contract, RealtyHub.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Contracts"
+        ],
+        "summary": "Cria um novo contrato",
+        "description": "Cria um novo contrato",
+        "operationId": "Contracts: Create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RealtyHub.Core.Requests.Contracts.CreateContractRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RealtyHub.Core.Responses.Response`1[[RealtyHub.Core.Models.Contract, RealtyHub.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
                 }
               }
             }
@@ -1534,6 +1711,30 @@
         "type": "integer",
         "format": "int32"
       },
+      "RealtyHub.Core.Enums.EPaymentStatus": {
+        "enum": [
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "RealtyHub.Core.Enums.EPaymentType": {
+        "enum": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
       "RealtyHub.Core.Enums.EPropertyType": {
         "enum": [
           1,
@@ -1607,7 +1808,7 @@
         },
         "additionalProperties": false
       },
-      "RealtyHub.Core.Models.Customer": {
+      "RealtyHub.Core.Models.Contract": {
         "type": "object",
         "properties": {
           "createdAt": {
@@ -1618,8 +1819,53 @@
             "type": "string",
             "format": "date-time"
           },
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "issueDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "signatureDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "effectiveDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "termEndDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "content": {
+            "type": "string",
+            "nullable": true
+          },
+          "offerId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "offer": {
+            "$ref": "#/components/schemas/RealtyHub.Core.Models.Offer"
+          },
           "isActive": {
             "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RealtyHub.Core.Models.Customer": {
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
           },
           "id": {
             "type": "integer",
@@ -1657,6 +1903,9 @@
           "businessName": {
             "type": "string",
             "nullable": true
+          },
+          "isActive": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -1672,9 +1921,6 @@
             "type": "string",
             "format": "date-time"
           },
-          "isActive": {
-            "type": "boolean"
-          },
           "id": {
             "type": "integer",
             "format": "int64"
@@ -1687,8 +1933,15 @@
             "type": "number",
             "format": "double"
           },
-          "status": {
+          "offerStatus": {
             "$ref": "#/components/schemas/RealtyHub.Core.Enums.EOfferStatus"
+          },
+          "payments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RealtyHub.Core.Models.Payment"
+            },
+            "nullable": true
           },
           "propertyId": {
             "type": "integer",
@@ -1707,7 +1960,7 @@
         },
         "additionalProperties": false
       },
-      "RealtyHub.Core.Models.Property": {
+      "RealtyHub.Core.Models.Payment": {
         "type": "object",
         "properties": {
           "createdAt": {
@@ -1718,8 +1971,44 @@
             "type": "string",
             "format": "date-time"
           },
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "paymentDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          },
+          "paymentType": {
+            "$ref": "#/components/schemas/RealtyHub.Core.Enums.EPaymentType"
+          },
+          "paymentStatus": {
+            "$ref": "#/components/schemas/RealtyHub.Core.Enums.EPaymentStatus"
+          },
+          "offerId": {
+            "type": "integer",
+            "format": "int64"
+          },
           "isActive": {
             "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RealtyHub.Core.Models.Property": {
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
           },
           "id": {
             "type": "integer",
@@ -1772,6 +2061,9 @@
           },
           "address": {
             "$ref": "#/components/schemas/RealtyHub.Core.Models.Address"
+          },
+          "isActive": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -1787,9 +2079,6 @@
             "type": "string",
             "format": "date-time"
           },
-          "isActive": {
-            "type": "boolean"
-          },
           "id": {
             "type": "integer",
             "format": "int64"
@@ -1804,6 +2093,9 @@
           },
           "property": {
             "$ref": "#/components/schemas/RealtyHub.Core.Models.Property"
+          },
+          "isActive": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -1819,9 +2111,6 @@
             "type": "string",
             "format": "date-time"
           },
-          "isActive": {
-            "type": "boolean"
-          },
           "id": {
             "type": "integer",
             "format": "int64"
@@ -1830,7 +2119,7 @@
             "type": "string",
             "format": "date-time"
           },
-          "viewingStatus": {
+          "status": {
             "$ref": "#/components/schemas/RealtyHub.Core.Enums.EViewingStatus"
           },
           "customerId": {
@@ -1850,8 +2139,82 @@
         },
         "additionalProperties": false
       },
+      "RealtyHub.Core.Requests.Contracts.CreateContractRequest": {
+        "required": [
+          "effectiveDate",
+          "issueDate",
+          "offerId",
+          "signatureDate",
+          "termEndDate"
+        ],
+        "type": "object",
+        "properties": {
+          "issueDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "signatureDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "effectiveDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "termEndDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "offerId": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RealtyHub.Core.Requests.Contracts.UpdateContractRequest": {
+        "required": [
+          "effectiveDate",
+          "issueDate",
+          "offerId",
+          "signatureDate",
+          "termEndDate"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "issueDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "signatureDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "effectiveDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "termEndDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "offerId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
       "RealtyHub.Core.Requests.Customers.CreateCustomerRequest": {
         "required": [
+          "customerType",
           "documentNumber",
           "email",
           "name",
@@ -1900,6 +2263,7 @@
       },
       "RealtyHub.Core.Requests.Customers.UpdateCustomerRequest": {
         "required": [
+          "customerType",
           "documentNumber",
           "email",
           "name",
@@ -1954,6 +2318,7 @@
         "required": [
           "amount",
           "customerId",
+          "offerStatus",
           "propertyId",
           "submission"
         ],
@@ -1974,6 +2339,16 @@
           "customerId": {
             "type": "integer",
             "format": "int64"
+          },
+          "offerStatus": {
+            "$ref": "#/components/schemas/RealtyHub.Core.Enums.EOfferStatus"
+          },
+          "createPaymentRequests": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RealtyHub.Core.Requests.Payments.CreatePaymentRequest"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1981,6 +2356,9 @@
       "RealtyHub.Core.Requests.Offers.UpdateOfferRequest": {
         "required": [
           "amount",
+          "customerId",
+          "offerStatus",
+          "propertyId",
           "submission"
         ],
         "type": "object",
@@ -1996,6 +2374,80 @@
           "amount": {
             "type": "number",
             "format": "double"
+          },
+          "propertyId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "customerId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "offerStatus": {
+            "$ref": "#/components/schemas/RealtyHub.Core.Enums.EOfferStatus"
+          },
+          "updatePaymentRequests": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RealtyHub.Core.Requests.Payments.UpdatePaymentRequest"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RealtyHub.Core.Requests.Payments.CreatePaymentRequest": {
+        "required": [
+          "amount",
+          "paymentDate",
+          "paymentStatus",
+          "paymentType"
+        ],
+        "type": "object",
+        "properties": {
+          "paymentDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          },
+          "paymentType": {
+            "$ref": "#/components/schemas/RealtyHub.Core.Enums.EPaymentType"
+          },
+          "paymentStatus": {
+            "$ref": "#/components/schemas/RealtyHub.Core.Enums.EPaymentStatus"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RealtyHub.Core.Requests.Payments.UpdatePaymentRequest": {
+        "required": [
+          "amount",
+          "paymentDate",
+          "paymentStatus",
+          "paymentType"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "paymentDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          },
+          "paymentType": {
+            "$ref": "#/components/schemas/RealtyHub.Core.Enums.EPaymentType"
+          },
+          "paymentStatus": {
+            "$ref": "#/components/schemas/RealtyHub.Core.Enums.EPaymentStatus"
           }
         },
         "additionalProperties": false
@@ -2027,7 +2479,6 @@
             "type": "string"
           },
           "price": {
-            "minimum": 0,
             "type": "number",
             "format": "double"
           },
@@ -2035,25 +2486,18 @@
             "$ref": "#/components/schemas/RealtyHub.Core.Enums.EPropertyType"
           },
           "bedroom": {
-            "maximum": 2147483647,
-            "minimum": 0,
             "type": "integer",
             "format": "int32"
           },
           "bathroom": {
-            "maximum": 2147483647,
-            "minimum": 0,
             "type": "integer",
             "format": "int32"
           },
           "garage": {
-            "maximum": 2147483647,
-            "minimum": 0,
             "type": "integer",
             "format": "int32"
           },
           "area": {
-            "minimum": 0,
             "type": "number",
             "format": "double"
           },
@@ -2101,7 +2545,6 @@
             "type": "string"
           },
           "price": {
-            "minimum": 0,
             "type": "number",
             "format": "double"
           },
@@ -2109,25 +2552,18 @@
             "$ref": "#/components/schemas/RealtyHub.Core.Enums.EPropertyType"
           },
           "bedroom": {
-            "maximum": 2147483647,
-            "minimum": 0,
             "type": "integer",
             "format": "int32"
           },
           "bathroom": {
-            "maximum": 2147483647,
-            "minimum": 0,
             "type": "integer",
             "format": "int32"
           },
           "garage": {
-            "maximum": 2147483647,
-            "minimum": 0,
             "type": "integer",
             "format": "int32"
           },
           "area": {
-            "minimum": 0,
             "type": "number",
             "format": "double"
           },
@@ -2185,6 +2621,40 @@
           "propertyId": {
             "type": "integer",
             "format": "int64"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RealtyHub.Core.Responses.PagedResponse`1[[System.Collections.Generic.List`1[[RealtyHub.Core.Models.Contract, RealtyHub.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RealtyHub.Core.Models.Contract"
+            },
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "currentPage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -2287,6 +2757,19 @@
           "totalCount": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RealtyHub.Core.Responses.Response`1[[RealtyHub.Core.Models.Contract, RealtyHub.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/RealtyHub.Core.Models.Contract"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false

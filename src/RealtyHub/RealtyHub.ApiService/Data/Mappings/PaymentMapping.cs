@@ -33,7 +33,7 @@ public class PaymentMapping : IEntityTypeConfiguration<Payment>
         builder.HasOne(p => p.Offer)
             .WithMany(o => o.Payments)
             .HasForeignKey(p => p.OfferId);
-
+        
         builder.Property(x => x.IsActive)
             .HasDefaultValue(true);
     }

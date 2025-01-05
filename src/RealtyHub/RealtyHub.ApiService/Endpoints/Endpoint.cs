@@ -1,4 +1,5 @@
 ﻿using RealtyHub.ApiService.Common.Api;
+using RealtyHub.ApiService.Endpoints.Contracts;
 using RealtyHub.ApiService.Endpoints.Customers;
 using RealtyHub.ApiService.Endpoints.Identity;
 using RealtyHub.ApiService.Endpoints.Offers;
@@ -67,6 +68,15 @@ public static class Endpoint
             .MapEndpoint<GetAllOffersByPropertyEndpoint>()
             .MapEndpoint<GetAllOffersByCustomerEndpoint>()
             .MapEndpoint<GetAllOffersEndpoint>();
+
+        endpoints.MapGroup("v1/contracts")
+            .WithTags("Contracts")
+            .RequireAuthorization()
+            .MapEndpoint<CreateContractEndpoint>()
+            .MapEndpoint<UpdateContractEndpoint>()
+            .MapEndpoint<DeleteContractEndpoint>()
+            .MapEndpoint<GetContractByIdEndpoint>()
+            .MapEndpoint<GetAllContractsEndpoint>();
     }
 
     private static IEndpointRouteBuilder MapEndpoint<TEndpoint>(this IEndpointRouteBuilder app)

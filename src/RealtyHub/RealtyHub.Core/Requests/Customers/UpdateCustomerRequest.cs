@@ -22,6 +22,7 @@ public class UpdateCustomerRequest : Request
     [Required(ErrorMessage = "Documento é um campo obrigatório")]
     [MaxLength(20, ErrorMessage = "O documento deve conter até 20 caracteres")]
     public string DocumentNumber { get; set; } = string.Empty;
+    [Required(ErrorMessage = "Tipo de cliente é um campo obrigatório")]
     public ECustomerType CustomerType { get; set; }
     public string? Rg { get; set; }
     public string? BusinessName { get; set; }

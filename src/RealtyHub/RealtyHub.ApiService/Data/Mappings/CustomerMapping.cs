@@ -45,6 +45,9 @@ public class CustomerMapping : IEntityTypeConfiguration<Customer>
             .IsRequired()
             .HasDefaultValueSql("NOW()");
 
+        builder.Property(c=>c.IsActive)
+            .HasDefaultValue(true);
+
         builder.OwnsOne(a => a.Address, address =>
         {
             address.Property(a => a.Street)

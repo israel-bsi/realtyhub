@@ -54,19 +54,15 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
 
         try
         {
-            var payments = new List<Payment>();
-            foreach (var paymentRequest in request.CreatePaymentRequests)
-            {
-                var payment = new Payment
+            var payments = request.CreatePaymentRequests.Select(paymentRequest => new Payment
                 {
                     PaymentDate = paymentRequest.PaymentDate,
                     Amount = paymentRequest.Amount,
                     PaymentType = paymentRequest.PaymentType,
                     PaymentStatus = paymentRequest.PaymentStatus,
                     IsActive = true
-                };
-                payments.Add(payment);
-            }
+                })
+                .ToList();
 
             var total = payments.Sum(p => p.Amount);
             if (total < request.Amount)
@@ -122,20 +118,36 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 return new Response<Offer?>(null, 400,
                     "O valor total dos pagamentos não corresponde ao valor da proposta");
 
+            var payments = await context
+                .Payments
+                .Where(p => p.OfferId == request.Id)
+                .ToListAsync();
+
             offer.Submission = request.Submission;
             offer.Amount = request.Amount;
             offer.PropertyId = request.PropertyId;
             offer.CustomerId = request.CustomerId;
             offer.OfferStatus = request.OfferStatus;
-            offer.Payments = request.UpdatePaymentRequests.Select(p => new Payment
+            foreach (var payment in payments)
             {
-                Id = p.Id,
-                PaymentDate = p.PaymentDate,
-                Amount = p.Amount,
-                PaymentType = p.PaymentType,
-                PaymentStatus = p.PaymentStatus,
-                IsActive = true
-            }).ToList();
+                var updatePaymentRequest = request.UpdatePaymentRequests
+                    .FirstOrDefault(p => p.Id == payment.Id);
+
+                if (updatePaymentRequest is not null)
+                {
+                    payment.PaymentDate = updatePaymentRequest.PaymentDate;
+                    payment.Amount = updatePaymentRequest.Amount;
+                    payment.PaymentType = updatePaymentRequest.PaymentType;
+                    payment.PaymentStatus = updatePaymentRequest.PaymentStatus;
+                    payment.UpdatedAt = DateTime.UtcNow;
+                    payment.IsActive = true;
+                }
+                else
+                {
+                    payment.IsActive = false;
+                    payment.UpdatedAt = DateTime.UtcNow;
+                }
+            }
             offer.UpdatedAt = DateTime.UtcNow;
             
             context.Offers.Update(offer);

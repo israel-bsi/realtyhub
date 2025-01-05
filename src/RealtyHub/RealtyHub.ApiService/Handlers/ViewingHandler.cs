@@ -34,8 +34,7 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
                 .Viewing
                 .AnyAsync(v => 
                     v.CustomerId == request.CustomerId 
-                    && v.PropertyId == request.PropertyId 
-                    && v.IsActive);
+                    && v.PropertyId == request.PropertyId);
 
             if (isViewingExits)
                 return new Response<Viewing?>(null, 400,
@@ -73,11 +72,21 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
                 .Viewing
                 .Include(v => v.Customer)
                 .Include(v => v.Property)
-                .FirstOrDefaultAsync(v => v.Id == request.Id && v.IsActive);
+                .FirstOrDefaultAsync(v => v.Id == request.Id);
 
             if (viewing is null)
-                return new Response<Viewing?>(null, 404, 
+                return new Response<Viewing?>(null, 404,
                     "Visita não encontrada");
+
+            switch (viewing.Status)
+            {
+                case EViewingStatus.Canceled:
+                    return new Response<Viewing?>(null, 400,
+                        "Não é possível reagendar uma visita cancelada");
+                case EViewingStatus.Done:
+                    return new Response<Viewing?>(null, 400,
+                        "Não é possível reagendar uma visita finalizada");
+            }
 
             viewing.Date = request.Date;
             viewing.UpdatedAt = DateTime.UtcNow;
@@ -102,7 +111,7 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
                 .Viewing
                 .Include(v => v.Customer)
                 .Include(v => v.Property)
-                .FirstOrDefaultAsync(v => v.Id == request.Id && v.IsActive);
+                .FirstOrDefaultAsync(v => v.Id == request.Id);
 
             if (viewing is null)
                 return new Response<Viewing?>(null, 404, 
@@ -139,7 +148,7 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
                 .Viewing
                 .Include(v => v.Customer)
                 .Include(v => v.Property)
-                .FirstOrDefaultAsync(v => v.Id == request.Id && v.IsActive);
+                .FirstOrDefaultAsync(v => v.Id == request.Id);
 
             if (viewing is null)
                 return new Response<Viewing?>(null, 404, 
@@ -178,7 +187,7 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
                 .AsNoTracking()
                 .Include(v => v.Customer)
                 .Include(v => v.Property)
-                .FirstOrDefaultAsync(v => v.Id == request.Id && v.IsActive);
+                .FirstOrDefaultAsync(v => v.Id == request.Id);
 
             return viewing is null
                 ? new Response<Viewing?>(null, 404, "Visita não encontrada")
@@ -199,8 +208,7 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
                 .Viewing
                 .AsNoTracking()
                 .Include(v => v.Customer)
-                .Include(v => v.Property)
-                .Where(v => v.IsActive);
+                .Include(v => v.Property);
 
             var viewings = await query
                 .Skip((request.PageNumber - 1) * request.PageSize)

@@ -158,4 +158,3 @@ C:\Users\maste\source\repos\RealtyHub\src\RealtyHub\RealtyHub.ApiService\obj\Deb
 C:\Users\maste\source\repos\RealtyHub\src\RealtyHub\RealtyHub.ApiService\obj\Debug\net8.0\RealtyHub.ApiService.pdb
 C:\Users\maste\source\repos\RealtyHub\src\RealtyHub\RealtyHub.ApiService\obj\Debug\net8.0\RealtyHub.ApiService.genruntimeconfig.cache
 C:\Users\maste\source\repos\RealtyHub\src\RealtyHub\RealtyHub.ApiService\obj\Debug\net8.0\ref\RealtyHub.ApiService.dll
-C:\Users\maste\source\repos\RealtyHub\src\RealtyHub\RealtyHub.ApiService\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
