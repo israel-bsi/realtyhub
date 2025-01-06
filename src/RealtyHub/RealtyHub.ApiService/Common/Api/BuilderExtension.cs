@@ -29,7 +29,7 @@ public static class BuilderExtension
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen(options =>
         {
-            options.OrderActionsBy((apiDesc) => apiDesc.HttpMethod);
+            options.OrderActionsBy((apiDesc) => apiDesc.GroupName);
             options.CustomSchemaIds(n => n.FullName);
         });
     }

@@ -21,7 +21,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .FirstOrDefaultAsync(c => c.Id == request.CustomerId && c.IsActive);
 
             if (customer is null)
-                return new Response<Offer?>(null, 404, 
+                return new Response<Offer?>(null, 404,
                     "Cliente não encontrado");
 
             context.Attach(customer);
@@ -41,7 +41,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .FirstOrDefaultAsync(p => p.Id == request.PropertyId && p.IsActive);
 
             if (property is null)
-                return new Response<Offer?>(null, 404, 
+                return new Response<Offer?>(null, 404,
                     "Imóvel não encontrado");
 
             context.Attach(property);
@@ -55,14 +55,13 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
         try
         {
             var payments = request.CreatePaymentRequests.Select(paymentRequest => new Payment
-                {
-                    PaymentDate = paymentRequest.PaymentDate,
-                    Amount = paymentRequest.Amount,
-                    PaymentType = paymentRequest.PaymentType,
-                    PaymentStatus = paymentRequest.PaymentStatus,
-                    IsActive = true
-                })
-                .ToList();
+            {
+                PaymentDate = paymentRequest.PaymentDate,
+                Amount = paymentRequest.Amount,
+                PaymentType = paymentRequest.PaymentType,
+                PaymentStatus = paymentRequest.PaymentStatus,
+                IsActive = true
+            }).ToList();
 
             var total = payments.Sum(p => p.Amount);
             if (total < request.Amount)
@@ -84,7 +83,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
             await context.Offers.AddAsync(offer);
             await context.SaveChangesAsync();
 
-            return new Response<Offer?>(offer, 201, 
+            return new Response<Offer?>(offer, 201,
                 "Proposta criada com sucesso");
         }
         catch (Exception ex)
@@ -106,7 +105,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .FirstOrDefaultAsync(o => o.Id == request.Id);
 
             if (offer is null)
-                return new Response<Offer?>(null, 404, 
+                return new Response<Offer?>(null, 404,
                     "Proposta não encontrada");
 
             if (offer.OfferStatus is EOfferStatus.Accepted or EOfferStatus.Rejected)
@@ -148,12 +147,34 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                     payment.UpdatedAt = DateTime.UtcNow;
                 }
             }
+
+            foreach (var payment in request.UpdatePaymentRequests)
+            {
+                var isExist = payments.Any(p => p.Id == payment.Id);
+                if (isExist) continue;
+
+                var newPayment = new Payment
+                {
+                    PaymentDate = payment.PaymentDate,
+                    Amount = payment.Amount,
+                    PaymentType = payment.PaymentType,
+                    PaymentStatus = payment.PaymentStatus,
+                    IsActive = true,
+                    OfferId = offer.Id,
+                    Offer = offer,
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow
+                };
+
+                context.Attach(newPayment);
+                offer.Payments.Add(newPayment);
+            }
             offer.UpdatedAt = DateTime.UtcNow;
-            
+
             context.Offers.Update(offer);
             await context.SaveChangesAsync();
 
-            return new Response<Offer?>(offer, 200, 
+            return new Response<Offer?>(offer, 200,
                 "Proposta atualizada com sucesso");
         }
         catch (Exception ex)
@@ -175,7 +196,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .FirstOrDefaultAsync(o => o.Id == request.Id);
 
             if (offer is null)
-                return new Response<Offer?>(null, 404, 
+                return new Response<Offer?>(null, 404,
                     "Proposta não encontrada");
 
             switch (offer.OfferStatus)
@@ -194,7 +215,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
             context.Offers.Update(offer);
             await context.SaveChangesAsync();
 
-            return new Response<Offer?>(offer, 200, 
+            return new Response<Offer?>(offer, 200,
                 "Proposta rejeitada com sucesso");
         }
         catch (Exception ex)
@@ -216,7 +237,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .FirstOrDefaultAsync(o => o.Id == request.Id);
 
             if (offer is null)
-                return new Response<Offer?>(null, 404, 
+                return new Response<Offer?>(null, 404,
                     "Proposta não encontrada");
 
             switch (offer.OfferStatus)
@@ -235,7 +256,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
             context.Offers.Update(offer);
             await context.SaveChangesAsync();
 
-            return new Response<Offer?>(offer, 200, 
+            return new Response<Offer?>(offer, 200,
                 "Proposta aceita com sucesso");
         }
         catch (Exception ex)
@@ -278,7 +299,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .FirstOrDefaultAsync(p => p.Id == request.PropertyId && p.IsActive);
 
             if (property is null)
-                return new Response<List<Offer>?>(null, 404, 
+                return new Response<List<Offer>?>(null, 404,
                     "Imóvel não encontrado");
 
             var offers = await context
@@ -293,9 +314,9 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
             var count = offers.Count;
 
             return offers.Count == 0
-                ? new Response<List<Offer>?>(null, 404, 
+                ? new Response<List<Offer>?>(null, 404,
                     "Nenhuma proposta encontrada para esse imóvel")
-                : new Response<List<Offer>?>(offers, 200, 
+                : new Response<List<Offer>?>(offers, 200,
                     $"{count} proposta(s) encontradas");
         }
         catch (Exception ex)
@@ -315,7 +336,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .FirstOrDefaultAsync(p => p.Id == request.CustomerId && p.IsActive);
 
             if (customer is null)
-                return new Response<List<Offer>?>(null, 404, 
+                return new Response<List<Offer>?>(null, 404,
                     "Cliente não encontrado");
 
             var offers = await context
@@ -330,9 +351,9 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
             var count = offers.Count;
 
             return offers.Count == 0
-                ? new Response<List<Offer>?>(null, 404, 
+                ? new Response<List<Offer>?>(null, 404,
                     "Nenhuma proposta feita por esse cliente foi encontrada")
-                : new Response<List<Offer>?>(offers, 200, 
+                : new Response<List<Offer>?>(offers, 200,
                     $"{count} proposta(s) encontradas");
         }
         catch (Exception ex)
@@ -341,7 +362,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 $"Não foi possível buscar as propostas\n{ex.Message}");
         }
     }
-    
+
     public async Task<PagedResponse<List<Offer>?>> GetAllAsync(GetAllOffersRequest request)
     {
         try

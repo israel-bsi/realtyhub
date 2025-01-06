@@ -29,6 +29,14 @@ public class ContractMapping : IEntityTypeConfiguration<Contract>
         builder.Property(c => c.IsActive)
             .IsRequired();
 
+        builder.Property(c => c.CreatedAt)
+            .IsRequired()
+            .HasDefaultValueSql("NOW()");
+
+        builder.Property(c => c.UpdatedAt)
+            .IsRequired()
+            .HasDefaultValueSql("NOW()");
+
         builder.HasOne(c => c.Offer)
             .WithOne()
             .HasForeignKey<Contract>(c => c.OfferId);

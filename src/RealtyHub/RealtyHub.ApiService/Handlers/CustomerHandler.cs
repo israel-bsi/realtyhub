@@ -25,7 +25,8 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
                     : EDocumentType.Cnpj,
                 Address = request.Address,
                 Rg = request.Rg,
-                BusinessName = request.BusinessName
+                BusinessName = request.BusinessName,
+                IsActive = true
             };
 
             await context.Customers.AddAsync(customer);
