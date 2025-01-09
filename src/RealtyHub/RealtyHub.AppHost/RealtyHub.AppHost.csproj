@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RealtyHub.ApiService\RealtyHub.ApiService.csproj" />
-    <ProjectReference Include="..\RealtyHub.Web\RealtyHub.Web.csproj" />
+    <ProjectReference Include="..\RealtyHub.Frontend\RealtyHub.Frontend.csproj" />
   </ItemGroup>
 
   <ItemGroup>
