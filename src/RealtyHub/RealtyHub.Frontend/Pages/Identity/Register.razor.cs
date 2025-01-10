@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using MudBlazor;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Requests.Account;
@@ -26,6 +27,8 @@ public partial class RegisterPage : ComponentBase
 
     #region Properties
     public RegisterRequest InputModel { get; set; } = new();
+    public string? ErrorText { get; set; }
+    public bool Error => !string.IsNullOrEmpty(ErrorText);
     public bool IsBusy { get; set; }
 
     #endregion
@@ -64,6 +67,15 @@ public partial class RegisterPage : ComponentBase
         {
             IsBusy = false;
         }
+    }
+    public void IsPasswordEqual(FocusEventArgs focusEventArgs)
+    {
+        if (InputModel.Password == InputModel.ConfirmPassword)
+        {
+            ErrorText = null;
+            return;
+        }
+        ErrorText = "As senhas não coincidem";
     }
     #endregion
 }
