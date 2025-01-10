@@ -1,16 +1,15 @@
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.Components.Web;
 using MudBlazor.Services;
 using RealtyHub.Core.Handlers;
 using RealtyHub.ServiceDefaults;
 using System.Globalization;
 using System.Net;
 using Blazored.LocalStorage;
-using Microsoft.AspNetCore.DataProtection;
+using RealtyHub.Core.Services;
 using RealtyHub.Web;
 using RealtyHub.Web.Handlers;
 using RealtyHub.Web.Security;
+using RealtyHub.Web.Services;
 
 CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("pt-BR");
 CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("pt-BR");
@@ -35,6 +34,7 @@ builder.Services.AddMudServices();
 builder.Services.AddLocalization();
 builder.Services.AddTransient<IAccountHandler, AccountHandler>();
 builder.Services.AddTransient<ICustomerHandler, CustomerHandler>();
+builder.Services.AddTransient<IViaCepService, ViaCepService>();
 
 builder.Services.AddHttpClient(Configuration.HttpClientName, client =>
     {
@@ -45,7 +45,7 @@ builder.Services.AddHttpClient(Configuration.HttpClientName, client =>
     {
         UseDefaultCredentials = true,
         CookieContainer = new CookieContainer(),
-        UseCookies = true
+        UseCookies = true,
     })
     .AddHttpMessageHandler<CookieHandler>();
 

@@ -4,8 +4,6 @@ namespace RealtyHub.Core.Responses;
 
 public class ViaCepResponse
 {
-    [JsonPropertyName("cep")]
-    public string ZipCode { get; set; } = string.Empty;
     [JsonPropertyName("logradouro")]
     public string Street { get; set; } = string.Empty;
     [JsonPropertyName("complemento")]

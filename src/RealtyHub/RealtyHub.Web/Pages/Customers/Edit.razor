@@ -1,0 +1,120 @@
+﻿@page "/clientes/editar/{id}"
+@using RealtyHub.Core.Enums
+@inherits EditCustomerPage
+
+<PageTitle>Editar Cliente</PageTitle>
+
+<MudText Typo="Typo.h3">Editar Cliente</MudText>
+
+@if (IsBusy)
+{
+    <MudPaper Class="pa-8 mt-4">
+        <MudSkeleton Height="55px"/>
+        <MudSkeleton Height="110px"/>
+        <MudSkeleton Height="55px"/>
+        <MudSkeleton Height="110px"/>
+        <MudSkeleton Height="55px"/>
+    </MudPaper>
+}
+else
+{
+    <MudPaper Class="pa-8 mt-4">
+        <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
+            <DataAnnotationsValidator />
+
+            <MudSelect T="ECustomerType"
+                       Label="Pessoa"
+                       AnchorOrigin="Origin.BottomCenter"
+                       @bind-Value="InputModel.CustomerType">
+                <MudSelectItem T="ECustomerType" Value="ECustomerType.Individual">
+                    Física
+                </MudSelectItem>
+                <MudSelectItem T="ECustomerType" Value="ECustomerType.Business">
+                    Jurídica
+                </MudSelectItem>
+            </MudSelect>
+
+            <MudTextField Label="@(InputModel.CustomerType == ECustomerType.Individual ? "Nome" : "Razão Social")"
+                          HelperText="Campo obrigatório"
+                          @bind-Value="InputModel.Name"
+                          For="@(() => InputModel.Name)" />
+
+            @if (InputModel.CustomerType == ECustomerType.Individual)
+            {
+                <MudTextField Label="Rg"
+                              @bind-Value="InputModel.Rg"
+                              For="@(() => InputModel.Rg)" />
+            }
+            else
+            {
+                <MudTextField Label="Razão Social"
+                              @bind-Value="InputModel.BusinessName"
+                              For="@(() => InputModel.BusinessName)" />
+            }
+
+            <MudTextField Label="@DocumentType"
+                          HelperText="Campo obrigatório"
+                          @bind-Value="InputModel.DocumentNumber"
+                          For="@(() => InputModel.DocumentNumber)"
+                          Mask="DocumentCustomerMask" />
+
+            <MudTextField Label="E-mail"
+                          HelperText="Campo obrigatório"
+                          @bind-Value="InputModel.Email"
+                          For="@(() => InputModel.Email)" />
+
+            <MudTextField Label="Telefone"
+                          HelperText="Campo obrigatório"
+                          @bind-Value="InputModel.Phone"
+                          For="@(() => InputModel.Phone)"
+                          Mask="PhoneMask" />
+
+            <MudTextField Label="CEP"
+                          HelperText="Campo obrigatório"
+                          @bind-Value="InputModel.Address.ZipCode"
+                          For="@(() => InputModel.Address.ZipCode)"
+                          Mask="ZipCodeMask"
+                          OnBlur="SearchAddressAsync" />
+
+            <MudTextField Label="Logradouro"
+                          HelperText="Campo obrigatório"
+                          @bind-Value="InputModel.Address.Street"
+                          For="@(() => InputModel.Address.Street)" />
+
+            <MudTextField Label="Bairro"
+                          HelperText="Campo obrigatório"
+                          @bind-Value="InputModel.Address.Neighborhood"
+                          For="@(() => InputModel.Address.Neighborhood)" />
+
+            <MudTextField Label="Número"
+                          HelperText="Campo obrigatório"
+                          @bind-Value="InputModel.Address.Number"
+                          For="@(() => InputModel.Address.Number)" />
+
+            <MudTextField Label="Complemento"
+                          @bind-Value="InputModel.Address.Complement"
+                          For="@(() => InputModel.Address.Complement)" />
+
+            <MudTextField Label="Cidade"
+                          HelperText="Campo obrigatório"
+                          @bind-Value="InputModel.Address.City"
+                          For="@(() => InputModel.Address.City)" />
+
+            <MudTextField Label="Estado"
+                          HelperText="Campo obrigatório"
+                          @bind-Value="InputModel.Address.State"
+                          For="@(() => InputModel.Address.State)" />
+
+            <MudTextField Label="País"
+                          HelperText="Campo obrigatório"
+                          @bind-Value="InputModel.Address.Country"
+                          For="@(() => InputModel.Address.Country)" />
+
+            <MudButton ButtonType="ButtonType.Submit"
+                       Variant="Variant.Filled"
+                       Color="Color.Primary">
+                Salvar
+            </MudButton>
+        </EditForm>
+    </MudPaper>
+}
