@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Components.Authorization;
 using RealtyHub.Core.Models.Account;
 
-namespace RealtyHub.Frontend.Security;
+namespace RealtyHub.Web.Security;
 
 public class CookieAuthenticationStateProvider(IHttpClientFactory clientFactory) : 
     AuthenticationStateProvider, ICookieAuthenticationStateProvider

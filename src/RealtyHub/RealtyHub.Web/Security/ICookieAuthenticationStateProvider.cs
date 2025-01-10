@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.Authorization;
 
-namespace RealtyHub.Frontend.Security;
+namespace RealtyHub.Web.Security;
 
 public interface ICookieAuthenticationStateProvider
 {

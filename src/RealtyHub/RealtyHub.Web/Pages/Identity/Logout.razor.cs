@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using RealtyHub.Core.Handlers;
-using RealtyHub.Frontend.Security;
+using RealtyHub.Web.Security;
 
-namespace RealtyHub.Frontend.Pages.Identity;
+namespace RealtyHub.Web.Pages.Identity;
 
 public partial class LogoutPage : ComponentBase
 {

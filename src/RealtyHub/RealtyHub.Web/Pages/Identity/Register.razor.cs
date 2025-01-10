@@ -1,14 +1,16 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using MudBlazor;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Requests.Account;
-using RealtyHub.Frontend.Security;
+using RealtyHub.Web.Security;
 
-namespace RealtyHub.Frontend.Pages.Identity;
+namespace RealtyHub.Web.Pages.Identity;
 
-public partial class LoginPage : ComponentBase
+public partial class RegisterPage : ComponentBase
 {
     #region Services
+
     [Inject]
     public ISnackbar Snackbar { get; set; } = null!;
 
@@ -18,13 +20,17 @@ public partial class LoginPage : ComponentBase
     [Inject]
     public NavigationManager NavigationManager { get; set; } = null!;
 
-    [Inject]
+    [Inject] 
     public ICookieAuthenticationStateProvider AuthenticationStateProvider { get; set; } = null!;
+
     #endregion
 
     #region Properties
-    public LoginRequest InputModel { get; set; } = new();
+    public RegisterRequest InputModel { get; set; } = new();
+    public string? ErrorText { get; set; }
+    public bool Error => !string.IsNullOrEmpty(ErrorText);
     public bool IsBusy { get; set; }
+
     #endregion
 
     #region Overrides
@@ -44,12 +50,11 @@ public partial class LoginPage : ComponentBase
         IsBusy = true;
         try
         {
-            var result = await Handler.LoginAsync(InputModel);
+            var result = await Handler.RegisterAsync(InputModel);
             if (result.IsSuccess)
             {
-                await AuthenticationStateProvider.GetAuthenticationStateAsync();
-                AuthenticationStateProvider.NotifyAuthenticationStateChanged();
-                NavigationManager.NavigateTo("/");
+                Snackbar.Add(result.Message, Severity.Success);
+                NavigationManager.NavigateTo("/login");
             }
             else
                 Snackbar.Add(result.Message, Severity.Error);
@@ -62,6 +67,15 @@ public partial class LoginPage : ComponentBase
         {
             IsBusy = false;
         }
+    }
+    public void IsPasswordEqual(FocusEventArgs focusEventArgs)
+    {
+        if (InputModel.Password == InputModel.ConfirmPassword)
+        {
+            ErrorText = null;
+            return;
+        }
+        ErrorText = "As senhas não coincidem";
     }
     #endregion
 }

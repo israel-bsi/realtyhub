@@ -4,7 +4,7 @@ using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Requests.Account;
 using RealtyHub.Core.Responses;
 
-namespace RealtyHub.Frontend.Handlers;
+namespace RealtyHub.Web.Handlers;
 
 public class AccountHandler(IHttpClientFactory httpClientFactory) : IAccountHandler
 {

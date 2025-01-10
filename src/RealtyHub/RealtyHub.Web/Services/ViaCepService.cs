@@ -2,7 +2,7 @@
 using RealtyHub.Core.Responses;
 using RealtyHub.Core.Services;
 
-namespace RealtyHub.Frontend.Services;
+namespace RealtyHub.Web.Services;
 
 public class ViaCepService(IHttpClientFactory httpClientFactory) : IViaCepService
 {

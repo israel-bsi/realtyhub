@@ -1,4 +1,4 @@
-﻿namespace RealtyHub.Frontend.Security;
+﻿namespace RealtyHub.Web.Security;
 
 public class CookieHandler : DelegatingHandler
 {

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Sdk Name="Aspire.AppHost.Sdk" Version="9.0.0" />
 
@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RealtyHub.ApiService\RealtyHub.ApiService.csproj" />
-    <ProjectReference Include="..\RealtyHub.Frontend\RealtyHub.Frontend.csproj" />
+    <ProjectReference Include="..\RealtyHub.Web\RealtyHub.Web.csproj" />
   </ItemGroup>
 
   <ItemGroup>

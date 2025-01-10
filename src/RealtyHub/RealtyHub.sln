@@ -1,4 +1,4 @@
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
@@ -12,7 +12,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealtyHub.Tests", "RealtyHu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealtyHub.Core", "RealtyHub.Core\RealtyHub.Core.csproj", "{4CAB8F0F-8228-436A-B50D-498B1421D31E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealtyHub.Frontend", "RealtyHub.Frontend\RealtyHub.Frontend.csproj", "{B06A9A10-A3DA-4B8D-AD09-5410A0224A90}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealtyHub.Web", "RealtyHub.Web\RealtyHub.Web.csproj", "{D09A8866-74F9-433F-B52E-A44F59E2C1C6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,10 +40,10 @@ Global
 		{4CAB8F0F-8228-436A-B50D-498B1421D31E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4CAB8F0F-8228-436A-B50D-498B1421D31E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4CAB8F0F-8228-436A-B50D-498B1421D31E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B06A9A10-A3DA-4B8D-AD09-5410A0224A90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B06A9A10-A3DA-4B8D-AD09-5410A0224A90}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B06A9A10-A3DA-4B8D-AD09-5410A0224A90}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B06A9A10-A3DA-4B8D-AD09-5410A0224A90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D09A8866-74F9-433F-B52E-A44F59E2C1C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D09A8866-74F9-433F-B52E-A44F59E2C1C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D09A8866-74F9-433F-B52E-A44F59E2C1C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D09A8866-74F9-433F-B52E-A44F59E2C1C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
