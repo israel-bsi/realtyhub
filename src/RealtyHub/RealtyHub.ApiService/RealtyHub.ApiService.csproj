@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RealtyHub.Core\RealtyHub.Core.csproj" />
-    <ProjectReference Include="..\RealtyHub.ServiceDefaults\RealtyHub.ServiceDefaults.csproj" />
   </ItemGroup>
 
   <ItemGroup>

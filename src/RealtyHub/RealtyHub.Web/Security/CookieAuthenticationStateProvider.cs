@@ -1,13 +1,11 @@
-﻿using System.Security.Claims;
-using System.Text.Json;
+﻿using System.Net.Http.Json;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.JSInterop;
 using RealtyHub.Core.Models.Account;
-using RealtyHub.Web.Services;
 
 namespace RealtyHub.Web.Security;
 
-public class CookieAuthenticationStateProvider(IHttpClientFactory clientFactory, UserIdentityService userIdentityService) : 
+public class CookieAuthenticationStateProvider(IHttpClientFactory clientFactory) : 
     AuthenticationStateProvider, ICookieAuthenticationStateProvider
 {
     private readonly HttpClient _httpClient = clientFactory.CreateClient(Configuration.HttpClientName);
@@ -41,7 +39,7 @@ public class CookieAuthenticationStateProvider(IHttpClientFactory clientFactory,
     {
         try
         {
-            return await userIdentityService.GetUserAsync();
+            return await _httpClient.GetFromJsonAsync<User?>("v1/identity/manage/info");
         }
         catch
         {

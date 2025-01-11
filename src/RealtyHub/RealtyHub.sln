@@ -1,10 +1,9 @@
-﻿Microsoft Visual Studio Solution File, Format Version 12.00
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealtyHub.AppHost", "RealtyHub.AppHost\RealtyHub.AppHost.csproj", "{E51AF8B9-0B75-4D03-8B0F-1E8CDA30F2AC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealtyHub.ServiceDefaults", "RealtyHub.ServiceDefaults\RealtyHub.ServiceDefaults.csproj", "{9E97DB67-1754-4145-BD75-963E87212B6A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealtyHub.ApiService", "RealtyHub.ApiService\RealtyHub.ApiService.csproj", "{7C0BDC08-6A4E-4C8B-8346-151C3D9B9F58}"
 EndProject
@@ -12,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealtyHub.Tests", "RealtyHu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealtyHub.Core", "RealtyHub.Core\RealtyHub.Core.csproj", "{4CAB8F0F-8228-436A-B50D-498B1421D31E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealtyHub.Web", "RealtyHub.Web\RealtyHub.Web.csproj", "{D09A8866-74F9-433F-B52E-A44F59E2C1C6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealtyHub.Web", "RealtyHub.Web\RealtyHub.Web.csproj", "{4C1BB000-50C3-4C09-8A7B-A77584478CB3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,10 +23,6 @@ Global
 		{E51AF8B9-0B75-4D03-8B0F-1E8CDA30F2AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E51AF8B9-0B75-4D03-8B0F-1E8CDA30F2AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E51AF8B9-0B75-4D03-8B0F-1E8CDA30F2AC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9E97DB67-1754-4145-BD75-963E87212B6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9E97DB67-1754-4145-BD75-963E87212B6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9E97DB67-1754-4145-BD75-963E87212B6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9E97DB67-1754-4145-BD75-963E87212B6A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7C0BDC08-6A4E-4C8B-8346-151C3D9B9F58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7C0BDC08-6A4E-4C8B-8346-151C3D9B9F58}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C0BDC08-6A4E-4C8B-8346-151C3D9B9F58}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -40,10 +35,10 @@ Global
 		{4CAB8F0F-8228-436A-B50D-498B1421D31E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4CAB8F0F-8228-436A-B50D-498B1421D31E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4CAB8F0F-8228-436A-B50D-498B1421D31E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D09A8866-74F9-433F-B52E-A44F59E2C1C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D09A8866-74F9-433F-B52E-A44F59E2C1C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D09A8866-74F9-433F-B52E-A44F59E2C1C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D09A8866-74F9-433F-B52E-A44F59E2C1C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C1BB000-50C3-4C09-8A7B-A77584478CB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C1BB000-50C3-4C09-8A7B-A77584478CB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C1BB000-50C3-4C09-8A7B-A77584478CB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C1BB000-50C3-4C09-8A7B-A77584478CB3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

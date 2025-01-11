@@ -4,7 +4,6 @@ using RealtyHub.ApiService;
 using RealtyHub.ApiService.Common.Api;
 using RealtyHub.ApiService.Data;
 using RealtyHub.ApiService.Endpoints;
-using RealtyHub.ServiceDefaults;
 
 CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("pt-BR");
 CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("pt-BR");
@@ -32,7 +31,6 @@ app.UseExceptionHandler();
 app.UseCors(ApiConfiguration.CorsPolicyName);
 app.UseSecurity();
 app.MapEndpoints();
-app.MapDefaultEndpoints();
 
 app.Run();
 

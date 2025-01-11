@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using MudBlazor;
 using RealtyHub.Core.Enums;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Requests.Customers;
 using RealtyHub.Core.Services;
-using System.Text.RegularExpressions;
 
 namespace RealtyHub.Web.Pages.Customers;
 

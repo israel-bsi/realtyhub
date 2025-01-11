@@ -5,8 +5,6 @@ using RealtyHub.ApiService.Handlers;
 using RealtyHub.ApiService.Models;
 using RealtyHub.Core;
 using RealtyHub.Core.Handlers;
-using RealtyHub.Core.Services;
-using RealtyHub.ServiceDefaults;
 
 namespace RealtyHub.ApiService.Common.Api;
 
@@ -90,12 +88,7 @@ public static class BuilderExtension
 
     public static void AddServices(this WebApplicationBuilder builder)
     {
-        // Add service defaults & Aspire client integrations.
-        builder.AddServiceDefaults();
-
-        // Add services to the container.
         builder.Services.AddProblemDetails();
-
         builder.Services.AddTransient<ICustomerHandler, CustomerHandler>();
         builder.Services.AddTransient<IPropertyHandler, PropertyHandler>();
         builder.Services.AddTransient<IViewingHandler, ViewingHandler>();
