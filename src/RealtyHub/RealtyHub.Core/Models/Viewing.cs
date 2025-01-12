@@ -11,4 +11,5 @@ public class Viewing : Entity
     public Customer Customer { get; set; } = new();
     public long PropertyId { get; set; }
     public Property Property { get; set; } = new();
+    public string UserId { get; set; } = string.Empty;
 }

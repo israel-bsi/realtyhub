@@ -1,5 +1,4 @@
 ﻿@page "/clientes"
-@using MudBlazor
 @inherits ListCustomersPage
 
 <MudText Typo="Typo.h3">Clientes</MudText>
@@ -31,7 +30,6 @@
         </MudTextField>
     </ToolBarContent>
     <Columns>
-        <PropertyColumn Property="x => x.Id" Title="Id" />
         <PropertyColumn Property="x => x.Name" Title="Nome" />
         <PropertyColumn Property="x => x.DocumentNumber" Title="Documento" />
         <PropertyColumn Property="x => x.Email" Title="E-mail" />

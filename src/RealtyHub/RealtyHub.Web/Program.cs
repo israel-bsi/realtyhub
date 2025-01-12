@@ -33,6 +33,7 @@ builder.Services
 builder.Services.AddTransient<IAccountHandler, AccountHandler>();
 builder.Services.AddTransient<ICustomerHandler, CustomerHandler>();
 builder.Services.AddTransient<IViaCepService, ViaCepService>();
+builder.Services.AddTransient<DocumentValidator>();
 
 builder.Services.AddLocalization();
 CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("pt-BR");

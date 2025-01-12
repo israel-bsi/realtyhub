@@ -3,6 +3,7 @@
 public class User
 {
     public string Email { get; set; } = string.Empty;
+    public string Creci { get; set; } = string.Empty;
     public bool IsEmailConfirmed { get; set; }
     public Dictionary<string, string> Claims { get; set; } = new();
 }

@@ -24,6 +24,9 @@ public class CustomerMapping : IEntityTypeConfiguration<Customer>
             .IsRequired()
             .HasMaxLength(30);
 
+        builder.Property(c=>c.CustomerType)
+            .IsRequired();
+
         builder.Property(c => c.DocumentNumber)
             .IsRequired()
             .HasMaxLength(20);
@@ -37,6 +40,12 @@ public class CustomerMapping : IEntityTypeConfiguration<Customer>
         builder.Property(c => c.IsActive)
             .HasDefaultValue(true);
 
+        builder.Property(c => c.UserId)
+            .IsRequired();
+
+        builder.Property(c => c.IsActive)
+            .HasDefaultValue(true);
+
         builder.Property(c => c.CreatedAt)
             .IsRequired()
             .HasDefaultValueSql("NOW()");
@@ -44,9 +53,6 @@ public class CustomerMapping : IEntityTypeConfiguration<Customer>
         builder.Property(c => c.UpdatedAt)
             .IsRequired()
             .HasDefaultValueSql("NOW()");
-
-        builder.Property(c=>c.IsActive)
-            .HasDefaultValue(true);
 
         builder.OwnsOne(a => a.Address, address =>
         {

@@ -13,4 +13,5 @@ public class Offer : Entity
     public Property Property { get; set; } = new();
     public long CustomerId { get; set; }
     public Customer Customer { get; set; } = new();
+    public string UserId { get; set; } = string.Empty;
 }

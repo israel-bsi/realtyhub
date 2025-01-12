@@ -16,6 +16,9 @@ public class PropertyImageMapping : IEntityTypeConfiguration<PropertyImage>
             .IsRequired()
             .HasMaxLength(200);
 
+        builder.Property(c => c.UserId)
+            .IsRequired();
+
         builder.Property(pi => pi.IsActive)
             .IsRequired();
 

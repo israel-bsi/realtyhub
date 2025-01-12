@@ -26,6 +26,9 @@ public class ContractMapping : IEntityTypeConfiguration<Contract>
         builder.Property(c => c.OfferId)
             .IsRequired();
 
+        builder.Property(c => c.UserId)
+            .IsRequired();
+
         builder.Property(c => c.IsActive)
             .IsRequired();
 

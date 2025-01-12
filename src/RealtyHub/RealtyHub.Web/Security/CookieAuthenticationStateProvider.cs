@@ -30,6 +30,7 @@ public class CookieAuthenticationStateProvider(IHttpClientFactory clientFactory)
         user = new ClaimsPrincipal(id);
 
         _isAuthenticated = true;
+        
         return new AuthenticationState(user);
     }
     public void NotifyAuthenticationStateChanged() => 
@@ -52,7 +53,8 @@ public class CookieAuthenticationStateProvider(IHttpClientFactory clientFactory)
         var claims = new List<Claim>
         {
             new (ClaimTypes.Name, user.Email),
-            new (ClaimTypes.Email, user.Email)
+            new (ClaimTypes.Email, user.Email),
+            new ("creci", user.Creci)
         };
 
         claims.AddRange(

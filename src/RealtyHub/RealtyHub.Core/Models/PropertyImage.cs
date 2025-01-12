@@ -7,4 +7,5 @@ public class PropertyImage : Entity
     public long PropertyId { get; set; }
      public Property Property { get; set; } = new();
      public bool IsActive { get; set; }
+     public string UserId { get; set; } = string.Empty;
 }

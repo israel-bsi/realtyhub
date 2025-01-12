@@ -24,6 +24,12 @@ public class PaymentMapping : IEntityTypeConfiguration<Payment>
         builder.Property(x => x.PaymentStatus)
             .IsRequired();
 
+        builder.Property(c => c.UserId)
+            .IsRequired();
+
+        builder.Property(x => x.IsActive)
+            .HasDefaultValue(true);
+
         builder.Property(x => x.CreatedAt)
             .HasDefaultValueSql("NOW()");
 
@@ -33,8 +39,6 @@ public class PaymentMapping : IEntityTypeConfiguration<Payment>
         builder.HasOne(p => p.Offer)
             .WithMany(o => o.Payments)
             .HasForeignKey(p => p.OfferId);
-        
-        builder.Property(x => x.IsActive)
-            .HasDefaultValue(true);
+
     }
 }

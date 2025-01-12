@@ -32,6 +32,9 @@ public class ViewingMapping : IEntityTypeConfiguration<Viewing>
             .WithMany()
             .HasForeignKey(v => v.PropertyId);
 
+        builder.Property(c => c.UserId)
+            .IsRequired();
+
         builder.Property(v => v.CreatedAt)
             .HasDefaultValueSql("NOW()")
             .IsRequired();

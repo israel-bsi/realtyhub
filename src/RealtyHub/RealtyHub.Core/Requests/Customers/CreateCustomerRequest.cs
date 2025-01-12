@@ -26,4 +26,17 @@ public class CreateCustomerRequest : Request
     public ECustomerType CustomerType { get; set; } = ECustomerType.Individual;
     public string? Rg { get; set; }
     public string? BusinessName { get; set; }
+
+    public static implicit operator CreateCustomerRequest(Customer customer) =>
+        new()
+        {
+            Name = customer.Name,
+            Email = customer.Email,
+            Phone = customer.Phone,
+            DocumentNumber = customer.DocumentNumber,
+            CustomerType = customer.CustomerType,
+            Address = customer.Address,
+            Rg = customer.Rg,
+            BusinessName = customer.BusinessName
+        };
 }

@@ -26,4 +26,18 @@ public class UpdateCustomerRequest : Request
     public ECustomerType CustomerType { get; set; }
     public string? Rg { get; set; }
     public string? BusinessName { get; set; }
+
+    public static implicit operator UpdateCustomerRequest(Customer customer) =>
+        new()
+        {
+            Id = customer.Id,
+            Name = customer.Name,
+            Email = customer.Email,
+            Phone = customer.Phone,
+            DocumentNumber = customer.DocumentNumber,
+            CustomerType = customer.CustomerType,
+            Address = customer.Address,
+            Rg = customer.Rg,
+            BusinessName = customer.BusinessName
+        };
 }

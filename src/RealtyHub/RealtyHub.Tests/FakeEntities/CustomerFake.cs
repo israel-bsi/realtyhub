@@ -39,7 +39,7 @@ public class CustomerFake
     private static Address GetFakeAddress()
     {
         return new Faker<Address>()
-            .RuleFor(a => a.Number, a => a.Random.Number(1, 999))
+            .RuleFor(a => a.Number, a => a.Random.Number(1, 999).ToString())
             .RuleFor(a => a.Street, a => a.Address.StreetName())
             .RuleFor(a => a.Complement, a => a.Address.SecondaryAddress())
             .RuleFor(a => a.Neighborhood, a => a.Address.County())

@@ -20,15 +20,16 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
                 Email = request.Email,
                 Phone = request.Phone,
                 DocumentNumber = request.DocumentNumber,
+                CustomerType = request.CustomerType,
                 DocumentType = request.CustomerType == ECustomerType.Individual 
                     ? EDocumentType.Cpf
                     : EDocumentType.Cnpj,
                 Address = request.Address,
                 Rg = request.Rg,
                 BusinessName = request.BusinessName,
+                UserId = request.UserId,
                 IsActive = true
             };
-
             await context.Customers.AddAsync(customer);
             await context.SaveChangesAsync();
 
@@ -64,6 +65,7 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
             customer.Address = request.Address;
             customer.Rg = request.Rg;
             customer.BusinessName = request.BusinessName;
+            customer.UserId = request.UserId;
             customer.UpdatedAt = DateTime.UtcNow;
 
             context.Customers.Update(customer);
@@ -85,7 +87,9 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
         {
             var customer = await context
                 .Customers
-                .FirstOrDefaultAsync(c => c.Id == request.Id && c.IsActive);
+                .FirstOrDefaultAsync(c => c.Id == request.Id 
+                                          && c.UserId == request.UserId
+                                          && c.IsActive);
 
             if (customer is null)
                 return new Response<Customer?>(null, 404, 
@@ -112,7 +116,9 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
             var customer = await context
                 .Customers
                 .AsNoTracking()
-                .FirstOrDefaultAsync(c => c.Id == request.Id && c.IsActive);
+                .FirstOrDefaultAsync(c => c.Id == request.Id 
+                                          && c.UserId == request.UserId
+                                          &&  c.IsActive);
 
             return customer is null
                 ? new Response<Customer?>(null, 404, 
@@ -133,7 +139,7 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
             var query = context
                 .Customers
                 .AsNoTracking()
-                .Where(c=>c.IsActive)
+                .Where(c=>c.UserId == request.UserId && c.IsActive)
                 .OrderBy(c => c.Name);
 
             var customers = await query

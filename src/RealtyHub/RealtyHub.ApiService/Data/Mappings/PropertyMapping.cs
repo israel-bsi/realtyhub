@@ -42,6 +42,12 @@ public class PropertyMapping : IEntityTypeConfiguration<Property>
         builder.Property(p => p.IsNew)
             .IsRequired();
 
+        builder.Property(c => c.UserId)
+            .IsRequired();
+
+        builder.Property(p => p.IsActive)
+            .IsRequired();
+
         builder.Property(p => p.CreatedAt)
             .HasDefaultValueSql("NOW()")
             .IsRequired();

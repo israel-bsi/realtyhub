@@ -32,11 +32,26 @@ public class CustomerHandler(IHttpClientFactory httpClientFactory) : ICustomerHa
                ?? new Response<Customer?>(null, 400, "Falha ao excluir o cliente");
     }
 
-    public async Task<Response<Customer?>> GetByIdAsync(GetCustomerByIdRequest request) =>
-        await _httpClient.GetFromJsonAsync<Response<Customer?>>($"v1/customers/{request.Id}")
-        ?? new Response<Customer?>(null, 400, "Não foi possível obter o cliente");
+    public async Task<Response<Customer?>> GetByIdAsync(GetCustomerByIdRequest request)
+    {
+        try
+        {
+            var response = await _httpClient.GetAsync($"v1/customers/{request.Id}");
+            if (!response.IsSuccessStatusCode)
+                return new Response<Customer?>(null, 400, "Não foi possível obter o cliente");
+
+            var customer = await response.Content.ReadFromJsonAsync<Response<Customer?>>();
+            return customer is null 
+                ? new Response<Customer?>(null, 400, "Não foi possível obter o cliente") 
+                : new Response<Customer?>(customer.Data);
+        }
+        catch (Exception e)
+        {
+            return new Response<Customer?>(null, 400, e.Message);
+        }
+    }
 
     public async Task<PagedResponse<List<Customer>?>> GetAllAsync(GetAllCustomersRequest request) =>
-        await _httpClient.GetFromJsonAsync<PagedResponse<List<Customer>?>>($"v1/customers")
+        await _httpClient.GetFromJsonAsync<PagedResponse<List<Customer>?>>("v1/customers")
         ?? new PagedResponse<List<Customer>?>(null, 400, "Não foi possível obter os clientes");
 }

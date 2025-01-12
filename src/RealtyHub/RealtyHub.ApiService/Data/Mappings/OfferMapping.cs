@@ -27,6 +27,9 @@ public class OfferMapping : IEntityTypeConfiguration<Offer>
         builder.Property(x => x.CustomerId)
             .IsRequired();
 
+        builder.Property(c => c.UserId)
+            .IsRequired();
+
         builder.Property(x => x.CreatedAt)
             .IsRequired()
             .HasDefaultValueSql("NOW()");
