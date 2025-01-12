@@ -1,7 +1,10 @@
 ﻿@page "/clientes"
+@using RealtyHub.Core.Models
 @inherits ListCustomersPage
 
 <MudText Typo="Typo.h3">Clientes</MudText>
+
+<PageTitle>Clientes</PageTitle>
 
 <div class="d-flex justify-end">
     <MudButton Variant="Variant.Filled"
@@ -12,18 +15,22 @@
     </MudButton>
 </div>
 
-<MudDataGrid Class="mt-4"
-             Items="@Customers"
+<MudDataGrid T="Customer"
+             Class="mt-4"
+             ServerData="LoadServerData"
+             @ref="DataGrid"
              Filterable="true"
-             QuickFilter="Filter"
-             Hideable="true">
+             Hideable="true"
+             RowsPerPage="@Core.Configuration.DefaultPageSize">
     <ToolBarContent>
         <MudText Typo="Typo.h6">Clientes</MudText>
         <MudSpacer />
         <MudTextField @bind-Value="SearchTerm"
-                      Placeholder="Filtrar..."
+                      Placeholder="Filtrar por Nome, Documento e Email"
                       Adornment="Adornment.Start"
                       AdornmentIcon="@Icons.Material.Filled.Search"
+                      Clearable="true"
+                      OnClearButtonClick="@(() => @SearchTerm = "" )"
                       Immediate="true"
                       IconSize="Size.Medium"
                       Class="mt-0">
@@ -33,6 +40,18 @@
         <PropertyColumn Property="x => x.Name" Title="Nome" />
         <PropertyColumn Property="x => x.DocumentNumber" Title="Documento" />
         <PropertyColumn Property="x => x.Email" Title="E-mail" />
+        <TemplateColumn Title="Tipo">
+            <CellTemplate>
+                @if (context.Item.CustomerType == ECustomerType.Individual)
+                {
+                    <span>Pessoa Física</span>
+                }
+                else
+                {
+                    <span>Pessoa Jurídica</span>
+                }
+            </CellTemplate>
+        </TemplateColumn>
         <TemplateColumn Class="d-flex justify-end">
             <CellTemplate>
                 <MudStack Row>
@@ -49,4 +68,7 @@
             </CellTemplate>
         </TemplateColumn>
     </Columns>
+    <PagerContent>
+        <MudDataGridPager T="Customer" />
+    </PagerContent>
 </MudDataGrid>

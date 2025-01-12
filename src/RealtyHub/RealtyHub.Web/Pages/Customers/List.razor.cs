@@ -3,6 +3,7 @@ using MudBlazor;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.Customers;
+using RealtyHub.Web.Components;
 
 namespace RealtyHub.Web.Pages.Customers;
 
@@ -10,9 +11,20 @@ public partial class ListCustomersPage : ComponentBase
 {
     #region Properties
 
-    public bool IsBusy { get; set; }
-    public List<Customer> Customers { get; set; } = new();
-    public string SearchTerm { get; set; } = string.Empty;
+    public MudDataGrid<Customer> DataGrid { get; set; } = null!;
+    public List<Customer> Customers { get; set; } = [];
+    private string _searchTerm = string.Empty;
+    public string SearchTerm
+    {
+        get => _searchTerm;
+        set
+        {
+            if (_searchTerm == value) return;
+            _searchTerm = value;
+            _ = DataGrid.ReloadServerData();
+        }
+    }
+
     #endregion
 
     #region Services
@@ -27,49 +39,30 @@ public partial class ListCustomersPage : ComponentBase
 
     #endregion
 
-    #region Overrides
-
-    protected override async Task OnInitializedAsync()
-    {
-        IsBusy = true;
-        try
-        {
-            var request = new GetAllCustomersRequest();
-            var result = await Handler.GetAllAsync(request);
-            if (result.IsSuccess)
-                Customers = result.Data ?? new List<Customer>();
-            else
-                Snackbar.Add(result.Message, Severity.Error);
-        }
-        catch (Exception ex)
-        {
-            Snackbar.Add(ex.Message, Severity.Error);
-        }
-        finally
-        {
-            IsBusy = false;
-        }
-        IsBusy = false;
-        await base.OnInitializedAsync();
-    }
-
-    #endregion
-
     #region Methods
 
     public async void OnDeleteButtonClickedAsync(long id, string name)
     {
-        var result = await DialogService.ShowMessageBox(
-            "ATENÇÃO",
-            $"Ao prosseguir o cliente {name} será excluido. Esta é uma ação irreversível! Deseja continuar?",
-            yesText: "Excluir",
-            cancelText: "Cancelar");
-
-        if (result is true)
+        var parameters = new DialogParameters
         {
-            await OnDeleteAsync(id, name);
-        }
+            { "ContentText", $"Ao prosseguir o cliente {name} será excluido. " +
+                             "Esta é uma ação irreversível! Deseja continuar?" },
+            { "ButtonText", "Confirmar" },
+            { "ButtonColor", Color.Error }
+        };
 
+        var options = new DialogOptions
+        {
+            CloseButton = true,
+            MaxWidth = MaxWidth.Small
+        };
+
+        var dialog = await DialogService.ShowAsync<DialogConfirm>("Atenção", parameters, options);
+        var result = await dialog.Result;
+
+        if (result.Canceled) return;
+
+        await OnDeleteAsync(id, name);
         StateHasChanged();
     }
 
@@ -87,34 +80,42 @@ public partial class ListCustomersPage : ComponentBase
         }
     }
 
-    public Func<Customer, bool> Filter => customer =>
+    public async Task<GridData<Customer>> LoadServerData(GridState<Customer> state)
     {
-        if (string.IsNullOrEmpty(SearchTerm))
-            return true;
+        try
+        {
+            var request = new GetAllCustomersRequest
+            {
+                PageNumber = state.Page + 1,
+                PageSize = state.PageSize,
+                SearchTerm = SearchTerm
+            };
 
-        if (customer.Id.ToString().Contains(SearchTerm, StringComparison.OrdinalIgnoreCase))
-            return true;
+            var response = await Handler.GetAllAsync(request);
+            if (response.IsSuccess)
+                return new GridData<Customer>
+                {
+                    Items = response.Data ?? [],
+                    TotalItems = response.TotalCount
+                };
 
-        if (customer.Name.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase))
-            return true;
-
-        if (customer.BusinessName != null && customer.BusinessName.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase))
-            return true;
-
-        if (customer.DocumentNumber.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase))
-            return true;
-
-        if (customer.Email.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase))
-            return true;
-
-        if (customer.Phone.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase))
-            return true;
-
-        if (customer.Address.ZipCode.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase))
-            return true;
-
-        return false;
-    };
+            Snackbar.Add(response.Message, Severity.Error);
+            return new GridData<Customer>
+            {
+                Items = Array.Empty<Customer>(),
+                TotalItems = 0
+            };
+        }
+        catch (Exception e)
+        {
+            Snackbar.Add(e.Message, Severity.Error);
+            return new GridData<Customer>
+            {
+                Items = Array.Empty<Customer>(),
+                TotalItems = 0
+            };
+        }
+    }
 
     #endregion
 }

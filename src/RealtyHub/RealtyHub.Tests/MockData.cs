@@ -1,7 +1,7 @@
 ﻿using Aspire.Hosting.ApplicationModel;
 using RealtyHub.ApiService.Data;
-using RealtyHub.Tests.FakeEntities;
 using System.Net.Http.Json;
+using RealtyHub.Core.Utilities.FakeEntities;
 
 namespace RealtyHub.Tests;
 

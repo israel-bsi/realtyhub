@@ -139,8 +139,16 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
             var query = context
                 .Customers
                 .AsNoTracking()
-                .Where(c=>c.UserId == request.UserId && c.IsActive)
-                .OrderBy(c => c.Name);
+                .Where(c => c.UserId == request.UserId && c.IsActive);
+
+            if (!string.IsNullOrEmpty(request.SearchTerm))
+            {
+                query = query.Where(c => c.Name.Contains(request.SearchTerm)
+                                         || c.Email.Contains(request.SearchTerm)
+                                         || c.DocumentNumber.Contains(request.SearchTerm));
+            }
+
+            query = query.OrderBy(c => c.Name);
 
             var customers = await query
                 .Skip((request.PageNumber - 1) * request.PageSize)

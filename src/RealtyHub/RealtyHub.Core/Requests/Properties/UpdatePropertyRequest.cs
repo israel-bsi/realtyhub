@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
 using RealtyHub.Core.Enums;
 using RealtyHub.Core.Models;
 
@@ -30,7 +29,6 @@ public class UpdatePropertyRequest : Request
     public string TransactionsDetails { get; set; } = string.Empty;
     [Required(ErrorMessage = "Endereço é um campo obrigatório")]
     public Address Address { get; set; } = new();
-    [JsonIgnore]
     public List<PropertyImage> PropertyImage { get; set; } = [];
     [Required(ErrorMessage = "Propriedade nova é um campo obrigatório")]
     public bool IsNew { get; set; }

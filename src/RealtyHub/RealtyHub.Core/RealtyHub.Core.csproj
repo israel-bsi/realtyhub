@@ -9,7 +9,10 @@
   <ItemGroup>
     <Folder Include="Requests\Payments\" />
     <Folder Include="Requests\PropertiesImages\" />
-    <Folder Include="Utilities\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Bogus" Version="35.6.1" />
   </ItemGroup>
 
 </Project>

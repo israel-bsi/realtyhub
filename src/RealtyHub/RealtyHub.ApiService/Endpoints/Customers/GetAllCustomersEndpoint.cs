@@ -23,13 +23,15 @@ public class GetAllCustomersEndpoint : IEndpoint
         ClaimsPrincipal user,
         ICustomerHandler handler,
         [FromQuery] int pageNumber = Configuration.DefaultPageNumber,
-        [FromQuery] int pageSize = Configuration.DefaultPageSize)
+        [FromQuery] int pageSize = Configuration.DefaultPageSize,
+        [FromQuery] string searchTerm = "")
     {
         var request = new GetAllCustomersRequest
         {
             UserId = user.Identity?.Name ?? string.Empty,
             PageNumber = pageNumber,
-            PageSize = pageSize
+            PageSize = pageSize,
+            SearchTerm = searchTerm
         };
         var result = await handler.GetAllAsync(request);
 

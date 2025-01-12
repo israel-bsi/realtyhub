@@ -51,7 +51,14 @@ public class CustomerHandler(IHttpClientFactory httpClientFactory) : ICustomerHa
         }
     }
 
-    public async Task<PagedResponse<List<Customer>?>> GetAllAsync(GetAllCustomersRequest request) =>
-        await _httpClient.GetFromJsonAsync<PagedResponse<List<Customer>?>>("v1/customers")
-        ?? new PagedResponse<List<Customer>?>(null, 400, "Não foi possível obter os clientes");
+    public async Task<PagedResponse<List<Customer>?>> GetAllAsync(GetAllCustomersRequest request)
+    {
+        var url = $"v1/customers?pageNumber={request.PageNumber}&pageSize={request.PageSize}";
+
+        if (!string.IsNullOrEmpty(request.SearchTerm)) 
+            url = $"{url}&searchTerm={request.SearchTerm}";
+
+        return await _httpClient.GetFromJsonAsync<PagedResponse<List<Customer>?>>(url)
+               ?? new PagedResponse<List<Customer>?>(null, 400, "Não foi possível obter os clientes");
+    }
 }

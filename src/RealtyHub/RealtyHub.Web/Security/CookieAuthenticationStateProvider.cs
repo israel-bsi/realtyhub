@@ -30,7 +30,7 @@ public class CookieAuthenticationStateProvider(IHttpClientFactory clientFactory)
         user = new ClaimsPrincipal(id);
 
         _isAuthenticated = true;
-        
+        Configuration.UserName = userInfo.Email;
         return new AuthenticationState(user);
     }
     public void NotifyAuthenticationStateChanged() => 
