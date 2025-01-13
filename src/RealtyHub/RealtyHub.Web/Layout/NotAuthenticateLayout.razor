@@ -11,10 +11,6 @@
 <MudLayout>
     <CascadingValue Value="this">
         <MudAppBar>
-            <MudIconButton Icon="@Icons.Material.Filled.Menu"
-                           Color="Color.Inherit"
-                           Edge="Edge.Start"
-                           OnClick="ToggleDrawer" />
             RealtyHub
             <MudSpacer />
             <MudSwitch Color="Color.Inherit"
@@ -24,16 +20,7 @@
                        ThumbIcon="@Icons.TwoTone.DarkMode"
                        Class="ma-4"
                        Disabled="DisableMudSwitch" />
-
-            <MudIconButton Icon="@Icons.Material.Filled.Logout"
-                           Color="Color.Inherit"
-                           Edge="Edge.Start"
-                           OnClick="LogoutAsync"
-                           Title="Logout" />
         </MudAppBar>
-        <MudDrawer @bind-Open="@_isDrawerOpened">
-            <NavMenu />
-        </MudDrawer>
         <MudMainContent>
             <MudContainer Class="mt-4">
                 @Body
@@ -47,11 +34,8 @@
     public bool SaveState { get; set; }
     public bool IsDarkMode { get; set; }
     public bool DisableMudSwitch { get; set; }
-    public bool _isDrawerOpened { get; set; } = true;
+  
     private MudThemeProvider _mudThemeProvider = null!;
-
-    [Inject] public NavigationManager NavigationManager { get; set; } = null!;
-    [Inject] public IDialogService DialogService { get; set; } = null!;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -72,12 +56,6 @@
         SaveState = true;
     }
 
-    private void ToggleDrawer()
-    {
-        _isDrawerOpened = !_isDrawerOpened;
-        SaveState = true;
-    }
-
     private async Task OnThemeToggled(bool newValue)
     {
         IsDarkMode = newValue;
@@ -92,27 +70,5 @@
         SaveState = false;
         DisableMudSwitch = disableMudSwtich;
         StateHasChanged();
-    }
-
-    public async Task LogoutAsync()
-    {
-        var parameters = new DialogParameters
-        {
-            { "ContentText", "Deseja realmente sair do sistema?" },
-            { "ButtonText", "Confirmar" },
-            { "ButtonColor", Color.Error }
-        };
-
-        var options = new DialogOptions
-            {
-                CloseButton = true,
-                MaxWidth = MaxWidth.Small
-            };
-
-        var dialog = await DialogService.ShowAsync<DialogConfirm>("Confirmação", parameters, options);
-        var result = await dialog.Result;
-
-        if (result.Canceled) return;
-        NavigationManager.NavigateTo("/sair");
     }
 }

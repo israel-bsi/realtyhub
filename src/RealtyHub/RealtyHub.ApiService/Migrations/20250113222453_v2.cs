@@ -5,10 +5,18 @@
 namespace RealtyHub.ApiService.Migrations
 {
     /// <inheritdoc />
-    public partial class v3 : Migration
+    public partial class v2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropColumn(
+                name: "VerificationCode",
+                table: "IdentityUser");
+        }
+
+        /// <inheritdoc />
+        protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
                 name: "VerificationCode",
@@ -17,14 +25,6 @@ namespace RealtyHub.ApiService.Migrations
                 maxLength: 6,
                 nullable: false,
                 defaultValue: "");
-        }
-
-        /// <inheritdoc />
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropColumn(
-                name: "VerificationCode",
-                table: "IdentityUser");
         }
     }
 }

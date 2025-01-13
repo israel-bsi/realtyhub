@@ -228,11 +228,6 @@ namespace RealtyHub.ApiService.Migrations
                         .HasMaxLength(160)
                         .HasColumnType("character varying(160)");
 
-                    b.Property<string>("VerificationCode")
-                        .IsRequired()
-                        .HasMaxLength(6)
-                        .HasColumnType("character varying(6)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")

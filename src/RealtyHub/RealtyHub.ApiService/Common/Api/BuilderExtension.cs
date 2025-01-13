@@ -59,7 +59,7 @@ public static class BuilderExtension
             .AddIdentityCore<User>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
-                options.SignIn.RequireConfirmedEmail = false;
+                options.SignIn.RequireConfirmedEmail = true;
                 options.SignIn.RequireConfirmedPhoneNumber = false;
                 options.User.RequireUniqueEmail = true;
                 options.Password.RequireLowercase = false;

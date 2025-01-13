@@ -1,5 +1,4 @@
-﻿using System.Net;
-using System.Net.Http.Json;
+﻿using System.Net.Http.Json;
 using System.Text;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models.Account;
@@ -15,9 +14,6 @@ public class AccountHandler(IHttpClientFactory httpClientFactory) : IAccountHand
     {
         var result = await _httpClient.PostAsJsonAsync("v1/identity/login?useCookies=true", request);
 
-        if (result.StatusCode == HttpStatusCode.Unauthorized)
-            return new Response<string>(null, 401, "E-mail ou senha inválidos");
-
         return result.IsSuccessStatusCode
             ? new Response<string>("Login realizado com sucesso!", 200, "Login realizado com sucesso!")
             : new Response<string>(null, (int)result.StatusCode, "Não foi possível realizar login");
@@ -27,23 +23,33 @@ public class AccountHandler(IHttpClientFactory httpClientFactory) : IAccountHand
         var result = await _httpClient.PostAsJsonAsync("v1/identity/registeruser", request);
 
         var content = await result.Content.ReadAsStringAsync();
+
         if (content.Contains("DuplicateUserName"))
             return new Response<string>(null, 400, "E-mail já cadastrado");
 
-        return result.IsSuccessStatusCode 
-            ? new Response<string>("Cadastro realizado com sucesso!", 201, "Cadastro realizado com sucesso!")
-            : new Response<string>(null, (int)result.StatusCode,"Não foi possível realizar o cadastro");
+        if (!result.IsSuccessStatusCode)
+            return new Response<string>(null, (int)result.StatusCode, "Não foi possível realizar o cadastro");
+
+        var data = await result.Content.ReadFromJsonAsync<Response<string>>();
+
+        return new Response<string>(null, 201, data?.Message);
     }
 
     public async Task<Response<string>> ConfirmEmail(UserConfirmEmail user)
     {
-        var emptyContent = new StringContent("{}", Encoding.UTF8, "application/json");
         var url = $"v1/identity/confirm-email?userId={user.UserId}&token={user.Token}";
-        var result = await _httpClient.PostAsync(url, emptyContent);
+        var result = await _httpClient.GetAsync(url);
 
-        return result.IsSuccessStatusCode 
-            ? new Response<string>(null, 200, "Email confirmado com sucesso!")
-            : new Response<string>(null, (int)result.StatusCode, "Não foi possível confirmar o e-mail");
+        var content = await result.Content.ReadAsStringAsync();
+
+        if (content.Contains("InvalidToken"))
+            return new Response<string>(null, 400, "Token inválido");
+
+        var data = await result.Content.ReadFromJsonAsync<Response<string>>();
+
+        return result.IsSuccessStatusCode
+            ? new Response<string>(data?.Data, 200, data?.Message)
+            : new Response<string>(data?.Data, (int)result.StatusCode, data?.Message);
     }
 
     public async Task LogoutAsync()

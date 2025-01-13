@@ -1,9 +1,12 @@
 ﻿using System.Security.Claims;
+using System.Text;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.WebUtilities;
 using RealtyHub.ApiService.Common.Api;
 using RealtyHub.ApiService.Models;
 using RealtyHub.Core.Requests.Account;
 using RealtyHub.Core.Requests.Emails;
+using RealtyHub.Core.Responses;
 using RealtyHub.Core.Services;
 
 namespace RealtyHub.ApiService.Endpoints.Identity;
@@ -27,8 +30,7 @@ public class RegisterUserEndpoint : IEndpoint
             UserName = request.Email,
             Email = request.Email,
             GivenName = request.GivenName,
-            Creci = request.Creci,
-            VerificationCode = Guid.NewGuid().ToString("N")[..6].ToUpper()
+            Creci = request.Creci
         };
 
         var createResult = await userManager.CreateAsync(user, request.Password);
@@ -38,7 +40,6 @@ public class RegisterUserEndpoint : IEndpoint
 
         var claims = new List<Claim>
         {
-            new("VerificationCode", user.VerificationCode),
             new("Creci", user.Creci),
             new (ClaimTypes.GivenName, user.GivenName)
         };
@@ -48,23 +49,23 @@ public class RegisterUserEndpoint : IEndpoint
             return Results.BadRequest(addClaimsResult.Errors);
 
         var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
+        var encodedToken = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(token));
         var confirmationLink = $"{Core.Configuration.FrontendUrl}" +
                                $"/confirmar-email?" +
                                $"userId={user.Id}" +
-                               $"&token={Uri.EscapeDataString(token)}";
+                               $"&token={encodedToken}";
 
         var emailRequest = new EmailMessageRequest
         {
             EmailTo = user.Email,
             Name = user.GivenName,
-            Code = user.VerificationCode,
             ConfirmationLink = confirmationLink
         };
 
         var emailResult = await emailService.SendVerificationCodeAsync(emailRequest);
 
         return emailResult.IsSuccess 
-            ? Results.Ok("Usuário registrado com sucesso! Verifique seu e-mail!") 
-            : Results.BadRequest(addClaimsResult.Errors);
+            ? Results.Ok(new Response<string>(null, message: "Usuário registrado com sucesso! Verifique seu e-mail!")) 
+            : Results.BadRequest(emailResult.Message);
     }
 }

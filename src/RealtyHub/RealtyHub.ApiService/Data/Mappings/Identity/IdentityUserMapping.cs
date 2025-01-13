@@ -18,7 +18,6 @@ public class IdentityUserMapping : IEntityTypeConfiguration<User>
 
         builder.Property(u => u.Creci);
         builder.Property(u => u.GivenName).HasMaxLength(100);
-        builder.Property(u => u.VerificationCode).HasMaxLength(6);
         builder.Property(u => u.Email).HasMaxLength(180);
         builder.Property(u => u.NormalizedEmail).HasMaxLength(180);
         builder.Property(u => u.UserName).HasMaxLength(160);

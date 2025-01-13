@@ -12,8 +12,8 @@ using RealtyHub.ApiService.Data;
 namespace RealtyHub.ApiService.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250113130022_v2")]
-    partial class v2
+    [Migration("20250113221701_v1")]
+    partial class v1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -230,6 +230,11 @@ namespace RealtyHub.ApiService.Migrations
                     b.Property<string>("UserName")
                         .HasMaxLength(160)
                         .HasColumnType("character varying(160)");
+
+                    b.Property<string>("VerificationCode")
+                        .IsRequired()
+                        .HasMaxLength(6)
+                        .HasColumnType("character varying(6)");
 
                     b.HasKey("Id");
 

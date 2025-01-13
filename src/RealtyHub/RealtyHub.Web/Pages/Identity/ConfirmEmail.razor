@@ -2,32 +2,23 @@
 @inherits ConfirmEmailPage
 @layout NotAuthenticateLayout
 
-<PageTitle>RealtyHub - Confirmar Email</PageTitle>
-<MudPaper>
-    <MudGrid Justify="Justify.Center">
-        <MudItem xs="12" sm="12" md="8" lg="6" xl="6" xxl="6">
-            <MudPaper Class="mud-width-full pa-8">
-                <MudText>
-                    @Status
-                </MudText>
+<PageTitle>Confirmar Email</PageTitle>
 
-                <div class="d-flex mt-8">
-                    @if (IsBusy)
-                    {
-                        <MudProgressCircular Color="Color.Info" 
-                                             Indeterminate="true" />
-                    }
-                    else
-                    {
-                        <MudButton ButtonType="ButtonType.Submit"
-                                   Href="/"
-                                   Variant="Variant.Filled"
-                                   Color="Color.Primary">
-                            Ir para home
-                        </MudButton>
-                    }
-                </div>
-            </MudPaper>
-        </MudItem>
-    </MudGrid>
-</MudPaper>
+<MudGrid style="height: 85vh;" Class="d-flex align-center justify-center">
+    <MudItem xs="12" sm="12" md="8" lg="6" xl="6" xxl="6">
+        <MudPaper Class="mud-width-full pa-8">
+            <MudText>
+                @Status
+            </MudText>
+
+            <div class="d-flex mt-8">
+                <MudButton ButtonType="ButtonType.Submit"
+                           Href="/login"
+                           Variant="Variant.Filled"
+                           Color="Color.Primary">
+                    Ir para página de login
+                </MudButton>
+            </div>
+        </MudPaper>
+    </MudItem>
+</MudGrid>

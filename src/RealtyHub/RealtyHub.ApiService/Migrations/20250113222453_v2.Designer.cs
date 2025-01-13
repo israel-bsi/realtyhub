@@ -12,8 +12,8 @@ using RealtyHub.ApiService.Data;
 namespace RealtyHub.ApiService.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250113114317_v1")]
-    partial class v1
+    [Migration("20250113222453_v2")]
+    partial class v2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -191,6 +191,11 @@ namespace RealtyHub.ApiService.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("boolean");
+
+                    b.Property<string>("GivenName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("boolean");

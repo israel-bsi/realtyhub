@@ -64,7 +64,9 @@ namespace RealtyHub.ApiService.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    GivenName = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     Creci = table.Column<string>(type: "text", nullable: false),
+                    VerificationCode = table.Column<string>(type: "character varying(6)", maxLength: 6, nullable: false),
                     UserName = table.Column<string>(type: "character varying(160)", maxLength: 160, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "character varying(180)", maxLength: 180, nullable: true),
                     Email = table.Column<string>(type: "character varying(180)", maxLength: 180, nullable: true),
