@@ -5,6 +5,10 @@ namespace RealtyHub.Core.Requests.Account;
 
 public class RegisterRequest : Request
 {
+    [Required(ErrorMessage = "Creci é obrigatório")]
+    public string Creci { get; set; } = string.Empty;
+    [Required(ErrorMessage = "Nome é obrigatório")]
+    public string GivenName { get; set; } = string.Empty;
     [Required(ErrorMessage = "E-mail é obrigatório")]
     [EmailAddress(ErrorMessage = "E-mail inválido")]
     public string Email { get; set; } = string.Empty;

@@ -15,6 +15,8 @@ public class CookieAuthenticationStateProvider(IHttpClientFactory clientFactory)
         await GetAuthenticationStateAsync();
         return _isAuthenticated;
     }
+    public void NotifyAuthenticationStateChanged() =>
+        NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
     public override async Task<AuthenticationState> GetAuthenticationStateAsync()
     {
         _isAuthenticated = false;
@@ -30,17 +32,15 @@ public class CookieAuthenticationStateProvider(IHttpClientFactory clientFactory)
         user = new ClaimsPrincipal(id);
 
         _isAuthenticated = true;
-        Configuration.UserName = userInfo.Email;
+        Configuration.GivenName = userInfo.GivenName;
         return new AuthenticationState(user);
     }
-    public void NotifyAuthenticationStateChanged() => 
-        NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
 
     private async Task<User?> GetUser()
     {
         try
         {
-            return await _httpClient.GetFromJsonAsync<User?>("v1/identity/manage/info");
+            return await _httpClient.GetFromJsonAsync<User?>("v1/identity/manageinfo");
         }
         catch
         {
@@ -54,7 +54,8 @@ public class CookieAuthenticationStateProvider(IHttpClientFactory clientFactory)
         {
             new (ClaimTypes.Name, user.Email),
             new (ClaimTypes.Email, user.Email),
-            new ("creci", user.Creci)
+            new ("creci", user.Creci),
+            new (ClaimTypes.GivenName, user.GivenName)
         };
 
         claims.AddRange(

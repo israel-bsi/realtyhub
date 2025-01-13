@@ -6,7 +6,7 @@ public static class Configuration
 {
     public const string HttpClientName = "realtyhub";
     public static string BackendUrl { get; set; } = "http://localhost:5538";
-    public static string UserName { get; set; } = string.Empty;
+    public static string GivenName { get; set; } = string.Empty;
     private const string PrincipalColor = "#B0C4DE";
     public static readonly MudTheme Theme = new()
     {

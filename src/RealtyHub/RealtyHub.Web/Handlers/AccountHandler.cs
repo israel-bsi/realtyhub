@@ -23,7 +23,7 @@ public class AccountHandler(IHttpClientFactory httpClientFactory) : IAccountHand
     }
     public async Task<Response<string>> RegisterAsync(RegisterRequest request)
     {
-        var result = await _httpClient.PostAsJsonAsync("v1/identity/register", request);
+        var result = await _httpClient.PostAsJsonAsync("v1/identity/registeruser", request);
 
         var content = await result.Content.ReadAsStringAsync();
         if (content.Contains("DuplicateUserName"))
