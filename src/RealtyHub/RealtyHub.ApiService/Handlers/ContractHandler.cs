@@ -38,7 +38,7 @@ public class ContractHandler(AppDbContext context) : IContractHandler
                 TermEndDate = request.TermEndDate,
                 Content = $"Contrato do cliente {offer.Customer.Name}\n" +
                                     $"Documento: {offer.Customer.DocumentNumber}\n" +
-                                    $"Tipo Documento: {offer.Customer.DocumentType.ToString()}\n" +
+                                    $"Tipo Cliente: {offer.Customer.CustomerType.ToString()}\n" +
                                     $"Telefone: {offer.Customer.Phone}\n" +
                                     $"Email: {offer.Customer.Email}\n" +
                                     $"Valor: {offer.Amount}\n" +

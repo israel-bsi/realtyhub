@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace RealtyHub.ApiService.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class v1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -22,10 +22,10 @@ namespace RealtyHub.ApiService.Migrations
                     Email = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     Phone = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
                     DocumentNumber = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
-                    DocumentType = table.Column<int>(type: "integer", nullable: false),
+                    CustomerType = table.Column<int>(type: "integer", nullable: false),
                     Street = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: false),
                     Neighborhood = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: false),
-                    Number = table.Column<int>(type: "integer", nullable: false),
+                    Number = table.Column<string>(type: "text", nullable: false),
                     City = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: false),
                     State = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: false),
                     Country = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: false),
@@ -34,6 +34,7 @@ namespace RealtyHub.ApiService.Migrations
                     Rg = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: true),
                     BusinessName = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: true),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false, defaultValue: true),
+                    UserId = table.Column<string>(type: "text", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()"),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()")
                 },
@@ -102,13 +103,14 @@ namespace RealtyHub.ApiService.Migrations
                     IsNew = table.Column<bool>(type: "boolean", nullable: false),
                     Street = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: false),
                     Neighborhood = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: false),
-                    Number = table.Column<int>(type: "integer", nullable: false),
+                    Number = table.Column<string>(type: "text", nullable: false),
                     City = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: false),
                     State = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: false),
                     Country = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: false),
                     ZipCode = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
                     Complement = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: true),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false),
+                    UserId = table.Column<string>(type: "text", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()"),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()")
                 },
@@ -228,6 +230,7 @@ namespace RealtyHub.ApiService.Migrations
                     OfferStatus = table.Column<int>(type: "integer", nullable: false),
                     PropertyId = table.Column<long>(type: "bigint", nullable: false),
                     CustomerId = table.Column<long>(type: "bigint", nullable: false),
+                    UserId = table.Column<string>(type: "text", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()"),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()")
                 },
@@ -257,6 +260,7 @@ namespace RealtyHub.ApiService.Migrations
                     FilePath = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
                     PropertyId = table.Column<long>(type: "bigint", nullable: false),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false),
+                    UserId = table.Column<string>(type: "text", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()"),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()")
                 },
@@ -281,6 +285,7 @@ namespace RealtyHub.ApiService.Migrations
                     Status = table.Column<int>(type: "integer", nullable: false),
                     CustomerId = table.Column<long>(type: "bigint", nullable: false),
                     PropertyId = table.Column<long>(type: "bigint", nullable: false),
+                    UserId = table.Column<string>(type: "text", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()"),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()")
                 },
@@ -314,6 +319,7 @@ namespace RealtyHub.ApiService.Migrations
                     Content = table.Column<string>(type: "text", nullable: false),
                     OfferId = table.Column<long>(type: "bigint", nullable: false),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false),
+                    UserId = table.Column<string>(type: "text", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()"),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()")
                 },
@@ -340,6 +346,7 @@ namespace RealtyHub.ApiService.Migrations
                     PaymentStatus = table.Column<int>(type: "integer", nullable: false),
                     OfferId = table.Column<long>(type: "bigint", nullable: false),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false, defaultValue: true),
+                    UserId = table.Column<string>(type: "text", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()"),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()")
                 },

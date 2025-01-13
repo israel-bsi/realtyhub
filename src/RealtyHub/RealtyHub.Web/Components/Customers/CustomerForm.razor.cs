@@ -9,6 +9,7 @@ using RealtyHub.Web.Services;
 using System.Text.RegularExpressions;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Responses;
+using Microsoft.AspNetCore.Components.Forms;
 
 namespace RealtyHub.Web.Components.Customers;
 
@@ -22,7 +23,8 @@ public partial class CustomerFormComponent : ComponentBase
     #endregion
 
     #region Properties
-
+    public EditContext EditContext = null!;
+    private ValidationMessageStore MessageStore = null!;
     public string Operation => Id != 0
         ? "Editar" : "Cadastrar";
     public bool IsBusy { get; set; }
@@ -51,9 +53,7 @@ public partial class CustomerFormComponent : ComponentBase
     public PatternMask DocumentCustomerMask { get; set; } = null!;
     public string DocumentType =>
         InputModel.CustomerType == ECustomerType.Individual ? "CPF" : "CNPJ";
-
     public string Pattern = @"\D";
-
     public string? ErrorText { get; set; }
     public bool Error => !string.IsNullOrEmpty(ErrorText);
 
@@ -88,8 +88,6 @@ public partial class CustomerFormComponent : ComponentBase
             InputModel.Phone = Regex.Replace(InputModel.Phone, Pattern, "");
             InputModel.DocumentNumber = Regex.Replace(InputModel.DocumentNumber, Pattern, "");
             InputModel.Address.ZipCode = Regex.Replace(InputModel.Address.ZipCode, Pattern, "");
-            InputModel.DocumentType = InputModel.CustomerType == ECustomerType.Individual
-                ? EDocumentType.Cpf : EDocumentType.Cnpj;
 
             Response<Customer?> result;
             if (InputModel.Id > 0)
@@ -140,26 +138,34 @@ public partial class CustomerFormComponent : ComponentBase
             Snackbar.Add(e.Message, Severity.Error);
         }
     }
-    public void ValidateDocument(FocusEventArgs focusEventArgs)
+    public void OnBlurDocumentTextField(FocusEventArgs focusEventArgs)
+        => ValidateDocument();
+    public void ValidateDocument()
     {
+        MessageStore.Clear();
         if (InputModel.CustomerType is ECustomerType.Individual)
         {
             ErrorText =
                 !DocumentValidator.IsValidCpf(InputModel.DocumentNumber)
-                ? "CPF inválido" : null;
+                    ? "CPF inválido" : null;
         }
         else
         {
             ErrorText =
                 !DocumentValidator.IsValidCnpj(InputModel.DocumentNumber)
-                ? "CNPJ inválido" : null;
+                    ? "CNPJ inválido" : null;
         }
+
+        if (string.IsNullOrEmpty(ErrorText)) return;
+
+        MessageStore.Add(() => InputModel.DocumentNumber, ErrorText);
+        EditContext.NotifyValidationStateChanged();
     }
     public void OnCustomerTypeChanged(ECustomerType newCustomerType)
     {
         InputModel.CustomerType = newCustomerType;
         ChangeDocumentMask(newCustomerType);
-        StateHasChanged();
+        ValidateDocument();
     }
     private void ChangeDocumentMask(ECustomerType customerType)
     {
@@ -169,6 +175,7 @@ public partial class CustomerFormComponent : ComponentBase
             ECustomerType.Business => CnpjMask,
             _ => DocumentCustomerMask
         };
+        StateHasChanged();
     }
 
     #endregion
@@ -177,7 +184,8 @@ public partial class CustomerFormComponent : ComponentBase
 
     protected override async Task OnInitializedAsync()
     {
-        ChangeDocumentMask(InputModel.CustomerType);
+        EditContext = new EditContext(InputModel);
+        MessageStore = new ValidationMessageStore(EditContext);
         if (Id != 0)
         {
             GetCustomerByIdRequest? request = null;
@@ -204,7 +212,6 @@ public partial class CustomerFormComponent : ComponentBase
                     InputModel.Email = response.Data.Email;
                     InputModel.Phone = response.Data.Phone;
                     InputModel.DocumentNumber = response.Data.DocumentNumber;
-                    InputModel.DocumentType = response.Data.DocumentType;
                     InputModel.CustomerType = response.Data.CustomerType;
                     InputModel.Rg = response.Data.Rg;
                     InputModel.BusinessName = response.Data.BusinessName;
@@ -222,8 +229,6 @@ public partial class CustomerFormComponent : ComponentBase
                     Snackbar.Add(response.Message, Severity.Error);
                     NavigationManager.NavigateTo("/clientes");
                 }
-                InputModel.DocumentType = InputModel.CustomerType == ECustomerType.Individual
-                    ? EDocumentType.Cpf : EDocumentType.Cnpj;
             }
             catch (Exception e)
             {
@@ -232,10 +237,13 @@ public partial class CustomerFormComponent : ComponentBase
             finally
             {
                 IsBusy = false;
+                ChangeDocumentMask(InputModel.CustomerType);
+                ValidateDocument();
             }
         }
         else
         {
+            InputModel.CustomerType = ECustomerType.Individual;
             NavigationManager.NavigateTo("/clientes/adicionar");
         }
     }

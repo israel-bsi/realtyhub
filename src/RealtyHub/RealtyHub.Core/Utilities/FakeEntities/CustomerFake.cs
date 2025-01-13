@@ -16,7 +16,6 @@ public class CustomerFake
             .RuleFor(c => c.Phone, c=> c.Phone.PhoneNumber("###########"))
             .RuleFor(c => c.DocumentNumber, c => c.Company.Cnpj(false))
             .RuleFor(c => c.CustomerType, ECustomerType.Business)
-            .RuleFor(c => c.DocumentType, EDocumentType.Cnpj)
             .RuleFor(c => c.Address, GetFakeAddress)
             .RuleFor(c => c.BusinessName, c => c.Company.CompanyName())
             .RuleFor(c => c.IsActive, true);
@@ -30,7 +29,6 @@ public class CustomerFake
             .RuleFor(c => c.Email, c => c.Person.Email)
             .RuleFor(c => c.Phone, c => c.Phone.PhoneNumber("###########"))
             .RuleFor(c => c.DocumentNumber, c => c.Person.Cpf(false))
-            .RuleFor(c => c.DocumentType, EDocumentType.Cpf)
             .RuleFor(c => c.CustomerType, ECustomerType.Individual)
             .RuleFor(c => c.Address, GetFakeAddress)
             .RuleFor(c => c.Rg, c => c.Person.Cpf(false))

@@ -12,8 +12,8 @@ using RealtyHub.ApiService.Data;
 namespace RealtyHub.ApiService.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250111234144_v5")]
-    partial class v5
+    [Migration("20250113114317_v1")]
+    partial class v1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -313,9 +313,6 @@ namespace RealtyHub.ApiService.Migrations
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("character varying(20)");
-
-                    b.Property<int>("DocumentType")
-                        .HasColumnType("integer");
 
                     b.Property<string>("Email")
                         .IsRequired()

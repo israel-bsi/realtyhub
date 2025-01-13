@@ -17,7 +17,7 @@
 else
 {
     <MudPaper Class="pa-8 mt-4" Elevation="2">
-        <EditForm Model="InputModel" OnValidSubmit="OnValidSubmitAsync">
+        <EditForm OnValidSubmit="OnValidSubmitAsync" EditContext="@EditContext">
             <ObjectGraphDataAnnotationsValidator />
 
             <MudText Class="mb-6" Typo="Typo.h6">Dados Pessoais</MudText>
@@ -37,7 +37,7 @@ else
                                   @bind-Value="InputModel.DocumentNumber"
                                   For="@(() => InputModel.DocumentNumber)"
                                   Mask="DocumentCustomerMask"
-                                  OnBlur="ValidateDocument"
+                                  OnBlur="OnBlurDocumentTextField"
                                   ErrorText="@ErrorText"
                                   Error="Error"
                                   Immediate="true" 

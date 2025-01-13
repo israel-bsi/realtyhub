@@ -20,9 +20,8 @@ public class Customer : Entity
     [Required(ErrorMessage = "Documento é um campo obrigatório")]
     [MaxLength(20, ErrorMessage = "O documento deve conter até 20 caracteres")]
     public string DocumentNumber { get; set; } = string.Empty;
-    public EDocumentType DocumentType { get; set; } = EDocumentType.Cpf;
     [Required(ErrorMessage = "Tipo de cliente é um campo obrigatório")]
-    public ECustomerType CustomerType { get; set; } = ECustomerType.Individual;
+    public ECustomerType CustomerType { get; set; }
     [ValidateComplexType]
     public Address Address { get; set; } = new();
     public string? Rg { get; set; }
