@@ -13,6 +13,11 @@ public class CustomerHandler(IHttpClientFactory httpClientFactory) : ICustomerHa
     {
         var result = await _httpClient.PostAsJsonAsync("v1/customers", request);
 
+        var data = await result.Content.ReadFromJsonAsync<Response<Customer?>>();
+
+        if (!result.IsSuccessStatusCode)
+            return new Response<Customer?>(null, 400, data?.Message);
+        
         return await result.Content.ReadFromJsonAsync<Response<Customer?>>()
                ?? new Response<Customer?>(null, 400, "Falha ao criar o cliente");
     }

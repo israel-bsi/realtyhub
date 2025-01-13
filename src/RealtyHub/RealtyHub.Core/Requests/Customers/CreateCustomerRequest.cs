@@ -24,6 +24,7 @@ public class CreateCustomerRequest : Request
 
     [Required(ErrorMessage = "Tipo de cliente é um campo obrigatório")]
     public ECustomerType CustomerType { get; set; } = ECustomerType.Individual;
+    public EDocumentType DocumentType { get; set; } = EDocumentType.Cpf;
     public string? Rg { get; set; }
     public string? BusinessName { get; set; }
 
@@ -34,6 +35,7 @@ public class CreateCustomerRequest : Request
             Email = customer.Email,
             Phone = customer.Phone,
             DocumentNumber = customer.DocumentNumber,
+            DocumentType = customer.DocumentType,
             CustomerType = customer.CustomerType,
             Address = customer.Address,
             Rg = customer.Rg,

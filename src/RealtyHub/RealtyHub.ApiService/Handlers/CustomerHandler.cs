@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RealtyHub.ApiService.Data;
-using RealtyHub.Core.Enums;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.Customers;
@@ -14,6 +13,15 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
     {
         try
         {
+            var isCustomerExists = await context
+                .Customers
+                .AnyAsync(c => (c.DocumentNumber == request.DocumentNumber
+                               || c.Email == request.Email)
+                               && c.UserId == request.UserId);
+
+            if (isCustomerExists)
+                return new Response<Customer?>(null, 400, "Cliente já cadastrado");
+
             var customer = new Customer
             {
                 Name = request.Name,
@@ -21,9 +29,7 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
                 Phone = request.Phone,
                 DocumentNumber = request.DocumentNumber,
                 CustomerType = request.CustomerType,
-                DocumentType = request.CustomerType == ECustomerType.Individual 
-                    ? EDocumentType.Cpf
-                    : EDocumentType.Cnpj,
+                DocumentType = request.DocumentType,
                 Address = request.Address,
                 Rg = request.Rg,
                 BusinessName = request.BusinessName,
@@ -59,9 +65,8 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
             customer.Email = request.Email;
             customer.Phone = request.Phone;
             customer.DocumentNumber = request.DocumentNumber;
-            customer.DocumentType = request.CustomerType == ECustomerType.Individual 
-                ? EDocumentType.Cpf 
-                : EDocumentType.Cnpj;
+            customer.DocumentType = request.DocumentType;
+            customer.CustomerType = request.CustomerType;
             customer.Address = request.Address;
             customer.Rg = request.Rg;
             customer.BusinessName = request.BusinessName;

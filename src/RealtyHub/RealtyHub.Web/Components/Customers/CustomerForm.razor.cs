@@ -48,8 +48,7 @@ public partial class CustomerFormComponent : ComponentBase
         MaskChars = [new MaskChar('#', @"[0-9]")]
     };
 
-    public PatternMask DocumentCustomerMask =>
-        InputModel.CustomerType == ECustomerType.Individual ? CpfMask : CnpjMask;
+    public PatternMask DocumentCustomerMask { get; set; } = null!;
     public string DocumentType =>
         InputModel.CustomerType == ECustomerType.Individual ? "CPF" : "CNPJ";
 
@@ -89,6 +88,8 @@ public partial class CustomerFormComponent : ComponentBase
             InputModel.Phone = Regex.Replace(InputModel.Phone, Pattern, "");
             InputModel.DocumentNumber = Regex.Replace(InputModel.DocumentNumber, Pattern, "");
             InputModel.Address.ZipCode = Regex.Replace(InputModel.Address.ZipCode, Pattern, "");
+            InputModel.DocumentType = InputModel.CustomerType == ECustomerType.Individual
+                ? EDocumentType.Cpf : EDocumentType.Cnpj;
 
             Response<Customer?> result;
             if (InputModel.Id > 0)
@@ -99,7 +100,7 @@ public partial class CustomerFormComponent : ComponentBase
             {
                 result = await Handler.CreateAsync(InputModel);
             }
-            
+
             if (result.IsSuccess)
             {
                 Snackbar.Add(result.Message, Severity.Success);
@@ -154,6 +155,21 @@ public partial class CustomerFormComponent : ComponentBase
                 ? "CNPJ inválido" : null;
         }
     }
+    public void OnCustomerTypeChanged(ECustomerType newCustomerType)
+    {
+        InputModel.CustomerType = newCustomerType;
+        ChangeDocumentMask(newCustomerType);
+        StateHasChanged();
+    }
+    private void ChangeDocumentMask(ECustomerType customerType)
+    {
+        DocumentCustomerMask = customerType switch
+        {
+            ECustomerType.Individual => CpfMask,
+            ECustomerType.Business => CnpjMask,
+            _ => DocumentCustomerMask
+        };
+    }
 
     #endregion
 
@@ -161,6 +177,7 @@ public partial class CustomerFormComponent : ComponentBase
 
     protected override async Task OnInitializedAsync()
     {
+        ChangeDocumentMask(InputModel.CustomerType);
         if (Id != 0)
         {
             GetCustomerByIdRequest? request = null;
@@ -187,6 +204,7 @@ public partial class CustomerFormComponent : ComponentBase
                     InputModel.Email = response.Data.Email;
                     InputModel.Phone = response.Data.Phone;
                     InputModel.DocumentNumber = response.Data.DocumentNumber;
+                    InputModel.DocumentType = response.Data.DocumentType;
                     InputModel.CustomerType = response.Data.CustomerType;
                     InputModel.Rg = response.Data.Rg;
                     InputModel.BusinessName = response.Data.BusinessName;
@@ -204,6 +222,8 @@ public partial class CustomerFormComponent : ComponentBase
                     Snackbar.Add(response.Message, Severity.Error);
                     NavigationManager.NavigateTo("/clientes");
                 }
+                InputModel.DocumentType = InputModel.CustomerType == ECustomerType.Individual
+                    ? EDocumentType.Cpf : EDocumentType.Cnpj;
             }
             catch (Exception e)
             {

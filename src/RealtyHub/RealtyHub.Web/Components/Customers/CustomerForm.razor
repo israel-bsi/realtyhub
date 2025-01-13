@@ -17,14 +17,14 @@
 else
 {
     <MudPaper Class="pa-8 mt-4" Elevation="2">
-        <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
-            <DataAnnotationsValidator />
-            
+        <EditForm Model="InputModel" OnValidSubmit="OnValidSubmitAsync">
+            <ObjectGraphDataAnnotationsValidator />
+
             <MudText Class="mb-6" Typo="Typo.h6">Dados Pessoais</MudText>
-            
+
             <MudGrid>
                 <MudItem>
-                    <MudRadioGroup @bind-Value="InputModel.CustomerType">
+                    <MudRadioGroup T="ECustomerType" Value="InputModel.CustomerType" ValueChanged="OnCustomerTypeChanged">
                         <MudRadio Value="ECustomerType.Individual">Pessoa Física</MudRadio>
                         <MudRadio Value="ECustomerType.Business">Pessoa Jurídica</MudRadio>
                     </MudRadioGroup>
@@ -39,9 +39,11 @@ else
                                   Mask="DocumentCustomerMask"
                                   OnBlur="ValidateDocument"
                                   ErrorText="@ErrorText"
-                                  Error="Error" />
+                                  Error="Error"
+                                  Immediate="true" 
+                                  @key="DocumentCustomerMask" />
                 </MudItem>
-                
+
                 <MudItem lg="4" xs="12" sm="6">
                     <MudTextField Label="@(InputModel.CustomerType == ECustomerType.Individual ? "Nome" : "Razão Social")"
                                   @bind-Value="InputModel.Name"
@@ -63,8 +65,6 @@ else
                                       For="@(() => InputModel.BusinessName)" />
                     }
                 </MudItem>
-
-               
 
                 <MudItem lg="3" xs="12" sm="6">
                     <MudTextField Label="Telefone"
@@ -88,50 +88,50 @@ else
                                   @bind-Value="InputModel.Address.ZipCode"
                                   For="@(() => InputModel.Address.ZipCode)"
                                   Mask="ZipCodeMask"
-                                  OnBlur="SearchAddressAsync" />
+                                  OnBlur="SearchAddressAsync"/>
                 </MudItem>
 
                 <MudItem lg="4" xs="12" sm="6">
                     <MudTextField Label="Logradouro"
                                   @bind-Value="InputModel.Address.Street"
-                                  For="@(() => InputModel.Address.Street)" />
+                                  For="@(() => InputModel.Address.Street)"/>
                 </MudItem>
 
                 <MudItem lg="2" xs="12" sm="6">
                     <MudTextField Label="Número"
                                   @bind-Value="InputModel.Address.Number"
                                   For="@(() => InputModel.Address.Number)"
-                                  MaxLength="10" />
+                                  MaxLength="10"/>
                 </MudItem>
 
                 <MudItem lg="4" xs="12" sm="6">
                     <MudTextField Label="Complemento"
                                   @bind-Value="InputModel.Address.Complement"
-                                  For="@(() => InputModel.Address.Complement)" />
+                                  For="@(() => InputModel.Address.Complement)"/>
                 </MudItem>
 
                 <MudItem lg="3" xs="12" sm="6">
                     <MudTextField Label="Bairro"
                                   @bind-Value="InputModel.Address.Neighborhood"
-                                  For="@(() => InputModel.Address.Neighborhood)" />
+                                  For="@(() => InputModel.Address.Neighborhood)"/>
                 </MudItem>
 
                 <MudItem lg="3" xs="12" sm="6">
                     <MudTextField Label="Cidade"
                                   @bind-Value="InputModel.Address.City"
-                                  For="@(() => InputModel.Address.City)" />
+                                  For="@(() => InputModel.Address.City)"/>
                 </MudItem>
 
                 <MudItem lg="3" xs="12" sm="6">
                     <MudTextField Label="Estado"
                                   @bind-Value="InputModel.Address.State"
-                                  For="@(() => InputModel.Address.State)" />
+                                  For="@(() => InputModel.Address.State)"/>
                 </MudItem>
 
                 <MudItem lg="3" xs="12" sm="6">
                     <MudTextField Label="País"
                                   @bind-Value="InputModel.Address.Country"
-                                  For="@(() => InputModel.Address.Country)" />
+                                  For="@(() => InputModel.Address.Country)"/>
                 </MudItem>
             </MudGrid>
 

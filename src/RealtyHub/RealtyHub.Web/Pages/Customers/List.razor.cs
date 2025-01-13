@@ -41,7 +41,7 @@ public partial class ListCustomersPage : ComponentBase
 
     #region Methods
 
-    public async void OnDeleteButtonClickedAsync(long id, string name)
+    public async Task OnDeleteButtonClickedAsync(long id, string name)
     {
         var parameters = new DialogParameters
         {
@@ -66,12 +66,13 @@ public partial class ListCustomersPage : ComponentBase
         StateHasChanged();
     }
 
-    public async Task OnDeleteAsync(long id, string name)
+    private async Task OnDeleteAsync(long id, string name)
     {
         try
         {
             await Handler.DeleteAsync(new DeleteCustomerRequest { Id = id });
             Customers.RemoveAll(x => x.Id == id);
+            await DataGrid.ReloadServerData();
             Snackbar.Add($"Cliente {name} excluído", Severity.Success);
         }
         catch (Exception e)
