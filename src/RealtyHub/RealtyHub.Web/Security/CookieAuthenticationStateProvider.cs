@@ -54,8 +54,9 @@ public class CookieAuthenticationStateProvider(IHttpClientFactory clientFactory)
         {
             new (ClaimTypes.Name, user.Email),
             new (ClaimTypes.Email, user.Email),
-            new ("creci", user.Creci),
-            new (ClaimTypes.GivenName, user.GivenName)
+            new ("Creci", user.Creci),
+            new (ClaimTypes.GivenName, user.GivenName),
+            new ("VerificationCode", user.VerificationCode)
         };
 
         claims.AddRange(

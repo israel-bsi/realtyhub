@@ -29,7 +29,8 @@ public static class Endpoint
             .MapEndpoint<LogoutEndpoint>()
             .MapEndpoint<GetRolesEndpoint>()
             .MapEndpoint<RegisterUserEndpoint>()
-            .MapEndpoint<ManageInfoEndpoint>();
+            .MapEndpoint<ManageInfoEndpoint>()
+            .MapEndpoint<ConfirmEmailEndpoint>();
 
         endpoints.MapGroup("v1/customers")
             .WithTags("Customers")

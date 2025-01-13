@@ -14,7 +14,6 @@ public class ManageInfoEndpoint : IEndpoint
             .Produces<UserResponse>();
     }
     private static async Task<IResult> HandlerAsync(
-        SignInManager<User> signInManager,
         UserManager<User> userManager,
         ClaimsPrincipal claimsPrincipal)
     {
@@ -27,7 +26,9 @@ public class ManageInfoEndpoint : IEndpoint
                 GivenName = user.GivenName,
                 Creci = user.Creci,
                 Email = user.Email ?? string.Empty,
-                UserName = user.UserName ?? string.Empty
+                UserName = user.UserName ?? string.Empty,
+                VerificationCode = user.VerificationCode,
+                Claims = claimsPrincipal.Claims.ToDictionary(c => c.Type, c => c.Value)
             });
     }
 }

@@ -3,8 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using RealtyHub.ApiService.Data;
 using RealtyHub.ApiService.Handlers;
 using RealtyHub.ApiService.Models;
-using RealtyHub.Core;
+using RealtyHub.ApiService.Services;
 using RealtyHub.Core.Handlers;
+using RealtyHub.Core.Services;
 
 namespace RealtyHub.ApiService.Common.Api;
 
@@ -12,13 +13,15 @@ public static class BuilderExtension
 {
     public static void AddConfiguration(this WebApplicationBuilder builder)
     {
-        Configuration.ConnectionString =
+        Core.Configuration.ConnectionString =
             builder
                 .Configuration
                 .GetConnectionString("DefaultConnection")
             ?? string.Empty;
-        Configuration.BackendUrl = builder.Configuration.GetValue<string>("BackendUrl") ?? string.Empty;
-        Configuration.FrontendUrl = builder.Configuration.GetValue<string>("FrontendUrl") ?? string.Empty;
+        Core.Configuration.BackendUrl = builder.Configuration.GetValue<string>("BackendUrl") ?? string.Empty;
+        Core.Configuration.FrontendUrl = builder.Configuration.GetValue<string>("FrontendUrl") ?? string.Empty;
+        Configuration.EmailSettings.EmailPassword = 
+            builder.Configuration.GetValue<string>("EmailPassword") ?? string.Empty;
     }
 
     public static void AddDocumentation(this WebApplicationBuilder builder)
@@ -47,7 +50,7 @@ public static class BuilderExtension
             .AddDbContext<AppDbContext>(
                 x =>
                 {
-                    x.UseNpgsql(Configuration.ConnectionString)
+                    x.UseNpgsql(Core.Configuration.ConnectionString)
                         .EnableSensitiveDataLogging()
                         .EnableDetailedErrors();
                 });
@@ -74,11 +77,11 @@ public static class BuilderExtension
     {
         builder.Services.AddCors(
             options => options.AddPolicy(
-                ApiConfiguration.CorsPolicyName,
+                Configuration.CorsPolicyName,
                 policy => policy
                     .WithOrigins([
-                        Configuration.BackendUrl,
-                        Configuration.FrontendUrl
+                        Core.Configuration.BackendUrl,
+                        Core.Configuration.FrontendUrl
                     ])
                     .AllowAnyMethod()
                     .AllowAnyHeader()
@@ -94,5 +97,6 @@ public static class BuilderExtension
         builder.Services.AddTransient<IViewingHandler, ViewingHandler>();
         builder.Services.AddTransient<IOfferHandler, OfferHandler>();
         builder.Services.AddTransient<IContractHandler, ContractHandler>();
+        builder.Services.AddTransient<IEmailService, EmailService>();
     }
 }

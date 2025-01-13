@@ -22,8 +22,8 @@ public class GetAllOffersEndpoint : IEndpoint
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
         IOfferHandler handler,
-        [FromQuery] int pageNumber = Configuration.DefaultPageNumber,
-        [FromQuery] int pageSize = Configuration.DefaultPageSize)
+        [FromQuery] int pageNumber = Core.Configuration.DefaultPageNumber,
+        [FromQuery] int pageSize = Core.Configuration.DefaultPageSize)
     {
         var request = new GetAllOffersRequest
         {

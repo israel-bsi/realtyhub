@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Requests\Emails\" />
     <Folder Include="Requests\Payments\" />
     <Folder Include="Requests\PropertiesImages\" />
   </ItemGroup>

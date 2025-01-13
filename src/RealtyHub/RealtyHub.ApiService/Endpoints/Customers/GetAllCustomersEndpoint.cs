@@ -22,8 +22,8 @@ public class GetAllCustomersEndpoint : IEndpoint
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
         ICustomerHandler handler,
-        [FromQuery] int pageNumber = Configuration.DefaultPageNumber,
-        [FromQuery] int pageSize = Configuration.DefaultPageSize,
+        [FromQuery] int pageNumber = Core.Configuration.DefaultPageNumber,
+        [FromQuery] int pageSize = Core.Configuration.DefaultPageSize,
         [FromQuery] string searchTerm = "")
     {
         var request = new GetAllCustomersRequest

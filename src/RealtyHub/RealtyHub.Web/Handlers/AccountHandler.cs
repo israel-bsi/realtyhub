@@ -2,6 +2,7 @@
 using System.Net.Http.Json;
 using System.Text;
 using RealtyHub.Core.Handlers;
+using RealtyHub.Core.Models.Account;
 using RealtyHub.Core.Requests.Account;
 using RealtyHub.Core.Responses;
 
@@ -33,6 +34,18 @@ public class AccountHandler(IHttpClientFactory httpClientFactory) : IAccountHand
             ? new Response<string>("Cadastro realizado com sucesso!", 201, "Cadastro realizado com sucesso!")
             : new Response<string>(null, (int)result.StatusCode,"Não foi possível realizar o cadastro");
     }
+
+    public async Task<Response<string>> ConfirmEmail(UserConfirmEmail user)
+    {
+        var emptyContent = new StringContent("{}", Encoding.UTF8, "application/json");
+        var url = $"v1/identity/confirm-email?userId={user.UserId}&token={user.Token}";
+        var result = await _httpClient.PostAsync(url, emptyContent);
+
+        return result.IsSuccessStatusCode 
+            ? new Response<string>(null, 200, "Email confirmado com sucesso!")
+            : new Response<string>(null, (int)result.StatusCode, "Não foi possível confirmar o e-mail");
+    }
+
     public async Task LogoutAsync()
     {
         var emptyContent = new StringContent("{}", Encoding.UTF8, "application/json");

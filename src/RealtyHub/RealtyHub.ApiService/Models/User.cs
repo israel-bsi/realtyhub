@@ -6,5 +6,6 @@ public class User : IdentityUser<long>
 {
     public string GivenName { get; set; } = string.Empty;
     public string Creci { get; set; } = string.Empty;
+    public string VerificationCode { get; set; } = string.Empty;
     public List<IdentityRole<long>>? Roles { get; set; }
 }
