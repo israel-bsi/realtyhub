@@ -10,7 +10,7 @@ public class Property : Entity
     [MaxLength(120, ErrorMessage = "A Título deve conter até 120 caracteres")]
     public string Title { get; set; } = string.Empty;
     [Required(ErrorMessage = "Descrição é um campo obrigatório")]
-    [MaxLength(80, ErrorMessage = "A descrição deve conter até 80 caracteres")]
+    [MaxLength(255 ,ErrorMessage = "A descrição deve conter até 255 caracteres")]
     public string Description { get; set; } = string.Empty;
     [Required(ErrorMessage = "Preço é um campo obrigatório")]
     public decimal Price { get; set; }

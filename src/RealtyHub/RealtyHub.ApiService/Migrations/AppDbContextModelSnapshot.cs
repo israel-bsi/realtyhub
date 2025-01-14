@@ -473,7 +473,8 @@ namespace RealtyHub.ApiService.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(80)
+                        .HasColumnType("character varying(80)");
 
                     b.Property<int>("Garage")
                         .HasColumnType("integer");

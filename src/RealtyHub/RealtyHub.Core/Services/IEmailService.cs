@@ -5,5 +5,5 @@ namespace RealtyHub.Core.Services;
 
 public interface IEmailService
 {
-    Task<Response<bool>> SendVerificationCodeAsync(EmailMessageRequest request);
+    Task<Response<bool>> SendConfirmationLinkAsync(EmailMessageRequest request);
 }

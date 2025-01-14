@@ -26,5 +26,10 @@ public static class Utility
         {
             MaskChars = [new MaskChar('#', @"[0-9]")]
         };
+
+        public readonly PatternMask Number = new("###")
+        {
+            MaskChars = [new MaskChar('#', @"[0-9]")]
+        };
     }
 }
