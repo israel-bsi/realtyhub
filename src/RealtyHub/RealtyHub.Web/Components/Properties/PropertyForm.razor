@@ -1,8 +1,8 @@
-﻿@inherits CustomerFormComponent
+﻿@inherits PropertyFormComponent
 
-<PageTitle>@Operation Cliente</PageTitle>
+<PageTitle>@Operation Imóvel</PageTitle>
 
-<MudText Typo="Typo.h4">@Operation Cliente</MudText>
+<MudText Typo="Typo.h4">@Operation Imóvel</MudText>
 
 @if (IsBusy)
 {
@@ -17,67 +17,21 @@
 else
 {
     <MudPaper Class="pa-8 mt-4" Elevation="2">
-        <EditForm OnValidSubmit="OnValidSubmitAsync" EditContext="@EditContext">
+        <EditForm Model="InputModel" OnValidSubmit="OnValidSubmitAsync">
             <ObjectGraphDataAnnotationsValidator />
 
-            <MudText Class="mb-6" Typo="Typo.h6">Dados Pessoais</MudText>
-
-            <MudGrid>
-                <MudItem>
-                    <MudRadioGroup T="ECustomerType" Value="InputModel.CustomerType" ValueChanged="OnCustomerTypeChanged">
-                        <MudRadio Value="ECustomerType.Individual">Pessoa Física</MudRadio>
-                        <MudRadio Value="ECustomerType.Business">Pessoa Jurídica</MudRadio>
-                    </MudRadioGroup>
-                </MudItem>
-            </MudGrid>
+            <MudText Class="mb-6" Typo="Typo.h6">Dados do Imóvel</MudText>
 
             <MudGrid>
                 <MudItem lg="2" xs="12" sm="6">
-                    <MudTextField Label="@DocumentType"
-                                  @bind-Value="InputModel.DocumentNumber"
-                                  For="@(() => InputModel.DocumentNumber)"
-                                  Mask="DocumentCustomerMask"
-                                  OnBlur="OnBlurDocumentTextField"
-                                  ErrorText="@ErrorText"
-                                  Error="Error"
-                                  Immediate="true" 
-                                  @key="DocumentCustomerMask" />
+                    <EnumSelect TEnum="EPropertyType"
+                                Label="Tipo do Imóvel"
+                                @bind-SelectedValue="InputModel.PropertyType">
+
+                    </EnumSelect>
                 </MudItem>
 
-                <MudItem lg="4" xs="12" sm="6">
-                    <MudTextField Label="@(InputModel.CustomerType == ECustomerType.Individual ? "Nome" : "Razão Social")"
-                                  @bind-Value="InputModel.Name"
-                                  For="@(() => InputModel.Name)" />
-                </MudItem>
 
-                <MudItem lg="3" xs="12" sm="6">
-                    @if (InputModel.CustomerType == ECustomerType.Individual)
-                    {
-                        <MudTextField Label="Rg"
-                                      @bind-Value="InputModel.Rg"
-                                      For="@(() => InputModel.Rg)"
-                                      MaxLength="20" />
-                    }
-                    else
-                    {
-                        <MudTextField Label="Nome Fantasia"
-                                      @bind-Value="InputModel.BusinessName"
-                                      For="@(() => InputModel.BusinessName)" />
-                    }
-                </MudItem>
-
-                <MudItem lg="3" xs="12" sm="6">
-                    <MudTextField Label="Telefone"
-                                  @bind-Value="InputModel.Phone"
-                                  For="@(() => InputModel.Phone)"
-                                  Mask="@Utility.Masks.Phone" />
-                </MudItem>
-
-                <MudItem lg="4" xs="12" sm="6">
-                    <MudTextField Label="E-mail"
-                                  @bind-Value="InputModel.Email"
-                                  For="@(() => InputModel.Email)" />
-                </MudItem>
             </MudGrid>
 
             <MudText Class="mt-6 mb-6" Typo="Typo.h6">Endereço</MudText>

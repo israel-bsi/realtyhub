@@ -31,4 +31,21 @@ public class CreatePropertyRequest : Request
     public List<PropertyImage> PropertyImage { get; set; } = [];
     [Required(ErrorMessage = "Propriedade nova é um campo obrigatório")]
     public bool IsNew { get; set; }
+
+    public static implicit operator CreatePropertyRequest(Property request) =>
+        new()
+        {
+            Title = request.Title,
+            Description = request.Description,
+            Price = request.Price,
+            PropertyType = request.PropertyType,
+            Bedroom = request.Bedroom,
+            Bathroom = request.Bathroom,
+            Garage = request.Garage,
+            Area = request.Area,
+            TransactionsDetails = request.TransactionsDetails,
+            Address = request.Address,
+            PropertyImage = request.PropertyImage,
+            IsNew = request.IsNew
+        };
 }

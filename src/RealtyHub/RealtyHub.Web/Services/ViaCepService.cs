@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using RealtyHub.Core.Models;
 using RealtyHub.Core.Responses;
 using RealtyHub.Core.Services;
 
@@ -29,6 +30,32 @@ public class ViaCepService(IHttpClientFactory httpClientFactory) : IViaCepServic
         catch (Exception ex)
         {
             return new Response<ViaCepResponse?>(null, 500, ex.Message);
+        }
+    }
+
+    public async Task<Response<Address?>> GetAddressAsync(string cep)
+    {
+        try
+        {
+            var searchAddressAsync = await SearchAddressAsync(cep);
+            if (searchAddressAsync is { IsSuccess: false, Data: null })
+                return new Response<Address?>(null, 500, searchAddressAsync.Message);
+
+            var address = new Address
+            {
+                ZipCode = cep,
+                Street = searchAddressAsync.Data!.Street,
+                Neighborhood = searchAddressAsync.Data.Neighborhood,
+                City = searchAddressAsync.Data.City,
+                State = searchAddressAsync.Data.State,
+                Complement = searchAddressAsync.Data.Complement
+            };
+
+            return new Response<Address?>(address);
+        }
+        catch (Exception e)
+        {
+            return new Response<Address?>(null, 500, e.Message);
         }
     }
 }

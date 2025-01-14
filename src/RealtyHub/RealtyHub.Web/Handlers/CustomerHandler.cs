@@ -33,27 +33,23 @@ public class CustomerHandler(IHttpClientFactory httpClientFactory) : ICustomerHa
     public async Task<Response<Customer?>> DeleteAsync(DeleteCustomerRequest request)
     {
         var result = await _httpClient.DeleteAsync($"v1/customers/{request.Id}");
+
         return await result.Content.ReadFromJsonAsync<Response<Customer?>>()
                ?? new Response<Customer?>(null, 400, "Falha ao excluir o cliente");
     }
 
     public async Task<Response<Customer?>> GetByIdAsync(GetCustomerByIdRequest request)
     {
-        try
-        {
-            var response = await _httpClient.GetAsync($"v1/customers/{request.Id}");
-            if (!response.IsSuccessStatusCode)
-                return new Response<Customer?>(null, 400, "Não foi possível obter o cliente");
+        var response = await _httpClient.GetAsync($"v1/customers/{request.Id}");
 
-            var customer = await response.Content.ReadFromJsonAsync<Response<Customer?>>();
-            return customer is null 
-                ? new Response<Customer?>(null, 400, "Não foi possível obter o cliente") 
-                : new Response<Customer?>(customer.Data);
-        }
-        catch (Exception e)
-        {
-            return new Response<Customer?>(null, 400, e.Message);
-        }
+        if (!response.IsSuccessStatusCode)
+            return new Response<Customer?>(null, 400, "Não foi possível obter o cliente");
+
+        var customer = await response.Content.ReadFromJsonAsync<Response<Customer?>>();
+
+        return customer is null
+            ? new Response<Customer?>(null, 400, "Não foi possível obter o cliente")
+            : new Response<Customer?>(customer.Data);
     }
 
     public async Task<PagedResponse<List<Customer>?>> GetAllAsync(GetAllCustomersRequest request)

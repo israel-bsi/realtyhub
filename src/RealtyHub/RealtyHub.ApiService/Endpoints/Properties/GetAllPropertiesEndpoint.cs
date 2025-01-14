@@ -1,7 +1,6 @@
 ﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using RealtyHub.ApiService.Common.Api;
-using RealtyHub.Core;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.Properties;
@@ -23,13 +22,15 @@ public class GetAllPropertiesEndpoint : IEndpoint
         ClaimsPrincipal user,
         IPropertyHandler handler,
         [FromQuery] int pageNumber = Core.Configuration.DefaultPageNumber,
-        [FromQuery] int pageSize = Core.Configuration.DefaultPageSize)
+        [FromQuery] int pageSize = Core.Configuration.DefaultPageSize,
+        [FromQuery] string searchTerm = "")
     {
         var request = new GetAllPropertiesRequest
         {
             UserId = user.Identity?.Name ?? string.Empty,
             PageNumber = pageNumber,
-            PageSize = pageSize
+            PageSize = pageSize,
+            SearchTerm = searchTerm
         };
         var result = await handler.GetAllAsync(request);
 

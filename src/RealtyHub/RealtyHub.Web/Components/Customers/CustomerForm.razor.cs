@@ -29,27 +29,6 @@ public partial class CustomerFormComponent : ComponentBase
         ? "Editar" : "Cadastrar";
     public bool IsBusy { get; set; }
     public Customer InputModel { get; set; } = new();
-
-    public readonly PatternMask PhoneMask = new("(##) #########")
-    {
-        MaskChars = [new MaskChar('#', @"[0-9]")]
-    };
-
-    public readonly PatternMask ZipCodeMask = new("#####-###")
-    {
-        MaskChars = [new MaskChar('#', @"[0-9]")]
-    };
-
-    public readonly PatternMask CpfMask = new("###.###.###-##")
-    {
-        MaskChars = [new MaskChar('#', @"[0-9]")]
-    };
-
-    public readonly PatternMask CnpjMask = new("##.###.###/####-##")
-    {
-        MaskChars = [new MaskChar('#', @"[0-9]")]
-    };
-
     public PatternMask DocumentCustomerMask { get; set; } = null!;
     public string DocumentType =>
         InputModel.CustomerType == ECustomerType.Individual ? "CPF" : "CNPJ";
@@ -91,13 +70,9 @@ public partial class CustomerFormComponent : ComponentBase
 
             Response<Customer?> result;
             if (InputModel.Id > 0)
-            {
                 result = await Handler.UpdateAsync(InputModel);
-            }
             else
-            {
                 result = await Handler.CreateAsync(InputModel);
-            }
 
             if (result.IsSuccess)
             {
@@ -123,14 +98,10 @@ public partial class CustomerFormComponent : ComponentBase
             if (string.IsNullOrWhiteSpace(InputModel.Address.ZipCode))
                 return;
 
-            var result = await CepService.SearchAddressAsync(InputModel.Address.ZipCode);
+            var result = await CepService.GetAddressAsync(InputModel.Address.ZipCode);
             if (result.Data is null || !result.IsSuccess) return;
 
-            InputModel.Address.Street = result.Data.Street;
-            InputModel.Address.Neighborhood = result.Data.Neighborhood;
-            InputModel.Address.City = result.Data.City;
-            InputModel.Address.State = result.Data.State;
-            InputModel.Address.Complement = result.Data.Complement;
+            InputModel.Address = result.Data;
             StateHasChanged();
         }
         catch (Exception e)
@@ -171,8 +142,8 @@ public partial class CustomerFormComponent : ComponentBase
     {
         DocumentCustomerMask = customerType switch
         {
-            ECustomerType.Individual => CpfMask,
-            ECustomerType.Business => CnpjMask,
+            ECustomerType.Individual => Utility.Masks.Cnpj,
+            ECustomerType.Business => Utility.Masks.Cnpj,
             _ => DocumentCustomerMask
         };
         StateHasChanged();
@@ -207,22 +178,7 @@ public partial class CustomerFormComponent : ComponentBase
                 var response = await Handler.GetByIdAsync(request);
                 if (response is { IsSuccess: true, Data: not null })
                 {
-                    InputModel.Id = response.Data.Id;
-                    InputModel.Name = response.Data.Name;
-                    InputModel.Email = response.Data.Email;
-                    InputModel.Phone = response.Data.Phone;
-                    InputModel.DocumentNumber = response.Data.DocumentNumber;
-                    InputModel.CustomerType = response.Data.CustomerType;
-                    InputModel.Rg = response.Data.Rg;
-                    InputModel.BusinessName = response.Data.BusinessName;
-                    InputModel.Address.ZipCode = response.Data.Address.ZipCode;
-                    InputModel.Address.Street = response.Data.Address.Street;
-                    InputModel.Address.Neighborhood = response.Data.Address.Neighborhood;
-                    InputModel.Address.Number = response.Data.Address.Number;
-                    InputModel.Address.Complement = response.Data.Address.Complement;
-                    InputModel.Address.City = response.Data.Address.City;
-                    InputModel.Address.State = response.Data.Address.State;
-                    InputModel.Address.Country = response.Data.Address.Country;
+                    InputModel = response.Data;
                 }
                 else
                 {
