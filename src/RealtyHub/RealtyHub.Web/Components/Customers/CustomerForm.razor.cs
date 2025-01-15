@@ -4,7 +4,6 @@ using MudBlazor;
 using RealtyHub.Core.Enums;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Requests.Customers;
-using RealtyHub.Core.Services;
 using RealtyHub.Web.Services;
 using System.Text.RegularExpressions;
 using RealtyHub.Core.Models;
@@ -43,8 +42,6 @@ public partial class CustomerFormComponent : ComponentBase
     [Inject]
     public ICustomerHandler Handler { get; set; } = null!;
 
-    [Inject]
-    public IViaCepService CepService { get; set; } = null!;
 
     [Inject]
     public NavigationManager NavigationManager { get; set; } = null!;
@@ -89,24 +86,6 @@ public partial class CustomerFormComponent : ComponentBase
         finally
         {
             IsBusy = false;
-        }
-    }
-    public async Task SearchAddressAsync(FocusEventArgs focusEventArgs)
-    {
-        try
-        {
-            if (string.IsNullOrWhiteSpace(InputModel.Address.ZipCode))
-                return;
-
-            var result = await CepService.GetAddressAsync(InputModel.Address.ZipCode);
-            if (result.Data is null || !result.IsSuccess) return;
-
-            InputModel.Address = result.Data;
-            StateHasChanged();
-        }
-        catch (Exception e)
-        {
-            Snackbar.Add(e.Message, Severity.Error);
         }
     }
     public void OnBlurDocumentTextField(FocusEventArgs focusEventArgs)

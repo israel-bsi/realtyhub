@@ -1,0 +1,87 @@
+﻿@using RealtyHub.Core.Models
+@using RealtyHub.Core.Services
+
+<MudText Class="mt-6 mb-6" Typo="Typo.h6">Endereço</MudText>
+
+<MudGrid>
+    <MudItem lg="2" xs="12" sm="6">
+        <MudTextField Label="CEP"
+                      @bind-Value="InputModel.ZipCode"
+                      For="@(() => InputModel.ZipCode)"
+                      Mask="@Utility.Masks.ZipCode"
+                      OnBlur="SearchAddressAsync"
+                      InputType="InputType.Text" />
+    </MudItem>
+
+    <MudItem lg="4" xs="12" sm="6">
+        <MudTextField Label="Logradouro"
+                      @bind-Value="InputModel.Street"
+                      For="@(() => InputModel.Street)" />
+    </MudItem>
+
+    <MudItem lg="2" xs="12" sm="6">
+        <MudTextField Label="Número"
+                      @bind-Value="InputModel.Number"
+                      For="@(() => InputModel.Number)"
+                      MaxLength="10" />
+    </MudItem>
+
+    <MudItem lg="4" xs="12" sm="6">
+        <MudTextField Label="Complemento"
+                      @bind-Value="InputModel.Complement"
+                      For="@(() => InputModel.Complement)" />
+    </MudItem>
+
+    <MudItem lg="3" xs="12" sm="6">
+        <MudTextField Label="Bairro"
+                      @bind-Value="InputModel.Neighborhood"
+                      For="@(() => InputModel.Neighborhood)" />
+    </MudItem>
+
+    <MudItem lg="3" xs="12" sm="6">
+        <MudTextField Label="Cidade"
+                      @bind-Value="InputModel.City"
+                      For="@(() => InputModel.City)" />
+    </MudItem>
+
+    <MudItem lg="3" xs="12" sm="6">
+        <MudTextField Label="Estado"
+                      @bind-Value="InputModel.State"
+                      For="@(() => InputModel.State)" />
+    </MudItem>
+
+    <MudItem lg="3" xs="12" sm="6">
+        <MudTextField Label="País"
+                      @bind-Value="InputModel.Country"
+                      For="@(() => InputModel.Country)" />
+    </MudItem>
+</MudGrid>
+
+@code
+{
+    [Parameter, EditorRequired]
+    public Address InputModel { get; set; } = new();
+
+    [Inject] public IViaCepService CepService { get; set; } = null!;
+
+    [Inject] public ISnackbar Snackbar { get; set; } = null!;
+
+    public async Task SearchAddressAsync(FocusEventArgs focusEventArgs)
+    {
+        try
+        {
+            if (string.IsNullOrWhiteSpace(InputModel.ZipCode))
+                return;
+
+            var result = await CepService.GetAddressAsync(InputModel.ZipCode);
+            if (result.Data is null || !result.IsSuccess) return;
+
+            InputModel = result.Data;
+            StateHasChanged();
+        }
+        catch (Exception e)
+        {
+            Snackbar.Add(e.Message, Severity.Error);
+        }
+    }
+}

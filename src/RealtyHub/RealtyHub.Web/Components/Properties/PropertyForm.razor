@@ -33,7 +33,7 @@ else
                 <MudItem lg="4" xs="12" sm="6">
                     <MudCheckBox @bind-Value="InputModel.IsNew"
                                  For="@(() => InputModel.IsNew)"
-                                 Label="Propriedade Nova">
+                                 Label="Imóvel Novo">
                     </MudCheckBox>
                 </MudItem>
             </MudGrid>
@@ -46,110 +46,72 @@ else
                                   InputType="InputType.Text" />
                 </MudItem>
 
-                <MudItem lg="4" xs="12" sm="6">
+                <MudItem lg="8" xs="12" sm="6">
+                    <MudTextField Label="Descrição"
+                                  @bind-Value="InputModel.Description"
+                                  For="@(() => InputModel.Description)"
+                                  InputType="InputType.Text"
+                                  MaxLength="255" />
+                </MudItem>
+            </MudGrid>
+
+            <MudGrid>
+                <MudItem lg="3" xs="12" sm="6">
                     <MudTextField Label="Preço"
                                   T="decimal"
                                   Variant="Variant.Text"
                                   Format="C"
                                   @bind-Value="InputModel.Price"
-                                  For="@(() => InputModel.Price)"/>
+                                  For="@(() => InputModel.Price)" />
                 </MudItem>
 
-                <MudItem lg="4" xs="12" sm="6">
-                    <MudTextField Label="Quartos"
-                                  @bind-Value="InputModel.Bedroom"
-                                  For="@(() => InputModel.Bedroom)"
-                                  InputType="InputType.Number"
-                                  Mask="@Utility.Masks.Number" />
+                <MudItem lg="1" xs="12" sm="6">
+                    <MudNumericField Label="Quartos"
+                                     @bind-Value="InputModel.Bedroom"
+                                     For="@(() => InputModel.Bedroom)"
+                                     InputMode="InputMode.numeric"
+                                     Max="999"
+                                     Min="1" />
                 </MudItem>
 
-                <MudItem lg="4" xs="12" sm="6">
-                    <MudTextField Label="Banheiros"
-                                  @bind-Value="InputModel.Bathroom"
-                                  For="@(() => InputModel.Bathroom)"
-                                  InputType="InputType.Number"
-                                  Mask="@Utility.Masks.Number" />
+                <MudItem lg="1" xs="12" sm="6">
+                    <MudNumericField Label="Banheiros"
+                                     @bind-Value="InputModel.Bathroom"
+                                     For="@(() => InputModel.Bathroom)"
+                                     InputMode="InputMode.numeric"
+                                     Max="999"
+                                     Min="1" />
                 </MudItem>
 
-                <MudItem lg="4" xs="12" sm="6">
-                    <MudTextField Label="Garagens"
-                                  @bind-Value="InputModel.Garage"
-                                  For="@(() => InputModel.Garage)"
-                                  InputType="InputType.Number"
-                                  Mask="@Utility.Masks.Number" />
+                <MudItem lg="1" xs="12" sm="6">
+                    <MudNumericField Label="Garagens"
+                                     @bind-Value="InputModel.Garage"
+                                     For="@(() => InputModel.Garage)"
+                                     InputMode="InputMode.numeric"
+                                     Max="999"
+                                     Min="1" />
                 </MudItem>
 
-                <MudItem lg="4" xs="12" sm="6">
-                    <MudTextField Label="Área(m²) "
-                                  @bind-Value="InputModel.Area"
-                                  For="@(() => InputModel.Area)"
-                                  InputType="InputType.Number" />
+                <MudItem lg="2" xs="12" sm="6">
+                    <MudNumericField Label="Área(m²)"
+                                     T="double"
+                                     @bind-Value="InputModel.Area"
+                                     For="@(() => InputModel.Area)"
+                                     InputMode="InputMode.numeric"
+                                     Max="9999999"
+                                     Min="1" />
                 </MudItem>
 
                 <MudItem lg="4" xs="12" sm="6">
                     <MudTextField Label="Detalhes da transação"
                                   @bind-Value="InputModel.TransactionsDetails"
                                   For="@(() => InputModel.TransactionsDetails)"
-                                  InputType="InputType.Text"/>
-                </MudItem>
-
-            </MudGrid>
-
-            <MudText Class="mt-6 mb-6" Typo="Typo.h6">Endereço</MudText>
-
-            <MudGrid>
-                <MudItem lg="2" xs="12" sm="6">
-                    <MudTextField Label="CEP"
-                                  @bind-Value="InputModel.Address.ZipCode"
-                                  For="@(() => InputModel.Address.ZipCode)"
-                                  Mask="@Utility.Masks.ZipCode"
-                                  OnBlur="SearchAddressAsync"
                                   InputType="InputType.Text" />
                 </MudItem>
 
-                <MudItem lg="4" xs="12" sm="6">
-                    <MudTextField Label="Logradouro"
-                                  @bind-Value="InputModel.Address.Street"
-                                  For="@(() => InputModel.Address.Street)" />
-                </MudItem>
-
-                <MudItem lg="2" xs="12" sm="6">
-                    <MudTextField Label="Número"
-                                  @bind-Value="InputModel.Address.Number"
-                                  For="@(() => InputModel.Address.Number)"
-                                  MaxLength="10" />
-                </MudItem>
-
-                <MudItem lg="4" xs="12" sm="6">
-                    <MudTextField Label="Complemento"
-                                  @bind-Value="InputModel.Address.Complement"
-                                  For="@(() => InputModel.Address.Complement)" />
-                </MudItem>
-
-                <MudItem lg="3" xs="12" sm="6">
-                    <MudTextField Label="Bairro"
-                                  @bind-Value="InputModel.Address.Neighborhood"
-                                  For="@(() => InputModel.Address.Neighborhood)" />
-                </MudItem>
-
-                <MudItem lg="3" xs="12" sm="6">
-                    <MudTextField Label="Cidade"
-                                  @bind-Value="InputModel.Address.City"
-                                  For="@(() => InputModel.Address.City)" />
-                </MudItem>
-
-                <MudItem lg="3" xs="12" sm="6">
-                    <MudTextField Label="Estado"
-                                  @bind-Value="InputModel.Address.State"
-                                  For="@(() => InputModel.Address.State)" />
-                </MudItem>
-
-                <MudItem lg="3" xs="12" sm="6">
-                    <MudTextField Label="País"
-                                  @bind-Value="InputModel.Address.Country"
-                                  For="@(() => InputModel.Address.Country)" />
-                </MudItem>
             </MudGrid>
+            
+            <AddressComponent InputModel="InputModel.Address"/>
 
             <MudButton ButtonType="ButtonType.Submit"
                        Variant="Variant.Filled"

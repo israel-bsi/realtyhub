@@ -1,12 +1,10 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 using MudBlazor;
 using RealtyHub.Core.Enums;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.Properties;
 using RealtyHub.Core.Responses;
-using RealtyHub.Core.Services;
 
 namespace RealtyHub.Web.Components.Properties;
 
@@ -28,9 +26,6 @@ public partial class PropertyFormComponent : ComponentBase
     #endregion
 
     #region Services
-
-    [Inject]
-    public IViaCepService CepService { get; set; } = null!;
 
     [Inject]
     public ISnackbar Snackbar { get; set; } = null!;
@@ -72,24 +67,6 @@ public partial class PropertyFormComponent : ComponentBase
         finally
         {
             IsBusy = false;
-        }
-    }
-    public async Task SearchAddressAsync(FocusEventArgs focusEventArgs)
-    {
-        try
-        {
-            if (string.IsNullOrWhiteSpace(InputModel.Address.ZipCode))
-                return;
-
-            var result = await CepService.GetAddressAsync(InputModel.Address.ZipCode);
-            if (result.Data is null || !result.IsSuccess) return;
-
-            InputModel.Address = result.Data;
-            StateHasChanged();
-        }
-        catch (Exception e)
-        {
-            Snackbar.Add(e.Message, Severity.Error);
         }
     }
 
