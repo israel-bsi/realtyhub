@@ -52,13 +52,15 @@ public partial class PropertyFormComponent : ComponentBase
             else
                 result = await Handler.CreateAsync(InputModel);
 
+            var resultMessage = result.Message ?? string.Empty;
+
             if (result.IsSuccess)
             {
-                Snackbar.Add(result.Message, Severity.Success);
+                Snackbar.Add(resultMessage, Severity.Success);
                 NavigationManager.NavigateTo("/imoveis");
             }
             else
-                Snackbar.Add(result.Message, Severity.Error);
+                Snackbar.Add(resultMessage, Severity.Error);
         }
         catch (Exception e)
         {
@@ -113,7 +115,7 @@ public partial class PropertyFormComponent : ComponentBase
         }
         else
         {
-            Snackbar.Add(response.Message, Severity.Error);
+            Snackbar.Add(response.Message ?? string.Empty, Severity.Error);
             NavigationManager.NavigateTo("/imoveis");
         }
     }

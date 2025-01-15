@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 using MudBlazor;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Requests.Account;
@@ -51,13 +50,16 @@ public partial class RegisterPage : ComponentBase
         try
         {
             var result = await Handler.RegisterAsync(InputModel);
+
+            var resultMessage = result.Message ?? string.Empty;
+
             if (result.IsSuccess)
             {
-                Snackbar.Add(result.Message, Severity.Success);
+                Snackbar.Add(resultMessage, Severity.Success);
                 NavigationManager.NavigateTo("/login");
             }
             else
-                Snackbar.Add(result.Message, Severity.Error);
+                Snackbar.Add(resultMessage, Severity.Error);
         }
         catch (Exception e)
         {
@@ -68,7 +70,7 @@ public partial class RegisterPage : ComponentBase
             IsBusy = false;
         }
     }
-    public void IsPasswordEqual(FocusEventArgs focusEventArgs)
+    public void IsPasswordEqual()
     {
         if (InputModel.Password == InputModel.ConfirmPassword)
         {

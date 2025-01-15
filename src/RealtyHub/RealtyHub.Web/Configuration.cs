@@ -17,7 +17,7 @@ public static class Configuration
                 FontFamily = ["Raleway", "sans-serif"]
             }
         },
-        Palette = new PaletteLight
+        PaletteLight = new PaletteLight
         {
             //Primary = PrincipalColor, //Cor primária
             //PrimaryContrastText = new MudColor("#000000"), //Cor do texto do elemento primário

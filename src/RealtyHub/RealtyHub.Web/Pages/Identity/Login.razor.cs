@@ -52,7 +52,7 @@ public partial class LoginPage : ComponentBase
                 NavigationManager.NavigateTo("/");
             }
             else
-                Snackbar.Add(result.Message, Severity.Error);
+                Snackbar.Add(result.Message ?? string.Empty, Severity.Error);
         }
         catch (Exception e)
         {

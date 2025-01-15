@@ -7,31 +7,37 @@
                   Theme="Configuration.Theme" />
 <MudSnackbarProvider />
 <MudDialogProvider />
+<MudPopoverProvider />
 
 <AuthorizeView>
     <Authorized>
         <MudLayout>
             <CascadingValue Value="this">
                 <MudAppBar>
-                    <MudIconButton Icon="@Icons.Material.Filled.Menu"
-                                   Color="Color.Inherit"
-                                   Edge="Edge.Start"
-                                   OnClick="ToggleDrawer" />
+                    <MudTooltip Text="Abir/Fechar Menu de Navegação">
+                        <MudIconButton Icon="@Icons.Material.Filled.Menu"
+                                       Color="Color.Inherit"
+                                       Edge="Edge.Start"
+                                       OnClick="ToggleDrawer" />
+                    </MudTooltip>
                     RealtyHub
                     <MudSpacer />
-                    <MudSwitch Color="Color.Inherit"
-                               Value="IsDarkMode"
-                               ValueChanged="OnThemeToggled"
-                               T="bool"
-                               ThumbIcon="@Icons.TwoTone.DarkMode"
-                               Class="ma-4"
-                               Disabled="DisableMudSwitch" />
+                    <MudTooltip Text="Mudar tema">
+                        <MudSwitch Color="Color.Inherit"
+                                   Value="IsDarkMode"
+                                   ValueChanged="OnThemeToggled"
+                                   T="bool"
+                                   ThumbIcon="@Icons.Material.TwoTone.DarkMode"
+                                   Class="ma-4"
+                                   Disabled="DisableMudSwitch" />
+                    </MudTooltip>
 
-                    <MudIconButton Icon="@Icons.Material.Filled.Logout"
-                                   Color="Color.Inherit"
-                                   Edge="Edge.Start"
-                                   OnClick="LogoutAsync" 
-                                   Title="Logout" />
+                    <MudTooltip Text="Logout">
+                        <MudIconButton Icon="@Icons.Material.Filled.Logout"
+                                       Color="Color.Inherit"
+                                       Edge="Edge.Start"
+                                       OnClick="LogoutAsync" />
+                    </MudTooltip>
                 </MudAppBar>
                 <MudDrawer @bind-Open="@_isDrawerOpened">
                     <NavMenu />
@@ -111,15 +117,15 @@
         };
 
         var options = new DialogOptions
-        {
-            CloseButton = true,
-            MaxWidth = MaxWidth.Small
-        };
-        
+            {
+                CloseButton = true,
+                MaxWidth = MaxWidth.Small
+            };
+
         var dialog = await DialogService.ShowAsync<DialogConfirm>("Confirmação", parameters, options);
         var result = await dialog.Result;
 
-        if (result.Canceled) return;
+        if (result is { Canceled: true }) return;
         NavigationManager.NavigateTo("/sair");
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 using MudBlazor;
 using RealtyHub.Core.Enums;
 using RealtyHub.Core.Handlers;
@@ -71,13 +70,14 @@ public partial class CustomerFormComponent : ComponentBase
             else
                 result = await Handler.CreateAsync(InputModel);
 
+            var resultMessage = result.Message ?? string.Empty;
             if (result.IsSuccess)
             {
-                Snackbar.Add(result.Message, Severity.Success);
+                Snackbar.Add(resultMessage, Severity.Success);
                 NavigationManager.NavigateTo("/clientes");
             }
             else
-                Snackbar.Add(result.Message, Severity.Error);
+                Snackbar.Add(resultMessage, Severity.Error);
         }
         catch (Exception e)
         {
@@ -88,7 +88,7 @@ public partial class CustomerFormComponent : ComponentBase
             IsBusy = false;
         }
     }
-    public void OnBlurDocumentTextField(FocusEventArgs focusEventArgs)
+    public void OnBlurDocumentTextField()
         => ValidateDocument();
     public void ValidateDocument()
     {
@@ -167,7 +167,7 @@ public partial class CustomerFormComponent : ComponentBase
         }
         else
         {
-            Snackbar.Add(response.Message, Severity.Error);
+            Snackbar.Add(response.Message ?? string.Empty, Severity.Error);
             NavigationManager.NavigateTo("/clientes");
         }
         ValidateDocument();

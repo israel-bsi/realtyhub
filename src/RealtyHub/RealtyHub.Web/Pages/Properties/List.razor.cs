@@ -60,7 +60,7 @@ public partial class ListPropertiesPage : ComponentBase
         var dialog = await DialogService.ShowAsync<DialogConfirm>("Atenção", parameters, options);
         var result = await dialog.Result;
 
-        if (result.Canceled) return;
+        if (result is { Canceled: true }) return;
 
         await OnDeleteAsync(id, title);
         StateHasChanged();
@@ -100,10 +100,10 @@ public partial class ListPropertiesPage : ComponentBase
                     TotalItems = response.TotalCount
                 };
 
-            Snackbar.Add(response.Message, Severity.Error);
+            Snackbar.Add(response.Message ?? string.Empty, Severity.Error);
             return new GridData<Property>
             {
-                Items = Array.Empty<Property>(),
+                Items = [],
                 TotalItems = 0
             };
         }
@@ -112,7 +112,7 @@ public partial class ListPropertiesPage : ComponentBase
             Snackbar.Add(e.Message, Severity.Error);
             return new GridData<Property>
             {
-                Items = Array.Empty<Property>(),
+                Items = [],
                 TotalItems = 0
             };
         }
