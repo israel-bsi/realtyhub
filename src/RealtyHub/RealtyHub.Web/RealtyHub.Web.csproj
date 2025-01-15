@@ -22,11 +22,9 @@
     <ProjectReference Include="..\RealtyHub.Core\RealtyHub.Core.csproj" />
   </ItemGroup>
 
-
   <ItemGroup>
     <ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
   </ItemGroup>
-
 
   <ItemGroup>
     <Content Update="App.razor">

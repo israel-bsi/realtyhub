@@ -30,7 +30,7 @@ public class Property : Entity
     public Address Address { get; set; } = new();
     [Required(ErrorMessage = "Propriedade nova é um campo obrigatório")]
     public bool IsNew { get; set; }
-    public List<PropertyImage> PropertyImage { get; set; } = [];
+    public List<PropertyImage> PropertyImages { get; set; } = [];
     public bool IsActive { get; set; }
     public string UserId { get; set; } = string.Empty;
 }

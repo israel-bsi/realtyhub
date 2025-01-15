@@ -45,7 +45,7 @@ public class CreatePropertyRequest : Request
             Area = request.Area,
             TransactionsDetails = request.TransactionsDetails,
             Address = request.Address,
-            PropertyImage = request.PropertyImage,
+            PropertyImage = request.PropertyImages,
             IsNew = request.IsNew
         };
 }

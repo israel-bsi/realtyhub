@@ -26,6 +26,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) :
     public DbSet<Offer> Offers { get; set; } = null!;
     public DbSet<Payment> Payments { get; set; } = null!;
     public DbSet<Contract> Contracts { get; set; } = null!;
+    public DbSet<PropertyImage> PropertyImages { get; set; } = null!;
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

@@ -34,6 +34,21 @@ public static class AppExtension
 
             return Results.Created();
         });
+
+        app.MapPost("v1/properties/createmany", async (
+            AppDbContext context,
+            [FromQuery] int quantity = 0) =>
+        {
+            if (quantity > 0)
+            {
+                var properties = PropertyFake.GetFakeProperties(quantity);
+                await context.Properties.AddRangeAsync(properties);
+            }
+
+            await context.SaveChangesAsync();
+
+            return Results.Created();
+        });
     }
 
     public static void UseSecurity(this WebApplication app)

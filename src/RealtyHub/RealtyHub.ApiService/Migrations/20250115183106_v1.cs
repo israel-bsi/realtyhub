@@ -93,7 +93,7 @@ namespace RealtyHub.ApiService.Migrations
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Title = table.Column<string>(type: "character varying(120)", maxLength: 120, nullable: false),
-                    Description = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: false),
+                    Description = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
                     Price = table.Column<decimal>(type: "numeric", nullable: false),
                     PropertyType = table.Column<int>(type: "integer", nullable: false),
                     Bedroom = table.Column<int>(type: "integer", nullable: false),
@@ -256,9 +256,7 @@ namespace RealtyHub.ApiService.Migrations
                 name: "PropertyImage",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    FilePath = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    Id = table.Column<string>(type: "text", nullable: false),
                     PropertyId = table.Column<long>(type: "bigint", nullable: false),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false),
                     UserId = table.Column<string>(type: "text", nullable: false),

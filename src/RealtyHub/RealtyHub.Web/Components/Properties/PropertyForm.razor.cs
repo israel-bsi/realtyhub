@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using System.Net.Http;
+using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
 using RealtyHub.Core.Enums;
 using RealtyHub.Core.Handlers;
@@ -22,6 +25,7 @@ public partial class PropertyFormComponent : ComponentBase
         ? "Editar" : "Cadastrar";
     public bool IsBusy { get; set; }
     public Property InputModel { get; set; } = new();
+    public List<IBrowserFile> Files = [];
 
     #endregion
 
@@ -52,6 +56,7 @@ public partial class PropertyFormComponent : ComponentBase
             else
                 result = await Handler.CreateAsync(InputModel);
 
+            await UploadPhotosAsync();
             var resultMessage = result.Message ?? string.Empty;
 
             if (result.IsSuccess)
@@ -109,7 +114,7 @@ public partial class PropertyFormComponent : ComponentBase
             InputModel.Address.State = response.Data.Address.State;
             InputModel.Address.Country = response.Data.Address.Country;
             InputModel.IsNew = response.Data.IsNew;
-            InputModel.PropertyImage = response.Data.PropertyImage;
+            InputModel.PropertyImages = response.Data.PropertyImages;
             InputModel.IsActive = response.Data.IsActive;
             InputModel.UserId = response.Data.UserId;
         }
@@ -126,6 +131,43 @@ public partial class PropertyFormComponent : ComponentBase
         NavigationManager.NavigateTo("/imoveis/adicionar");
     }
 
+    public async Task OnFilesChange(IReadOnlyList<IBrowserFile>? files)
+    {
+        if (files is null) return;
+        foreach (var file in files)
+        {
+            Files.Add(file);
+        }
+
+        await UploadPhotosAsync();
+    }
+    [Inject]
+    public IHttpClientFactory HttpClientFactory { get; set; } = null!;
+    private async Task UploadPhotosAsync()
+    {
+        using var content = new MultipartFormDataContent();
+        foreach (var file in Files)
+        {
+            var fileContent = new StreamContent(file.OpenReadStream(long.MaxValue));
+            fileContent.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType);
+            content.Add(fileContent, "photos", file.Name);
+        }
+
+        var client = HttpClientFactory.CreateClient(Configuration.HttpClientName);
+        var url = $"/v1/properties/{InputModel.Id}/images";
+        var response = await client.PostAsync(url, content);
+
+        if (response.IsSuccessStatusCode)
+        {
+            Snackbar.Add("Imagens enviadas com sucesso", Severity.Success);
+            await LoadPropertyAsync();
+        }
+        else
+        {
+            Snackbar.Add("Erro ao enviar imagens", Severity.Error);
+            Snackbar.Add(await response.Content.ReadAsStringAsync(), Severity.Error);
+        }
+    }
     #endregion
 
     #region Overrides

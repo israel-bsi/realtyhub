@@ -110,6 +110,22 @@ else
                 </MudItem>
 
             </MudGrid>
+            
+            <MudGrid Class="mt-4 mb-4">
+                <MudItem lg="4" xs="12" sm="6">
+                    <MudText Class="mb-2">Imagens</MudText>
+                    <MudFileUpload T="IReadOnlyList<IBrowserFile>" FilesChanged="OnFilesChange">
+                        <ActivatorContent>
+                            <MudButton Variant="Variant.Filled" 
+                                       Color="Color.Primary" 
+                                       StartIcon="@Icons.Material.Filled.UploadFile">
+                                Upload Files
+                            </MudButton>
+                            <MudText>Imagens selecionadas: @Files.Count</MudText>
+                        </ActivatorContent>
+                    </MudFileUpload>
+                </MudItem>
+            </MudGrid>
 
             <AddressComponent @bind-InputModel="InputModel.Address" />
 

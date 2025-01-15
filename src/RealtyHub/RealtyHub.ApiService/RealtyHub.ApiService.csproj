@@ -29,4 +29,8 @@
     <InternalsVisibleTo Include="RealtyHub.Tests" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Sources\Images\" />
+  </ItemGroup>
+
 </Project>

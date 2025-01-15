@@ -12,7 +12,7 @@ using RealtyHub.ApiService.Data;
 namespace RealtyHub.ApiService.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250114142019_v1")]
+    [Migration("20250115183106_v1")]
     partial class v1
     {
         /// <inheritdoc />
@@ -476,8 +476,8 @@ namespace RealtyHub.ApiService.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(80)
-                        .HasColumnType("character varying(80)");
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
 
                     b.Property<int>("Garage")
                         .HasColumnType("integer");
@@ -519,21 +519,13 @@ namespace RealtyHub.ApiService.Migrations
 
             modelBuilder.Entity("RealtyHub.Core.Models.PropertyImage", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
                         .HasDefaultValueSql("NOW()");
-
-                    b.Property<string>("FilePath")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("boolean");
@@ -817,7 +809,7 @@ namespace RealtyHub.ApiService.Migrations
             modelBuilder.Entity("RealtyHub.Core.Models.PropertyImage", b =>
                 {
                     b.HasOne("RealtyHub.Core.Models.Property", "Property")
-                        .WithMany("PropertyImage")
+                        .WithMany("PropertyImages")
                         .HasForeignKey("PropertyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -856,7 +848,7 @@ namespace RealtyHub.ApiService.Migrations
 
             modelBuilder.Entity("RealtyHub.Core.Models.Property", b =>
                 {
-                    b.Navigation("PropertyImage");
+                    b.Navigation("PropertyImages");
                 });
 #pragma warning restore 612, 618
         }

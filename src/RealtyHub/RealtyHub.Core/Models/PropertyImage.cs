@@ -1,11 +1,13 @@
-﻿namespace RealtyHub.Core.Models;
+﻿using System.Text.Json.Serialization;
+
+namespace RealtyHub.Core.Models;
 
 public class PropertyImage : Entity
 {
-    public long Id { get; set; }
-    public string FilePath { get; set; } = string.Empty;
+    public string Id { get; set; } = string.Empty;
     public long PropertyId { get; set; }
-     public Property Property { get; set; } = new();
-     public bool IsActive { get; set; }
-     public string UserId { get; set; } = string.Empty;
+    public bool IsActive { get; set; }
+    public string UserId { get; set; } = string.Empty;
+    [JsonIgnore]
+    public Property Property { get; set; } = new();
 }

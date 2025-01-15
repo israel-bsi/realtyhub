@@ -12,14 +12,13 @@ public class PropertyImageMapping : IEntityTypeConfiguration<PropertyImage>
 
         builder.HasKey(pi => pi.Id);
 
-        builder.Property(pi => pi.FilePath)
-            .IsRequired()
-            .HasMaxLength(200);
-
         builder.Property(c => c.UserId)
             .IsRequired();
 
         builder.Property(pi => pi.IsActive)
+            .IsRequired();
+
+        builder.Property(pi => pi.PropertyId)
             .IsRequired();
 
         builder.Property(pi => pi.CreatedAt)
