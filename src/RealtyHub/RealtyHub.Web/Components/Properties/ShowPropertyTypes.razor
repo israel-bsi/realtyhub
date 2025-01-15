@@ -1,0 +1,50 @@
+﻿@using RealtyHub.Core.Models
+
+<TemplateColumn Title="Tipo" T="EPropertyType">
+    <CellTemplate>
+        @switch (InputModel.PropertyType)
+        {
+            case EPropertyType.Casa:
+                <span>Casa</span>
+                break;
+                case EPropertyType.Apartamento:
+                <span>Apartamento</span>
+                break;
+            case EPropertyType.Terreno:
+                <span>Terreno</span>
+                break;
+            case EPropertyType.Comercial:
+                <span>Comercial</span>
+                break;
+            case EPropertyType.Kitnet:
+                <span>Kitnet</span>
+                break;
+            case EPropertyType.Chácara:
+                <span>Chácara</span>
+                break;
+            case EPropertyType.Sítio:
+                <span>Sítio</span>
+                break;
+            case EPropertyType.Fazenda:
+                <span>Fazenda</span>
+                break;
+            case EPropertyType.Cobertura:
+                <span>Cobertura</span>
+                break;
+            case EPropertyType.Galpão:
+                <span>Galpão</span>
+                break;
+            case EPropertyType.Outros:
+                <span>Outros</span>
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+    </CellTemplate>
+</TemplateColumn>
+
+@code
+{
+    [Parameter, EditorRequired]
+    public Property InputModel { get; set; } = null!;
+}

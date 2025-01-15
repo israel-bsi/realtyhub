@@ -1,5 +1,63 @@
-﻿<h3>List</h3>
+﻿@page "/imoveis"
+@using RealtyHub.Core.Models
+@inherits ListPropertiesPage
 
-@code {
+<MudText Typo="Typo.h3">Imóveis</MudText>
 
-}
+<PageTitle>Imóveis</PageTitle>
+
+<div class="d-flex justify-end">
+    <MudButton Variant="Variant.Filled"
+               Color="Color.Primary"
+               StartIcon="@Icons.TwoTone.Add"
+               Href="/imoveis/adicionar">
+        Novo Imóvel
+    </MudButton>
+</div>
+
+<MudDataGrid T="Property"
+             Class="mt-4"
+             ServerData="LoadServerData"
+             @ref="DataGrid"
+             Filterable="true"
+             Hideable="true"
+             RowsPerPage="@Core.Configuration.DefaultPageSize">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">Imóveis</MudText>
+        <MudSpacer />
+        <MudTextField @bind-Value="SearchTerm"
+                      Placeholder="Filtrar por Nome, Documento e Email"
+                      Adornment="Adornment.Start"
+                      AdornmentIcon="@Icons.Material.Filled.Search"
+                      Clearable="true"
+                      OnClearButtonClick="@(() => @SearchTerm = "" )"
+                      Immediate="true"
+                      IconSize="Size.Medium"
+                      Class="mt-0">
+        </MudTextField>
+    </ToolBarContent>
+    <Columns>
+        <PropertyColumn Property="x => x.Title" Title="Título" />
+        <PropertyColumn Property="x => x.Description" Title="Descrição" />
+        <PropertyColumn Property="x => x.IsNew" Title="Imóvel Novo" />
+        <PropertyColumn Property="x => x.PropertyType" Title="Tipo" />
+        <TemplateColumn Class="d-flex justify-end">
+            <CellTemplate>
+                <MudStack Row>
+                    <MudIconButton Icon="@Icons.Material.Filled.Edit"
+                                   Href="@($"/imoveis/editar/{context.Item.Id}")"
+                                   Color="Color.Primary">
+                    </MudIconButton>
+                    <MudIconButton Icon="@Icons.Material.Filled.Delete"
+                                   Color="Color.Error"
+                                   aria-label="Excluir"
+                                   OnClick="() => OnDeleteButtonClickedAsync(context.Item.Id, context.Item.Title)">
+                    </MudIconButton>
+                </MudStack>
+            </CellTemplate>
+        </TemplateColumn>
+    </Columns>
+    <PagerContent>
+        <MudDataGridPager T="Property" />
+    </PagerContent>
+</MudDataGrid>
