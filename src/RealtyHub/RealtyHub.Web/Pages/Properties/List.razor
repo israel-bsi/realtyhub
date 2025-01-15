@@ -39,7 +39,18 @@
     <Columns>
         <PropertyColumn Property="x => x.Title" Title="Título" />
         <PropertyColumn Property="x => x.Description" Title="Descrição" />
-        <PropertyColumn Property="x => x.IsNew" Title="Imóvel Novo" />
+        <TemplateColumn Title="Imóvel Novo">
+            <CellTemplate>
+                @if (context.Item.IsNew)
+                {
+                    <span>Sim</span>
+                }
+                else
+                {
+                    <span>Não</span>
+                }
+            </CellTemplate>
+        </TemplateColumn>
         <PropertyColumn Property="x => x.PropertyType" Title="Tipo" />
         <TemplateColumn Class="d-flex justify-end">
             <CellTemplate>

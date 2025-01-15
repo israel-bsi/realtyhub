@@ -17,7 +17,7 @@
 else
 {
     <MudPaper Class="pa-8 mt-4" Elevation="2">
-        <EditForm Model="InputModel" OnValidSubmit="OnValidSubmitAsync">
+        <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
             <ObjectGraphDataAnnotationsValidator />
 
             <MudText Class="mb-6" Typo="Typo.h6">Dados do Imóvel</MudText>
@@ -71,7 +71,7 @@ else
                                      For="@(() => InputModel.Bedroom)"
                                      InputMode="InputMode.numeric"
                                      Max="999"
-                                     Min="1" />
+                                     Min="0" />
                 </MudItem>
 
                 <MudItem lg="1" xs="12" sm="6">
@@ -80,7 +80,7 @@ else
                                      For="@(() => InputModel.Bathroom)"
                                      InputMode="InputMode.numeric"
                                      Max="999"
-                                     Min="1" />
+                                     Min="0" />
                 </MudItem>
 
                 <MudItem lg="1" xs="12" sm="6">
@@ -89,7 +89,7 @@ else
                                      For="@(() => InputModel.Garage)"
                                      InputMode="InputMode.numeric"
                                      Max="999"
-                                     Min="1" />
+                                     Min="0" />
                 </MudItem>
 
                 <MudItem lg="2" xs="12" sm="6">
@@ -110,8 +110,8 @@ else
                 </MudItem>
 
             </MudGrid>
-            
-            <AddressComponent InputModel="InputModel.Address"/>
+
+            <AddressComponent @bind-InputModel="InputModel.Address" />
 
             <MudButton ButtonType="ButtonType.Submit"
                        Variant="Variant.Filled"

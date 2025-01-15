@@ -55,7 +55,7 @@ public partial class PropertyFormComponent : ComponentBase
             if (result.IsSuccess)
             {
                 Snackbar.Add(result.Message, Severity.Success);
-                NavigationManager.NavigateTo("/properties");
+                NavigationManager.NavigateTo("/imoveis");
             }
             else
                 Snackbar.Add(result.Message, Severity.Error);
@@ -70,53 +70,81 @@ public partial class PropertyFormComponent : ComponentBase
         }
     }
 
+    private async Task LoadPropertyAsync()
+    {
+        GetPropertyByIdRequest? request = null;
+
+        try
+        {
+            request = new GetPropertyByIdRequest { Id = Id };
+        }
+        catch
+        {
+            Snackbar.Add("Parâmetro inválido", Severity.Error);
+        }
+
+        if (request is null) return;
+
+        var response = await Handler.GetByIdAsync(request);
+        if (response is { IsSuccess: true, Data: not null })
+        {
+            InputModel.Id = response.Data.Id;
+            InputModel.Title = response.Data.Title;
+            InputModel.Description = response.Data.Description;
+            InputModel.Price = response.Data.Price;
+            InputModel.PropertyType = response.Data.PropertyType;
+            InputModel.Bedroom = response.Data.Bedroom;
+            InputModel.Bathroom = response.Data.Bathroom;
+            InputModel.Garage = response.Data.Garage;
+            InputModel.Area = response.Data.Area;
+            InputModel.TransactionsDetails = response.Data.TransactionsDetails;
+            InputModel.Address.ZipCode = response.Data.Address.ZipCode;
+            InputModel.Address.Street = response.Data.Address.Street;
+            InputModel.Address.Number = response.Data.Address.Number;
+            InputModel.Address.Complement = response.Data.Address.Complement;
+            InputModel.Address.Neighborhood = response.Data.Address.Neighborhood;
+            InputModel.Address.City = response.Data.Address.City;
+            InputModel.Address.State = response.Data.Address.State;
+            InputModel.Address.Country = response.Data.Address.Country;
+            InputModel.IsNew = response.Data.IsNew;
+            InputModel.PropertyImage = response.Data.PropertyImage;
+            InputModel.IsActive = response.Data.IsActive;
+            InputModel.UserId = response.Data.UserId;
+        }
+        else
+        {
+            Snackbar.Add(response.Message, Severity.Error);
+            NavigationManager.NavigateTo("/imoveis");
+        }
+    }
+
+    private void RedirectToCreateProperty()
+    {
+        InputModel.PropertyType = EPropertyType.Casa;
+        NavigationManager.NavigateTo("/imoveis/adicionar");
+    }
+
     #endregion
 
     #region Overrides
 
     protected override async Task OnInitializedAsync()
     {
-        if (Id != 0)
+        IsBusy = true;
+        try
         {
-            GetPropertyByIdRequest? request = null;
-
-            try
-            {
-                request = new GetPropertyByIdRequest { Id = Id };
-            }
-            catch (Exception e)
-            {
-                Snackbar.Add(e.Message, Severity.Error);
-            }
-
-            if (request is null) return;
-
-            IsBusy = true;
-            try
-            {
-                var response = await Handler.GetByIdAsync(request);
-                if (response is { IsSuccess: true, Data: not null })
-                {
-                    InputModel = response.Data;
-                }
-                else
-                {
-                    Snackbar.Add(response.Message, Severity.Error);
-                }
-            }
-            catch (Exception e)
-            {
-                Snackbar.Add(e.Message, Severity.Error);
-            }
-            finally
-            {
-                IsBusy = false;
-            }
+            if (Id != 0)
+                await LoadPropertyAsync();
+            else
+                RedirectToCreateProperty();
         }
-        else
+        catch (Exception e)
         {
-            InputModel.PropertyType = EPropertyType.Casa;
-            NavigationManager.NavigateTo("/imoveis/adicionar");
+            Snackbar.Add(e.Message, Severity.Error);
+        }
+        finally
+        {
+            IsBusy = false;
         }
     }
 

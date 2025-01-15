@@ -16,55 +16,70 @@
     <MudItem lg="4" xs="12" sm="6">
         <MudTextField Label="Logradouro"
                       @bind-Value="InputModel.Street"
-                      For="@(() => InputModel.Street)" />
+                      For="@(() => InputModel.Street)"
+                      InputType="InputType.Text" />
     </MudItem>
 
     <MudItem lg="2" xs="12" sm="6">
         <MudTextField Label="Número"
                       @bind-Value="InputModel.Number"
                       For="@(() => InputModel.Number)"
+                      InputType="InputType.Text"
                       MaxLength="10" />
     </MudItem>
 
     <MudItem lg="4" xs="12" sm="6">
         <MudTextField Label="Complemento"
                       @bind-Value="InputModel.Complement"
-                      For="@(() => InputModel.Complement)" />
+                      For="@(() => InputModel.Complement)" 
+                      InputType="InputType.Text" />
     </MudItem>
 
     <MudItem lg="3" xs="12" sm="6">
         <MudTextField Label="Bairro"
                       @bind-Value="InputModel.Neighborhood"
-                      For="@(() => InputModel.Neighborhood)" />
+                      For="@(() => InputModel.Neighborhood)" 
+                      InputType="InputType.Text" />
     </MudItem>
 
     <MudItem lg="3" xs="12" sm="6">
         <MudTextField Label="Cidade"
                       @bind-Value="InputModel.City"
-                      For="@(() => InputModel.City)" />
+                      For="@(() => InputModel.City)" 
+                      InputType="InputType.Text" />
     </MudItem>
 
     <MudItem lg="3" xs="12" sm="6">
         <MudTextField Label="Estado"
                       @bind-Value="InputModel.State"
-                      For="@(() => InputModel.State)" />
+                      For="@(() => InputModel.State)" 
+                      InputType="InputType.Text" />
     </MudItem>
 
     <MudItem lg="3" xs="12" sm="6">
         <MudTextField Label="País"
                       @bind-Value="InputModel.Country"
-                      For="@(() => InputModel.Country)" />
+                      For="@(() => InputModel.Country)" 
+                      InputType="InputType.Text" />
     </MudItem>
 </MudGrid>
 
 @code
 {
     [Parameter, EditorRequired]
-    public Address InputModel { get; set; } = new();
+    public Address InputModel { get; set; } = null!;
 
-    [Inject] public IViaCepService CepService { get; set; } = null!;
+    [Parameter]
+    public EventCallback<Address> InputModelChanged { get; set; }
 
-    [Inject] public ISnackbar Snackbar { get; set; } = null!;
+    [CascadingParameter]
+    public EditContext CurrentEditContext { get; set; } = null!;
+
+    [Inject]
+    public IViaCepService CepService { get; set; } = null!;
+
+    [Inject]
+    public ISnackbar Snackbar { get; set; } = null!;
 
     public async Task SearchAddressAsync(FocusEventArgs focusEventArgs)
     {
@@ -76,12 +91,25 @@
             var result = await CepService.GetAddressAsync(InputModel.ZipCode);
             if (result.Data is null || !result.IsSuccess) return;
 
-            InputModel = result.Data;
+            InputModel.Street = result.Data.Street;
+            InputModel.Number = result.Data.Number;
+            InputModel.Complement = result.Data.Complement;
+            InputModel.Neighborhood = result.Data.Neighborhood;
+            InputModel.City = result.Data.City;
+            InputModel.State = result.Data.State;
+            InputModel.Country = result.Data.Country;
+            await InputModelChanged.InvokeAsync(InputModel);
             StateHasChanged();
         }
         catch (Exception e)
         {
             Snackbar.Add(e.Message, Severity.Error);
         }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnParametersSetAsync();
+        await base.OnInitializedAsync();
     }
 }

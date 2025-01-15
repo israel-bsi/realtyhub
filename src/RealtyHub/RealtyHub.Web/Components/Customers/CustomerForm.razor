@@ -41,13 +41,15 @@ else
                                   ErrorText="@ErrorText"
                                   Error="Error"
                                   Immediate="true" 
-                                  @key="DocumentCustomerMask" />
+                                  @key="DocumentCustomerMask"
+                                  InputType="InputType.Text" />
                 </MudItem>
 
                 <MudItem lg="4" xs="12" sm="6">
                     <MudTextField Label="@(InputModel.CustomerType == ECustomerType.Individual ? "Nome" : "Razão Social")"
                                   @bind-Value="InputModel.Name"
-                                  For="@(() => InputModel.Name)" />
+                                  For="@(() => InputModel.Name)"
+                                  InputType="InputType.Text" />
                 </MudItem>
 
                 <MudItem lg="3" xs="12" sm="6">
@@ -56,13 +58,15 @@ else
                         <MudTextField Label="Rg"
                                       @bind-Value="InputModel.Rg"
                                       For="@(() => InputModel.Rg)"
-                                      MaxLength="20" />
+                                      MaxLength="20"
+                                      InputType="InputType.Text" />
                     }
                     else
                     {
                         <MudTextField Label="Nome Fantasia"
                                       @bind-Value="InputModel.BusinessName"
-                                      For="@(() => InputModel.BusinessName)" />
+                                      For="@(() => InputModel.BusinessName)"
+                                      InputType="InputType.Text" />
                     }
                 </MudItem>
 
@@ -70,17 +74,19 @@ else
                     <MudTextField Label="Telefone"
                                   @bind-Value="InputModel.Phone"
                                   For="@(() => InputModel.Phone)"
-                                  Mask="@Utility.Masks.Phone" />
+                                  Mask="@Utility.Masks.Phone"
+                                  InputType="InputType.Text" />
                 </MudItem>
 
                 <MudItem lg="4" xs="12" sm="6">
                     <MudTextField Label="E-mail"
                                   @bind-Value="InputModel.Email"
-                                  For="@(() => InputModel.Email)" />
+                                  For="@(() => InputModel.Email)"
+                                  InputType="InputType.Email" />
                 </MudItem>
             </MudGrid>
             
-            <AddressComponent InputModel="InputModel.Address"/>
+            <AddressComponent @bind-InputModel="InputModel.Address" />
 
             <MudButton ButtonType="ButtonType.Submit"
                        Variant="Variant.Filled"

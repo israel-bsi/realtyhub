@@ -1,7 +1,7 @@
 ﻿@using System.Reflection
 @typeparam TEnum
 
-<MudSelect T="TEnum" Label="@Label" @bind-Value="SelectedValue" Disabled="@Disabled">
+<MudSelect T="TEnum" Label="@Label" Value="SelectedValue" ValueChanged="OnSelectedValueChanged">
     @foreach (var value in Enum.GetValues(typeof(TEnum)).Cast<TEnum>())
     {
         <MudSelectItem Value="value">@GetDisplayName(value)</MudSelectItem>
@@ -12,12 +12,18 @@
     [Parameter] public required TEnum SelectedValue { get; set; }
     [Parameter] public EventCallback<TEnum> SelectedValueChanged { get; set; }
     [Parameter] public string Label { get; set; } = string.Empty;
-    [Parameter] public bool Disabled { get; set; }
 
     private string GetDisplayName(TEnum value)
     {
         var field = value!.GetType().GetField(value.ToString() ?? string.Empty);
         var displayAttribute = field?.GetCustomAttribute<DisplayAttribute>();
         return displayAttribute?.Name ?? value.ToString()!;
+    }
+
+    private async Task OnSelectedValueChanged(TEnum value)
+    {
+        SelectedValue = value;
+        await SelectedValueChanged.InvokeAsync(value);
+        StateHasChanged();
     }
 }

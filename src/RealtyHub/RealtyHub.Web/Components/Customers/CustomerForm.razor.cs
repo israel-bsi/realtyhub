@@ -23,7 +23,7 @@ public partial class CustomerFormComponent : ComponentBase
 
     #region Properties
     public EditContext EditContext = null!;
-    private ValidationMessageStore MessageStore = null!;
+    private ValidationMessageStore? MessageStore;
     public string Operation => Id != 0
         ? "Editar" : "Cadastrar";
     public bool IsBusy { get; set; }
@@ -92,7 +92,7 @@ public partial class CustomerFormComponent : ComponentBase
         => ValidateDocument();
     public void ValidateDocument()
     {
-        MessageStore.Clear();
+        MessageStore?.Clear();
         if (InputModel.CustomerType is ECustomerType.Individual)
         {
             ErrorText =
@@ -108,7 +108,7 @@ public partial class CustomerFormComponent : ComponentBase
 
         if (string.IsNullOrEmpty(ErrorText)) return;
 
-        MessageStore.Add(() => InputModel.DocumentNumber, ErrorText);
+        MessageStore?.Add(() => InputModel.DocumentNumber, ErrorText);
         EditContext.NotifyValidationStateChanged();
     }
     public void OnCustomerTypeChanged(ECustomerType newCustomerType)
@@ -121,65 +121,92 @@ public partial class CustomerFormComponent : ComponentBase
     {
         DocumentCustomerMask = customerType switch
         {
-            ECustomerType.Individual => Utility.Masks.Cnpj,
+            ECustomerType.Individual => Utility.Masks.Cpf,
             ECustomerType.Business => Utility.Masks.Cnpj,
             _ => DocumentCustomerMask
         };
         StateHasChanged();
     }
 
+    private async Task LoadCustomerAsync()
+    {
+        GetCustomerByIdRequest? request = null;
+
+        try
+        {
+            request = new GetCustomerByIdRequest { Id = Id };
+        }
+        catch
+        {
+            Snackbar.Add("Parâmetro inválido", Severity.Error);
+        }
+
+        if (request is null) return;
+
+        var response = await Handler.GetByIdAsync(request);
+        if (response is { IsSuccess: true, Data: not null })
+        {
+            InputModel.Id = response.Data.Id;
+            InputModel.Name = response.Data.Name;
+            InputModel.Email = response.Data.Email;
+            InputModel.Phone = response.Data.Phone;
+            InputModel.DocumentNumber = response.Data.DocumentNumber;
+            InputModel.CustomerType = response.Data.CustomerType;
+            InputModel.Address.ZipCode = response.Data.Address.ZipCode;
+            InputModel.Address.Street = response.Data.Address.Street;
+            InputModel.Address.Number = response.Data.Address.Number;
+            InputModel.Address.Complement = response.Data.Address.Complement;
+            InputModel.Address.Neighborhood = response.Data.Address.Neighborhood;
+            InputModel.Address.City = response.Data.Address.City;
+            InputModel.Address.State = response.Data.Address.State;
+            InputModel.Address.Country = response.Data.Address.Country;
+            InputModel.Rg = response.Data.Rg;
+            InputModel.BusinessName = response.Data.BusinessName;
+            InputModel.IsActive = response.Data.IsActive;
+            InputModel.UserId = response.Data.UserId;
+        }
+        else
+        {
+            Snackbar.Add(response.Message, Severity.Error);
+            NavigationManager.NavigateTo("/clientes");
+        }
+        ValidateDocument();
+    }
+
+    private void RedirectToCreateCustomer()
+    {
+        InputModel.CustomerType = ECustomerType.Individual;
+        NavigationManager.NavigateTo("/clientes/adicionar");
+    }
+
+    private void ExecuteValidations()
+    {
+        EditContext = new EditContext(InputModel);
+        MessageStore = new ValidationMessageStore(EditContext);
+        ChangeDocumentMask(InputModel.CustomerType);
+    }
     #endregion
 
     #region Overrides
 
     protected override async Task OnInitializedAsync()
     {
-        EditContext = new EditContext(InputModel);
-        MessageStore = new ValidationMessageStore(EditContext);
-        if (Id != 0)
+        IsBusy = true;
+        try
         {
-            GetCustomerByIdRequest? request = null;
-
-            try
-            {
-                request = new GetCustomerByIdRequest { Id = Id };
-            }
-            catch
-            {
-                Snackbar.Add("Parâmetro inválido", Severity.Error);
-            }
-
-            if (request is null) return;
-
-            IsBusy = true;
-            try
-            {
-                var response = await Handler.GetByIdAsync(request);
-                if (response is { IsSuccess: true, Data: not null })
-                {
-                    InputModel = response.Data;
-                }
-                else
-                {
-                    Snackbar.Add(response.Message, Severity.Error);
-                    NavigationManager.NavigateTo("/clientes");
-                }
-            }
-            catch (Exception e)
-            {
-                Snackbar.Add(e.Message, Severity.Error);
-            }
-            finally
-            {
-                IsBusy = false;
-                ChangeDocumentMask(InputModel.CustomerType);
-                ValidateDocument();
-            }
+            if (Id != 0)
+                await LoadCustomerAsync();
+            else
+                RedirectToCreateCustomer();
         }
-        else
+        catch (Exception e)
         {
-            InputModel.CustomerType = ECustomerType.Individual;
-            NavigationManager.NavigateTo("/clientes/adicionar");
+            Snackbar.Add(e.Message, Severity.Error);
+        }
+        finally
+        {
+            ExecuteValidations();
+            IsBusy = false;
         }
     }
 

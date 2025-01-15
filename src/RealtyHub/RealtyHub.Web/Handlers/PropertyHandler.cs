@@ -18,8 +18,7 @@ public class PropertyHandler(IHttpClientFactory httpClientFactory) : IPropertyHa
         if (!result.IsSuccessStatusCode)
             return new Response<Property?>(null, 400, data?.Message);
 
-        return await result.Content.ReadFromJsonAsync<Response<Property?>>()
-               ?? new Response<Property?>(null, 400, "Falha ao criar o imóvel");
+        return data ?? new Response<Property?>(null, 400, "Falha ao criar o imóvel");
     }
 
     public async Task<Response<Property?>> UpdateAsync(UpdatePropertyRequest request)

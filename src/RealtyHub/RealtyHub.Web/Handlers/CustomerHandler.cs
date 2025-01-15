@@ -17,9 +17,8 @@ public class CustomerHandler(IHttpClientFactory httpClientFactory) : ICustomerHa
 
         if (!result.IsSuccessStatusCode)
             return new Response<Customer?>(null, 400, data?.Message);
-        
-        return await result.Content.ReadFromJsonAsync<Response<Customer?>>()
-               ?? new Response<Customer?>(null, 400, "Falha ao criar o cliente");
+
+        return data ?? new Response<Customer?>(null, 400, "Falha ao criar o cliente");
     }
 
     public async Task<Response<Customer?>> UpdateAsync(UpdateCustomerRequest request)
