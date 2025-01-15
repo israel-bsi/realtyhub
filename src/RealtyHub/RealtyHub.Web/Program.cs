@@ -10,6 +10,7 @@ using RealtyHub.Web;
 using RealtyHub.Web.Handlers;
 using RealtyHub.Web.Security;
 using RealtyHub.Web.Services;
+using MudBlazor.Translations;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
@@ -24,6 +25,7 @@ builder.Services.AddScoped<AuthenticationStateProvider, CookieAuthenticationStat
 builder.Services.AddScoped(x =>
     (ICookieAuthenticationStateProvider)x.GetRequiredService<AuthenticationStateProvider>());
 builder.Services.AddMudServices();
+builder.Services.AddMudTranslations();
 builder.Services.AddBlazoredLocalStorage();
 
 builder.Services
@@ -37,7 +39,7 @@ builder.Services.AddTransient<IViaCepService, ViaCepService>();
 builder.Services.AddTransient<DocumentValidator>();
 
 builder.Services.AddLocalization();
-CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("pt-BR");
-CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("pt-BR");
+CultureInfo.DefaultThreadCurrentCulture = CultureInfo.CurrentCulture;
+CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.CurrentUICulture;
 
 await builder.Build().RunAsync();
