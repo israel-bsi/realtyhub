@@ -30,8 +30,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseStaticFiles(new StaticFileOptions
 {
-    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Sources", "Images")),
-    RequestPath = "/images"
+    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Sources", "Photos")),
+    RequestPath = "/photos"
 });
 app.UseExceptionHandler();
 app.UseCors(Configuration.CorsPolicyName);

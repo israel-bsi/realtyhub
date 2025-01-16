@@ -253,10 +253,11 @@ namespace RealtyHub.ApiService.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PropertyImage",
+                name: "PropertyPhotos",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
+                    Extension = table.Column<string>(type: "text", nullable: false),
                     PropertyId = table.Column<long>(type: "bigint", nullable: false),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false),
                     UserId = table.Column<string>(type: "text", nullable: false),
@@ -265,9 +266,9 @@ namespace RealtyHub.ApiService.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PropertyImage", x => x.Id);
+                    table.PrimaryKey("PK_PropertyPhotos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PropertyImage_Property_PropertyId",
+                        name: "FK_PropertyPhotos_Property_PropertyId",
                         column: x => x.PropertyId,
                         principalTable: "Property",
                         principalColumn: "Id",
@@ -415,8 +416,8 @@ namespace RealtyHub.ApiService.Migrations
                 column: "OfferId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PropertyImage_PropertyId",
-                table: "PropertyImage",
+                name: "IX_PropertyPhotos_PropertyId",
+                table: "PropertyPhotos",
                 column: "PropertyId");
 
             migrationBuilder.CreateIndex(
@@ -458,7 +459,7 @@ namespace RealtyHub.ApiService.Migrations
                 name: "Payment");
 
             migrationBuilder.DropTable(
-                name: "PropertyImage");
+                name: "PropertyPhotos");
 
             migrationBuilder.DropTable(
                 name: "Viewing");

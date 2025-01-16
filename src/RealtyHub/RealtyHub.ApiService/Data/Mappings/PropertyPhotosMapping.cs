@@ -4,13 +4,16 @@ using RealtyHub.Core.Models;
 
 namespace RealtyHub.ApiService.Data.Mappings;
 
-public class PropertyImageMapping : IEntityTypeConfiguration<PropertyImage>
+public class PropertyPhotosMapping : IEntityTypeConfiguration<PropertyPhoto>
 {
-    public void Configure(EntityTypeBuilder<PropertyImage> builder)
+    public void Configure(EntityTypeBuilder<PropertyPhoto> builder)
     {
-        builder.ToTable("PropertyImage");
+        builder.ToTable("PropertyPhotos");
 
         builder.HasKey(pi => pi.Id);
+
+        builder.Property(pi => pi.Extension)
+            .IsRequired();
 
         builder.Property(c => c.UserId)
             .IsRequired();

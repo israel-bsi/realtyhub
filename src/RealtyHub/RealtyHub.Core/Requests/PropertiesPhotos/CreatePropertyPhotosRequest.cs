@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using RealtyHub.Core.Models;
 
-namespace RealtyHub.Core.Requests.PropertiesImages;
+namespace RealtyHub.Core.Requests.PropertiesPhotos;
 
-public class CreatePropertyImageRequest : Request
+public class CreatePropertyPhotosRequest : Request
 {
     public long PropertyId { get; set; }
     public HttpRequest? HttpRequest { get; set; }

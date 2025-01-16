@@ -97,7 +97,7 @@ public class PropertyMapping : IEntityTypeConfiguration<Property>
                 .HasMaxLength(80);
         });
 
-        builder.HasMany(p => p.PropertyImages)
+        builder.HasMany(p => p.PropertyPhotos)
             .WithOne(pi => pi.Property)
             .HasForeignKey(pi => pi.PropertyId);
     }

@@ -29,7 +29,7 @@ public class UpdatePropertyRequest : Request
     public string TransactionsDetails { get; set; } = string.Empty;
     [Required(ErrorMessage = "Endereço é um campo obrigatório")]
     public Address Address { get; set; } = new();
-    public List<PropertyImage> PropertyImage { get; set; } = [];
+    public List<PropertyPhoto> PropertyPhotos { get; set; } = [];
     [Required(ErrorMessage = "Propriedade nova é um campo obrigatório")]
     public bool IsNew { get; set; }
 
@@ -47,7 +47,7 @@ public class UpdatePropertyRequest : Request
             Area = request.Area,
             TransactionsDetails = request.TransactionsDetails,
             Address = request.Address,
-            PropertyImage = request.PropertyImages,
+            PropertyPhotos = request.PropertyPhotos,
             IsNew = request.IsNew
         };
 }

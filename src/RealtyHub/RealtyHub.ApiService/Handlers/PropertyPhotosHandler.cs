@@ -2,19 +2,19 @@
 using RealtyHub.ApiService.Data;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
-using RealtyHub.Core.Requests.PropertiesImages;
+using RealtyHub.Core.Requests.PropertiesPhotos;
 using RealtyHub.Core.Responses;
 
 namespace RealtyHub.ApiService.Handlers;
 
-public class PropertyImageHandler(AppDbContext context) : IPropertyImageHandler
+public class PropertyPhotosHandler(AppDbContext context) : IPropertyPhotosHandler
 {
-    public async Task<Response<PropertyImage?>> CreateAsync(CreatePropertyImageRequest request)
+    public async Task<Response<PropertyPhoto?>> CreateAsync(CreatePropertyPhotosRequest request)
     {
         try
         {
             if (request.HttpRequest is null)
-                return new Response<PropertyImage?>(null, 400,
+                return new Response<PropertyPhoto?>(null, 400,
                     "Requisição inválida");
 
             var property = await context
@@ -26,89 +26,90 @@ public class PropertyImageHandler(AppDbContext context) : IPropertyImageHandler
                     && p.IsActive);
 
             if (property is null)
-                return new Response<PropertyImage?>(null, 404,
+                return new Response<PropertyPhoto?>(null, 404,
                     "Imóvel não encontrado");
 
             context.Attach(property);
 
             if (!request.HttpRequest.HasFormContentType)
-                return new Response<PropertyImage?>(null, 400,
+                return new Response<PropertyPhoto?>(null, 400,
                     "Conteúdo do tipo multipart/form-data esperado");
 
             var form = await request.HttpRequest.ReadFormAsync();
             var files = form.Files;
 
             if (files.Count == 0)
-                return new Response<PropertyImage?>(null, 400,
+                return new Response<PropertyPhoto?>(null, 400,
                     "Nenhum arquivo encontrado");
 
             foreach (var file in files)
             {
-                var idImage = Guid.NewGuid().ToString();
+                var idPhoto = Guid.NewGuid().ToString();
                 var extension = Path.GetExtension(file.FileName);
-                var fileName = $"{idImage}{extension}";
-                var fullFileName = Path.Combine(Directory.GetCurrentDirectory(), "Sources", "Images", fileName);
+                var fileName = $"{idPhoto}{extension}";
+                var fullFileName = Path.Combine(Directory.GetCurrentDirectory(), "Sources", "Photos", fileName);
 
                 await using var stream = new FileStream(fullFileName, FileMode.Create);
                 await file.CopyToAsync(stream);
 
-                var propertyImage = new PropertyImage
+                var propertyPhoto = new PropertyPhoto
                 {
-                    Id = idImage,
+                    Id = idPhoto,
+                    Extension = extension,
                     PropertyId = request.PropertyId,
                     Property = property,
                     IsActive = true,
                     UserId = request.UserId
                 };
 
-                context.PropertyImages.Add(propertyImage);
+                context.PropertyPhotos.Add(propertyPhoto);
             }
 
             await context.SaveChangesAsync();
 
-            return new Response<PropertyImage?>(null, 201);
+            return new Response<PropertyPhoto?>(null, 201);
         }
         catch (Exception e)
         {
-            return new Response<PropertyImage?>(null, 500, e.Message);
+            return new Response<PropertyPhoto?>(null, 500, e.Message);
         }
     }
 
-    public async Task<Response<PropertyImage?>> DeleteAsync(DeletePropertyImageRequest request)
+    public async Task<Response<PropertyPhoto?>> DeleteAsync(DeletePropertyPhotoRequest request)
     {
         try
         {
-            var propertyImage = await context
-                .PropertyImages
+            var propertyPhoto = await context
+                .PropertyPhotos
                 .FirstOrDefaultAsync(pi =>
-                    pi.Id == request.ImageId
+                    pi.Id == request.Id
                     && pi.UserId == request.UserId
                     && pi.IsActive);
 
-            if (propertyImage is null)
-                return new Response<PropertyImage?>(null, 404,
-                    "Imagem não encontrada");
+            if (propertyPhoto is null)
+                return new Response<PropertyPhoto?>(null, 404,
+                    "Foto não encontrada");
 
-            context.Attach(propertyImage);
+            context.Attach(propertyPhoto);
 
-            propertyImage.IsActive = false;
+            propertyPhoto.IsActive = false;
 
             await context.SaveChangesAsync();
 
-            return new Response<PropertyImage?>(null, 204);
+            return new Response<PropertyPhoto?>(null, 204);
         }
         catch (Exception e)
         {
-            return new Response<PropertyImage?>(null, 500, e.Message);
+            return new Response<PropertyPhoto?>(null, 500, e.Message);
         }
     }
 
-    public async Task<Response<List<PropertyImage>?>> GetAllByPropertyAsync(GetAllPropertyImagesByPropertyRequest request)
+    public async Task<Response<List<PropertyPhoto>?>> GetAllByPropertyAsync(GetAllPropertyPhotosByPropertyRequest request)
     {
         try
         {
-            var propertyImages = await context
-                .PropertyImages
+            var propertyPhotos = await context
+                .PropertyPhotos
                 .AsNoTracking()
                 .Where(pi =>
                     pi.PropertyId == request.PropertyId
@@ -116,11 +117,11 @@ public class PropertyImageHandler(AppDbContext context) : IPropertyImageHandler
                     && pi.IsActive)
                 .ToListAsync();
 
-            return new Response<List<PropertyImage>?>(propertyImages);
+            return new Response<List<PropertyPhoto>?>(propertyPhotos);
         }
         catch (Exception e)
         {
-            return new Response<List<PropertyImage>?>(null, 500, e.Message);
+            return new Response<List<PropertyPhoto>?>(null, 500, e.Message);
         }
     }
 }

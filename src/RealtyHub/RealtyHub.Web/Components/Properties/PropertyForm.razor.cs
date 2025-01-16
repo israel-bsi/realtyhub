@@ -5,7 +5,7 @@ using RealtyHub.Core.Enums;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.Properties;
-using RealtyHub.Core.Requests.PropertiesImages;
+using RealtyHub.Core.Requests.PropertiesPhotos;
 using RealtyHub.Core.Responses;
 
 namespace RealtyHub.Web.Components.Properties;
@@ -34,7 +34,7 @@ public partial class PropertyFormComponent : ComponentBase
     public ISnackbar Snackbar { get; set; } = null!;
 
     [Inject]
-    public IPropertyImageHandler PropertyImageHandler { get; set; } = null!;
+    public IPropertyPhotosHandler PropertyPhotosHandler { get; set; } = null!;
 
     [Inject]
     public IPropertyHandler PropertyHandler { get; set; } = null!;
@@ -62,14 +62,14 @@ public partial class PropertyFormComponent : ComponentBase
 
             if (result.IsSuccess)
             {
-                var request = new CreatePropertyImageRequest
+                var request = new CreatePropertyPhotosRequest
                 {
                     PropertyId = result.Data?.Id ?? 0,
                     FileBytes = SelectedFileBytes
                 };
-                var resultImages = await PropertyImageHandler.CreateAsync(request);
-                if (!resultImages.IsSuccess)
-                    Snackbar.Add(resultImages.Message ?? string.Empty, Severity.Error);
+                var resultPhotos = await PropertyPhotosHandler.CreateAsync(request);
+                if (!resultPhotos.IsSuccess)
+                    Snackbar.Add(resultPhotos.Message ?? string.Empty, Severity.Error);
 
                 Snackbar.Add(resultMessage, Severity.Success);
                 NavigationManager.NavigateTo("/imoveis");
@@ -124,7 +124,7 @@ public partial class PropertyFormComponent : ComponentBase
             InputModel.Address.State = response.Data.Address.State;
             InputModel.Address.Country = response.Data.Address.Country;
             InputModel.IsNew = response.Data.IsNew;
-            InputModel.PropertyImages = response.Data.PropertyImages;
+            InputModel.PropertyPhotos = response.Data.PropertyPhotos;
             InputModel.IsActive = response.Data.IsActive;
             InputModel.UserId = response.Data.UserId;
         }

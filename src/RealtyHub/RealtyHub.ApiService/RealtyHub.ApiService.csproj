@@ -30,7 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Sources\Images\" />
+    <Folder Include="Sources\Photos\" />
   </ItemGroup>
 
 </Project>

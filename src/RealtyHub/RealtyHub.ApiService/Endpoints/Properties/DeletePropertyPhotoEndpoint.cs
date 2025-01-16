@@ -1,32 +1,32 @@
 ﻿using RealtyHub.ApiService.Common.Api;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
-using RealtyHub.Core.Requests.PropertiesImages;
 using RealtyHub.Core.Responses;
 using System.Security.Claims;
+using RealtyHub.Core.Requests.PropertiesPhotos;
 
 namespace RealtyHub.ApiService.Endpoints.Properties;
-public class DeletePropertyImageEndpoint : IEndpoint
+public class DeletePropertyPhotoEndpoint : IEndpoint
 {
     public static void Map(IEndpointRouteBuilder app)
     {
-        app.MapDelete("/{propertyId:long}/images/{imageId}", HandlerAsync)
+        app.MapDelete("/{propertyId:long}/photos/{photoId}", HandlerAsync)
             .WithName("Properties: Delete Photos")
             .WithSummary("Exclui uma foto de um imóvel")
             .WithDescription("Exclui uma foto de um imóvel")
             .WithOrder(7)
-            .Produces<Response<PropertyImage?>>();
+            .Produces<Response<PropertyPhoto?>>();
     }
 
     private static async Task<IResult> HandlerAsync(
         long propertyId,
-        IPropertyImageHandler handler,
+        IPropertyPhotosHandler handler,
         ClaimsPrincipal user, 
-        string imageId)
+        string photoId)
     {
-        var request = new DeletePropertyImageRequest
+        var request = new DeletePropertyPhotoRequest
         {
-            ImageId = imageId,
+            Id = photoId,
             PropertyId = propertyId,
             UserId = user.Identity?.Name ?? string.Empty
         };

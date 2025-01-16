@@ -98,6 +98,6 @@ public static class BuilderExtension
         builder.Services.AddTransient<IOfferHandler, OfferHandler>();
         builder.Services.AddTransient<IContractHandler, ContractHandler>();
         builder.Services.AddTransient<IEmailService, EmailService>();
-        builder.Services.AddTransient<IPropertyImageHandler, PropertyImageHandler>();
+        builder.Services.AddTransient<IPropertyPhotosHandler, PropertyPhotosHandler>();
     }
 }
