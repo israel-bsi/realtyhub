@@ -6,6 +6,7 @@ public class PropertyPhoto : Entity
 {
     public string Id { get; set; } = string.Empty;
     public string Extension { get; set; } = string.Empty;
+    public string FullName { get; set; } = string.Empty;
     public long PropertyId { get; set; }
     public bool IsActive { get; set; }
     public string UserId { get; set; } = string.Empty;

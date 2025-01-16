@@ -1,4 +1,5 @@
-﻿@inherits PropertyFormComponent
+﻿@using RealtyHub.Core.Models
+@inherits PropertyFormComponent
 
 <PageTitle>@Operation Imóvel</PageTitle>
 
@@ -112,21 +113,37 @@ else
                 </MudItem>
             </MudGrid>
 
-            <MudGrid Class="mt-2 mb-2">
+            <MudGrid Class="mt-2 mb-2" Spacing="2">
                 <MudItem lg="4" xs="12" sm="6">
-                    <MudText Class="mb-2">Fotos</MudText>
-                    <MudFileUpload T="IReadOnlyList<IBrowserFile>" FilesChanged="OnFilesChange">
+                    <MudFileUpload T="IReadOnlyList<IBrowserFile>" FilesChanged="OnFilesChange" Class="mr-8 mb-4">
                         <ActivatorContent>
                             <MudButton Variant="Variant.Filled"
                                        Color="Color.Primary"
                                        StartIcon="@Icons.Material.Filled.AddAPhoto">
                                 Selecionar fotos
                             </MudButton>
-                            <MudText>Fotos selecionadas: @SelectedFileBytes.Count</MudText>
                         </ActivatorContent>
                     </MudFileUpload>
                 </MudItem>
             </MudGrid>
+            @if (PropertyPhotos.Count > 0)
+            {
+                <MudCarousel ItemsSource="@PropertyPhotos" 
+                             ShowArrows="true" 
+                             ShowBullets="true" 
+                             Class="mud-width-full"
+                             Style="width: 100%; height: 400px;"
+                             TData="PropertyPhoto">
+                    <ItemTemplate Context="photo">
+                        <MudImage Src="@($"{Configuration.BackendUrl}/photos/{photo.FullName}")"
+                                  Fluid="true" ObjectFit="ObjectFit.Cover" />
+                    </ItemTemplate>
+                </MudCarousel>
+            }
+            else
+            {
+                <p>Nenhuma foto disponível para este imóvel.</p>
+            }
 
             <AddressComponent @bind-InputModel="InputModel.Address" />
 

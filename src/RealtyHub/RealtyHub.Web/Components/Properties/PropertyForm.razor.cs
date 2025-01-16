@@ -24,7 +24,8 @@ public partial class PropertyFormComponent : ComponentBase
         ? "Editar" : "Cadastrar";
     public bool IsBusy { get; set; }
     public Property InputModel { get; set; } = new();
-    public List<FileData> SelectedFileBytes { get; set; } = new();
+    public List<FileData> SelectedFileBytes { get; set; } = [];
+    public List<PropertyPhoto> PropertyPhotos { get; set; } = [];
 
     #endregion
 
@@ -41,6 +42,9 @@ public partial class PropertyFormComponent : ComponentBase
 
     [Inject]
     public NavigationManager NavigationManager { get; set; } = null!;
+
+    [Inject]
+    public IDialogService DialogService { get; set; } = null!;
 
     #endregion
 
@@ -87,6 +91,17 @@ public partial class PropertyFormComponent : ComponentBase
         }
     }
 
+    public void RemovePhoto(PropertyPhoto propertyPhoto) 
+        => PropertyPhotos.Remove(propertyPhoto);
+
+    public async Task OpenImageDialog(PropertyPhoto propertyPhoto)
+    {
+        var photoUrl = $"{Configuration.BackendUrl}/photos/{propertyPhoto.FullName}";
+        var parameters = new DialogParameters { ["ImageUrl"] = photoUrl };
+        var options = new DialogOptions { CloseOnEscapeKey = true };
+        await DialogService.ShowAsync<ImageDialog>("Imagem Ampliada", parameters, options);
+    }
+
     private async Task LoadPropertyAsync()
     {
         GetPropertyByIdRequest? request = null;
@@ -127,6 +142,7 @@ public partial class PropertyFormComponent : ComponentBase
             InputModel.PropertyPhotos = response.Data.PropertyPhotos;
             InputModel.IsActive = response.Data.IsActive;
             InputModel.UserId = response.Data.UserId;
+            await LoadPhotos();
         }
         else
         {
@@ -155,6 +171,30 @@ public partial class PropertyFormComponent : ComponentBase
                 ContentType = file.ContentType,
                 Name = file.Name
             });
+        }
+    }
+
+    public List<string> PhotosSrc { get; set; } = [];
+    public async Task LoadPhotos()
+    {
+        try
+        {
+            var request = new GetAllPropertyPhotosByPropertyRequest { PropertyId = Id };
+            var response = await PropertyPhotosHandler.GetAllByPropertyAsync(request);
+            if (response is { IsSuccess: true, Data: not null })
+            {
+                PropertyPhotos = response.Data;
+                foreach (var photo in PropertyPhotos)
+                {
+                    PhotosSrc.Add($"{Configuration.BackendUrl}/photos/{photo.FullName}");
+                }
+            }
+            else
+                Snackbar.Add(response.Message ?? string.Empty, Severity.Error);
+        }
+        catch (Exception e)
+        {
+            Snackbar.Add(e.Message, Severity.Error);
         }
     }
     #endregion

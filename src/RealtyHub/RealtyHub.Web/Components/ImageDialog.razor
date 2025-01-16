@@ -1,0 +1,15 @@
+﻿<MudDialog>
+    <DialogContent>
+        <MudImage Src="@ImageUrl" Alt="Imagem Ampliada" Fluid="true" />
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="CloseDialog" Color="Color.Error">Fechar</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; } = null!;
+    [Parameter] public string ImageUrl { get; set; } = null!;
+
+    void CloseDialog() => MudDialog.Close();
+}

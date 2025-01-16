@@ -56,6 +56,7 @@ public class PropertyPhotosHandler(AppDbContext context) : IPropertyPhotosHandle
                 {
                     Id = idPhoto,
                     Extension = extension,
+                    FullName = idPhoto + extension,
                     PropertyId = request.PropertyId,
                     Property = property,
                     IsActive = true,
