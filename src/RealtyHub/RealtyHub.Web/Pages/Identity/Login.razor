@@ -5,11 +5,11 @@
 <PageTitle>RealtyHub - Entrar</PageTitle>
 
 <MudGrid Justify="Justify.Center">
-    <MudItem xs="12" sm="12" md="8" lg="6" xl="6" xxl="6"> 
+    <MudItem xs="12" sm="12" md="8" lg="6" xl="6" xxl="6">
         <MudPaper Class="mud-width-full pa-8">
-            <div class ="d-flex justify-center pb-8 pt-8">
-                <img src="Img/logo-branco.png" 
-                     alt="RealtyHub - Portal Imobiliário" 
+            <div class="d-flex justify-center pb-8 pt-8">
+                <img src="Img/logo-branco.png"
+                     alt="RealtyHub - Portal Imobiliário"
                      width="200" />
             </div>
             <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
@@ -19,29 +19,43 @@
                               Label="E-mail"
                               InputType="InputType.Email"
                               For="@(() => InputModel.Email)"
-                              @bind-Value="@InputModel.Email" 
-                              Class="mb-4"/>
+                              @bind-Value="@InputModel.Email"
+                              Class="mb-4" 
+                              AdornmentIcon="@Icons.Material.Filled.Email"
+                              Adornment="Adornment.Start" />
 
                 <MudTextField T="string"
                               Label="Senha"
                               InputType="InputType.Password"
                               For="@(() => InputModel.Password)"
-                              @bind-Value="@InputModel.Password" 
-                              Class="mb-4" />
-                
+                              @bind-Value="@InputModel.Password"
+                              Class="mb-4" 
+                              AdornmentIcon="@Icons.Material.Filled.Password"
+                              Adornment="Adornment.Start" />
+
                 <div class="d-flex mt-8">
                     @if (IsBusy)
                     {
-                        <MudProgressCircular Color="Color.Info" Indeterminate="true"/>
+                        <MudProgressCircular Color="Color.Info" Indeterminate="true" />
                     }
                     else
                     {
-                        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary">Login</MudButton>
+                        <MudButton ButtonType="ButtonType.Submit"
+                                   Variant="Variant.Filled"
+                                   Color="Color.Primary"
+                                   StartIcon="@Icons.Material.Filled.Login">
+                            Login
+                        </MudButton>
                         <MudSpacer />
-                        <MudButton Href="/comecar" Variant="Variant.Filled" Color="Color.Primary">Quero me cadastrar</MudButton>
+                        <MudButton Href="/comecar"
+                                   Variant="Variant.Filled"
+                                   Color="Color.Primary" 
+                                   StartIcon="@Icons.Material.Filled.AppRegistration">
+                            Quero me cadastrar
+                        </MudButton>
                     }
                 </div>
-            </EditForm>   
+            </EditForm>
         </MudPaper>
     </MudItem>
 </MudGrid>

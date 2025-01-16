@@ -24,14 +24,22 @@ else
 
             <MudGrid>
                 <MudItem>
-                    <MudRadioGroup T="ECustomerType" Value="InputModel.CustomerType" ValueChanged="OnCustomerTypeChanged">
-                        <MudRadio Value="ECustomerType.Individual">Pessoa Física</MudRadio>
-                        <MudRadio Value="ECustomerType.Business">Pessoa Jurídica</MudRadio>
+                    <MudRadioGroup Class="flex-center" T="ECustomerType" Value="InputModel.CustomerType" ValueChanged="OnCustomerTypeChanged">
+                        <div style="display: flex;">
+                            <div class="flex-center">
+                                <MudIcon Icon="@Icons.Material.Filled.Person"></MudIcon>
+                                <MudRadio Value="ECustomerType.Individual">Pessoa Física</MudRadio>
+                            </div>
+                            <div class="flex-center">
+                                <MudIcon Icon="@Icons.Material.Filled.Business"></MudIcon>
+                                <MudRadio Value="ECustomerType.Business">Pessoa Jurídica</MudRadio>
+                            </div>
+                        </div>
                     </MudRadioGroup>
                 </MudItem>
             </MudGrid>
 
-            <MudGrid>
+            <MudGrid Class="mt-2">
                 <MudItem lg="2" xs="12" sm="6">
                     <MudTextField Label="@DocumentType"
                                   @bind-Value="InputModel.DocumentNumber"
@@ -40,13 +48,14 @@ else
                                   OnBlur="OnBlurDocumentTextField"
                                   ErrorText="@ErrorText"
                                   Error="Error"
-                                  Immediate="true" 
+                                  Immediate="true"
                                   @key="DocumentCustomerMask"
                                   InputType="InputType.Text" />
                 </MudItem>
 
                 <MudItem lg="4" xs="12" sm="6">
-                    <MudTextField Label="@(InputModel.CustomerType == ECustomerType.Individual ? "Nome" : "Razão Social")"
+                    <MudTextField Label="@(InputModel.CustomerType ==
+                                           ECustomerType.Individual ? "Nome" : "Razão Social")"
                                   @bind-Value="InputModel.Name"
                                   For="@(() => InputModel.Name)"
                                   InputType="InputType.Text" />
@@ -85,13 +94,14 @@ else
                                   InputType="InputType.Email" />
                 </MudItem>
             </MudGrid>
-            
+
             <AddressComponent @bind-InputModel="InputModel.Address" />
 
             <MudButton ButtonType="ButtonType.Submit"
                        Variant="Variant.Filled"
                        Color="Color.Primary"
-                       Class="mt-6">
+                       Class="mt-6"
+                       StartIcon="@Icons.Material.Filled.Save">
                 Salvar
             </MudButton>
         </EditForm>

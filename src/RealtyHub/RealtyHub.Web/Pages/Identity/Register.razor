@@ -20,28 +20,36 @@
                               InputType="InputType.Text"
                               For="@(() => InputModel.GivenName)"
                               @bind-Value="@InputModel.GivenName"
-                              Class="mb-4" />
+                              Class="mb-4"
+                              AdornmentIcon="@Icons.Material.Filled.Person"
+                              Adornment="Adornment.Start" />
 
                 <MudTextField T="string"
                               Label="Creci"
                               InputType="InputType.Text"
                               For="@(() => InputModel.Creci)"
                               @bind-Value="@InputModel.Creci"
-                              Class="mb-4" />
+                              Class="mb-4"
+                              AdornmentIcon="@Icons.Material.Filled.AppRegistration"
+                              Adornment="Adornment.Start" />
 
                 <MudTextField T="string"
                               Label="E-mail"
                               InputType="InputType.Email"
                               For="@(() => InputModel.Email)"
-                              @bind-Value="@InputModel.Email" 
-                              Class="mb-4" />
+                              @bind-Value="@InputModel.Email"
+                              Class="mb-4"
+                              AdornmentIcon="@Icons.Material.Filled.Email"
+                              Adornment="Adornment.Start" />
 
                 <MudTextField T="string"
                               Label="Senha"
                               InputType="InputType.Password"
                               For="@(() => InputModel.Password)"
-                              @bind-Value="@InputModel.Password" 
-                              Class="mb-4" />
+                              @bind-Value="@InputModel.Password"
+                              Class="mb-4"
+                              AdornmentIcon="@Icons.Material.Filled.Password"
+                              Adornment="Adornment.Start" />
 
                 <MudTextField T="string"
                               Label="Confirmar Senha"
@@ -50,8 +58,10 @@
                               @bind-Value="@InputModel.ConfirmPassword"
                               OnBlur="IsPasswordEqual"
                               Error="Error"
-                              ErrorText="@ErrorText" 
-                              Class="mb-4" />
+                              ErrorText="@ErrorText"
+                              Class="mb-4" 
+                              AdornmentIcon="@Icons.Material.Filled.Password"
+                              Adornment="Adornment.Start" />
 
                 <div class="d-flex mt-8">
                     @if (IsBusy)
@@ -60,9 +70,19 @@
                     }
                     else
                     {
-                        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary">Começar</MudButton>
+                        <MudButton ButtonType="ButtonType.Submit"
+                                   Variant="Variant.Filled"
+                                   Color="Color.Primary"
+                                   StartIcon="@Icons.Material.Filled.Start">
+                            Começar
+                        </MudButton>
                         <MudSpacer />
-                        <MudButton Href="/login" Variant="Variant.Filled" Color="Color.Primary">Já tenho uma conta</MudButton>
+                        <MudButton Href="/login"
+                                   Variant="Variant.Filled"
+                                   Color="Color.Primary" 
+                                   StartIcon="@Icons.Material.Filled.Login">
+                            Já tenho uma conta
+                        </MudButton>
                     }
 
                 </div>

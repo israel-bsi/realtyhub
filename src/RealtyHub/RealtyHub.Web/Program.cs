@@ -35,6 +35,7 @@ builder.Services
 builder.Services.AddTransient<IAccountHandler, AccountHandler>();
 builder.Services.AddTransient<ICustomerHandler, CustomerHandler>();
 builder.Services.AddTransient<IPropertyHandler, PropertyHandler>();
+builder.Services.AddTransient<IPropertyImageHandler, PropertyImageHandler>();
 builder.Services.AddTransient<IViaCepService, ViaCepService>();
 builder.Services.AddTransient<DocumentValidator>();
 

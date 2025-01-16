@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 using RealtyHub.ApiService.Common.Api;
-using RealtyHub.ApiService.Handlers;
+using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.PropertiesImages;
 using RealtyHub.Core.Responses;
@@ -22,7 +22,7 @@ public class CreatePropertyImagesEndpoint : IEndpoint
     private static async Task<IResult> HandlerAsync(
         HttpRequest httpRequest,
         long id,
-        PropertyImageHandler handler,
+        IPropertyImageHandler handler,
         ClaimsPrincipal user)
     {
         var request = new CreatePropertyImageRequest

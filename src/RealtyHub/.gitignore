@@ -38,6 +38,7 @@ bld/
 # Ignora todas as pastas bin e obj no repositório
 **/bin/
 **/obj/
+**/Images/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/

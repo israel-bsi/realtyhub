@@ -1,12 +1,11 @@
-﻿using System.Net.Http;
-using System.Net.Http.Headers;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
 using RealtyHub.Core.Enums;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.Properties;
+using RealtyHub.Core.Requests.PropertiesImages;
 using RealtyHub.Core.Responses;
 
 namespace RealtyHub.Web.Components.Properties;
@@ -25,7 +24,7 @@ public partial class PropertyFormComponent : ComponentBase
         ? "Editar" : "Cadastrar";
     public bool IsBusy { get; set; }
     public Property InputModel { get; set; } = new();
-    public List<IBrowserFile> Files = [];
+    public List<FileData> SelectedFileBytes { get; set; } = new();
 
     #endregion
 
@@ -35,7 +34,10 @@ public partial class PropertyFormComponent : ComponentBase
     public ISnackbar Snackbar { get; set; } = null!;
 
     [Inject]
-    public IPropertyHandler Handler { get; set; } = null!;
+    public IPropertyImageHandler PropertyImageHandler { get; set; } = null!;
+
+    [Inject]
+    public IPropertyHandler PropertyHandler { get; set; } = null!;
 
     [Inject]
     public NavigationManager NavigationManager { get; set; } = null!;
@@ -52,15 +54,23 @@ public partial class PropertyFormComponent : ComponentBase
             Response<Property?> result;
 
             if (InputModel.Id > 0)
-                result = await Handler.UpdateAsync(InputModel);
+                result = await PropertyHandler.UpdateAsync(InputModel);
             else
-                result = await Handler.CreateAsync(InputModel);
+                result = await PropertyHandler.CreateAsync(InputModel);
 
-            await UploadPhotosAsync();
             var resultMessage = result.Message ?? string.Empty;
 
             if (result.IsSuccess)
             {
+                var request = new CreatePropertyImageRequest
+                {
+                    PropertyId = result.Data?.Id ?? 0,
+                    FileBytes = SelectedFileBytes
+                };
+                var resultImages = await PropertyImageHandler.CreateAsync(request);
+                if (!resultImages.IsSuccess)
+                    Snackbar.Add(resultImages.Message ?? string.Empty, Severity.Error);
+
                 Snackbar.Add(resultMessage, Severity.Success);
                 NavigationManager.NavigateTo("/imoveis");
             }
@@ -92,7 +102,7 @@ public partial class PropertyFormComponent : ComponentBase
 
         if (request is null) return;
 
-        var response = await Handler.GetByIdAsync(request);
+        var response = await PropertyHandler.GetByIdAsync(request);
         if (response is { IsSuccess: true, Data: not null })
         {
             InputModel.Id = response.Data.Id;
@@ -136,36 +146,15 @@ public partial class PropertyFormComponent : ComponentBase
         if (files is null) return;
         foreach (var file in files)
         {
-            Files.Add(file);
-        }
+            using var ms = new MemoryStream();
+            await file.OpenReadStream(long.MaxValue).CopyToAsync(ms);
 
-        await UploadPhotosAsync();
-    }
-    [Inject]
-    public IHttpClientFactory HttpClientFactory { get; set; } = null!;
-    private async Task UploadPhotosAsync()
-    {
-        using var content = new MultipartFormDataContent();
-        foreach (var file in Files)
-        {
-            var fileContent = new StreamContent(file.OpenReadStream(long.MaxValue));
-            fileContent.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType);
-            content.Add(fileContent, "photos", file.Name);
-        }
-
-        var client = HttpClientFactory.CreateClient(Configuration.HttpClientName);
-        var url = $"/v1/properties/{InputModel.Id}/images";
-        var response = await client.PostAsync(url, content);
-
-        if (response.IsSuccessStatusCode)
-        {
-            Snackbar.Add("Imagens enviadas com sucesso", Severity.Success);
-            await LoadPropertyAsync();
-        }
-        else
-        {
-            Snackbar.Add("Erro ao enviar imagens", Severity.Error);
-            Snackbar.Add(await response.Content.ReadAsStringAsync(), Severity.Error);
+            SelectedFileBytes.Add(new FileData
+            {
+                Content = ms.ToArray(),
+                ContentType = file.ContentType,
+                Name = file.Name
+            });
         }
     }
     #endregion
@@ -194,3 +183,4 @@ public partial class PropertyFormComponent : ComponentBase
 
     #endregion
 }
+

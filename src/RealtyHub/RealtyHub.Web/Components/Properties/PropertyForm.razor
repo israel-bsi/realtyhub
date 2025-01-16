@@ -22,7 +22,7 @@ else
 
             <MudText Class="mb-6" Typo="Typo.h6">Dados do Imóvel</MudText>
 
-            <MudGrid>
+            <MudGrid Class="mb-4">
                 <MudItem lg="2" xs="12" sm="6">
                     <EnumSelect TEnum="EPropertyType"
                                 Label="Tipo do Imóvel"
@@ -65,6 +65,15 @@ else
                                   For="@(() => InputModel.Price)" />
                 </MudItem>
 
+                <MudItem lg="8" xs="12" sm="6">
+                    <MudTextField Label="Detalhes da transação"
+                                  @bind-Value="InputModel.TransactionsDetails"
+                                  For="@(() => InputModel.TransactionsDetails)"
+                                  InputType="InputType.Text" />
+                </MudItem>
+            </MudGrid>
+
+            <MudGrid Class="mt-1">
                 <MudItem lg="1" xs="12" sm="6">
                     <MudNumericField Label="Quartos"
                                      @bind-Value="InputModel.Bedroom"
@@ -101,27 +110,19 @@ else
                                      Max="9999999"
                                      Min="1" />
                 </MudItem>
-
-                <MudItem lg="4" xs="12" sm="6">
-                    <MudTextField Label="Detalhes da transação"
-                                  @bind-Value="InputModel.TransactionsDetails"
-                                  For="@(() => InputModel.TransactionsDetails)"
-                                  InputType="InputType.Text" />
-                </MudItem>
-
             </MudGrid>
-            
-            <MudGrid Class="mt-4 mb-4">
+
+            <MudGrid Class="mt-2 mb-2">
                 <MudItem lg="4" xs="12" sm="6">
                     <MudText Class="mb-2">Imagens</MudText>
                     <MudFileUpload T="IReadOnlyList<IBrowserFile>" FilesChanged="OnFilesChange">
                         <ActivatorContent>
-                            <MudButton Variant="Variant.Filled" 
-                                       Color="Color.Primary" 
-                                       StartIcon="@Icons.Material.Filled.UploadFile">
-                                Upload Files
+                            <MudButton Variant="Variant.Filled"
+                                       Color="Color.Primary"
+                                       StartIcon="@Icons.Material.Filled.AddAPhoto">
+                                Selecionar fotos
                             </MudButton>
-                            <MudText>Imagens selecionadas: @Files.Count</MudText>
+                            <MudText>Imagens selecionadas: @SelectedFileBytes.Count</MudText>
                         </ActivatorContent>
                     </MudFileUpload>
                 </MudItem>
@@ -132,7 +133,8 @@ else
             <MudButton ButtonType="ButtonType.Submit"
                        Variant="Variant.Filled"
                        Color="Color.Primary"
-                       Class="mt-6">
+                       Class="mt-6"
+                       StartIcon="@Icons.Material.Filled.Save">
                 Salvar
             </MudButton>
         </EditForm>

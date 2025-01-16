@@ -75,3 +75,8 @@
 code {
     color: #c02d76;
 }
+
+.flex-center {
+    display: flex;
+    align-items: center;
+}

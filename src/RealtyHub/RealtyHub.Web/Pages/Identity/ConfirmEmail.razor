@@ -10,12 +10,15 @@
             <MudText>
                 @Status
             </MudText>
+            
+            <MudIcon Icon="@(Success ? Icons.Material.Filled.CheckCircle : Icons.Material.Filled.Error)"></MudIcon>
 
             <div class="d-flex mt-8">
                 <MudButton ButtonType="ButtonType.Submit"
                            Href="/login"
                            Variant="Variant.Filled"
-                           Color="Color.Primary">
+                           Color="Color.Primary"
+                           StartIcon="@Icons.Material.Filled.Home">
                     Ir para página de login
                 </MudButton>
             </div>

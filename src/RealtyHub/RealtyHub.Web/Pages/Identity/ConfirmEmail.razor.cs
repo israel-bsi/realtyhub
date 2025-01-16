@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using MudBlazor;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models.Account;
 
@@ -19,6 +20,7 @@ public partial class ConfirmEmailPage : ComponentBase
 
     #region Properties
     public string Status { get; set; } = string.Empty;
+    public bool Success { get; set; }
     #endregion
 
     #region Services
@@ -40,6 +42,7 @@ public partial class ConfirmEmailPage : ComponentBase
             };
 
             var result = await AccountHandler.ConfirmEmail(request);
+            Success = result.IsSuccess;
             Status = result.Message!;
         }
         catch (Exception e)

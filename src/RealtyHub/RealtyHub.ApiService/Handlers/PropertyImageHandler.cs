@@ -1,16 +1,36 @@
-﻿using RealtyHub.ApiService.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using RealtyHub.ApiService.Data;
+using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.PropertiesImages;
 using RealtyHub.Core.Responses;
 
 namespace RealtyHub.ApiService.Handlers;
 
-public class PropertyImageHandler(AppDbContext context)
+public class PropertyImageHandler(AppDbContext context) : IPropertyImageHandler
 {
     public async Task<Response<PropertyImage?>> CreateAsync(CreatePropertyImageRequest request)
     {
         try
         {
+            if (request.HttpRequest is null)
+                return new Response<PropertyImage?>(null, 400,
+                    "Requisição inválida");
+
+            var property = await context
+                .Properties
+                .AsNoTracking()
+                .FirstOrDefaultAsync(p =>
+                    p.Id == request.PropertyId
+                    && p.UserId == request.UserId
+                    && p.IsActive);
+
+            if (property is null)
+                return new Response<PropertyImage?>(null, 404,
+                    "Imóvel não encontrado");
+
+            context.Attach(property);
+
             if (!request.HttpRequest.HasFormContentType)
                 return new Response<PropertyImage?>(null, 400,
                     "Conteúdo do tipo multipart/form-data esperado");
@@ -36,6 +56,7 @@ public class PropertyImageHandler(AppDbContext context)
                 {
                     Id = idImage,
                     PropertyId = request.PropertyId,
+                    Property = property,
                     IsActive = true,
                     UserId = request.UserId
                 };
