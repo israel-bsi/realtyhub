@@ -35,18 +35,23 @@ public class PropertyImageHandler(IHttpClientFactory httpClientFactory) : IPrope
         return data ?? new Response<PropertyImage?>(null, 400, "Falha ao criar as imagens");
     }
 
-    public Task<Response<PropertyImage?>> DeleteAsync()
+    public async Task<Response<PropertyImage?>> DeleteAsync(DeletePropertyImageRequest request)
     {
-        throw new NotImplementedException();
+        var url = $"/v1/properties/{request.PropertyId}/images/{request.ImageId}";
+        var response = await _httpClient.DeleteAsync(url);
+        var data = await response.Content.ReadFromJsonAsync<Response<PropertyImage?>>();
+        if (!response.IsSuccessStatusCode)
+            return new Response<PropertyImage?>(null, (int)response.StatusCode, data?.Message);
+        return data ?? new Response<PropertyImage?>(null, 400, "Falha ao deletar a imagem");
     }
 
-    public Task<Response<PropertyImage?>> GetByIdAsync()
+    public async Task<Response<List<PropertyImage>?>> GetAllByPropertyAsync(GetAllPropertyImagesByPropertyRequest request)
     {
-        throw new NotImplementedException();
-    }
-
-    public Task<Response<PropertyImage?>> GetByPropertyAsync()
-    {
-        throw new NotImplementedException();
+        var url = $"/v1/properties/{request.PropertyId}/images";
+        var response = await _httpClient.GetAsync(url);
+        var data = await response.Content.ReadFromJsonAsync<Response<List<PropertyImage>?>>();
+        if (!response.IsSuccessStatusCode)
+            return new Response<List<PropertyImage>?>(null, (int)response.StatusCode, data?.Message);
+        return data ?? new Response<List<PropertyImage>?>(null, 400, "Falha ao buscar as imagens");
     }
 }

@@ -1,5 +1,6 @@
 using System.Globalization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using RealtyHub.ApiService;
 using RealtyHub.ApiService.Common.Api;
 using RealtyHub.ApiService.Data;
@@ -27,6 +28,11 @@ dbContext.Database.Migrate();
 if (app.Environment.IsDevelopment())
     app.ConfigureDevEnvironment();
 
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Sources", "Images")),
+    RequestPath = "/images"
+});
 app.UseExceptionHandler();
 app.UseCors(Configuration.CorsPolicyName);
 app.UseSecurity();

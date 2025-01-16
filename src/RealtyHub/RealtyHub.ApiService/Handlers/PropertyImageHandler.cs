@@ -74,18 +74,53 @@ public class PropertyImageHandler(AppDbContext context) : IPropertyImageHandler
         }
     }
 
-    public Task<Response<PropertyImage?>> DeleteAsync()
+    public async Task<Response<PropertyImage?>> DeleteAsync(DeletePropertyImageRequest request)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var propertyImage = await context
+                .PropertyImages
+                .FirstOrDefaultAsync(pi =>
+                    pi.Id == request.ImageId
+                    && pi.UserId == request.UserId
+                    && pi.IsActive);
+
+            if (propertyImage is null)
+                return new Response<PropertyImage?>(null, 404,
+                    "Imagem não encontrada");
+
+            context.Attach(propertyImage);
+
+            propertyImage.IsActive = false;
+
+            await context.SaveChangesAsync();
+
+            return new Response<PropertyImage?>(null, 204);
+        }
+        catch (Exception e)
+        {
+            return new Response<PropertyImage?>(null, 500, e.Message);
+        }
     }
 
-    public Task<Response<PropertyImage?>> GetByIdAsync()
+    public async Task<Response<List<PropertyImage>?>> GetAllByPropertyAsync(GetAllPropertyImagesByPropertyRequest request)
     {
-        throw new NotImplementedException();
-    }
+        try
+        {
+            var propertyImages = await context
+                .PropertyImages
+                .AsNoTracking()
+                .Where(pi =>
+                    pi.PropertyId == request.PropertyId
+                    && pi.UserId == request.UserId
+                    && pi.IsActive)
+                .ToListAsync();
 
-    public Task<Response<PropertyImage?>> GetByPropertyAsync()
-    {
-        throw new NotImplementedException();
+            return new Response<List<PropertyImage>?>(propertyImages);
+        }
+        catch (Exception e)
+        {
+            return new Response<List<PropertyImage>?>(null, 500, e.Message);
+        }
     }
 }
