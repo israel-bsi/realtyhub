@@ -17,7 +17,7 @@
 }
 else
 {
-    <MudPaper Class="pa-8 mt-4" Elevation="2">
+    <MudPaper Class="pa-8 mt-4 d-flex justify-center align-center" Elevation="2">
         <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
             <ObjectGraphDataAnnotationsValidator />
 
@@ -113,6 +113,10 @@ else
                 </MudItem>
             </MudGrid>
 
+            <AddressComponent @bind-InputModel="InputModel.Address" />
+
+            <MudText Class="mb-4 mt-4" Typo="Typo.h6">Fotos do imóvel</MudText>
+
             <MudGrid Class="mt-2 mb-2" Spacing="2">
                 <MudItem lg="4" xs="12" sm="6">
                     <MudFileUpload T="IReadOnlyList<IBrowserFile>" FilesChanged="OnFilesChange" Class="mr-8 mb-4">
@@ -126,31 +130,39 @@ else
                     </MudFileUpload>
                 </MudItem>
             </MudGrid>
-            @if (PropertyPhotos.Count > 0)
-            {
-                <MudCarousel ItemsSource="@PropertyPhotos" 
-                             ShowArrows="true" 
-                             ShowBullets="true" 
-                             Class="mud-width-full"
-                             Style="width: 100%; height: 400px;"
-                             TData="PropertyPhoto">
-                    <ItemTemplate Context="photo">
-                        <MudImage Src="@($"{Configuration.BackendUrl}/photos/{photo.FullName}")"
-                                  Fluid="true" ObjectFit="ObjectFit.Cover" />
-                    </ItemTemplate>
-                </MudCarousel>
-            }
-            else
-            {
-                <p>Nenhuma foto disponível para este imóvel.</p>
-            }
+            <MudGrid Class="d-flex justify-center align-center mb-8" Style="height: 40vh;">
+                <MudItem xs="12" sm="10" md="8" lg="6" xl="4">
+                    @if (PropertyPhotos.Count > 0)
+                    {
+                        <MudCarousel ItemsSource="@PropertyPhotos"
+                                     ShowArrows="true"
+                                     ShowBullets="true"
+                                     AutoCycle="false"
+                                     Class="cursor-pointer mud-width-full d-flex justify-center align-center"
+                                     Style="width: 100%; height: 90vh; align-self: center"
+                                     TData="PropertyPhoto">
 
-            <AddressComponent @bind-InputModel="InputModel.Address" />
+                            <ItemTemplate Context="photo">
+                                <MudImage Src="@($"{Configuration.BackendUrl}/photos/{photo.FullName}")"
+                                          @onclick="@(() => OpenImageDialog(photo))"
+                                          Width="600"
+                                          Height="600"
+                                          Fluid="true"
+                                          ObjectFit="ObjectFit.Cover" />
+                            </ItemTemplate>
+                        </MudCarousel>
+                    }
+                    else
+                    {
+                        <p>Nenhuma foto disponível para este imóvel.</p>
+                    }
+                </MudItem>
+            </MudGrid>
 
             <MudButton ButtonType="ButtonType.Submit"
                        Variant="Variant.Filled"
                        Color="Color.Primary"
-                       Class="mt-6"
+                       Class="mt-10"
                        StartIcon="@Icons.Material.Filled.Save">
                 Salvar
             </MudButton>

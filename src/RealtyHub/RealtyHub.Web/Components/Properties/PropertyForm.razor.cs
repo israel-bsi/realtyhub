@@ -98,7 +98,12 @@ public partial class PropertyFormComponent : ComponentBase
     {
         var photoUrl = $"{Configuration.BackendUrl}/photos/{propertyPhoto.FullName}";
         var parameters = new DialogParameters { ["ImageUrl"] = photoUrl };
-        var options = new DialogOptions { CloseOnEscapeKey = true };
+        var options = new DialogOptions
+        {
+            CloseOnEscapeKey = true,
+            MaxWidth = MaxWidth.Large,
+            FullWidth = true
+        };
         await DialogService.ShowAsync<ImageDialog>("Imagem Ampliada", parameters, options);
     }
 
@@ -174,7 +179,6 @@ public partial class PropertyFormComponent : ComponentBase
         }
     }
 
-    public List<string> PhotosSrc { get; set; } = [];
     public async Task LoadPhotos()
     {
         try
@@ -182,13 +186,7 @@ public partial class PropertyFormComponent : ComponentBase
             var request = new GetAllPropertyPhotosByPropertyRequest { PropertyId = Id };
             var response = await PropertyPhotosHandler.GetAllByPropertyAsync(request);
             if (response is { IsSuccess: true, Data: not null })
-            {
                 PropertyPhotos = response.Data;
-                foreach (var photo in PropertyPhotos)
-                {
-                    PhotosSrc.Add($"{Configuration.BackendUrl}/photos/{photo.FullName}");
-                }
-            }
             else
                 Snackbar.Add(response.Message ?? string.Empty, Severity.Error);
         }
