@@ -29,6 +29,7 @@ public partial class PropertyFormComponent : ComponentBase
     public List<PhotoItem> AllPhotos { get; set; } = [];
     public int SelectedIndex { get; set; }
     public int CarouselKey { get; set; }
+    public int DataGridBtnPhotosKey { get; set; }
     #endregion
 
     #region Services
@@ -162,7 +163,6 @@ public partial class PropertyFormComponent : ComponentBase
         var result = await dialog.Result;
         if (result is { Canceled: true }) return;
 
-        Snackbar.Add(SelectedIndex.ToString(), Severity.Info);
         if (SelectedIndex >= 0 && SelectedIndex < AllPhotos.Count)
         {
             AllPhotos.RemoveAt(SelectedIndex);
@@ -170,8 +170,6 @@ public partial class PropertyFormComponent : ComponentBase
             SelectedIndex = AllPhotos.Count > 0
                 ? Math.Min(SelectedIndex, AllPhotos.Count - 1)
                 : 0;
-
-            Snackbar.Add(SelectedIndex.ToString(), Severity.Info);
         }
 
         CarouselKey++;
@@ -210,6 +208,7 @@ public partial class PropertyFormComponent : ComponentBase
         }
 
         CarouselKey++;
+        DataGridBtnPhotosKey++;
         StateHasChanged();
     }
     public async Task LoadPhotosFromServerAsync()

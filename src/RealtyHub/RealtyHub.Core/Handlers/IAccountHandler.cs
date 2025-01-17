@@ -8,6 +8,6 @@ public interface IAccountHandler
 {
     Task<Response<string>> LoginAsync(LoginRequest request);
     Task<Response<string>> RegisterAsync(RegisterRequest request);
-    Task<Response<string>> ConfirmEmail(UserConfirmEmail userConfirm);
+    Task<Response<string>> ConfirmEmail(UserConfirmEmailRequest userConfirm);
     Task LogoutAsync();
 }

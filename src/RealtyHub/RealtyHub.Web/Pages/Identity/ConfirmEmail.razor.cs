@@ -35,7 +35,7 @@ public partial class ConfirmEmailPage : ComponentBase
     {
         try
         {
-            var request = new UserConfirmEmail
+            var request = new UserConfirmEmailRequest
             {
                 UserId = UserId,
                 Token = Token

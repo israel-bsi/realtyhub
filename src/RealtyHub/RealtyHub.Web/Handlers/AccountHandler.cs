@@ -35,7 +35,7 @@ public class AccountHandler(IHttpClientFactory httpClientFactory) : IAccountHand
         return new Response<string>(null, 201, data?.Message);
     }
 
-    public async Task<Response<string>> ConfirmEmail(UserConfirmEmail user)
+    public async Task<Response<string>> ConfirmEmail(UserConfirmEmailRequest user)
     {
         var url = $"v1/identity/confirm-email?userId={user.UserId}&token={user.Token}";
         var result = await _httpClient.GetAsync(url);

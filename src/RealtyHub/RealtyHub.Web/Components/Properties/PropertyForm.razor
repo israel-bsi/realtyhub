@@ -117,7 +117,7 @@ else
 
             <MudText Class="mb-4 mt-4" Typo="Typo.h6">Fotos do imóvel</MudText>
 
-            <MudGrid Class="mt-2 mb-4" Spacing="2">
+            <MudGrid Class="mt-2 mb-4" Spacing="2" @key="@DataGridBtnPhotosKey">
                 <MudItem lg="8" xs="12" sm="10">
                     <MudStack Row="true" Spacing="2">
                         <MudFileUpload T="IReadOnlyList<IBrowserFile>" FilesChanged="OnFilesChange">
@@ -130,7 +130,7 @@ else
                                 </MudButton>
                             </ActivatorContent>
                         </MudFileUpload>
-                        @if (PropertyPhotos.Count > 0)
+                        @if (AllPhotos.Count > 0)
                         {
                             <MudButton Color="Color.Error"
                                        Variant="Variant.Filled"
@@ -151,10 +151,10 @@ else
                 </MudItem>
             </MudGrid>
 
-            <MudGrid Class="d-flex justify-center align-center mb-8" Style="height: 40vh;">
-                <MudItem xs="12" sm="10" md="8" lg="6" xl="4">
-                    @if (PropertyPhotos.Count > 0)
-                    {
+            @if (AllPhotos.Count > 0)
+            {
+                <MudGrid Class="d-flex justify-center align-center mb-8" Style="height: 40vh;">
+                    <MudItem xs="12" sm="10" md="8" lg="6" xl="4">
                         <MudCarousel ItemsSource="@AllPhotos"
                                      ShowArrows="true"
                                      ShowBullets="true"
@@ -162,7 +162,7 @@ else
                                      Class="cursor-pointer mud-width-full d-flex justify-center align-center"
                                      Style="width: 100%; height: 90vh; align-self: center"
                                      TData="PhotoItem"
-                                     @bind-SelectedIndex="SelectedIndex" 
+                                     @bind-SelectedIndex="SelectedIndex"
                                      @key="@CarouselKey">
 
                             <ItemTemplate Context="photoItem">
@@ -174,13 +174,9 @@ else
                                           ObjectFit="ObjectFit.Cover" />
                             </ItemTemplate>
                         </MudCarousel>
-                    }
-                    else
-                    {
-                        <p>Nenhuma foto disponível para este imóvel.</p>
-                    }
-                </MudItem>
-            </MudGrid>
+                    </MudItem>
+                </MudGrid>
+            }
 
             <MudButton ButtonType="ButtonType.Submit"
                        Variant="Variant.Filled"
