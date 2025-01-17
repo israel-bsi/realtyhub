@@ -2,7 +2,6 @@
 using RealtyHub.ApiService.Common.Api;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
-using RealtyHub.Core.Requests.Properties;
 using RealtyHub.Core.Responses;
 
 namespace RealtyHub.ApiService.Endpoints.Properties;
@@ -20,7 +19,7 @@ public class UpdatePropertyEndpoint : IEndpoint
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
         IPropertyHandler handler,
-        UpdatePropertyRequest request,
+        Property request,
         long id)
     {
         request.Id = id;

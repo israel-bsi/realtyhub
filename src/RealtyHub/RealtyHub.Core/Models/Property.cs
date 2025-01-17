@@ -7,7 +7,7 @@ public class Property : Entity
 {
     public long Id { get; set; }
     [Required(ErrorMessage = "Título é um campo obrigatório")]
-    [MaxLength(120, ErrorMessage = "A Título deve conter até 120 caracteres")]
+    [MaxLength(120, ErrorMessage = "O Título deve conter até 120 caracteres")]
     public string Title { get; set; } = string.Empty;
     [Required(ErrorMessage = "Descrição é um campo obrigatório")]
     [MaxLength(255 ,ErrorMessage = "A descrição deve conter até 255 caracteres")]

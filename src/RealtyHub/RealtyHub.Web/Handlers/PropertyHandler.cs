@@ -9,7 +9,7 @@ namespace RealtyHub.Web.Handlers;
 public class PropertyHandler(IHttpClientFactory httpClientFactory) : IPropertyHandler
 {
     private readonly HttpClient _httpClient = httpClientFactory.CreateClient(Configuration.HttpClientName);
-    public async Task<Response<Property?>> CreateAsync(CreatePropertyRequest request)
+    public async Task<Response<Property?>> CreateAsync(Property request)
     {
         var result = await _httpClient.PostAsJsonAsync("v1/properties", request);
 
@@ -21,7 +21,7 @@ public class PropertyHandler(IHttpClientFactory httpClientFactory) : IPropertyHa
         return data ?? new Response<Property?>(null, 400, "Falha ao criar o imóvel");
     }
 
-    public async Task<Response<Property?>> UpdateAsync(UpdatePropertyRequest request)
+    public async Task<Response<Property?>> UpdateAsync(Property request)
     {
         var result = await _httpClient.PutAsJsonAsync($"v1/properties/{request.Id}", request);
 

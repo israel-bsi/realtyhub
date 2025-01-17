@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using RealtyHub.ApiService.Data;
 using RealtyHub.Core.Utilities.FakeEntities;
 
@@ -50,10 +52,23 @@ public static class AppExtension
             return Results.Created();
         });
     }
-
     public static void UseSecurity(this WebApplication app)
     {
         app.UseAuthentication();
         app.UseAuthorization();
+    }
+    public static void UseStaticFiles(this WebApplication app)
+    {
+        app.UseStaticFiles(new StaticFileOptions
+        {
+            FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Sources", "Photos")),
+            RequestPath = "/photos"
+        });
+    }
+    public static void ApplyMigrations(this WebApplication app)
+    {
+        using var scope = app.Services.CreateScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        dbContext.Database.Migrate();
     }
 }

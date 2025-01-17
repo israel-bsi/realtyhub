@@ -9,7 +9,7 @@ namespace RealtyHub.ApiService.Handlers;
 
 public class PropertyHandler(AppDbContext context) : IPropertyHandler
 {
-    public async Task<Response<Property?>> CreateAsync(CreatePropertyRequest request)
+    public async Task<Response<Property?>> CreateAsync(Property request)
     {
         try
         {
@@ -43,7 +43,7 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
         }
     }
 
-    public async Task<Response<Property?>> UpdateAsync(UpdatePropertyRequest request)
+    public async Task<Response<Property?>> UpdateAsync(Property request)
     {
         try
         {

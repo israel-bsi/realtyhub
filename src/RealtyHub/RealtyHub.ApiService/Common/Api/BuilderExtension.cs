@@ -23,7 +23,6 @@ public static class BuilderExtension
         Configuration.EmailSettings.EmailPassword = 
             builder.Configuration.GetValue<string>("EmailPassword") ?? string.Empty;
     }
-
     public static void AddDocumentation(this WebApplicationBuilder builder)
     {
         builder.Services.AddEndpointsApiExplorer();
@@ -33,7 +32,6 @@ public static class BuilderExtension
             options.CustomSchemaIds(n => n.FullName);
         });
     }
-    
     public static void AddSecurity(this WebApplicationBuilder builder)
     {
         builder.Services
@@ -42,7 +40,6 @@ public static class BuilderExtension
 
         builder.Services.AddAuthorization();
     }
-
     public static void AddDataContexts(this WebApplicationBuilder builder)
     {
         builder
@@ -72,7 +69,6 @@ public static class BuilderExtension
             .AddEntityFrameworkStores<AppDbContext>()
             .AddApiEndpoints();
     }
-
     public static void AddCrossOrigin(this WebApplicationBuilder builder)
     {
         builder.Services.AddCors(
@@ -88,7 +84,6 @@ public static class BuilderExtension
                     .AllowCredentials()
             ));
     }
-
     public static void AddServices(this WebApplicationBuilder builder)
     {
         builder.Services.AddProblemDetails();

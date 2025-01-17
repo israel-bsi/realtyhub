@@ -9,7 +9,7 @@ namespace RealtyHub.ApiService.Handlers;
 
 public class CustomerHandler(AppDbContext context) : ICustomerHandler
 {
-    public async Task<Response<Customer?>> CreateAsync(CreateCustomerRequest request)
+    public async Task<Response<Customer?>> CreateAsync(Customer request)
     {
         try
         {
@@ -48,7 +48,7 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
         }
     }
 
-    public async Task<Response<Customer?>> UpdateAsync(UpdateCustomerRequest request)
+    public async Task<Response<Customer?>> UpdateAsync(Customer request)
     {
         try
         {

@@ -1,9 +1,6 @@
 using System.Globalization;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.FileProviders;
 using RealtyHub.ApiService;
 using RealtyHub.ApiService.Common.Api;
-using RealtyHub.ApiService.Data;
 using RealtyHub.ApiService.Endpoints;
 
 CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("pt-BR");
@@ -21,18 +18,12 @@ builder.AddServices();
 
 var app = builder.Build();
 
-using var scope = app.Services.CreateScope();
-var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-dbContext.Database.Migrate();
+app.ApplyMigrations();
 
 if (app.Environment.IsDevelopment())
     app.ConfigureDevEnvironment();
 
-app.UseStaticFiles(new StaticFileOptions
-{
-    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Sources", "Photos")),
-    RequestPath = "/photos"
-});
+app.UseStaticFiles();
 app.UseExceptionHandler();
 app.UseCors(Configuration.CorsPolicyName);
 app.UseSecurity();

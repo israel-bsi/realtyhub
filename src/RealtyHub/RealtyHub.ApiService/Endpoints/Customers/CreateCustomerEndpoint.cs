@@ -2,7 +2,6 @@
 using RealtyHub.ApiService.Common.Api;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
-using RealtyHub.Core.Requests.Customers;
 using RealtyHub.Core.Responses;
 
 namespace RealtyHub.ApiService.Endpoints.Customers;
@@ -19,7 +18,7 @@ public class CreateCustomerEndpoint : IEndpoint
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
         ICustomerHandler handler,
-        CreateCustomerRequest request)
+        Customer request)
     {
         request.UserId = user.Identity?.Name ?? string.Empty;
         var result = await handler.CreateAsync(request);

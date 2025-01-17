@@ -9,7 +9,7 @@ namespace RealtyHub.Web.Handlers;
 public class CustomerHandler(IHttpClientFactory httpClientFactory) : ICustomerHandler
 {
     private readonly HttpClient _httpClient = httpClientFactory.CreateClient(Configuration.HttpClientName);
-    public async Task<Response<Customer?>> CreateAsync(CreateCustomerRequest request)
+    public async Task<Response<Customer?>> CreateAsync(Customer request)
     {
         var result = await _httpClient.PostAsJsonAsync("v1/customers", request);
 
@@ -21,7 +21,7 @@ public class CustomerHandler(IHttpClientFactory httpClientFactory) : ICustomerHa
         return data ?? new Response<Customer?>(null, 400, "Falha ao criar o cliente");
     }
 
-    public async Task<Response<Customer?>> UpdateAsync(UpdateCustomerRequest request)
+    public async Task<Response<Customer?>> UpdateAsync(Customer request)
     {
         var result = await _httpClient.PutAsJsonAsync($"v1/customers/{request.Id}", request);
 

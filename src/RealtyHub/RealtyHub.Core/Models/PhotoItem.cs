@@ -7,6 +7,4 @@ public class PhotoItem
     public byte[]? Content { get; set; }
     public string? ContentType { get; set; }
     public string? OriginalFileName { get; set; }
-    public bool IsNew => string.IsNullOrEmpty(Id);
-    public bool MarkedForRemoval { get; set; }
 }
