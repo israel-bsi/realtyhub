@@ -2,7 +2,6 @@
 using RealtyHub.ApiService.Common.Api;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
-using RealtyHub.Core.Requests.Viewings;
 using RealtyHub.Core.Responses;
 
 namespace RealtyHub.ApiService.Endpoints.Viewings;
@@ -19,7 +18,7 @@ public class ScheduleViewingEndpoint : IEndpoint
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
         IViewingHandler handler,
-        ScheduleViewingRequest request)
+        Viewing request)
     {
         request.UserId = user.Identity?.Name ?? string.Empty;
         var result = await handler.ScheduleAsync(request);

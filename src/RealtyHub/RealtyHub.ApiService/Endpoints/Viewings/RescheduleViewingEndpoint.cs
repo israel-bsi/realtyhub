@@ -2,7 +2,6 @@
 using RealtyHub.ApiService.Common.Api;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
-using RealtyHub.Core.Requests.Viewings;
 using RealtyHub.Core.Responses;
 
 namespace RealtyHub.ApiService.Endpoints.Viewings;
@@ -20,7 +19,7 @@ public class RescheduleViewingEndpoint : IEndpoint
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
         IViewingHandler handler,
-        RescheduleViewingRequest request,
+        Viewing request,
         long id)
     {
         request.Id = id;

@@ -61,7 +61,8 @@ public static class Endpoint
             .MapEndpoint<CancelViewingEndpoint>()
             .MapEndpoint<GetViewingByIdEndpoint>()
             .MapEndpoint<GetAllViewingsEndpoint>()
-            .MapEndpoint<DoneViewingEndpoint>();
+            .MapEndpoint<DoneViewingEndpoint>()
+            .MapEndpoint<GetAllViewingsByPropertyEndpoint>();
 
         endpoints.MapGroup("v1/offers")
             .WithTags("Offers")

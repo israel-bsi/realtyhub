@@ -12,10 +12,10 @@ public class ViewingMapping : IEntityTypeConfiguration<Viewing>
 
         builder.HasKey(v => v.Id);
 
-        builder.Property(v => v.Date)
+        builder.Property(v => v.ViewingDate)
             .IsRequired();
 
-        builder.Property(v => v.Status)
+        builder.Property(v => v.ViewingStatus)
             .IsRequired();
 
         builder.Property(v => v.CustomerId)

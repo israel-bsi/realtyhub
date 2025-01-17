@@ -10,13 +10,15 @@ namespace RealtyHub.ApiService.Handlers;
 
 public class ViewingHandler(AppDbContext context) : IViewingHandler
 {
-    public async Task<Response<Viewing?>> ScheduleAsync(ScheduleViewingRequest request)
+    public async Task<Response<Viewing?>> ScheduleAsync(Viewing request)
     {
         try
         {
             var customer = await context
                 .Customers
-                .FirstOrDefaultAsync(c => c.Id == request.CustomerId && c.IsActive);
+                .FirstOrDefaultAsync(c => c.Id == request.CustomerId 
+                                          && c.UserId == request.UserId
+                                          && c.IsActive);
 
             if (customer is null)
                 return new Response<Viewing?>(null, 404, 
@@ -24,7 +26,9 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
 
             var property = await context
                 .Properties
-                .FirstOrDefaultAsync(p => p.Id == request.PropertyId && p.IsActive);
+                .FirstOrDefaultAsync(p => p.Id == request.PropertyId
+                                          && p.UserId == request.UserId
+                                          && p.IsActive);
 
             if (property is null)
                 return new Response<Viewing?>(null, 404, 
@@ -34,6 +38,7 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
                 .Viewing
                 .AnyAsync(v => 
                     v.CustomerId == request.CustomerId 
+                    && v.UserId == request.UserId
                     && v.PropertyId == request.PropertyId);
 
             if (isViewingExits)
@@ -43,12 +48,13 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
 
             var viewing = new Viewing
             {
-                Date = request.Date,
-                Status = request.ViewingStatus,
+                ViewingDate = request.ViewingDate,
+                ViewingStatus = request.ViewingStatus,
                 CustomerId = request.CustomerId,
                 Customer = customer,
                 PropertyId = request.PropertyId,
-                Property = property
+                Property = property,
+                UserId = request.UserId
             };
 
             context.Viewing.Add(viewing);
@@ -64,7 +70,7 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
         }
     }
 
-    public async Task<Response<Viewing?>> RescheduleAsync(RescheduleViewingRequest request)
+    public async Task<Response<Viewing?>> RescheduleAsync(Viewing request)
     {
         try
         {
@@ -72,13 +78,14 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
                 .Viewing
                 .Include(v => v.Customer)
                 .Include(v => v.Property)
-                .FirstOrDefaultAsync(v => v.Id == request.Id);
+                .FirstOrDefaultAsync(v => v.Id == request.Id 
+                                          && v.UserId == request.UserId);
 
             if (viewing is null)
                 return new Response<Viewing?>(null, 404,
                     "Visita não encontrada");
 
-            switch (viewing.Status)
+            switch (viewing.ViewingStatus)
             {
                 case EViewingStatus.Canceled:
                     return new Response<Viewing?>(null, 400,
@@ -88,7 +95,7 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
                         "Não é possível reagendar uma visita finalizada");
             }
 
-            viewing.Date = request.Date;
+            viewing.ViewingDate = request.ViewingDate;
             viewing.UpdatedAt = DateTime.UtcNow;
 
             context.Viewing.Update(viewing);
@@ -111,13 +118,14 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
                 .Viewing
                 .Include(v => v.Customer)
                 .Include(v => v.Property)
-                .FirstOrDefaultAsync(v => v.Id == request.Id);
+                .FirstOrDefaultAsync(v => v.Id == request.Id 
+                                          && v.UserId == request.UserId);
 
             if (viewing is null)
                 return new Response<Viewing?>(null, 404, 
                     "Visita não encontrada");
 
-            switch (viewing.Status)
+            switch (viewing.ViewingStatus)
             {
                 case EViewingStatus.Canceled:
                     return new Response<Viewing?>(null, 400, 
@@ -127,7 +135,7 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
                         "Visita já finalizada");
             }
 
-            viewing.Status = EViewingStatus.Done;
+            viewing.ViewingStatus = EViewingStatus.Done;
             viewing.UpdatedAt = DateTime.UtcNow;
 
             await context.SaveChangesAsync();
@@ -149,13 +157,14 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
                 .Viewing
                 .Include(v => v.Customer)
                 .Include(v => v.Property)
-                .FirstOrDefaultAsync(v => v.Id == request.Id);
+                .FirstOrDefaultAsync(v => v.Id == request.Id 
+                                          && v.UserId == request.UserId);
 
             if (viewing is null)
                 return new Response<Viewing?>(null, 404, 
                     "Visita não encontrada");
 
-            switch (viewing.Status)
+            switch (viewing.ViewingStatus)
             {
                 case EViewingStatus.Done:
                     return new Response<Viewing?>(null, 400, 
@@ -165,7 +174,7 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
                         "Visita já cancelada");
             }
 
-            viewing.Status = EViewingStatus.Canceled;
+            viewing.ViewingStatus = EViewingStatus.Canceled;
             viewing.UpdatedAt = DateTime.UtcNow;
 
             await context.SaveChangesAsync();
@@ -189,7 +198,8 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
                 .AsNoTracking()
                 .Include(v => v.Customer)
                 .Include(v => v.Property)
-                .FirstOrDefaultAsync(v => v.Id == request.Id);
+                .FirstOrDefaultAsync(v => v.Id == request.Id 
+                                          && v.UserId == request.UserId);
 
             return viewing is null
                 ? new Response<Viewing?>(null, 404, "Visita não encontrada")
@@ -210,7 +220,8 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
                 .Viewing
                 .AsNoTracking()
                 .Include(v => v.Customer)
-                .Include(v => v.Property);
+                .Include(v => v.Property)
+                .Where(v => v.UserId == request.UserId);
 
             var viewings = await query
                 .Skip((request.PageNumber - 1) * request.PageSize)
@@ -226,6 +237,28 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
         {
             return new PagedResponse<List<Viewing>?>(null, 500, 
                 message: $"Não foi possível retornar as visitas\n{ex.Message}");
+        }
+    }
+
+    public async Task<Response<List<Viewing>?>> GetAllByProperty(GetAllViewingsByPropertyRequest request)
+    {
+        try
+        {
+            var viewings = await context
+                .Viewing
+                .AsNoTracking()
+                .Include(v => v.Customer)
+                .Include(v => v.Property)
+                .Where(v => v.PropertyId == request.PropertyId
+                                && v.UserId == request.UserId)
+                .ToListAsync();
+
+            return new Response<List<Viewing>?>(viewings);
+        }
+        catch (Exception e)
+        {
+            return new Response<List<Viewing>?>(null, 500,
+                $"Não foi possível retornar as visitas\n{e.Message}");
         }
     }
 }

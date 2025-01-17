@@ -1,15 +1,21 @@
-﻿using RealtyHub.Core.Enums;
+﻿using System.ComponentModel.DataAnnotations;
+using RealtyHub.Core.Enums;
 
 namespace RealtyHub.Core.Models;
 
 public class Viewing : Entity
 {
     public long Id { get; set; }
-    public DateTime Date { get; set; }
-    public EViewingStatus Status { get; set; }
+    [Required(ErrorMessage = "Data da visita é um campo obrigatório")]
+    [DataType(DataType.DateTime)]
+    public DateTime ViewingDate { get; set; }
+    [Required(ErrorMessage = "Status da visita é um campo obrigatório")]
+    public EViewingStatus ViewingStatus { get; set; }
+    [Required(ErrorMessage = "Cliente é um campo obrigatório")]
     public long CustomerId { get; set; }
-    public Customer Customer { get; set; } = new();
+    [Required(ErrorMessage = "Propriedade é um campo obrigatório")]
     public long PropertyId { get; set; }
     public Property Property { get; set; } = new();
+    public Customer Customer { get; set; } = new();
     public string UserId { get; set; } = string.Empty;
 }
