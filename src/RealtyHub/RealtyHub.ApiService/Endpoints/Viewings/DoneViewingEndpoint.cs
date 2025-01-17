@@ -10,7 +10,7 @@ namespace RealtyHub.ApiService.Endpoints.Viewings;
 public class DoneViewingEndpoint : IEndpoint
 {
     public static void Map(IEndpointRouteBuilder app)
-        => app.MapPut("/done/{id:long}", HandlerAsync)
+        => app.MapPut("/{id:long}/done", HandlerAsync)
             .WithName("Viewings: Done")
             .WithSummary("Finaliza uma visita")
             .WithDescription("Finaliza uma visita")

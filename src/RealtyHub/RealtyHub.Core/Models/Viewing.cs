@@ -8,9 +8,10 @@ public class Viewing : Entity
     public long Id { get; set; }
     [Required(ErrorMessage = "Data da visita é um campo obrigatório")]
     [DataType(DataType.DateTime)]
-    public DateTime ViewingDate { get; set; }
+    public DateTime? ViewingDate { get; set; } = DateTime.Now;
+
     [Required(ErrorMessage = "Status da visita é um campo obrigatório")]
-    public EViewingStatus ViewingStatus { get; set; }
+    public EViewingStatus ViewingStatus { get; set; } = EViewingStatus.Scheduled;
     [Required(ErrorMessage = "Cliente é um campo obrigatório")]
     public long CustomerId { get; set; }
     [Required(ErrorMessage = "Propriedade é um campo obrigatório")]

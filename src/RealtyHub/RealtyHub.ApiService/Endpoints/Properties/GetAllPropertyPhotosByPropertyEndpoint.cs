@@ -11,7 +11,7 @@ public class GetAllPropertyPhotosByPropertyEndpoint : IEndpoint
 {
     public static void Map(IEndpointRouteBuilder app)
     {
-        app.MapGet("/{propertyId:long}/photos", HandlerAsync)
+        app.MapGet("/{id:long}/photos", HandlerAsync)
             .WithName("Properties: Get Photos By Property")
             .WithSummary("Recupera todos as fotos de um imóvel")
             .WithDescription("Recupera todos as fotos de um imóvel")
@@ -20,13 +20,13 @@ public class GetAllPropertyPhotosByPropertyEndpoint : IEndpoint
     }
 
     private static async Task<IResult> HandlerAsync(
-        long propertyId,
+        long id,
         IPropertyPhotosHandler handler,
         ClaimsPrincipal user)
     {
         var request = new GetAllPropertyPhotosByPropertyRequest
         {
-            PropertyId = propertyId,
+            PropertyId = id,
             UserId = user.Identity?.Name ?? string.Empty
         };
 

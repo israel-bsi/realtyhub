@@ -3,6 +3,7 @@ using RealtyHub.ApiService.Data;
 using RealtyHub.Core.Enums;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
+using RealtyHub.Core.Requests.Properties;
 using RealtyHub.Core.Requests.Viewings;
 using RealtyHub.Core.Responses;
 
@@ -237,28 +238,6 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
         {
             return new PagedResponse<List<Viewing>?>(null, 500, 
                 message: $"Não foi possível retornar as visitas\n{ex.Message}");
-        }
-    }
-
-    public async Task<Response<List<Viewing>?>> GetAllByProperty(GetAllViewingsByPropertyRequest request)
-    {
-        try
-        {
-            var viewings = await context
-                .Viewing
-                .AsNoTracking()
-                .Include(v => v.Customer)
-                .Include(v => v.Property)
-                .Where(v => v.PropertyId == request.PropertyId
-                                && v.UserId == request.UserId)
-                .ToListAsync();
-
-            return new Response<List<Viewing>?>(viewings);
-        }
-        catch (Exception e)
-        {
-            return new Response<List<Viewing>?>(null, 500,
-                $"Não foi possível retornar as visitas\n{e.Message}");
         }
     }
 }

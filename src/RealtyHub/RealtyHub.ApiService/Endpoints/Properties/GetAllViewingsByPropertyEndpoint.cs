@@ -2,16 +2,16 @@
 using RealtyHub.ApiService.Common.Api;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
-using RealtyHub.Core.Requests.Viewings;
+using RealtyHub.Core.Requests.Properties;
 using RealtyHub.Core.Responses;
 
-namespace RealtyHub.ApiService.Endpoints.Viewings;
+namespace RealtyHub.ApiService.Endpoints.Properties;
 
 public class GetAllViewingsByPropertyEndpoint : IEndpoint
 {
     public static void Map(IEndpointRouteBuilder app)
-        => app.MapGet("/properties/{id:long}", HandlerAsync)
-            .WithName("Viewings: Get All By Property")
+        => app.MapGet("/{id:long}/viewings", HandlerAsync)
+            .WithName("Properties: Get All Viewings")
             .WithSummary("Lista todas as visitas de um imóvel")
             .WithDescription("Lista todas as visitas de um imóvel")
             .WithOrder(6)
@@ -19,7 +19,7 @@ public class GetAllViewingsByPropertyEndpoint : IEndpoint
 
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
-        IViewingHandler handler,
+        IPropertyHandler handler,
         long id)
     {
         var request = new GetAllViewingsByPropertyRequest
@@ -27,8 +27,8 @@ public class GetAllViewingsByPropertyEndpoint : IEndpoint
             UserId = user.Identity?.Name ?? string.Empty,
             PropertyId = id
         };
-        
-        var result = await handler.GetAllByProperty(request);
+
+        var result = await handler.GetAllViewingsAsync(request);
 
         return result.IsSuccess ? Results.Ok(result) : Results.BadRequest(result);
     }

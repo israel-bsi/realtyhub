@@ -1,1 +1,54 @@
-﻿
+﻿@inherits ViewingFormComponent
+
+<PageTitle>@Operation Visita</PageTitle>
+
+<MudText Typo="Typo.h4">@Operation Visita</MudText>
+
+@if (IsBusy)
+{
+    <MudPaper Class="pa-8 mt-4">
+        <MudSkeleton Animation="Animation.Wave" Height="55px" />
+        <MudSkeleton Animation="Animation.Wave" Height="110px" />
+        <MudSkeleton Animation="Animation.Wave" Height="55px" />
+        <MudSkeleton Animation="Animation.Wave" Height="110px" />
+        <MudSkeleton Animation="Animation.Wave" Height="55px" />
+    </MudPaper>
+}
+else
+{
+    <MudPaper Class="pa-8 mt-4" Elevation="2">
+        <EditForm OnValidSubmit="OnValidSubmitAsync" Model="InputModel">
+            <ObjectGraphDataAnnotationsValidator />
+            
+            <MudDatePicker Label="Data da Visita" 
+                           @bind-Date="@InputModel.ViewingDate"/>
+
+            @if (Id != 0)
+            {
+                <EnumSelect TEnum="EViewingStatus"
+                            Label="Tipo do Imóvel"
+                            @bind-SelectedValue="InputModel.ViewingStatus"/>
+            }
+            
+            <MudTextField T="long" 
+                          Label="Imóvel" 
+                          @bind-Value="InputModel.PropertyId"
+                          For="@(() => InputModel.PropertyId)" 
+                          InputType="InputType.Number"/>
+
+            <MudTextField T="long"
+                          Label="Cliente"
+                          @bind-Value="InputModel.CustomerId"
+                          For="@(() => InputModel.CustomerId)"
+                          InputType="InputType.Number" />
+            
+            <MudButton ButtonType="ButtonType.Submit"
+                       Variant="Variant.Filled"
+                       Color="Color.Primary"
+                       Class="mt-6"
+                       StartIcon="@Icons.Material.Filled.Save">
+                @Operation
+            </MudButton>
+        </EditForm>
+    </MudPaper>
+}

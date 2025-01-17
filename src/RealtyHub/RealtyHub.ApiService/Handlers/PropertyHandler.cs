@@ -173,4 +173,26 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
                 $"Não foi possível retornar os imóveis\n{ex.Message}");
         }
     }
+    
+    public async Task<Response<List<Viewing>?>> GetAllViewingsAsync(GetAllViewingsByPropertyRequest request)
+    {
+        try
+        {
+            var viewings = await context
+                .Viewing
+                .AsNoTracking()
+                .Include(v => v.Customer)
+                .Include(v => v.Property)
+                .Where(v => v.PropertyId == request.PropertyId
+                            && v.UserId == request.UserId)
+                .ToListAsync();
+
+            return new Response<List<Viewing>?>(viewings);
+        }
+        catch (Exception e)
+        {
+            return new Response<List<Viewing>?>(null, 500,
+                $"Não foi possível retornar as visitas\n{e.Message}");
+        }
+    }
 }

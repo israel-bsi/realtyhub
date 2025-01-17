@@ -127,7 +127,6 @@ public partial class CustomerFormComponent : ComponentBase
         };
         StateHasChanged();
     }
-
     private async Task LoadCustomerAsync()
     {
         GetCustomerByIdRequest? request = null;
@@ -172,19 +171,18 @@ public partial class CustomerFormComponent : ComponentBase
         }
         ValidateDocument();
     }
-
     private void RedirectToCreateCustomer()
     {
         InputModel.CustomerType = ECustomerType.Individual;
         NavigationManager.NavigateTo("/clientes/adicionar");
     }
-
     private void ExecuteValidations()
     {
         EditContext = new EditContext(InputModel);
         MessageStore = new ValidationMessageStore(EditContext);
         ChangeDocumentMask(InputModel.CustomerType);
     }
+    
     #endregion
 
     #region Overrides

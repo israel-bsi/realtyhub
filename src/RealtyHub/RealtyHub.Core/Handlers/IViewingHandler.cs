@@ -12,5 +12,4 @@ public interface IViewingHandler
     Task<Response<Viewing?>> CancelAsync(CancelViewingRequest request);
     Task<Response<Viewing?>> GetByIdAsync(GetViewingByIdRequest request);
     Task<PagedResponse<List<Viewing>?>> GetAllAsync(GetAllViewingsRequest request);
-    Task<Response<List<Viewing>?>> GetAllByProperty(GetAllViewingsByPropertyRequest request);
 }

@@ -10,7 +10,7 @@ public class DeletePropertyPhotoEndpoint : IEndpoint
 {
     public static void Map(IEndpointRouteBuilder app)
     {
-        app.MapDelete("/{propertyId:long}/photos/{photoId}", HandlerAsync)
+        app.MapDelete("/{id:long}/photos/{photoId}", HandlerAsync)
             .WithName("Properties: Delete Photos")
             .WithSummary("Exclui uma foto de um imóvel")
             .WithDescription("Exclui uma foto de um imóvel")
@@ -19,7 +19,7 @@ public class DeletePropertyPhotoEndpoint : IEndpoint
     }
 
     private static async Task<IResult> HandlerAsync(
-        long propertyId,
+        long id,
         IPropertyPhotosHandler handler,
         ClaimsPrincipal user, 
         string photoId)
@@ -27,7 +27,7 @@ public class DeletePropertyPhotoEndpoint : IEndpoint
         var request = new DeletePropertyPhotoRequest
         {
             Id = photoId,
-            PropertyId = propertyId,
+            PropertyId = id,
             UserId = user.Identity?.Name ?? string.Empty
         };
 

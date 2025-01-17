@@ -8,33 +8,40 @@ namespace RealtyHub.Web.Handlers;
 
 public class PropertyHandler(IHttpClientFactory httpClientFactory) : IPropertyHandler
 {
-    private readonly HttpClient _httpClient = httpClientFactory.CreateClient(Configuration.HttpClientName);
+    private readonly HttpClient _httpClient = httpClientFactory
+        .CreateClient(Configuration.HttpClientName);
     public async Task<Response<Property?>> CreateAsync(Property request)
     {
-        var result = await _httpClient.PostAsJsonAsync("v1/properties", request);
+        var result = await _httpClient
+            .PostAsJsonAsync("v1/properties", request);
 
         var data = await result.Content.ReadFromJsonAsync<Response<Property?>>();
 
         if (!result.IsSuccessStatusCode)
             return new Response<Property?>(null, 400, data?.Message);
 
-        return data ?? new Response<Property?>(null, 400, "Falha ao criar o imóvel");
+        return data ?? new Response<Property?>(null, 400, 
+            "Falha ao criar o imóvel");
     }
 
     public async Task<Response<Property?>> UpdateAsync(Property request)
     {
-        var result = await _httpClient.PutAsJsonAsync($"v1/properties/{request.Id}", request);
+        var result = await _httpClient
+            .PutAsJsonAsync($"v1/properties/{request.Id}", request);
 
         return await result.Content.ReadFromJsonAsync<Response<Property?>>()
-            ?? new Response<Property?>(null, 400, "Falha ao atualizar o imóvel");
+            ?? new Response<Property?>(null, 400, 
+                "Falha ao atualizar o imóvel");
     }
 
     public async Task<Response<Property?>> DeleteAsync(DeletePropertyRequest request)
     {
-        var result = await _httpClient.DeleteAsync($"v1/properties/{request.Id}");
+        var result = await _httpClient
+            .DeleteAsync($"v1/properties/{request.Id}");
 
         return await result.Content.ReadFromJsonAsync<Response<Property?>>()
-               ?? new Response<Property?>(null, 400, "Falha ao excluir o imóvel");
+               ?? new Response<Property?>(null, 400, 
+                   "Falha ao excluir o imóvel");
     }
 
     public async Task<Response<Property?>> GetByIdAsync(GetPropertyByIdRequest request)
@@ -42,7 +49,8 @@ public class PropertyHandler(IHttpClientFactory httpClientFactory) : IPropertyHa
         var response = await _httpClient.GetAsync($"v1/properties/{request.Id}");
 
         if (!response.IsSuccessStatusCode)
-            return new Response<Property?>(null, 400, "Não foi possível obter o imóvel");
+            return new Response<Property?>(null, 400, 
+                "Não foi possível obter o imóvel");
 
         var property = await response.Content.ReadFromJsonAsync<Response<Property?>>();
 
@@ -59,6 +67,23 @@ public class PropertyHandler(IHttpClientFactory httpClientFactory) : IPropertyHa
             url = $"{url}&searchTerm={request.SearchTerm}";
 
         return await _httpClient.GetFromJsonAsync<PagedResponse<List<Property>?>>(url)
-               ?? new PagedResponse<List<Property>?>(null, 400, "Não foi possível obter os imóveis");
+               ?? new PagedResponse<List<Property>?>(null, 400, 
+                   "Não foi possível obter os imóveis");
+    }
+
+    public async Task<Response<List<Viewing>?>> GetAllViewingsAsync(GetAllViewingsByPropertyRequest request)
+    {
+        var response = await _httpClient
+            .GetAsync($"v1/properties/{request.PropertyId}/viewings");
+
+        if (!response.IsSuccessStatusCode)
+            return new Response<List<Viewing>?>(null, 400, 
+                "Não foi possível obter as visitas");
+
+        var viewings = await response.Content.ReadFromJsonAsync<Response<List<Viewing>?>>();
+        return viewings is null
+            ? new Response<List<Viewing>?>(null, 400, 
+                "Não foi possível obter as visitas")
+            : new Response<List<Viewing>?>(viewings.Data);
     }
 }

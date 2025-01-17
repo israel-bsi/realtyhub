@@ -1,4 +1,4 @@
-﻿namespace RealtyHub.Core.Requests.Viewings;
+﻿namespace RealtyHub.Core.Requests.Properties;
 
 public class GetAllViewingsByPropertyRequest : Request
 {

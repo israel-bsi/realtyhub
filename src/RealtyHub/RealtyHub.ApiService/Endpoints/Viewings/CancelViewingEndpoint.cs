@@ -10,7 +10,7 @@ namespace RealtyHub.ApiService.Endpoints.Viewings;
 public class CancelViewingEndpoint : IEndpoint
 {
     public static void Map(IEndpointRouteBuilder app)
-        => app.MapDelete("/{id:long}", HandlerAsync)
+        => app.MapPut("/{id:long}/cancel", HandlerAsync)
             .WithName("Viewings: Cancel")
             .WithSummary("Cancela uma visita")
             .WithDescription("Cancela uma visita")

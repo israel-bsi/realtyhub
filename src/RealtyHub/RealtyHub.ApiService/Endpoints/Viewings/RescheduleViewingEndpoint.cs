@@ -9,7 +9,7 @@ namespace RealtyHub.ApiService.Endpoints.Viewings;
 public class RescheduleViewingEndpoint : IEndpoint
 {
     public static void Map(IEndpointRouteBuilder app)
-        => app.MapPut("/{id:long}", HandlerAsync)
+        => app.MapPut("/{id:long}/reschedule", HandlerAsync)
             .WithName("Viewings: Reschedule")
             .WithSummary("Reagenda uma visita")
             .WithDescription("Reagenda uma visita")
