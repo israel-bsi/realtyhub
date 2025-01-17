@@ -117,34 +117,56 @@ else
 
             <MudText Class="mb-4 mt-4" Typo="Typo.h6">Fotos do imóvel</MudText>
 
-            <MudGrid Class="mt-2 mb-2" Spacing="2">
-                <MudItem lg="4" xs="12" sm="6">
-                    <MudFileUpload T="IReadOnlyList<IBrowserFile>" FilesChanged="OnFilesChange" Class="mr-8 mb-4">
-                        <ActivatorContent>
-                            <MudButton Variant="Variant.Filled"
-                                       Color="Color.Primary"
-                                       StartIcon="@Icons.Material.Filled.AddAPhoto">
-                                Selecionar fotos
+            <MudGrid Class="mt-2 mb-4" Spacing="2">
+                <MudItem lg="8" xs="12" sm="10">
+                    <MudStack Row="true" Spacing="2">
+                        <MudFileUpload T="IReadOnlyList<IBrowserFile>" FilesChanged="OnFilesChange">
+                            <ActivatorContent>
+                                <MudButton Variant="Variant.Filled"
+                                           Color="Color.Primary"
+                                           StartIcon="@Icons.Material.Filled.AddAPhoto"
+                                           Style="white-space: nowrap;">
+                                    Selecionar fotos
+                                </MudButton>
+                            </ActivatorContent>
+                        </MudFileUpload>
+                        @if (PropertyPhotos.Count > 0)
+                        {
+                            <MudButton Color="Color.Error"
+                                       Variant="Variant.Filled"
+                                       Style="white-space: nowrap;"
+                                       StartIcon="@Icons.Material.Filled.DeleteForever"
+                                       OnClick="RemoveAllPhotos">
+                                Excluir todas as fotos
                             </MudButton>
-                        </ActivatorContent>
-                    </MudFileUpload>
+                            <MudButton Color="Color.Error"
+                                       Variant="Variant.Filled"
+                                       Style="white-space: nowrap;"
+                                       StartIcon="@Icons.Material.Filled.Delete"
+                                       OnClick="RemovePhoto">
+                                Excluir a foto selecionada
+                            </MudButton>
+                        }
+                    </MudStack>
                 </MudItem>
             </MudGrid>
+
             <MudGrid Class="d-flex justify-center align-center mb-8" Style="height: 40vh;">
                 <MudItem xs="12" sm="10" md="8" lg="6" xl="4">
                     @if (PropertyPhotos.Count > 0)
                     {
-                        <MudCarousel ItemsSource="@PropertyPhotos"
+                        <MudCarousel ItemsSource="@CombinedPhotos"
                                      ShowArrows="true"
                                      ShowBullets="true"
                                      AutoCycle="false"
                                      Class="cursor-pointer mud-width-full d-flex justify-center align-center"
                                      Style="width: 100%; height: 90vh; align-self: center"
-                                     TData="PropertyPhoto">
+                                     TData="string" 
+                                     @bind-SelectedIndex="SelectedIndex">
 
-                            <ItemTemplate Context="photo">
-                                <MudImage Src="@($"{Configuration.BackendUrl}/photos/{photo.FullName}")"
-                                          @onclick="@(() => OpenImageDialog(photo))"
+                            <ItemTemplate Context="photoUrl">
+                                <MudImage Src="@photoUrl"
+                                          @onclick="@(() => OpenImageDialog(photoUrl))"
                                           Width="600"
                                           Height="600"
                                           Fluid="true"

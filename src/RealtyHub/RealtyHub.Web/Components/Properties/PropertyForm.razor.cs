@@ -7,6 +7,7 @@ using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.Properties;
 using RealtyHub.Core.Requests.PropertiesPhotos;
 using RealtyHub.Core.Responses;
+using RealtyHub.Web.Services;
 
 namespace RealtyHub.Web.Components.Properties;
 
@@ -26,6 +27,8 @@ public partial class PropertyFormComponent : ComponentBase
     public Property InputModel { get; set; } = new();
     public List<FileData> SelectedFileBytes { get; set; } = [];
     public List<PropertyPhoto> PropertyPhotos { get; set; } = [];
+    public List<string> CombinedPhotos { get; set; } = [];
+    public int SelectedIndex { get; set; }
 
     #endregion
 
@@ -46,6 +49,9 @@ public partial class PropertyFormComponent : ComponentBase
     [Inject]
     public IDialogService DialogService { get; set; } = null!;
 
+    [Inject]
+    public ShowDialogConfirm ShowDialogConfirm { get; set; } = null!;
+
     #endregion
 
     #region Methods
@@ -58,23 +64,29 @@ public partial class PropertyFormComponent : ComponentBase
             Response<Property?> result;
 
             if (InputModel.Id > 0)
+            {
                 result = await PropertyHandler.UpdateAsync(InputModel);
+            }
             else
+            {
                 result = await PropertyHandler.CreateAsync(InputModel);
-
+                if (result.IsSuccess)
+                {
+                    var request = new CreatePropertyPhotosRequest
+                    {
+                        PropertyId = result.Data?.Id ?? 0,
+                        FileBytes = SelectedFileBytes
+                    };
+                    var resultPhotos = await PropertyPhotosHandler.CreateAsync(request);
+                    if (!resultPhotos.IsSuccess)
+                        Snackbar.Add(resultPhotos.Message ?? string.Empty, Severity.Error);
+                }
+            }
+            
             var resultMessage = result.Message ?? string.Empty;
 
             if (result.IsSuccess)
             {
-                var request = new CreatePropertyPhotosRequest
-                {
-                    PropertyId = result.Data?.Id ?? 0,
-                    FileBytes = SelectedFileBytes
-                };
-                var resultPhotos = await PropertyPhotosHandler.CreateAsync(request);
-                if (!resultPhotos.IsSuccess)
-                    Snackbar.Add(resultPhotos.Message ?? string.Empty, Severity.Error);
-
                 Snackbar.Add(resultMessage, Severity.Success);
                 NavigationManager.NavigateTo("/imoveis");
             }
@@ -91,12 +103,50 @@ public partial class PropertyFormComponent : ComponentBase
         }
     }
 
-    public void RemovePhoto(PropertyPhoto propertyPhoto) 
-        => PropertyPhotos.Remove(propertyPhoto);
-
-    public async Task OpenImageDialog(PropertyPhoto propertyPhoto)
+    public async Task RemoveAllPhotos()
     {
-        var photoUrl = $"{Configuration.BackendUrl}/photos/{propertyPhoto.FullName}";
+        var parameters = new DialogParameters
+        {
+            { "ContentText", "Deseja realmente excluir todas as fotos do imóvel?" },
+            { "ButtonColor", Color.Error }
+        };
+
+        var dialog = await DialogService.ShowAsync<DialogConfirm>("Confirmação", parameters);
+        var result = await dialog.Result;
+        if (result is { Canceled: true }) return;
+
+        CombinedPhotos.Clear();
+        SelectedFileBytes.Clear();
+        PropertyPhotos.Clear();
+        StateHasChanged();
+    }
+
+    public async Task RemovePhoto()
+    {
+        var parameters = new DialogParameters
+        {
+            { "ContentText", "Deseja realmente excluir a foto selecionada?" },
+            { "ButtonColor", Color.Error }
+        };
+
+        var dialog = await DialogService.ShowAsync<DialogConfirm>("Confirmação", parameters);
+        var result = await dialog.Result;
+        if (result is { Canceled: true }) return;
+
+        if (SelectedIndex >= 0 && SelectedIndex < CombinedPhotos.Count)
+        {
+            CombinedPhotos.RemoveAt(SelectedIndex);
+
+            SelectedIndex = CombinedPhotos.Count > 0 
+                ? Math.Min(SelectedIndex, CombinedPhotos.Count - 1) 
+                : 0;
+
+            StateHasChanged();
+        }
+    }
+
+    public async Task OpenImageDialog(string photoUrl)
+    {
         var parameters = new DialogParameters { ["ImageUrl"] = photoUrl };
         var options = new DialogOptions
         {
@@ -170,13 +220,20 @@ public partial class PropertyFormComponent : ComponentBase
             using var ms = new MemoryStream();
             await file.OpenReadStream(long.MaxValue).CopyToAsync(ms);
 
-            SelectedFileBytes.Add(new FileData
+            var newFile = new FileData
             {
+                Id = Guid.NewGuid().ToString(),
                 Content = ms.ToArray(),
                 ContentType = file.ContentType,
                 Name = file.Name
-            });
+            };
+
+            SelectedFileBytes.Add(newFile);
+
+            CombinedPhotos.Add($"data:{newFile.ContentType};base64,{Convert.ToBase64String(newFile.Content)}");
         }
+
+        StateHasChanged();
     }
 
     public async Task LoadPhotos()
@@ -186,7 +243,12 @@ public partial class PropertyFormComponent : ComponentBase
             var request = new GetAllPropertyPhotosByPropertyRequest { PropertyId = Id };
             var response = await PropertyPhotosHandler.GetAllByPropertyAsync(request);
             if (response is { IsSuccess: true, Data: not null })
+            {
                 PropertyPhotos = response.Data;
+                foreach (var photo in PropertyPhotos) 
+                    CombinedPhotos.Add($"{Configuration.BackendUrl}/photos/{photo.FullName}");
+            }
+                
             else
                 Snackbar.Add(response.Message ?? string.Empty, Severity.Error);
         }
