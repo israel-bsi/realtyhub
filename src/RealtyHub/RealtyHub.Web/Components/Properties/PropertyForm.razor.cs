@@ -287,7 +287,7 @@ public partial class PropertyFormComponent : ComponentBase
     }
     private void RedirectToCreateProperty()
     {
-        InputModel.PropertyType = EPropertyType.Casa;
+        InputModel.PropertyType = EPropertyType.House;
         NavigationManager.NavigateTo("/imoveis/adicionar");
     }
 

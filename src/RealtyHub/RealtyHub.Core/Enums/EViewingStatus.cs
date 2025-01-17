@@ -4,10 +4,10 @@ namespace RealtyHub.Core.Enums;
 
 public enum EViewingStatus
 {
-    [Display(Name = "Agendado")]
+    [Display(Name = "Agendada")]
     Scheduled = 1,
-    [Display(Name = "Finalizado")]
+    [Display(Name = "Finalizada")]
     Done = 2,
-    [Display(Name = "Cancelado")]
+    [Display(Name = "Cancelada")]
     Canceled = 3
 }
