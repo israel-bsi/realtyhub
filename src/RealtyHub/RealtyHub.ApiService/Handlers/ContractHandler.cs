@@ -16,12 +16,12 @@ public class ContractHandler(AppDbContext context) : IContractHandler
         {
             var offer = await context
                 .Offers
-                .Include(o=>o.Customer)
+                .Include(o => o.Customer)
                 .Include(o => o.Property)
                 .FirstOrDefaultAsync(o => o.Id == request.OfferId);
 
             if (offer is null)
-                return new Response<Contract?>(null, 404, 
+                return new Response<Contract?>(null, 404,
                     "Proposta não encontrada");
 
             if (offer.OfferStatus != EOfferStatus.Accepted)
@@ -38,7 +38,7 @@ public class ContractHandler(AppDbContext context) : IContractHandler
                 TermEndDate = request.TermEndDate,
                 Content = $"Contrato do cliente {offer.Customer.Name}\n" +
                                     $"Documento: {offer.Customer.DocumentNumber}\n" +
-                                    $"Tipo Cliente: {offer.Customer.CustomerType.ToString()}\n" +
+                                    $"Tipo Cliente: {offer.Customer.CustomerType}\n" +
                                     $"Telefone: {offer.Customer.Phone}\n" +
                                     $"Email: {offer.Customer.Email}\n" +
                                     $"Valor: {offer.Amount}\n" +
@@ -56,12 +56,12 @@ public class ContractHandler(AppDbContext context) : IContractHandler
             await context.Contracts.AddAsync(contract);
             await context.SaveChangesAsync();
 
-            return new Response<Contract?>(contract, 201, 
+            return new Response<Contract?>(contract, 201,
                 "Contrato criado com sucesso");
         }
         catch (Exception ex)
         {
-            return new Response<Contract?>(null, 500, 
+            return new Response<Contract?>(null, 500,
                 $"Não foi possível criar o contrato\n{ex.Message}");
         }
     }

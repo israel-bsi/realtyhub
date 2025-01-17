@@ -9,7 +9,7 @@ namespace RealtyHub.ApiService.Endpoints.Offers;
 
 public class UpdateOfferEndpoint : IEndpoint
 {
-    public static void Map(IEndpointRouteBuilder app) 
+    public static void Map(IEndpointRouteBuilder app)
         => app.MapPut("/{id:long}", HandlerAsync)
             .WithName("Offers: Update")
             .WithSummary("Atualiza uma proposta")

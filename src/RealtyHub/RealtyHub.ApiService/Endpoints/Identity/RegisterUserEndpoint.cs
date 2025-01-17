@@ -1,6 +1,4 @@
-﻿using System.Security.Claims;
-using System.Text;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
 using RealtyHub.ApiService.Common.Api;
 using RealtyHub.ApiService.Models;
@@ -8,6 +6,8 @@ using RealtyHub.Core.Requests.Account;
 using RealtyHub.Core.Requests.Emails;
 using RealtyHub.Core.Responses;
 using RealtyHub.Core.Services;
+using System.Security.Claims;
+using System.Text;
 
 namespace RealtyHub.ApiService.Endpoints.Identity;
 
@@ -19,8 +19,8 @@ public class RegisterUserEndpoint : IEndpoint
     }
 
     private static async Task<IResult> HandlerAsync(
-        RegisterRequest request, 
-        UserManager<User> userManager, 
+        RegisterRequest request,
+        UserManager<User> userManager,
         IEmailService emailService,
         LinkGenerator linkGenerator,
         HttpContext httpContext)
@@ -64,8 +64,8 @@ public class RegisterUserEndpoint : IEndpoint
 
         var emailResult = await emailService.SendConfirmationLinkAsync(emailRequest);
 
-        return emailResult.IsSuccess 
-            ? Results.Ok(new Response<string>(null, message: "Usuário registrado com sucesso! Verifique seu e-mail!")) 
+        return emailResult.IsSuccess
+            ? Results.Ok(new Response<string>(null, message: "Usuário registrado com sucesso! Verifique seu e-mail!"))
             : Results.BadRequest(emailResult.Message);
     }
 }

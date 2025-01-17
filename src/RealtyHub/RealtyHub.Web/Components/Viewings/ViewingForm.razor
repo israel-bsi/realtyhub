@@ -22,11 +22,14 @@ else
             
             <MudDatePicker Label="Data da Visita" 
                            @bind-Date="@InputModel.ViewingDate"/>
+            
+            <MudTimePicker Label="Hora da Visita"
+                           @bind-Time="@ViewingTime"/>
 
             @if (Id != 0)
             {
                 <EnumSelect TEnum="EViewingStatus"
-                            Label="Tipo do Imóvel"
+                            Label="Status da Visita"
                             @bind-SelectedValue="InputModel.ViewingStatus"/>
             }
             
@@ -42,13 +45,32 @@ else
                           For="@(() => InputModel.CustomerId)"
                           InputType="InputType.Number" />
             
-            <MudButton ButtonType="ButtonType.Submit"
-                       Variant="Variant.Filled"
-                       Color="Color.Primary"
-                       Class="mt-6"
-                       StartIcon="@Icons.Material.Filled.Save">
-                @Operation
-            </MudButton>
+            <div>
+                <MudButton ButtonType="ButtonType.Submit"
+                           Variant="Variant.Filled"
+                           Color="Color.Primary"
+                           Class="mt-6"
+                           StartIcon="@Icons.Material.Filled.Save">
+                    @Operation
+                </MudButton>
+                @if (Id != 0)
+                {
+                    <MudButton Variant="Variant.Filled"
+                               Color="Color.Primary"
+                               Class="mt-6 ml-2"
+                               StartIcon="@Icons.Material.Filled.Check"
+                               OnClick="OnClickDoneViewing">
+                        Finalizar Visita
+                    </MudButton>
+                    <MudButton Variant="Variant.Filled"
+                               Color="Color.Error"
+                               Class="mt-6 ml-2"
+                               StartIcon="@Icons.Material.Filled.Cancel"
+                               OnClick="OnClickCancelViewing">
+                        Cancelar Visita
+                    </MudButton>
+                }
+            </div>
         </EditForm>
     </MudPaper>
 }

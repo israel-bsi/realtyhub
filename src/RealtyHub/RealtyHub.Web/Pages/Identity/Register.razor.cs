@@ -19,7 +19,7 @@ public partial class RegisterPage : ComponentBase
     [Inject]
     public NavigationManager NavigationManager { get; set; } = null!;
 
-    [Inject] 
+    [Inject]
     public ICookieAuthenticationStateProvider AuthenticationStateProvider { get; set; } = null!;
 
     #endregion

@@ -20,7 +20,7 @@ public static class BuilderExtension
             ?? string.Empty;
         Core.Configuration.BackendUrl = builder.Configuration.GetValue<string>("BackendUrl") ?? string.Empty;
         Core.Configuration.FrontendUrl = builder.Configuration.GetValue<string>("FrontendUrl") ?? string.Empty;
-        Configuration.EmailSettings.EmailPassword = 
+        Configuration.EmailSettings.EmailPassword =
             builder.Configuration.GetValue<string>("EmailPassword") ?? string.Empty;
     }
     public static void AddDocumentation(this WebApplicationBuilder builder)

@@ -1,9 +1,9 @@
-﻿using System.Net.Http.Json;
-using System.Text;
-using RealtyHub.Core.Handlers;
+﻿using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models.Account;
 using RealtyHub.Core.Requests.Account;
 using RealtyHub.Core.Responses;
+using System.Net.Http.Json;
+using System.Text;
 
 namespace RealtyHub.Web.Handlers;
 

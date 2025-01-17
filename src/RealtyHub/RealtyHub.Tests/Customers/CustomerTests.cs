@@ -1,6 +1,6 @@
-﻿using System.Net.Http.Json;
-using RealtyHub.Core.Models;
+﻿using RealtyHub.Core.Models;
 using RealtyHub.Core.Responses;
+using System.Net.Http.Json;
 
 namespace RealtyHub.Tests.Customers;
 

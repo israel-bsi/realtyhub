@@ -1,16 +1,16 @@
+using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor.Services;
+using MudBlazor.Translations;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Services;
-using System.Globalization;
-using Blazored.LocalStorage;
 using RealtyHub.Web;
 using RealtyHub.Web.Handlers;
 using RealtyHub.Web.Security;
 using RealtyHub.Web.Services;
-using MudBlazor.Translations;
+using System.Globalization;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 

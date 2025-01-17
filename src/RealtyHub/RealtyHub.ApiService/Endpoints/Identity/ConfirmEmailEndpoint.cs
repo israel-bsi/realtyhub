@@ -1,11 +1,11 @@
-﻿using System.Security.Claims;
-using System.Text;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
 using RealtyHub.ApiService.Common.Api;
 using RealtyHub.ApiService.Models;
 using RealtyHub.Core.Responses;
+using System.Security.Claims;
+using System.Text;
 
 namespace RealtyHub.ApiService.Endpoints.Identity;
 
@@ -20,7 +20,7 @@ public class ConfirmEmailEndpoint : IEndpoint
     private static async Task<IResult> Handler(
         UserManager<User> userManager,
         ClaimsPrincipal claimsPrincipal,
-        [FromQuery] string userId, 
+        [FromQuery] string userId,
         [FromQuery] string token)
     {
         var user = await userManager.FindByIdAsync(userId);

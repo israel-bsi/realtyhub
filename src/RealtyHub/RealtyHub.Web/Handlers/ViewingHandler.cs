@@ -1,11 +1,8 @@
 ﻿using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
-using RealtyHub.Core.Requests.Properties;
 using RealtyHub.Core.Requests.Viewings;
 using RealtyHub.Core.Responses;
-using System.Net.Http;
 using System.Net.Http.Json;
-using System.Reflection.Metadata.Ecma335;
 
 namespace RealtyHub.Web.Handlers;
 
@@ -23,7 +20,7 @@ public class ViewingHandler(IHttpClientFactory httpClientFactory) : IViewingHand
         if (!result.IsSuccessStatusCode)
             return new Response<Viewing?>(null, 400, data?.Message);
 
-        return data ?? new Response<Viewing?>(null, 400, 
+        return data ?? new Response<Viewing?>(null, 400,
             "Falha ao agendar a visita");
     }
 
@@ -33,7 +30,7 @@ public class ViewingHandler(IHttpClientFactory httpClientFactory) : IViewingHand
             .PutAsJsonAsync($"v1/viewings/{request.Id}/reschedule", request);
 
         return await result.Content.ReadFromJsonAsync<Response<Viewing?>>()
-            ?? new Response<Viewing?>(null, 400, 
+            ?? new Response<Viewing?>(null, 400,
                 "Falha ao reagendar a visita");
     }
 
@@ -43,7 +40,7 @@ public class ViewingHandler(IHttpClientFactory httpClientFactory) : IViewingHand
             .PutAsJsonAsync($"v1/viewings/{request.Id}/done", request);
 
         return await result.Content.ReadFromJsonAsync<Response<Viewing?>>()
-            ?? new Response<Viewing?>(null, 400, 
+            ?? new Response<Viewing?>(null, 400,
                 "Falha ao concluir a visita");
     }
 

@@ -1,8 +1,8 @@
-﻿using System.Security.Claims;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using RealtyHub.ApiService.Common.Api;
 using RealtyHub.ApiService.Models;
 using RealtyHub.Core.Responses;
+using System.Security.Claims;
 
 namespace RealtyHub.ApiService.Endpoints.Identity;
 

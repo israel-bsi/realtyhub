@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
 using RealtyHub.Core.Enums;
 using RealtyHub.Core.Handlers;
+using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.Customers;
+using RealtyHub.Core.Responses;
 using RealtyHub.Web.Services;
 using System.Text.RegularExpressions;
-using RealtyHub.Core.Models;
-using RealtyHub.Core.Responses;
-using Microsoft.AspNetCore.Components.Forms;
 
 namespace RealtyHub.Web.Components.Customers;
 
@@ -182,7 +182,7 @@ public partial class CustomerFormComponent : ComponentBase
         MessageStore = new ValidationMessageStore(EditContext);
         ChangeDocumentMask(InputModel.CustomerType);
     }
-    
+
     #endregion
 
     #region Overrides

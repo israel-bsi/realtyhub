@@ -19,14 +19,15 @@ public partial class ViewingFormComponent : ComponentBase
 
     #region Properties
     public string Operation => Id != 0
-        ? "Agendar" : "Reagendar";
+        ? "Reagendar" : "Agendar";
     public Viewing InputModel { get; set; } = new();
+    public TimeSpan? ViewingTime { get; set; }
     public bool IsBusy { get; set; }
     #endregion
 
     #region Services
 
-    [Inject] 
+    [Inject]
     public IViewingHandler Handler { get; set; } = null!;
 
     [Inject]
@@ -44,6 +45,13 @@ public partial class ViewingFormComponent : ComponentBase
         IsBusy = true;
         try
         {
+            if (InputModel.ViewingDate.HasValue && ViewingTime.HasValue)
+            {
+                InputModel.ViewingDate = InputModel
+                    .ViewingDate.Value.Date.Add(ViewingTime.Value)
+                    .ToUniversalTime();
+            }
+
             Response<Viewing?> result;
             if (Id == 0)
                 result = await Handler.ScheduleAsync(InputModel);
@@ -88,6 +96,7 @@ public partial class ViewingFormComponent : ComponentBase
             InputModel.Property = response.Data.Property;
             InputModel.Customer = response.Data.Customer;
             InputModel.UserId = response.Data.UserId;
+            ViewingTime = InputModel.ViewingDate!.Value.TimeOfDay;
         }
         else
         {
@@ -102,6 +111,16 @@ public partial class ViewingFormComponent : ComponentBase
         NavigationManager.NavigateTo("/visitas/agendar");
     }
 
+    public async Task OnClickDoneViewing()
+    {
+        Snackbar.Add($"Visita {InputModel.Id} finalizada", Severity.Info);
+    }
+
+    public async Task OnClickCancelViewing()
+    {
+        Snackbar.Add($"Visita {InputModel.Id} cancelada", Severity.Info);
+    }
+
     #endregion
 
     #region Overrides
@@ -111,7 +130,7 @@ public partial class ViewingFormComponent : ComponentBase
         IsBusy = true;
         try
         {
-            if (Id != 0) 
+            if (Id != 0)
                 await LoadViewingAsync();
             else
                 RedirectToCreateViewing();

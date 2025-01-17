@@ -11,8 +11,8 @@ public class CustomerFake
     {
         var businessCustomerFake = new Faker<Customer>(Configuration.Locale)
             .RuleFor(c => c.Name, c => c.Company.CompanyName())
-            .RuleFor(c => c.Email, c=> c.Person.Email)
-            .RuleFor(c => c.Phone, c=> c.Phone.PhoneNumber("###########"))
+            .RuleFor(c => c.Email, c => c.Person.Email)
+            .RuleFor(c => c.Phone, c => c.Phone.PhoneNumber("###########"))
             .RuleFor(c => c.DocumentNumber, c => c.Company.Cnpj(false))
             .RuleFor(c => c.CustomerType, ECustomerType.Business)
             .RuleFor(c => c.Address, AddressFake.GetFakeAddress)
@@ -35,5 +35,5 @@ public class CustomerFake
 
         return individualCustomerFake.Generate(quantity);
     }
- 
+
 }

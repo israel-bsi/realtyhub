@@ -1,7 +1,7 @@
-﻿using System.Text.Json;
-using RealtyHub.Core.Models;
+﻿using RealtyHub.Core.Models;
 using RealtyHub.Core.Responses;
 using RealtyHub.Core.Services;
+using System.Text.Json;
 
 namespace RealtyHub.Web.Services;
 

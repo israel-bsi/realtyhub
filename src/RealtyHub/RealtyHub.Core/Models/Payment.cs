@@ -1,5 +1,5 @@
-﻿using System.Text.Json.Serialization;
-using RealtyHub.Core.Enums;
+﻿using RealtyHub.Core.Enums;
+using System.Text.Json.Serialization;
 
 namespace RealtyHub.Core.Models;
 

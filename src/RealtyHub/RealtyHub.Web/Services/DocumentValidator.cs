@@ -16,14 +16,14 @@ public class DocumentValidator
             return false;
 
         var soma = 0;
-        for (var i = 0; i < 9; i++) 
+        for (var i = 0; i < 9; i++)
             soma += (cpf[i] - '0') * (10 - i);
 
         var resto = soma % 11;
         var digitoVerificador1 = resto < 2 ? 0 : 11 - resto;
 
         soma = 0;
-        for (var i = 0; i < 10; i++) 
+        for (var i = 0; i < 10; i++)
             soma += (cpf[i] - '0') * (11 - i);
 
         resto = soma % 11;
@@ -57,7 +57,7 @@ public class DocumentValidator
         var digitoVerificador1 = resto < 2 ? 0 : 11 - resto;
 
         soma = 0;
-        for (var i = 0; i < 13; i++) 
+        for (var i = 0; i < 13; i++)
             soma += (cnpj[i] - '0') * peso2[i];
 
         resto = soma % 11;

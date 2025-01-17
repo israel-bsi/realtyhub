@@ -1,9 +1,9 @@
 ﻿using RealtyHub.ApiService.Common.Api;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
+using RealtyHub.Core.Requests.PropertiesPhotos;
 using RealtyHub.Core.Responses;
 using System.Security.Claims;
-using RealtyHub.Core.Requests.PropertiesPhotos;
 
 namespace RealtyHub.ApiService.Endpoints.Properties;
 public class DeletePropertyPhotoEndpoint : IEndpoint
@@ -21,7 +21,7 @@ public class DeletePropertyPhotoEndpoint : IEndpoint
     private static async Task<IResult> HandlerAsync(
         long id,
         IPropertyPhotosHandler handler,
-        ClaimsPrincipal user, 
+        ClaimsPrincipal user,
         string photoId)
     {
         var request = new DeletePropertyPhotoRequest

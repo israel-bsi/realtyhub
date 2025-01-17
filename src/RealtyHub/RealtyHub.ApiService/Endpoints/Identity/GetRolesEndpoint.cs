@@ -1,6 +1,6 @@
-﻿using System.Security.Claims;
-using RealtyHub.ApiService.Common.Api;
+﻿using RealtyHub.ApiService.Common.Api;
 using RealtyHub.Core.Models.Account;
+using System.Security.Claims;
 
 namespace RealtyHub.ApiService.Endpoints.Identity;
 

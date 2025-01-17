@@ -173,7 +173,7 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
                 $"Não foi possível retornar os imóveis\n{ex.Message}");
         }
     }
-    
+
     public async Task<Response<List<Viewing>?>> GetAllViewingsAsync(GetAllViewingsByPropertyRequest request)
     {
         try

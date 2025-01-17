@@ -1,9 +1,9 @@
-﻿using System.Security.Claims;
-using RealtyHub.ApiService.Common.Api;
+﻿using RealtyHub.ApiService.Common.Api;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.PropertiesPhotos;
 using RealtyHub.Core.Responses;
+using System.Security.Claims;
 
 namespace RealtyHub.ApiService.Endpoints.Properties;
 

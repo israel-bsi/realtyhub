@@ -20,7 +20,7 @@ public class PropertyHandler(IHttpClientFactory httpClientFactory) : IPropertyHa
         if (!result.IsSuccessStatusCode)
             return new Response<Property?>(null, 400, data?.Message);
 
-        return data ?? new Response<Property?>(null, 400, 
+        return data ?? new Response<Property?>(null, 400,
             "Falha ao criar o imóvel");
     }
 
@@ -30,7 +30,7 @@ public class PropertyHandler(IHttpClientFactory httpClientFactory) : IPropertyHa
             .PutAsJsonAsync($"v1/properties/{request.Id}", request);
 
         return await result.Content.ReadFromJsonAsync<Response<Property?>>()
-            ?? new Response<Property?>(null, 400, 
+            ?? new Response<Property?>(null, 400,
                 "Falha ao atualizar o imóvel");
     }
 
@@ -40,7 +40,7 @@ public class PropertyHandler(IHttpClientFactory httpClientFactory) : IPropertyHa
             .DeleteAsync($"v1/properties/{request.Id}");
 
         return await result.Content.ReadFromJsonAsync<Response<Property?>>()
-               ?? new Response<Property?>(null, 400, 
+               ?? new Response<Property?>(null, 400,
                    "Falha ao excluir o imóvel");
     }
 
@@ -49,7 +49,7 @@ public class PropertyHandler(IHttpClientFactory httpClientFactory) : IPropertyHa
         var response = await _httpClient.GetAsync($"v1/properties/{request.Id}");
 
         if (!response.IsSuccessStatusCode)
-            return new Response<Property?>(null, 400, 
+            return new Response<Property?>(null, 400,
                 "Não foi possível obter o imóvel");
 
         var property = await response.Content.ReadFromJsonAsync<Response<Property?>>();
@@ -67,7 +67,7 @@ public class PropertyHandler(IHttpClientFactory httpClientFactory) : IPropertyHa
             url = $"{url}&searchTerm={request.SearchTerm}";
 
         return await _httpClient.GetFromJsonAsync<PagedResponse<List<Property>?>>(url)
-               ?? new PagedResponse<List<Property>?>(null, 400, 
+               ?? new PagedResponse<List<Property>?>(null, 400,
                    "Não foi possível obter os imóveis");
     }
 
@@ -77,12 +77,12 @@ public class PropertyHandler(IHttpClientFactory httpClientFactory) : IPropertyHa
             .GetAsync($"v1/properties/{request.PropertyId}/viewings");
 
         if (!response.IsSuccessStatusCode)
-            return new Response<List<Viewing>?>(null, 400, 
+            return new Response<List<Viewing>?>(null, 400,
                 "Não foi possível obter as visitas");
 
         var viewings = await response.Content.ReadFromJsonAsync<Response<List<Viewing>?>>();
         return viewings is null
-            ? new Response<List<Viewing>?>(null, 400, 
+            ? new Response<List<Viewing>?>(null, 400,
                 "Não foi possível obter as visitas")
             : new Response<List<Viewing>?>(viewings.Data);
     }

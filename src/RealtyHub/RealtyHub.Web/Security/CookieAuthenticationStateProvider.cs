@@ -1,11 +1,11 @@
-﻿using System.Net.Http.Json;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Components.Authorization;
+﻿using Microsoft.AspNetCore.Components.Authorization;
 using RealtyHub.Core.Models.Account;
+using System.Net.Http.Json;
+using System.Security.Claims;
 
 namespace RealtyHub.Web.Security;
 
-public class CookieAuthenticationStateProvider(IHttpClientFactory clientFactory) : 
+public class CookieAuthenticationStateProvider(IHttpClientFactory clientFactory) :
     AuthenticationStateProvider, ICookieAuthenticationStateProvider
 {
     private readonly HttpClient _httpClient = clientFactory.CreateClient(Configuration.HttpClientName);
@@ -60,8 +60,8 @@ public class CookieAuthenticationStateProvider(IHttpClientFactory clientFactory)
 
         claims.AddRange(
             user.Claims
-                .Where(x=> x.Key != ClaimTypes.Name && x.Key != ClaimTypes.Email)
-                .Select(x=> new Claim(x.Key, x.Value))
+                .Where(x => x.Key != ClaimTypes.Name && x.Key != ClaimTypes.Email)
+                .Select(x => new Claim(x.Key, x.Value))
         );
 
         RoleClaim[]? roles;

@@ -1,8 +1,8 @@
-﻿using System.Net.Http.Json;
-using RealtyHub.Core.Handlers;
+﻿using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.Customers;
 using RealtyHub.Core.Responses;
+using System.Net.Http.Json;
 
 namespace RealtyHub.Web.Handlers;
 
@@ -55,7 +55,7 @@ public class CustomerHandler(IHttpClientFactory httpClientFactory) : ICustomerHa
     {
         var url = $"v1/customers?pageNumber={request.PageNumber}&pageSize={request.PageSize}";
 
-        if (!string.IsNullOrEmpty(request.SearchTerm)) 
+        if (!string.IsNullOrEmpty(request.SearchTerm))
             url = $"{url}&searchTerm={request.SearchTerm}";
 
         return await _httpClient.GetFromJsonAsync<PagedResponse<List<Customer>?>>(url)

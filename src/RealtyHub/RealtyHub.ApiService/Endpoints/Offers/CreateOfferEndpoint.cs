@@ -1,15 +1,15 @@
-﻿using System.Security.Claims;
-using RealtyHub.ApiService.Common.Api;
+﻿using RealtyHub.ApiService.Common.Api;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.Offers;
 using RealtyHub.Core.Responses;
+using System.Security.Claims;
 
 namespace RealtyHub.ApiService.Endpoints.Offers;
 
 public class CreateOfferEndpoint : IEndpoint
 {
-    public static void Map(IEndpointRouteBuilder app) 
+    public static void Map(IEndpointRouteBuilder app)
         => app.MapPost("/", HandlerAsync)
             .WithName("Offers: Create")
             .WithSummary("Cria uma proposta")

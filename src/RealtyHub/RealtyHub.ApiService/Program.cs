@@ -1,7 +1,7 @@
-using System.Globalization;
 using RealtyHub.ApiService;
 using RealtyHub.ApiService.Common.Api;
 using RealtyHub.ApiService.Endpoints;
+using System.Globalization;
 
 CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("pt-BR");
 CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("pt-BR");

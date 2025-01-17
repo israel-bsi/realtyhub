@@ -1,9 +1,9 @@
 ﻿using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
+using RealtyHub.Core.Requests.PropertiesPhotos;
 using RealtyHub.Core.Responses;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
-using RealtyHub.Core.Requests.PropertiesPhotos;
 
 namespace RealtyHub.Web.Handlers;
 

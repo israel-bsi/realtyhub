@@ -1,8 +1,8 @@
-﻿using System.Net;
-using System.Net.Mail;
-using RealtyHub.Core.Requests.Emails;
+﻿using RealtyHub.Core.Requests.Emails;
 using RealtyHub.Core.Responses;
 using RealtyHub.Core.Services;
+using System.Net;
+using System.Net.Mail;
 
 namespace RealtyHub.ApiService.Services;
 
@@ -27,8 +27,8 @@ public class EmailService : IEmailService
         catch (Exception ex)
         {
             return Task.FromResult(new Response<bool>(
-                false, 
-                (int)HttpStatusCode.InternalServerError, 
+                false,
+                (int)HttpStatusCode.InternalServerError,
                 ex.Message));
         }
     }

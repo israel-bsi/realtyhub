@@ -1,13 +1,12 @@
-﻿using Aspire.Hosting.ApplicationModel;
-using RealtyHub.ApiService.Data;
-using System.Net.Http.Json;
+﻿using RealtyHub.ApiService.Data;
 using RealtyHub.Core.Utilities.FakeEntities;
+using System.Net.Http.Json;
 
 namespace RealtyHub.Tests;
 
 public class MockData
 {
-    public static async Task CreateCustomers(RealtyHubApiTests application, 
+    public static async Task CreateCustomers(RealtyHubApiTests application,
         bool create, int quantityBusiness, int quantityIndividual)
     {
         using var scoce = application.Services.CreateScope();

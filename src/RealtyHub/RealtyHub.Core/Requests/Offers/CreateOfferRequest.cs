@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-using RealtyHub.Core.Enums;
+﻿using RealtyHub.Core.Enums;
 using RealtyHub.Core.Requests.Payments;
+using System.ComponentModel.DataAnnotations;
 
 namespace RealtyHub.Core.Requests.Offers;
 

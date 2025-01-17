@@ -2,28 +2,27 @@
 
 #nullable disable
 
-namespace RealtyHub.ApiService.Migrations
+namespace RealtyHub.ApiService.Migrations;
+
+/// <inheritdoc />
+public partial class v3 : Migration
 {
     /// <inheritdoc />
-    public partial class v3 : Migration
+    protected override void Up(MigrationBuilder migrationBuilder)
     {
-        /// <inheritdoc />
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropColumn(
-                name: "FullName",
-                table: "PropertyPhotos");
-        }
+        migrationBuilder.DropColumn(
+            name: "FullName",
+            table: "PropertyPhotos");
+    }
 
-        /// <inheritdoc />
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.AddColumn<string>(
-                name: "FullName",
-                table: "PropertyPhotos",
-                type: "text",
-                nullable: false,
-                defaultValue: "");
-        }
+    /// <inheritdoc />
+    protected override void Down(MigrationBuilder migrationBuilder)
+    {
+        migrationBuilder.AddColumn<string>(
+            name: "FullName",
+            table: "PropertyPhotos",
+            type: "text",
+            nullable: false,
+            defaultValue: "");
     }
 }

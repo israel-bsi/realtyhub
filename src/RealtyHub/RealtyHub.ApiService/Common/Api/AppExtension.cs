@@ -15,8 +15,8 @@ public static class AppExtension
         app.MapSwagger().RequireAuthorization();
 
         app.MapPost("v1/customers/createmany", async (
-                AppDbContext context, 
-                [FromQuery] int individualQuantity = 0, 
+                AppDbContext context,
+                [FromQuery] int individualQuantity = 0,
                 [FromQuery] int bussinessQuantity = 0) =>
         {
             if (individualQuantity > 0)
@@ -29,7 +29,7 @@ public static class AppExtension
             {
                 var businessCustomers = CustomerFake.GetFakeBusinessCustomers(bussinessQuantity);
                 await context.Customers.AddRangeAsync(businessCustomers);
-                
+
             }
 
             await context.SaveChangesAsync();
