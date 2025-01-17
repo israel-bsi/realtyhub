@@ -56,7 +56,6 @@ public class PropertyPhotosHandler(AppDbContext context) : IPropertyPhotosHandle
                 {
                     Id = idPhoto,
                     Extension = extension,
-                    FullName = idPhoto + extension,
                     PropertyId = request.PropertyId,
                     Property = property,
                     IsActive = true,
@@ -94,6 +93,7 @@ public class PropertyPhotosHandler(AppDbContext context) : IPropertyPhotosHandle
             context.Attach(propertyPhoto);
 
             propertyPhoto.IsActive = false;
+            propertyPhoto.UpdatedAt = DateTime.UtcNow;
 
             await context.SaveChangesAsync();
 

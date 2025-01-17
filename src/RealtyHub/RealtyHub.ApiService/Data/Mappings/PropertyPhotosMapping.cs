@@ -15,9 +15,6 @@ public class PropertyPhotosMapping : IEntityTypeConfiguration<PropertyPhoto>
         builder.Property(pi => pi.Extension)
             .IsRequired();
 
-        builder.Property(pi => pi.FullName)
-            .IsRequired();
-
         builder.Property(c => c.UserId)
             .IsRequired();
 

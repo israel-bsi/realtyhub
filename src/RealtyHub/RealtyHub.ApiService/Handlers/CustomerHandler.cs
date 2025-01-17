@@ -99,6 +99,7 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
                     "Cliente não encontrado");
 
             customer.IsActive = false;
+            customer.UpdatedAt = DateTime.UtcNow;
 
             await context.SaveChangesAsync();
 

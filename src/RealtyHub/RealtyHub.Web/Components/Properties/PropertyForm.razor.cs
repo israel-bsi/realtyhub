@@ -25,11 +25,10 @@ public partial class PropertyFormComponent : ComponentBase
         ? "Editar" : "Cadastrar";
     public bool IsBusy { get; set; }
     public Property InputModel { get; set; } = new();
-    public List<FileData> SelectedFileBytes { get; set; } = [];
     public List<PropertyPhoto> PropertyPhotos { get; set; } = [];
-    public List<string> CombinedPhotos { get; set; } = [];
+    public List<PhotoItem> AllPhotos { get; set; } = [];
     public int SelectedIndex { get; set; }
-
+    public int CarouselKey { get; set; }
     #endregion
 
     #region Services
@@ -64,34 +63,23 @@ public partial class PropertyFormComponent : ComponentBase
             Response<Property?> result;
 
             if (InputModel.Id > 0)
-            {
                 result = await PropertyHandler.UpdateAsync(InputModel);
-            }
             else
-            {
                 result = await PropertyHandler.CreateAsync(InputModel);
-                if (result.IsSuccess)
-                {
-                    var request = new CreatePropertyPhotosRequest
-                    {
-                        PropertyId = result.Data?.Id ?? 0,
-                        FileBytes = SelectedFileBytes
-                    };
-                    var resultPhotos = await PropertyPhotosHandler.CreateAsync(request);
-                    if (!resultPhotos.IsSuccess)
-                        Snackbar.Add(resultPhotos.Message ?? string.Empty, Severity.Error);
-                }
-            }
-            
-            var resultMessage = result.Message ?? string.Empty;
 
-            if (result.IsSuccess)
+            if (!result.IsSuccess)
             {
-                Snackbar.Add(resultMessage, Severity.Success);
-                NavigationManager.NavigateTo("/imoveis");
+                Snackbar.Add(result.Message ?? string.Empty, Severity.Error);
+                return;
             }
-            else
-                Snackbar.Add(resultMessage, Severity.Error);
+
+            InputModel.Id = result.Data?.Id ?? 0;
+
+            await DeleteRemovedServerPhotos();
+            await UpdateServerPhotos();
+
+            Snackbar.Add(result.Message ?? string.Empty, Severity.Success);
+            NavigationManager.NavigateTo("/imoveis");
         }
         catch (Exception e)
         {
@@ -102,7 +90,50 @@ public partial class PropertyFormComponent : ComponentBase
             IsBusy = false;
         }
     }
+    private async Task UpdateServerPhotos()
+    {
+        var newPhotos = AllPhotos.Where(p => string.IsNullOrEmpty(p.Id)).ToList();
+        if (newPhotos.Count > 0)
+        {
+            var request = new CreatePropertyPhotosRequest
+            {
+                PropertyId = InputModel.Id,
+                FileBytes = newPhotos.Select(p => new FileData
+                {
+                    Content = p.Content!,
+                    ContentType = p.ContentType!,
+                    Name = p.OriginalFileName!
+                }).ToList()
+            };
 
+            var resultPhotos = await PropertyPhotosHandler.CreateAsync(request);
+            if (!resultPhotos.IsSuccess)
+                Snackbar.Add(resultPhotos.Message ?? string.Empty, Severity.Error);
+        }
+    }
+    private async Task DeleteRemovedServerPhotos()
+    {
+        var oldServerPhotosIds = PropertyPhotos
+            .Select(p => p.Id)
+            .ToList();
+
+        var currentServerPhotosIds = AllPhotos
+            .Where(p => !string.IsNullOrEmpty(p.Id))
+            .Select(p => p.Id)
+            .ToList();
+
+        var removedIds = oldServerPhotosIds.Except(currentServerPhotosIds).ToList();
+
+        foreach (var photoId in removedIds)
+        {
+            var deleteReq = new DeletePropertyPhotoRequest { Id = photoId, PropertyId = InputModel.Id };
+            var resp = await PropertyPhotosHandler.DeleteAsync(deleteReq);
+            if (!resp.IsSuccess)
+            {
+                Snackbar.Add(resp.Message ?? $"Erro ao excluir foto {photoId}", Severity.Error);
+            }
+        }
+    }
     public async Task RemoveAllPhotos()
     {
         var parameters = new DialogParameters
@@ -115,12 +146,10 @@ public partial class PropertyFormComponent : ComponentBase
         var result = await dialog.Result;
         if (result is { Canceled: true }) return;
 
-        CombinedPhotos.Clear();
-        SelectedFileBytes.Clear();
-        PropertyPhotos.Clear();
+        CarouselKey++;
+        AllPhotos.Clear();
         StateHasChanged();
     }
-
     public async Task RemovePhoto()
     {
         var parameters = new DialogParameters
@@ -133,18 +162,21 @@ public partial class PropertyFormComponent : ComponentBase
         var result = await dialog.Result;
         if (result is { Canceled: true }) return;
 
-        if (SelectedIndex >= 0 && SelectedIndex < CombinedPhotos.Count)
+        Snackbar.Add(SelectedIndex.ToString(), Severity.Info);
+        if (SelectedIndex >= 0 && SelectedIndex < AllPhotos.Count)
         {
-            CombinedPhotos.RemoveAt(SelectedIndex);
+            AllPhotos.RemoveAt(SelectedIndex);
 
-            SelectedIndex = CombinedPhotos.Count > 0 
-                ? Math.Min(SelectedIndex, CombinedPhotos.Count - 1) 
+            SelectedIndex = AllPhotos.Count > 0
+                ? Math.Min(SelectedIndex, AllPhotos.Count - 1)
                 : 0;
 
-            StateHasChanged();
+            Snackbar.Add(SelectedIndex.ToString(), Severity.Info);
         }
-    }
 
+        CarouselKey++;
+        StateHasChanged();
+    }
     public async Task OpenImageDialog(string photoUrl)
     {
         var parameters = new DialogParameters { ["ImageUrl"] = photoUrl };
@@ -154,9 +186,58 @@ public partial class PropertyFormComponent : ComponentBase
             MaxWidth = MaxWidth.Large,
             FullWidth = true
         };
-        await DialogService.ShowAsync<ImageDialog>("Imagem Ampliada", parameters, options);
+        await DialogService.ShowAsync<ImageDialog>(null, parameters, options);
     }
+    public async Task OnFilesChange(IReadOnlyList<IBrowserFile>? files)
+    {
+        if (files is null) return;
+        foreach (var file in files)
+        {
+            using var ms = new MemoryStream();
+            await file.OpenReadStream(long.MaxValue).CopyToAsync(ms);
 
+            var newBytes = ms.ToArray();
+            var base64 = Convert.ToBase64String(newBytes);
+            var dataUri = $"data:{file.ContentType};base64,{base64}";
+
+            AllPhotos.Add(new PhotoItem
+            {
+                DisplayUrl = dataUri,
+                Content = newBytes,
+                ContentType = file.ContentType,
+                OriginalFileName = file.Name
+            });
+        }
+
+        CarouselKey++;
+        StateHasChanged();
+    }
+    public async Task LoadPhotosFromServerAsync()
+    {
+        try
+        {
+            var request = new GetAllPropertyPhotosByPropertyRequest { PropertyId = Id };
+            var response = await PropertyPhotosHandler.GetAllByPropertyAsync(request);
+            if (response is { IsSuccess: true, Data: not null })
+            {
+                PropertyPhotos = response.Data;
+                foreach (var photo in PropertyPhotos)
+                {
+                    AllPhotos.Add(new PhotoItem
+                    {
+                        Id = photo.Id,
+                        DisplayUrl = $"{Configuration.BackendUrl}/photos/{photo.Id}{photo.Extension}",
+                    });
+                }
+            }
+            else
+                Snackbar.Add(response.Message ?? string.Empty, Severity.Error);
+        }
+        catch (Exception e)
+        {
+            Snackbar.Add(e.Message, Severity.Error);
+        }
+    }
     private async Task LoadPropertyAsync()
     {
         GetPropertyByIdRequest? request = null;
@@ -197,7 +278,7 @@ public partial class PropertyFormComponent : ComponentBase
             InputModel.PropertyPhotos = response.Data.PropertyPhotos;
             InputModel.IsActive = response.Data.IsActive;
             InputModel.UserId = response.Data.UserId;
-            await LoadPhotos();
+            await LoadPhotosFromServerAsync();
         }
         else
         {
@@ -205,58 +286,12 @@ public partial class PropertyFormComponent : ComponentBase
             NavigationManager.NavigateTo("/imoveis");
         }
     }
-
     private void RedirectToCreateProperty()
     {
         InputModel.PropertyType = EPropertyType.Casa;
         NavigationManager.NavigateTo("/imoveis/adicionar");
     }
 
-    public async Task OnFilesChange(IReadOnlyList<IBrowserFile>? files)
-    {
-        if (files is null) return;
-        foreach (var file in files)
-        {
-            using var ms = new MemoryStream();
-            await file.OpenReadStream(long.MaxValue).CopyToAsync(ms);
-
-            var newFile = new FileData
-            {
-                Id = Guid.NewGuid().ToString(),
-                Content = ms.ToArray(),
-                ContentType = file.ContentType,
-                Name = file.Name
-            };
-
-            SelectedFileBytes.Add(newFile);
-
-            CombinedPhotos.Add($"data:{newFile.ContentType};base64,{Convert.ToBase64String(newFile.Content)}");
-        }
-
-        StateHasChanged();
-    }
-
-    public async Task LoadPhotos()
-    {
-        try
-        {
-            var request = new GetAllPropertyPhotosByPropertyRequest { PropertyId = Id };
-            var response = await PropertyPhotosHandler.GetAllByPropertyAsync(request);
-            if (response is { IsSuccess: true, Data: not null })
-            {
-                PropertyPhotos = response.Data;
-                foreach (var photo in PropertyPhotos) 
-                    CombinedPhotos.Add($"{Configuration.BackendUrl}/photos/{photo.FullName}");
-            }
-                
-            else
-                Snackbar.Add(response.Message ?? string.Empty, Severity.Error);
-        }
-        catch (Exception e)
-        {
-            Snackbar.Add(e.Message, Severity.Error);
-        }
-    }
     #endregion
 
     #region Overrides
@@ -283,4 +318,3 @@ public partial class PropertyFormComponent : ComponentBase
 
     #endregion
 }
-

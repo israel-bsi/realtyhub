@@ -155,18 +155,19 @@ else
                 <MudItem xs="12" sm="10" md="8" lg="6" xl="4">
                     @if (PropertyPhotos.Count > 0)
                     {
-                        <MudCarousel ItemsSource="@CombinedPhotos"
+                        <MudCarousel ItemsSource="@AllPhotos"
                                      ShowArrows="true"
                                      ShowBullets="true"
                                      AutoCycle="false"
                                      Class="cursor-pointer mud-width-full d-flex justify-center align-center"
                                      Style="width: 100%; height: 90vh; align-self: center"
-                                     TData="string" 
-                                     @bind-SelectedIndex="SelectedIndex">
+                                     TData="PhotoItem"
+                                     @bind-SelectedIndex="SelectedIndex" 
+                                     @key="@CarouselKey">
 
-                            <ItemTemplate Context="photoUrl">
-                                <MudImage Src="@photoUrl"
-                                          @onclick="@(() => OpenImageDialog(photoUrl))"
+                            <ItemTemplate Context="photoItem">
+                                <MudImage Src="@photoItem.DisplayUrl"
+                                          @onclick="@(() => OpenImageDialog(photoItem.DisplayUrl))"
                                           Width="600"
                                           Height="600"
                                           Fluid="true"

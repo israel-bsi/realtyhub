@@ -119,6 +119,7 @@ public class ContractHandler(AppDbContext context) : IContractHandler
                     "Contrato não encontrado");
 
             contract.IsActive = false;
+            contract.UpdatedAt = DateTime.UtcNow;
             await context.SaveChangesAsync();
 
             return new Response<Contract?>(contract, 200,

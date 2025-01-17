@@ -128,6 +128,7 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
             }
 
             viewing.Status = EViewingStatus.Done;
+            viewing.UpdatedAt = DateTime.UtcNow;
 
             await context.SaveChangesAsync();
 
@@ -165,6 +166,7 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
             }
 
             viewing.Status = EViewingStatus.Canceled;
+            viewing.UpdatedAt = DateTime.UtcNow;
 
             await context.SaveChangesAsync();
 
