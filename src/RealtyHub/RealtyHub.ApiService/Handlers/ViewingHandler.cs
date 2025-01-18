@@ -223,6 +223,14 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
                 .Include(v => v.Property)
                 .Where(v => v.UserId == request.UserId);
 
+            if (request.StartDate is not null && request.EndDate is not null)
+            {
+                query = query.Where(v => v.ViewingDate >= request.StartDate
+                                         && v.ViewingDate <= request.EndDate);
+            }
+
+            query = query.OrderBy(v => v.ViewingDate);
+
             var viewings = await query
                 .Skip((request.PageNumber - 1) * request.PageSize)
                 .Take(request.PageSize)

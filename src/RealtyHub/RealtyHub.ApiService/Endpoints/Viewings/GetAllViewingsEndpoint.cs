@@ -21,6 +21,8 @@ public class GetAllViewingsEndpoint : IEndpoint
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
         IViewingHandler handler,
+        [FromQuery] DateTime? startDate,
+        [FromQuery] DateTime? endDate,
         [FromQuery] int pageNumber = Core.Configuration.DefaultPageNumber,
         [FromQuery] int pageSize = Core.Configuration.DefaultPageSize)
     {
@@ -28,7 +30,9 @@ public class GetAllViewingsEndpoint : IEndpoint
         {
             UserId = user.Identity?.Name ?? string.Empty,
             PageNumber = pageNumber,
-            PageSize = pageSize
+            PageSize = pageSize,
+            StartDate = startDate,
+            EndDate = endDate
         };
         var result = await handler.GetAllAsync(request);
 

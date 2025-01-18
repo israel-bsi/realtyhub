@@ -184,8 +184,15 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
                 .Include(v => v.Customer)
                 .Include(v => v.Property)
                 .Where(v => v.PropertyId == request.PropertyId
-                            && v.UserId == request.UserId)
-                .OrderBy(v => v.ViewingDate);
+                            && v.UserId == request.UserId);
+
+            if (request.StartDate is not null && request.EndDate is not null)
+            {
+                query = query.Where(v => v.ViewingDate >= request.StartDate
+                                         && v.ViewingDate <= request.EndDate);
+            }
+
+            query = query.OrderBy(v => v.ViewingDate);
 
             var viewings = await query
                 .Skip((request.PageNumber - 1) * request.PageSize)
