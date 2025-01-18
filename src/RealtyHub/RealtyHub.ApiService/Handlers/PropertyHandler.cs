@@ -174,24 +174,32 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
         }
     }
 
-    public async Task<Response<List<Viewing>?>> GetAllViewingsAsync(GetAllViewingsByPropertyRequest request)
+    public async Task<PagedResponse<List<Viewing>?>> GetAllViewingsAsync(GetAllViewingsByPropertyRequest request)
     {
         try
         {
-            var viewings = await context
+            var query = context
                 .Viewing
                 .AsNoTracking()
                 .Include(v => v.Customer)
                 .Include(v => v.Property)
                 .Where(v => v.PropertyId == request.PropertyId
                             && v.UserId == request.UserId)
+                .OrderBy(v => v.ViewingDate);
+
+            var viewings = await query
+                .Skip((request.PageNumber - 1) * request.PageSize)
+                .Take(request.PageSize)
                 .ToListAsync();
 
-            return new Response<List<Viewing>?>(viewings);
+            var count = await query.CountAsync();
+
+            return new PagedResponse<List<Viewing>?>(
+                viewings, count, request.PageNumber, request.PageSize);
         }
         catch (Exception e)
         {
-            return new Response<List<Viewing>?>(null, 500,
+            return new PagedResponse<List<Viewing>?>(null, 500,
                 $"Não foi possível retornar as visitas\n{e.Message}");
         }
     }

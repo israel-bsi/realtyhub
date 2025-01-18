@@ -4,5 +4,5 @@ namespace RealtyHub.Web.Pages.Viewings;
 
 public partial class ListViewingsPage : ComponentBase
 {
-
+    
 }

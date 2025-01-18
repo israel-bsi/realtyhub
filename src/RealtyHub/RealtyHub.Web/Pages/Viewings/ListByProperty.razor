@@ -1,0 +1,66 @@
+﻿@page "/visitas/imoveis/{propertyId:long}"
+@using RealtyHub.Core.Extensions
+@using RealtyHub.Core.Models
+@inherits ListViewingsByPropertyPage
+
+<PageTitle>Visitas</PageTitle>
+
+<MudText Typo="Typo.h5">Visitas agendadas para o imóvel @Property.Title</MudText>
+
+<div class="d-flex justify-end">
+    <MudButton Variant="Variant.Filled"
+               Color="Color.Primary"
+               StartIcon="@Icons.Material.Filled.ScheduleSend"
+               OnClick="OnScheduleButtonClickedAsync">
+        Agendar nova visita
+    </MudButton>
+</div>
+
+<MudDataGrid T="Viewing"
+             Class="mt-4"
+             ServerData="LoadServerData"
+             @ref="DataGrid"
+             Filterable="true"
+             Hideable="true"
+             RowsPerPage="@Core.Configuration.DefaultPageSize">
+
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">Visitas</MudText>
+        <MudSpacer />
+        <MudDateRangePicker PickerVariant="PickerVariant.Dialog"
+                            Label="Escolha a data da visita"
+                            @bind-DateRange="DateRange" />
+    </ToolBarContent>
+    <Columns>
+        <PropertyColumn Property="v=>v.ViewingDate" Title="Data"></PropertyColumn>
+        <PropertyColumn Property="v=>v.Customer!.Name" Title="Cliente"></PropertyColumn>
+        <PropertyColumn Property="v=>v.Property!.Title" Title="Imóvel"></PropertyColumn>
+        <TemplateColumn Title="Status">
+            <CellTemplate>
+                @context.Item.ViewingStatus.GetDisplayName()
+            </CellTemplate>
+        </TemplateColumn>
+        <TemplateColumn Class="justify-end" Title="Ações">
+            <CellTemplate>
+                <MudStack Row>
+                    <MudTooltip Text="Reagendar">
+                        <MudIconButton Icon="@Icons.Material.Filled.Schedule" 
+                                       Color="Color.Primary" 
+                                       OnClick="() => OnRescheduleButtonClickedAsync(context.Item)" />
+                    </MudTooltip>
+                    <MudTooltip Text="Finalizar">
+                        <MudIconButton Icon="@Icons.Material.Filled.Done" 
+                                       Color="Color.Primary" />
+                    </MudTooltip>
+                    <MudTooltip Text="Cancelar">
+                        <MudIconButton Icon="@Icons.Material.Filled.Cancel" 
+                                       Color="Color.Error" />
+                    </MudTooltip>
+                </MudStack>
+            </CellTemplate>
+        </TemplateColumn>
+    </Columns>
+    <PagerContent>
+        <MudDataGridPager T="Viewing"/>
+    </PagerContent>
+</MudDataGrid>

@@ -71,19 +71,17 @@ public class PropertyHandler(IHttpClientFactory httpClientFactory) : IPropertyHa
                    "Não foi possível obter os imóveis");
     }
 
-    public async Task<Response<List<Viewing>?>> GetAllViewingsAsync(GetAllViewingsByPropertyRequest request)
+    public async Task<PagedResponse<List<Viewing>?>> GetAllViewingsAsync(GetAllViewingsByPropertyRequest request)
     {
         var response = await _httpClient
             .GetAsync($"v1/properties/{request.PropertyId}/viewings");
 
         if (!response.IsSuccessStatusCode)
-            return new Response<List<Viewing>?>(null, 400,
+            return new PagedResponse<List<Viewing>?>(null, 400,
                 "Não foi possível obter as visitas");
 
-        var viewings = await response.Content.ReadFromJsonAsync<Response<List<Viewing>?>>();
-        return viewings is null
-            ? new Response<List<Viewing>?>(null, 400,
-                "Não foi possível obter as visitas")
-            : new Response<List<Viewing>?>(viewings.Data);
+        return await response.Content.ReadFromJsonAsync<PagedResponse<List<Viewing>?>>()
+               ?? new PagedResponse<List<Viewing>?>(null, 400,
+                   "Não foi possível obter as visitas");
     }
 }

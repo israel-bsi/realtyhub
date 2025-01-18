@@ -110,20 +110,12 @@ public partial class ListPropertiesPage : ComponentBase
                 };
 
             Snackbar.Add(response.Message ?? string.Empty, Severity.Error);
-            return new GridData<Property>
-            {
-                Items = [],
-                TotalItems = 0
-            };
+            return new GridData<Property>();
         }
         catch (Exception e)
         {
             Snackbar.Add(e.Message, Severity.Error);
-            return new GridData<Property>
-            {
-                Items = [],
-                TotalItems = 0
-            };
+            return new GridData<Property>();
         }
     }
     public async Task SelectProperty(Property property)

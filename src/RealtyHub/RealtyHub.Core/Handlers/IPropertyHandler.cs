@@ -11,5 +11,5 @@ public interface IPropertyHandler
     Task<Response<Property?>> DeleteAsync(DeletePropertyRequest request);
     Task<Response<Property?>> GetByIdAsync(GetPropertyByIdRequest request);
     Task<PagedResponse<List<Property>?>> GetAllAsync(GetAllPropertiesRequest request);
-    Task<Response<List<Viewing>?>> GetAllViewingsAsync(GetAllViewingsByPropertyRequest request);
+    Task<PagedResponse<List<Viewing>?>> GetAllViewingsAsync(GetAllViewingsByPropertyRequest request);
 }
