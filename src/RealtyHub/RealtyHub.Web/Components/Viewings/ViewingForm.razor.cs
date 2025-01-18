@@ -28,8 +28,8 @@ public partial class ViewingFormComponent : ComponentBase
     [Parameter]
     public bool LockCustomerSearch { get; set; }
 
-    [Parameter]
-    public bool RedirectToPageList { get; set; }
+    [Parameter] 
+    public bool RedirectToPageList { get; set; } = true;
 
     [Parameter]
     public EventCallback OnSubmitButtonClicked { get; set; }
@@ -37,13 +37,14 @@ public partial class ViewingFormComponent : ComponentBase
     #endregion
 
     #region Properties
+
     public string Operation => Id != 0
         ? "Reagendar" : "Agendar";
     public Viewing InputModel { get; set; } = new();
-    public TimeSpan? ViewingTime { get; set; }
+    public TimeSpan? ViewingTime { get; set; } = DateTime.Now.TimeOfDay;
     public bool IsBusy { get; set; }
     public int EditFormKey { get; set; }
-    
+
     #endregion
 
     #region Services
@@ -66,21 +67,7 @@ public partial class ViewingFormComponent : ComponentBase
 
     public async Task OnValidSubmitAsync()
     {
-        if (ViewingTime is null)
-        {
-            Snackbar.Add("Informe o horário da visita", Severity.Error);
-            return;
-        }
-        if (InputModel.Customer is null)
-        {
-            Snackbar.Add("Informe o cliente", Severity.Error);
-            return;
-        }
-        if (InputModel.Property is null)
-        {
-            Snackbar.Add("Informe o imóvel", Severity.Error);
-            return;
-        }
+        if (IsFormInvalid()) return;
         IsBusy = true;
         try
         {
@@ -117,6 +104,27 @@ public partial class ViewingFormComponent : ComponentBase
         {
             IsBusy = false;
         }
+    }
+
+    private bool IsFormInvalid()
+    {
+        if (InputModel.Customer is null && InputModel.Property is null)
+        {
+            Snackbar.Add("Informe o cliente e o imóvel", Severity.Error);
+            return true;
+        }
+        if (InputModel.Customer is null)
+        {
+            Snackbar.Add("Informe o cliente", Severity.Error);
+            return true;
+        }
+        if (InputModel.Property is null)
+        {
+            Snackbar.Add("Informe o imóvel", Severity.Error);
+            return true;
+        }
+
+        return false;
     }
     private async Task LoadViewingAsync()
     {

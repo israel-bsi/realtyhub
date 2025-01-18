@@ -1,4 +1,5 @@
-﻿using RealtyHub.ApiService.Common.Api;
+﻿using Microsoft.AspNetCore.Mvc;
+using RealtyHub.ApiService.Common.Api;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.Properties;
@@ -15,17 +16,21 @@ public class GetAllViewingsByPropertyEndpoint : IEndpoint
             .WithSummary("Lista todas as visitas de um imóvel")
             .WithDescription("Lista todas as visitas de um imóvel")
             .WithOrder(6)
-            .Produces<Response<List<Viewing>?>>();
+            .Produces<PagedResponse<List<Viewing>?>>();
 
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
         IPropertyHandler handler,
-        long id)
+        long id,
+        [FromQuery] int pageNumber = Core.Configuration.DefaultPageNumber,
+        [FromQuery] int pageSize = Core.Configuration.DefaultPageSize)
     {
         var request = new GetAllViewingsByPropertyRequest
         {
             UserId = user.Identity?.Name ?? string.Empty,
-            PropertyId = id
+            PropertyId = id,
+            PageNumber = pageNumber,
+            PageSize = pageSize
         };
 
         var result = await handler.GetAllViewingsAsync(request);
