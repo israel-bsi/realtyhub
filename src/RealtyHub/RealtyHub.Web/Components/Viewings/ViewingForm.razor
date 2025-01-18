@@ -28,14 +28,6 @@ else
                            Label="Hora da Visita"
                            @bind-Time="@ViewingTime" />
 
-            @if (Id != 0)
-            {
-                <EnumSelect Class="mb-2" 
-                            TEnum="EViewingStatus"
-                            Label="Status da Visita"
-                            @bind-SelectedValue="InputModel.ViewingStatus" />
-            }
-
             <MudTextField Class="mb-2" 
                           ReadOnly="true"
                           Label="@(InputModel.Customer == null ? "Clique aqui para pesquisar o cliente" : "Cliente Selecionado")"

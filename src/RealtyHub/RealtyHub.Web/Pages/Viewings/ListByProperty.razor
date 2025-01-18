@@ -23,7 +23,7 @@
              Filterable="true"
              Hideable="true"
              RowsPerPage="@Core.Configuration.DefaultPageSize">
-
+             
     <ToolBarContent>
         <MudText Typo="Typo.h6">Visitas</MudText>
         <MudSpacer />
@@ -34,7 +34,6 @@
     <Columns>
         <PropertyColumn Property="v=>v.ViewingDate" Title="Data"></PropertyColumn>
         <PropertyColumn Property="v=>v.Customer!.Name" Title="Cliente"></PropertyColumn>
-        <PropertyColumn Property="v=>v.Property!.Title" Title="Imóvel"></PropertyColumn>
         <TemplateColumn Title="Status">
             <CellTemplate>
                 @context.Item.ViewingStatus.GetDisplayName()
@@ -50,11 +49,13 @@
                     </MudTooltip>
                     <MudTooltip Text="Finalizar">
                         <MudIconButton Icon="@Icons.Material.Filled.Done" 
-                                       Color="Color.Primary" />
+                                       Color="Color.Primary" 
+                                       OnClick="() => OnDoneButtonClickedAsync(context.Item)"/>
                     </MudTooltip>
                     <MudTooltip Text="Cancelar">
                         <MudIconButton Icon="@Icons.Material.Filled.Cancel" 
-                                       Color="Color.Error" />
+                                       Color="Color.Error"
+                                       OnClick="() => OnCancelButtonClickedAsync(context.Item)" />
                     </MudTooltip>
                 </MudStack>
             </CellTemplate>
