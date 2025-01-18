@@ -22,7 +22,8 @@
              Filterable="true"
              Hideable="true"
              RowsPerPage="@Core.Configuration.DefaultPageSize" 
-             RowClick="@(e => SelectProperty(e.Item))">
+             RowClick="@(e => SelectProperty(e.Item))" 
+             RowStyle="cursor: pointer">
     <ToolBarContent>
         <MudText Typo="Typo.h6">Imóveis</MudText>
         <MudSpacer />

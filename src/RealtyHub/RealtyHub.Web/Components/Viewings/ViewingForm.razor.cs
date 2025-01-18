@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using RealtyHub.Core.Enums;
 using RealtyHub.Core.Handlers;
@@ -22,9 +23,12 @@ public partial class ViewingFormComponent : ComponentBase
     #region Properties
     public string Operation => Id != 0
         ? "Reagendar" : "Agendar";
-    public Viewing InputModel { get; set; } = new();
+
+    public Viewing InputModel { get; set; } = null!;
+    [Required]
     public TimeSpan? ViewingTime { get; set; }
     public bool IsBusy { get; set; }
+    public int EditFormKey { get; set; }
     #endregion
 
     #region Services
@@ -47,6 +51,21 @@ public partial class ViewingFormComponent : ComponentBase
 
     public async Task OnValidSubmitAsync()
     {
+        if (ViewingTime is null)
+        {
+            Snackbar.Add("Informe o horário da visita", Severity.Error);
+            return;
+        }
+        if (InputModel.Customer is null)
+        {
+            Snackbar.Add("Informe o cliente", Severity.Error);
+            return;
+        }
+        if (InputModel.Property is null)
+        {
+            Snackbar.Add("Informe o imóvel", Severity.Error);
+            return;
+        }
         IsBusy = true;
         try
         {
@@ -117,8 +136,11 @@ public partial class ViewingFormComponent : ComponentBase
     }
     private void RedirectToCreateViewing()
     {
-        InputModel.ViewingStatus = EViewingStatus.Scheduled;
-        InputModel.ViewingDate = DateTime.Now;
+        InputModel = new Viewing
+        {
+            ViewingStatus = EViewingStatus.Scheduled,
+            ViewingDate = DateTime.Now
+        };
         NavigationManager.NavigateTo("/visitas/agendar");
     }
     public async Task OnClickDoneViewing()
@@ -156,12 +178,19 @@ public partial class ViewingFormComponent : ComponentBase
             MaxWidth = MaxWidth.Large,
             FullWidth = true
         };
-        await DialogService.ShowAsync<CustomerDialog>(null, parameters, options);
+        var dialog = await DialogService
+            .ShowAsync<CustomerDialog>("Informe o Cliente", parameters, options);
+        var result = await dialog.Result;
+
+        if (result is { Canceled: false, Data: Customer selectedCustomer }) 
+            SelectedCustomer(selectedCustomer);
     }
     private void SelectedCustomer(Customer customer)
     {
         InputModel.Customer = customer;
         InputModel.CustomerId = customer.Id;
+        EditFormKey++;
+        StateHasChanged();
     }
     public async Task OpenPropertyDialog()
     {
@@ -176,12 +205,20 @@ public partial class ViewingFormComponent : ComponentBase
             MaxWidth = MaxWidth.Large,
             FullWidth = true
         };
-        await DialogService.ShowAsync<PropertyDialog>(null, parameters, options);
+        var dialog = await DialogService
+            .ShowAsync<PropertyDialog>("Informe o Imóvel", parameters, options);
+
+        var result = await dialog.Result;
+
+        if (result is { Canceled: false, Data: Property selectedProperty })
+            SelectedProperty(selectedProperty);
     }
     private void SelectedProperty(Property property)
     {
         InputModel.Property = property;
         InputModel.PropertyId = property.Id;
+        EditFormKey++;
+        StateHasChanged();
     }
     
     #endregion

@@ -127,6 +127,5 @@ public partial class ListPropertiesPage : ComponentBase
         if (OnPropertySelected.HasDelegate)
             await OnPropertySelected.InvokeAsync(property);
     }
-
     #endregion
 }

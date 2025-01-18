@@ -15,7 +15,7 @@ public class Viewing : Entity
     public long CustomerId { get; set; }
     [Required(ErrorMessage = "Propriedade é um campo obrigatório")]
     public long PropertyId { get; set; }
-    public Property Property { get; set; } = new();
-    public Customer Customer { get; set; } = new();
+    public Property? Property { get; set; }
+    public Customer? Customer { get; set; }
     public string UserId { get; set; } = string.Empty;
 }

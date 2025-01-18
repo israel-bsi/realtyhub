@@ -7,11 +7,11 @@
 <MudGrid style="height: 85vh;" Class="d-flex align-center justify-center">
     <MudItem xs="12" sm="12" md="8" lg="6" xl="6" xxl="6">
         <MudPaper Class="mud-width-full pa-8">
-            <MudText>
-                @Status
-            </MudText>
             
-            <MudIcon Icon="@(Success ? Icons.Material.Filled.CheckCircle : Icons.Material.Filled.Error)"></MudIcon>
+            <div class="flex-center">
+                <MudIcon Icon="@(Success ? Icons.Material.Filled.CheckCircle : Icons.Material.Filled.Error)"></MudIcon>
+                <MudText Class="ml-2">@Status</MudText>
+            </div>
 
             <div class="d-flex mt-8">
                 <MudButton ButtonType="ButtonType.Submit"

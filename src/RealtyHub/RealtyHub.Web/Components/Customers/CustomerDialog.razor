@@ -3,7 +3,7 @@
 
 <MudDialog>
     <DialogContent>
-        <List OnCustomerSelected="OnCustomerSelected" />
+        <List OnCustomerSelected="SelectCustomer" />
     </DialogContent>
     <DialogActions>
         <MudButton OnClick="CloseDialog" Color="Color.Primary">Fechar</MudButton>
@@ -11,16 +11,19 @@
 </MudDialog>
 
 @code {
-    [CascadingParameter] MudDialogInstance MudDialog { get; set; } = null!;
-
-    void CloseDialog() => MudDialog.Close();
+    [CascadingParameter] 
+    MudDialogInstance MudDialog { get; set; } = null!;
 
     [Parameter]
     public EventCallback<Customer> OnCustomerSelected { get; set; }
+
+    void CloseDialog() => MudDialog.Close();
 
     public async Task SelectCustomer(Customer customer)
     {
         if (OnCustomerSelected.HasDelegate)
             await OnCustomerSelected.InvokeAsync(customer);
+
+        MudDialog.Close(DialogResult.Ok(customer));
     }
 }

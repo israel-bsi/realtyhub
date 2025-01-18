@@ -1,7 +1,7 @@
 ﻿@using System.Reflection
 @typeparam TEnum
 
-<MudSelect T="TEnum" Label="@Label" Value="SelectedValue" ValueChanged="OnSelectedValueChanged">
+<MudSelect Class="@Class" T="TEnum" Label="@Label" Value="SelectedValue" ValueChanged="OnSelectedValueChanged">
     @foreach (var value in Enum.GetValues(typeof(TEnum)).Cast<TEnum>())
     {
         <MudSelectItem Value="value">@GetDisplayName(value)</MudSelectItem>
@@ -12,6 +12,7 @@
     [Parameter] public required TEnum SelectedValue { get; set; }
     [Parameter] public EventCallback<TEnum> SelectedValueChanged { get; set; }
     [Parameter] public string Label { get; set; } = string.Empty;
+    [Parameter] public string Class { get; set; } = string.Empty;
 
     private string GetDisplayName(TEnum value)
     {

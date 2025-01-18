@@ -17,37 +17,42 @@
 else
 {
     <MudPaper Class="pa-8 mt-4" Elevation="2">
-        <EditForm OnValidSubmit="OnValidSubmitAsync" Model="InputModel">
+        <EditForm OnValidSubmit="OnValidSubmitAsync" Model="InputModel" @key="EditFormKey">
             <ObjectGraphDataAnnotationsValidator />
 
-            <MudDatePicker Label="Data da Visita"
+            <MudDatePicker Class="mb-2" 
+                           Label="Data da Visita"
                            @bind-Date="@InputModel.ViewingDate" />
 
-            <MudTimePicker Label="Hora da Visita"
+            <MudTimePicker Class="mb-2" 
+                           Label="Hora da Visita"
                            @bind-Time="@ViewingTime" />
 
             @if (Id != 0)
             {
-                <EnumSelect TEnum="EViewingStatus"
+                <EnumSelect Class="mb-2" 
+                            TEnum="EViewingStatus"
                             Label="Status da Visita"
                             @bind-SelectedValue="InputModel.ViewingStatus" />
             }
 
-            <MudButton Class="mt-4"
-                       OnClick="OpenCustomerDialog"
-                       ButtonType="ButtonType.Button"
-                       Color="Color.Primary"
-                       StartIcon="@Icons.Material.Filled.Person">
-                Pesquisar Cliente
-            </MudButton>
-            
-            <MudButton Class="mt-4"
-                       OnClick="OpenPropertyDialog"
-                       ButtonType="ButtonType.Button"
-                       Color="Color.Primary"
-                       StartIcon="@Icons.Material.Filled.Home">
-                Pesquisar Imóvel
-            </MudButton>
+            <MudTextField Class="mb-2" 
+                          ReadOnly="true"
+                          Label="@(InputModel.Customer == null ? "Clique aqui para pesquisar o cliente" : "Cliente Selecionado")"
+                          AdornmentIcon="@Icons.Material.Filled.PersonSearch"
+                          @onclick="@OpenCustomerDialog"
+                          OnAdornmentClick="OpenCustomerDialog"
+                          Adornment="Adornment.End"
+                          Value="@InputModel.Customer?.Name"/>
+
+            <MudTextField Class="mb-2" 
+                          ReadOnly="true"
+                          Label="@(InputModel.Property == null ? "Clique aqui para pesquisar o imóvel" : "Imóvel Selecionado")"
+                          AdornmentIcon="@Icons.Material.Filled.Search"
+                          @onclick="@OpenPropertyDialog"
+                          OnAdornmentClick="OpenPropertyDialog"
+                          Adornment="Adornment.End"
+                          Value="@InputModel.Property?.Title"/>
 
             <div>
                 <MudButton ButtonType="ButtonType.Submit"

@@ -3,7 +3,7 @@
 
 <MudDialog>
     <DialogContent>
-        <List OnPropertySelected="OnPropertySelected" />
+        <List OnPropertySelected="SelectProperty" />
     </DialogContent>
     <DialogActions>
         <MudButton OnClick="CloseDialog" Color="Color.Primary">Fechar</MudButton>
@@ -11,16 +11,19 @@
 </MudDialog>
 
 @code {
-    [CascadingParameter] MudDialogInstance MudDialog { get; set; } = null!;
-
-    void CloseDialog() => MudDialog.Close();
+    [CascadingParameter] 
+    MudDialogInstance MudDialog { get; set; } = null!;
 
     [Parameter]
     public EventCallback<Property> OnPropertySelected { get; set; }
+
+    void CloseDialog() => MudDialog.Close();
 
     public async Task SelectProperty(Property property)
     {
         if (OnPropertySelected.HasDelegate)
             await OnPropertySelected.InvokeAsync(property);
+
+        MudDialog.Close(DialogResult.Ok(property));
     }
 }
