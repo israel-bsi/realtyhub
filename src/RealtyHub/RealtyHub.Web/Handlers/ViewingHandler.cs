@@ -15,12 +15,12 @@ public class ViewingHandler(IHttpClientFactory httpClientFactory) : IViewingHand
         var result = await _httpClient
             .PostAsJsonAsync("v1/viewings", request);
 
-        var data = await result.Content.ReadFromJsonAsync<Response<Viewing?>>();
+        var response = await result.Content.ReadFromJsonAsync<Response<Viewing?>>();
 
         if (!result.IsSuccessStatusCode)
-            return new Response<Viewing?>(null, 400, data?.Message);
+            return new Response<Viewing?>(null, 400, response?.Message);
 
-        return data ?? new Response<Viewing?>(null, 400,
+        return response ?? new Response<Viewing?>(null, 400,
             "Falha ao agendar a visita");
     }
 
@@ -28,9 +28,13 @@ public class ViewingHandler(IHttpClientFactory httpClientFactory) : IViewingHand
     {
         var result = await _httpClient
             .PutAsJsonAsync($"v1/viewings/{request.Id}/reschedule", request);
+        
+        var response = await result.Content.ReadFromJsonAsync<Response<Viewing?>>();
 
-        return await result.Content.ReadFromJsonAsync<Response<Viewing?>>()
-            ?? new Response<Viewing?>(null, 400,
+        if (!result.IsSuccessStatusCode)
+            return new Response<Viewing?>(null, 400, response?.Message);
+
+        return response ?? new Response<Viewing?>(null, 400,
                 "Falha ao reagendar a visita");
     }
 
@@ -39,8 +43,12 @@ public class ViewingHandler(IHttpClientFactory httpClientFactory) : IViewingHand
         var result = await _httpClient
             .PutAsJsonAsync($"v1/viewings/{request.Id}/done", request);
 
-        return await result.Content.ReadFromJsonAsync<Response<Viewing?>>()
-            ?? new Response<Viewing?>(null, 400,
+        var response = await result.Content.ReadFromJsonAsync<Response<Viewing?>>();
+
+        if (!result.IsSuccessStatusCode)
+            return new Response<Viewing?>(null, 400, response?.Message);
+
+        return response ?? new Response<Viewing?>(null, 400,
                 "Falha ao concluir a visita");
     }
 
@@ -49,8 +57,12 @@ public class ViewingHandler(IHttpClientFactory httpClientFactory) : IViewingHand
         var result = await _httpClient
             .PutAsJsonAsync($"v1/viewings/{request.Id}/cancel", request);
 
-        return await result.Content.ReadFromJsonAsync<Response<Viewing?>>()
-               ?? new Response<Viewing?>(null, 400,
+        var response = await result.Content.ReadFromJsonAsync<Response<Viewing?>>();
+
+        if (!result.IsSuccessStatusCode)
+            return new Response<Viewing?>(null, 400, response?.Message);
+
+        return response ?? new Response<Viewing?>(null, 400,
                    "Falha ao cancelar a visita");
     }
 

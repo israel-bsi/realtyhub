@@ -22,7 +22,8 @@
                               @bind-Value="@InputModel.Email"
                               Class="mb-4" 
                               AdornmentIcon="@Icons.Material.Filled.Email"
-                              Adornment="Adornment.Start" />
+                              Adornment="Adornment.Start" 
+                              UserAttributes="@(new() { { "autocomplete", "true" }, { "aria-required", "true" } } )" />
 
                 <MudTextField T="string"
                               Label="Senha"
@@ -31,7 +32,8 @@
                               @bind-Value="@InputModel.Password"
                               Class="mb-4" 
                               AdornmentIcon="@Icons.Material.Filled.Password"
-                              Adornment="Adornment.Start" />
+                              Adornment="Adornment.Start"
+                              UserAttributes="@(new() { { "autocomplete", "current-password" }, { "aria-required", "true" } } )" />
 
                 <div class="d-flex mt-8">
                     @if (IsBusy)

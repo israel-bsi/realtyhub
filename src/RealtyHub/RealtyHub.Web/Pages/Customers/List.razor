@@ -21,7 +21,8 @@
              @ref="DataGrid"
              Filterable="true"
              Hideable="true"
-             RowsPerPage="@Core.Configuration.DefaultPageSize">
+             RowsPerPage="@Core.Configuration.DefaultPageSize"
+             RowClick="@(e => SelectCustomer(e.Item))">
     <ToolBarContent>
         <MudText Typo="Typo.h6">Clientes</MudText>
         <MudSpacer />

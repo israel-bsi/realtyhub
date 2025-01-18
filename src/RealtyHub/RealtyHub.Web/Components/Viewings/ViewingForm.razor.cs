@@ -5,6 +5,8 @@ using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.Viewings;
 using RealtyHub.Core.Responses;
+using RealtyHub.Web.Components.Customers;
+using RealtyHub.Web.Components.Properties;
 
 namespace RealtyHub.Web.Components.Viewings;
 
@@ -28,13 +30,16 @@ public partial class ViewingFormComponent : ComponentBase
     #region Services
 
     [Inject]
-    public IViewingHandler Handler { get; set; } = null!;
+    public IViewingHandler ViewingHandler { get; set; } = null!;
 
     [Inject]
     public NavigationManager NavigationManager { get; set; } = null!;
 
     [Inject]
     public ISnackbar Snackbar { get; set; } = null!;
+
+    [Inject]
+    public IDialogService DialogService { get; set; } = null!;
 
     #endregion
 
@@ -54,12 +59,19 @@ public partial class ViewingFormComponent : ComponentBase
 
             Response<Viewing?> result;
             if (Id == 0)
-                result = await Handler.ScheduleAsync(InputModel);
+                result = await ViewingHandler.ScheduleAsync(InputModel);
             else
-                result = await Handler.RescheduleAsync(InputModel);
+                result = await ViewingHandler.RescheduleAsync(InputModel);
 
             var resultMessage = result.Message ?? string.Empty;
-            Snackbar.Add(resultMessage, result.IsSuccess ? Severity.Success : Severity.Error);
+            if (!result.IsSuccess)
+            {
+                Snackbar.Add(resultMessage, Severity.Error);
+                return;
+            }
+
+            Snackbar.Add(resultMessage, Severity.Success);
+            NavigationManager.NavigateTo("/visitas");
         }
         catch (Exception e)
         {
@@ -70,7 +82,6 @@ public partial class ViewingFormComponent : ComponentBase
             IsBusy = false;
         }
     }
-
     private async Task LoadViewingAsync()
     {
         GetViewingByIdRequest? request = null;
@@ -85,7 +96,7 @@ public partial class ViewingFormComponent : ComponentBase
 
         if (request is null) return;
 
-        var response = await Handler.GetByIdAsync(request);
+        var response = await ViewingHandler.GetByIdAsync(request);
         if (response is { IsSuccess: true, Data: not null })
         {
             InputModel.Id = response.Data.Id;
@@ -110,17 +121,69 @@ public partial class ViewingFormComponent : ComponentBase
         InputModel.ViewingDate = DateTime.Now;
         NavigationManager.NavigateTo("/visitas/agendar");
     }
-
     public async Task OnClickDoneViewing()
     {
-        Snackbar.Add($"Visita {InputModel.Id} finalizada", Severity.Info);
-    }
+        var request = new DoneViewingRequest { Id = InputModel.Id };
+        var result = await ViewingHandler.DoneAsync(request);
+        var resultMessage = result.Message ?? string.Empty;
+        if (result is { IsSuccess: true, Data: not null })
+            InputModel.ViewingStatus = result.Data.ViewingStatus;
 
+        Snackbar.Add(resultMessage, Severity.Info);
+        StateHasChanged();
+    }
     public async Task OnClickCancelViewing()
     {
-        Snackbar.Add($"Visita {InputModel.Id} cancelada", Severity.Info);
-    }
+        var request = new CancelViewingRequest { Id = InputModel.Id };
+        var result = await ViewingHandler.CancelAsync(request);
+        var resultMessage = result.Message ?? string.Empty;
+        if (result is { IsSuccess: true, Data: not null })
+            InputModel.ViewingStatus = result.Data.ViewingStatus;
 
+        Snackbar.Add(resultMessage, Severity.Info);
+        StateHasChanged();
+    }
+    public async Task OpenCustomerDialog()
+    {
+        var parameters = new DialogParameters
+        {
+            { "OnCustomerSelected", EventCallback.Factory
+                .Create<Customer>(this, SelectedCustomer) }
+        };
+        var options = new DialogOptions
+        {
+            CloseButton = true,
+            MaxWidth = MaxWidth.Large,
+            FullWidth = true
+        };
+        await DialogService.ShowAsync<CustomerDialog>(null, parameters, options);
+    }
+    private void SelectedCustomer(Customer customer)
+    {
+        InputModel.Customer = customer;
+        InputModel.CustomerId = customer.Id;
+    }
+    public async Task OpenPropertyDialog()
+    {
+        var parameters = new DialogParameters
+        {
+            { "OnPropertySelected", EventCallback.Factory
+                .Create<Property>(this, SelectedProperty) }
+        };
+        var options = new DialogOptions
+        {
+            CloseButton = true,
+            MaxWidth = MaxWidth.Large,
+            FullWidth = true
+        };
+        await DialogService.ShowAsync<PropertyDialog>(null, parameters, options);
+    }
+    private void SelectedProperty(Property property)
+    {
+        InputModel.Property = property;
+        InputModel.PropertyId = property.Id;
+    }
+    
     #endregion
 
     #region Overrides

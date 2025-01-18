@@ -9,6 +9,13 @@ namespace RealtyHub.Web.Pages.Customers;
 
 public partial class ListCustomersPage : ComponentBase
 {
+    #region Parameters
+
+    [Parameter] 
+    public EventCallback<Customer> OnCustomerSelected { get; set; }
+
+    #endregion
+
     #region Properties
 
     public MudDataGrid<Customer> DataGrid { get; set; } = null!;
@@ -65,7 +72,6 @@ public partial class ListCustomersPage : ComponentBase
         await OnDeleteAsync(id, name);
         StateHasChanged();
     }
-
     private async Task OnDeleteAsync(long id, string name)
     {
         try
@@ -80,7 +86,6 @@ public partial class ListCustomersPage : ComponentBase
             Snackbar.Add(e.Message, Severity.Success);
         }
     }
-
     public async Task<GridData<Customer>> LoadServerData(GridState<Customer> state)
     {
         try
@@ -116,6 +121,11 @@ public partial class ListCustomersPage : ComponentBase
                 TotalItems = 0
             };
         }
+    }
+    public async Task SelectCustomer(Customer customer)
+    {
+        if (OnCustomerSelected.HasDelegate) 
+            await OnCustomerSelected.InvokeAsync(customer);
     }
 
     #endregion
