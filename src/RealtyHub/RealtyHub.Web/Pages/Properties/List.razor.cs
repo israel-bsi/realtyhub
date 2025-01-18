@@ -4,6 +4,7 @@ using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.Properties;
 using RealtyHub.Web.Components;
+using RealtyHub.Web.Components.Viewings;
 
 namespace RealtyHub.Web.Pages.Properties;
 
@@ -14,8 +15,11 @@ public partial class ListPropertiesPage : ComponentBase
     [Parameter]
     public EventCallback<Property> OnPropertySelected { get; set; }
 
+    [Parameter]
+    public string RowStyle { get; set; } = string.Empty;
+
     #endregion
-    
+
     #region Properties
 
     public MudDataGrid<Property> DataGrid { get; set; } = null!;
@@ -126,6 +130,22 @@ public partial class ListPropertiesPage : ComponentBase
     {
         if (OnPropertySelected.HasDelegate)
             await OnPropertySelected.InvokeAsync(property);
+    }
+    public async Task OnScheduleButtonClickedAsync(Property? property)
+    {
+        var options = new DialogOptions
+        {
+            CloseButton = true,
+            MaxWidth = MaxWidth.Medium,
+            FullWidth = true
+        };
+        var parameters = new DialogParameters
+        {
+            { "Property", property },
+            { "LockPropertySearch", true },
+            { "RedirectToPageList", false }
+        };
+        await DialogService.ShowAsync<ViewingDialog>(null, parameters, options);
     }
     #endregion
 }

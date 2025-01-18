@@ -1,7 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using RealtyHub.Core.Enums;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.Viewings;
@@ -18,17 +16,34 @@ public partial class ViewingFormComponent : ComponentBase
     [Parameter]
     public long Id { get; set; }
 
+    [Parameter] 
+    public Customer? Customer { get; set; }
+
+    [Parameter]
+    public Property? Property { get; set; }
+
+    [Parameter] 
+    public bool LockPropertySearch { get; set; }
+
+    [Parameter]
+    public bool LockCustomerSearch { get; set; }
+
+    [Parameter]
+    public bool RedirectToPageList { get; set; }
+
+    [Parameter]
+    public EventCallback OnSubmitButtonClicked { get; set; }
+
     #endregion
 
     #region Properties
     public string Operation => Id != 0
         ? "Reagendar" : "Agendar";
-
-    public Viewing InputModel { get; set; } = null!;
-    [Required]
+    public Viewing InputModel { get; set; } = new();
     public TimeSpan? ViewingTime { get; set; }
     public bool IsBusy { get; set; }
     public int EditFormKey { get; set; }
+    
     #endregion
 
     #region Services
@@ -89,8 +104,10 @@ public partial class ViewingFormComponent : ComponentBase
                 return;
             }
 
+            await OnSubmitButtonClickedAsync();
             Snackbar.Add(resultMessage, Severity.Success);
-            NavigationManager.NavigateTo("/visitas");
+            if (RedirectToPageList)
+                NavigationManager.NavigateTo("/visitas");
         }
         catch (Exception e)
         {
@@ -134,15 +151,6 @@ public partial class ViewingFormComponent : ComponentBase
             NavigationManager.NavigateTo("/visitas");
         }
     }
-    private void RedirectToCreateViewing()
-    {
-        InputModel = new Viewing
-        {
-            ViewingStatus = EViewingStatus.Scheduled,
-            ViewingDate = DateTime.Now
-        };
-        NavigationManager.NavigateTo("/visitas/agendar");
-    }
     public async Task OnClickDoneViewing()
     {
         var request = new DoneViewingRequest { Id = InputModel.Id };
@@ -167,6 +175,7 @@ public partial class ViewingFormComponent : ComponentBase
     }
     public async Task OpenCustomerDialog()
     {
+        if (LockCustomerSearch) return;
         var parameters = new DialogParameters
         {
             { "OnCustomerSelected", EventCallback.Factory
@@ -194,6 +203,7 @@ public partial class ViewingFormComponent : ComponentBase
     }
     public async Task OpenPropertyDialog()
     {
+        if (LockPropertySearch) return;
         var parameters = new DialogParameters
         {
             { "OnPropertySelected", EventCallback.Factory
@@ -220,7 +230,12 @@ public partial class ViewingFormComponent : ComponentBase
         EditFormKey++;
         StateHasChanged();
     }
-    
+    private async Task OnSubmitButtonClickedAsync()
+    {
+        if (OnSubmitButtonClicked.HasDelegate)
+            await OnSubmitButtonClicked.InvokeAsync();
+    }
+
     #endregion
 
     #region Overrides
@@ -233,7 +248,12 @@ public partial class ViewingFormComponent : ComponentBase
             if (Id != 0)
                 await LoadViewingAsync();
             else
-                RedirectToCreateViewing();
+            {
+                InputModel.Customer = Customer;
+                InputModel.CustomerId = Customer?.Id ?? 0;
+                InputModel.Property = Property;
+                InputModel.PropertyId = Property?.Id ?? 0;
+            }
         }
         catch (Exception e)
         {

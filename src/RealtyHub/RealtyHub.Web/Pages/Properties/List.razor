@@ -23,7 +23,7 @@
              Hideable="true"
              RowsPerPage="@Core.Configuration.DefaultPageSize" 
              RowClick="@(e => SelectProperty(e.Item))" 
-             RowStyle="cursor: pointer">
+             RowStyle="@RowStyle">
     <ToolBarContent>
         <MudText Typo="Typo.h6">Imóveis</MudText>
         <MudSpacer />
@@ -57,15 +57,25 @@
         <TemplateColumn Class="justify-end" Title="Ações">
             <CellTemplate>
                 <MudStack Row>
-                    <MudIconButton Icon="@Icons.Material.Filled.Edit"
-                                   Href="@($"/imoveis/editar/{context.Item.Id}")"
-                                   Color="Color.Primary">
-                    </MudIconButton>
-                    <MudIconButton Icon="@Icons.Material.Filled.Delete"
-                                   Color="Color.Error"
-                                   aria-label="Excluir"
-                                   OnClick="() => OnDeleteButtonClickedAsync(context.Item.Id, context.Item.Title)">
-                    </MudIconButton>
+                    <MudTooltip Text="Editar">
+                        <MudIconButton Icon="@Icons.Material.Filled.Edit"
+                                       Href="@($"/imoveis/editar/{context.Item.Id}")"
+                                       Color="Color.Primary">
+                        </MudIconButton>
+                    </MudTooltip>
+                    <MudTooltip Text="Excluir">
+                        <MudIconButton Icon="@Icons.Material.Filled.Delete"
+                                       Color="Color.Error"
+                                       aria-label="Excluir"
+                                       OnClick="() => OnDeleteButtonClickedAsync(context.Item.Id, context.Item.Title)">
+                        </MudIconButton>
+                    </MudTooltip>
+                    <MudTooltip Text="Agendar Visita">
+                        <MudIconButton Icon="@Icons.Material.Filled.ScheduleSend" 
+                                       Color="Color.Primary" 
+                                       OnClick="() => OnScheduleButtonClickedAsync(context.Item)">
+                        </MudIconButton>
+                    </MudTooltip>
                 </MudStack>
             </CellTemplate>
         </TemplateColumn>

@@ -1,0 +1,60 @@
+﻿@using RealtyHub.Core.Models
+
+<MudDialog>
+    <DialogContent>
+        <ViewingForm 
+            Customer="Customer" 
+            Property="Property"
+            LockCustomerSearch="LockCustomerSearch"
+            LockPropertySearch="LockPropertySearch"
+            RedirectToPageList="RedirectToPageList"
+            OnSubmitButtonClicked="OnSubmitButtonClickedAsync" />
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="CloseDialog" Color="Color.Primary">Fechar</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter]
+    MudDialogInstance MudDialog { get; set; } = null!;
+
+    [Parameter]
+    public Property? Property { get; set; }
+
+    [Parameter]
+    public Customer? Customer { get; set; }
+
+    [Parameter]
+    public bool LockCustomerSearch { get; set; }
+
+    [Parameter]
+    public bool LockPropertySearch { get; set; }
+
+    [Parameter]
+    public bool RedirectToPageList { get; set; }
+
+    [Parameter]
+    public EventCallback<Property> OnPropertySelected { get; set; }
+
+    [Parameter]
+    public EventCallback OnSubmitButtonClicked { get; set; }
+
+    public async Task SelectProperty(Property property)
+    {
+        if (OnPropertySelected.HasDelegate)
+            await OnPropertySelected.InvokeAsync(property);
+
+        MudDialog.Close(DialogResult.Ok(property));
+    }
+
+    public async Task OnSubmitButtonClickedAsync()
+    {
+        if (OnSubmitButtonClicked.HasDelegate)
+            await OnSubmitButtonClicked.InvokeAsync();
+
+        CloseDialog();
+    }
+
+    void CloseDialog() => MudDialog.Close();
+}

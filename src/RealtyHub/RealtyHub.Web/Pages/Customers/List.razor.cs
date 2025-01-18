@@ -13,7 +13,9 @@ public partial class ListCustomersPage : ComponentBase
 
     [Parameter] 
     public EventCallback<Customer> OnCustomerSelected { get; set; }
-
+    
+    [Parameter]
+    public string RowStyle { get; set; } = string.Empty;
     #endregion
 
     #region Properties
