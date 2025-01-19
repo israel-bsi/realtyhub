@@ -20,10 +20,10 @@ public class ResetPasswordPage : ComponentBase
 
     #region Properties
 
-    public ResetPasswordRequest ResetPasswordModel { get; set; } = null!;
+    public bool IsBusy { get; set; }
+    public ResetPasswordRequest ResetPasswordModel { get; set; } = new();
     public ForgotPasswordRequest ForgotPasswordModel { get; set; } = new();
-    public string Status { get; set; } = string.Empty;
-    public bool Success { get; set; }
+    
     #endregion
 
     #region Services
@@ -36,28 +36,52 @@ public class ResetPasswordPage : ComponentBase
     
     [Inject] 
     public ISnackbar Snackbar { get; set; } = null!;
+    
     #endregion
 
-    #region Overrides
+    #region Methods
 
-    protected override async Task OnInitializedAsync()
+    protected async Task OnValidSubmitForgotFormAsync()
     {
+        IsBusy = true;
         try
         {
-            var result = await AccountHandler.ResetPasswordAsync(ResetPasswordModel);
-            Success = result.IsSuccess;
-            Status = result.Message!;
+            var result = await AccountHandler.ForgotPasswordAsync(ForgotPasswordModel);
+            Snackbar.Add(result.Message ?? string.Empty, Severity.Success);
         }
         catch (Exception e)
         {
-            Status = $"Erro ao confirmar email!\n{e.Message}";
+            Snackbar.Add(e.Message, Severity.Error);
+        }
+        finally
+        {
+            IsBusy = false;
         }
     }
-
-    protected async Task OnValidSubmitAsync()
+    public async Task OnValidSubmitResetFormAsync()
     {
-        var result = await AccountHandler.ForgotPasswordAsync(ForgotPasswordModel);
-        Snackbar.Add(result.Message ?? string.Empty, Severity.Success);
+        IsBusy = true;
+        try
+        {
+            ResetPasswordModel.UserId = UserId;
+            ResetPasswordModel.Token = Token;
+            var result = await AccountHandler.ResetPasswordAsync(ResetPasswordModel);
+            if (result.IsSuccess)
+            {
+                Snackbar.Add(result.Message ?? string.Empty, Severity.Success);
+                NavigationManager.NavigateTo("/login");
+            }
+            else
+                Snackbar.Add(result.Message ?? string.Empty, Severity.Error);
+        }
+        catch (Exception e)
+        {
+            Snackbar.Add(e.Message, Severity.Error);
+        }
+        finally
+        {
+            IsBusy = false;
+        }
     }
 
     #endregion

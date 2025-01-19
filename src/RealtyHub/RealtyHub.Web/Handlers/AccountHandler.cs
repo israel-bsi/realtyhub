@@ -54,11 +54,11 @@ public class AccountHandler(IHttpClientFactory httpClientFactory) : IAccountHand
     {
         var result = await _httpClient.PostAsJsonAsync("v1/identity/forgot-password", request);
         var content = await result.Content.ReadAsStringAsync();
-        if (content.Contains("User not found"))
+        if (content.Contains("Usuário não encontrado"))
             return new Response<string>(null, 404, "Usuário não encontrado");
 
         if (!result.IsSuccessStatusCode)
-            return new Response<string>(null, (int)result.StatusCode, "Não foi possível resetar a senha");
+            return new Response<string>(null, (int)result.StatusCode, "Não foi possível redefinir a senha");
 
         var data = await result.Content.ReadFromJsonAsync<Response<string>>();
         return new Response<string>(null, 200, data?.Message);

@@ -34,6 +34,8 @@
                               AdornmentIcon="@Icons.Material.Filled.Password"
                               Adornment="Adornment.Start"
                               UserAttributes="@(new() { { "autocomplete", "current-password" }, { "aria-required", "true" } } )" />
+                
+                <MudNavLink Href="/recuperar-senha">Esqueci a senha</MudNavLink>
 
                 <div class="d-flex mt-8">
                     @if (IsBusy)

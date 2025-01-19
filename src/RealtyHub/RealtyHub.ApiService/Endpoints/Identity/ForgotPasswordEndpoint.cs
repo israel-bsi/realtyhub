@@ -40,6 +40,6 @@ public class ForgotPasswordEndpoint : IEndpoint
             ResetPasswordLink = resetLink
         };
         await emailService.SendResetPasswordLinkAsync(message);
-        return Results.Ok(new Response<string>());
+        return Results.Ok(new Response<string>(null, message: "Verifique seu emaiL!"));
     }
 }

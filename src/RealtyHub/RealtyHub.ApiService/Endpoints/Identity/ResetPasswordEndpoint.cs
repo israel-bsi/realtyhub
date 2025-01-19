@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
 using RealtyHub.ApiService.Common.Api;
 using RealtyHub.ApiService.Models;
@@ -19,17 +20,21 @@ public class ResetPasswordEndpoint : IEndpoint
     private static async Task<IResult> HandlerAsync(
         UserManager<User> userManager,
         IEmailService emailService,
-        ResetPasswordRequest request)
+        ResetPasswordRequest request,
+        [FromQuery] string userId,
+        [FromQuery] string token)
     {
-        var user = await userManager.FindByIdAsync(request.UserId);
+        var user = await userManager.FindByIdAsync(userId);
         if (user is null)
             return Results.BadRequest(
                 new Response<string>(null, 404, "Usuário não encontrado"));
 
-        var decodedToken = WebEncoders.Base64UrlDecode(request.Token);
-        var token = Encoding.UTF8.GetString(decodedToken);
-        var resetResult = await userManager.ResetPasswordAsync(user, token, request.Password);
+        var decodedBytes = WebEncoders.Base64UrlDecode(token);
+        var decodedToken = Encoding.UTF8.GetString(decodedBytes);
+        var resetResult = await userManager.ResetPasswordAsync(user, decodedToken, request.PasswordResetModel.Password);
 
-        return resetResult.Succeeded ? Results.Ok() : Results.BadRequest(resetResult.Errors);
+        return resetResult.Succeeded 
+            ? Results.Ok(new Response<string>(null, message: "Senha redefinida com sucesso")) 
+            : Results.BadRequest(resetResult.Errors);
     }
 }
