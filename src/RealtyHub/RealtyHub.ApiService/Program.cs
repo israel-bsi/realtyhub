@@ -3,10 +3,10 @@ using RealtyHub.ApiService.Common.Api;
 using RealtyHub.ApiService.Endpoints;
 using System.Globalization;
 
+var builder = WebApplication.CreateBuilder(args);
+
 CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("pt-BR");
 CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("pt-BR");
-
-var builder = WebApplication.CreateBuilder(args);
 
 builder.Logging.AddConsole();
 builder.AddConfiguration();
@@ -22,6 +22,11 @@ app.ApplyMigrations();
 
 if (app.Environment.IsDevelopment())
     app.ConfigureDevEnvironment();
+
+app.MapGet("/teste", (DateTime endDate) =>
+{
+    return $"Data recebida: {endDate:dd/MM/yyyy HH:mm:ss}";
+});
 
 app.UseStaticFiles();
 app.UseExceptionHandler();

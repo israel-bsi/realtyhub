@@ -52,6 +52,7 @@ public partial class ListViewingsPage : ComponentBase
     {
         try
         {
+            var endDate = DateRange.End?.AddHours(23).AddMinutes(59).AddSeconds(59);
             string message;
             if (PropertyId != 0)
             {
@@ -60,6 +61,8 @@ public partial class ListViewingsPage : ComponentBase
                     PropertyId = PropertyId,
                     PageNumber = state.Page + 1,
                     PageSize = state.PageSize,
+                    StartDate = DateRange.Start?.ToUniversalTime().ToString("o"),
+                    EndDate = endDate?.ToUniversalTime().ToString("o")
                 };
 
                 var response = await PropertyHandler.GetAllViewingsAsync(request);
@@ -73,10 +76,12 @@ public partial class ListViewingsPage : ComponentBase
             }
             else
             {
-                var request = new GetAllViewingsRequest()
+                var request = new GetAllViewingsRequest
                 {
                     PageNumber = state.Page + 1,
                     PageSize = state.PageSize,
+                    StartDate = DateRange.Start?.ToUniversalTime().ToString("o"),
+                    EndDate = endDate?.ToUniversalTime().ToString("o")
                 };
 
                 var response = await ViewingHandler.GetAllAsync(request);
@@ -194,7 +199,12 @@ public partial class ListViewingsPage : ComponentBase
         }
         return false;
     }
-    
+    public void OnDateRangeChanged(DateRange newDateRange)
+    {
+        DateRange = newDateRange;
+        DataGrid.ReloadServerData();
+    }
+
     #endregion
 
     #region Overrides

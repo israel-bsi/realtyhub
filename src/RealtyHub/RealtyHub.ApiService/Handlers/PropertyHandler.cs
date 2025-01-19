@@ -188,8 +188,11 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
 
             if (request.StartDate is not null && request.EndDate is not null)
             {
-                query = query.Where(v => v.ViewingDate >= request.StartDate
-                                         && v.ViewingDate <= request.EndDate);
+                var startDate = DateTime.Parse(request.StartDate);
+                var endDate = DateTime.Parse(request.EndDate);
+
+                query = query.Where(v => v.ViewingDate >= startDate
+                                         && v.ViewingDate <= endDate);
             }
 
             query = query.OrderBy(v => v.ViewingDate);

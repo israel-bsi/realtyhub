@@ -21,8 +21,8 @@ public class GetAllViewingsEndpoint : IEndpoint
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
         IViewingHandler handler,
-        [FromQuery] DateTime? startDate,
-        [FromQuery] DateTime? endDate,
+        [FromQuery] string? startDate,
+        [FromQuery] string? endDate,
         [FromQuery] int pageNumber = Core.Configuration.DefaultPageNumber,
         [FromQuery] int pageSize = Core.Configuration.DefaultPageSize)
     {

@@ -88,7 +88,16 @@ public class ViewingHandler(IHttpClientFactory httpClientFactory) : IViewingHand
         if (!string.IsNullOrEmpty(request.SearchTerm))
             url = $"{url}&searchTerm={request.SearchTerm}";
 
-        return await _httpClient.GetFromJsonAsync<PagedResponse<List<Viewing>?>>(url)
+        if (request.StartDate is not null & request.EndDate is not null)
+            url = $"{url}&startDate={request.StartDate}&endDate={request.EndDate}";
+
+        var response = await _httpClient.GetAsync(url);
+
+        if (!response.IsSuccessStatusCode)
+            return new PagedResponse<List<Viewing>?>(null, 400,
+                "Não foi possível obter as visitas");
+
+        return await response.Content.ReadFromJsonAsync<PagedResponse<List<Viewing>?>>()
                ?? new PagedResponse<List<Viewing>?>(null, 400,
                    "Não foi possível obter as visitas");
     }

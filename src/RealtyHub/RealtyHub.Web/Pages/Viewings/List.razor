@@ -1,6 +1,7 @@
 ﻿@page "/visitas/imoveis/{propertyId:long}"
 @page "/visitas/imoveis"
 @page "/visitas"
+@using System.Globalization
 @using RealtyHub.Core.Extensions
 @using RealtyHub.Core.Models
 @inherits ListViewingsPage
@@ -29,8 +30,10 @@
         <MudText Typo="Typo.h6">Visitas</MudText>
         <MudSpacer />
         <MudDateRangePicker PickerVariant="PickerVariant.Dialog"
-                            Label="Escolha a data da visita"
-                            @bind-DateRange="DateRange" />
+                            Label="Escolha a data da visita" 
+                            DateRange="DateRange"
+                            DateRangeChanged="OnDateRangeChanged" 
+                            Clearable="true" />
     </ToolBarContent>
     <Columns>
         <PropertyColumn Property="v=>v.ViewingDate" Title="Data"></PropertyColumn>

@@ -22,8 +22,8 @@ public class GetAllViewingsByPropertyEndpoint : IEndpoint
         ClaimsPrincipal user,
         IPropertyHandler handler,
         long id,
-        [FromQuery] DateTime? startDate, 
-        [FromQuery] DateTime? endDate,
+        [FromQuery] string? startDate, 
+        [FromQuery] string? endDate,
         [FromQuery] int pageNumber = Core.Configuration.DefaultPageNumber,
         [FromQuery] int pageSize = Core.Configuration.DefaultPageSize)
     {

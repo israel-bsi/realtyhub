@@ -73,8 +73,15 @@ public class PropertyHandler(IHttpClientFactory httpClientFactory) : IPropertyHa
 
     public async Task<PagedResponse<List<Viewing>?>> GetAllViewingsAsync(GetAllViewingsByPropertyRequest request)
     {
-        var response = await _httpClient
-            .GetAsync($"v1/properties/{request.PropertyId}/viewings");
+        var url = $"v1/properties/{request.PropertyId}/viewings?pageNumber={request.PageNumber}&pageSize={request.PageSize}";
+        
+        if (!string.IsNullOrEmpty(request.SearchTerm))
+            url = $"{url}&searchTerm={request.SearchTerm}";
+
+        if (request.StartDate is not null & request.EndDate is not null)
+            url = $"{url}&startDate={request.StartDate}&endDate={request.EndDate}";
+
+        var response = await _httpClient.GetAsync(url);
 
         if (!response.IsSuccessStatusCode)
             return new PagedResponse<List<Viewing>?>(null, 400,
