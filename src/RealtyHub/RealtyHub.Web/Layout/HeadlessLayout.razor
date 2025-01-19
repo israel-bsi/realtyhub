@@ -4,9 +4,11 @@
 <MudSnackbarProvider />
 
 <MudLayout>
-    <MudMainContent>
-        <MudContainer>
-            @Body
-        </MudContainer>
-    </MudMainContent>
+    <CascadingValue Value="@Configuration.SrcLogo" Name="LogoCascading">
+        <MudMainContent>
+            <MudContainer>
+                @Body
+            </MudContainer>
+        </MudMainContent>
+    </CascadingValue>
 </MudLayout>

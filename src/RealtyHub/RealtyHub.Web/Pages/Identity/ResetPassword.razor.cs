@@ -16,6 +16,9 @@ public class ResetPasswordPage : ComponentBase
     [SupplyParameterFromQuery(Name = "Token")]
     public string Token { get; set; } = string.Empty;
 
+    [CascadingParameter(Name = "LogoCascading")] 
+    public string SrcLogo { get; set; } = string.Empty;
+
     #endregion
 
     #region Properties

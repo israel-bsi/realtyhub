@@ -9,7 +9,7 @@
 <MudDialogProvider />
 
 <MudLayout>
-    <CascadingValue Value="this">
+    <CascadingValue Value="@Configuration.SrcLogo" Name="LogoCascading">
         <MudAppBar>
             RealtyHub
             <MudSpacer />
@@ -53,6 +53,9 @@
             await LocalStorage.SetItemAsync<bool?>("themePreference", IsDarkMode);
             StateHasChanged();
         }
+        Configuration.SrcLogo = IsDarkMode
+            ? Configuration.SrcLogos.BlackLogo
+            : Configuration.SrcLogos.WhiteLogo;
         SaveState = true;
     }
 
