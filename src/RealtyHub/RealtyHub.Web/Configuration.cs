@@ -6,6 +6,7 @@ public static class Configuration
 {
     public const string HttpClientName = "realtyhub";
     public static string BackendUrl { get; set; } = "http://localhost:5538";
+    public static string SrcLogo { get; set; } = SrcLogos.WhiteLogo;
     public static string GivenName { get; set; } = string.Empty;
     private const string PrincipalColor = "#B0C4DE";
     public static readonly MudTheme Theme = new()
@@ -41,4 +42,10 @@ public static class Configuration
             //TextPrimary = Colors.Shades.White
         }
     };
+
+    public static class SrcLogos
+    {
+        public const string WhiteLogo = "/src/img/white-logo-nobg.png";
+        public const string BlackLogo = "/src/img/black-logo-nobg.png";
+    }
 }
