@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using RealtyHub.Core.Enums;
+using RealtyHub.Core.Extensions;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.Properties;
@@ -22,7 +23,7 @@ public partial class ListViewingsPage : ComponentBase
     #region Properties
 
     public MudDataGrid<Viewing> DataGrid { get; set; } = null!;
-    public DateRange DateRange { get; set; } = new();
+    public DateRange DateRange { get; set; } = new(DateTime.Now.GetFirstDay(),DateTime.Now.GetLastDay());
     public List<Viewing> Items { get; set; } = [];
     public Property? Property { get; set; }
     public string HeaderTitle => Property is null ? 

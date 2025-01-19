@@ -8,15 +8,15 @@ namespace RealtyHub.ApiService.Services;
 
 public class EmailService : IEmailService
 {
-    public Task<Response<bool>> SendConfirmationLinkAsync(EmailMessageRequest request)
+    public Task<Response<bool>> SendConfirmationLinkAsync(ConfirmEmailMessage message)
     {
         var smtpClient = ConfigureClient();
         var mailMessage = ConfigureMailMessage();
 
-        mailMessage.To.Add(request.EmailTo);
+        mailMessage.To.Add(message.EmailTo);
         mailMessage.Subject = "Confirme seu email";
         mailMessage.Body = $"<h3>Por favor, confirme seu email clicando neste link:</h3>" +
-                           $"<h3> <a href='{request.ConfirmationLink}'>Confirmar email</a></h3>";
+                           $"<h3> <a href='{message.ConfirmationLink}'>Confirmar email</a></h3>";
         mailMessage.IsBodyHtml = true;
 
         try
@@ -32,6 +32,32 @@ public class EmailService : IEmailService
                 ex.Message));
         }
     }
+
+    public Task<Response<bool>> SendResetPasswordLinkAsync(ResetPasswordMessage message)
+    {
+        var smtpClient = ConfigureClient();
+        var mailMessage = ConfigureMailMessage();
+
+        mailMessage.To.Add(message.EmailTo);
+        mailMessage.Subject = "Redefinir senha";
+        mailMessage.Body = $"<h3>Para redefinir sua senha, clique no link abaixo:</h3>" +
+                           $"<h3> <a href='{message.ResetPasswordLink}'>Redefinir senha</a></h3>";
+        mailMessage.IsBodyHtml = true;
+
+        try
+        {
+            smtpClient.Send(mailMessage);
+            return Task.FromResult(new Response<bool>(true));
+        }
+        catch (Exception ex)
+        {
+            return Task.FromResult(new Response<bool>(
+                false,
+                (int)HttpStatusCode.InternalServerError,
+                ex.Message));
+        }
+    }
+
     private static SmtpClient ConfigureClient()
     {
         return new SmtpClient

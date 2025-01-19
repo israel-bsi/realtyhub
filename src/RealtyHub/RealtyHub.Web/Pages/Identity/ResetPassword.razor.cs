@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Components;
+using MudBlazor;
 using RealtyHub.Core.Handlers;
-using RealtyHub.Core.Models.Account;
+using RealtyHub.Core.Requests.Account;
 
 namespace RealtyHub.Web.Pages.Identity;
 
-public partial class ConfirmEmailPage : ComponentBase
+public class ResetPasswordPage : ComponentBase
 {
     #region Parameters
 
@@ -18,6 +19,9 @@ public partial class ConfirmEmailPage : ComponentBase
     #endregion
 
     #region Properties
+
+    public ResetPasswordRequest ResetPasswordModel { get; set; } = null!;
+    public ForgotPasswordRequest ForgotPasswordModel { get; set; } = new();
     public string Status { get; set; } = string.Empty;
     public bool Success { get; set; }
     #endregion
@@ -26,6 +30,12 @@ public partial class ConfirmEmailPage : ComponentBase
 
     [Inject]
     public IAccountHandler AccountHandler { get; set; } = null!;
+    
+    [Inject] 
+    public NavigationManager NavigationManager { get; set; } = null!;
+    
+    [Inject] 
+    public ISnackbar Snackbar { get; set; } = null!;
     #endregion
 
     #region Overrides
@@ -34,13 +44,7 @@ public partial class ConfirmEmailPage : ComponentBase
     {
         try
         {
-            var request = new ConfirmEmailRequest
-            {
-                UserId = UserId,
-                Token = Token
-            };
-
-            var result = await AccountHandler.ConfirmEmailAsync(request);
+            var result = await AccountHandler.ResetPasswordAsync(ResetPasswordModel);
             Success = result.IsSuccess;
             Status = result.Message!;
         }
@@ -48,6 +52,12 @@ public partial class ConfirmEmailPage : ComponentBase
         {
             Status = $"Erro ao confirmar email!\n{e.Message}";
         }
+    }
+
+    protected async Task OnValidSubmitAsync()
+    {
+        var result = await AccountHandler.ForgotPasswordAsync(ForgotPasswordModel);
+        Snackbar.Add(result.Message ?? string.Empty, Severity.Success);
     }
 
     #endregion

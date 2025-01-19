@@ -21,9 +21,7 @@ public class RegisterUserEndpoint : IEndpoint
     private static async Task<IResult> HandlerAsync(
         RegisterRequest request,
         UserManager<User> userManager,
-        IEmailService emailService,
-        LinkGenerator linkGenerator,
-        HttpContext httpContext)
+        IEmailService emailService)
     {
         var user = new User
         {
@@ -55,14 +53,14 @@ public class RegisterUserEndpoint : IEndpoint
                                $"userId={user.Id}" +
                                $"&token={encodedToken}";
 
-        var emailRequest = new EmailMessageRequest
+        var emailMessage = new ConfirmEmailMessage
         {
             EmailTo = user.Email,
             Name = user.GivenName,
             ConfirmationLink = confirmationLink
         };
 
-        var emailResult = await emailService.SendConfirmationLinkAsync(emailRequest);
+        var emailResult = await emailService.SendConfirmationLinkAsync(emailMessage);
 
         return emailResult.IsSuccess
             ? Results.Ok(new Response<string>(null, message: "Usuário registrado com sucesso! Verifique seu e-mail!"))
