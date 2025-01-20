@@ -39,7 +39,7 @@ public partial class RegisterPage : ComponentBase
         var user = authState.User;
 
         if (user.Identity is { IsAuthenticated: true })
-            NavigationManager.NavigateTo("/");
+            NavigationManager.NavigateTo("/dashboard");
     }
     #endregion
 

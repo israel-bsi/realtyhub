@@ -3,8 +3,8 @@
 @inject ILocalStorageService LocalStorage
 
 <MudThemeProvider @ref="_mudThemeProvider"
-@bind-IsDarkMode="IsDarkMode"
-Theme="Configuration.Theme" />
+                  @bind-IsDarkMode="IsDarkMode"
+                  Theme="Configuration.Theme" />
 <MudSnackbarProvider />
 <MudDialogProvider />
 <MudPopoverProvider />
@@ -16,31 +16,31 @@ Theme="Configuration.Theme" />
                 <MudAppBar>
                     <MudTooltip Text="Abir/Fechar Menu de Navegação">
                         <MudIconButton Icon="@Icons.Material.Filled.Menu"
-                        Color="Color.Inherit"
-                        Edge="Edge.Start"
-                        OnClick="ToggleDrawer" />
+                                       Color="Color.Inherit"
+                                       Edge="Edge.Start"
+                                       OnClick="ToggleDrawer" />
                     </MudTooltip>
                     RealtyHub
                     <MudSpacer />
                     <MudTooltip Text="Mudar tema">
                         <MudSwitch Color="Color.Inherit"
-                        Value="IsDarkMode"
-                        ValueChanged="OnThemeToggled"
-                        T="bool"
-                        ThumbIcon="@Icons.Material.TwoTone.DarkMode"
-                        Class="ma-4"
-                        Disabled="DisableMudSwitch" />
+                                   Value="IsDarkMode"
+                                   ValueChanged="OnThemeToggled"
+                                   T="bool"
+                                   ThumbIcon="@Icons.Material.TwoTone.DarkMode"
+                                   Class="ma-4"
+                                   Disabled="DisableMudSwitch" />
                     </MudTooltip>
 
                     <MudTooltip Text="Logout">
                         <MudIconButton Icon="@Icons.Material.Filled.Logout"
-                        Color="Color.Inherit"
-                        Edge="Edge.Start"
-                        OnClick="LogoutAsync" />
+                                       Color="Color.Inherit"
+                                       Edge="Edge.Start"
+                                       OnClick="LogoutAsync" />
                     </MudTooltip>
                 </MudAppBar>
                 <MudDrawer @bind-Open="@_isDrawerOpened">
-                    <NavMenu @key="MudNavMenuKey"   />
+                    <NavMenu @key="MudNavMenuKey" />
                 </MudDrawer>
                 <MudMainContent>
                     <MudContainer Class="mt-4">
@@ -51,7 +51,7 @@ Theme="Configuration.Theme" />
         </MudLayout>
     </Authorized>
     <NotAuthorized>
-        <LoginRedirect />
+        <HomeRedirect />
     </NotAuthorized>
 </AuthorizeView>
 

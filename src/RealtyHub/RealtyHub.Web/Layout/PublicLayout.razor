@@ -7,19 +7,36 @@
                   Theme="Configuration.Theme" />
 <MudSnackbarProvider />
 <MudDialogProvider />
+<MudPopoverProvider />
 
 <MudLayout>
     <CascadingValue Value="@Configuration.SrcLogo" Name="LogoCascading">
         <MudAppBar>
             RealtyHub
             <MudSpacer />
-            <MudSwitch Color="Color.Inherit"
-                       Value="IsDarkMode"
-                       ValueChanged="OnThemeToggled"
-                       T="bool"
-                       ThumbIcon="@Icons.Material.TwoTone.DarkMode"
-                       Class="ma-4"
-                       Disabled="DisableMudSwitch" />
+            <MudTooltip Text="Realizar login">
+                <MudIconButton Class="mr-4"
+                               Icon="@Icons.Material.Filled.Login"
+                               Color="Color.Inherit"
+                               Edge="Edge.Start"
+                               Href="/login" />
+            </MudTooltip>
+            <MudTooltip Text="Registrar-se">
+                <MudIconButton Class="mr-4"
+                               Icon="@Icons.Material.Filled.PersonAdd"
+                               Color="Color.Inherit"
+                               Edge="Edge.Start"
+                               Href="/comecar" />
+            </MudTooltip>
+            <MudTooltip Text="Mudar tema">
+                <MudSwitch Color="Color.Inherit"
+                           Value="IsDarkMode"
+                           ValueChanged="OnThemeToggled"
+                           T="bool"
+                           ThumbIcon="@Icons.Material.TwoTone.DarkMode"
+                           Class="ma-4"
+                           Disabled="DisableMudSwitch" />
+            </MudTooltip>
         </MudAppBar>
         <MudMainContent>
             <MudContainer Class="mt-4">
@@ -34,7 +51,7 @@
     public bool SaveState { get; set; }
     public bool IsDarkMode { get; set; }
     public bool DisableMudSwitch { get; set; }
-  
+
     private MudThemeProvider _mudThemeProvider = null!;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

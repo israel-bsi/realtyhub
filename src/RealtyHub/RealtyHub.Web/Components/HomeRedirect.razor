@@ -1,0 +1,11 @@
+﻿@inject NavigationManager NavigationManager
+
+<h3>Redirecionando para a página principal...</h3>
+
+@code
+{
+    protected override void OnInitialized()
+    {
+        NavigationManager.NavigateTo("/home");
+    }
+}

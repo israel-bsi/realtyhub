@@ -11,6 +11,11 @@
 
             <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
                 <DataAnnotationsValidator />
+                
+                <MudText Class="flex-center justify-center mb-4"
+                         Typo="Typo.h6">
+                    Crie sua conta para usar nossos serviços!
+                </MudText>
 
                 <MudTextField T="string"
                               Label="Nome"
