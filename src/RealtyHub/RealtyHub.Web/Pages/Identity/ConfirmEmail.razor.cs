@@ -18,6 +18,8 @@ public partial class ConfirmEmailPage : ComponentBase
     #endregion
 
     #region Properties
+
+    public bool IsBusy { get; set; }
     public string Status { get; set; } = string.Empty;
     public bool Success { get; set; }
     #endregion
@@ -32,6 +34,7 @@ public partial class ConfirmEmailPage : ComponentBase
 
     protected override async Task OnInitializedAsync()
     {
+        IsBusy = true;
         try
         {
             var request = new ConfirmEmailRequest
@@ -47,6 +50,10 @@ public partial class ConfirmEmailPage : ComponentBase
         catch (Exception e)
         {
             Status = $"Erro ao confirmar email!\n{e.Message}";
+        }
+        finally
+        {
+            IsBusy = false;
         }
     }
 

@@ -1,27 +1,35 @@
 ﻿@page "/confirmar-email"
 @inherits ConfirmEmailPage
-@layout NotAuthenticateLayout
+@layout HeadlessLayout
 
 <PageTitle>RealtyHub - Confirmar Email</PageTitle>
 
-<MudGrid style="height: 85vh;" Class="d-flex align-center justify-center">
+<MudGrid Justify="Justify.Center">
     <MudItem xs="12" sm="12" md="8" lg="6" xl="6" xxl="6">
         <MudPaper Class="mud-width-full pa-8">
-            
-            <div class="flex-center">
-                <MudIcon Icon="@(Success ? Icons.Material.Filled.CheckCircle : Icons.Material.Filled.Error)"></MudIcon>
-                <MudText Class="ml-2">@Status</MudText>
-            </div>
+            <Logo Width="200" />
 
-            <div class="d-flex mt-8">
-                <MudButton ButtonType="ButtonType.Submit"
-                           Href="/login"
-                           Variant="Variant.Filled"
-                           Color="Color.Primary"
-                           StartIcon="@Icons.Material.Filled.Home">
-                    Ir para página de login
-                </MudButton>
-            </div>
+            @if (IsBusy)
+            {
+                <MudProgressCircular Color="Color.Info" Indeterminate="true" />
+            }
+            else
+            {
+                <div class="flex-center">
+                    <MudIcon Icon="@(Success ? Icons.Material.Filled.CheckCircle : Icons.Material.Filled.Error)"></MudIcon>
+                    <MudText Class="ml-2">@Status</MudText>
+                </div>
+
+                <div class="d-flex mt-8">
+                    <MudButton ButtonType="ButtonType.Submit"
+                               Href="/login"
+                               Variant="Variant.Filled"
+                               Color="Color.Primary"
+                               StartIcon="@Icons.Material.Filled.Home">
+                        Ir para página de login
+                    </MudButton>
+                </div>
+            }
         </MudPaper>
     </MudItem>
 </MudGrid>
