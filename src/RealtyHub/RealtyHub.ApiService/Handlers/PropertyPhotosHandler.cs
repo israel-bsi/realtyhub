@@ -42,9 +42,14 @@ public class PropertyPhotosHandler(AppDbContext context) : IPropertyPhotosHandle
                 return new Response<PropertyPhoto?>(null, 400,
                     "Nenhum arquivo encontrado");
 
+            var photosToCreate = new List<PropertyPhoto>();
+            var photosToUpdate = new List<PropertyPhoto>();
+
             foreach (var file in files)
             {
-                var idPhoto = Guid.NewGuid().ToString();
+                var id = file.Headers["Id"].FirstOrDefault();
+                var isThumbnail = bool.Parse(file.Headers["IsThumbnail"].FirstOrDefault() ?? "false");
+                var idPhoto = string.IsNullOrEmpty(id) ? Guid.NewGuid().ToString() : id;
                 var extension = Path.GetExtension(file.FileName);
                 var fileName = $"{idPhoto}{extension}";
                 var fullFileName = Path.Combine(Directory.GetCurrentDirectory(), "Sources", "Photos", fileName);
@@ -56,15 +61,36 @@ public class PropertyPhotosHandler(AppDbContext context) : IPropertyPhotosHandle
                 {
                     Id = idPhoto,
                     Extension = extension,
+                    IsThumbnail = isThumbnail,
                     PropertyId = request.PropertyId,
                     Property = property,
                     IsActive = true,
                     UserId = request.UserId
                 };
-
-                context.PropertyPhotos.Add(propertyPhoto);
+                if (string.IsNullOrEmpty(id))
+                    photosToCreate.Add(propertyPhoto);
+                else
+                    photosToUpdate.Add(propertyPhoto);
             }
 
+            if (photosToCreate.Any(p => p.IsThumbnail))
+            {
+                await context.PropertyPhotos
+                    .Where(pi =>
+                        pi.PropertyId == request.PropertyId
+                        && pi.UserId == request.UserId
+                        && pi.IsActive
+                        && pi.IsThumbnail)
+                    .ForEachAsync(pi =>
+                    {
+                        context.Attach(pi);
+                        pi.IsThumbnail = false;
+                        pi.UpdatedAt = DateTime.UtcNow;
+                    });
+            }
+
+            await context.PropertyPhotos.AddRangeAsync(photosToCreate);
+            context.PropertyPhotos.UpdateRange(photosToUpdate);
             await context.SaveChangesAsync();
 
             return new Response<PropertyPhoto?>(null, 201);
@@ -75,6 +101,53 @@ public class PropertyPhotosHandler(AppDbContext context) : IPropertyPhotosHandle
         }
     }
 
+    public async Task<Response<List<PropertyPhoto>?>> UpdateAsync(UpdatePorpertyPhotosRequest request)
+    {
+        try
+        {
+            if (request.Photos.Any(p => p.IsThumbnail))
+            {
+                await context.PropertyPhotos
+                    .Where(pi =>
+                        pi.PropertyId == request.PropertyId
+                        && pi.UserId == request.UserId
+                        && pi.IsActive
+                        && pi.IsThumbnail)
+                    .ForEachAsync(pi =>
+                    {
+                        context.Attach(pi);
+                        pi.IsThumbnail = false;
+                        pi.UpdatedAt = DateTime.UtcNow;
+                    });
+            }
+
+            foreach (var photo in request.Photos)
+            {
+                var existingEntity = await context
+                    .PropertyPhotos
+                    .FirstOrDefaultAsync(pi =>
+                        pi.Id == photo.Id
+                        && pi.UserId == request.UserId
+                        && pi.IsActive);
+
+                if (existingEntity is null)
+                    continue;
+
+                context.Attach(existingEntity);
+
+                existingEntity.IsThumbnail = photo.IsThumbnail;
+                existingEntity.UpdatedAt = DateTime.UtcNow;
+            }
+
+            await context.SaveChangesAsync();
+
+            return new Response<List<PropertyPhoto>?>(null, 204);
+        }
+        catch (Exception e)
+        {
+            return new Response<List<PropertyPhoto>?>(null, 500, e.Message);
+        }
+    }
     public async Task<Response<PropertyPhoto?>> DeleteAsync(DeletePropertyPhotoRequest request)
     {
         try
@@ -93,6 +166,7 @@ public class PropertyPhotosHandler(AppDbContext context) : IPropertyPhotosHandle
             context.Attach(propertyPhoto);
 
             propertyPhoto.IsActive = false;
+            propertyPhoto.IsThumbnail = false;
             propertyPhoto.UpdatedAt = DateTime.UtcNow;
 
             await context.SaveChangesAsync();

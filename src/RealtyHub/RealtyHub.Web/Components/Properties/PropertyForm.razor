@@ -159,15 +159,29 @@ else
                                      ShowArrows="true"
                                      ShowBullets="true"
                                      AutoCycle="false"
-                                     Class="cursor-pointer mud-width-full d-flex justify-center align-center"
-                                     Style="width: 100%; height: 90vh; align-self: center"
+                                     Class="mud-width-full align-center"
+                                     Style="width: 100%; height: 105vh;"
                                      TData="PhotoItem"
                                      @bind-SelectedIndex="SelectedIndex"
                                      @key="@CarouselKey">
 
                             <ItemTemplate Context="photoItem">
+                                <div class="d-flex flex-column align-items-center mt-4">
+                                    <MudButton ButtonType="ButtonType.Button"
+                                               Color="Color.Primary"
+                                               Variant="Variant.Filled"
+                                               StartIcon="@Icons.Material.Filled.Image"
+                                               Disabled="@photoItem.IsThumbnail"
+                                               OnClick="@(() => SetThumbnail(photoItem.Id))">
+                                        @(photoItem.IsThumbnail ? "Foto já definida como principal" : "Definir como foto principal")
+                                    </MudButton>
+                                    <MudText Typo="Typo.caption" Class="mt-2">
+                                        A foto ficará em exibição na página principal
+                                    </MudText>
+                                </div>
                                 <MudImage Src="@photoItem.DisplayUrl"
                                           @onclick="@(() => OpenImageDialog(photoItem.DisplayUrl))"
+                                          Class="cursor-pointer"
                                           Width="600"
                                           Height="600"
                                           Fluid="true"
@@ -185,6 +199,7 @@ else
                        StartIcon="@Icons.Material.Filled.Save">
                 Salvar
             </MudButton>
+            <MudText Class="mb-10" />
         </EditForm>
     </MudPaper>
 }

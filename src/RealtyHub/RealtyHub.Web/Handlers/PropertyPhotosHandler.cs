@@ -21,6 +21,9 @@ public class PropertyPhotosHandler(IHttpClientFactory httpClientFactory) : IProp
             var fileContent = new ByteArrayContent(fileData.Content);
             fileContent.Headers.ContentType = new MediaTypeHeaderValue(fileData.ContentType);
 
+            fileContent.Headers.Add("IsThumbnail", fileData.IsThumbnail.ToString());
+            fileContent.Headers.Add("Id", $"{fileData.Id}");
+
             content.Add(fileContent, "photos", fileData.Name);
         }
 
@@ -33,6 +36,16 @@ public class PropertyPhotosHandler(IHttpClientFactory httpClientFactory) : IProp
             return new Response<PropertyPhoto?>(null, (int)response.StatusCode, data?.Message);
 
         return data ?? new Response<PropertyPhoto?>(null, 400, "Falha ao adicionar as fotos");
+    }
+
+    public async Task<Response<List<PropertyPhoto>?>> UpdateAsync(UpdatePorpertyPhotosRequest request)
+    {
+        var url = $"/v1/properties/{request.PropertyId}/photos";
+        var response = await _httpClient.PutAsJsonAsync(url, request.Photos);
+        var data = await response.Content.ReadFromJsonAsync<Response<List<PropertyPhoto>?>>();
+        if (!response.IsSuccessStatusCode)
+            return new Response<List<PropertyPhoto>?>(null, (int)response.StatusCode, data?.Message);
+        return data ?? new Response<List<PropertyPhoto>?>(null, 400, "Falha ao atualizar as fotos");
     }
 
     public async Task<Response<PropertyPhoto?>> DeleteAsync(DeletePropertyPhotoRequest request)

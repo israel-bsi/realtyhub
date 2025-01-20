@@ -54,7 +54,8 @@ public static class Endpoint
             .MapEndpoint<CreatePropertyPhotosEndpoint>()
             .MapEndpoint<DeletePropertyPhotoEndpoint>()
             .MapEndpoint<GetAllPropertyPhotosByPropertyEndpoint>()
-            .MapEndpoint<GetAllViewingsByPropertyEndpoint>();
+            .MapEndpoint<GetAllViewingsByPropertyEndpoint>()
+            .MapEndpoint<UpdatePropertyPhotosEndpoint>();
 
         endpoints.MapGroup("v1/viewings")
             .WithTags("Viewings")

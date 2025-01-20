@@ -1,0 +1,25 @@
+﻿@* @using RealtyHub.Core.Models
+
+<MudDataGrid T="Property" Items="properties" Bordered="true" Hover="true" Striped="true">
+    <Columns>
+        <PropertyColumn Property="@(e => e.Title)" Title="Titulo" />
+        <TemplateColumn Title="Imagem">
+            <CellTemplate>
+                @if (!string.IsNullOrEmpty(context.CaminhoImagem))
+                {
+                    <MudImage Src="@context.Item.PropertyPhotos" Alt="Imagem de @context.Nome" Width="100px" Height="100px" />
+                }
+            </CellTemplate>
+        </TemplateColumn>
+        <!-- Outras colunas conforme necessário -->
+    </Columns>
+</MudDataGrid>
+
+@code {
+    private List<Property> properties;
+
+    protected override async Task OnInitializedAsync()
+    {
+        properties = await servicoDeDados.ObterObjetosAsync();
+    }
+} *@

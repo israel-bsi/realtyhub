@@ -115,12 +115,16 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
     {
         try
         {
-            var property = await context
+            var query = context
                 .Properties
                 .AsNoTracking()
-                .FirstOrDefaultAsync(p => p.Id == request.Id
-                                          && p.UserId == request.UserId
-                                          && p.IsActive);
+                .Include(p => p.PropertyPhotos.Where(p=>p.IsActive))
+                .Where(p=>p.Id == request.Id && p.IsActive);
+
+                if (!string.IsNullOrEmpty(request.UserId))
+                query = query.Where(p => p.UserId == request.UserId);
+
+                var property = await query.FirstOrDefaultAsync();
 
             return property is null
                 ? new Response<Property?>(null, 404,
@@ -141,7 +145,11 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
             var query = context
                 .Properties
                 .AsNoTracking()
-                .Where(p => p.UserId == request.UserId && p.IsActive);
+                .Include(p => p.PropertyPhotos)
+                .Where(p => p.IsActive);
+
+            if (!string.IsNullOrEmpty(request.UserId))
+                query = query.Where(v => v.UserId == request.UserId);
 
             if (!string.IsNullOrEmpty(request.SearchTerm))
             {

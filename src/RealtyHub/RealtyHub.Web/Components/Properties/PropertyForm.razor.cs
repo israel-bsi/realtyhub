@@ -91,50 +91,6 @@ public partial class PropertyFormComponent : ComponentBase
             IsBusy = false;
         }
     }
-    private async Task UpdateServerPhotos()
-    {
-        var newPhotos = AllPhotos.Where(p => string.IsNullOrEmpty(p.Id)).ToList();
-        if (newPhotos.Count > 0)
-        {
-            var request = new CreatePropertyPhotosRequest
-            {
-                PropertyId = InputModel.Id,
-                FileBytes = newPhotos.Select(p => new FileData
-                {
-                    Content = p.Content!,
-                    ContentType = p.ContentType!,
-                    Name = p.OriginalFileName!
-                }).ToList()
-            };
-
-            var resultPhotos = await PropertyPhotosHandler.CreateAsync(request);
-            if (!resultPhotos.IsSuccess)
-                Snackbar.Add(resultPhotos.Message ?? string.Empty, Severity.Error);
-        }
-    }
-    private async Task DeleteRemovedServerPhotos()
-    {
-        var oldServerPhotosIds = PropertyPhotos
-            .Select(p => p.Id)
-            .ToList();
-
-        var currentServerPhotosIds = AllPhotos
-            .Where(p => !string.IsNullOrEmpty(p.Id))
-            .Select(p => p.Id)
-            .ToList();
-
-        var removedIds = oldServerPhotosIds.Except(currentServerPhotosIds).ToList();
-
-        foreach (var photoId in removedIds)
-        {
-            var deleteReq = new DeletePropertyPhotoRequest { Id = photoId, PropertyId = InputModel.Id };
-            var resp = await PropertyPhotosHandler.DeleteAsync(deleteReq);
-            if (!resp.IsSuccess)
-            {
-                Snackbar.Add(resp.Message ?? $"Erro ao excluir foto {photoId}", Severity.Error);
-            }
-        }
-    }
     public async Task RemoveAllPhotos()
     {
         var parameters = new DialogParameters
@@ -225,6 +181,7 @@ public partial class PropertyFormComponent : ComponentBase
                     AllPhotos.Add(new PhotoItem
                     {
                         Id = photo.Id,
+                        IsThumbnail = photo.IsThumbnail,
                         DisplayUrl = $"{Configuration.BackendUrl}/photos/{photo.Id}{photo.Extension}",
                     });
                 }
@@ -235,6 +192,62 @@ public partial class PropertyFormComponent : ComponentBase
         catch (Exception e)
         {
             Snackbar.Add(e.Message, Severity.Error);
+        }
+    }
+    public void SetThumbnail(PhotoItem item)
+    {
+        //TODO Adaptar para para consumir o endpoint de atualização de foto
+        foreach (var item in AllPhotos)
+        {
+            item.IsThumbnail = item.Id == id;
+        }
+        CarouselKey++;
+        StateHasChanged();
+    }
+    private async Task UpdateServerPhotos()
+    {
+        var newPhotos = AllPhotos.Where(p => string.IsNullOrEmpty(p.Id)).ToList();
+        if (newPhotos.Count > 0)
+        {
+            var request = new CreatePropertyPhotosRequest
+            {
+                PropertyId = InputModel.Id,
+                FileBytes = newPhotos.Select(p => new FileData
+                {
+                    Id = p.Id,
+                    Content = p.Content!,
+                    ContentType = p.ContentType!,
+                    Name = p.OriginalFileName!,
+                    IsThumbnail = p.IsThumbnail
+                }).ToList()
+            };
+
+            var resultPhotos = await PropertyPhotosHandler.CreateAsync(request);
+            if (!resultPhotos.IsSuccess)
+                Snackbar.Add(resultPhotos.Message ?? string.Empty, Severity.Error);
+        }
+    }
+    private async Task DeleteRemovedServerPhotos()
+    {
+        var oldServerPhotosIds = PropertyPhotos
+            .Select(p => p.Id)
+            .ToList();
+
+        var currentServerPhotosIds = AllPhotos
+            .Where(p => !string.IsNullOrEmpty(p.Id))
+            .Select(p => p.Id)
+            .ToList();
+
+        var removedIds = oldServerPhotosIds.Except(currentServerPhotosIds).ToList();
+
+        foreach (var photoId in removedIds)
+        {
+            var deleteReq = new DeletePropertyPhotoRequest { Id = photoId, PropertyId = InputModel.Id };
+            var resp = await PropertyPhotosHandler.DeleteAsync(deleteReq);
+            if (!resp.IsSuccess)
+            {
+                Snackbar.Add(resp.Message ?? $"Erro ao excluir foto {photoId}", Severity.Error);
+            }
         }
     }
     private async Task LoadPropertyAsync()
