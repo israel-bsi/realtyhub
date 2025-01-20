@@ -16,30 +16,34 @@ public class ResetPasswordPage : ComponentBase
     [SupplyParameterFromQuery(Name = "Token")]
     public string Token { get; set; } = string.Empty;
 
-    [CascadingParameter(Name = "LogoCascading")] 
+    [CascadingParameter(Name = "LogoCascading")]
     public string SrcLogo { get; set; } = string.Empty;
 
     #endregion
 
     #region Properties
 
+    public string HeaderText { get; set; }
+    = "Enviaremos um e-mail com um instruções de recuperação";
+
+    public bool IsSuccess { get; set; }
     public bool IsBusy { get; set; }
     public ResetPasswordRequest ResetPasswordModel { get; set; } = new();
     public ForgotPasswordRequest ForgotPasswordModel { get; set; } = new();
-    
+
     #endregion
 
     #region Services
 
     [Inject]
     public IAccountHandler AccountHandler { get; set; } = null!;
-    
-    [Inject] 
+
+    [Inject]
     public NavigationManager NavigationManager { get; set; } = null!;
-    
-    [Inject] 
+
+    [Inject]
     public ISnackbar Snackbar { get; set; } = null!;
-    
+
     #endregion
 
     #region Methods
@@ -50,7 +54,11 @@ public class ResetPasswordPage : ComponentBase
         try
         {
             var result = await AccountHandler.ForgotPasswordAsync(ForgotPasswordModel);
-            Snackbar.Add(result.Message ?? string.Empty, Severity.Success);
+            IsSuccess = result.IsSuccess;
+            if (IsSuccess)
+                HeaderText = "O e-mail foi enviado com sucesso!";
+            else
+                Snackbar.Add(result.Message ?? string.Empty, Severity.Error);
         }
         catch (Exception e)
         {
