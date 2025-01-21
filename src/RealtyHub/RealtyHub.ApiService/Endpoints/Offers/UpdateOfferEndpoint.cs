@@ -15,7 +15,8 @@ public class UpdateOfferEndpoint : IEndpoint
             .WithSummary("Atualiza uma proposta")
             .WithDescription("Atualiza uma proposta")
             .WithOrder(2)
-            .Produces<Response<Offer?>>();
+            .Produces<Response<Offer?>>()
+            .Produces<Response<Offer?>>(StatusCodes.Status400BadRequest);
 
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,

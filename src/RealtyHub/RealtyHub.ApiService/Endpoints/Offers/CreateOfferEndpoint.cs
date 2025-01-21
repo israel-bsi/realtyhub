@@ -15,7 +15,8 @@ public class CreateOfferEndpoint : IEndpoint
             .WithSummary("Cria uma proposta")
             .WithDescription("Cria uma proposta")
             .WithOrder(1)
-            .Produces<Response<Offer?>>();
+            .Produces<Response<Offer?>>(StatusCodes.Status201Created)
+            .Produces<Response<Offer?>>(StatusCodes.Status400BadRequest);
 
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,

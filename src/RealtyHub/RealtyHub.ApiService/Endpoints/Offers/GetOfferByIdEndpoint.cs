@@ -15,7 +15,8 @@ public class GetOfferByIdEndpoint : IEndpoint
             .WithSummary("Recupera uma proposta")
             .WithDescription("Recupera uma proposta")
             .WithOrder(4)
-            .Produces<Response<Offer?>>();
+            .Produces<Response<Offer?>>()
+            .Produces<Response<Offer?>>(StatusCodes.Status400BadRequest);
 
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,

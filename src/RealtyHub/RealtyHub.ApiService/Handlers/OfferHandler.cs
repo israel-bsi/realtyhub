@@ -18,7 +18,9 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
             customer = await context
                 .Customers
                 .AsNoTracking()
-                .FirstOrDefaultAsync(c => c.Id == request.CustomerId && c.IsActive);
+                .FirstOrDefaultAsync(c => c.Id == request.CustomerId 
+                                          && c.UserId == request.UserId
+                                          && c.IsActive);
 
             if (customer is null)
                 return new Response<Offer?>(null, 404,
@@ -38,7 +40,9 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
             property = await context
                 .Properties
                 .AsNoTracking()
-                .FirstOrDefaultAsync(p => p.Id == request.PropertyId && p.IsActive);
+                .FirstOrDefaultAsync(p => p.Id == request.PropertyId
+                                          && p.UserId == request.UserId
+                                          && p.IsActive);
 
             if (property is null)
                 return new Response<Offer?>(null, 404,
@@ -60,6 +64,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 Amount = paymentRequest.Amount,
                 PaymentType = paymentRequest.PaymentType,
                 PaymentStatus = paymentRequest.PaymentStatus,
+                UserId = request.UserId,
                 IsActive = true
             }).ToList();
 
@@ -77,7 +82,8 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 Customer = customer,
                 PropertyId = request.PropertyId,
                 Property = property,
-                Payments = payments
+                Payments = payments,
+                UserId = request.UserId
             };
 
             await context.Offers.AddAsync(offer);
@@ -102,7 +108,8 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .Include(o => o.Customer)
                 .Include(o => o.Property)
                 .Include(o => o.Payments)
-                .FirstOrDefaultAsync(o => o.Id == request.Id);
+                .FirstOrDefaultAsync(o => o.Id == request.Id 
+                                          && o.UserId == request.UserId);
 
             if (offer is null)
                 return new Response<Offer?>(null, 404,
@@ -119,7 +126,8 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
 
             var payments = await context
                 .Payments
-                .Where(p => p.OfferId == request.Id)
+                .Where(p => p.OfferId == request.Id 
+                            && p.UserId == request.UserId)
                 .ToListAsync();
 
             offer.Submission = request.Submission;
@@ -162,8 +170,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                     IsActive = true,
                     OfferId = offer.Id,
                     Offer = offer,
-                    CreatedAt = DateTime.UtcNow,
-                    UpdatedAt = DateTime.UtcNow
+                    UserId = request.UserId
                 };
 
                 context.Attach(newPayment);
@@ -193,7 +200,8 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .Include(o => o.Customer)
                 .Include(o => o.Property)
                 .Include(o => o.Payments)
-                .FirstOrDefaultAsync(o => o.Id == request.Id);
+                .FirstOrDefaultAsync(o => o.Id == request.Id 
+                                          && o.UserId == request.UserId);
 
             if (offer is null)
                 return new Response<Offer?>(null, 404,
@@ -234,7 +242,8 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .Include(o => o.Customer)
                 .Include(o => o.Property)
                 .Include(o => o.Payments)
-                .FirstOrDefaultAsync(o => o.Id == request.Id);
+                .FirstOrDefaultAsync(o => o.Id == request.Id 
+                                          && o.UserId == request.UserId);
 
             if (offer is null)
                 return new Response<Offer?>(null, 404,
@@ -276,7 +285,8 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .Include(o => o.Customer)
                 .Include(o => o.Property)
                 .Include(o => o.Payments)
-                .FirstOrDefaultAsync(o => o.Id == request.Id);
+                .FirstOrDefaultAsync(o => o.Id == request.Id 
+                                          && o.UserId == request.UserId);
 
             return offer == null
                 ? new Response<Offer?>(null, 404, "Proposta não encontrada")
@@ -296,7 +306,9 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
             var property = await context
                 .Properties
                 .AsNoTracking()
-                .FirstOrDefaultAsync(p => p.Id == request.PropertyId && p.IsActive);
+                .FirstOrDefaultAsync(p => p.Id == request.PropertyId 
+                                          && p.UserId == request.UserId 
+                                          && p.IsActive);
 
             if (property is null)
                 return new Response<List<Offer>?>(null, 404,
@@ -308,7 +320,8 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .Include(o => o.Customer)
                 .Include(o => o.Property)
                 .Include(o => o.Payments)
-                .Where(o => o.PropertyId == request.PropertyId)
+                .Where(o => o.PropertyId == request.PropertyId 
+                            && o.UserId == request.UserId)
                 .ToListAsync();
 
             var count = offers.Count;
@@ -333,7 +346,9 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
             var customer = await context
                 .Customers
                 .AsNoTracking()
-                .FirstOrDefaultAsync(p => p.Id == request.CustomerId && p.IsActive);
+                .FirstOrDefaultAsync(p => p.Id == request.CustomerId 
+                                          && p.UserId == request.UserId 
+                                          && p.IsActive);
 
             if (customer is null)
                 return new Response<List<Offer>?>(null, 404,
@@ -345,7 +360,8 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .Include(o => o.Customer)
                 .Include(o => o.Property)
                 .Include(o => o.Payments)
-                .Where(o => o.CustomerId == request.CustomerId)
+                .Where(o => o.CustomerId == request.CustomerId 
+                            && o.UserId == request.UserId)
                 .ToListAsync();
 
             var count = offers.Count;
@@ -372,7 +388,8 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .AsNoTracking()
                 .Include(o => o.Customer)
                 .Include(o => o.Property)
-                .Include(o => o.Payments);
+                .Include(o => o.Payments)
+                .Where(o => o.UserId == request.UserId);
 
             var offers = await query
                 .Skip((request.PageNumber - 1) * request.PageSize)

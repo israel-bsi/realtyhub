@@ -15,7 +15,8 @@ public class AcceptOfferEndpoint : IEndpoint
             .WithSummary("Aceita uma proposta")
             .WithDescription("Aceita uma proposta")
             .WithOrder(7)
-            .Produces<Response<Offer?>>();
+            .Produces<Response<Offer?>>()
+            .Produces<Response<Offer?>>(StatusCodes.Status400BadRequest);
 
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,

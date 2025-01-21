@@ -16,7 +16,8 @@ public class GetAllOffersByPropertyEndpoint : IEndpoint
             .WithSummary("Recupera todas as propostas de um imóvel")
             .WithDescription("Recupera todas as propostas de um imóvel")
             .WithOrder(6)
-            .Produces<Response<Offer?>>();
+            .Produces<Response<Offer?>>()
+            .Produces<Response<Offer?>>(StatusCodes.Status400BadRequest);
     }
 
     private static async Task<IResult> HandlerAsync(

@@ -15,7 +15,8 @@ public class RejectOfferEndpoint : IEndpoint
             .WithSummary("Rejeita uma proposta")
             .WithDescription("Rejeita uma proposta")
             .WithOrder(3)
-            .Produces<Response<Offer?>>();
+            .Produces<Response<Offer?>>()
+            .Produces<Response<Offer?>>(StatusCodes.Status400BadRequest);
 
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,

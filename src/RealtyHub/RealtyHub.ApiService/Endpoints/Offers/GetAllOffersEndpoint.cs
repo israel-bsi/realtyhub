@@ -16,7 +16,8 @@ public class GetAllOffersEndpoint : IEndpoint
             .WithSummary("Recupera todas as propostas")
             .WithDescription("Recupera todas as propostas")
             .WithOrder(5)
-            .Produces<Response<Offer?>>();
+            .Produces<Response<Offer?>>()
+            .Produces<Response<Offer?>>(StatusCodes.Status400BadRequest);
 
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,

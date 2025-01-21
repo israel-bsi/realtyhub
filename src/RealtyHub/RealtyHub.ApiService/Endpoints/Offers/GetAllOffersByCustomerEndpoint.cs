@@ -16,7 +16,8 @@ public class GetAllOffersByCustomerEndpoint : IEndpoint
             .WithSummary("Recupera todas as propostas feitas por um cliente")
             .WithDescription("Recupera todas as propostas feitas por um cliente")
             .WithOrder(8)
-            .Produces<Response<Offer?>>();
+            .Produces<Response<Offer?>>()
+            .Produces<Response<Offer?>>(StatusCodes.Status400BadRequest);
     }
 
     private static async Task<IResult> HandlerAsync(
