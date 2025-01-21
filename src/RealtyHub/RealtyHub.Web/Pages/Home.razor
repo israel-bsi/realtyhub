@@ -1,5 +1,71 @@
 ﻿@page "/home"
+@using RealtyHub.Core.Handlers
+@using RealtyHub.Core.Models
+@using RealtyHub.Core.Requests.Properties
 @layout PublicLayout
 
 <PageTitle>Home</PageTitle>
 
+@if (IsBusy)
+{
+    <div class="centered-container">
+        <MudProgressCircular Size="Size.Large" Color="Color.Info" Indeterminate="true" />
+    </div>
+}
+else
+{
+    <MudPaper>
+        <MudGrid Justify="Justify.FlexStart">
+            @foreach (var property in Properties)
+            {
+                <CardHome Property="property"></CardHome>
+            }
+        </MudGrid>
+    </MudPaper>
+    <MudPagination></MudPagination>
+}
+
+@code
+{
+    [Inject]
+    public IPropertyHandler PropertyHandler { get; set; } = null!;
+
+    [Inject]
+    public ISnackbar Snackbar { get; set; } = null!;
+
+    public List<Property> Properties { get; set; } = [];
+
+    public bool IsBusy { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        IsBusy = true;
+        try
+        {
+            var request = new GetAllPropertiesRequest();
+            var response = await PropertyHandler.GetAllAsync(request);
+            if (response is { IsSuccess: true, Data: not null })
+                Properties = response.Data;
+            else
+                Snackbar.Add("Não foi possível exibir os imóveis");
+        }
+        catch
+        {
+            Snackbar.Add("Erro ao exibir os imóveis", Severity.Error);
+        }
+        finally
+        {
+            await Task.Delay(1000);
+            IsBusy = false;
+        }
+    }
+}
+
+<style>
+    .centered-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50vh;
+    }
+</style>

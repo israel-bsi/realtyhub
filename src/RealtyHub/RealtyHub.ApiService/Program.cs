@@ -23,11 +23,6 @@ app.ApplyMigrations();
 if (app.Environment.IsDevelopment())
     app.ConfigureDevEnvironment();
 
-app.MapGet("/teste", (DateTime endDate) =>
-{
-    return $"Data recebida: {endDate:dd/MM/yyyy HH:mm:ss}";
-});
-
 app.UseStaticFiles();
 app.UseExceptionHandler();
 app.UseCors(Configuration.CorsPolicyName);

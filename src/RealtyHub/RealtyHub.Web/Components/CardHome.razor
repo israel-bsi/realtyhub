@@ -1,0 +1,51 @@
+﻿@using RealtyHub.Core.Models
+@inherits LayoutComponentBase
+@inject ISnackbar Snackbar
+
+<MudItem xs="6" sm="3">
+    <MudPaper Elevation="2">
+        <MudCard Class="@("mb-4 " + Class)">
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.body1">@Property.Title</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardMedia Image="@GetSrcPhoto()" Height="250" />
+            <MudCardContent>
+                <MudText Typo="Typo.body2">@Property.Description</MudText>
+            </MudCardContent>
+            <MudCardActions>
+                <MudTooltip Text="Enviar proposta">
+                    <MudIconButton Icon="@Icons.Material.Filled.Send"
+                    Color="Color.Primary"
+                    OnClick="@(() => Snackbar.Add("Enviando proposta", Severity.Info))" />
+                </MudTooltip>
+                <MudTooltip Text="Mais informações">
+                    <MudIconButton Icon="@Icons.Material.Filled.Info" 
+                    Color="Color.Primary"
+                    OnClick="@(() => Snackbar.Add("Exibindo a pagina completa", Severity.Info))"/>
+                </MudTooltip>
+            </MudCardActions>
+        </MudCard>
+    </MudPaper>
+</MudItem>
+
+@code
+{
+    [Parameter]
+    public string Class { get; set; } = string.Empty;
+
+    [Parameter] 
+    public Property Property { get; set; } = new();
+
+    protected string GetSrcPhoto()
+    {
+        var photo = Property
+            .PropertyPhotos
+            .FirstOrDefault(p=>p.IsThumbnail);
+
+        var fullName = $"{photo?.Id}{photo?.Extension}";
+
+        return $"{Configuration.BackendUrl}/photos/{fullName}";
+    }
+}
