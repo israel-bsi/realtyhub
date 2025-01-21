@@ -16,7 +16,8 @@ public class GetAllPropertyPhotosByPropertyEndpoint : IEndpoint
             .WithSummary("Recupera todos as fotos de um imóvel")
             .WithDescription("Recupera todos as fotos de um imóvel")
             .WithOrder(8)
-            .Produces<Response<List<PropertyPhoto>?>>();
+            .Produces<Response<List<PropertyPhoto>?>>()
+            .Produces<Response<Property?>>(StatusCodes.Status400BadRequest);
     }
 
     private static async Task<IResult> HandlerAsync(
@@ -32,6 +33,8 @@ public class GetAllPropertyPhotosByPropertyEndpoint : IEndpoint
 
         var result = await handler.GetAllByPropertyAsync(request);
 
-        return result.IsSuccess ? Results.Ok(result) : Results.BadRequest(result);
+        return result.IsSuccess 
+            ? Results.Ok(result) 
+            : Results.BadRequest(result);
     }
 }

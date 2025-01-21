@@ -15,7 +15,8 @@ public class DeletePropertyPhotoEndpoint : IEndpoint
             .WithSummary("Exclui uma foto de um imóvel")
             .WithDescription("Exclui uma foto de um imóvel")
             .WithOrder(7)
-            .Produces<Response<PropertyPhoto?>>();
+            .Produces<Response<PropertyPhoto?>>(StatusCodes.Status204NoContent)
+            .Produces<Response<Property?>>(StatusCodes.Status400BadRequest);
     }
 
     private static async Task<IResult> HandlerAsync(
@@ -33,6 +34,8 @@ public class DeletePropertyPhotoEndpoint : IEndpoint
 
         var result = await handler.DeleteAsync(request);
 
-        return result.IsSuccess ? Results.Ok(result) : Results.BadRequest(result);
+        return result.IsSuccess 
+            ? Results.NoContent() 
+            : Results.BadRequest(result);
     }
 }

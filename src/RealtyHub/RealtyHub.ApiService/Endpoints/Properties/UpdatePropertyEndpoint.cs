@@ -14,7 +14,8 @@ public class UpdatePropertyEndpoint : IEndpoint
             .WithSummary("Atualiza um imóvel")
             .WithDescription("Atualiza um imóvel")
             .WithOrder(2)
-            .Produces<Response<Property?>>();
+            .Produces<Response<Property?>>()
+            .Produces<Response<Property?>>(StatusCodes.Status400BadRequest);
 
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
@@ -24,6 +25,7 @@ public class UpdatePropertyEndpoint : IEndpoint
     {
         request.Id = id;
         request.UserId = user.Identity?.Name ?? string.Empty;
+
         var result = await handler.UpdateAsync(request);
 
         return result.IsSuccess

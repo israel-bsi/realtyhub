@@ -16,7 +16,8 @@ public class CreatePropertyPhotosEndpoint : IEndpoint
             .WithSummary("Adiciona fotos a um imóvel")
             .WithDescription("Adiciona fotos a um imóvel")
             .WithOrder(6)
-            .Produces<Response<PropertyPhoto?>>();
+            .Produces<Response<PropertyPhoto?>>(StatusCodes.Status201Created)
+            .Produces<Response<Property?>>(StatusCodes.Status400BadRequest);
     }
 
     private static async Task<IResult> HandlerAsync(
@@ -35,7 +36,7 @@ public class CreatePropertyPhotosEndpoint : IEndpoint
         var result = await handler.CreateAsync(request);
 
         return result.IsSuccess
-            ? Results.CreatedAtRoute(value: result)
+            ? Results.Created($"/{result.Data?.Id}", result)
             : Results.BadRequest(result);
     }
 }

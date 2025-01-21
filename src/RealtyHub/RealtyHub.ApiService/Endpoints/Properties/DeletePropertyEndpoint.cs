@@ -15,7 +15,8 @@ public class DeletePropertyEndpoint : IEndpoint
             .WithSummary("Deleta um imóvel")
             .WithDescription("Deleta um imóvel")
             .WithOrder(3)
-            .Produces<Response<Property?>>();
+            .Produces<Response<Property?>>(StatusCodes.Status204NoContent)
+            .Produces<Response<Property?>>(StatusCodes.Status400BadRequest);
 
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
@@ -30,7 +31,7 @@ public class DeletePropertyEndpoint : IEndpoint
         var result = await handler.DeleteAsync(request);
 
         return result.IsSuccess
-            ? Results.Ok(result)
+            ? Results.NoContent()
             : Results.BadRequest(result);
     }
 }

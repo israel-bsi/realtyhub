@@ -16,7 +16,8 @@ public class GetAllPropertiesEndpoint : IEndpoint
             .WithSummary("Recupera todos os imóvels")
             .WithDescription("Recupera todos os imóvels")
             .WithOrder(5)
-            .Produces<PagedResponse<List<Property>?>>();
+            .Produces<PagedResponse<List<Property>?>>()
+            .Produces<Response<Property?>>(StatusCodes.Status400BadRequest);
 
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
@@ -32,6 +33,7 @@ public class GetAllPropertiesEndpoint : IEndpoint
             PageSize = pageSize,
             SearchTerm = searchTerm
         };
+
         var result = await handler.GetAllAsync(request);
 
         return result.IsSuccess

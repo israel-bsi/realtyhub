@@ -14,7 +14,8 @@ public class CreatePropertyEndpoint : IEndpoint
             .WithSummary("Cria um novo imóvel")
             .WithDescription("Cria um novo imóvel")
             .WithOrder(1)
-            .Produces<Response<Property?>>();
+            .Produces<Response<Property?>>(StatusCodes.Status201Created)
+            .Produces<Response<Property?>>(StatusCodes.Status400BadRequest);
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
         IPropertyHandler handler,

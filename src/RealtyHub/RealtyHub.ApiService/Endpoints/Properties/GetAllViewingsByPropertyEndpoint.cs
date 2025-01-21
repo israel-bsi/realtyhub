@@ -16,7 +16,8 @@ public class GetAllViewingsByPropertyEndpoint : IEndpoint
             .WithSummary("Lista todas as visitas de um imóvel")
             .WithDescription("Lista todas as visitas de um imóvel")
             .WithOrder(6)
-            .Produces<PagedResponse<List<Viewing>?>>();
+            .Produces<PagedResponse<List<Viewing>?>>()
+            .Produces<PagedResponse<Property?>>(StatusCodes.Status400BadRequest);
 
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
@@ -39,6 +40,8 @@ public class GetAllViewingsByPropertyEndpoint : IEndpoint
 
         var result = await handler.GetAllViewingsAsync(request);
 
-        return result.IsSuccess ? Results.Ok(result) : Results.BadRequest(result);
+        return result.IsSuccess 
+            ? Results.Ok(result) 
+            : Results.BadRequest(result);
     }
 }

@@ -15,7 +15,8 @@ public class GetPropertyByIdEndpoint : IEndpoint
             .WithSummary("Recupera um imóvel")
             .WithDescription("Recupera um imóvel")
             .WithOrder(4)
-            .Produces<Response<Property?>>();
+            .Produces<Response<Property?>>()
+            .Produces<Response<Property?>>(StatusCodes.Status400BadRequest);
 
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
@@ -27,6 +28,7 @@ public class GetPropertyByIdEndpoint : IEndpoint
             Id = id,
             UserId = user.Identity?.Name ?? string.Empty
         };
+
         var result = await handler.GetByIdAsync(request);
 
         return result.IsSuccess

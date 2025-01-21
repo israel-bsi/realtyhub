@@ -16,7 +16,8 @@ public class UpdatePropertyPhotosEndpoint : IEndpoint
             .WithSummary("Atualiza as fotos de um imóvel")
             .WithDescription("Atualiza as fotos de um imóvel")
             .WithOrder(7)
-            .Produces<Response<List<PropertyPhoto>?>>();
+            .Produces<Response<List<PropertyPhoto>?>>()
+            .Produces<Response<List<PropertyPhoto>?>>(StatusCodes.Status400BadRequest);
     }
     
     private static async Task<IResult> HandlerAsync(
@@ -29,6 +30,9 @@ public class UpdatePropertyPhotosEndpoint : IEndpoint
         request.UserId = user.Identity?.Name ?? string.Empty;
 
         var result = await handler.UpdateAsync(request);
-        return result.IsSuccess ? Results.Ok(result) : Results.BadRequest(result);
+
+        return result.IsSuccess 
+            ? Results.Ok(result) 
+            : Results.BadRequest(result);
     }
 }

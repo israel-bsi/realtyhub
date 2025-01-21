@@ -118,7 +118,7 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
             var query = context
                 .Properties
                 .AsNoTracking()
-                .Include(p => p.PropertyPhotos.Where(p=>p.IsActive))
+                .Include(p => p.PropertyPhotos.Where(photo=>photo.IsActive))
                 .Where(p=>p.Id == request.Id && p.IsActive);
 
                 if (!string.IsNullOrEmpty(request.UserId))
