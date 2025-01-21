@@ -19,8 +19,6 @@
              Class="mt-4"
              ServerData="LoadServerData"
              @ref="DataGrid"
-             Filterable="true"
-             Hideable="true"
              RowsPerPage="@Core.Configuration.DefaultPageSize"
              RowClick="@(e => SelectCustomer(e.Item))" 
              RowStyle="@RowStyle">

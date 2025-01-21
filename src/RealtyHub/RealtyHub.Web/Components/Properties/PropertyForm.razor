@@ -172,7 +172,7 @@ else
                                                Variant="Variant.Filled"
                                                StartIcon="@Icons.Material.Filled.Image"
                                                Disabled="@photoItem.IsThumbnail"
-                                               OnClick="@(() => SetThumbnail(photoItem.Id))">
+                                               OnClick="@(() => UpdateThumbnailsAsync(photoItem))">
                                         @(photoItem.IsThumbnail ? "Foto já definida como principal" : "Definir como foto principal")
                                     </MudButton>
                                     <MudText Typo="Typo.caption" Class="mt-2">

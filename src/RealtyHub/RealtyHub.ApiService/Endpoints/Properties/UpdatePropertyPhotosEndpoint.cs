@@ -22,14 +22,13 @@ public class UpdatePropertyPhotosEndpoint : IEndpoint
     private static async Task<IResult> HandlerAsync(
         long id,
         IPropertyPhotosHandler handler,
+        UpdatePorpertyPhotosRequest request,
         ClaimsPrincipal user)
     {
-        var request = new UpdatePorpertyPhotosRequest
-        {
-            PropertyId = id,
-            UserId = user.Identity?.Name ?? string.Empty
-        };
+        request.PropertyId = id;
+        request.UserId = user.Identity?.Name ?? string.Empty;
+
         var result = await handler.UpdateAsync(request);
-        return result.IsSuccess ? Results.Ok() : Results.BadRequest(result);
+        return result.IsSuccess ? Results.Ok(result) : Results.BadRequest(result);
     }
 }

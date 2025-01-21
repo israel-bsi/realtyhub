@@ -12,4 +12,14 @@ public class PropertyPhoto : Entity
     public string UserId { get; set; } = string.Empty;
     [JsonIgnore]
     public Property Property { get; set; } = new();
+
+    public override string ToString()
+    {
+        return $"Id: {Id}, " +
+            $"Extension: {Extension}, " +
+            $"IsThumbnail: {IsThumbnail}, " +
+            $"PropertyId: {PropertyId}, " +
+            $"IsActive: {IsActive}, " +
+            $"UserId: {UserId}";
+    }
 }

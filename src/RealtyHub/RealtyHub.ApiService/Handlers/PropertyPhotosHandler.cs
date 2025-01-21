@@ -141,13 +141,14 @@ public class PropertyPhotosHandler(AppDbContext context) : IPropertyPhotosHandle
 
             await context.SaveChangesAsync();
 
-            return new Response<List<PropertyPhoto>?>(null, 204);
+            return new Response<List<PropertyPhoto>?>();
         }
         catch (Exception e)
         {
             return new Response<List<PropertyPhoto>?>(null, 500, e.Message);
         }
     }
+    
     public async Task<Response<PropertyPhoto?>> DeleteAsync(DeletePropertyPhotoRequest request)
     {
         try
@@ -186,10 +187,11 @@ public class PropertyPhotosHandler(AppDbContext context) : IPropertyPhotosHandle
             var propertyPhotos = await context
                 .PropertyPhotos
                 .AsNoTracking()
-                .Where(pi =>
-                    pi.PropertyId == request.PropertyId
-                    && pi.UserId == request.UserId
-                    && pi.IsActive)
+                .Where(p =>
+                    p.PropertyId == request.PropertyId
+                    && p.UserId == request.UserId
+                    && p.IsActive)
+                .OrderBy(p=>p.IsThumbnail)
                 .ToListAsync();
 
             return new Response<List<PropertyPhoto>?>(propertyPhotos);

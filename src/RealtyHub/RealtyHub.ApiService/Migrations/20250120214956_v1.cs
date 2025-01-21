@@ -258,6 +258,7 @@ namespace RealtyHub.ApiService.Migrations
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
                     Extension = table.Column<string>(type: "text", nullable: false),
+                    IsThumbnail = table.Column<bool>(type: "boolean", nullable: false),
                     PropertyId = table.Column<long>(type: "bigint", nullable: false),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false),
                     UserId = table.Column<string>(type: "text", nullable: false),

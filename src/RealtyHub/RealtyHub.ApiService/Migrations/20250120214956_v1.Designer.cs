@@ -12,8 +12,8 @@ using RealtyHub.ApiService.Data;
 namespace RealtyHub.ApiService.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250120174318_v2")]
-    partial class v2
+    [Migration("20250120214956_v1")]
+    partial class v1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

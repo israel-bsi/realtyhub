@@ -41,11 +41,14 @@ public class PropertyPhotosHandler(IHttpClientFactory httpClientFactory) : IProp
     public async Task<Response<List<PropertyPhoto>?>> UpdateAsync(UpdatePorpertyPhotosRequest request)
     {
         var url = $"/v1/properties/{request.PropertyId}/photos";
-        var response = await _httpClient.PutAsJsonAsync(url, request.Photos);
-        var data = await response.Content.ReadFromJsonAsync<Response<List<PropertyPhoto>?>>();
-        if (!response.IsSuccessStatusCode)
-            return new Response<List<PropertyPhoto>?>(null, (int)response.StatusCode, data?.Message);
-        return data ?? new Response<List<PropertyPhoto>?>(null, 400, "Falha ao atualizar as fotos");
+        var result = await _httpClient.PutAsJsonAsync(url, request);
+
+        if (!result.IsSuccessStatusCode)
+            return new Response<List<PropertyPhoto>?>(null, 400, "Falha ao atualizar as fotos");
+
+        var data = await result.Content.ReadFromJsonAsync<Response<List<PropertyPhoto>?>>();
+
+        return data ?? new Response<List<PropertyPhoto>?>(data?.Data, 400, data?.Message);
     }
 
     public async Task<Response<PropertyPhoto?>> DeleteAsync(DeletePropertyPhotoRequest request)

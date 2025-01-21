@@ -7,7 +7,6 @@ using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.Properties;
 using RealtyHub.Core.Requests.PropertiesPhotos;
 using RealtyHub.Core.Responses;
-using RealtyHub.Web.Services;
 
 namespace RealtyHub.Web.Components.Properties;
 
@@ -48,9 +47,6 @@ public partial class PropertyFormComponent : ComponentBase
 
     [Inject]
     public IDialogService DialogService { get; set; } = null!;
-
-    [Inject]
-    public ShowDialogConfirm ShowDialogConfirm { get; set; } = null!;
 
     #endregion
 
@@ -194,15 +190,58 @@ public partial class PropertyFormComponent : ComponentBase
             Snackbar.Add(e.Message, Severity.Error);
         }
     }
-    public void SetThumbnail(PhotoItem item)
+    public async Task UpdateThumbnailsAsync(PhotoItem item)
     {
-        //TODO Adaptar para para consumir o endpoint de atualização de foto
-        foreach (var item in AllPhotos)
+        if (string.IsNullOrEmpty(item.Id))
         {
-            item.IsThumbnail = item.Id == id;
+            foreach (var photoItem in AllPhotos)
+            {
+                photoItem.IsThumbnail = photoItem.Id == item.Id;
+            }
+            return;
         }
-        CarouselKey++;
-        StateHasChanged();
+        IsBusy = true;
+        try
+        {
+            var request = new UpdatePorpertyPhotosRequest
+            {
+                PropertyId = InputModel.Id,
+                Photos =
+                [
+                    new()
+                    {
+                        Id = item.Id,
+                        IsThumbnail = true,
+                        PropertyId = InputModel.Id,
+                    }
+                ]
+            };
+
+            var result = await PropertyPhotosHandler.UpdateAsync(request);
+            if (!result.IsSuccess)
+            {
+                Snackbar.Add(result.Message ?? string.Empty, Severity.Error);
+                return;
+            }
+
+            Snackbar.Add("Foto definida como principal", Severity.Success);
+
+            foreach (var photoItem in AllPhotos)
+            {
+                photoItem.IsThumbnail = photoItem.Id == item.Id;
+            }
+
+            CarouselKey++;
+            StateHasChanged();
+        }
+        catch (Exception e)
+        {
+            Snackbar.Add(e.Message, Severity.Error);
+        }
+        finally
+        {
+            IsBusy = false;
+        }
     }
     private async Task UpdateServerPhotos()
     {
