@@ -15,7 +15,9 @@ public class RegisterUserEndpoint : IEndpoint
 {
     public static void Map(IEndpointRouteBuilder app)
     {
-        app.MapPost("/registeruser", HandlerAsync);
+        app.MapPost("/registeruser", HandlerAsync)
+            .Produces<Response<string>>()
+            .Produces<Response<string>>(StatusCodes.Status400BadRequest);
     }
 
     private static async Task<IResult> HandlerAsync(

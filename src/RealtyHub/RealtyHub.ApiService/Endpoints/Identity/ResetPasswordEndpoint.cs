@@ -14,7 +14,9 @@ public class ResetPasswordEndpoint : IEndpoint
 {
     public static void Map(IEndpointRouteBuilder app)
     {
-        app.MapPost("/reset-password", HandlerAsync);
+        app.MapPost("/reset-password", HandlerAsync)
+            .Produces<Response<string>>()
+            .Produces<Response<string>>(StatusCodes.Status400BadRequest);
     }
 
     private static async Task<IResult> HandlerAsync(

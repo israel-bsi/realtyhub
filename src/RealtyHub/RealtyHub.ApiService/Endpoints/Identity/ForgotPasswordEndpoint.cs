@@ -14,7 +14,9 @@ public class ForgotPasswordEndpoint : IEndpoint
 {
     public static void Map(IEndpointRouteBuilder app)
     {
-        app.MapPost("/forgot-password", HandlerAsync);
+        app.MapPost("/forgot-password", HandlerAsync)
+            .Produces<Response<string>>()
+            .Produces<Response<string>>(StatusCodes.Status400BadRequest);
     }
 
     private static async Task<IResult> HandlerAsync(

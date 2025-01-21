@@ -27,7 +27,6 @@ public static class Endpoint
         endpoints.MapGroup("v1/identity")
             .WithTags("Identity")
             .MapEndpoint<LogoutEndpoint>()
-            .MapEndpoint<GetRolesEndpoint>()
             .MapEndpoint<RegisterUserEndpoint>()
             .MapEndpoint<ManageInfoEndpoint>()
             .MapEndpoint<ConfirmEmailEndpoint>()

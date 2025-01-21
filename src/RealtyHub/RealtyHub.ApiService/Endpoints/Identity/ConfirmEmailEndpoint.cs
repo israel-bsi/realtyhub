@@ -14,7 +14,9 @@ public class ConfirmEmailEndpoint : IEndpoint
     public static void Map(IEndpointRouteBuilder app)
     {
         app.MapGet("confirm-email", Handler)
-            .Produces<Response<string>>();
+            .Produces<Response<string>>()
+            .Produces<Response<string>>(StatusCodes.Status404NotFound)
+            .Produces<Response<string>>(StatusCodes.Status400BadRequest);
     }
 
     private static async Task<IResult> Handler(
@@ -36,7 +38,7 @@ public class ConfirmEmailEndpoint : IEndpoint
         var result = await userManager.ConfirmEmailAsync(user, decodedToken);
 
         return result.Succeeded
-            ? Results.Ok(new Response<string>(null, 201, "Email confirmado com sucesso!"))
+            ? Results.Ok(new Response<string>(null, 200, "Email confirmado com sucesso!"))
             : Results.BadRequest(result.Errors);
     }
 }

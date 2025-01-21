@@ -11,7 +11,9 @@ public class ManageInfoEndpoint : IEndpoint
     public static void Map(IEndpointRouteBuilder app)
     {
         app.MapGet("/manageinfo", HandlerAsync)
-            .Produces<UserResponse>();
+            .Produces<UserResponse>()
+            .Produces<Response<string>>(StatusCodes.Status401Unauthorized)
+            .RequireAuthorization();
     }
     private static async Task<IResult> HandlerAsync(
         UserManager<User> userManager,
