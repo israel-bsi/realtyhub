@@ -16,7 +16,8 @@ public class GetAllCustomersEndpoint : IEndpoint
             .WithSummary("Recupera todos os clientes")
             .WithDescription("Recupera todos os clientes")
             .WithOrder(5)
-            .Produces<PagedResponse<List<Customer>?>>();
+            .Produces<PagedResponse<List<Customer>?>>()
+            .Produces(StatusCodes.Status400BadRequest);
 
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,

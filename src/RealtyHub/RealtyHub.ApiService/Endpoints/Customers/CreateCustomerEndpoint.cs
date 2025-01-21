@@ -14,7 +14,9 @@ public class CreateCustomerEndpoint : IEndpoint
             .WithSummary("Cria um novo cliente")
             .WithDescription("Cria um novo cliente")
             .WithOrder(1)
-            .Produces<Response<Customer?>>();
+            .Produces<Response<Customer?>>(StatusCodes.Status201Created)
+            .Produces(StatusCodes.Status400BadRequest);
+
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
         ICustomerHandler handler,

@@ -15,7 +15,8 @@ public class GetCustomerByIdEndpoint : IEndpoint
             .WithSummary("Recupera um cliente")
             .WithDescription("Recupera um cliente")
             .WithOrder(4)
-            .Produces<Response<Customer?>>();
+            .Produces<Response<Customer?>>()
+            .Produces(StatusCodes.Status400BadRequest);
 
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,

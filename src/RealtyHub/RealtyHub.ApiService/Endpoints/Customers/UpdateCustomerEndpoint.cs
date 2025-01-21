@@ -14,7 +14,8 @@ public class UpdateCustomerEndpoint : IEndpoint
             .WithSummary("Atualiza um cliente")
             .WithDescription("Atualiza um cliente")
             .WithOrder(2)
-            .Produces<Response<Customer?>>();
+            .Produces<Response<Customer?>>()
+            .Produces(StatusCodes.Status400BadRequest);
 
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
