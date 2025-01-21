@@ -103,7 +103,7 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
 
             await context.SaveChangesAsync();
 
-            return new Response<Customer?>(customer, message:
+            return new Response<Customer?>(null, 204, 
                 "Cliente excluído com sucesso");
         }
         catch (Exception ex)

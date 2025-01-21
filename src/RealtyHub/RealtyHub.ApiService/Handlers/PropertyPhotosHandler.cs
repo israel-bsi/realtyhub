@@ -9,7 +9,8 @@ namespace RealtyHub.ApiService.Handlers;
 
 public class PropertyPhotosHandler(AppDbContext context) : IPropertyPhotosHandler
 {
-    public async Task<Response<PropertyPhoto?>> CreateAsync(CreatePropertyPhotosRequest request)
+    public async Task<Response<PropertyPhoto?>> CreateAsync(
+        CreatePropertyPhotosRequest request)
     {
         try
         {
@@ -101,7 +102,8 @@ public class PropertyPhotosHandler(AppDbContext context) : IPropertyPhotosHandle
         }
     }
 
-    public async Task<Response<List<PropertyPhoto>?>> UpdateAsync(UpdatePorpertyPhotosRequest request)
+    public async Task<Response<List<PropertyPhoto>?>> UpdateAsync(
+        UpdatePorpertyPhotosRequest request)
     {
         try
         {
@@ -149,7 +151,8 @@ public class PropertyPhotosHandler(AppDbContext context) : IPropertyPhotosHandle
         }
     }
     
-    public async Task<Response<PropertyPhoto?>> DeleteAsync(DeletePropertyPhotoRequest request)
+    public async Task<Response<PropertyPhoto?>> DeleteAsync(
+        DeletePropertyPhotoRequest request)
     {
         try
         {
@@ -172,7 +175,8 @@ public class PropertyPhotosHandler(AppDbContext context) : IPropertyPhotosHandle
 
             await context.SaveChangesAsync();
 
-            return new Response<PropertyPhoto?>(null, 204);
+            return new Response<PropertyPhoto?>(null, 204, 
+                "Foto excluída com sucesso");
         }
         catch (Exception e)
         {
@@ -180,7 +184,8 @@ public class PropertyPhotosHandler(AppDbContext context) : IPropertyPhotosHandle
         }
     }
 
-    public async Task<Response<List<PropertyPhoto>?>> GetAllByPropertyAsync(GetAllPropertyPhotosByPropertyRequest request)
+    public async Task<Response<List<PropertyPhoto>?>> GetAllByPropertyAsync(
+        GetAllPropertyPhotosByPropertyRequest request)
     {
         try
         {

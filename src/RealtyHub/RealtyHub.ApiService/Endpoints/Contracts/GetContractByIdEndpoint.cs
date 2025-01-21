@@ -15,7 +15,8 @@ public class GetContractByIdEndpoint : IEndpoint
             .WithSummary("Recupera um contrato")
             .WithDescription("Recupera um contrato")
             .WithOrder(4)
-            .Produces<Response<Contract?>>();
+            .Produces<Response<Contract?>>()
+            .Produces(StatusCodes.Status400BadRequest);
 
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
@@ -31,7 +32,7 @@ public class GetContractByIdEndpoint : IEndpoint
         var result = await handler.GetByIdAsync(request);
 
         return result.IsSuccess
-            ? Results.Created($"/{result.Data?.Id}", result)
+            ? Results.Ok(result)
             : Results.BadRequest(result);
     }
 }

@@ -101,7 +101,7 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
 
             await context.SaveChangesAsync();
 
-            return new Response<Property?>(property, 200,
+            return new Response<Property?>(null, 204,
                 "Imóvel deletado com sucesso");
         }
         catch (Exception ex)

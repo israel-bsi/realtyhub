@@ -15,7 +15,8 @@ public class UpdateContractEndpoint : IEndpoint
             .WithSummary("Atualiza um contrato")
             .WithDescription("Atualiza um contrato")
             .WithOrder(2)
-            .Produces<Response<Contract?>>();
+            .Produces<Response<Contract?>>()
+            .Produces(StatusCodes.Status400BadRequest);
 
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
@@ -28,7 +29,7 @@ public class UpdateContractEndpoint : IEndpoint
         var result = await handler.UpdateAsync(request);
 
         return result.IsSuccess
-            ? Results.Created($"/{result.Data?.Id}", result)
+            ? Results.Ok(result)
             : Results.BadRequest(result);
     }
 }

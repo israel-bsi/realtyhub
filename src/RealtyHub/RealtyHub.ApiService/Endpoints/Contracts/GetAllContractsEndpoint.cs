@@ -16,7 +16,8 @@ public class GetAllContractsEndpoint : IEndpoint
             .WithSummary("Recupera todos os contratos")
             .WithDescription("Recupera todos os contratos")
             .WithOrder(5)
-            .Produces<PagedResponse<List<Contract>?>>();
+            .Produces<PagedResponse<List<Contract>?>>()
+            .Produces(StatusCodes.Status400BadRequest);
 
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,

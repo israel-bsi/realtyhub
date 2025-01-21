@@ -18,7 +18,8 @@ public class ContractHandler(AppDbContext context) : IContractHandler
                 .Offers
                 .Include(o => o.Customer)
                 .Include(o => o.Property)
-                .FirstOrDefaultAsync(o => o.Id == request.OfferId);
+                .FirstOrDefaultAsync(o => o.Id == request.OfferId
+                                          && o.UserId == request.UserId);
 
             if (offer is null)
                 return new Response<Contract?>(null, 404,
@@ -50,7 +51,8 @@ public class ContractHandler(AppDbContext context) : IContractHandler
                                     $"Endereço: {offer.Property.Address.Neighborhood}\n",
                 Offer = offer,
                 OfferId = request.OfferId,
-                IsActive = true
+                IsActive = true,
+                UserId = request.UserId
             };
 
             await context.Contracts.AddAsync(contract);
@@ -72,7 +74,9 @@ public class ContractHandler(AppDbContext context) : IContractHandler
         {
             var contract = await context
                 .Contracts
-                .FirstOrDefaultAsync(c => c.Id == request.Id && c.IsActive);
+                .FirstOrDefaultAsync(c => c.Id == request.Id 
+                                          && c.UserId == request.UserId 
+                                          && c.IsActive);
 
             if (contract is null)
                 return new Response<Contract?>(null, 404,
@@ -80,7 +84,8 @@ public class ContractHandler(AppDbContext context) : IContractHandler
 
             var offer = await context
                 .Offers
-                .FirstOrDefaultAsync(o => o.Id == request.OfferId);
+                .FirstOrDefaultAsync(o => o.Id == request.OfferId 
+                                          && o.UserId == request.UserId);
 
             if (offer is null)
                 return new Response<Contract?>(null, 404,
@@ -112,7 +117,9 @@ public class ContractHandler(AppDbContext context) : IContractHandler
         {
             var contract = await context
                 .Contracts
-                .FirstOrDefaultAsync(c => c.Id == request.Id && c.IsActive);
+                .FirstOrDefaultAsync(c => c.Id == request.Id 
+                                          && c.UserId == request.UserId 
+                                          && c.IsActive);
 
             if (contract is null)
                 return new Response<Contract?>(null, 404,
@@ -122,7 +129,7 @@ public class ContractHandler(AppDbContext context) : IContractHandler
             contract.UpdatedAt = DateTime.UtcNow;
             await context.SaveChangesAsync();
 
-            return new Response<Contract?>(contract, 200,
+            return new Response<Contract?>(null, 204,
                 "Contrato excluído com sucesso");
         }
         catch (Exception ex)
@@ -142,7 +149,9 @@ public class ContractHandler(AppDbContext context) : IContractHandler
                 .Include(c => c.Offer)
                 .ThenInclude(o => o.Customer)
                 .Include(c => c.Offer.Property)
-                .FirstOrDefaultAsync(c => c.Id == request.Id && c.IsActive);
+                .FirstOrDefaultAsync(c => c.Id == request.Id 
+                                          && c.UserId == request.UserId
+                                          && c.IsActive);
 
             if (contract is null)
                 return new Response<Contract?>(null, 404,
@@ -168,7 +177,7 @@ public class ContractHandler(AppDbContext context) : IContractHandler
                 .Include(c => c.Offer)
                 .ThenInclude(o => o.Customer)
                 .Include(c => c.Offer.Property)
-                .Where(c => c.IsActive);
+                .Where(c => c.UserId == request.UserId && c.IsActive);
 
             var contracts = await query
                 .Skip((request.PageNumber - 1) * request.PageSize)

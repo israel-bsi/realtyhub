@@ -15,7 +15,8 @@ public class DeleteContractEndpoint : IEndpoint
             .WithSummary("Deleta um contrato")
             .WithDescription("Deleta um contrato")
             .WithOrder(3)
-            .Produces<Response<Contract?>>();
+            .Produces<Response<Contract?>>(StatusCodes.Status204NoContent)
+            .Produces(StatusCodes.Status400BadRequest);
 
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
@@ -31,7 +32,7 @@ public class DeleteContractEndpoint : IEndpoint
         var result = await handler.DeleteAsync(request);
 
         return result.IsSuccess
-            ? Results.Created($"/{result.Data?.Id}", result)
+            ? Results.NoContent()
             : Results.BadRequest(result);
     }
 }

@@ -15,7 +15,8 @@ public class CreateContractEndpoint : IEndpoint
             .WithSummary("Cria um novo contrato")
             .WithDescription("Cria um novo contrato")
             .WithOrder(1)
-            .Produces<Response<Contract?>>();
+            .Produces<Response<Contract?>>(StatusCodes.Status201Created)
+            .Produces(StatusCodes.Status400BadRequest);
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
         IContractHandler handler,
