@@ -14,7 +14,8 @@ public class RescheduleViewingEndpoint : IEndpoint
             .WithSummary("Reagenda uma visita")
             .WithDescription("Reagenda uma visita")
             .WithOrder(2)
-            .Produces<Response<Viewing?>>();
+            .Produces<Response<Viewing?>>()
+            .Produces<Response<Viewing?>>(StatusCodes.Status400BadRequest);
 
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,

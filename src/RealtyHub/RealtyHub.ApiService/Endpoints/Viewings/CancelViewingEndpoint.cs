@@ -15,7 +15,8 @@ public class CancelViewingEndpoint : IEndpoint
             .WithSummary("Cancela uma visita")
             .WithDescription("Cancela uma visita")
             .WithOrder(3)
-            .Produces<Response<Viewing?>>();
+            .Produces<Response<Viewing?>>()
+            .Produces<Response<Viewing?>>(StatusCodes.Status400BadRequest);
 
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
@@ -27,6 +28,7 @@ public class CancelViewingEndpoint : IEndpoint
             Id = id,
             UserId = user.Identity?.Name ?? string.Empty
         };
+
         var result = await handler.CancelAsync(request);
 
         return result.IsSuccess

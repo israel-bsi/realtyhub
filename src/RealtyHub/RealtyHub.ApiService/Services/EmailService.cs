@@ -27,9 +27,7 @@ public class EmailService : IEmailService
         catch (Exception ex)
         {
             return Task.FromResult(new Response<bool>(
-                false,
-                (int)HttpStatusCode.InternalServerError,
-                ex.Message));
+                false, 500, ex.Message));
         }
     }
 
@@ -52,9 +50,7 @@ public class EmailService : IEmailService
         catch (Exception ex)
         {
             return Task.FromResult(new Response<bool>(
-                false,
-                (int)HttpStatusCode.InternalServerError,
-                ex.Message));
+                false, 500, ex.Message));
         }
     }
 

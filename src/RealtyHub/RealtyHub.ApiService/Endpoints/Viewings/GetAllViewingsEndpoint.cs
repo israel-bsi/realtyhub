@@ -16,7 +16,8 @@ public class GetAllViewingsEndpoint : IEndpoint
             .WithSummary("Recupera todas as visitas")
             .WithDescription("Recupera todas as visitas")
             .WithOrder(5)
-            .Produces<PagedResponse<List<Viewing>?>>();
+            .Produces<PagedResponse<List<Viewing>?>>()
+            .Produces<PagedResponse<List<Viewing?>>>(StatusCodes.Status400BadRequest);
 
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
@@ -34,6 +35,7 @@ public class GetAllViewingsEndpoint : IEndpoint
             StartDate = startDate,
             EndDate = endDate
         };
+
         var result = await handler.GetAllAsync(request);
 
         return result.IsSuccess

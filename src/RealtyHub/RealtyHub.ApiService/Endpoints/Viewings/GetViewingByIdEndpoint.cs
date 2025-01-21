@@ -15,7 +15,8 @@ public class GetViewingByIdEndpoint : IEndpoint
             .WithSummary("Recupera uma visita")
             .WithDescription("Recupera uma visita")
             .WithOrder(4)
-            .Produces<Response<Viewing?>>();
+            .Produces<Response<Viewing?>>()
+            .Produces<Response<Viewing?>>(StatusCodes.Status400BadRequest);
 
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,

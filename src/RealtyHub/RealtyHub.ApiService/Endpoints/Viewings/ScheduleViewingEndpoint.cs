@@ -14,7 +14,9 @@ public class ScheduleViewingEndpoint : IEndpoint
             .WithSummary("Agenda uma nova visita")
             .WithDescription("Agenda uma nova visita")
             .WithOrder(1)
-            .Produces<Response<Viewing?>>();
+            .Produces<Response<Viewing?>>(StatusCodes.Status201Created)
+            .Produces<Response<Viewing?>>(StatusCodes.Status400BadRequest);
+
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
         IViewingHandler handler,

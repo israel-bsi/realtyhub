@@ -15,7 +15,8 @@ public class DoneViewingEndpoint : IEndpoint
             .WithSummary("Finaliza uma visita")
             .WithDescription("Finaliza uma visita")
             .WithOrder(6)
-            .Produces<Response<Viewing?>>();
+            .Produces<Response<Viewing?>>()
+            .Produces<Response<Viewing?>>(StatusCodes.Status400BadRequest);
 
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
@@ -25,6 +26,7 @@ public class DoneViewingEndpoint : IEndpoint
     {
         request.Id = id;
         request.UserId = user.Identity?.Name ?? string.Empty;
+
         var result = await handler.DoneAsync(request);
 
         return result.IsSuccess
