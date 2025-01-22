@@ -1,7 +1,7 @@
 ﻿<Logo Width="100" />
 
 <MudNavMenu Bordered="true" @key="MudNavMenuKey">
-    <MudText Typo="Typo.h6" Class="px-4">RealtyHub</MudText>
+    <MudText Align="Align.Center" Typo="Typo.h6" Class="px-4">RealtyHub</MudText>
     <MudDivider Class="my-2" />
     <div class="d-flex">
         <MudIcon Icon="@Icons.Material.Filled.RealEstateAgent" Class="ml-4"></MudIcon>
@@ -20,7 +20,13 @@
             <MudNavLink Icon="@Icons.Material.Filled.ScheduleSend" Href="/visitas/agendar" Match="NavLinkMatch.All">Agendar</MudNavLink>
             <MudNavLink Icon="@Icons.Material.Filled.Schedule" Href="/visitas" Match="NavLinkMatch.All">Listar</MudNavLink>
         </MudNavGroup>
+        <MudNavLink Icon="@Icons.Material.Filled.LocalOffer" Href="/propostas" Match="NavLinkMatch.All">Propostas</MudNavLink>
+        <MudNavGroup Icon="fa-solid fa-file-contract" Title="Contratos" Expanded="true">
+            <MudNavLink Icon="fa-solid fa-file-signature" Href="/contratos/emitir" Match="NavLinkMatch.All">Emitir</MudNavLink>
+            <MudNavLink Icon="fa-solid fa-file-contract" Href="/contratos" Match="NavLinkMatch.All">Listar</MudNavLink>
+        </MudNavGroup>
     </MudNavGroup>
+    
 </MudNavMenu>
 
 @code 

@@ -13,4 +13,15 @@ public static class DateTimeExtension
                 1)
             .AddMonths(1)
             .AddDays(-1);
+
+    public static string ToUtcString(this DateTime? date) =>
+        date is null 
+            ? string.Empty 
+            : date.Value.ToUniversalTime().ToString("o");
+
+    public static DateTime ToEndOfDay(this DateTime date) =>
+        date.Date
+            .AddHours(23)
+            .AddMinutes(59)
+            .AddSeconds(59);
 }

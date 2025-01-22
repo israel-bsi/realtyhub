@@ -13,6 +13,9 @@ public partial class OfferFormComponent : ComponentBase
     [Parameter]
     public long Id { get; set; }
 
+    [Parameter]
+    public EventCallback OnSubmitButtonClicked { get; set; }
+
     #endregion
 
     #region Properties
@@ -49,6 +52,7 @@ public partial class OfferFormComponent : ComponentBase
             if (response.IsSuccess)
             {
                 Snackbar.Add("Proposta cadastrada com sucesso", Severity.Success);
+                await OnSubmitButtonClickedAsync();
                 NavigationManager.NavigateTo("/home");
             }
             else
@@ -65,6 +69,11 @@ public partial class OfferFormComponent : ComponentBase
             IsBusy = false;
         }
     }
+    private async Task OnSubmitButtonClickedAsync()
+    {
+        if (OnSubmitButtonClicked.HasDelegate)
+            await OnSubmitButtonClicked.InvokeAsync();
+    }
 
     #endregion
 
@@ -75,7 +84,7 @@ public partial class OfferFormComponent : ComponentBase
         IsBusy = true;
         try
         {
-            var request = new GetPropertyByIdRequest { Id = 102 };
+            var request = new GetPropertyByIdRequest { Id = Id };
             var response = await PropertyHandler.GetByIdAsync(request);
             if (response is { IsSuccess: true, Data: not null })
             {

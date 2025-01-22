@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using RealtyHub.Core.Models;
+using RealtyHub.Web.Components.Offers;
 
 namespace RealtyHub.Web.Components;
 
@@ -38,6 +39,24 @@ public partial class CardHomeComponent : ComponentBase
         var fullName = $"{photo?.Id}{photo?.Extension}";
 
         return $"{Configuration.BackendUrl}/photos/{fullName}";
+    }
+
+    public async Task OnSendOfferClickedAsync()
+    {
+        var options = new DialogOptions
+        {
+            CloseButton = true,
+            MaxWidth = MaxWidth.Medium,
+            CloseOnEscapeKey = true,
+            FullWidth = true
+        };
+
+        var parameters = new DialogParameters
+        {
+            { "Id", Property.Id }
+        };
+
+        await DialogService.ShowAsync<OfferDialog>("Enviar proposta", parameters, options);
     }
 
     #endregion

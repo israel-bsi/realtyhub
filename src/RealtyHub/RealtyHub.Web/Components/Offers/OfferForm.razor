@@ -1,8 +1,6 @@
 ﻿@inherits OfferFormComponent
 
-<PageTitle>Propostas</PageTitle>
-
-<MudText Typo="Typo.h4">Propostas</MudText>
+<PageTitle>Enviar propsota</PageTitle>
 
 @if (IsBusy)
 {
@@ -10,11 +8,11 @@
 }
 else
 {
-    <MudPaper Class="pa-8 mt-4" Elevation="2">
+    <MudPaper Class="pa-8" Elevation="4">
         <EditForm OnValidSubmit="OnValidSubmitAsync" Model="InputModel">
             <ObjectGraphDataAnnotationsValidator />
-            
-            <ValidationSummary/>
+
+            <MudText Class="mt-5 mb-3" Typo="Typo.h6">Informações da proposta</MudText>
 
             <MudGrid>
                 <MudItem xs="6" sm="3">
@@ -37,7 +35,7 @@ else
                 </MudItem>
             </MudGrid>
 
-            <MudText Class="mt-5 mb-3" Typo="Typo.h6">Informações para contato</MudText>
+            <MudText Class="mt-5" Typo="Typo.h6">Informações para contato</MudText>
 
             <MudGrid>
                 <MudItem xs="12" sm="6">

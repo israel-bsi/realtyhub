@@ -1,0 +1,29 @@
+﻿<MudDialog>
+    <DialogContent>
+        <OfferForm Id="Id" OnSubmitButtonClicked="OnSubmitButtonClickedAsync" />
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="CloseDialog" Color="Color.Primary">Fechar</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter]
+    MudDialogInstance MudDialog { get; set; } = null!;
+
+    [Parameter]
+    public EventCallback OnSubmitButtonClicked { get; set; }
+
+    [Parameter]
+    public long Id { get; set; }
+
+    public void CloseDialog() => MudDialog.Close();
+
+    public async Task OnSubmitButtonClickedAsync()
+    {
+        if (OnSubmitButtonClicked.HasDelegate)
+            await OnSubmitButtonClicked.InvokeAsync();
+
+        CloseDialog();
+    }
+}
