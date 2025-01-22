@@ -10,7 +10,7 @@ namespace RealtyHub.ApiService.Endpoints.Offers;
 public class AcceptOfferEndpoint : IEndpoint
 {
     public static void Map(IEndpointRouteBuilder app)
-        => app.MapPut("/accept/{id:long}", HandlerAsync)
+        => app.MapPut("/{id:long}/accept", HandlerAsync)
             .WithName("Offers: Accept")
             .WithSummary("Aceita uma proposta")
             .WithDescription("Aceita uma proposta")
