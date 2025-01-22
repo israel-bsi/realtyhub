@@ -1,7 +1,6 @@
 ﻿using RealtyHub.ApiService.Common.Api;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
-using RealtyHub.Core.Requests.Offers;
 using RealtyHub.Core.Responses;
 using System.Security.Claims;
 
@@ -21,7 +20,7 @@ public class CreateOfferEndpoint : IEndpoint
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
         IOfferHandler handler,
-        CreateOfferRequest request)
+        Offer request)
     {
         request.UserId = user.Identity?.Name ?? string.Empty;
 

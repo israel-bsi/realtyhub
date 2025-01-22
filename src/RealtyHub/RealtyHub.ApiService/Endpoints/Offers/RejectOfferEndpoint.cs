@@ -10,7 +10,7 @@ namespace RealtyHub.ApiService.Endpoints.Offers;
 public class RejectOfferEndpoint : IEndpoint
 {
     public static void Map(IEndpointRouteBuilder app)
-        => app.MapPut("/reject/{id:long}", HandlerAsync)
+        => app.MapPut("/{id:long}/reject", HandlerAsync)
             .WithName("Offers: Reject")
             .WithSummary("Rejeita uma proposta")
             .WithDescription("Rejeita uma proposta")

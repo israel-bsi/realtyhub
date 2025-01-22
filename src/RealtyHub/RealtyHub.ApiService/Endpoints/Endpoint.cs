@@ -72,7 +72,6 @@ public static class Endpoint
         endpoints.MapGroup("v1/offers")
             .WithTags("Offers")
             .RequireAuthorization()
-            .MapEndpoint<CreateOfferEndpoint>()
             .MapEndpoint<UpdateOfferEndpoint>()
             .MapEndpoint<AcceptOfferEndpoint>()
             .MapEndpoint<RejectOfferEndpoint>()
@@ -80,6 +79,10 @@ public static class Endpoint
             .MapEndpoint<GetAllOffersByPropertyEndpoint>()
             .MapEndpoint<GetAllOffersByCustomerEndpoint>()
             .MapEndpoint<GetAllOffersEndpoint>();
+
+        endpoints.MapGroup("v1/offers")
+            .WithTags("Offers")
+            .MapEndpoint<CreateOfferEndpoint>();
 
         endpoints.MapGroup("v1/contracts")
             .WithTags("Contracts")

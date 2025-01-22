@@ -10,7 +10,7 @@ namespace RealtyHub.ApiService.Handlers;
 
 public class OfferHandler(AppDbContext context) : IOfferHandler
 {
-    public async Task<Response<Offer?>> CreateAsync(CreateOfferRequest request)
+    public async Task<Response<Offer?>> CreateAsync(Offer request)
     {
         Customer? customer;
         try
@@ -58,7 +58,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
 
         try
         {
-            var payments = request.CreatePaymentRequests.Select(paymentRequest => new Payment
+            var payments = request.Payments.Select(paymentRequest => new Payment
             {
                 PaymentDate = paymentRequest.PaymentDate,
                 Amount = paymentRequest.Amount,
@@ -99,7 +99,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
         }
     }
 
-    public async Task<Response<Offer?>> UpdateAsync(UpdateOfferRequest request)
+    public async Task<Response<Offer?>> UpdateAsync(Offer request)
     {
         try
         {
@@ -119,7 +119,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 return new Response<Offer?>(null, 400,
                     "Não é possível atualizar uma proposta aceita ou rejeitada");
 
-            var total = request.UpdatePaymentRequests.Sum(p => p.Amount);
+            var total = request.Payments.Sum(p => p.Amount);
             if (total < request.Amount)
                 return new Response<Offer?>(null, 400,
                     "O valor total dos pagamentos não corresponde ao valor da proposta");
@@ -137,7 +137,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
             offer.OfferStatus = request.OfferStatus;
             foreach (var payment in payments)
             {
-                var updatePaymentRequest = request.UpdatePaymentRequests
+                var updatePaymentRequest = request.Payments
                     .FirstOrDefault(p => p.Id == payment.Id);
 
                 if (updatePaymentRequest is not null)
@@ -156,7 +156,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 }
             }
 
-            foreach (var payment in request.UpdatePaymentRequests)
+            foreach (var payment in request.Payments)
             {
                 var isExist = payments.Any(p => p.Id == payment.Id);
                 if (isExist) continue;
@@ -299,7 +299,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
         }
     }
 
-    public async Task<Response<List<Offer>?>> GetAllOffersByPropertyAsync(GetAllOffersByPropertyRequest request)
+    public async Task<PagedResponse<List<Offer>?>> GetAllOffersByPropertyAsync(GetAllOffersByPropertyRequest request)
     {
         try
         {
@@ -311,35 +311,46 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                                           && p.IsActive);
 
             if (property is null)
-                return new Response<List<Offer>?>(null, 404,
+                return new PagedResponse<List<Offer>?>(null, 404,
                     "Imóvel não encontrado");
 
-            var offers = await context
+            var query = context
                 .Offers
                 .AsNoTracking()
                 .Include(o => o.Customer)
                 .Include(o => o.Property)
-                .Include(o => o.Payments)
-                .Where(o => o.PropertyId == request.PropertyId 
-                            && o.UserId == request.UserId)
+                //.Include(o => o.Payments)
+                .Where(o => o.PropertyId == request.PropertyId
+                            && o.UserId == request.UserId);
+
+            if (request.StartDate is not null && request.EndDate is not null)
+            {
+                var startDate = DateTime.Parse(request.StartDate).ToUniversalTime();
+                var endDate = DateTime.Parse(request.EndDate).ToUniversalTime();
+
+                query = query.Where(o => o.Submission >= startDate
+                                         && o.Submission <= endDate);
+            }
+
+            query = query.OrderBy(o => o.Submission);
+
+            var offers = await query
+                .Skip((request.PageNumber - 1) * request.PageSize)
+                .Take(request.PageSize)
                 .ToListAsync();
 
-            var count = offers.Count;
+            var count = await query.CountAsync();
 
-            return offers.Count == 0
-                ? new Response<List<Offer>?>(null, 404,
-                    "Nenhuma proposta encontrada para esse imóvel")
-                : new Response<List<Offer>?>(offers, 200,
-                    $"{count} proposta(s) encontradas");
+            return new PagedResponse<List<Offer>?>(offers, count, request.PageNumber, request.PageSize);
         }
         catch (Exception ex)
         {
-            return new Response<List<Offer>?>(null, 500,
+            return new PagedResponse<List<Offer>?>(null, 500,
                 $"Não foi possível buscar as propostas\n{ex.Message}");
         }
     }
 
-    public async Task<Response<List<Offer>?>> GetAllOffersByCustomerAsync(GetAllOffersByCustomerRequest request)
+    public async Task<PagedResponse<List<Offer>?>> GetAllOffersByCustomerAsync(GetAllOffersByCustomerRequest request)
     {
         try
         {
@@ -351,30 +362,41 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                                           && p.IsActive);
 
             if (customer is null)
-                return new Response<List<Offer>?>(null, 404,
+                return new PagedResponse<List<Offer>?>(null, 404,
                     "Cliente não encontrado");
 
-            var offers = await context
+            var query = context
                 .Offers
                 .AsNoTracking()
                 .Include(o => o.Customer)
                 .Include(o => o.Property)
-                .Include(o => o.Payments)
-                .Where(o => o.CustomerId == request.CustomerId 
-                            && o.UserId == request.UserId)
+                //.Include(o => o.Payments)
+                .Where(o => o.CustomerId == request.CustomerId
+                            && o.UserId == request.UserId);
+
+            if (request.StartDate is not null && request.EndDate is not null)
+            {
+                var startDate = DateTime.Parse(request.StartDate).ToUniversalTime();
+                var endDate = DateTime.Parse(request.EndDate).ToUniversalTime();
+
+                query = query.Where(o => o.Submission >= startDate
+                                         && o.Submission <= endDate);
+            }
+
+            query = query.OrderBy(o => o.Submission);
+
+            var offers = await query
+                .Skip((request.PageNumber - 1) * request.PageSize)
+                .Take(request.PageSize)
                 .ToListAsync();
 
-            var count = offers.Count;
+            var count = await query.CountAsync();
 
-            return offers.Count == 0
-                ? new Response<List<Offer>?>(null, 404,
-                    "Nenhuma proposta feita por esse cliente foi encontrada")
-                : new Response<List<Offer>?>(offers, 200,
-                    $"{count} proposta(s) encontradas");
+            return new PagedResponse<List<Offer>?>(offers, count, request.PageNumber, request.PageSize);
         }
         catch (Exception ex)
         {
-            return new Response<List<Offer>?>(null, 500,
+            return new PagedResponse<List<Offer>?>(null, 500,
                 $"Não foi possível buscar as propostas\n{ex.Message}");
         }
     }
