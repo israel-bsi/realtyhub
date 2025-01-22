@@ -1,0 +1,70 @@
+﻿@inherits OfferFormComponent
+
+<PageTitle>Propostas</PageTitle>
+
+<MudText Typo="Typo.h4">Propostas</MudText>
+
+@if (IsBusy)
+{
+    <SkeletonWave />
+}
+else
+{
+    <MudPaper Class="pa-8 mt-4" Elevation="2">
+        <EditForm OnValidSubmit="OnValidSubmitAsync" Model="InputModel">
+            <ObjectGraphDataAnnotationsValidator />
+            
+            <ValidationSummary/>
+
+            <MudGrid>
+                <MudItem xs="6" sm="3">
+                    <MudTextField Label="Valor"
+                                  T="decimal"
+                                  Variant="Variant.Text"
+                                  HelperText="Informe quando deseja pagar no imóvel"
+                                  Format="C"
+                                  @bind-Value="InputModel.Amount"
+                                  For="@(() => InputModel.Amount)" />
+                </MudItem>
+                <MudItem lg="9" xs="12" sm="6">
+                    <MudTextField Label="Pagamento"
+                                  T="string"
+                                  Variant="Variant.Text"
+                                  HelperText="Descreva detalhadamente como deseja realizar o pagamento"
+                                  @bind-Value="InputModel.PaymentDetails"
+                                  For="@(() => InputModel.PaymentDetails)"
+                                  AutoGrow="true" />
+                </MudItem>
+            </MudGrid>
+
+            <MudText Class="mt-5 mb-3" Typo="Typo.h6">Informações para contato</MudText>
+
+            <MudGrid>
+                <MudItem xs="12" sm="6">
+                    <MudTextField Label="Nome"
+                                  T="string"
+                                  Variant="Variant.Text"
+                                  HelperText="Informe seu nome"
+                                  @bind-Value="InputModel.Customer.Name"
+                                  For="@(() => InputModel.Customer.Name)" />
+                </MudItem>
+                <MudItem xs="12" sm="6">
+                    <MudTextField Label="E-mail"
+                                  T="string"
+                                  Variant="Variant.Text"
+                                  HelperText="Informe seu e-mail para contato"
+                                  @bind-Value="InputModel.Customer.Email"
+                                  For="@(() => InputModel.Customer.Email)" />
+                </MudItem>
+            </MudGrid>
+
+            <MudButton ButtonType="ButtonType.Submit"
+                       Variant="Variant.Filled"
+                       Color="Color.Primary"
+                       Class="mt-5"
+                       StartIcon="@Icons.Material.Filled.Send">
+                Enviar proposta
+            </MudButton>
+        </EditForm>
+    </MudPaper>
+}
