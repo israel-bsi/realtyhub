@@ -1,6 +1,6 @@
 ﻿namespace RealtyHub.Core.Requests.Offers;
 
-public class GetAllOffersByCustomerRequest : Request
+public class GetAllOffersByCustomerRequest : PagedRequest
 {
     public long CustomerId { get; set; }
 }
