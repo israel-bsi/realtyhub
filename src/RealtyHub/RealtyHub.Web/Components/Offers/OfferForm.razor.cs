@@ -2,6 +2,7 @@
 using MudBlazor;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
+using RealtyHub.Core.Requests.Offers;
 using RealtyHub.Core.Requests.Properties;
 
 namespace RealtyHub.Web.Components.Offers;
@@ -11,7 +12,10 @@ public partial class OfferFormComponent : ComponentBase
     #region Parameters
 
     [Parameter]
-    public long Id { get; set; }
+    public long PropertyId { get; set; }
+
+    [Parameter]
+    public long OfferId { get; set; }
 
     [Parameter]
     public EventCallback OnSubmitButtonClicked { get; set; }
@@ -84,16 +88,30 @@ public partial class OfferFormComponent : ComponentBase
         IsBusy = true;
         try
         {
-            var request = new GetPropertyByIdRequest { Id = Id };
-            var response = await PropertyHandler.GetByIdAsync(request);
-            if (response is { IsSuccess: true, Data: not null })
+            if (OfferId != 0)
             {
-                InputModel.Property = response.Data;
-                InputModel.PropertyId = response.Data.Id;
-                return;
+                var request = new GetOfferByIdRequest { Id = OfferId };
+                var response = await OfferHandler.GetByIdAsync(request);
+                if (response is { IsSuccess: true, Data: not null })
+                {
+                    InputModel = response.Data;
+                    return;
+                }
+                Snackbar.Add(response.Message ?? string.Empty, Severity.Error);
             }
+            else
+            {
+                var request = new GetPropertyByIdRequest { Id = PropertyId };
+                var response = await PropertyHandler.GetByIdAsync(request);
+                if (response is { IsSuccess: true, Data: not null })
+                {
+                    InputModel.Property = response.Data;
+                    InputModel.PropertyId = response.Data.Id;
+                    return;
+                }
 
-            Snackbar.Add(response.Message ?? string.Empty, Severity.Error);
+                Snackbar.Add(response.Message ?? string.Empty, Severity.Error);
+            }
         }
         catch (Exception e)
         {

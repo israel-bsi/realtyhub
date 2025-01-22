@@ -11,7 +11,9 @@
              Class="mt-4"
              ServerData="LoadServerData"
              @ref="DataGrid"
-             RowsPerPage="@Core.Configuration.DefaultPageSize">
+             RowsPerPage="@Core.Configuration.DefaultPageSize"
+             RowClick="@(e => SelectOffer(e.Item))"
+             RowStyle="cursor: pointer">
 
     <ToolBarContent>
         <MudText Typo="Typo.h6">Propostas</MudText>

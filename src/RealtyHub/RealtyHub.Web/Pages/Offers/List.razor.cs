@@ -6,12 +6,19 @@ using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.Offers;
 using RealtyHub.Web.Components;
-using System;
+using RealtyHub.Web.Components.Offers;
 
 namespace RealtyHub.Web.Pages.Offers;
 
 public partial class ListOffersPage : ComponentBase
 {
+    #region Parameters
+
+    [Parameter]
+    public EventCallback<Offer> OnOfferSelected { get; set; }
+
+    #endregion
+
     #region Properties
 
     public MudDataGrid<Offer> DataGrid { get; set; } = null!;
@@ -54,7 +61,7 @@ public partial class ListOffersPage : ComponentBase
                 Items = response.Data ?? new List<Offer>();
                 return new GridData<Offer>
                 {
-                    Items = Items.OrderByDescending(o=>o.UpdatedAt),
+                    Items = Items.OrderByDescending(o => o.UpdatedAt),
                     TotalItems = response.TotalCount
                 };
             }
@@ -84,7 +91,7 @@ public partial class ListOffersPage : ComponentBase
             { "ButtonColor", Color.Success }
         };
         var dialog = await DialogService.ShowAsync<DialogConfirm>("Confirmação", parameters);
-        if (await dialog.Result is {Canceled: true}) return;
+        if (await dialog.Result is { Canceled: true }) return;
 
         var request = new AcceptOfferRequest { Id = offer.Id };
         var result = await Handler.AcceptAsync(request);
@@ -117,6 +124,26 @@ public partial class ListOffersPage : ComponentBase
         }
         else
             Snackbar.Add(result.Message ?? string.Empty, Severity.Error);
+    }
+
+    public async Task SelectOffer(Offer offer)
+    {
+        var options = new DialogOptions
+        {
+            CloseButton = true,
+            MaxWidth = MaxWidth.Medium,
+            CloseOnEscapeKey = true,
+            FullWidth = true
+        };
+
+        var parameters = new DialogParameters
+        {
+            { "OfferId", offer.Id }
+        };
+
+        await DialogService.ShowAsync<OfferDialogCreate>("Proposta", parameters, options);
+        //if (OnOfferSelected.HasDelegate)
+        //    await OnOfferSelected.InvokeAsync(offer);
     }
 
     private bool IsOfferStatusInvalid(Offer viewing)

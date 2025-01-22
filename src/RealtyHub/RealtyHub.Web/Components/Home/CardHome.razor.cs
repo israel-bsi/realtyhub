@@ -3,7 +3,7 @@ using MudBlazor;
 using RealtyHub.Core.Models;
 using RealtyHub.Web.Components.Offers;
 
-namespace RealtyHub.Web.Components;
+namespace RealtyHub.Web.Components.Home;
 
 public partial class CardHomeComponent : ComponentBase
 {
@@ -53,10 +53,10 @@ public partial class CardHomeComponent : ComponentBase
 
         var parameters = new DialogParameters
         {
-            { "Id", Property.Id }
+            { "PropertyId", Property.Id }
         };
 
-        await DialogService.ShowAsync<OfferDialog>("Enviar proposta", parameters, options);
+        await DialogService.ShowAsync<OfferDialogCreate>("Enviar proposta", parameters, options);
     }
 
     #endregion
