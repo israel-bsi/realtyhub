@@ -48,6 +48,9 @@ public class PropertyMapping : IEntityTypeConfiguration<Property>
         builder.Property(p => p.IsActive)
             .IsRequired();
 
+        builder.Property(p=>p.ShowInHome)
+            .IsRequired();
+
         builder.Property(p => p.CreatedAt)
             .HasDefaultValueSql("NOW()")
             .IsRequired();

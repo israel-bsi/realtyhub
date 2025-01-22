@@ -32,5 +32,6 @@ public class Property : Entity
     public bool IsNew { get; set; }
     public List<PropertyPhoto> PropertyPhotos { get; set; } = [];
     public bool IsActive { get; set; }
+    public bool ShowInHome { get; set; }
     public string UserId { get; set; } = string.Empty;
 }
