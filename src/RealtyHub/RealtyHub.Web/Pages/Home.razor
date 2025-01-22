@@ -1,14 +1,12 @@
 ﻿@page "/home"
-@using RealtyHub.Core.Handlers
-@using RealtyHub.Core.Models
-@using RealtyHub.Core.Requests.Properties
+@inherits HomePage
 @layout PublicLayout
 
 <PageTitle>Home</PageTitle>
 
 @if (IsBusy)
 {
-    <div class="centered-container">
+    <div class="d-flex justify-center align-center" style="height: 50vh">
         <MudProgressCircular Size="Size.Large" Color="Color.Info" Indeterminate="true" />
     </div>
 }
@@ -21,7 +19,7 @@ else
                 <CardHome Property="property"></CardHome>
             }
         </MudGrid>
-        <div class="mt-4 mb-4" style="display: flex; justify-content: center; align-items: center">
+        <div class="d-flex justify-center align-center mt-4 mb-4">
             <MudPagination Count="@TotalPages"
                            Selected="@CurrentPage"
                            ShowPreviousButton="true"
@@ -33,69 +31,3 @@ else
         </div>
     </MudPaper>
 }
-
-@code
-{
-    [Inject]
-    public IPropertyHandler PropertyHandler { get; set; } = null!;
-
-    [Inject]
-    public ISnackbar Snackbar { get; set; } = null!;
-
-    private List<Property> Properties { get; set; } = [];
-    private int TotalPages { get; set; }
-    private int CurrentPage { get; set; } = 1;
-    private int PageSize { get; set; } = 6;    
-    private bool IsBusy { get; set; }
-
-    protected override async Task OnInitializedAsync()
-    {
-        IsBusy = true;
-        try
-        {
-            await LoadDataAsync(CurrentPage);
-        }
-        catch
-        {
-            Snackbar.Add("Erro ao exibir os imóveis", Severity.Error);
-        }
-        finally
-        {
-            await Task.Delay(1000);
-            IsBusy = false;
-        }
-    }
-
-    private async Task LoadDataAsync(int pageNumber)
-    {
-        var request = new GetAllPropertiesRequest
-        {
-            PageNumber = pageNumber,
-            PageSize = PageSize
-        };
-        var response = await PropertyHandler.GetAllAsync(request);
-        if (response is { IsSuccess: true, Data: not null })
-        {
-            Properties = response.Data.Where(p=>p.ShowInHome).ToList();
-            TotalPages = response.TotalPages;
-            return;
-        }
-
-        Snackbar.Add("Não foi possível exibir os imóveis", Severity.Error);
-    }
-
-    private async Task OnPageChanged(int newPage)
-    {
-        CurrentPage = newPage;
-        await LoadDataAsync(newPage);
-    }
-}
-
-<style>
-    .centered-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 50vh;
-    }
-</style>
