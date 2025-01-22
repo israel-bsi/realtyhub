@@ -1,6 +1,4 @@
-﻿@using RealtyHub.Core.Models
-@inherits LayoutComponentBase
-@inject ISnackbar Snackbar
+﻿@inherits CardHomeComponent
 
 <MudItem xs="8" sm="4">
     <MudPaper Elevation="2">
@@ -29,23 +27,3 @@
         </MudCard>
     </MudPaper>
 </MudItem>
-
-@code
-{
-    [Parameter]
-    public string Class { get; set; } = string.Empty;
-
-    [Parameter] 
-    public Property Property { get; set; } = new();
-
-    protected string GetSrcPhoto()
-    {
-        var photo = Property
-            .PropertyPhotos
-            .FirstOrDefault(p=>p.IsThumbnail);
-
-        var fullName = $"{photo?.Id}{photo?.Extension}";
-
-        return $"{Configuration.BackendUrl}/photos/{fullName}";
-    }
-}
