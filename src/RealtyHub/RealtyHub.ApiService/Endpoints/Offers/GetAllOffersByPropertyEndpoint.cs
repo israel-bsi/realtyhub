@@ -1,4 +1,5 @@
-﻿using RealtyHub.ApiService.Common.Api;
+﻿using Microsoft.AspNetCore.Mvc;
+using RealtyHub.ApiService.Common.Api;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.Offers;
@@ -16,19 +17,27 @@ public class GetAllOffersByPropertyEndpoint : IEndpoint
             .WithSummary("Recupera todas as propostas de um imóvel")
             .WithDescription("Recupera todas as propostas de um imóvel")
             .WithOrder(6)
-            .Produces<Response<Offer?>>()
-            .Produces<Response<Offer?>>(StatusCodes.Status400BadRequest);
+            .Produces<PagedResponse<Offer?>>()
+            .Produces<PagedResponse<Offer?>>(StatusCodes.Status400BadRequest);
     }
 
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
         IOfferHandler handler,
-        long id)
+        long id,
+        [FromQuery] string? startDate,
+        [FromQuery] string? endDate,
+        [FromQuery] int pageNumber = Core.Configuration.DefaultPageNumber,
+        [FromQuery] int pageSize = Core.Configuration.DefaultPageSize)
     {
         var request = new GetAllOffersByPropertyRequest
         {
             PropertyId = id,
-            UserId = user.Identity?.Name ?? string.Empty
+            UserId = user.Identity?.Name ?? string.Empty,
+            PageNumber = pageNumber,
+            PageSize = pageSize,
+            StartDate = startDate,
+            EndDate = endDate
         };
         var result = await handler.GetAllOffersByPropertyAsync(request);
 

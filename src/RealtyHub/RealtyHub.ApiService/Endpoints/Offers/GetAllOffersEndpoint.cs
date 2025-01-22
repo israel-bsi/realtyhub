@@ -16,12 +16,14 @@ public class GetAllOffersEndpoint : IEndpoint
             .WithSummary("Recupera todas as propostas")
             .WithDescription("Recupera todas as propostas")
             .WithOrder(5)
-            .Produces<Response<Offer?>>()
-            .Produces<Response<Offer?>>(StatusCodes.Status400BadRequest);
+            .Produces<PagedResponse<Offer?>>()
+            .Produces<PagedResponse<Offer?>>(StatusCodes.Status400BadRequest);
 
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
         IOfferHandler handler,
+        [FromQuery] string? startDate,
+        [FromQuery] string? endDate,
         [FromQuery] int pageNumber = Core.Configuration.DefaultPageNumber,
         [FromQuery] int pageSize = Core.Configuration.DefaultPageSize)
     {
@@ -29,7 +31,9 @@ public class GetAllOffersEndpoint : IEndpoint
         {
             UserId = user.Identity?.Name ?? string.Empty,
             PageNumber = pageNumber,
-            PageSize = pageSize
+            PageSize = pageSize,
+            StartDate = startDate,
+            EndDate = endDate
         };
         var result = await handler.GetAllAsync(request);
 
