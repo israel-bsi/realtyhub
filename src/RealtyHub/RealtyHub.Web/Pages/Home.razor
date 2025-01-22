@@ -14,15 +14,24 @@
 }
 else
 {
-    <MudPaper>
+    <MudPaper Class="mb-4">
         <MudGrid Justify="Justify.FlexStart">
             @foreach (var property in Properties)
             {
                 <CardHome Property="property"></CardHome>
             }
         </MudGrid>
+        <div class="mt-4 mb-4" style="display: flex; justify-content: center; align-items: center">
+            <MudPagination Count="@TotalPages"
+                           Selected="@CurrentPage"
+                           ShowPreviousButton="true"
+                           ShowNextButton="true"
+                           ShowPageButtons="true" 
+                           ShowFirstButton="true"
+                           ShowLastButton="true" 
+                           SelectedChanged="@OnPageChanged"/>
+        </div>
     </MudPaper>
-    <MudPagination></MudPagination>
 }
 
 @code
@@ -33,21 +42,18 @@ else
     [Inject]
     public ISnackbar Snackbar { get; set; } = null!;
 
-    public List<Property> Properties { get; set; } = [];
-
-    public bool IsBusy { get; set; }
+    private List<Property> Properties { get; set; } = [];
+    private int TotalPages { get; set; }
+    private int CurrentPage { get; set; } = 1;
+    private int PageSize { get; set; } = 6;    
+    private bool IsBusy { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         IsBusy = true;
         try
         {
-            var request = new GetAllPropertiesRequest();
-            var response = await PropertyHandler.GetAllAsync(request);
-            if (response is { IsSuccess: true, Data: not null })
-                Properties = response.Data;
-            else
-                Snackbar.Add("Não foi possível exibir os imóveis");
+            await LoadDataAsync(CurrentPage);
         }
         catch
         {
@@ -58,6 +64,30 @@ else
             await Task.Delay(1000);
             IsBusy = false;
         }
+    }
+
+    private async Task LoadDataAsync(int pageNumber)
+    {
+        var request = new GetAllPropertiesRequest
+        {
+            PageNumber = pageNumber,
+            PageSize = PageSize
+        };
+        var response = await PropertyHandler.GetAllAsync(request);
+        if (response is { IsSuccess: true, Data: not null })
+        {
+            Properties = response.Data.Where(p=>p.ShowInHome).ToList();
+            TotalPages = response.TotalPages;
+            return;
+        }
+
+        Snackbar.Add("Não foi possível exibir os imóveis", Severity.Error);
+    }
+
+    private async Task OnPageChanged(int newPage)
+    {
+        CurrentPage = newPage;
+        await LoadDataAsync(newPage);
     }
 }
 
