@@ -1,0 +1,63 @@
+﻿@page "/imoveis/detalhes/{id:long}"
+@using RealtyHub.Core.Models
+@layout PublicLayout
+@inherits PropertyDetailsPage
+
+<PageTitle>Detalhes - @InputModel.Title</PageTitle>
+
+<MudPaper Elevation="2">
+    <MudGrid @key="GridKey">
+        <MudItem xs="24" sm="12">
+            <MudCarousel ItemsSource="@InputModel.PropertyPhotos"
+                         ShowArrows="true"
+                         ShowBullets="true"
+                         AutoCycle="false"
+                         Style="height: 70vh; width: 100%;"
+                         TData="PropertyPhoto">
+
+                <ItemTemplate>
+                    <div class="d-flex justify-center align-center" style="height: 100%;">
+                        <MudImage Src="@($"{Configuration.BackendUrl}/photos/{context.Id}{context.Extension}")"
+                                  Style="max-width: 95%; max-height: 100%;"
+                                  ObjectFit="ObjectFit.Contain" />
+                    </div>
+                </ItemTemplate>
+            </MudCarousel>
+        </MudItem>
+    </MudGrid>
+    
+    <MudText Class="ml-5 mb-10 mt-10" Typo="Typo.h6">@InputModel.Title</MudText>
+    
+    <MudCard Elevation="3" Class="mb-10 mt-10">
+        <MudCardHeader>
+            <CardHeaderContent>
+                <MudText Typo="Typo.h6">Descrição</MudText>
+            </CardHeaderContent>
+        </MudCardHeader>
+        <MudCardContent>
+            <MudText Typo="Typo.body1">@InputModel.Description</MudText>
+        </MudCardContent>
+    </MudCard>
+    
+    <MudCard Elevation="3" Class="mb-10 mt-10">
+        <MudCardHeader>
+            <CardHeaderContent>
+                <MudText Typo="Typo.h6">Preço</MudText>
+            </CardHeaderContent>
+        </MudCardHeader>
+        <MudCardContent>
+            <MudText Typo="Typo.body1">@InputModel.Price.ToString("C")</MudText>
+        </MudCardContent>
+    </MudCard>
+    
+    <MudCard Elevation="3" Class="mb-10 mt-10">
+        <MudCardHeader>
+            <CardHeaderContent>
+                <MudText Typo="Typo.h6">Localização</MudText>
+            </CardHeaderContent>
+        </MudCardHeader>
+        <MudCardContent>
+            <MudText Typo="Typo.body1">@InputModel.Address.Neighborhood</MudText>
+        </MudCardContent>
+    </MudCard>
+</MudPaper>
