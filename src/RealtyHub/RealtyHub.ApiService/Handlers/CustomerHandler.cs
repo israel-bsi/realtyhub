@@ -121,7 +121,7 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
                 .Customers
                 .AsNoTracking()
                 .FirstOrDefaultAsync(c => c.Id == request.Id
-                                          && c.UserId == request.UserId
+                                          && (c.UserId == request.UserId || string.IsNullOrEmpty(c.UserId))
                                           && c.IsActive);
 
             return customer is null
@@ -143,7 +143,8 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
             var query = context
                 .Customers
                 .AsNoTracking()
-                .Where(c => c.UserId == request.UserId && c.IsActive);
+                .Where(c => (c.UserId == request.UserId || string.IsNullOrEmpty(c.UserId))
+                            && c.IsActive);
 
             if (!string.IsNullOrEmpty(request.SearchTerm))
             {

@@ -14,11 +14,9 @@ public class Offer : Entity
     public long CustomerId { get; set; }
     [Required(ErrorMessage = "Detalhes do pagamento é um campo obrigatório")]
     public string PaymentDetails { get; set; } = string.Empty;
-    public DateTime Submission { get; set; } = DateTime.UtcNow;
+    public DateTime SubmissionDate { get; set; } = DateTime.UtcNow;
     public EOfferStatus OfferStatus { get; set; } = EOfferStatus.Analysis;
-    public List<Payment> Payments { get; set; } = [];
     public Customer Customer { get; set; } = new();
-    [ValidateComplexType]
     public Property Property { get; set; } = new();
     public string UserId { get; set; } = string.Empty;
 }

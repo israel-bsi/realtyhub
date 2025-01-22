@@ -12,28 +12,6 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
 {
     public async Task<Response<Offer?>> CreateAsync(Offer request)
     {
-        Customer? customer;
-        try
-        {
-            customer = await context
-                .Customers
-                .AsNoTracking()
-                .FirstOrDefaultAsync(c => c.Id == request.CustomerId 
-                                          && c.UserId == request.UserId
-                                          && c.IsActive);
-
-            if (customer is null)
-                return new Response<Offer?>(null, 404,
-                    "Cliente não encontrado");
-
-            context.Attach(customer);
-        }
-        catch (Exception ex)
-        {
-            return new Response<Offer?>(null, 500,
-                $"Falha ao obter cliente\n{ex.Message}");
-        }
-
         Property? property;
         try
         {
@@ -58,31 +36,17 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
 
         try
         {
-            var payments = request.Payments.Select(paymentRequest => new Payment
-            {
-                PaymentDate = paymentRequest.PaymentDate,
-                Amount = paymentRequest.Amount,
-                PaymentType = paymentRequest.PaymentType,
-                PaymentStatus = paymentRequest.PaymentStatus,
-                UserId = request.UserId,
-                IsActive = true
-            }).ToList();
-
-            var total = payments.Sum(p => p.Amount);
-            if (total < request.Amount)
-                return new Response<Offer?>(null, 400,
-                    "O valor total dos pagamentos não corresponde ao valor da proposta");
-
+            request.Customer.IsActive = true;
             var offer = new Offer
             {
-                Submission = request.Submission,
+                SubmissionDate = request.SubmissionDate,
                 Amount = request.Amount,
+                PaymentDetails = request.PaymentDetails,
                 OfferStatus = request.OfferStatus,
                 CustomerId = request.CustomerId,
-                Customer = customer,
+                Customer = request.Customer,
                 PropertyId = request.PropertyId,
                 Property = property,
-                Payments = payments,
                 UserId = request.UserId
             };
 
@@ -107,7 +71,6 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .Offers
                 .Include(o => o.Customer)
                 .Include(o => o.Property)
-                .Include(o => o.Payments)
                 .FirstOrDefaultAsync(o => o.Id == request.Id 
                                           && o.UserId == request.UserId);
 
@@ -119,63 +82,12 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 return new Response<Offer?>(null, 400,
                     "Não é possível atualizar uma proposta aceita ou rejeitada");
 
-            var total = request.Payments.Sum(p => p.Amount);
-            if (total < request.Amount)
-                return new Response<Offer?>(null, 400,
-                    "O valor total dos pagamentos não corresponde ao valor da proposta");
-
-            var payments = await context
-                .Payments
-                .Where(p => p.OfferId == request.Id 
-                            && p.UserId == request.UserId)
-                .ToListAsync();
-
-            offer.Submission = request.Submission;
+            offer.SubmissionDate = request.SubmissionDate;
             offer.Amount = request.Amount;
             offer.PropertyId = request.PropertyId;
             offer.CustomerId = request.CustomerId;
             offer.OfferStatus = request.OfferStatus;
-            foreach (var payment in payments)
-            {
-                var updatePaymentRequest = request.Payments
-                    .FirstOrDefault(p => p.Id == payment.Id);
-
-                if (updatePaymentRequest is not null)
-                {
-                    payment.PaymentDate = updatePaymentRequest.PaymentDate;
-                    payment.Amount = updatePaymentRequest.Amount;
-                    payment.PaymentType = updatePaymentRequest.PaymentType;
-                    payment.PaymentStatus = updatePaymentRequest.PaymentStatus;
-                    payment.UpdatedAt = DateTime.UtcNow;
-                    payment.IsActive = true;
-                }
-                else
-                {
-                    payment.IsActive = false;
-                    payment.UpdatedAt = DateTime.UtcNow;
-                }
-            }
-
-            foreach (var payment in request.Payments)
-            {
-                var isExist = payments.Any(p => p.Id == payment.Id);
-                if (isExist) continue;
-
-                var newPayment = new Payment
-                {
-                    PaymentDate = payment.PaymentDate,
-                    Amount = payment.Amount,
-                    PaymentType = payment.PaymentType,
-                    PaymentStatus = payment.PaymentStatus,
-                    IsActive = true,
-                    OfferId = offer.Id,
-                    Offer = offer,
-                    UserId = request.UserId
-                };
-
-                context.Attach(newPayment);
-                offer.Payments.Add(newPayment);
-            }
+            offer.PaymentDetails = request.PaymentDetails;
             offer.UpdatedAt = DateTime.UtcNow;
 
             context.Offers.Update(offer);
@@ -199,7 +111,6 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .Offers
                 .Include(o => o.Customer)
                 .Include(o => o.Property)
-                .Include(o => o.Payments)
                 .FirstOrDefaultAsync(o => o.Id == request.Id 
                                           && o.UserId == request.UserId);
 
@@ -241,7 +152,6 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .Offers
                 .Include(o => o.Customer)
                 .Include(o => o.Property)
-                .Include(o => o.Payments)
                 .FirstOrDefaultAsync(o => o.Id == request.Id 
                                           && o.UserId == request.UserId);
 
@@ -284,7 +194,6 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .AsNoTracking()
                 .Include(o => o.Customer)
                 .Include(o => o.Property)
-                .Include(o => o.Payments)
                 .FirstOrDefaultAsync(o => o.Id == request.Id 
                                           && o.UserId == request.UserId);
 
@@ -319,7 +228,6 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .AsNoTracking()
                 .Include(o => o.Customer)
                 .Include(o => o.Property)
-                //.Include(o => o.Payments)
                 .Where(o => o.PropertyId == request.PropertyId
                             && o.UserId == request.UserId);
 
@@ -328,11 +236,11 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 var startDate = DateTime.Parse(request.StartDate).ToUniversalTime();
                 var endDate = DateTime.Parse(request.EndDate).ToUniversalTime();
 
-                query = query.Where(o => o.Submission >= startDate
-                                         && o.Submission <= endDate);
+                query = query.Where(o => o.SubmissionDate >= startDate
+                                         && o.SubmissionDate <= endDate);
             }
 
-            query = query.OrderBy(o => o.Submission);
+            query = query.OrderBy(o => o.SubmissionDate);
 
             var offers = await query
                 .Skip((request.PageNumber - 1) * request.PageSize)
@@ -370,7 +278,6 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .AsNoTracking()
                 .Include(o => o.Customer)
                 .Include(o => o.Property)
-                //.Include(o => o.Payments)
                 .Where(o => o.CustomerId == request.CustomerId
                             && o.UserId == request.UserId);
 
@@ -379,11 +286,11 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 var startDate = DateTime.Parse(request.StartDate).ToUniversalTime();
                 var endDate = DateTime.Parse(request.EndDate).ToUniversalTime();
 
-                query = query.Where(o => o.Submission >= startDate
-                                         && o.Submission <= endDate);
+                query = query.Where(o => o.SubmissionDate >= startDate
+                                         && o.SubmissionDate <= endDate);
             }
 
-            query = query.OrderBy(o => o.Submission);
+            query = query.OrderBy(o => o.SubmissionDate);
 
             var offers = await query
                 .Skip((request.PageNumber - 1) * request.PageSize)
@@ -410,7 +317,6 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .AsNoTracking()
                 .Include(o => o.Customer)
                 .Include(o => o.Property)
-                .Include(o => o.Payments)
                 .Where(o => o.UserId == request.UserId);
 
             var offers = await query

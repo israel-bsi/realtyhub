@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using RealtyHub.ApiService.Data;
@@ -11,9 +12,11 @@ using RealtyHub.ApiService.Data;
 namespace RealtyHub.ApiService.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250122151900_v3")]
+    partial class v3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -383,7 +386,7 @@ namespace RealtyHub.ApiService.Migrations
                     b.Property<long>("PropertyId")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTime>("SubmissionDate")
+                    b.Property<DateTime>("Submission")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("UpdatedAt")
@@ -402,6 +405,55 @@ namespace RealtyHub.ApiService.Migrations
                     b.HasIndex("PropertyId");
 
                     b.ToTable("Offer", (string)null);
+                });
+
+            modelBuilder.Entity("RealtyHub.Core.Models.Payment", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("numeric");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasDefaultValueSql("NOW()");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(true);
+
+                    b.Property<long>("OfferId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("PaymentDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("PaymentStatus")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("PaymentType")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasDefaultValueSql("NOW()");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OfferId");
+
+                    b.ToTable("Payment", (string)null);
                 });
 
             modelBuilder.Entity("RealtyHub.Core.Models.Property", b =>
@@ -693,6 +745,17 @@ namespace RealtyHub.ApiService.Migrations
                     b.Navigation("Property");
                 });
 
+            modelBuilder.Entity("RealtyHub.Core.Models.Payment", b =>
+                {
+                    b.HasOne("RealtyHub.Core.Models.Offer", "Offer")
+                        .WithMany("Payments")
+                        .HasForeignKey("OfferId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Offer");
+                });
+
             modelBuilder.Entity("RealtyHub.Core.Models.Property", b =>
                 {
                     b.OwnsOne("RealtyHub.Core.Models.Address", "Address", b1 =>
@@ -791,6 +854,11 @@ namespace RealtyHub.ApiService.Migrations
             modelBuilder.Entity("RealtyHub.ApiService.Models.User", b =>
                 {
                     b.Navigation("Roles");
+                });
+
+            modelBuilder.Entity("RealtyHub.Core.Models.Offer", b =>
+                {
+                    b.Navigation("Payments");
                 });
 
             modelBuilder.Entity("RealtyHub.Core.Models.Property", b =>

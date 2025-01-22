@@ -92,6 +92,7 @@ public partial class CustomerFormComponent : ComponentBase
         => ValidateDocument();
     public void ValidateDocument()
     {
+        if (string.IsNullOrEmpty(InputModel.DocumentNumber)) return;
         MessageStore?.Clear();
         if (InputModel.CustomerType is ECustomerType.Individual)
         {

@@ -12,10 +12,13 @@ public class OfferMapping : IEntityTypeConfiguration<Offer>
 
         builder.HasKey(x => x.Id);
 
-        builder.Property(x => x.Submission)
+        builder.Property(x => x.SubmissionDate)
             .IsRequired();
 
         builder.Property(x => x.Amount)
+            .IsRequired();
+
+        builder.Property(o=>o.PaymentDetails)
             .IsRequired();
 
         builder.Property(x => x.OfferStatus)
