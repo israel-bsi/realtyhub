@@ -15,13 +15,13 @@
             <MudCardActions>
                 <MudTooltip Text="Enviar proposta">
                     <MudIconButton Icon="@Icons.Material.Filled.Send"
-                    Color="Color.Primary"
-                    OnClick="@(() => Snackbar.Add("Enviando proposta", Severity.Info))" />
+                                   Color="Color.Primary"
+                                   OnClick="@(() => Snackbar.Add("Enviando proposta", Severity.Info))" />
                 </MudTooltip>
                 <MudTooltip Text="Mais informações">
-                    <MudIconButton Icon="@Icons.Material.Filled.Info" 
-                    Color="Color.Primary"
-                    OnClick="@(() => Snackbar.Add("Exibindo a pagina completa", Severity.Info))"/>
+                    <MudIconButton Icon="@Icons.Material.Filled.Info"
+                                   Color="Color.Primary"
+                                   OnClick="OnShowDetails" />
                 </MudTooltip>
             </MudCardActions>
         </MudCard>
