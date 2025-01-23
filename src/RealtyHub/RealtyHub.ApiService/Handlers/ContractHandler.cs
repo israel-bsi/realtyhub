@@ -22,8 +22,7 @@ public class ContractHandler(AppDbContext context) : IContractHandler
                                           && o.UserId == request.UserId);
 
             if (offer is null)
-                return new Response<Contract?>(null, 404,
-                    "Proposta não encontrada");
+                return new Response<Contract?>(null, 404, "Proposta não encontrada");
 
             if (offer.OfferStatus != EOfferStatus.Accepted)
                 return new Response<Contract?>(null, 400,
@@ -58,13 +57,11 @@ public class ContractHandler(AppDbContext context) : IContractHandler
             await context.Contracts.AddAsync(contract);
             await context.SaveChangesAsync();
 
-            return new Response<Contract?>(contract, 201,
-                "Contrato criado com sucesso");
+            return new Response<Contract?>(contract, 201, "Contrato criado com sucesso");
         }
-        catch (Exception ex)
+        catch
         {
-            return new Response<Contract?>(null, 500,
-                $"Não foi possível criar o contrato\n{ex.Message}");
+            return new Response<Contract?>(null, 500, "Não foi possível criar o contrato");
         }
     }
 
@@ -79,8 +76,7 @@ public class ContractHandler(AppDbContext context) : IContractHandler
                                           && c.IsActive);
 
             if (contract is null)
-                return new Response<Contract?>(null, 404,
-                    "Contrato não encontrado");
+                return new Response<Contract?>(null, 404, "Contrato não encontrado");
 
             var offer = await context
                 .Offers
@@ -88,8 +84,7 @@ public class ContractHandler(AppDbContext context) : IContractHandler
                                           && o.UserId == request.UserId);
 
             if (offer is null)
-                return new Response<Contract?>(null, 404,
-                    "Proposta não encontrada");
+                return new Response<Contract?>(null, 404, "Proposta não encontrada");
 
             contract.IssueDate = request.IssueDate;
             contract.SignatureDate = request.SignatureDate;
@@ -101,13 +96,11 @@ public class ContractHandler(AppDbContext context) : IContractHandler
 
             await context.SaveChangesAsync();
 
-            return new Response<Contract?>(contract, 200,
-                "Contrato atualizado com sucesso");
+            return new Response<Contract?>(contract, 200, "Contrato atualizado com sucesso");
         }
-        catch (Exception ex)
+        catch
         {
-            return new Response<Contract?>(null, 500,
-                $"Não foi possível atualizar o contrato\n{ex.Message}");
+            return new Response<Contract?>(null, 500, "Não foi possível atualizar o contrato");
         }
     }
 
@@ -122,20 +115,17 @@ public class ContractHandler(AppDbContext context) : IContractHandler
                                           && c.IsActive);
 
             if (contract is null)
-                return new Response<Contract?>(null, 404,
-                    "Contrato não encontrado");
+                return new Response<Contract?>(null, 404, "Contrato não encontrado");
 
             contract.IsActive = false;
             contract.UpdatedAt = DateTime.UtcNow;
             await context.SaveChangesAsync();
 
-            return new Response<Contract?>(null, 204,
-                "Contrato excluído com sucesso");
+            return new Response<Contract?>(null, 204, "Contrato excluído com sucesso");
         }
-        catch (Exception ex)
+        catch
         {
-            return new Response<Contract?>(null, 500,
-                $"Não foi possível excluir o contrato\n{ex.Message}");
+            return new Response<Contract?>(null, 500, "Não foi possível excluir o contrato");
         }
     }
 
@@ -154,16 +144,13 @@ public class ContractHandler(AppDbContext context) : IContractHandler
                                           && c.IsActive);
 
             if (contract is null)
-                return new Response<Contract?>(null, 404,
-                    "Contrato não encontrado");
+                return new Response<Contract?>(null, 404, "Contrato não encontrado");
 
-            return new Response<Contract?>(contract, 200,
-                "Contrato encontrado com sucesso");
+            return new Response<Contract?>(contract, 200, "Contrato encontrado com sucesso");
         }
-        catch (Exception ex)
+        catch
         {
-            return new Response<Contract?>(null, 500,
-                $"Não foi possível encontrar o contrato\n{ex.Message}");
+            return new Response<Contract?>(null, 500, "Não foi possível encontrar o contrato");
         }
     }
 
@@ -187,12 +174,12 @@ public class ContractHandler(AppDbContext context) : IContractHandler
             var count = await query.CountAsync();
 
             return new PagedResponse<List<Contract>?>(
-                contracts, count, request.PageNumber, request.PageSize);
+               contracts, count, request.PageNumber, request.PageSize);
         }
-        catch (Exception ex)
+        catch
         {
-            return new PagedResponse<List<Contract>?>(null, 500,
-                $"Não foi possível retornar os contratos\n{ex.Message}");
+            return new PagedResponse<List<Contract>?>(null, 500, 
+                "Não foi possível retornar os contratos");
         }
     }
 }

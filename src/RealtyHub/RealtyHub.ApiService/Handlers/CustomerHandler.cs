@@ -38,13 +38,11 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
             await context.Customers.AddAsync(customer);
             await context.SaveChangesAsync();
 
-            return new Response<Customer?>(customer, 201,
-                "Cliente criado com sucesso");
+            return new Response<Customer?>(customer, 201, "Cliente criado com sucesso");
         }
-        catch (Exception ex)
+        catch
         {
-            return new Response<Customer?>(null, 500,
-                $"Não foi possível criar o cliente\n{ex.Message}");
+            return new Response<Customer?>(null, 500, "Não foi possível criar o cliente");
         }
     }
 
@@ -57,8 +55,7 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
                 .FirstOrDefaultAsync(c => c.Id == request.Id && c.IsActive);
 
             if (customer is null)
-                return new Response<Customer?>(null, 404,
-                    "Cliente não encontrado");
+                return new Response<Customer?>(null, 404, "Cliente não encontrado");
 
             customer.Name = request.Name;
             customer.Email = request.Email;
@@ -74,13 +71,11 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
             context.Customers.Update(customer);
             await context.SaveChangesAsync();
 
-            return new Response<Customer?>(customer, message:
-                "Cliente atualizado com sucesso");
+            return new Response<Customer?>(customer, message: "Cliente atualizado com sucesso");
         }
-        catch (Exception ex)
+        catch
         {
-            return new Response<Customer?>(null, 500,
-                $"Não foi possível atualizar o cliente\n{ex.Message}");
+            return new Response<Customer?>(null, 500, "Não foi possível atualizar o cliente");
         }
     }
 
@@ -95,21 +90,18 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
                                           && c.IsActive);
 
             if (customer is null)
-                return new Response<Customer?>(null, 404,
-                    "Cliente não encontrado");
+                return new Response<Customer?>(null, 404, "Cliente não encontrado");
 
             customer.IsActive = false;
             customer.UpdatedAt = DateTime.UtcNow;
 
             await context.SaveChangesAsync();
 
-            return new Response<Customer?>(null, 204, 
-                "Cliente excluído com sucesso");
+            return new Response<Customer?>(null, 204, "Cliente excluído com sucesso");
         }
-        catch (Exception ex)
+        catch
         {
-            return new Response<Customer?>(null, 500,
-                $"Não foi possível excluir o cliente\n{ex.Message}");
+            return new Response<Customer?>(null, 500, "Não foi possível excluir o cliente");
         }
     }
 
@@ -125,14 +117,12 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
                                           && c.IsActive);
 
             return customer is null
-                ? new Response<Customer?>(null, 404,
-                    "Cliente não encontrado")
+                ? new Response<Customer?>(null, 404, "Cliente não encontrado")
                 : new Response<Customer?>(customer);
         }
-        catch (Exception ex)
+        catch
         {
-            return new Response<Customer?>(null, 500,
-                $"Não foi possível retornar o cliente\n{ex.Message}");
+            return new Response<Customer?>(null, 500, "Não foi possível retornar o cliente");
         }
     }
 
@@ -163,12 +153,11 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
             var count = await query.CountAsync();
 
             return new PagedResponse<List<Customer>?>(
-                customers, count, request.PageNumber, request.PageSize);
+               customers, count, request.PageNumber, request.PageSize);
         }
         catch
         {
-            return new PagedResponse<List<Customer>?>(null, 500,
-                "Não foi possível consultar os clientes");
+            return new PagedResponse<List<Customer>?>(null, 500, "Não foi possível consultar os clientes");
         }
     }
 }

@@ -9,14 +9,12 @@ namespace RealtyHub.ApiService.Handlers;
 
 public class PropertyPhotosHandler(AppDbContext context) : IPropertyPhotosHandler
 {
-    public async Task<Response<PropertyPhoto?>> CreateAsync(
-        CreatePropertyPhotosRequest request)
+    public async Task<Response<PropertyPhoto?>> CreateAsync(CreatePropertyPhotosRequest request)
     {
         try
         {
             if (request.HttpRequest is null)
-                return new Response<PropertyPhoto?>(null, 400,
-                    "Requisição inválida");
+                return new Response<PropertyPhoto?>(null, 400, "Requisição inválida");
 
             var property = await context
                 .Properties
@@ -27,21 +25,19 @@ public class PropertyPhotosHandler(AppDbContext context) : IPropertyPhotosHandle
                     && p.IsActive);
 
             if (property is null)
-                return new Response<PropertyPhoto?>(null, 404,
-                    "Imóvel não encontrado");
+                return new Response<PropertyPhoto?>(null, 404, "Imóvel não encontrado");
 
             context.Attach(property);
 
             if (!request.HttpRequest.HasFormContentType)
                 return new Response<PropertyPhoto?>(null, 400,
-                    "Conteúdo do tipo multipart/form-data esperado");
+                   "Conteúdo do tipo multipart/form-data esperado");
 
             var form = await request.HttpRequest.ReadFormAsync();
             var files = form.Files;
 
             if (files.Count == 0)
-                return new Response<PropertyPhoto?>(null, 400,
-                    "Nenhum arquivo encontrado");
+                return new Response<PropertyPhoto?>(null, 400, "Nenhum arquivo encontrado");
 
             var photosToCreate = new List<PropertyPhoto>();
             var photosToUpdate = new List<PropertyPhoto>();
@@ -53,7 +49,8 @@ public class PropertyPhotosHandler(AppDbContext context) : IPropertyPhotosHandle
                 var idPhoto = string.IsNullOrEmpty(id) ? Guid.NewGuid().ToString() : id;
                 var extension = Path.GetExtension(file.FileName);
                 var fileName = $"{idPhoto}{extension}";
-                var fullFileName = Path.Combine(Directory.GetCurrentDirectory(), "Sources", "Photos", fileName);
+                var currentDirectory = Directory.GetCurrentDirectory();
+                var fullFileName = Path.Combine(currentDirectory, "Sources", "Photos", fileName);
 
                 await using var stream = new FileStream(fullFileName, FileMode.Create);
                 await file.CopyToAsync(stream);
@@ -96,14 +93,13 @@ public class PropertyPhotosHandler(AppDbContext context) : IPropertyPhotosHandle
 
             return new Response<PropertyPhoto?>(null, 201);
         }
-        catch (Exception e)
+        catch
         {
-            return new Response<PropertyPhoto?>(null, 500, e.Message);
+            return new Response<PropertyPhoto?>(null, 500, "Não foi possível criar as fotos");
         }
     }
 
-    public async Task<Response<List<PropertyPhoto>?>> UpdateAsync(
-        UpdatePorpertyPhotosRequest request)
+    public async Task<Response<List<PropertyPhoto>?>> UpdateAsync(UpdatePorpertyPhotosRequest request)
     {
         try
         {
@@ -145,14 +141,13 @@ public class PropertyPhotosHandler(AppDbContext context) : IPropertyPhotosHandle
 
             return new Response<List<PropertyPhoto>?>();
         }
-        catch (Exception e)
+        catch
         {
-            return new Response<List<PropertyPhoto>?>(null, 500, e.Message);
+            return new Response<List<PropertyPhoto>?>(null, 500, "Não foi possível atualizar as fotos");
         }
     }
     
-    public async Task<Response<PropertyPhoto?>> DeleteAsync(
-        DeletePropertyPhotoRequest request)
+    public async Task<Response<PropertyPhoto?>> DeleteAsync(DeletePropertyPhotoRequest request)
     {
         try
         {
@@ -164,8 +159,7 @@ public class PropertyPhotosHandler(AppDbContext context) : IPropertyPhotosHandle
                     && pi.IsActive);
 
             if (propertyPhoto is null)
-                return new Response<PropertyPhoto?>(null, 404,
-                    "Foto não encontrada");
+                return new Response<PropertyPhoto?>(null, 404, "Foto não encontrada");
 
             context.Attach(propertyPhoto);
 
@@ -175,17 +169,16 @@ public class PropertyPhotosHandler(AppDbContext context) : IPropertyPhotosHandle
 
             await context.SaveChangesAsync();
 
-            return new Response<PropertyPhoto?>(null, 204, 
-                "Foto excluída com sucesso");
+            return new Response<PropertyPhoto?>(null, 204, "Foto excluída com sucesso");
         }
-        catch (Exception e)
+        catch
         {
-            return new Response<PropertyPhoto?>(null, 500, e.Message);
+            return new Response<PropertyPhoto?>(null, 500, "Não foi possível deletar a foto");
         }
     }
 
     public async Task<Response<List<PropertyPhoto>?>> GetAllByPropertyAsync(
-        GetAllPropertyPhotosByPropertyRequest request)
+       GetAllPropertyPhotosByPropertyRequest request)
     {
         try
         {
@@ -201,9 +194,9 @@ public class PropertyPhotosHandler(AppDbContext context) : IPropertyPhotosHandle
 
             return new Response<List<PropertyPhoto>?>(propertyPhotos);
         }
-        catch (Exception e)
+        catch
         {
-            return new Response<List<PropertyPhoto>?>(null, 500, e.Message);
+            return new Response<List<PropertyPhoto>?>(null, 500, "Não foi possível buscar a foto");
         }
     }
 }

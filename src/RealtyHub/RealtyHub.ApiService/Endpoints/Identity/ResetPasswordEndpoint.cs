@@ -33,7 +33,9 @@ public class ResetPasswordEndpoint : IEndpoint
 
         var decodedBytes = WebEncoders.Base64UrlDecode(token);
         var decodedToken = Encoding.UTF8.GetString(decodedBytes);
-        var resetResult = await userManager.ResetPasswordAsync(user, decodedToken, request.PasswordResetModel.Password);
+
+        var resetResult = await userManager
+            .ResetPasswordAsync(user, decodedToken, request.PasswordResetModel.Password);
 
         return resetResult.Succeeded 
             ? Results.Ok(new Response<string>(null, message: "Senha redefinida com sucesso")) 

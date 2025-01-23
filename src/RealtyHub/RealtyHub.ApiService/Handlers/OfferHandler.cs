@@ -27,10 +27,9 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
 
             context.Attach(property);
         }
-        catch (Exception ex)
+        catch
         {
-            return new Response<Offer?>(null, 500,
-               $"Falha ao obter imóvel\n{ex.Message}");
+            return new Response<Offer?>(null, 500, "Falha ao obter imóvel");
         }
 
         try
@@ -67,10 +66,9 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
 
             return new Response<Offer?>(offer, 201, "Proposta criada com sucesso");
         }
-        catch (Exception ex)
+        catch
         {
-            return new Response<Offer?>(null, 500,
-                $"Não foi possível criar a proposta\n{ex.Message}");
+            return new Response<Offer?>(null, 500, "Não foi possível criar a proposta");
         }
     }
 
@@ -153,13 +151,11 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
             context.Offers.Update(offer);
             await context.SaveChangesAsync();
 
-            return new Response<Offer?>(offer, 200,
-                "Proposta atualizada com sucesso");
+            return new Response<Offer?>(offer, 200, "Proposta atualizada com sucesso");
         }
-        catch (Exception ex)
+        catch
         {
-            return new Response<Offer?>(null, 500,
-                $"Não foi possível atualizar a proposta\n{ex.Message}");
+            return new Response<Offer?>(null, 500, "Não foi possível atualizar a proposta");
         }
     }
 
@@ -195,13 +191,11 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
             context.Offers.Update(offer);
             await context.SaveChangesAsync();
 
-            return new Response<Offer?>(offer, 200,
-                "Proposta rejeitada com sucesso");
+            return new Response<Offer?>(offer, 200, "Proposta rejeitada com sucesso");
         }
-        catch (Exception ex)
+        catch
         {
-            return new Response<Offer?>(null, 500,
-                $"Não foi possível rejeitar a proposta\n{ex.Message}");
+            return new Response<Offer?>(null, 500, "Não foi possível rejeitar a proposta");
         }
     }
 
@@ -237,13 +231,11 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
             context.Offers.Update(offer);
             await context.SaveChangesAsync();
 
-            return new Response<Offer?>(offer, 200,
-                "Proposta aceita com sucesso");
+            return new Response<Offer?>(offer, 200, "Proposta aceita com sucesso");
         }
-        catch (Exception ex)
+        catch
         {
-            return new Response<Offer?>(null, 500,
-                $"Não foi possível aceitar a proposta\n{ex.Message}");
+            return new Response<Offer?>(null, 500, "Não foi possível aceitar a proposta");
         }
     }
 
@@ -264,10 +256,9 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 ? new Response<Offer?>(null, 404, "Proposta não encontrada")
                 : new Response<Offer?>(offer, 200, "Proposta encontrada");
         }
-        catch (Exception ex)
+        catch
         {
-            return new Response<Offer?>(null, 500,
-                $"Não foi possível buscar a proposta\n{ex.Message}");
+            return new Response<Offer?>(null, 500, "Não foi possível buscar a proposta");
         }
     }
 
@@ -316,15 +307,14 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
 
             return new PagedResponse<List<Offer>?>(offers, count, request.PageNumber, request.PageSize);
         }
-        catch (Exception ex)
+        catch
         {
-            return new PagedResponse<List<Offer>?>(null, 500,
-                $"Não foi possível buscar as propostas\n{ex.Message}");
+            return new PagedResponse<List<Offer>?>(null, 500, "Não foi possível buscar as propostas");
         }
     }
 
     public async Task<PagedResponse<List<Offer>?>> GetAllOffersByCustomerAsync(
-        GetAllOffersByCustomerRequest request)
+       GetAllOffersByCustomerRequest request)
     {
         try
         {
@@ -368,10 +358,9 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
 
             return new PagedResponse<List<Offer>?>(offers, count, request.PageNumber, request.PageSize);
         }
-        catch (Exception ex)
+        catch
         {
-            return new PagedResponse<List<Offer>?>(null, 500,
-                $"Não foi possível buscar as propostas\n{ex.Message}");
+            return new PagedResponse<List<Offer>?>(null, 500, "Não foi possível buscar as propostas");
         }
     }
 
@@ -394,13 +383,11 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
 
             var count = await query.CountAsync();
 
-            return new PagedResponse<List<Offer>?>(
-                offers, count, request.PageNumber, request.PageSize);
+            return new PagedResponse<List<Offer>?>(offers, count, request.PageNumber, request.PageSize);
         }
-        catch (Exception ex)
+        catch
         {
-            return new PagedResponse<List<Offer>?>(null, 500,
-                $"Não foi possível buscar as propostas\n{ex.Message}");
+            return new PagedResponse<List<Offer>?>(null, 500, "Não foi possível buscar as propostas");
         }
     }
 }

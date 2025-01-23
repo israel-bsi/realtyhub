@@ -27,18 +27,21 @@ public class ConfirmEmailEndpoint : IEndpoint
     {
         var user = await userManager.FindByIdAsync(userId);
         if (user is null)
-            return Results.NotFound(new Response<string>(null, 400, "Usuário não encontrado!"));
+            return Results.NotFound(new Response<string>(null, 400, 
+                "Usuário não encontrado!"));
 
         var emailConfirmed = await userManager.IsEmailConfirmedAsync(user);
         if (emailConfirmed)
-            return Results.BadRequest(new Response<string>(null, 400, "Email já confirmado!"));
+            return Results.BadRequest(new Response<string>(null, 400, 
+                "Email já confirmado!"));
 
         var decodedBytes = WebEncoders.Base64UrlDecode(token);
         var decodedToken = Encoding.UTF8.GetString(decodedBytes);
         var result = await userManager.ConfirmEmailAsync(user, decodedToken);
 
         return result.Succeeded
-            ? Results.Ok(new Response<string>(null, 200, "Email confirmado com sucesso!"))
+            ? Results.Ok(new Response<string>(null, 200, 
+                "Email confirmado com sucesso!"))
             : Results.BadRequest(result.Errors);
     }
 }

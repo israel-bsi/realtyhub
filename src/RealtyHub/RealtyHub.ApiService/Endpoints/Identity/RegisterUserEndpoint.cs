@@ -65,7 +65,8 @@ public class RegisterUserEndpoint : IEndpoint
         var emailResult = await emailService.SendConfirmationLinkAsync(emailMessage);
 
         return emailResult.IsSuccess
-            ? Results.Ok(new Response<string>(null, message: "Usuário registrado com sucesso! Verifique seu e-mail!"))
+            ? Results.Ok(new Response<string>(null, 
+                message: "Usuário registrado com sucesso! Verifique seu e-mail!"))
             : Results.BadRequest(emailResult.Message);
     }
 }
