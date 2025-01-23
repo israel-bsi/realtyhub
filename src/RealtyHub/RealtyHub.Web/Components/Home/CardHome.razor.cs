@@ -56,7 +56,7 @@ public partial class CardHomeComponent : ComponentBase
             { "PropertyId", Property.Id }
         };
 
-        await DialogService.ShowAsync<OfferDialogCreate>("Enviar proposta", parameters, options);
+        await DialogService.ShowAsync<OfferDialog>("Enviar proposta", parameters, options);
     }
 
     #endregion

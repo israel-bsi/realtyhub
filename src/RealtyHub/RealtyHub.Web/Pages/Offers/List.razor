@@ -28,11 +28,9 @@
         <PropertyColumn Property="v=>v.SubmissionDate" Title="Data"></PropertyColumn>
         <PropertyColumn Property="v=>v.Customer.Name" Title="Cliente"></PropertyColumn>
         <PropertyColumn Property="v=>v.Property.Title" Title="Imóvel"></PropertyColumn>
-        <TemplateColumn Title="Detalhes">
-            <CellTemplate Context="context">
-                <div class="detalhes-cell">
-                    @context.Item.PaymentDetails
-                </div>
+        <TemplateColumn Title="Valor">
+            <CellTemplate>
+                @context.Item.Amount.ToString("C")
             </CellTemplate>
         </TemplateColumn>
         <TemplateColumn Title="Status">
@@ -42,19 +40,18 @@
         </TemplateColumn>
         <TemplateColumn Class="justify-end" Title="Ações">
             <CellTemplate>
-                @if (context.Item.OfferStatus == EOfferStatus.Analysis)
-                {
-                    <MudTooltip Text="Aceitar">
-                        <MudIconButton Icon="@Icons.Material.Filled.Done"
-                                       Color="Color.Primary"
-                                       OnClick="() => OnAcceptClickedAsync(context.Item)" />
-                    </MudTooltip>
-                    <MudTooltip Text="Rejeitar">
-                        <MudIconButton Icon="@Icons.Material.Filled.Cancel"
-                                       Color="Color.Primary"
-                                       OnClick="() => OnRejectClickedAsync(context.Item)" />
-                    </MudTooltip>
-                }
+                <MudTooltip Text="Aceitar">
+                    <MudIconButton Icon="@Icons.Material.Filled.Done"
+                                   Color="Color.Primary"
+                                   OnClick="() => OnAcceptClickedAsync(context.Item)"
+                                   Disabled="@(context.Item.OfferStatus != EOfferStatus.Analysis)"/>
+                </MudTooltip>
+                <MudTooltip Text="Rejeitar">
+                    <MudIconButton Icon="@Icons.Material.Filled.Cancel"
+                                   Color="Color.Primary"
+                                   OnClick="() => OnRejectClickedAsync(context.Item)"
+                                   Disabled="@(context.Item.OfferStatus != EOfferStatus.Analysis)"/>
+                </MudTooltip>
             </CellTemplate>
         </TemplateColumn>
     </Columns>

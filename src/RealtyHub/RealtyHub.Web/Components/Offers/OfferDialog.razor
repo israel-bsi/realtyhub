@@ -2,7 +2,8 @@
     <DialogContent>
         <OfferForm PropertyId="@PropertyId"
                    OfferId="@OfferId"
-                   OnSubmitButtonClicked="OnSubmitButtonClickedAsync" />
+                   OnSubmitButtonClicked="OnSubmitButtonClickedAsync"
+                   ReadyOnly="@ReadyOnly" />
     </DialogContent>
     <DialogActions>
         <MudButton OnClick="CloseDialog" Color="Color.Primary">Fechar</MudButton>
@@ -22,8 +23,8 @@
     [Parameter]
     public long OfferId { get; set; }
 
-    [Parameter]
-    public string RowStyle { get; set; } = string.Empty;
+    [Parameter] 
+    public bool ReadyOnly { get; set; }
 
     public void CloseDialog() => MudDialog.Close();
 

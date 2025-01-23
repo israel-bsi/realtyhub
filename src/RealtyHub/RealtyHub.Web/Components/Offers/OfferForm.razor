@@ -1,6 +1,6 @@
 ﻿@inherits OfferFormComponent
 
-<PageTitle>Enviar propsota</PageTitle>
+<PageTitle>@Operation proposta</PageTitle>
 
 @if (IsBusy)
 {
@@ -22,7 +22,8 @@ else
                                   HelperText="Informe quando deseja pagar no imóvel"
                                   Format="C"
                                   @bind-Value="InputModel.Amount"
-                                  For="@(() => InputModel.Amount)" />
+                                  For="@(() => InputModel.Amount)" 
+                                  ReadOnly="ReadyOnly" />
                 </MudItem>
                 <MudItem lg="9" xs="12" sm="6">
                     <MudTextField Label="Pagamento"
@@ -31,7 +32,8 @@ else
                                   HelperText="Descreva detalhadamente como deseja realizar o pagamento"
                                   @bind-Value="InputModel.PaymentDetails"
                                   For="@(() => InputModel.PaymentDetails)"
-                                  AutoGrow="true" />
+                                  AutoGrow="true"
+                                  ReadOnly="ReadyOnly" />
                 </MudItem>
             </MudGrid>
 
@@ -44,7 +46,8 @@ else
                                   Variant="Variant.Text"
                                   HelperText="Informe seu nome"
                                   @bind-Value="InputModel.Customer.Name"
-                                  For="@(() => InputModel.Customer.Name)" />
+                                  For="@(() => InputModel.Customer.Name)"
+                                  ReadOnly="ReadyOnly" />
                 </MudItem>
                 <MudItem xs="12" sm="6">
                     <MudTextField Label="E-mail"
@@ -52,17 +55,21 @@ else
                                   Variant="Variant.Text"
                                   HelperText="Informe seu e-mail para contato"
                                   @bind-Value="InputModel.Customer.Email"
-                                  For="@(() => InputModel.Customer.Email)" />
+                                  For="@(() => InputModel.Customer.Email)"
+                                  ReadOnly="ReadyOnly" />
                 </MudItem>
             </MudGrid>
 
-            <MudButton ButtonType="ButtonType.Submit"
-                       Variant="Variant.Filled"
-                       Color="Color.Primary"
-                       Class="mt-5"
-                       StartIcon="@Icons.Material.Filled.Send">
-                Enviar proposta
-            </MudButton>
+            @if (ReadyOnly == false)
+            {
+                <MudButton ButtonType="ButtonType.Submit"
+                           Variant="Variant.Filled"
+                           Color="Color.Primary"
+                           Class="mt-5"
+                           StartIcon="@Icons.Material.Filled.Send">
+                    @Operation proposta
+                </MudButton>
+            }
         </EditForm>
     </MudPaper>
 }

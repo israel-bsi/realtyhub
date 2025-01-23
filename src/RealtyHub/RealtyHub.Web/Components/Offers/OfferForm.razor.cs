@@ -17,6 +17,9 @@ public partial class OfferFormComponent : ComponentBase
     [Parameter]
     public long OfferId { get; set; }
 
+    [Parameter] 
+    public bool ReadyOnly { get; set; }
+
     [Parameter]
     public EventCallback OnSubmitButtonClicked { get; set; }
 
@@ -26,6 +29,7 @@ public partial class OfferFormComponent : ComponentBase
 
     public bool IsBusy { get; set; }
     public Offer InputModel { get; set; } = new();
+    public string Operation => OfferId == 0 ? "Enviar" : "Editar";
 
     #endregion
 
@@ -52,17 +56,31 @@ public partial class OfferFormComponent : ComponentBase
         IsBusy = true;
         try
         {
-            var response = await OfferHandler.CreateAsync(InputModel);
-            if (response.IsSuccess)
+            string message;
+            if (OfferId == 0)
             {
-                Snackbar.Add("Proposta cadastrada com sucesso", Severity.Success);
-                await OnSubmitButtonClickedAsync();
-                NavigationManager.NavigateTo("/home");
+                var response = await OfferHandler.CreateAsync(InputModel);
+                if (response.IsSuccess)
+                {
+                    Snackbar.Add("Proposta cadastrada com sucesso", Severity.Success);
+                    await OnSubmitButtonClickedAsync();
+                    NavigationManager.NavigateTo("/home");
+                    return;
+                }
+                message = response.Message ?? string.Empty;
             }
             else
             {
-                Snackbar.Add(response.Message ?? string.Empty, Severity.Error);
+                var response = await OfferHandler.UpdateAsync(InputModel);
+                if (response.IsSuccess)
+                {
+                    Snackbar.Add("Proposta alterada com sucesso", Severity.Success);
+                    await OnSubmitButtonClickedAsync();
+                    return;
+                }
+                message = response.Message ?? string.Empty;
             }
+            Snackbar.Add(message, Severity.Error);
         }
         catch (Exception e)
         {

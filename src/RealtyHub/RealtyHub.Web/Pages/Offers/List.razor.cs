@@ -138,12 +138,11 @@ public partial class ListOffersPage : ComponentBase
 
         var parameters = new DialogParameters
         {
-            { "OfferId", offer.Id }
+            { "OfferId", offer.Id },
+            { "ReadyOnly", offer.OfferStatus != EOfferStatus.Analysis }
         };
 
-        await DialogService.ShowAsync<OfferDialogCreate>("Proposta", parameters, options);
-        //if (OnOfferSelected.HasDelegate)
-        //    await OnOfferSelected.InvokeAsync(offer);
+        await DialogService.ShowAsync<OfferDialog>("Visualizar proposta", parameters, options);
     }
 
     private bool IsOfferStatusInvalid(Offer viewing)
