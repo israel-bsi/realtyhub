@@ -7,13 +7,7 @@
 
 @if (IsBusy)
 {
-    <MudPaper Class="pa-8 mt-4">
-        <MudSkeleton Animation="Animation.Wave" Height="55px" />
-        <MudSkeleton Animation="Animation.Wave" Height="110px" />
-        <MudSkeleton Animation="Animation.Wave" Height="55px" />
-        <MudSkeleton Animation="Animation.Wave" Height="110px" />
-        <MudSkeleton Animation="Animation.Wave" Height="55px" />
-    </MudPaper>
+    <SkeletonWave />
 }
 else
 {
@@ -25,9 +19,9 @@ else
 
             <MudGrid>
                 <MudItem>
-                    <MudRadioGroup Class="flex-center" 
-                                   T="ECustomerType" 
-                                   Value="InputModel.CustomerType" 
+                    <MudRadioGroup Class="flex-center"
+                                   T="ECustomerType"
+                                   Value="InputModel.CustomerType"
                                    ValueChanged="OnCustomerTypeChanged">
                         <div style="display: flex;">
                             <div class="flex-center">

@@ -21,13 +21,15 @@ public static class AppExtension
         {
             if (individualQuantity > 0)
             {
-                var individualCustomers = CustomerFake.GetFakeIndividualCustomers(individualQuantity);
+                var individualCustomers = CustomerFake
+                    .GetFakeIndividualCustomers(individualQuantity);
                 await context.Customers.AddRangeAsync(individualCustomers);
             }
 
             if (bussinessQuantity > 0)
             {
-                var businessCustomers = CustomerFake.GetFakeBusinessCustomers(bussinessQuantity);
+                var businessCustomers = CustomerFake
+                    .GetFakeBusinessCustomers(bussinessQuantity);
                 await context.Customers.AddRangeAsync(businessCustomers);
 
             }
@@ -59,9 +61,10 @@ public static class AppExtension
     }
     public static void UseStaticFiles(this WebApplication app)
     {
+        var root = Path.Combine(Directory.GetCurrentDirectory(), "Sources", "Photos");
         app.UseStaticFiles(new StaticFileOptions
         {
-            FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Sources", "Photos")),
+            FileProvider = new PhysicalFileProvider(root),
             RequestPath = "/photos"
         });
     }

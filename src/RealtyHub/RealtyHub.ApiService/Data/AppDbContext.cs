@@ -24,6 +24,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) :
     public DbSet<Property> Properties { get; set; } = null!;
     public DbSet<Viewing> Viewing { get; set; } = null!;
     public DbSet<Offer> Offers { get; set; } = null!;
+    public DbSet<Payment> Payments { get; set; } = null!;
     public DbSet<Contract> Contracts { get; set; } = null!;
     public DbSet<PropertyPhoto> PropertyPhotos { get; set; } = null!;
     protected override void OnModelCreating(ModelBuilder builder)

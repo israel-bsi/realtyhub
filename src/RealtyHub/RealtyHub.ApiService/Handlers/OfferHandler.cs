@@ -23,19 +23,31 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                                           && p.IsActive);
 
             if (property is null)
-                return new Response<Offer?>(null, 404,
-                    "Imóvel não encontrado");
+                return new Response<Offer?>(null, 404, "Imóvel não encontrado");
 
             context.Attach(property);
         }
         catch (Exception ex)
         {
             return new Response<Offer?>(null, 500,
-                $"Falha ao obter imóvel\n{ex.Message}");
+               $"Falha ao obter imóvel\n{ex.Message}");
         }
 
         try
         {
+            var payments = request.Payments.Select(paymentRequest => new Payment
+            {
+                Amount = paymentRequest.Amount,
+                PaymentType = paymentRequest.PaymentType,
+                UserId = request.UserId,
+                IsActive = true
+            }).ToList();
+
+            var total = payments.Sum(p => p.Amount);
+            if (total < request.Amount)
+                return new Response<Offer?>(null, 400,
+                    "O valor total dos pagamentos não corresponde ao valor da proposta");
+
             request.Customer.IsActive = true;
             var offer = new Offer
             {
@@ -53,8 +65,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
             await context.Offers.AddAsync(offer);
             await context.SaveChangesAsync();
 
-            return new Response<Offer?>(offer, 201,
-                "Proposta criada com sucesso");
+            return new Response<Offer?>(offer, 201, "Proposta criada com sucesso");
         }
         catch (Exception ex)
         {
@@ -71,6 +82,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .Offers
                 .Include(o => o.Customer)
                 .Include(o => o.Property)
+                .Include(o => o.Payments)
                 .FirstOrDefaultAsync(o => o.Id == request.Id 
                                           && o.UserId == request.UserId);
 
@@ -82,6 +94,17 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 return new Response<Offer?>(null, 400,
                     "Não é possível atualizar uma proposta aceita ou rejeitada");
 
+            var total = request.Payments.Sum(p => p.Amount);
+            if (total < request.Amount)
+                return new Response<Offer?>(null, 400,
+                    "O valor total dos pagamentos não corresponde ao valor da proposta");
+
+            var payments = await context
+                .Payments
+                .Where(p => p.OfferId == request.Id
+                            && p.UserId == request.UserId)
+                .ToListAsync();
+
             offer.SubmissionDate = request.SubmissionDate;
             offer.Amount = request.Amount;
             offer.PropertyId = request.PropertyId;
@@ -89,6 +112,43 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
             offer.OfferStatus = request.OfferStatus;
             offer.PaymentDetails = request.PaymentDetails;
             offer.UpdatedAt = DateTime.UtcNow;
+            foreach (var payment in payments)
+            {
+                var updatePaymentRequest = request.Payments
+                    .FirstOrDefault(p => p.Id == payment.Id);
+
+                if (updatePaymentRequest is not null)
+                {
+                    payment.Amount = updatePaymentRequest.Amount;
+                    payment.PaymentType = updatePaymentRequest.PaymentType;
+                    payment.UpdatedAt = DateTime.UtcNow;
+                    payment.IsActive = true;
+                }
+                else
+                {
+                    payment.IsActive = false;
+                    payment.UpdatedAt = DateTime.UtcNow;
+                }
+            }
+
+            foreach (var payment in request.Payments)
+            {
+                var isExist = payments.Any(p => p.Id == payment.Id);
+                if (isExist) continue;
+
+                var newPayment = new Payment
+                {
+                    Amount = payment.Amount,
+                    PaymentType = payment.PaymentType,
+                    IsActive = true,
+                    OfferId = offer.Id,
+                    Offer = offer,
+                    UserId = request.UserId
+                };
+
+                context.Attach(newPayment);
+                offer.Payments.Add(newPayment);
+            }
 
             context.Offers.Update(offer);
             await context.SaveChangesAsync();
@@ -111,6 +171,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .Offers
                 .Include(o => o.Customer)
                 .Include(o => o.Property)
+                .Include(o => o.Payments)
                 .FirstOrDefaultAsync(o => o.Id == request.Id 
                                           && o.UserId == request.UserId);
 
@@ -152,6 +213,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .Offers
                 .Include(o => o.Customer)
                 .Include(o => o.Property)
+                .Include(o => o.Payments)
                 .FirstOrDefaultAsync(o => o.Id == request.Id 
                                           && o.UserId == request.UserId);
 
@@ -194,6 +256,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .AsNoTracking()
                 .Include(o => o.Customer)
                 .Include(o => o.Property)
+                .Include(o => o.Payments)
                 .FirstOrDefaultAsync(o => o.Id == request.Id 
                                           && o.UserId == request.UserId);
 
@@ -208,7 +271,8 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
         }
     }
 
-    public async Task<PagedResponse<List<Offer>?>> GetAllOffersByPropertyAsync(GetAllOffersByPropertyRequest request)
+    public async Task<PagedResponse<List<Offer>?>> GetAllOffersByPropertyAsync(
+        GetAllOffersByPropertyRequest request)
     {
         try
         {
@@ -228,6 +292,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .AsNoTracking()
                 .Include(o => o.Customer)
                 .Include(o => o.Property)
+                .Include(o => o.Payments)
                 .Where(o => o.PropertyId == request.PropertyId
                             && o.UserId == request.UserId);
 
@@ -258,7 +323,8 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
         }
     }
 
-    public async Task<PagedResponse<List<Offer>?>> GetAllOffersByCustomerAsync(GetAllOffersByCustomerRequest request)
+    public async Task<PagedResponse<List<Offer>?>> GetAllOffersByCustomerAsync(
+        GetAllOffersByCustomerRequest request)
     {
         try
         {
@@ -278,6 +344,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .AsNoTracking()
                 .Include(o => o.Customer)
                 .Include(o => o.Property)
+                .Include(o => o.Payments)
                 .Where(o => o.CustomerId == request.CustomerId
                             && o.UserId == request.UserId);
 
@@ -317,6 +384,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .AsNoTracking()
                 .Include(o => o.Customer)
                 .Include(o => o.Property)
+                .Include(o => o.Payments)
                 .Where(o => o.UserId == request.UserId);
 
             var offers = await query

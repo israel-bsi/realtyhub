@@ -18,8 +18,13 @@ public static class BuilderExtension
                 .Configuration
                 .GetConnectionString("DefaultConnection")
             ?? string.Empty;
-        Core.Configuration.BackendUrl = builder.Configuration.GetValue<string>("BackendUrl") ?? string.Empty;
-        Core.Configuration.FrontendUrl = builder.Configuration.GetValue<string>("FrontendUrl") ?? string.Empty;
+
+        Core.Configuration.BackendUrl = builder.Configuration
+            .GetValue<string>("BackendUrl") ?? string.Empty;
+
+        Core.Configuration.FrontendUrl = builder.Configuration
+            .GetValue<string>("FrontendUrl") ?? string.Empty;
+        
         Configuration.EmailSettings.EmailPassword =
             builder.Configuration.GetValue<string>("EmailPassword") ?? string.Empty;
     }
