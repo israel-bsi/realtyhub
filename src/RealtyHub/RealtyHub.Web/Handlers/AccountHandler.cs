@@ -28,7 +28,8 @@ public class AccountHandler(IHttpClientFactory httpClientFactory) : IAccountHand
             return new Response<string>(null, 400, "E-mail já cadastrado");
 
         if (!result.IsSuccessStatusCode)
-            return new Response<string>(null, (int)result.StatusCode, "Não foi possível realizar o cadastro");
+            return new Response<string>(null, (int)result.StatusCode, 
+                "Não foi possível realizar o cadastro");
 
         var data = await result.Content.ReadFromJsonAsync<Response<string>>();
 
@@ -58,7 +59,8 @@ public class AccountHandler(IHttpClientFactory httpClientFactory) : IAccountHand
             return new Response<string>(null, 404, "Usuário não encontrado");
 
         if (!result.IsSuccessStatusCode)
-            return new Response<string>(null, (int)result.StatusCode, "Não foi possível redefinir a senha");
+            return new Response<string>(null, (int)result.StatusCode, 
+                "Não foi possível redefinir a senha");
 
         var data = await result.Content.ReadFromJsonAsync<Response<string>>();
         return new Response<string>(null, 200, data?.Message);

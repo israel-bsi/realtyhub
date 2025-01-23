@@ -71,8 +71,7 @@ public class EmailService : IEmailService
     {
         return new MailMessage
         {
-            From = new MailAddress(Configuration.EmailSettings.EmailFrom,
-                "Realty Hub")
+            From = new MailAddress(Configuration.EmailSettings.EmailFrom, "Realty Hub")
         };
     }
 }

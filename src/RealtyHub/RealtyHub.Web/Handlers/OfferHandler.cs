@@ -63,9 +63,12 @@ public class OfferHandler(IHttpClientFactory httpClientFactory) : IOfferHandler
             : new Response<Offer?>(result.Data);
     }
 
-    public async Task<PagedResponse<List<Offer>?>> GetAllOffersByPropertyAsync(GetAllOffersByPropertyRequest request)
+    public async Task<PagedResponse<List<Offer>?>> GetAllOffersByPropertyAsync(
+        GetAllOffersByPropertyRequest request)
     {
-        var url = $"v1/offers/property/{request.PropertyId}?pageNumber={request.PageNumber}&pageSize={request.PageSize}";
+        var url = $"v1/offers/property/{request.PropertyId}" +
+                  $"?pageNumber={request.PageNumber}&pageSize={request.PageSize}";
+
         if (request.StartDate is not null & request.EndDate is not null)
             url = $"{url}&startDate={request.StartDate}&endDate={request.EndDate}";
 
@@ -78,9 +81,12 @@ public class OfferHandler(IHttpClientFactory httpClientFactory) : IOfferHandler
                ?? new PagedResponse<List<Offer>?>(null, 400, "Não foi possível obter as propostas");
     }
 
-    public async Task<PagedResponse<List<Offer>?>> GetAllOffersByCustomerAsync(GetAllOffersByCustomerRequest request)
+    public async Task<PagedResponse<List<Offer>?>> GetAllOffersByCustomerAsync(
+        GetAllOffersByCustomerRequest request)
     {
-        var url = $"v1/offers/customer/{request.CustomerId}?pageNumber={request.PageNumber}&pageSize={request.PageSize}";
+        var url = $"v1/offers/customer/{request.CustomerId}?" +
+                  $"pageNumber={request.PageNumber}&pageSize={request.PageSize}";
+
         if (request.StartDate is not null & request.EndDate is not null)
             url = $"{url}&startDate={request.StartDate}&endDate={request.EndDate}";
 

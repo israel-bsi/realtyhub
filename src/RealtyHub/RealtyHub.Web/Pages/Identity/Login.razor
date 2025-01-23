@@ -24,8 +24,7 @@
                               @bind-Value="@InputModel.Email"
                               Class="mb-4"
                               AdornmentIcon="@Icons.Material.Filled.Email"
-                              Adornment="Adornment.Start"
-                              UserAttributes="@(new() { { "autocomplete", "true" }, { "aria-required", "true" } } )" />
+                              Adornment="Adornment.Start" />
 
                 <MudTextField T="string"
                               Label="Senha"
@@ -34,8 +33,7 @@
                               @bind-Value="@InputModel.Password"
                               Class="mb-4"
                               AdornmentIcon="@Icons.Material.Filled.Password"
-                              Adornment="Adornment.Start"
-                              UserAttributes="@(new() { { "autocomplete", "current-password" }, { "aria-required", "true" } } )" />
+                              Adornment="Adornment.Start" />
 
                 <a href="/recuperar-senha" style="color: blue">Esqueci a senha</a>
 

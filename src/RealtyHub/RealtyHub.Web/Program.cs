@@ -29,7 +29,10 @@ builder.Services.AddMudTranslations();
 builder.Services.AddBlazoredLocalStorage();
 
 builder.Services
-    .AddHttpClient(Configuration.HttpClientName, opt => { opt.BaseAddress = new Uri(Configuration.BackendUrl); })
+    .AddHttpClient(Configuration.HttpClientName, opt =>
+    {
+        opt.BaseAddress = new Uri(Configuration.BackendUrl);
+    })
     .AddHttpMessageHandler<CookieHandler>();
 
 builder.Services.AddTransient<IAccountHandler, AccountHandler>();

@@ -16,7 +16,10 @@
             else
             {
                 <div class="flex-center">
-                    <MudIcon Icon="@(Success ? Icons.Material.Filled.CheckCircle : Icons.Material.Filled.Error)"></MudIcon>
+                    <MudIcon Icon="@(Success
+                                   ? Icons.Material.Filled.CheckCircle
+                                   : Icons.Material.Filled.Error)">
+                    </MudIcon>
                     <MudText Class="ml-2">@Status</MudText>
                 </div>
 
