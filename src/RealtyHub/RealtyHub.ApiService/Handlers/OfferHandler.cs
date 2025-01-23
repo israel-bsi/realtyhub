@@ -52,10 +52,10 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
             {
                 SubmissionDate = request.SubmissionDate,
                 Amount = request.Amount,
-                PaymentDetails = request.PaymentDetails,
                 OfferStatus = request.OfferStatus,
                 CustomerId = request.CustomerId,
                 Customer = request.Customer,
+                Payments = payments,
                 PropertyId = request.PropertyId,
                 Property = property,
                 UserId = request.UserId
@@ -108,7 +108,6 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
             offer.PropertyId = request.PropertyId;
             offer.CustomerId = request.CustomerId;
             offer.OfferStatus = request.OfferStatus;
-            offer.PaymentDetails = request.PaymentDetails;
             offer.UpdatedAt = DateTime.UtcNow;
             foreach (var payment in payments)
             {

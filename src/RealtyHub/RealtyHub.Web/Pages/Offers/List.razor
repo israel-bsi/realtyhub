@@ -1,5 +1,4 @@
 ﻿@page "/propostas"
-@using RealtyHub.Core.Extensions
 @using RealtyHub.Core.Models
 @inherits ListOffersPage
 
@@ -35,7 +34,7 @@
         </TemplateColumn>
         <TemplateColumn Title="Status">
             <CellTemplate>
-                @context.Item.OfferStatus.GetDisplayName()
+                <OfferStatus Status="@context.Item.OfferStatus" />
             </CellTemplate>
         </TemplateColumn>
         <TemplateColumn Class="justify-end" Title="Ações">
@@ -44,13 +43,13 @@
                     <MudIconButton Icon="@Icons.Material.Filled.Done"
                                    Color="Color.Primary"
                                    OnClick="() => OnAcceptClickedAsync(context.Item)"
-                                   Disabled="@(context.Item.OfferStatus != EOfferStatus.Analysis)"/>
+                                   Disabled="@(context.Item.OfferStatus != EOfferStatus.Analysis)" />
                 </MudTooltip>
                 <MudTooltip Text="Rejeitar">
                     <MudIconButton Icon="@Icons.Material.Filled.Cancel"
                                    Color="Color.Primary"
                                    OnClick="() => OnRejectClickedAsync(context.Item)"
-                                   Disabled="@(context.Item.OfferStatus != EOfferStatus.Analysis)"/>
+                                   Disabled="@(context.Item.OfferStatus != EOfferStatus.Analysis)" />
                 </MudTooltip>
             </CellTemplate>
         </TemplateColumn>

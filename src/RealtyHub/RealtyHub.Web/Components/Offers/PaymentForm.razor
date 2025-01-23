@@ -1,0 +1,49 @@
+﻿@using RealtyHub.Core.Models
+
+<EditForm Model="InputModel">
+    <ObjectGraphDataAnnotationsValidator />
+
+    <MudStack Row="true">
+        <EnumSelect TEnum="EPaymentType"
+                    Label="Tipo do pagamento"
+                    @bind-SelectedValue="InputModel.PaymentType"
+                    HelperText="Informe o tipo de pagamento"
+                    ReadOnly="ReadOnly" />
+
+        <MudTextField Label="Valor"
+                      T="decimal"
+                      Variant="Variant.Text"
+                      Format="C"
+                      @bind-Value="InputModel.Amount"
+                      For="@(() => InputModel.Amount)"
+                      HelperText="Valor deste pagamento" 
+                      ReadOnly="ReadOnly" />
+    </MudStack>
+</EditForm>
+
+@code
+{
+    [CascadingParameter]
+    public EditContext CurrentEditContext { get; set; } = null!;
+
+    [Parameter]
+    public EventCallback<List<Payment>> PaymentsChanged { get; set; }
+
+    [Parameter]
+    public long OfferId { get; set; }
+
+    [Parameter]
+    public Payment InputModel { get; set; } = null!;
+
+    [Parameter]
+    public List<Payment> Payments { get; set; } = null!;
+
+    [Parameter]
+    public bool ReadOnly { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnParametersSetAsync();
+        await base.OnInitializedAsync();
+    }
+}

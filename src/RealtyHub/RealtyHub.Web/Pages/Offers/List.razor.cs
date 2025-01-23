@@ -87,7 +87,8 @@ public partial class ListOffersPage : ComponentBase
         if (IsOfferStatusInvalid(offer)) return;
         var parameters = new DialogParameters
         {
-            { "ContentText", "Deseja aceitar a proposta?" },
+            { "ContentText", "Deseja aceitar a proposta?<br>" +
+                             "Após a alteração não será mais possível editar!" },
             { "ButtonColor", Color.Success }
         };
         var dialog = await DialogService.ShowAsync<DialogConfirm>("Confirmação", parameters);
@@ -109,7 +110,8 @@ public partial class ListOffersPage : ComponentBase
         if (IsOfferStatusInvalid(offer)) return;
         var parameters = new DialogParameters
         {
-            { "ContentText", "Deseja recusar a proposta?" },
+            { "ContentText", "Deseja recusar a proposta?<br>" +
+                             "Após a alteração não será mais possível editar!" },
             { "ButtonColor", Color.Error }
         };
         var dialog = await DialogService.ShowAsync<DialogConfirm>("Confirmação", parameters);
@@ -139,7 +141,8 @@ public partial class ListOffersPage : ComponentBase
         var parameters = new DialogParameters
         {
             { "OfferId", offer.Id },
-            { "ReadyOnly", offer.OfferStatus != EOfferStatus.Analysis }
+            { "ReadyOnly", offer.OfferStatus != EOfferStatus.Analysis },
+            { "ShowPayments", true }
         };
 
         await DialogService.ShowAsync<OfferDialog>("Visualizar proposta", parameters, options);

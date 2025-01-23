@@ -18,9 +18,6 @@ public class OfferMapping : IEntityTypeConfiguration<Offer>
         builder.Property(x => x.Amount)
             .IsRequired();
 
-        builder.Property(o=>o.PaymentDetails)
-            .IsRequired();
-
         builder.Property(x => x.OfferStatus)
             .IsRequired();
 

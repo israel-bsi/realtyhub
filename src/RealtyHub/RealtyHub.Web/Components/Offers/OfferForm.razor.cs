@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
+using RealtyHub.Core.Enums;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.Offers;
@@ -18,7 +19,10 @@ public partial class OfferFormComponent : ComponentBase
     public long OfferId { get; set; }
 
     [Parameter] 
-    public bool ReadyOnly { get; set; }
+    public bool ReadOnly { get; set; }
+
+    [Parameter] 
+    public bool ShowPayments { get; set; }
 
     [Parameter]
     public EventCallback OnSubmitButtonClicked { get; set; }
@@ -30,6 +34,7 @@ public partial class OfferFormComponent : ComponentBase
     public bool IsBusy { get; set; }
     public Offer InputModel { get; set; } = new();
     public string Operation => OfferId == 0 ? "Enviar" : "Editar";
+    public bool DisableAddPayment => InputModel.Payments.Count >= 5;
 
     #endregion
 
@@ -95,6 +100,17 @@ public partial class OfferFormComponent : ComponentBase
     {
         if (OnSubmitButtonClicked.HasDelegate)
             await OnSubmitButtonClicked.InvokeAsync();
+    }
+
+    public void AddPayment()
+    {
+        if (InputModel.Payments.Count < 5)
+        {
+            InputModel.Payments.Add(new Payment
+            {
+                PaymentType = EPaymentType.BankSlip
+            });
+        }
     }
 
     #endregion

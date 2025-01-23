@@ -28,7 +28,6 @@ public class GetAllPropertiesEndpoint : IEndpoint
     {
         var request = new GetAllPropertiesRequest
         {
-            UserId = user.Identity?.Name ?? string.Empty,
             PageNumber = pageNumber,
             PageSize = pageSize,
             SearchTerm = searchTerm

@@ -15,27 +15,49 @@ else
             <MudText Class="mt-5 mb-3" Typo="Typo.h6">Informações da proposta</MudText>
 
             <MudGrid>
-                <MudItem xs="6" sm="3">
-                    <MudTextField Label="Valor"
+                <MudItem xs="8" sm="4">
+                    <MudTextField Label="Valor total"
                                   T="decimal"
                                   Variant="Variant.Text"
                                   HelperText="Informe quando deseja pagar no imóvel"
                                   Format="C"
                                   @bind-Value="InputModel.Amount"
-                                  For="@(() => InputModel.Amount)" 
-                                  ReadOnly="ReadyOnly" />
-                </MudItem>
-                <MudItem lg="9" xs="12" sm="6">
-                    <MudTextField Label="Pagamento"
-                                  T="string"
-                                  Variant="Variant.Text"
-                                  HelperText="Descreva detalhadamente como deseja realizar o pagamento"
-                                  @bind-Value="InputModel.PaymentDetails"
-                                  For="@(() => InputModel.PaymentDetails)"
-                                  AutoGrow="true"
-                                  ReadOnly="ReadyOnly" />
+                                  For="@(() => InputModel.Amount)"
+                                  ReadOnly="ReadOnly" />
                 </MudItem>
             </MudGrid>
+            
+            @if (OfferId == 0 || ShowPayments)
+            {
+                <MudGrid Class="mt-1">
+                    <MudItem xs="12">
+                        <MudText Class="mb-2" Typo="Typo.h6">Informações de pagamento</MudText>
+                    </MudItem>
+                    @foreach (var payment in InputModel.Payments)
+                    {
+                        <MudItem xs="12" sm="6">
+                            <PaymentForm InputModel="payment" 
+                                         @bind-Payments="InputModel.Payments"
+                                         ReadOnly="ReadOnly" />
+                        </MudItem>
+                    }
+                </MudGrid>
+
+               @if (ReadOnly == false)
+                {
+                    <MudItem xs="12">
+                        <MudButton ButtonType="ButtonType.Button"
+                                   Variant="Variant.Outlined"
+                                   Color="Color.Primary"
+                                   Class="mt-5"
+                                   StartIcon="@Icons.Material.Filled.Add"
+                                   OnClick="AddPayment" 
+                                   Disabled="DisableAddPayment">
+                            Adicionar pagamento
+                        </MudButton>
+                    </MudItem>
+                }
+            }
 
             <MudText Class="mt-5" Typo="Typo.h6">Informações para contato</MudText>
 
@@ -47,7 +69,7 @@ else
                                   HelperText="Informe seu nome"
                                   @bind-Value="InputModel.Customer.Name"
                                   For="@(() => InputModel.Customer.Name)"
-                                  ReadOnly="ReadyOnly" />
+                                  ReadOnly="ReadOnly" />
                 </MudItem>
                 <MudItem xs="12" sm="6">
                     <MudTextField Label="E-mail"
@@ -56,11 +78,11 @@ else
                                   HelperText="Informe seu e-mail para contato"
                                   @bind-Value="InputModel.Customer.Email"
                                   For="@(() => InputModel.Customer.Email)"
-                                  ReadOnly="ReadyOnly" />
+                                  ReadOnly="ReadOnly" />
                 </MudItem>
             </MudGrid>
 
-            @if (ReadyOnly == false)
+            @if (ReadOnly == false)
             {
                 <MudButton ButtonType="ButtonType.Submit"
                            Variant="Variant.Filled"

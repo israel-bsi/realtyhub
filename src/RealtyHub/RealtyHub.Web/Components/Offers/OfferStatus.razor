@@ -1,0 +1,22 @@
+﻿@using RealtyHub.Core.Extensions
+
+@switch (Status)
+{
+    case EOfferStatus.Accepted:
+        <MudChip T="Enum" Color="Color.Success">@Status.GetDisplayName()</MudChip>
+        break;
+
+    case EOfferStatus.Rejected:
+        <MudChip T="Enum" Color="Color.Error">@Status.GetDisplayName()</MudChip>
+        break;
+
+    case EOfferStatus.Analysis:
+        <MudChip T="Enum" Color="Color.Primary">@Status.GetDisplayName()</MudChip>
+        break;
+}
+
+@code
+{
+    [Parameter, EditorRequired] 
+    public EOfferStatus Status { get; set; }
+}

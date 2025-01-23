@@ -3,7 +3,8 @@
         <OfferForm PropertyId="@PropertyId"
                    OfferId="@OfferId"
                    OnSubmitButtonClicked="OnSubmitButtonClickedAsync"
-                   ReadyOnly="@ReadyOnly" />
+                   ReadOnly="@ReadyOnly"
+                   ShowPayments="@ShowPayments" />
     </DialogContent>
     <DialogActions>
         <MudButton OnClick="CloseDialog" Color="Color.Primary">Fechar</MudButton>
@@ -25,6 +26,9 @@
 
     [Parameter] 
     public bool ReadyOnly { get; set; }
+
+    [Parameter]
+    public bool ShowPayments { get; set; }
 
     public void CloseDialog() => MudDialog.Close();
 

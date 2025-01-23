@@ -13,7 +13,7 @@ public partial class HomePage : ComponentBase
     public List<Property> Properties { get; set; } = [];
     public int TotalPages { get; set; }
     public int CurrentPage { get; set; } = 1;
-    public int PageSize { get; set; } = 6;
+    public int PageSize { get; set; } = 8;
     public bool IsBusy { get; set; }
 
     #endregion
