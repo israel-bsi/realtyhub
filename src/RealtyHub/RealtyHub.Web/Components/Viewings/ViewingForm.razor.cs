@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
@@ -41,6 +42,7 @@ public partial class ViewingFormComponent : ComponentBase
     public string Operation => Id != 0
         ? "Reagendar" : "Agendar";
     public Viewing InputModel { get; set; } = new();
+    [DataType(DataType.Time)]
     public TimeSpan? ViewingTime { get; set; } = DateTime.Now.TimeOfDay;
     public bool IsBusy { get; set; }
     public int EditFormKey { get; set; }
@@ -243,7 +245,14 @@ public partial class ViewingFormComponent : ComponentBase
         if (OnSubmitButtonClicked.HasDelegate)
             await OnSubmitButtonClicked.InvokeAsync();
     }
+    public IEnumerable<string> ValidateTime(string timeInput)
+    {
+        if (string.IsNullOrWhiteSpace(timeInput))
+            yield return "O campo Hora da Visita é obrigatório.";
 
+        if (!Utility.Validations.TimeRegex.IsMatch(timeInput))
+            yield return "Formato de hora inválido. Utilize o formato HH:mm.";
+    }
     #endregion
 
     #region Overrides
