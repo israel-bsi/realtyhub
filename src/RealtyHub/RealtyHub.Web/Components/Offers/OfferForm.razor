@@ -35,7 +35,7 @@ else
                     </MudItem>
                     @foreach (var payment in InputModel.Payments)
                     {
-                        <MudItem xs="12" sm="6">
+                        <MudItem lg="12" xs="16" sm="10">
                             <PaymentForm InputModel="payment" 
                                          @bind-Payments="InputModel.Payments"
                                          ReadOnly="ReadOnly" />
@@ -78,6 +78,16 @@ else
                                   HelperText="Informe seu e-mail para contato"
                                   @bind-Value="InputModel.Customer.Email"
                                   For="@(() => InputModel.Customer.Email)"
+                                  ReadOnly="ReadOnly" />
+                </MudItem>
+
+                <MudItem xs="12" sm="6">
+                    <MudTextField Label="Telefone"
+                                  T="string"
+                                  Variant="Variant.Text"
+                                  HelperText="Informe seu telefone para contato"
+                                  @bind-Value="InputModel.Customer.Phone"
+                                  For="@(() => InputModel.Customer.Phone)"
                                   ReadOnly="ReadOnly" />
                 </MudItem>
             </MudGrid>

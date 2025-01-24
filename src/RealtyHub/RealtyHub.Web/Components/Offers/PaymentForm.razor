@@ -16,8 +16,33 @@
                       Format="C"
                       @bind-Value="InputModel.Amount"
                       For="@(() => InputModel.Amount)"
-                      HelperText="Valor deste pagamento" 
+                      HelperText="Valor deste pagamento"
                       ReadOnly="ReadOnly" />
+        
+        @if (InputModel.Installments)
+        {
+            <MudSelect T="int" 
+                       Label="Parcelas"
+                       ReadOnly="ReadOnly" 
+                       @bind-Value="InputModel.InstallmentsCount" 
+                       For="@(() => InputModel.InstallmentsCount)">
+                @for (int i = 1; i <= 24; i++)
+                {
+                    var i1 = i;
+                    <MudSelectItem Value="@i">@($"{i1}x")</MudSelectItem>
+                }
+            </MudSelect>
+        }
+        
+        @if (InputModel.PaymentType != EPaymentType.Check
+             && InputModel.PaymentType != EPaymentType.Fgts)
+        {
+            <MudCheckBox Label="Parcelado"
+                         @bind-Value="InputModel.Installments"
+                         For="@(() => InputModel.Installments)"
+                         ReadOnly="ReadOnly">
+            </MudCheckBox>
+        }
     </MudStack>
 </EditForm>
 

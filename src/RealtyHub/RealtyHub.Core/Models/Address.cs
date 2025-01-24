@@ -18,5 +18,5 @@ public class Address
     public string Country { get; set; } = string.Empty;
     [Required(ErrorMessage = "Cep é um campo obrigatório")]
     public string ZipCode { get; set; } = string.Empty;
-    public string? Complement { get; set; }
+    public string Complement { get; set; } = string.Empty;
 }

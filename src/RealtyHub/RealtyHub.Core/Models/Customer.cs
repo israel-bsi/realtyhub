@@ -24,8 +24,8 @@ public class Customer : Entity
     public ECustomerType CustomerType { get; set; }
     [ValidateComplexType]
     public Address Address { get; set; } = new();
-    public string? Rg { get; set; }
-    public string? BusinessName { get; set; }
+    public string Rg { get; set; } = string.Empty;
+    public string BusinessName { get; set; } = string.Empty;
     public bool IsActive { get; set; }
     public string UserId { get; set; } = string.Empty;
 }
