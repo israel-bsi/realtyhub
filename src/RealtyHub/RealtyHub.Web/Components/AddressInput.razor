@@ -5,7 +5,8 @@
 
 <MudGrid>
     <MudItem lg="2" xs="12" sm="6">
-        <MudTextField Label="CEP"
+        <MudTextField T="string"
+                      Label="CEP"
                       @bind-Value="InputModel.ZipCode"
                       For="@(() => InputModel.ZipCode)"
                       Mask="@Utility.Masks.ZipCode"
@@ -14,14 +15,16 @@
     </MudItem>
 
     <MudItem lg="4" xs="12" sm="6">
-        <MudTextField Label="Logradouro"
+        <MudTextField T="string"
+                      Label="Logradouro"
                       @bind-Value="InputModel.Street"
                       For="@(() => InputModel.Street)"
                       InputType="InputType.Text" />
     </MudItem>
 
     <MudItem lg="2" xs="12" sm="6">
-        <MudTextField Label="Número"
+        <MudTextField T="string"
+                      Label="Número"
                       @bind-Value="InputModel.Number"
                       For="@(() => InputModel.Number)"
                       InputType="InputType.Text"
@@ -29,37 +32,42 @@
     </MudItem>
 
     <MudItem lg="4" xs="12" sm="6">
-        <MudTextField Label="Complemento"
+        <MudTextField T="string"
+                      Label="Complemento"
                       @bind-Value="InputModel.Complement"
-                      For="@(() => InputModel.Complement)" 
+                      For="@(() => InputModel.Complement)"
                       InputType="InputType.Text" />
     </MudItem>
 
     <MudItem lg="3" xs="12" sm="6">
-        <MudTextField Label="Bairro"
+        <MudTextField T="string"
+                      Label="Bairro"
                       @bind-Value="InputModel.Neighborhood"
-                      For="@(() => InputModel.Neighborhood)" 
+                      For="@(() => InputModel.Neighborhood)"
                       InputType="InputType.Text" />
     </MudItem>
 
     <MudItem lg="3" xs="12" sm="6">
-        <MudTextField Label="Cidade"
+        <MudTextField T="string"
+                      Label="Cidade"
                       @bind-Value="InputModel.City"
-                      For="@(() => InputModel.City)" 
+                      For="@(() => InputModel.City)"
                       InputType="InputType.Text" />
     </MudItem>
 
     <MudItem lg="3" xs="12" sm="6">
-        <MudTextField Label="Estado"
+        <MudTextField T="string"
+                      Label="Estado"
                       @bind-Value="InputModel.State"
-                      For="@(() => InputModel.State)" 
+                      For="@(() => InputModel.State)"
                       InputType="InputType.Text" />
     </MudItem>
 
     <MudItem lg="3" xs="12" sm="6">
-        <MudTextField Label="País"
+        <MudTextField T="string"
+                      Label="País"
                       @bind-Value="InputModel.Country"
-                      For="@(() => InputModel.Country)" 
+                      For="@(() => InputModel.Country)"
                       InputType="InputType.Text" />
     </MudItem>
 </MudGrid>
