@@ -18,10 +18,10 @@ public partial class OfferFormComponent : ComponentBase
     [Parameter]
     public long OfferId { get; set; }
 
-    [Parameter] 
+    [Parameter]
     public bool ReadOnly { get; set; }
 
-    [Parameter] 
+    [Parameter]
     public bool ShowPayments { get; set; }
 
     [Parameter]

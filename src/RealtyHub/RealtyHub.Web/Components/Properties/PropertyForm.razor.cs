@@ -7,6 +7,7 @@ using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.Properties;
 using RealtyHub.Core.Requests.PropertiesPhotos;
 using RealtyHub.Core.Responses;
+using RealtyHub.Web.Components.Common;
 
 namespace RealtyHub.Web.Components.Properties;
 

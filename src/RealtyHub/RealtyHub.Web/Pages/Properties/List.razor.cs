@@ -3,7 +3,7 @@ using MudBlazor;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.Properties;
-using RealtyHub.Web.Components;
+using RealtyHub.Web.Components.Common;
 using RealtyHub.Web.Components.Viewings;
 
 namespace RealtyHub.Web.Pages.Properties;

@@ -3,7 +3,7 @@ using MudBlazor;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.Customers;
-using RealtyHub.Web.Components;
+using RealtyHub.Web.Components.Common;
 
 namespace RealtyHub.Web.Pages.Customers;
 
@@ -11,9 +11,9 @@ public partial class ListCustomersPage : ComponentBase
 {
     #region Parameters
 
-    [Parameter] 
+    [Parameter]
     public EventCallback<Customer> OnCustomerSelected { get; set; }
-    
+
     [Parameter]
     public string RowStyle { get; set; } = string.Empty;
     #endregion
@@ -126,7 +126,7 @@ public partial class ListCustomersPage : ComponentBase
     }
     public async Task SelectCustomer(Customer customer)
     {
-        if (OnCustomerSelected.HasDelegate) 
+        if (OnCustomerSelected.HasDelegate)
             await OnCustomerSelected.InvokeAsync(customer);
     }
 

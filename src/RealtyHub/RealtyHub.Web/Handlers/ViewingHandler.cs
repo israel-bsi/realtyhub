@@ -25,7 +25,7 @@ public class ViewingHandler(IHttpClientFactory httpClientFactory) : IViewingHand
     public async Task<Response<Viewing?>> RescheduleAsync(Viewing request)
     {
         var result = await _httpClient.PutAsJsonAsync($"v1/viewings/{request.Id}/reschedule", request);
-        
+
         var response = await result.Content.ReadFromJsonAsync<Response<Viewing?>>();
 
         if (!result.IsSuccessStatusCode)

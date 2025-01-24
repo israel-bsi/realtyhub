@@ -67,7 +67,7 @@ public class PropertyHandler(IHttpClientFactory httpClientFactory) : IPropertyHa
     {
         var url = $"v1/properties/{request.PropertyId}/viewings?" +
                   $"pageNumber={request.PageNumber}&pageSize={request.PageSize}";
-        
+
         if (!string.IsNullOrEmpty(request.SearchTerm))
             url = $"{url}&searchTerm={request.SearchTerm}";
 

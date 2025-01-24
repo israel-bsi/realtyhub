@@ -5,7 +5,7 @@ using RealtyHub.Core.Extensions;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.Offers;
-using RealtyHub.Web.Components;
+using RealtyHub.Web.Components.Common;
 using RealtyHub.Web.Components.Offers;
 
 namespace RealtyHub.Web.Pages.Offers;

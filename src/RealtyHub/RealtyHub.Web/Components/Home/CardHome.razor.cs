@@ -19,7 +19,7 @@ public partial class CardHomeComponent : ComponentBase
 
     #region Services
 
-    [Inject] 
+    [Inject]
     public ISnackbar Snackbar { get; set; } = null!;
 
     [Inject]

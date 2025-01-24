@@ -1,5 +1,5 @@
 ﻿using MudBlazor;
-using RealtyHub.Web.Components;
+using RealtyHub.Web.Components.Common;
 
 namespace RealtyHub.Web.Services;
 

@@ -6,7 +6,7 @@ using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.Properties;
 using RealtyHub.Core.Requests.Viewings;
-using RealtyHub.Web.Components;
+using RealtyHub.Web.Components.Common;
 using RealtyHub.Web.Components.Viewings;
 
 namespace RealtyHub.Web.Pages.Viewings;
@@ -23,10 +23,10 @@ public partial class ListViewingsPage : ComponentBase
     #region Properties
 
     public MudDataGrid<Viewing> DataGrid { get; set; } = null!;
-    public DateRange DateRange { get; set; } = new(DateTime.Now.GetFirstDay(),DateTime.Now.GetLastDay());
+    public DateRange DateRange { get; set; } = new(DateTime.Now.GetFirstDay(), DateTime.Now.GetLastDay());
     public List<Viewing> Items { get; set; } = [];
     public Property? Property { get; set; }
-    public string HeaderTitle => Property is null ? 
+    public string HeaderTitle => Property is null ?
         "Todas as visitas" : $"Visitas do imóvel {Property.Title}";
 
     #endregion

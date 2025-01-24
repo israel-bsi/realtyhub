@@ -4,7 +4,7 @@ namespace RealtyHub.Web.Security;
 
 public class CookieHandler : DelegatingHandler
 {
-    protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, 
+    protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
         CancellationToken cancellationToken)
     {
         request.SetBrowserRequestCredentials(BrowserRequestCredentials.Include);

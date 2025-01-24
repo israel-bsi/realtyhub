@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
@@ -7,6 +6,7 @@ using RealtyHub.Core.Requests.Viewings;
 using RealtyHub.Core.Responses;
 using RealtyHub.Web.Components.Customers;
 using RealtyHub.Web.Components.Properties;
+using System.ComponentModel.DataAnnotations;
 
 namespace RealtyHub.Web.Components.Viewings;
 
@@ -17,19 +17,19 @@ public partial class ViewingFormComponent : ComponentBase
     [Parameter]
     public long Id { get; set; }
 
-    [Parameter] 
+    [Parameter]
     public Customer? Customer { get; set; }
 
     [Parameter]
     public Property? Property { get; set; }
 
-    [Parameter] 
+    [Parameter]
     public bool LockPropertySearch { get; set; }
 
     [Parameter]
     public bool LockCustomerSearch { get; set; }
 
-    [Parameter] 
+    [Parameter]
     public bool RedirectToPageList { get; set; } = true;
 
     [Parameter]
@@ -201,7 +201,7 @@ public partial class ViewingFormComponent : ComponentBase
             .ShowAsync<CustomerDialog>("Informe o Cliente", parameters, options);
         var result = await dialog.Result;
 
-        if (result is { Canceled: false, Data: Customer selectedCustomer }) 
+        if (result is { Canceled: false, Data: Customer selectedCustomer })
             SelectedCustomer(selectedCustomer);
     }
     private void SelectedCustomer(Customer customer)

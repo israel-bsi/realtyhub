@@ -76,7 +76,7 @@ public class CookieAuthenticationStateProvider(IHttpClientFactory clientFactory)
 
         foreach (var role in roles ?? [])
             if (!string.IsNullOrEmpty(role.Type) && !string.IsNullOrEmpty(role.Value))
-                claims.Add(new Claim(role.Type, role.Value, 
+                claims.Add(new Claim(role.Type, role.Value,
                     role.ValueType, role.Issuer, role.OriginalIssuer));
 
         return claims;

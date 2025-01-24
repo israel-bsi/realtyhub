@@ -8,7 +8,7 @@ public static class Configuration
     public static string BackendUrl { get; set; } = "http://localhost:5538";
     public static string SrcLogo { get; set; } = SrcLogos.WhiteLogo;
     public static string GivenName { get; set; } = string.Empty;
-    private const string PrincipalColor = "#B0C4DE";
+    
     public static readonly MudTheme Theme = new()
     {
         Typography = new Typography
@@ -20,27 +20,10 @@ public static class Configuration
         },
         PaletteLight = new PaletteLight
         {
-            //Primary = PrincipalColor, //Cor primária
-            //PrimaryContrastText = new MudColor("#000000"), //Cor do texto do elemento primário
-            //Secondary = Colors.LightBlue.Darken3, //Cor secundária
-            //Background = Colors.Grey.Lighten4, //Cor de fundo da página
-            //AppbarBackground = PrincipalColor, //Cor do appbar no topo da página
-            //AppbarText = Colors.Shades.Black, //Cor do texto do appbar
-            TextPrimary = Colors.Shades.Black, //Cor do texto primário
-            DrawerText = Colors.Shades.Black, //Cor do texto do drawer
-            //DrawerBackground = PrincipalColor
+            TextPrimary = Colors.Shades.Black,
+            DrawerText = Colors.Shades.Black
         },
-        PaletteDark = new PaletteDark
-        {
-            //Primary = Colors.LightBlue.Accent3,
-            //Secondary = Colors.LightBlue.Darken3,
-            //AppbarBackground = PrincipalColor,
-            //AppbarText = Colors.Shades.Black,
-            //PrimaryContrastText = new MudColor("#000000"),
-            //DrawerBackground = PrincipalColor,
-            //DrawerText = Colors.Shades.Black,
-            //TextPrimary = Colors.Shades.White
-        }
+        PaletteDark = new PaletteDark()
     };
 
     public static class SrcLogos
