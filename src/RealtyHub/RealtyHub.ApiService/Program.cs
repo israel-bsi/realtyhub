@@ -20,6 +20,10 @@ var app = builder.Build();
 
 app.ApplyMigrations();
 
+app.UseSwagger();
+app.UseSwaggerUI();
+app.MapSwagger().RequireAuthorization();
+
 if (app.Environment.IsDevelopment())
     app.ConfigureDevEnvironment();
 

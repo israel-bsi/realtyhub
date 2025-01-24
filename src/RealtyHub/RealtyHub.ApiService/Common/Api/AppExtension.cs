@@ -62,6 +62,9 @@ public static class AppExtension
     public static void UseStaticFiles(this WebApplication app)
     {
         var root = Path.Combine(Directory.GetCurrentDirectory(), "Sources", "Photos");
+        if (!Directory.Exists(root))
+            Directory.CreateDirectory(root);
+
         app.UseStaticFiles(new StaticFileOptions
         {
             FileProvider = new PhysicalFileProvider(root),
