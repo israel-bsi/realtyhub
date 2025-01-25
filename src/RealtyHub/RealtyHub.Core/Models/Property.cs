@@ -15,7 +15,7 @@ public class Property : Entity
     [Required(ErrorMessage = "Preço é um campo obrigatório")]
     public decimal Price { get; set; }
     [Required(ErrorMessage = "Tipo de propriedade é um campo obrigatório")]
-    public EPropertyType PropertyType { get; set; }
+    public EPropertyType PropertyType { get; set; } = EPropertyType.Apartment;
     [Required(ErrorMessage = "Quartos é um campo obrigatório")]
     public int Bedroom { get; set; }
     [Required(ErrorMessage = "Banheiros é um campo obrigatório")]

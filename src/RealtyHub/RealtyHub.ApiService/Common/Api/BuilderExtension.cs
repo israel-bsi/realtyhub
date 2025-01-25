@@ -27,6 +27,10 @@ public static class BuilderExtension
         
         Configuration.EmailSettings.EmailPassword =
             builder.Configuration.GetValue<string>("EmailPassword") ?? string.Empty;
+
+        var root = Path.Combine(Directory.GetCurrentDirectory(), "Sources", "Contracts");
+        if (!Directory.Exists(root))
+            Directory.CreateDirectory(root);
     }
     public static void AddDocumentation(this WebApplicationBuilder builder)
     {

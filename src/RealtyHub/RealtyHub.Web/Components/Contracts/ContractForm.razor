@@ -1,0 +1,64 @@
+﻿@inherits ContractFormComponent
+
+<PageTitle>@Operation Contrato</PageTitle>
+
+@if (IsBusy)
+{
+    <SkeletonWave />
+}
+else
+{
+    <MudPaper Class="pa-8" Elevation="4">
+        <EditForm Model="InputModel" OnValidSubmit="OnValidSubmitAsync" @key="EditFormKey">
+            <ObjectGraphDataAnnotationsValidator/>
+
+            <MudText Class="mt-5 mb-3" Typo="Typo.h6">Informações do contrato</MudText>
+
+            <MudDatePicker Class="mb-2"
+                           Label="Data de emissão"
+                           @bind-Date="@InputModel.IssueDate"
+                           For="@(() => InputModel.IssueDate)" />
+
+            <MudDatePicker Class="mb-2"
+                           Label="Data de vigência"
+                           @bind-Date="InputModel.EffectiveDate"
+                           For="@(() => InputModel.EffectiveDate)" />
+
+            <MudDatePicker Class="mb-2"
+                           Label="Data de término"
+                           @bind-Date="InputModel.TermEndDate"
+                           For="@(() => InputModel.TermEndDate)" />
+
+            <MudDatePicker Class="mb-2"
+                           Label="Data da assinatura"
+                           @bind-Date="InputModel.SignatureDate"
+                           For="@(() => InputModel.SignatureDate)" />
+
+            <MudTextField Class="mb-2"
+                          ReadOnly="true"
+                          Label="@(InputModel.Offer.Customer == null ? "Clique aqui para pesquisar o cliente" : "Cliente Selecionado")"
+                          AdornmentIcon="@Icons.Material.Filled.PersonSearch"
+                          @onclick="@OpenCustomerDialog"
+                          OnAdornmentClick="OpenCustomerDialog"
+                          Adornment="Adornment.End"
+                          Value="@InputModel.Offer.Customer?.Name" />
+
+            <MudTextField Class="mb-2"
+                          ReadOnly="true"
+                          Label="@(InputModel.Offer.Property == null ? "Clique aqui para pesquisar o imóvel" : "Imóvel Selecionado")"
+                          AdornmentIcon="@Icons.Material.Filled.Search"
+                          @onclick="@OpenPropertyDialog"
+                          OnAdornmentClick="OpenPropertyDialog"
+                          Adornment="Adornment.End"
+                          Value="@InputModel.Offer.Property?.Title" />
+
+            <MudButton ButtonType="ButtonType.Submit"
+                       Variant="Variant.Filled"
+                       Color="Color.Primary"
+                       Class="mt-6"
+                       StartIcon="@(ContractId == 0 ? Icons.Material.Filled.Send : Icons.Material.Filled.Save)">
+                @Operation
+            </MudButton>
+        </EditForm>
+    </MudPaper>
+}

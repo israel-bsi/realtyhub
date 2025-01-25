@@ -1,7 +1,6 @@
 ﻿using RealtyHub.ApiService.Common.Api;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
-using RealtyHub.Core.Requests.Contracts;
 using RealtyHub.Core.Responses;
 using System.Security.Claims;
 
@@ -20,7 +19,7 @@ public class CreateContractEndpoint : IEndpoint
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
         IContractHandler handler,
-        CreateContractRequest request)
+        Contract request)
     {
         request.UserId = user.Identity?.Name ?? string.Empty;
         var result = await handler.CreateAsync(request);

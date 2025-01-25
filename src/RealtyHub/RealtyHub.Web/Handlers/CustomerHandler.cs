@@ -44,11 +44,9 @@ public class CustomerHandler(IHttpClientFactory httpClientFactory) : ICustomerHa
         if (!response.IsSuccessStatusCode)
             return new Response<Customer?>(null, 400, "Não foi possível obter o cliente");
 
-        var customer = await response.Content.ReadFromJsonAsync<Response<Customer?>>();
+        var data = await response.Content.ReadFromJsonAsync<Response<Customer?>>();
 
-        return customer is null
-            ? new Response<Customer?>(null, 400, "Não foi possível obter o cliente")
-            : new Response<Customer?>(customer.Data);
+        return data ?? new Response<Customer?>(null, 400, "Não foi possível obter o cliente");
     }
 
     public async Task<PagedResponse<List<Customer>?>> GetAllAsync(GetAllCustomersRequest request)

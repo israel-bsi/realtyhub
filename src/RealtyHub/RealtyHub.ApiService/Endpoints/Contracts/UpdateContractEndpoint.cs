@@ -21,7 +21,7 @@ public class UpdateContractEndpoint : IEndpoint
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
         IContractHandler handler,
-        UpdateContractRequest request,
+        Contract request,
         long id)
     {
         request.Id = id;

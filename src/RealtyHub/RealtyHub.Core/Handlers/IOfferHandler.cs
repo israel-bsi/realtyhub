@@ -11,6 +11,7 @@ public interface IOfferHandler
     Task<Response<Offer?>> RejectAsync(RejectOfferRequest request);
     Task<Response<Offer?>> AcceptAsync(AcceptOfferRequest request);
     Task<Response<Offer?>> GetByIdAsync(GetOfferByIdRequest request);
+    Task<Response<Offer?>> GetAcceptedByProperty(GetOfferAcceptedByProperty request);
     Task<PagedResponse<List<Offer>?>> GetAllOffersByPropertyAsync(GetAllOffersByPropertyRequest request);
     Task<PagedResponse<List<Offer>?>> GetAllOffersByCustomerAsync(GetAllOffersByCustomerRequest request);
     Task<PagedResponse<List<Offer>?>> GetAllAsync(GetAllOffersRequest request);

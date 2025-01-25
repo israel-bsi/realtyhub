@@ -78,7 +78,8 @@ public static class Endpoint
             .MapEndpoint<GetOfferByIdEndpoint>()
             .MapEndpoint<GetAllOffersByPropertyEndpoint>()
             .MapEndpoint<GetAllOffersByCustomerEndpoint>()
-            .MapEndpoint<GetAllOffersEndpoint>();
+            .MapEndpoint<GetAllOffersEndpoint>()
+            .MapEndpoint<GetOfferAcceptedEndpoint>();
 
         endpoints.MapGroup("v1/offers")
             .WithTags("Offers")

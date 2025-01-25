@@ -63,6 +63,21 @@ public class OfferHandler(IHttpClientFactory httpClientFactory) : IOfferHandler
             : new Response<Offer?>(result.Data);
     }
 
+    public async Task<Response<Offer?>> GetAcceptedByProperty(GetOfferAcceptedByProperty request)
+    {
+        var url = $"v1/offers/property/{request.PropertyId}/accepted";
+        var response = await _httpClient.GetAsync(url);
+
+        if (!response.IsSuccessStatusCode)
+            return new Response<Offer?>(null, 400, "Não foi possível obter a proposta aceita");
+
+        var result = await response.Content.ReadFromJsonAsync<Response<Offer?>>();
+
+        return result is null
+            ? new Response<Offer?>(null, 400, "Não foi possível obter a proposta aceita")
+            : new Response<Offer?>(result.Data);
+    }
+
     public async Task<PagedResponse<List<Offer>?>> GetAllOffersByPropertyAsync(
         GetAllOffersByPropertyRequest request)
     {

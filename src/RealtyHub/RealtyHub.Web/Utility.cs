@@ -33,7 +33,10 @@ public static class Utility
             MaskChars = [new MaskChar('#', @"[0-9]")]
         };
 
-        public readonly DateMask Date = new("dd/MM/yyyy");
+        public readonly PatternMask Date = new("##/##/####")
+        {
+            MaskChars = [new MaskChar('#', @"[0-9]")]
+        };
 
         public readonly PatternMask Time = new("##:##")
         {

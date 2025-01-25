@@ -20,6 +20,7 @@ public class PropertyFake
             .RuleFor(p => p.TransactionsDetails, p => p.Commerce.ProductMaterial())
             .RuleFor(p => p.Address, AddressFake.GetFakeAddress)
             .RuleFor(p => p.IsNew, true)
+            .RuleFor(p => p.ShowInHome, true)
             .RuleFor(p => p.IsActive, true);
 
         return propertyFake.Generate(quantity);

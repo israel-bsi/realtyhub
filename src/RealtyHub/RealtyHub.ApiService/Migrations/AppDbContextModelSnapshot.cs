@@ -256,22 +256,25 @@ namespace RealtyHub.ApiService.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasDefaultValueSql("NOW()");
 
-                    b.Property<DateTime>("EffectiveDate")
+                    b.Property<DateTime?>("EffectiveDate")
+                        .IsRequired()
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("boolean");
 
-                    b.Property<DateTime>("IssueDate")
+                    b.Property<DateTime?>("IssueDate")
+                        .IsRequired()
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<long>("OfferId")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTime>("SignatureDate")
+                    b.Property<DateTime?>("SignatureDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("TermEndDate")
+                    b.Property<DateTime?>("TermEndDate")
+                        .IsRequired()
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("UpdatedAt")
@@ -285,9 +288,6 @@ namespace RealtyHub.ApiService.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OfferId")
-                        .IsUnique();
-
                     b.ToTable("Contract", (string)null);
                 });
 
@@ -300,6 +300,7 @@ namespace RealtyHub.ApiService.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<string>("BusinessName")
+                        .IsRequired()
                         .HasMaxLength(80)
                         .HasColumnType("character varying(80)");
 
@@ -337,6 +338,7 @@ namespace RealtyHub.ApiService.Migrations
                         .HasColumnType("character varying(30)");
 
                     b.Property<string>("Rg")
+                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("character varying(20)");
 
@@ -365,6 +367,9 @@ namespace RealtyHub.ApiService.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("numeric");
 
+                    b.Property<long>("ContractId")
+                        .HasColumnType("bigint");
+
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
@@ -379,7 +384,8 @@ namespace RealtyHub.ApiService.Migrations
                     b.Property<long>("PropertyId")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTime>("SubmissionDate")
+                    b.Property<DateTime?>("SubmissionDate")
+                        .IsRequired()
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("UpdatedAt")
@@ -392,6 +398,9 @@ namespace RealtyHub.ApiService.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ContractId")
+                        .IsUnique();
 
                     b.HasIndex("CustomerId");
 
@@ -643,17 +652,6 @@ namespace RealtyHub.ApiService.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("RealtyHub.Core.Models.Contract", b =>
-                {
-                    b.HasOne("RealtyHub.Core.Models.Offer", "Offer")
-                        .WithOne()
-                        .HasForeignKey("RealtyHub.Core.Models.Contract", "OfferId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Offer");
-                });
-
             modelBuilder.Entity("RealtyHub.Core.Models.Customer", b =>
                 {
                     b.OwnsOne("RealtyHub.Core.Models.Address", "Address", b1 =>
@@ -668,6 +666,7 @@ namespace RealtyHub.ApiService.Migrations
                                 .HasColumnName("City");
 
                             b1.Property<string>("Complement")
+                                .IsRequired()
                                 .HasMaxLength(80)
                                 .HasColumnType("character varying(80)")
                                 .HasColumnName("Complement");
@@ -721,6 +720,12 @@ namespace RealtyHub.ApiService.Migrations
 
             modelBuilder.Entity("RealtyHub.Core.Models.Offer", b =>
                 {
+                    b.HasOne("RealtyHub.Core.Models.Contract", "Contract")
+                        .WithOne("Offer")
+                        .HasForeignKey("RealtyHub.Core.Models.Offer", "ContractId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("RealtyHub.Core.Models.Customer", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId")
@@ -732,6 +737,8 @@ namespace RealtyHub.ApiService.Migrations
                         .HasForeignKey("PropertyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Contract");
 
                     b.Navigation("Customer");
 
@@ -763,6 +770,7 @@ namespace RealtyHub.ApiService.Migrations
                                 .HasColumnName("City");
 
                             b1.Property<string>("Complement")
+                                .IsRequired()
                                 .HasMaxLength(80)
                                 .HasColumnType("character varying(80)")
                                 .HasColumnName("Complement");
@@ -847,6 +855,12 @@ namespace RealtyHub.ApiService.Migrations
             modelBuilder.Entity("RealtyHub.ApiService.Models.User", b =>
                 {
                     b.Navigation("Roles");
+                });
+
+            modelBuilder.Entity("RealtyHub.Core.Models.Contract", b =>
+                {
+                    b.Navigation("Offer")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("RealtyHub.Core.Models.Offer", b =>

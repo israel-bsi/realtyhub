@@ -13,6 +13,28 @@ namespace RealtyHub.ApiService.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Contract",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    IssueDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    EffectiveDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    TermEndDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    SignatureDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    Content = table.Column<string>(type: "text", nullable: false),
+                    OfferId = table.Column<long>(type: "bigint", nullable: false),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false),
+                    UserId = table.Column<string>(type: "text", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()"),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Contract", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Customer",
                 columns: table => new
                 {
@@ -30,9 +52,9 @@ namespace RealtyHub.ApiService.Migrations
                     State = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: false),
                     Country = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: false),
                     ZipCode = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
-                    Complement = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: true),
-                    Rg = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: true),
-                    BusinessName = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: true),
+                    Complement = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: false),
+                    Rg = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
+                    BusinessName = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: false),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false, defaultValue: true),
                     UserId = table.Column<string>(type: "text", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()"),
@@ -108,9 +130,10 @@ namespace RealtyHub.ApiService.Migrations
                     State = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: false),
                     Country = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: false),
                     ZipCode = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
-                    Complement = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: true),
+                    Complement = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: false),
                     IsNew = table.Column<bool>(type: "boolean", nullable: false),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false),
+                    ShowInHome = table.Column<bool>(type: "boolean", nullable: false),
                     UserId = table.Column<string>(type: "text", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()"),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()")
@@ -226,11 +249,12 @@ namespace RealtyHub.ApiService.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Submission = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Amount = table.Column<decimal>(type: "numeric", nullable: false),
-                    OfferStatus = table.Column<int>(type: "integer", nullable: false),
                     PropertyId = table.Column<long>(type: "bigint", nullable: false),
                     CustomerId = table.Column<long>(type: "bigint", nullable: false),
+                    SubmissionDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    OfferStatus = table.Column<int>(type: "integer", nullable: false),
+                    ContractId = table.Column<long>(type: "bigint", nullable: false),
                     UserId = table.Column<string>(type: "text", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()"),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()")
@@ -238,6 +262,12 @@ namespace RealtyHub.ApiService.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Offer", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Offer_Contract_ContractId",
+                        column: x => x.ContractId,
+                        principalTable: "Contract",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Offer_Customer_CustomerId",
                         column: x => x.CustomerId,
@@ -308,43 +338,15 @@ namespace RealtyHub.ApiService.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Contract",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    IssueDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    SignatureDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    EffectiveDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    TermEndDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Content = table.Column<string>(type: "text", nullable: false),
-                    OfferId = table.Column<long>(type: "bigint", nullable: false),
-                    IsActive = table.Column<bool>(type: "boolean", nullable: false),
-                    UserId = table.Column<string>(type: "text", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()"),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Contract", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Contract_Offer_OfferId",
-                        column: x => x.OfferId,
-                        principalTable: "Offer",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Payment",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    PaymentDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Amount = table.Column<decimal>(type: "numeric", nullable: false),
                     PaymentType = table.Column<int>(type: "integer", nullable: false),
-                    PaymentStatus = table.Column<int>(type: "integer", nullable: false),
+                    Installments = table.Column<bool>(type: "boolean", nullable: false),
+                    InstallmentsCount = table.Column<int>(type: "integer", nullable: false),
                     OfferId = table.Column<long>(type: "bigint", nullable: false),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false, defaultValue: true),
                     UserId = table.Column<string>(type: "text", nullable: false),
@@ -361,12 +363,6 @@ namespace RealtyHub.ApiService.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Contract_OfferId",
-                table: "Contract",
-                column: "OfferId",
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_IdentityClaim_UserId",
@@ -400,6 +396,12 @@ namespace RealtyHub.ApiService.Migrations
                 name: "IX_IdentityUserLogin_UserId",
                 table: "IdentityUserLogin",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Offer_ContractId",
+                table: "Offer",
+                column: "ContractId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Offer_CustomerId",
@@ -436,9 +438,6 @@ namespace RealtyHub.ApiService.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Contract");
-
-            migrationBuilder.DropTable(
                 name: "IdentityClaim");
 
             migrationBuilder.DropTable(
@@ -470,6 +469,9 @@ namespace RealtyHub.ApiService.Migrations
 
             migrationBuilder.DropTable(
                 name: "Offer");
+
+            migrationBuilder.DropTable(
+                name: "Contract");
 
             migrationBuilder.DropTable(
                 name: "Customer");

@@ -261,6 +261,29 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
         }
     }
 
+    public async Task<Response<Offer?>> GetAcceptedByProperty(GetOfferAcceptedByProperty request)
+    {
+        try
+        {
+            var offer = await context
+                .Offers
+                .AsNoTracking()
+                .Include(o => o.Customer)
+                .Include(o => o.Property)
+                .Include(o => o.Payments)
+                .FirstOrDefaultAsync(o => o.PropertyId == request.PropertyId
+                                          && o.UserId == request.UserId
+                                          && o.OfferStatus == EOfferStatus.Accepted);
+            return offer is null
+                ? new Response<Offer?>(null, 404, "Proposta aceita não encontrada")
+                : new Response<Offer?>(offer);
+        }
+        catch
+        {
+            return new Response<Offer?>(null, 500, "Não foi possível buscar a proposta aceita");
+        }
+    }
+
     public async Task<PagedResponse<List<Offer>?>> GetAllOffersByPropertyAsync(
         GetAllOffersByPropertyRequest request)
     {

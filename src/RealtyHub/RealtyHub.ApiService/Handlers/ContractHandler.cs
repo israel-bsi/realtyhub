@@ -10,7 +10,7 @@ namespace RealtyHub.ApiService.Handlers;
 
 public class ContractHandler(AppDbContext context) : IContractHandler
 {
-    public async Task<Response<Contract?>> CreateAsync(CreateContractRequest request)
+    public async Task<Response<Contract?>> CreateAsync(Contract request)
     {
         try
         {
@@ -36,7 +36,7 @@ public class ContractHandler(AppDbContext context) : IContractHandler
                 SignatureDate = request.SignatureDate,
                 EffectiveDate = request.EffectiveDate,
                 TermEndDate = request.TermEndDate,
-                Content = $"Contrato do cliente {offer.Customer.Name}\n" +
+                Content = $"Contrato do cliente {offer.Customer!.Name}\n" +
                                     $"Documento: {offer.Customer.DocumentNumber}\n" +
                                     $"Tipo Cliente: {offer.Customer.CustomerType}\n" +
                                     $"Telefone: {offer.Customer.Phone}\n" +
@@ -46,7 +46,7 @@ public class ContractHandler(AppDbContext context) : IContractHandler
                                     $"Data de assinatura: {request.SignatureDate}\n" +
                                     $"Data de vigência: {request.EffectiveDate}\n" +
                                     $"Data de término: {request.TermEndDate}\n" +
-                                    $"Imovel: {offer.Property.Title}\n" +
+                                    $"Imovel: {offer.Property!.Title}\n" +
                                     $"Endereço: {offer.Property.Address.Neighborhood}\n",
                 Offer = offer,
                 OfferId = request.OfferId,
@@ -65,7 +65,7 @@ public class ContractHandler(AppDbContext context) : IContractHandler
         }
     }
 
-    public async Task<Response<Contract?>> UpdateAsync(UpdateContractRequest request)
+    public async Task<Response<Contract?>> UpdateAsync(Contract request)
     {
         try
         {

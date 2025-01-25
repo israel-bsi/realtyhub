@@ -25,8 +25,8 @@
     </ToolBarContent>
     <Columns>
         <PropertyColumn Property="v=>v.SubmissionDate" Title="Data"></PropertyColumn>
-        <PropertyColumn Property="v=>v.Customer.Name" Title="Cliente"></PropertyColumn>
-        <PropertyColumn Property="v=>v.Property.Title" Title="Imóvel"></PropertyColumn>
+        <PropertyColumn Property="v=>v.Customer!.Name" Title="Cliente"></PropertyColumn>
+        <PropertyColumn Property="v=>v.Property!.Title" Title="Imóvel"></PropertyColumn>
         <TemplateColumn Title="Valor">
             <CellTemplate>
                 @context.Item.Amount.ToString("C")
@@ -51,6 +51,15 @@
                                    OnClick="() => OnRejectClickedAsync(context.Item)"
                                    Disabled="@(context.Item.OfferStatus != EOfferStatus.Analysis)" />
                 </MudTooltip>
+                @if (context.Item.OfferStatus == EOfferStatus.Accepted)
+                {
+                    <MudTooltip Text="Emitir contrato">
+                        <MudIconButton Icon="fa-solid fa-file-contract"
+                                       Color="Color.Primary"
+                                       OnClick="() => OnIssueContractClickedAsync(context.Item)" />
+                    </MudTooltip>
+                }
+                
             </CellTemplate>
         </TemplateColumn>
     </Columns>

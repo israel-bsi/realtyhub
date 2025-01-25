@@ -6,6 +6,7 @@ namespace RealtyHub.Core.Models;
 public class Offer : Entity
 {
     public long Id { get; set; }
+
     [Required(ErrorMessage = "O valor da proposta é obrigatório")]
     public decimal Amount { get; set; }
     [Required(ErrorMessage = "O imóvel é obrigatório")]
@@ -13,9 +14,9 @@ public class Offer : Entity
     [Required(ErrorMessage = "O cliente é obrigatório")]
     public long CustomerId { get; set; }
     public List<Payment> Payments { get; set; } = [];
-    public DateTime SubmissionDate { get; set; } = DateTime.UtcNow;
+    public DateTime? SubmissionDate { get; set; } = DateTime.UtcNow;
     public EOfferStatus OfferStatus { get; set; } = EOfferStatus.Analysis;
-    public Customer Customer { get; set; } = new();
-    public Property Property { get; set; } = new();
+    public Customer? Customer { get; set; } = new();
+    public Property? Property { get; set; } = new();
     public string UserId { get; set; } = string.Empty;
 }
