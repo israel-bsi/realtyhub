@@ -17,29 +17,37 @@ else
 
             <MudText Class="mb-6" Typo="Typo.h6">Dados Pessoais</MudText>
 
-            <MudGrid>
-                <MudItem>
-                    <MudRadioGroup Class="flex-center"
-                                   T="ECustomerType"
-                                   Value="InputModel.CustomerType"
-                                   ValueChanged="OnCustomerTypeChanged">
-                        <div style="display: flex;">
-                            <div class="flex-center">
-                                <MudIcon Icon="@Icons.Material.Filled.Person"></MudIcon>
-                                <MudRadio Value="ECustomerType.Individual">
-                                    @(ECustomerType.Individual.GetDisplayName())
-                                </MudRadio>
-                            </div>
-                            <div class="flex-center">
-                                <MudIcon Icon="@Icons.Material.Filled.Business"></MudIcon>
-                                <MudRadio Value="ECustomerType.Business">
-                                    @(ECustomerType.Business.GetDisplayName())
-                                </MudRadio>
-                            </div>
-                        </div>
-                    </MudRadioGroup>
-                </MudItem>
-            </MudGrid>
+            <MudStack Row="true" Spacing="2">
+                <MudRadioGroup T="ECustomerType"
+                               @bind-Value="InputModel.CustomerType"
+                               Class="flex-center">
+                    <MudStack Row="true" Spacing="1">
+                        <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="1">
+                            <MudIcon Icon="@Icons.Material.Filled.Person"></MudIcon>
+                            <MudRadio Value="ECustomerType.Individual">
+                                @(ECustomerType.Individual.GetDisplayName())
+                            </MudRadio>
+                        </MudStack>
+                        <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="1">
+                            <MudIcon Icon="@Icons.Material.Filled.Business"></MudIcon>
+                            <MudRadio Value="ECustomerType.Business">
+                                @(ECustomerType.Business.GetDisplayName())
+                            </MudRadio>
+                        </MudStack>
+                    </MudStack>
+                </MudRadioGroup>
+
+                @if (InputModel.CustomerType == ECustomerType.Individual)
+                {
+                    <MudItem xs="6" sm="3">
+                        <EnumSelect TEnum="EMaritalStatus"
+                                    Label="Estado Civil"
+                                    @bind-SelectedValue="InputModel.MaritalStatus"
+                                    Class="ml-4">
+                        </EnumSelect>
+                    </MudItem>
+                }
+            </MudStack>
 
             <MudGrid Class="mt-2">
                 <MudItem lg="2" xs="12" sm="6">
@@ -64,26 +72,39 @@ else
                                   For="@(() => InputModel.Name)"
                                   InputType="InputType.Text" />
                 </MudItem>
-
-                <MudItem lg="3" xs="12" sm="6">
-                    @if (InputModel.CustomerType == ECustomerType.Individual)
-                    {
+                
+                @if (InputModel.CustomerType == ECustomerType.Individual)
+                {
+                    <MudItem lg="3" xs="12" sm="6">
                         <MudTextField T="string"
                                       Label="Rg"
                                       @bind-Value="InputModel.Rg"
                                       For="@(() => InputModel.Rg)"
                                       MaxLength="20"
                                       InputType="InputType.Text" />
-                    }
-                    else
-                    {
+
+                        
+                    </MudItem>
+
+                    <MudItem lg="3" xs="12" sm="6">
+                        <MudTextField T="string"
+                                      Label="Nacionalidade"
+                                      @bind-Value="InputModel.Nationality"
+                                      For="@(() => InputModel.Nationality)"
+                                      MaxLength="80"
+                                      InputType="InputType.Text" />
+                    </MudItem>
+                }
+                else
+                {
+                    <MudItem lg="3" xs="12" sm="6">
                         <MudTextField T="string"
                                       Label="Nome Fantasia"
                                       @bind-Value="InputModel.BusinessName"
                                       For="@(() => InputModel.BusinessName)"
                                       InputType="InputType.Text" />
-                    }
-                </MudItem>
+                    </MudItem>
+                }
 
                 <MudItem lg="3" xs="12" sm="6">
                     <MudTextField T="string"

@@ -175,6 +175,7 @@ public partial class CustomerFormComponent : ComponentBase
     private void RedirectToCreateCustomer()
     {
         InputModel.CustomerType = ECustomerType.Individual;
+        InputModel.MaritalStatus = EMaritalStatus.Single;
         NavigationManager.NavigateTo("/clientes/adicionar");
     }
     private void ExecuteValidations()

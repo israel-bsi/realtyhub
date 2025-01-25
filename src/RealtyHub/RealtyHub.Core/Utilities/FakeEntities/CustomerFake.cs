@@ -31,6 +31,9 @@ public class CustomerFake
             .RuleFor(c => c.CustomerType, ECustomerType.Individual)
             .RuleFor(c => c.Address, AddressFake.GetFakeAddress)
             .RuleFor(c => c.Rg, c => c.Person.Cpf(false))
+            .RuleFor(c=>c.MaritalStatus, c=>c.Random.Enum<EMaritalStatus>())
+            .RuleFor(c=>c.Occupation, c=>c.Company.CompanyName())
+            .RuleFor(c=>c.Nationality, c=>c.Address.Country())
             .RuleFor(c => c.IsActive, true);
 
         return individualCustomerFake.Generate(quantity);
