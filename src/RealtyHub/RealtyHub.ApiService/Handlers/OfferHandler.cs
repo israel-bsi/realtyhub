@@ -47,7 +47,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 return new Response<Offer?>(null, 400,
                     "O valor total dos pagamentos não corresponde ao valor da proposta");
 
-            request.Customer.IsActive = true;
+            request.Customer!.IsActive = true;
             var offer = new Offer
             {
                 SubmissionDate = request.SubmissionDate,
@@ -81,6 +81,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .Include(o => o.Customer)
                 .Include(o => o.Property)
                 .Include(o => o.Payments)
+                .Include(o => o.Contract)
                 .FirstOrDefaultAsync(o => o.Id == request.Id 
                                           && o.UserId == request.UserId);
 
@@ -167,6 +168,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .Include(o => o.Customer)
                 .Include(o => o.Property)
                 .Include(o => o.Payments)
+                .Include(o => o.Contract)
                 .FirstOrDefaultAsync(o => o.Id == request.Id 
                                           && o.UserId == request.UserId);
 
@@ -207,6 +209,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .Include(o => o.Customer)
                 .Include(o => o.Property)
                 .Include(o => o.Payments)
+                .Include(o => o.Contract)
                 .FirstOrDefaultAsync(o => o.Id == request.Id 
                                           && o.UserId == request.UserId);
 
@@ -248,6 +251,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .Include(o => o.Customer)
                 .Include(o => o.Property)
                 .Include(o => o.Payments)
+                .Include(o => o.Contract)
                 .FirstOrDefaultAsync(o => o.Id == request.Id 
                                           && o.UserId == request.UserId);
 
@@ -270,6 +274,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .AsNoTracking()
                 .Include(o => o.Customer)
                 .Include(o => o.Property)
+                .Include(o => o.Contract)
                 .Include(o => o.Payments)
                 .FirstOrDefaultAsync(o => o.PropertyId == request.PropertyId
                                           && o.UserId == request.UserId
@@ -306,6 +311,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .Include(o => o.Customer)
                 .Include(o => o.Property)
                 .Include(o => o.Payments)
+                .Include(o => o.Contract)
                 .Where(o => o.PropertyId == request.PropertyId
                             && o.UserId == request.UserId);
 
@@ -357,6 +363,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .Include(o => o.Customer)
                 .Include(o => o.Property)
                 .Include(o => o.Payments)
+                .Include(o => o.Contract)
                 .Where(o => o.CustomerId == request.CustomerId
                             && o.UserId == request.UserId);
 
@@ -396,6 +403,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .Include(o => o.Customer)
                 .Include(o => o.Property)
                 .Include(o => o.Payments)
+                .Include(o=>o.Contract)
                 .Where(o => o.UserId == request.UserId);
 
             var offers = await query

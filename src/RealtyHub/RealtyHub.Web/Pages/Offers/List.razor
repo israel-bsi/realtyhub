@@ -51,7 +51,7 @@
                                    OnClick="() => OnRejectClickedAsync(context.Item)"
                                    Disabled="@(context.Item.OfferStatus != EOfferStatus.Analysis)" />
                 </MudTooltip>
-                @if (context.Item.OfferStatus == EOfferStatus.Accepted)
+                @if (context.Item.OfferStatus == EOfferStatus.Accepted && context.Item.Contract is null)
                 {
                     <MudTooltip Text="Emitir contrato">
                         <MudIconButton Icon="fa-solid fa-file-contract"
@@ -59,7 +59,14 @@
                                        OnClick="() => OnIssueContractClickedAsync(context.Item)" />
                     </MudTooltip>
                 }
-                
+                @if (context.Item.Contract is not null)
+                {
+                    <MudTooltip Text="Baixar contrato">
+                        <MudIconButton Icon="@Icons.Material.Filled.Download"
+                                       Color="Color.Primary"
+                                       OnClick="() => DownloadContract()" />
+                    </MudTooltip>
+                }
             </CellTemplate>
         </TemplateColumn>
     </Columns>

@@ -168,6 +168,11 @@ public partial class ListOffersPage : ComponentBase
         await DialogService.ShowAsync<ContractDialog>("Emitir contrato", parameters, options);
     }
 
+    public async Task DownloadContract()
+    {
+        Snackbar.Add("Contrato gerado com sucesso", Severity.Success);
+    }
+
     private bool IsOfferStatusInvalid(Offer viewing)
     {
         switch (viewing.OfferStatus)

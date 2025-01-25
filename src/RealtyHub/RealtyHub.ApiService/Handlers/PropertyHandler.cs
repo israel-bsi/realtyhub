@@ -116,10 +116,10 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
                 .Include(p => p.PropertyPhotos.Where(photo=>photo.IsActive))
                 .Where(p=>p.Id == request.Id && p.IsActive);
 
-                if (!string.IsNullOrEmpty(request.UserId))
+            if (!string.IsNullOrEmpty(request.UserId))
                 query = query.Where(p => p.UserId == request.UserId);
 
-                var property = await query.FirstOrDefaultAsync();
+            var property = await query.FirstOrDefaultAsync();
 
             return property is null
                 ? new Response<Property?>(null, 404, "Imóvel não encontrado")

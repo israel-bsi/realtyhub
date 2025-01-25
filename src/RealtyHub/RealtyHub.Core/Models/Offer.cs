@@ -1,5 +1,6 @@
 ﻿using RealtyHub.Core.Enums;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace RealtyHub.Core.Models;
 
@@ -18,5 +19,6 @@ public class Offer : Entity
     public EOfferStatus OfferStatus { get; set; } = EOfferStatus.Analysis;
     public Customer? Customer { get; set; } = new();
     public Property? Property { get; set; } = new();
+    public Contract? Contract { get; set; }
     public string UserId { get; set; } = string.Empty;
 }

@@ -45,5 +45,9 @@ public class OfferMapping : IEntityTypeConfiguration<Offer>
         builder.HasOne(x => x.Customer)
             .WithMany()
             .HasForeignKey(x => x.CustomerId);
+
+        builder.HasOne(x => x.Contract)
+            .WithOne(x => x.Offer)
+            .HasForeignKey<Contract>(x => x.OfferId);
     }
 }
