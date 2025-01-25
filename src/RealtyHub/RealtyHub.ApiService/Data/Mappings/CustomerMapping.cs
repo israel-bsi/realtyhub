@@ -34,6 +34,17 @@ public class CustomerMapping : IEntityTypeConfiguration<Customer>
         builder.Property(c => c.Rg)
             .HasMaxLength(20);
 
+        builder.Property(c => c.Nationality)
+            .HasMaxLength(80)
+            .IsRequired();
+
+        builder.Property(c => c.MaritalStatus)
+            .IsRequired();
+
+        builder.Property(c => c.Occupation)
+            .HasMaxLength(80)
+            .IsRequired();
+
         builder.Property(c => c.BusinessName)
             .HasMaxLength(80);
 

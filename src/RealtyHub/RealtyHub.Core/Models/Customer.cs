@@ -26,6 +26,9 @@ public class Customer : Entity
     public Address Address { get; set; } = new();
     public string Rg { get; set; } = string.Empty;
     public string BusinessName { get; set; } = string.Empty;
+    public string Nationality { get; set; } = string.Empty;
+    public EMaritalStatus MaritalStatus { get; set; }
+    public string Occupation { get; set; } = string.Empty;
     public bool IsActive { get; set; }
     public string UserId { get; set; } = string.Empty;
 }

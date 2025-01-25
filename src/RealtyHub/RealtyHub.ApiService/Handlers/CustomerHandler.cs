@@ -28,6 +28,9 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
                 Email = request.Email,
                 Phone = request.Phone,
                 DocumentNumber = request.DocumentNumber,
+                Nationality = request.Nationality,
+                MaritalStatus = request.MaritalStatus,
+                Occupation = request.Occupation,
                 CustomerType = request.CustomerType,
                 Address = request.Address,
                 Rg = request.Rg,
@@ -61,6 +64,9 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
             customer.Email = request.Email;
             customer.Phone = request.Phone;
             customer.DocumentNumber = request.DocumentNumber;
+            customer.Nationality = request.Nationality;
+            customer.MaritalStatus = request.MaritalStatus;
+            customer.Occupation = request.Occupation;
             customer.CustomerType = request.CustomerType;
             customer.Address = request.Address;
             customer.Rg = request.Rg;
