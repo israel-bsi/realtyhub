@@ -42,6 +42,7 @@ builder.Services.AddTransient<IPropertyPhotosHandler, PropertyPhotosHandler>();
 builder.Services.AddTransient<IViewingHandler, ViewingHandler>();
 builder.Services.AddTransient<IOfferHandler, OfferHandler>();
 builder.Services.AddTransient<IContractHandler, ContractHandler>();
+builder.Services.AddTransient<IContractContentHandler, ContractContentHandler>();
 builder.Services.AddTransient<IViaCepService, ViaCepService>();
 builder.Services.AddTransient<ShowDialogConfirm>();
 builder.Services.AddTransient<DocumentValidator>();
