@@ -121,6 +121,7 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
             var query = context
                 .Properties
                 .AsNoTracking()
+                .Include(p=>p.Seller)
                 .Include(p => p.PropertyPhotos.Where(photo=>photo.IsActive))
                 .Where(p=>p.Id == request.Id && p.IsActive);
 
@@ -146,7 +147,8 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
             var query = context
                 .Properties
                 .AsNoTracking()
-                .Include(p => p.PropertyPhotos)
+                .Include(p => p.Seller)
+                .Include(p => p.PropertyPhotos.Where(photos=> photos.IsActive))
                 .Where(p => p.IsActive);
 
             if (!string.IsNullOrEmpty(request.UserId))
@@ -191,7 +193,7 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
                 .Viewing
                 .AsNoTracking()
                 .Include(v => v.Buyer)
-                .Include(v => v.Buyer)
+                .Include(v => v.Property)
                 .Where(v => v.PropertyId == request.PropertyId
                             && v.UserId == request.UserId);
 

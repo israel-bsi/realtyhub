@@ -141,6 +141,8 @@ public partial class OfferFormComponent : ComponentBase
                 {
                     InputModel.Property = response.Data;
                     InputModel.PropertyId = response.Data.Id;
+                    InputModel.Buyer = new Customer();
+                    InputModel.BuyerId = 0;
                     return;
                 }
 

@@ -88,6 +88,7 @@ else
                                   HelperText="Informe seu telefone para contato"
                                   @bind-Value="InputModel.Buyer!.Phone"
                                   For="@(() => InputModel.Buyer!.Phone)"
+                                  Mask="@Utility.Masks.Phone"
                                   ReadOnly="ReadOnly" />
                 </MudItem>
             </MudGrid>
