@@ -18,7 +18,7 @@ public class ContractHandler(AppDbContext context) : IContractHandler
                 .Offers
                 .Include(o => o.Buyer)
                 .Include(o => o.Property)
-                .ThenInclude(o=>o.Seller)
+                .ThenInclude(o=>o!.Seller)
                 .FirstOrDefaultAsync(o => o.Id == request.OfferId
                                           && o.UserId == request.UserId);
 
@@ -37,7 +37,7 @@ public class ContractHandler(AppDbContext context) : IContractHandler
                 SignatureDate = request.SignatureDate,
                 EffectiveDate = request.EffectiveDate,
                 TermEndDate = request.TermEndDate,
-                Content = $"Contrato do cliente {offer.Buyer.Name}\n" +
+                Content = $"Contrato do cliente {offer.Buyer!.Name}\n" +
                                     $"Documento: {offer.Buyer.DocumentNumber}\n" +
                                     $"Tipo Cliente: {offer.Buyer.PersonType}\n" +
                                     $"Telefone: {offer.Buyer.Phone}\n" +
@@ -47,10 +47,10 @@ public class ContractHandler(AppDbContext context) : IContractHandler
                                     $"Data de assinatura: {request.SignatureDate}\n" +
                                     $"Data de vigência: {request.EffectiveDate}\n" +
                                     $"Data de término: {request.TermEndDate}\n" +
-                                    $"Imovel: {offer.Property.Title}\n" +
+                                    $"Imovel: {offer.Property!.Title}\n" +
                                     $"Endereço: {offer.Property.Address.Neighborhood}\n",
                 Buyer = offer.Buyer,
-                BuyerId = offer.Buyer.Id,
+                BuyerId = offer.Buyer!.Id,
                 SellerId = offer.Property.SellerId,
                 Seller = offer.Property.Seller,
                 Offer = offer,
@@ -90,7 +90,7 @@ public class ContractHandler(AppDbContext context) : IContractHandler
             var offer = await context
                 .Offers
                 .Include(offer => offer.Property)
-                .ThenInclude(property => property.Seller)
+                .ThenInclude(property => property!.Seller)
                 .FirstOrDefaultAsync(o => o.Id == request.OfferId 
                                           && o.UserId == request.UserId);
 
@@ -103,7 +103,7 @@ public class ContractHandler(AppDbContext context) : IContractHandler
             contract.TermEndDate = request.TermEndDate;
             contract.Buyer = request.Buyer;
             contract.BuyerId = request.BuyerId;
-            contract.SellerId = offer.Property.SellerId;
+            contract.SellerId = offer.Property!.SellerId;
             contract.Seller = offer.Property.Seller;
             contract.Offer = offer;
             contract.OfferId = request.OfferId;
@@ -155,7 +155,7 @@ public class ContractHandler(AppDbContext context) : IContractHandler
                 .Include(c => c.Offer)
                 .ThenInclude(o => o.Buyer)
                 .Include(c => c.Offer.Property)
-                .ThenInclude(p => p.Seller)
+                .ThenInclude(p => p!.Seller)
                 .FirstOrDefaultAsync(c => c.Id == request.Id 
                                           && c.UserId == request.UserId
                                           && c.IsActive);
@@ -180,7 +180,7 @@ public class ContractHandler(AppDbContext context) : IContractHandler
                 .Include(c => c.Offer)
                 .ThenInclude(o => o.Buyer)
                 .Include(c => c.Offer.Property)
-                .ThenInclude(p => p.Seller)
+                .ThenInclude(p => p!.Seller)
                 .Where(c => c.UserId == request.UserId && c.IsActive);
 
             var contracts = await query

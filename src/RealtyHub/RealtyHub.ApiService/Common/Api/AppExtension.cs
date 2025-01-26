@@ -57,14 +57,24 @@ public static class AppExtension
     }
     public static void UseStaticFiles(this WebApplication app)
     {
-        var root = Path.Combine(Directory.GetCurrentDirectory(), "Sources", "Photos");
-        if (!Directory.Exists(root))
-            Directory.CreateDirectory(root);
+        var pathPhotos = Path.Combine(Directory.GetCurrentDirectory(), "Sources", "Photos");
+        if (!Directory.Exists(pathPhotos))
+            Directory.CreateDirectory(pathPhotos);
 
         app.UseStaticFiles(new StaticFileOptions
         {
-            FileProvider = new PhysicalFileProvider(root),
+            FileProvider = new PhysicalFileProvider(pathPhotos),
             RequestPath = "/photos"
+        });
+
+        var pathContracts = Path.Combine(Directory.GetCurrentDirectory(), "Sources", "Contracts");
+        if (!Directory.Exists(pathContracts))
+            Directory.CreateDirectory(pathContracts);
+
+        app.UseStaticFiles(new StaticFileOptions
+        {
+            FileProvider = new PhysicalFileProvider(pathContracts),
+            RequestPath = "/contracts"
         });
     }
     public static void ApplyMigrations(this WebApplication app)

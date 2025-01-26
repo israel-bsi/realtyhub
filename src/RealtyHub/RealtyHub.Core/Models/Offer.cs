@@ -17,7 +17,7 @@ public class Offer : Entity
     public DateTime? SubmissionDate { get; set; } = DateTime.UtcNow;
     public EOfferStatus OfferStatus { get; set; } = EOfferStatus.Analysis;
     public string UserId { get; set; } = string.Empty;
-    public Customer Buyer { get; set; } = null!;
-    public Property Property { get; set; } = null!;
+    public Customer? Buyer { get; set; }
+    public Property? Property { get; set; }
     public Contract? Contract { get; set; }
 }

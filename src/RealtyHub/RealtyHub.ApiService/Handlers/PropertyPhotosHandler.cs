@@ -165,7 +165,7 @@ public class PropertyPhotosHandler(AppDbContext context) : IPropertyPhotosHandle
 
             propertyPhoto.IsActive = false;
             propertyPhoto.IsThumbnail = false;
-            propertyPhoto.UpdatedAt = DateTime.UtcNow;
+            propertyPhoto.UpdatedAt = DateTime.UtcNow; 
 
             await context.SaveChangesAsync();
 

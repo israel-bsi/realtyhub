@@ -31,6 +31,7 @@
 
   <ItemGroup>
     <Folder Include="Sources\Photos\" />
+    <Folder Include="Sources\Contracts\" />
   </ItemGroup>
 
 </Project>

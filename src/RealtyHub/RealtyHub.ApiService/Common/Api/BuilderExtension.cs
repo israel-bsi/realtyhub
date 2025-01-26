@@ -27,10 +27,6 @@ public static class BuilderExtension
         
         Configuration.EmailSettings.EmailPassword =
             builder.Configuration.GetValue<string>("EmailPassword") ?? string.Empty;
-
-        var root = Path.Combine(Directory.GetCurrentDirectory(), "Sources", "Contracts");
-        if (!Directory.Exists(root))
-            Directory.CreateDirectory(root);
     }
     public static void AddDocumentation(this WebApplicationBuilder builder)
     {
@@ -103,5 +99,6 @@ public static class BuilderExtension
         builder.Services.AddTransient<IContractHandler, ContractHandler>();
         builder.Services.AddTransient<IEmailService, EmailService>();
         builder.Services.AddTransient<IPropertyPhotosHandler, PropertyPhotosHandler>();
+        builder.Services.AddTransient<IContractContentHandler, ContractContentHandler>();
     }
 }
