@@ -31,6 +31,7 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
                 Nationality = request.Nationality,
                 MaritalStatus = request.MaritalStatus,
                 Occupation = request.Occupation,
+                PersonType = request.PersonType,
                 CustomerType = request.CustomerType,
                 Address = request.Address,
                 Rg = request.Rg,
@@ -67,6 +68,7 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
             customer.Nationality = request.Nationality;
             customer.MaritalStatus = request.MaritalStatus;
             customer.Occupation = request.Occupation;
+            customer.PersonType = request.PersonType;
             customer.CustomerType = request.CustomerType;
             customer.Address = request.Address;
             customer.Rg = request.Rg;
@@ -117,6 +119,7 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
         {
             var customer = await context
                 .Customers
+                .Include(c=>c.Properties)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(c => c.Id == request.Id
                                           && (c.UserId == request.UserId || string.IsNullOrEmpty(c.UserId))
@@ -138,6 +141,7 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
         {
             var query = context
                 .Customers
+                .Include(c => c.Properties)
                 .AsNoTracking()
                 .Where(c => (c.UserId == request.UserId || string.IsNullOrEmpty(c.UserId))
                             && c.IsActive);

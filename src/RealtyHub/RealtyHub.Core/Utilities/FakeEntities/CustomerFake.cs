@@ -14,7 +14,8 @@ public class CustomerFake
             .RuleFor(c => c.Email, c => c.Person.Email)
             .RuleFor(c => c.Phone, c => c.Phone.PhoneNumber("###########"))
             .RuleFor(c => c.DocumentNumber, c => c.Company.Cnpj(false))
-            .RuleFor(c => c.CustomerType, ECustomerType.Business)
+            .RuleFor(c => c.PersonType, EPersonType.Business)
+            .RuleFor(c => c.CustomerType, ECustomerType.Buyer | ECustomerType.Seller)
             .RuleFor(c => c.Address, AddressFake.GetFakeAddress)
             .RuleFor(c => c.BusinessName, c => c.Company.CompanyName())
             .RuleFor(c => c.IsActive, true);
@@ -28,7 +29,8 @@ public class CustomerFake
             .RuleFor(c => c.Email, c => c.Person.Email)
             .RuleFor(c => c.Phone, c => c.Phone.PhoneNumber("###########"))
             .RuleFor(c => c.DocumentNumber, c => c.Person.Cpf(false))
-            .RuleFor(c => c.CustomerType, ECustomerType.Individual)
+            .RuleFor(c => c.PersonType, EPersonType.Individual)
+            .RuleFor(c => c.CustomerType, ECustomerType.Seller)
             .RuleFor(c => c.Address, AddressFake.GetFakeAddress)
             .RuleFor(c => c.Rg, c => c.Person.Cpf(false))
             .RuleFor(c=>c.MaritalStatus, c=>c.Random.Enum<EMaritalStatus>())
@@ -38,5 +40,4 @@ public class CustomerFake
 
         return individualCustomerFake.Generate(quantity);
     }
-
 }

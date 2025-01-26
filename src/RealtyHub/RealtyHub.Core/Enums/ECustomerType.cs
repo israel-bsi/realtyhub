@@ -2,10 +2,11 @@
 
 namespace RealtyHub.Core.Enums;
 
+[Flags]
 public enum ECustomerType
 {
-    [Display(Name = "Pessoa Física")]
-    Individual = 1,
-    [Display(Name = "Pessoa Jurídica")]
-    Business = 2
+    [Display(Name = "Vendedor")]
+    Seller = 1,
+    [Display(Name = "Comprador")]
+    Buyer = 2
 }

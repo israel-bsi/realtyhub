@@ -135,8 +135,8 @@ public partial class ContractFormComponent : ComponentBase
     }
     private void SelectedCustomer(Customer customer)
     {
-        InputModel.Offer.Customer = customer;
-        InputModel.Offer.CustomerId = customer.Id;
+        InputModel.Offer.Buyer = customer;
+        InputModel.Offer.BuyerId = customer.Id;
         EditFormKey++;
         StateHasChanged();
     }

@@ -110,17 +110,17 @@ public partial class ViewingFormComponent : ComponentBase
 
     private bool IsFormInvalid()
     {
-        if (InputModel.Customer is null && InputModel.Property is null)
+        if (InputModel.Buyer is null && InputModel.Buyer is null)
         {
             Snackbar.Add("Informe o cliente e o imóvel", Severity.Error);
             return true;
         }
-        if (InputModel.Customer is null)
+        if (InputModel.Buyer is null)
         {
             Snackbar.Add("Informe o cliente", Severity.Error);
             return true;
         }
-        if (InputModel.Property is null)
+        if (InputModel.Buyer is null)
         {
             Snackbar.Add("Informe o imóvel", Severity.Error);
             return true;
@@ -148,10 +148,10 @@ public partial class ViewingFormComponent : ComponentBase
             InputModel.Id = response.Data.Id;
             InputModel.ViewingDate = response.Data.ViewingDate;
             InputModel.ViewingStatus = response.Data.ViewingStatus;
-            InputModel.CustomerId = response.Data.CustomerId;
+            InputModel.BuyerId = response.Data.BuyerId;
             InputModel.PropertyId = response.Data.PropertyId;
-            InputModel.Property = response.Data.Property;
-            InputModel.Customer = response.Data.Customer;
+            InputModel.Buyer = response.Data.Buyer;
+            InputModel.Buyer = response.Data.Buyer;
             InputModel.UserId = response.Data.UserId;
             ViewingTime = InputModel.ViewingDate!.Value.TimeOfDay;
         }
@@ -206,8 +206,8 @@ public partial class ViewingFormComponent : ComponentBase
     }
     private void SelectedCustomer(Customer customer)
     {
-        InputModel.Customer = customer;
-        InputModel.CustomerId = customer.Id;
+        InputModel.Buyer = customer;
+        InputModel.BuyerId = customer.Id;
         EditFormKey++;
         StateHasChanged();
     }
@@ -266,8 +266,8 @@ public partial class ViewingFormComponent : ComponentBase
                 await LoadViewingAsync();
             else
             {
-                InputModel.Customer = Customer;
-                InputModel.CustomerId = Customer?.Id ?? 0;
+                InputModel.Buyer = Customer;
+                InputModel.BuyerId = Customer?.Id ?? 0;
                 InputModel.Property = Property;
                 InputModel.PropertyId = Property?.Id ?? 0;
             }

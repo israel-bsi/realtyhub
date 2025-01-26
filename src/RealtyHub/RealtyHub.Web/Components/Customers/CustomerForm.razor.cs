@@ -29,7 +29,7 @@ public partial class CustomerFormComponent : ComponentBase
     public Customer InputModel { get; set; } = new();
     public PatternMask DocumentCustomerMask { get; set; } = null!;
     public string DocumentType =>
-        InputModel.CustomerType == ECustomerType.Individual ? "CPF" : "CNPJ";
+        InputModel.PersonType == EPersonType.Individual ? "CPF" : "CNPJ";
     public string Pattern = @"\D";
     public string? ErrorText { get; set; }
     public bool Error => !string.IsNullOrEmpty(ErrorText);
@@ -94,7 +94,7 @@ public partial class CustomerFormComponent : ComponentBase
     {
         if (string.IsNullOrEmpty(InputModel.DocumentNumber)) return;
         MessageStore?.Clear();
-        if (InputModel.CustomerType is ECustomerType.Individual)
+        if (InputModel.PersonType is EPersonType.Individual)
         {
             ErrorText =
                 !DocumentValidator.IsValidCpf(InputModel.DocumentNumber)
@@ -112,18 +112,18 @@ public partial class CustomerFormComponent : ComponentBase
         MessageStore?.Add(() => InputModel.DocumentNumber, ErrorText);
         EditContext.NotifyValidationStateChanged();
     }
-    public void OnCustomerTypeChanged(ECustomerType newCustomerType)
+    public void OnCustomerTypeChanged(EPersonType newPersonType)
     {
-        InputModel.CustomerType = newCustomerType;
-        ChangeDocumentMask(newCustomerType);
+        InputModel.PersonType = newPersonType;
+        ChangeDocumentMask(newPersonType);
         ValidateDocument();
     }
-    private void ChangeDocumentMask(ECustomerType customerType)
+    private void ChangeDocumentMask(EPersonType personType)
     {
-        DocumentCustomerMask = customerType switch
+        DocumentCustomerMask = personType switch
         {
-            ECustomerType.Individual => Utility.Masks.Cpf,
-            ECustomerType.Business => Utility.Masks.Cnpj,
+            EPersonType.Individual => Utility.Masks.Cpf,
+            EPersonType.Business => Utility.Masks.Cnpj,
             _ => DocumentCustomerMask
         };
         StateHasChanged();
@@ -151,7 +151,7 @@ public partial class CustomerFormComponent : ComponentBase
             InputModel.Email = response.Data.Email;
             InputModel.Phone = response.Data.Phone;
             InputModel.DocumentNumber = response.Data.DocumentNumber;
-            InputModel.CustomerType = response.Data.CustomerType;
+            InputModel.PersonType = response.Data.PersonType;
             InputModel.Address.ZipCode = response.Data.Address.ZipCode;
             InputModel.Address.Street = response.Data.Address.Street;
             InputModel.Address.Number = response.Data.Address.Number;
@@ -174,7 +174,7 @@ public partial class CustomerFormComponent : ComponentBase
     }
     private void RedirectToCreateCustomer()
     {
-        InputModel.CustomerType = ECustomerType.Individual;
+        InputModel.PersonType = EPersonType.Individual;
         InputModel.MaritalStatus = EMaritalStatus.Single;
         NavigationManager.NavigateTo("/clientes/adicionar");
     }
@@ -182,7 +182,7 @@ public partial class CustomerFormComponent : ComponentBase
     {
         EditContext = new EditContext(InputModel);
         MessageStore = new ValidationMessageStore(EditContext);
-        ChangeDocumentMask(InputModel.CustomerType);
+        ChangeDocumentMask(InputModel.PersonType);
     }
 
     #endregion

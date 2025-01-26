@@ -12,10 +12,10 @@ public class Viewing : Entity
     [Required(ErrorMessage = "Status da visita é um campo obrigatório")]
     public EViewingStatus ViewingStatus { get; set; } = EViewingStatus.Scheduled;
     [Required(ErrorMessage = "Cliente é um campo obrigatório")]
-    public long CustomerId { get; set; }
+    public long BuyerId { get; set; }
     [Required(ErrorMessage = "Propriedade é um campo obrigatório")]
     public long PropertyId { get; set; }
-    public Property? Property { get; set; }
-    public Customer? Customer { get; set; }
     public string UserId { get; set; } = string.Empty;
+    public Property? Property { get; set; }
+    public Customer? Buyer { get; set; }
 }

@@ -15,8 +15,8 @@ public class Payment : Entity
     [Range(1, 24)] 
     public int InstallmentsCount { get; set; } = 1;
     public long OfferId { get; set; }
-    [JsonIgnore]
-    public Offer Offer { get; set; } = new();
     public bool IsActive { get; set; }
     public string UserId { get; set; } = string.Empty;
+    [JsonIgnore] 
+    public Offer Offer { get; set; } = null!;
 }

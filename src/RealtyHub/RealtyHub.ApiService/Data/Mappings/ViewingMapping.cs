@@ -18,17 +18,11 @@ public class ViewingMapping : IEntityTypeConfiguration<Viewing>
         builder.Property(v => v.ViewingStatus)
             .IsRequired();
 
-        builder.Property(v => v.CustomerId)
-            .IsRequired();
-
-        builder.Property(v => v.PropertyId)
-            .IsRequired();
-
-        builder.HasOne(v => v.Customer)
+        builder.HasOne(v => v.Buyer)
             .WithMany()
-            .HasForeignKey(v => v.CustomerId);
+            .HasForeignKey(v => v.BuyerId);
 
-        builder.HasOne(v => v.Property)
+        builder.HasOne(v => v.Buyer)
             .WithMany()
             .HasForeignKey(v => v.PropertyId);
 

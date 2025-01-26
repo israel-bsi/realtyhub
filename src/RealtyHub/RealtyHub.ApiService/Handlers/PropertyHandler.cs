@@ -28,6 +28,8 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
                 TransactionsDetails = request.TransactionsDetails,
                 UserId = request.UserId,
                 ShowInHome = request.ShowInHome,
+                Seller = request.Seller,
+                SellerId = request.SellerId,
                 IsActive = true
             };
 
@@ -67,6 +69,8 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
             property.TransactionsDetails = request.TransactionsDetails;
             property.UserId = request.UserId;
             property.ShowInHome = request.ShowInHome;
+            property.Seller = request.Seller;
+            property.SellerId = request.SellerId;
             property.UpdatedAt = DateTime.UtcNow;
 
             context.Properties.Update(property);
@@ -182,8 +186,8 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
             var query = context
                 .Viewing
                 .AsNoTracking()
-                .Include(v => v.Customer)
-                .Include(v => v.Property)
+                .Include(v => v.Buyer)
+                .Include(v => v.Buyer)
                 .Where(v => v.PropertyId == request.PropertyId
                             && v.UserId == request.UserId);
 

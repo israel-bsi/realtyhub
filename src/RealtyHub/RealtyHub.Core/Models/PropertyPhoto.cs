@@ -11,7 +11,7 @@ public class PropertyPhoto : Entity
     public bool IsActive { get; set; }
     public string UserId { get; set; } = string.Empty;
     [JsonIgnore]
-    public Property Property { get; set; } = new();
+    public Property Property { get; set; } = null!;
 
     public override string ToString()
     {

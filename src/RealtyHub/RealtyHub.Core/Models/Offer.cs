@@ -1,6 +1,5 @@
 ﻿using RealtyHub.Core.Enums;
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
 
 namespace RealtyHub.Core.Models;
 
@@ -13,12 +12,12 @@ public class Offer : Entity
     [Required(ErrorMessage = "O imóvel é obrigatório")]
     public long PropertyId { get; set; }
     [Required(ErrorMessage = "O cliente é obrigatório")]
-    public long CustomerId { get; set; }
+    public long BuyerId { get; set; }
     public List<Payment> Payments { get; set; } = [];
     public DateTime? SubmissionDate { get; set; } = DateTime.UtcNow;
     public EOfferStatus OfferStatus { get; set; } = EOfferStatus.Analysis;
-    public Customer? Customer { get; set; } = new();
-    public Property? Property { get; set; } = new();
-    public Contract? Contract { get; set; }
     public string UserId { get; set; } = string.Empty;
+    public Customer Buyer { get; set; } = null!;
+    public Property Property { get; set; } = null!;
+    public Contract? Contract { get; set; }
 }

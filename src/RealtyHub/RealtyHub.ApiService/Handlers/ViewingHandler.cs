@@ -16,7 +16,7 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
         {
             var customer = await context
                 .Customers
-                .FirstOrDefaultAsync(c => c.Id == request.CustomerId
+                .FirstOrDefaultAsync(c => c.Id == request.BuyerId
                                           && c.UserId == request.UserId
                                           && c.IsActive);
 
@@ -36,8 +36,8 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
             {
                 ViewingDate = request.ViewingDate,
                 ViewingStatus = request.ViewingStatus,
-                CustomerId = request.CustomerId,
-                Customer = customer,
+                BuyerId = request.BuyerId,
+                Buyer = customer,
                 PropertyId = request.PropertyId,
                 Property = property,
                 UserId = request.UserId
@@ -60,7 +60,7 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
         {
             var viewing = await context
                 .Viewing
-                .Include(v => v.Customer)
+                .Include(v => v.Buyer)
                 .Include(v => v.Property)
                 .FirstOrDefaultAsync(v => v.Id == request.Id
                                          && v.UserId == request.UserId);
@@ -98,7 +98,7 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
         {
             var viewing = await context
                 .Viewing
-                .Include(v => v.Customer)
+                .Include(v => v.Buyer)
                 .Include(v => v.Property)
                 .FirstOrDefaultAsync(v => v.Id == request.Id
                                           && v.UserId == request.UserId);
@@ -135,7 +135,7 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
         {
             var viewing = await context
                 .Viewing
-                .Include(v => v.Customer)
+                .Include(v => v.Buyer)
                 .Include(v => v.Property)
                 .FirstOrDefaultAsync(v => v.Id == request.Id
                                           && v.UserId == request.UserId);
@@ -173,7 +173,7 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
             var viewing = await context
                 .Viewing
                 .AsNoTracking()
-                .Include(v => v.Customer)
+                .Include(v => v.Buyer)
                 .Include(v => v.Property)
                 .FirstOrDefaultAsync(v => v.Id == request.Id
                                           && v.UserId == request.UserId);
@@ -195,7 +195,7 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
             var query = context
                 .Viewing
                 .AsNoTracking()
-                .Include(v => v.Customer)
+                .Include(v => v.Buyer)
                 .Include(v => v.Property)
                 .Where(v => v.UserId == request.UserId);
 

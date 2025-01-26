@@ -16,8 +16,9 @@ public class ContractHandler(AppDbContext context) : IContractHandler
         {
             var offer = await context
                 .Offers
-                .Include(o => o.Customer)
+                .Include(o => o.Buyer)
                 .Include(o => o.Property)
+                .ThenInclude(o=>o.Seller)
                 .FirstOrDefaultAsync(o => o.Id == request.OfferId
                                           && o.UserId == request.UserId);
 
@@ -36,20 +37,24 @@ public class ContractHandler(AppDbContext context) : IContractHandler
                 SignatureDate = request.SignatureDate,
                 EffectiveDate = request.EffectiveDate,
                 TermEndDate = request.TermEndDate,
-                Content = $"Contrato do cliente {offer.Customer!.Name}\n" +
-                                    $"Documento: {offer.Customer.DocumentNumber}\n" +
-                                    $"Tipo Cliente: {offer.Customer.CustomerType}\n" +
-                                    $"Telefone: {offer.Customer.Phone}\n" +
-                                    $"Email: {offer.Customer.Email}\n" +
+                Content = $"Contrato do cliente {offer.Buyer.Name}\n" +
+                                    $"Documento: {offer.Buyer.DocumentNumber}\n" +
+                                    $"Tipo Cliente: {offer.Buyer.PersonType}\n" +
+                                    $"Telefone: {offer.Buyer.Phone}\n" +
+                                    $"Email: {offer.Buyer.Email}\n" +
                                     $"Valor: {offer.Amount}\n" +
                                     $"Data de emissão: {request.IssueDate}\n" +
                                     $"Data de assinatura: {request.SignatureDate}\n" +
                                     $"Data de vigência: {request.EffectiveDate}\n" +
                                     $"Data de término: {request.TermEndDate}\n" +
-                                    $"Imovel: {offer.Property!.Title}\n" +
+                                    $"Imovel: {offer.Property.Title}\n" +
                                     $"Endereço: {offer.Property.Address.Neighborhood}\n",
+                Buyer = offer.Buyer,
+                BuyerId = offer.Buyer.Id,
+                SellerId = offer.Property.SellerId,
+                Seller = offer.Property.Seller,
                 Offer = offer,
-                OfferId = request.OfferId,
+                OfferId = offer.Id,
                 IsActive = true,
                 UserId = request.UserId
             };
@@ -71,6 +76,10 @@ public class ContractHandler(AppDbContext context) : IContractHandler
         {
             var contract = await context
                 .Contracts
+                .Include(o => o.Seller)
+                .Include(o => o.Buyer)
+                .Include(o => o.Offer)
+                .ThenInclude(o => o.Property)
                 .FirstOrDefaultAsync(c => c.Id == request.Id 
                                           && c.UserId == request.UserId 
                                           && c.IsActive);
@@ -80,6 +89,8 @@ public class ContractHandler(AppDbContext context) : IContractHandler
 
             var offer = await context
                 .Offers
+                .Include(offer => offer.Property)
+                .ThenInclude(property => property.Seller)
                 .FirstOrDefaultAsync(o => o.Id == request.OfferId 
                                           && o.UserId == request.UserId);
 
@@ -90,6 +101,11 @@ public class ContractHandler(AppDbContext context) : IContractHandler
             contract.SignatureDate = request.SignatureDate;
             contract.EffectiveDate = request.EffectiveDate;
             contract.TermEndDate = request.TermEndDate;
+            contract.Buyer = request.Buyer;
+            contract.BuyerId = request.BuyerId;
+            contract.SellerId = offer.Property.SellerId;
+            contract.Seller = offer.Property.Seller;
+            contract.Offer = offer;
             contract.OfferId = request.OfferId;
             contract.IsActive = request.IsActive;
             contract.UpdatedAt = DateTime.UtcNow;
@@ -137,16 +153,16 @@ public class ContractHandler(AppDbContext context) : IContractHandler
                 .Contracts
                 .AsNoTracking()
                 .Include(c => c.Offer)
-                .ThenInclude(o => o.Customer)
+                .ThenInclude(o => o.Buyer)
                 .Include(c => c.Offer.Property)
+                .ThenInclude(p => p.Seller)
                 .FirstOrDefaultAsync(c => c.Id == request.Id 
                                           && c.UserId == request.UserId
                                           && c.IsActive);
 
-            if (contract is null)
-                return new Response<Contract?>(null, 404, "Contrato não encontrado");
-
-            return new Response<Contract?>(contract, 200, "Contrato encontrado com sucesso");
+            return contract is null 
+                ? new Response<Contract?>(null, 404, "Contrato não encontrado") 
+                : new Response<Contract?>(contract);
         }
         catch
         {
@@ -162,8 +178,9 @@ public class ContractHandler(AppDbContext context) : IContractHandler
                 .Contracts
                 .AsNoTracking()
                 .Include(c => c.Offer)
-                .ThenInclude(o => o.Customer)
+                .ThenInclude(o => o.Buyer)
                 .Include(c => c.Offer.Property)
+                .ThenInclude(p => p.Seller)
                 .Where(c => c.UserId == request.UserId && c.IsActive);
 
             var contracts = await query

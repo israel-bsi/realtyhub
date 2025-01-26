@@ -42,7 +42,7 @@
         <PropertyColumn Property="x => x.Email" Title="E-mail" />
         <TemplateColumn Title="Tipo">
             <CellTemplate>
-                @if (context.Item.CustomerType == ECustomerType.Individual)
+                @if (context.Item.PersonType == EPersonType.Individual)
                 {
                     <span>Pessoa Física</span>
                 }

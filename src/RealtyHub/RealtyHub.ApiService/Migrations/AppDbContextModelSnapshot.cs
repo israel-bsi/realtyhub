@@ -247,6 +247,9 @@ namespace RealtyHub.ApiService.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
+                    b.Property<long>("BuyerId")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("text");
@@ -270,6 +273,9 @@ namespace RealtyHub.ApiService.Migrations
                     b.Property<long>("OfferId")
                         .HasColumnType("bigint");
 
+                    b.Property<long>("SellerId")
+                        .HasColumnType("bigint");
+
                     b.Property<DateTime?>("SignatureDate")
                         .HasColumnType("timestamp with time zone");
 
@@ -288,8 +294,12 @@ namespace RealtyHub.ApiService.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BuyerId");
+
                     b.HasIndex("OfferId")
                         .IsUnique();
+
+                    b.HasIndex("SellerId");
 
                     b.ToTable("Contract", (string)null);
                 });
@@ -348,6 +358,9 @@ namespace RealtyHub.ApiService.Migrations
                         .HasMaxLength(80)
                         .HasColumnType("character varying(80)");
 
+                    b.Property<int>("PersonType")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasMaxLength(30)
@@ -383,13 +396,13 @@ namespace RealtyHub.ApiService.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("numeric");
 
+                    b.Property<long>("BuyerId")
+                        .HasColumnType("bigint");
+
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
                         .HasDefaultValueSql("NOW()");
-
-                    b.Property<long>("CustomerId")
-                        .HasColumnType("bigint");
 
                     b.Property<int>("OfferStatus")
                         .HasColumnType("integer");
@@ -412,7 +425,7 @@ namespace RealtyHub.ApiService.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("BuyerId");
 
                     b.HasIndex("PropertyId");
 
@@ -510,6 +523,10 @@ namespace RealtyHub.ApiService.Migrations
                     b.Property<int>("PropertyType")
                         .HasColumnType("integer");
 
+                    b.Property<long>("SellerId")
+                        .HasMaxLength(120)
+                        .HasColumnType("bigint");
+
                     b.Property<bool>("ShowInHome")
                         .HasColumnType("boolean");
 
@@ -532,6 +549,8 @@ namespace RealtyHub.ApiService.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("SellerId");
 
                     b.ToTable("Property", (string)null);
                 });
@@ -664,13 +683,29 @@ namespace RealtyHub.ApiService.Migrations
 
             modelBuilder.Entity("RealtyHub.Core.Models.Contract", b =>
                 {
+                    b.HasOne("RealtyHub.Core.Models.Customer", "Buyer")
+                        .WithMany()
+                        .HasForeignKey("BuyerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("RealtyHub.Core.Models.Offer", "Offer")
                         .WithOne("Contract")
                         .HasForeignKey("RealtyHub.Core.Models.Contract", "OfferId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("RealtyHub.Core.Models.Customer", "Seller")
+                        .WithMany()
+                        .HasForeignKey("SellerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Buyer");
+
                     b.Navigation("Offer");
+
+                    b.Navigation("Seller");
                 });
 
             modelBuilder.Entity("RealtyHub.Core.Models.Customer", b =>
@@ -741,9 +776,9 @@ namespace RealtyHub.ApiService.Migrations
 
             modelBuilder.Entity("RealtyHub.Core.Models.Offer", b =>
                 {
-                    b.HasOne("RealtyHub.Core.Models.Customer", "Customer")
+                    b.HasOne("RealtyHub.Core.Models.Customer", "Buyer")
                         .WithMany()
-                        .HasForeignKey("CustomerId")
+                        .HasForeignKey("BuyerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -753,7 +788,7 @@ namespace RealtyHub.ApiService.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Customer");
+                    b.Navigation("Buyer");
 
                     b.Navigation("Property");
                 });
@@ -771,6 +806,12 @@ namespace RealtyHub.ApiService.Migrations
 
             modelBuilder.Entity("RealtyHub.Core.Models.Property", b =>
                 {
+                    b.HasOne("RealtyHub.Core.Models.Customer", "Seller")
+                        .WithMany("Properties")
+                        .HasForeignKey("SellerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.OwnsOne("RealtyHub.Core.Models.Address", "Address", b1 =>
                         {
                             b1.Property<long>("PropertyId")
@@ -833,6 +874,8 @@ namespace RealtyHub.ApiService.Migrations
 
                     b.Navigation("Address")
                         .IsRequired();
+
+                    b.Navigation("Seller");
                 });
 
             modelBuilder.Entity("RealtyHub.Core.Models.PropertyPhoto", b =>
@@ -868,6 +911,11 @@ namespace RealtyHub.ApiService.Migrations
             modelBuilder.Entity("RealtyHub.ApiService.Models.User", b =>
                 {
                     b.Navigation("Roles");
+                });
+
+            modelBuilder.Entity("RealtyHub.Core.Models.Customer", b =>
+                {
+                    b.Navigation("Properties");
                 });
 
             modelBuilder.Entity("RealtyHub.Core.Models.Offer", b =>

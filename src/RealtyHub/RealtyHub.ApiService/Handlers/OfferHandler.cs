@@ -47,14 +47,14 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 return new Response<Offer?>(null, 400,
                     "O valor total dos pagamentos não corresponde ao valor da proposta");
 
-            request.Customer!.IsActive = true;
+            request.Buyer!.IsActive = true;
             var offer = new Offer
             {
                 SubmissionDate = request.SubmissionDate,
                 Amount = request.Amount,
                 OfferStatus = request.OfferStatus,
-                CustomerId = request.CustomerId,
-                Customer = request.Customer,
+                BuyerId = request.BuyerId,
+                Buyer = request.Buyer,
                 Payments = payments,
                 PropertyId = request.PropertyId,
                 Property = property,
@@ -78,7 +78,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
         {
             var offer = await context
                 .Offers
-                .Include(o => o.Customer)
+                .Include(o => o.Buyer)
                 .Include(o => o.Property)
                 .Include(o => o.Payments)
                 .Include(o => o.Contract)
@@ -107,7 +107,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
             offer.SubmissionDate = request.SubmissionDate;
             offer.Amount = request.Amount;
             offer.PropertyId = request.PropertyId;
-            offer.CustomerId = request.CustomerId;
+            offer.BuyerId = request.BuyerId;
             offer.OfferStatus = request.OfferStatus;
             offer.UpdatedAt = DateTime.UtcNow;
             foreach (var payment in payments)
@@ -165,7 +165,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
         {
             var offer = await context
                 .Offers
-                .Include(o => o.Customer)
+                .Include(o => o.Buyer)
                 .Include(o => o.Property)
                 .Include(o => o.Payments)
                 .Include(o => o.Contract)
@@ -206,7 +206,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
         {
             var offer = await context
                 .Offers
-                .Include(o => o.Customer)
+                .Include(o => o.Buyer)
                 .Include(o => o.Property)
                 .Include(o => o.Payments)
                 .Include(o => o.Contract)
@@ -248,7 +248,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
             var offer = await context
                 .Offers
                 .AsNoTracking()
-                .Include(o => o.Customer)
+                .Include(o => o.Buyer)
                 .Include(o => o.Property)
                 .Include(o => o.Payments)
                 .Include(o => o.Contract)
@@ -272,7 +272,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
             var offer = await context
                 .Offers
                 .AsNoTracking()
-                .Include(o => o.Customer)
+                .Include(o => o.Buyer)
                 .Include(o => o.Property)
                 .Include(o => o.Contract)
                 .Include(o => o.Payments)
@@ -308,7 +308,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
             var query = context
                 .Offers
                 .AsNoTracking()
-                .Include(o => o.Customer)
+                .Include(o => o.Buyer)
                 .Include(o => o.Property)
                 .Include(o => o.Payments)
                 .Include(o => o.Contract)
@@ -360,11 +360,11 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
             var query = context
                 .Offers
                 .AsNoTracking()
-                .Include(o => o.Customer)
+                .Include(o => o.Buyer)
                 .Include(o => o.Property)
                 .Include(o => o.Payments)
                 .Include(o => o.Contract)
-                .Where(o => o.CustomerId == request.CustomerId
+                .Where(o => o.BuyerId == request.CustomerId
                             && o.UserId == request.UserId);
 
             if (request.StartDate is not null && request.EndDate is not null)
@@ -400,7 +400,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
             var query = context
                 .Offers
                 .AsNoTracking()
-                .Include(o => o.Customer)
+                .Include(o => o.Buyer)
                 .Include(o => o.Property)
                 .Include(o => o.Payments)
                 .Include(o=>o.Contract)

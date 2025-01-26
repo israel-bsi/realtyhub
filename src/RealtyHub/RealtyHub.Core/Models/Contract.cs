@@ -5,8 +5,10 @@ namespace RealtyHub.Core.Models;
 public class Contract : Entity
 {
     public long Id { get; set; }
+    public long SellerId { get; set; }
+    public long BuyerId { get; set; }
+    public long OfferId { get; set; }
     [Required(ErrorMessage = "A data de emissão é obrigatoria")]
-    [DataType(DataType.Date)]
     public DateTime? IssueDate { get; set; }
     [Required(ErrorMessage = "A data de vigência é obrigatoria")]
     public DateTime? EffectiveDate { get; set; }
@@ -14,8 +16,9 @@ public class Contract : Entity
     public DateTime? TermEndDate { get; set; }
     public DateTime? SignatureDate { get; set; }
     public string Content { get; set; } = string.Empty;
-    public long OfferId { get; set; }
-    public Offer Offer { get; set; } = new();
     public bool IsActive { get; set; }
     public string UserId { get; set; } = string.Empty;
+    public Offer Offer { get; set; } = null!;
+    public Customer? Seller { get; set; }
+    public Customer? Buyer { get; set; }
 }

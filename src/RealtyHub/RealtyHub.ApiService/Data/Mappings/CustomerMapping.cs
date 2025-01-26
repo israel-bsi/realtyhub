@@ -24,7 +24,7 @@ public class CustomerMapping : IEntityTypeConfiguration<Customer>
             .IsRequired()
             .HasMaxLength(30);
 
-        builder.Property(c => c.CustomerType)
+        builder.Property(c => c.PersonType)
             .IsRequired();
 
         builder.Property(c => c.DocumentNumber)

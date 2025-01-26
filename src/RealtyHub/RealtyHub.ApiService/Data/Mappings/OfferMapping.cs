@@ -21,12 +21,6 @@ public class OfferMapping : IEntityTypeConfiguration<Offer>
         builder.Property(x => x.OfferStatus)
             .IsRequired();
 
-        builder.Property(x => x.PropertyId)
-            .IsRequired();
-
-        builder.Property(x => x.CustomerId)
-            .IsRequired();
-
         builder.Property(c => c.UserId)
             .IsRequired();
 
@@ -42,9 +36,9 @@ public class OfferMapping : IEntityTypeConfiguration<Offer>
             .WithMany()
             .HasForeignKey(x => x.PropertyId);
 
-        builder.HasOne(x => x.Customer)
+        builder.HasOne(x => x.Buyer)
             .WithMany()
-            .HasForeignKey(x => x.CustomerId);
+            .HasForeignKey(x => x.BuyerId);
 
         builder.HasOne(x => x.Contract)
             .WithOne(x => x.Offer)

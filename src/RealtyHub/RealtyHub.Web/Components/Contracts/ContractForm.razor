@@ -36,12 +36,12 @@ else
 
             <MudTextField Class="mb-2"
                           ReadOnly="true"
-                          Label="@(InputModel.Offer.Customer == null ? "Clique aqui para pesquisar o cliente" : "Cliente Selecionado")"
+                          Label="@(InputModel.Offer.Buyer == null ? "Clique aqui para pesquisar o cliente" : "Cliente Selecionado")"
                           AdornmentIcon="@Icons.Material.Filled.PersonSearch"
                           @onclick="@OpenCustomerDialog"
                           OnAdornmentClick="OpenCustomerDialog"
                           Adornment="Adornment.End"
-                          Value="@InputModel.Offer.Customer?.Name" />
+                          Value="@InputModel.Offer.Buyer?.Name" />
 
             <MudTextField Class="mb-2"
                           ReadOnly="true"

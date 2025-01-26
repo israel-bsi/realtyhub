@@ -51,6 +51,10 @@ public class PropertyMapping : IEntityTypeConfiguration<Property>
         builder.Property(p=>p.ShowInHome)
             .IsRequired();
 
+        builder.HasOne(p => p.Seller)
+            .WithMany(c => c.Properties)
+            .HasForeignKey(p => p.SellerId);
+
         builder.Property(p => p.CreatedAt)
             .HasDefaultValueSql("NOW()")
             .IsRequired();

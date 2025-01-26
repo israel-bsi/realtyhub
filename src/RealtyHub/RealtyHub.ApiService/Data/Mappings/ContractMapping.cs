@@ -23,9 +23,6 @@ public class ContractMapping : IEntityTypeConfiguration<Contract>
         builder.Property(c => c.Content)
             .IsRequired();
 
-        builder.Property(c => c.OfferId)
-            .IsRequired();
-
         builder.Property(c => c.UserId)
             .IsRequired();
 
@@ -43,5 +40,13 @@ public class ContractMapping : IEntityTypeConfiguration<Contract>
         builder.HasOne(c => c.Offer)
             .WithOne()
             .HasForeignKey<Contract>(c => c.OfferId);
+
+        builder.HasOne(c => c.Seller)
+            .WithMany()
+            .HasForeignKey(c => c.SellerId);
+
+        builder.HasOne(c => c.Buyer)
+            .WithMany()
+            .HasForeignKey(c => c.BuyerId);
     }
 }

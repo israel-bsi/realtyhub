@@ -18,26 +18,26 @@ else
             <MudText Class="mb-6" Typo="Typo.h6">Dados Pessoais</MudText>
 
             <MudStack Row="true" Spacing="2">
-                <MudRadioGroup T="ECustomerType"
-                               @bind-Value="InputModel.CustomerType"
+                <MudRadioGroup T="EPersonType"
+                               @bind-Value="InputModel.PersonType"
                                Class="flex-center">
                     <MudStack Row="true" Spacing="1">
                         <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="1">
                             <MudIcon Icon="@Icons.Material.Filled.Person"></MudIcon>
-                            <MudRadio Value="ECustomerType.Individual">
-                                @(ECustomerType.Individual.GetDisplayName())
+                            <MudRadio Value="EPersonType.Individual">
+                                @(EPersonType.Individual.GetDisplayName())
                             </MudRadio>
                         </MudStack>
                         <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="1">
                             <MudIcon Icon="@Icons.Material.Filled.Business"></MudIcon>
-                            <MudRadio Value="ECustomerType.Business">
-                                @(ECustomerType.Business.GetDisplayName())
+                            <MudRadio Value="EPersonType.Business">
+                                @(EPersonType.Business.GetDisplayName())
                             </MudRadio>
                         </MudStack>
                     </MudStack>
                 </MudRadioGroup>
 
-                @if (InputModel.CustomerType == ECustomerType.Individual)
+                @if (InputModel.PersonType == EPersonType.Individual)
                 {
                     <MudItem xs="6" sm="3">
                         <EnumSelect TEnum="EMaritalStatus"
@@ -66,14 +66,14 @@ else
 
                 <MudItem lg="4" xs="12" sm="6">
                     <MudTextField T="string"
-                                  Label="@(InputModel.CustomerType ==
-                                           ECustomerType.Individual ? "Nome" : "Razão Social")"
+                                  Label="@(InputModel.PersonType ==
+                                           EPersonType.Individual ? "Nome" : "Razão Social")"
                                   @bind-Value="InputModel.Name"
                                   For="@(() => InputModel.Name)"
                                   InputType="InputType.Text" />
                 </MudItem>
                 
-                @if (InputModel.CustomerType == ECustomerType.Individual)
+                @if (InputModel.PersonType == EPersonType.Individual)
                 {
                     <MudItem lg="3" xs="12" sm="6">
                         <MudTextField T="string"
