@@ -19,7 +19,8 @@ else
 
             <MudStack Row="true" Spacing="2">
                 <MudRadioGroup T="EPersonType"
-                               @bind-Value="InputModel.PersonType"
+                               Value="InputModel.PersonType"
+                               ValueChanged="OnPersonTypeChanged"
                                Class="flex-center">
                     <MudStack Row="true" Spacing="1">
                         <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="1">
@@ -47,6 +48,14 @@ else
                         </EnumSelect>
                     </MudItem>
                 }
+                
+                <MudItem xs="6" sm="3">
+                    <EnumSelect TEnum="ECustomerType"
+                                Label="Tipo do cliente"
+                                @bind-SelectedValue="InputModel.CustomerType"
+                                Class="ml-4">
+                    </EnumSelect>
+                </MudItem>
             </MudStack>
 
             <MudGrid Class="mt-2">
@@ -91,6 +100,15 @@ else
                                       Label="Nacionalidade"
                                       @bind-Value="InputModel.Nationality"
                                       For="@(() => InputModel.Nationality)"
+                                      MaxLength="80"
+                                      InputType="InputType.Text" />
+                    </MudItem>
+
+                    <MudItem lg="3" xs="12" sm="6">
+                        <MudTextField T="string"
+                                      Label="Ocupação"
+                                      @bind-Value="InputModel.Occupation"
+                                      For="@(() => InputModel.Occupation)"
                                       MaxLength="80"
                                       InputType="InputType.Text" />
                     </MudItem>

@@ -326,6 +326,8 @@ public partial class PropertyFormComponent : ComponentBase
             InputModel.Address.City = response.Data.Address.City;
             InputModel.Address.State = response.Data.Address.State;
             InputModel.Address.Country = response.Data.Address.Country;
+            InputModel.RegistryNumber = response.Data.RegistryNumber;
+            InputModel.RegistryRecord = response.Data.RegistryRecord;
             InputModel.IsNew = response.Data.IsNew;
             InputModel.ShowInHome = response.Data.ShowInHome;
             InputModel.PropertyPhotos = response.Data.PropertyPhotos;

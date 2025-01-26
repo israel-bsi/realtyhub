@@ -31,6 +31,10 @@ public class Property : Entity
     public Address Address { get; set; } = new();
     [Required(ErrorMessage = "Propriedade nova é um campo obrigatório")]
     public bool IsNew { get; set; }
+    [Required(ErrorMessage = "Matriculá no Cartório é um campo obrigatório")]
+    public string RegistryNumber { get; set; } = string.Empty;
+    [Required(ErrorMessage = "Registro do Cartório é um campo obrigatório")]
+    public string RegistryRecord { get; set; } = string.Empty;
     public bool IsActive { get; set; }
     public bool ShowInHome { get; set; }
     public string UserId { get; set; } = string.Empty;

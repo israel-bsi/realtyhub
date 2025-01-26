@@ -42,6 +42,12 @@ public class PropertyMapping : IEntityTypeConfiguration<Property>
         builder.Property(p => p.IsNew)
             .IsRequired();
 
+        builder.Property(p => p.RegistryNumber)
+            .IsRequired();
+
+        builder.Property(p => p.RegistryRecord)
+            .IsRequired();
+
         builder.Property(c => c.UserId)
             .IsRequired();
 

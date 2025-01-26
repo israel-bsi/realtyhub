@@ -112,7 +112,7 @@ public partial class CustomerFormComponent : ComponentBase
         MessageStore?.Add(() => InputModel.DocumentNumber, ErrorText);
         EditContext.NotifyValidationStateChanged();
     }
-    public void OnCustomerTypeChanged(EPersonType newPersonType)
+    public void OnPersonTypeChanged(EPersonType newPersonType)
     {
         InputModel.PersonType = newPersonType;
         ChangeDocumentMask(newPersonType);
@@ -152,6 +152,9 @@ public partial class CustomerFormComponent : ComponentBase
             InputModel.Phone = response.Data.Phone;
             InputModel.DocumentNumber = response.Data.DocumentNumber;
             InputModel.PersonType = response.Data.PersonType;
+            InputModel.CustomerType = response.Data.CustomerType;
+            InputModel.Occupation = response.Data.Occupation;
+            InputModel.Nationality = response.Data.Nationality;
             InputModel.Address.ZipCode = response.Data.Address.ZipCode;
             InputModel.Address.Street = response.Data.Address.Street;
             InputModel.Address.Number = response.Data.Address.Number;

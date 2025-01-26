@@ -25,6 +25,8 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
                 Area = request.Area,
                 Garage = request.Garage,
                 IsNew = request.IsNew,
+                RegistryNumber = request.RegistryNumber,
+                RegistryRecord = request.RegistryRecord,
                 TransactionsDetails = request.TransactionsDetails,
                 UserId = request.UserId,
                 ShowInHome = request.ShowInHome,
@@ -66,6 +68,8 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
             property.Area = request.Area;
             property.Garage = request.Garage;
             property.IsNew = request.IsNew;
+            property.RegistryNumber = request.RegistryNumber;
+            property.RegistryRecord = request.RegistryRecord;
             property.TransactionsDetails = request.TransactionsDetails;
             property.UserId = request.UserId;
             property.ShowInHome = request.ShowInHome;
