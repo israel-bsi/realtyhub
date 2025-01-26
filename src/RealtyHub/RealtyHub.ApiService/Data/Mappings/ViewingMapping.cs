@@ -22,7 +22,7 @@ public class ViewingMapping : IEntityTypeConfiguration<Viewing>
             .WithMany()
             .HasForeignKey(v => v.BuyerId);
 
-        builder.HasOne(v => v.Buyer)
+        builder.HasOne(v => v.Property)
             .WithMany()
             .HasForeignKey(v => v.PropertyId);
 

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using RealtyHub.ApiService.Data;
@@ -11,9 +12,11 @@ using RealtyHub.ApiService.Data;
 namespace RealtyHub.ApiService.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250126030401_v3")]
+    partial class v3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -621,6 +624,9 @@ namespace RealtyHub.ApiService.Migrations
                     b.Property<long>("PropertyId")
                         .HasColumnType("bigint");
 
+                    b.Property<long>("PropertyId1")
+                        .HasColumnType("bigint");
+
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
@@ -639,9 +645,9 @@ namespace RealtyHub.ApiService.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BuyerId");
-
                     b.HasIndex("PropertyId");
+
+                    b.HasIndex("PropertyId1");
 
                     b.ToTable("Viewing", (string)null);
                 });
@@ -901,13 +907,13 @@ namespace RealtyHub.ApiService.Migrations
                 {
                     b.HasOne("RealtyHub.Core.Models.Customer", "Buyer")
                         .WithMany()
-                        .HasForeignKey("BuyerId")
+                        .HasForeignKey("PropertyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("RealtyHub.Core.Models.Property", "Property")
                         .WithMany()
-                        .HasForeignKey("PropertyId")
+                        .HasForeignKey("PropertyId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

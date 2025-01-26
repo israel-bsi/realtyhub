@@ -28,7 +28,6 @@ public partial class ListViewingsPage : ComponentBase
     public Property? Property { get; set; }
     public string HeaderTitle => Property is null ?
         "Todas as visitas" : $"Visitas do imóvel {Property.Title}";
-
     #endregion
 
     #region Services
@@ -104,6 +103,8 @@ public partial class ListViewingsPage : ComponentBase
             return new GridData<Viewing>();
         }
     }
+    public async Task ReloadDataGridAsync() 
+        => await DataGrid.ReloadServerData();
     public async Task OnScheduleButtonClickedAsync()
     {
         var options = new DialogOptions
@@ -114,12 +115,12 @@ public partial class ListViewingsPage : ComponentBase
         };
         var parameters = new DialogParameters
         {
-            { "Property", Property },
-            { "LockPropertySearch", true },
             { "RedirectToPageList", false }
         };
-        await DialogService.ShowAsync<ViewingDialog>(null, parameters, options);
-        await DataGrid.ReloadServerData();
+        var dialog = await DialogService.ShowAsync<ViewingDialog>("Agendar visita", parameters, options);
+        var result = await dialog.Result;
+        if (result is { Canceled: false })
+            await ReloadDataGridAsync();
     }
     public async Task OnRescheduleButtonClickedAsync(Viewing viewing)
     {
@@ -138,7 +139,7 @@ public partial class ListViewingsPage : ComponentBase
             { "RedirectToPageList", false },
             { "Id", viewing.Id}
         };
-        await DialogService.ShowAsync<ViewingDialog>(null, parameters, options);
+        await DialogService.ShowAsync<ViewingDialog>("Reagendar visita", parameters, options);
         await DataGrid.ReloadServerData();
     }
     public async Task OnDoneButtonClickedAsync(Viewing viewing)
