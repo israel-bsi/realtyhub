@@ -135,6 +135,20 @@ else
                 </MudItem>
             </MudGrid>
 
+            <MudText Class="mb-4 mt-4" Typo="Typo.h6">Proprietário/Vendedor</MudText>
+            <MudGrid>
+                <MudItem lg="8" xs="12" sm="6">
+                    <MudTextField Class="mb-2"
+                                  ReadOnly="true"
+                                  Label="@(InputModel.Seller == null ? "Clique aqui para pesquisar o cliente" : "Cliente Selecionado")"
+                                  AdornmentIcon="@Icons.Material.Filled.PersonSearch"
+                                  @onclick="@OpenCustomerDialog"
+                                  OnAdornmentClick="OpenCustomerDialog"
+                                  Adornment="Adornment.End"
+                                  Value="@InputModel.Seller?.Name" />
+                </MudItem>
+            </MudGrid>
+
             <AddressInput @bind-InputModel="InputModel.Address" />
 
             <MudText Class="mb-4 mt-4" Typo="Typo.h6">Fotos do imóvel</MudText>
@@ -189,25 +203,26 @@ else
 
                             <ItemTemplate Context="photoItem">
                                 <div class="d-flex flex-column align-items-center mt-4">
-                                    <MudButton ButtonType="ButtonType.Button"
-                                               Color="Color.Primary"
-                                               Variant="Variant.Filled"
-                                               StartIcon="@Icons.Material.Filled.Image"
-                                               Disabled="@photoItem.IsThumbnail"
-                                               OnClick="@(() => UpdateThumbnailsAsync(photoItem))">
-                                        @(photoItem.IsThumbnail ? "Foto já definida como principal" : "Definir como foto principal")
-                                    </MudButton>
+                                    <MudItem md="9" xs="6" sm="3">
+                                        <MudButton ButtonType="ButtonType.Button"
+                                                   Color="Color.Primary"
+                                                   Variant="Variant.Filled"
+                                                   StartIcon="@Icons.Material.Filled.Image"
+                                                   Disabled="@photoItem.IsThumbnail"
+                                                   OnClick="@(() => UpdateThumbnailsAsync(photoItem))">
+                                            @(photoItem.IsThumbnail ? "Foto já definida como principal" : "Definir como foto principal")
+                                        </MudButton>
+                                    </MudItem>
                                     <MudText Typo="Typo.caption" Class="mt-2">
                                         A foto ficará em exibição na página principal
                                     </MudText>
+                                    <MudImage Src="@photoItem.DisplayUrl"
+                                              @onclick="@(() => OpenImageDialog(photoItem.DisplayUrl))"
+                                              Class="cursor-pointer"
+                                              Style="width: 80%; height: 60%; align-self: center"
+                                              Fluid="true"
+                                              ObjectFit="ObjectFit.Cover" />
                                 </div>
-                                <MudImage Src="@photoItem.DisplayUrl"
-                                          @onclick="@(() => OpenImageDialog(photoItem.DisplayUrl))"
-                                          Class="cursor-pointer"
-                                          Width="600"
-                                          Height="600"
-                                          Fluid="true"
-                                          ObjectFit="ObjectFit.Cover" />
                             </ItemTemplate>
                         </MudCarousel>
                     </MudItem>

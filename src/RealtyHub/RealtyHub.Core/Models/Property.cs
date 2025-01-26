@@ -6,9 +6,9 @@ namespace RealtyHub.Core.Models;
 public class Property : Entity
 {
     public long Id { get; set; }
+    public long SellerId { get; set; }
     [Required(ErrorMessage = "Título é um campo obrigatório")]
     [MaxLength(120, ErrorMessage = "O Título deve conter até 120 caracteres")]
-    public long SellerId { get; set; }
     public string Title { get; set; } = string.Empty;
     [Required(ErrorMessage = "Descrição é um campo obrigatório")]
     [MaxLength(255, ErrorMessage = "A descrição deve conter até 255 caracteres")]
@@ -39,5 +39,5 @@ public class Property : Entity
     public bool ShowInHome { get; set; }
     public string UserId { get; set; } = string.Empty;
     public List<PropertyPhoto> PropertyPhotos { get; set; } = [];
-    public Customer Seller { get; set; } = null!;
+    public Customer? Seller { get; set; }
 }

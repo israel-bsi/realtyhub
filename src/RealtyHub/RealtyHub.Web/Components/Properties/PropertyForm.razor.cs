@@ -8,6 +8,7 @@ using RealtyHub.Core.Requests.Properties;
 using RealtyHub.Core.Requests.PropertiesPhotos;
 using RealtyHub.Core.Responses;
 using RealtyHub.Web.Components.Common;
+using RealtyHub.Web.Components.Customers;
 
 namespace RealtyHub.Web.Components.Properties;
 
@@ -333,6 +334,8 @@ public partial class PropertyFormComponent : ComponentBase
             InputModel.PropertyPhotos = response.Data.PropertyPhotos;
             InputModel.IsActive = response.Data.IsActive;
             InputModel.UserId = response.Data.UserId;
+            InputModel.Seller = response.Data.Seller;
+            InputModel.SellerId = response.Data.SellerId;
             await LoadPhotosFromServerAsync();
         }
         else
@@ -346,7 +349,33 @@ public partial class PropertyFormComponent : ComponentBase
         InputModel.PropertyType = EPropertyType.House;
         NavigationManager.NavigateTo("/imoveis/adicionar");
     }
+    public async Task OpenCustomerDialog()
+    {
+        var parameters = new DialogParameters
+        {
+            { "OnCustomerSelected", EventCallback.Factory
+                .Create<Customer>(this, SelectedSeller) }
+        };
+        var options = new DialogOptions
+        {
+            CloseButton = true,
+            MaxWidth = MaxWidth.Large,
+            FullWidth = true
+        };
+        var dialog = await DialogService
+            .ShowAsync<CustomerDialog>("Informe o vendedor", parameters, options);
+        var result = await dialog.Result;
 
+        if (result is { Canceled: false, Data: Customer selectedCustomer })
+            SelectedSeller(selectedCustomer);
+    }
+    private void SelectedSeller(Customer seller)
+    {
+        InputModel.Seller = seller;
+        InputModel.SellerId = seller.Id;
+        //EditFormKey++;
+        StateHasChanged();
+    }
     #endregion
 
     #region Overrides

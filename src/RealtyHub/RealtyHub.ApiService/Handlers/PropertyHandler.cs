@@ -30,7 +30,6 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
                 TransactionsDetails = request.TransactionsDetails,
                 UserId = request.UserId,
                 ShowInHome = request.ShowInHome,
-                Seller = request.Seller,
                 SellerId = request.SellerId,
                 IsActive = true
             };
@@ -73,7 +72,6 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
             property.TransactionsDetails = request.TransactionsDetails;
             property.UserId = request.UserId;
             property.ShowInHome = request.ShowInHome;
-            property.Seller = request.Seller;
             property.SellerId = request.SellerId;
             property.UpdatedAt = DateTime.UtcNow;
 
