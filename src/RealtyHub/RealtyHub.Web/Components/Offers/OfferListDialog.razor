@@ -1,0 +1,30 @@
+﻿@using RealtyHub.Core.Models
+@using RealtyHub.Web.Pages.Offers
+
+<MudDialog>
+    <DialogContent>
+        <List OnOfferSelected="SelectOffer" RowStyle="cursor: pointer" />
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="CloseDialog" Color="Color.Primary">Fechar</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code
+{
+    [CascadingParameter]
+    MudDialogInstance MudDialog { get; set; } = null!;
+
+    [Parameter]
+    public EventCallback<Offer> OnOfferSelected { get; set; }
+
+    void CloseDialog() => MudDialog.Close();
+
+    public async Task SelectOffer(Offer offer)
+    {
+        if (OnOfferSelected.HasDelegate)
+            await OnOfferSelected.InvokeAsync(offer);
+
+        MudDialog.Close(DialogResult.Ok(offer));
+    }
+}

@@ -175,6 +175,7 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
                 .AsNoTracking()
                 .Include(v => v.Buyer)
                 .Include(v => v.Property)
+                .ThenInclude(p=>p!.Seller)
                 .FirstOrDefaultAsync(v => v.Id == request.Id
                                           && v.UserId == request.UserId);
 
@@ -197,6 +198,7 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
                 .AsNoTracking()
                 .Include(v => v.Buyer)
                 .Include(v => v.Property)
+                .ThenInclude(p => p!.Seller)
                 .Where(v => v.UserId == request.UserId);
 
             if (request.StartDate is not null && request.EndDate is not null)

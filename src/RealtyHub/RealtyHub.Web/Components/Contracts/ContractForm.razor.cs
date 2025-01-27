@@ -143,6 +143,13 @@ public partial class ContractFormComponent : ComponentBase
         EditFormKey++;
         StateHasChanged();
     }
+    public void ClearPropertyObjects()
+    {
+        InputModel.Offer!.Property = new Property();
+        InputModel.Offer.PropertyId = 0;
+        EditFormKey++;
+        StateHasChanged();
+    }
 
     public async Task OpenOfferDialog()
     {
@@ -155,11 +162,11 @@ public partial class ContractFormComponent : ComponentBase
         var options = new DialogOptions
         {
             CloseButton = true,
-            MaxWidth = MaxWidth.Large,
+            MaxWidth = MaxWidth.ExtraLarge,
             FullWidth = true
         };
         var dialog = await DialogService
-            .ShowAsync<OfferDialog>("Informe a proposta", parameters, options);
+            .ShowAsync<OfferListDialog>("Selecione a proposta", parameters, options);
         var result = await dialog.Result;
         if (result is { Canceled: false, Data: Offer offer })
             SelectedOffer(offer);
@@ -172,6 +179,17 @@ public partial class ContractFormComponent : ComponentBase
         InputModel.SellerId = offer.Property.SellerId;
         InputModel.Buyer = offer.Buyer;
         InputModel.BuyerId = offer.BuyerId;
+        EditFormKey++;
+        StateHasChanged();
+    }
+    public void ClearOfferObjets()
+    {
+        InputModel.Offer = new Offer();
+        InputModel.OfferId = 0;
+        InputModel.Seller = new Customer();
+        InputModel.SellerId = 0;
+        InputModel.Buyer = new Customer();
+        InputModel.BuyerId = 0;
         EditFormKey++;
         StateHasChanged();
     }
@@ -204,6 +222,13 @@ public partial class ContractFormComponent : ComponentBase
         EditFormKey++;
         StateHasChanged();
     }
+    public void ClearBuyerObjects()
+    {
+        InputModel.Buyer = new Customer();
+        InputModel.BuyerId = 0;
+        EditFormKey++;
+        StateHasChanged();
+    }
 
     public async Task OpenSellerDialog()
     {
@@ -233,7 +258,14 @@ public partial class ContractFormComponent : ComponentBase
         EditFormKey++;
         StateHasChanged();
     }
-
+    public void ClearSellerObjects()
+    {
+        InputModel.Seller = new Customer();
+        InputModel.SellerId = 0;
+        EditFormKey++;
+        StateHasChanged();
+    }
+    
     #endregion
 
     #region Overrides

@@ -7,7 +7,6 @@ using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.Offers;
 using RealtyHub.Web.Components.Common;
 using RealtyHub.Web.Components.Offers;
-using System;
 using RealtyHub.Web.Components.Contracts;
 
 namespace RealtyHub.Web.Pages.Offers;
@@ -18,6 +17,9 @@ public partial class ListOffersPage : ComponentBase
 
     [Parameter]
     public EventCallback<Offer> OnOfferSelected { get; set; }
+
+    [Parameter]
+    public string RowStyle { get; set; } = string.Empty;
 
     #endregion
 
@@ -130,7 +132,7 @@ public partial class ListOffersPage : ComponentBase
             Snackbar.Add(result.Message ?? string.Empty, Severity.Error);
     }
 
-    public async Task SelectOffer(Offer offer)
+    public async Task OpenOfferDialog(Offer offer)
     {
         var options = new DialogOptions
         {
@@ -171,6 +173,12 @@ public partial class ListOffersPage : ComponentBase
     public async Task DownloadContract()
     {
         Snackbar.Add("Contrato gerado com sucesso", Severity.Success);
+    }
+
+    public async Task SelectOffer(Offer offer)
+    {
+        if (OnOfferSelected.HasDelegate)
+            await OnOfferSelected.InvokeAsync(offer);
     }
 
     private bool IsOfferStatusInvalid(Offer viewing)

@@ -12,7 +12,7 @@
              @ref="DataGrid"
              RowsPerPage="@Core.Configuration.DefaultPageSize"
              RowClick="@(e => SelectOffer(e.Item))"
-             RowStyle="cursor: pointer">
+             RowStyle="@RowStyle">
 
     <ToolBarContent>
         <MudText Typo="Typo.h6">Propostas</MudText>
@@ -26,7 +26,8 @@
     <Columns>
         <PropertyColumn Property="v => v.Id" Title="Id"></PropertyColumn>
         <PropertyColumn Property="v => v.SubmissionDate" Title="Data"></PropertyColumn>
-        <PropertyColumn Property="v => v.Buyer!.Name" Title="Cliente"></PropertyColumn>
+        <PropertyColumn Property="v => v.Buyer!.Name" Title="Comprador"></PropertyColumn>
+        <PropertyColumn Property="v => v.Property!.Seller!.Name" Title="Vendedor"></PropertyColumn>
         <PropertyColumn Property="v => v.Property!.Title" Title="Imóvel"></PropertyColumn>
         <TemplateColumn Title="Valor">
             <CellTemplate>
@@ -40,24 +41,29 @@
         </TemplateColumn>
         <TemplateColumn Class="justify-end" Title="Ações">
             <CellTemplate>
+                <MudTooltip Text="Visualizar">
+                    <MudIconButton Icon="@Icons.Material.Filled.Visibility"
+                                   Color="Color.Primary"
+                                   OnClick="() => OpenOfferDialog(context.Item)" />
+                </MudTooltip>
                 <MudTooltip Text="Aceitar">
                     <MudIconButton Icon="@Icons.Material.Filled.Done"
                                    Color="Color.Primary"
                                    OnClick="() => OnAcceptClickedAsync(context.Item)"
-                                   Disabled="@(context.Item.OfferStatus != EOfferStatus.Analysis)" />
+                                   Disabled="@(context.Item.OfferStatus != EOfferStatus.Analysis)"/>
                 </MudTooltip>
                 <MudTooltip Text="Rejeitar">
                     <MudIconButton Icon="@Icons.Material.Filled.Cancel"
                                    Color="Color.Primary"
                                    OnClick="() => OnRejectClickedAsync(context.Item)"
-                                   Disabled="@(context.Item.OfferStatus != EOfferStatus.Analysis)" />
+                                   Disabled="@(context.Item.OfferStatus != EOfferStatus.Analysis)"/>
                 </MudTooltip>
                 @if (context.Item.OfferStatus == EOfferStatus.Accepted && context.Item.Contract is null)
                 {
                     <MudTooltip Text="Emitir contrato">
                         <MudIconButton Icon="fa-solid fa-file-contract"
                                        Color="Color.Primary"
-                                       OnClick="() => OnIssueContractClickedAsync(context.Item)" />
+                                       OnClick="() => OnIssueContractClickedAsync(context.Item)"/>
                     </MudTooltip>
                 }
                 @if (context.Item.Contract is not null)
@@ -65,7 +71,7 @@
                     <MudTooltip Text="Baixar contrato">
                         <MudIconButton Icon="@Icons.Material.Filled.Download"
                                        Color="Color.Primary"
-                                       OnClick="() => DownloadContract()" />
+                                       OnClick="() => DownloadContract()"/>
                     </MudTooltip>
                 }
             </CellTemplate>

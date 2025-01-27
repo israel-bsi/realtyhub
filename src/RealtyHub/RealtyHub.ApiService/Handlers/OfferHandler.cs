@@ -250,6 +250,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .AsNoTracking()
                 .Include(o => o.Buyer)
                 .Include(o => o.Property)
+                    .ThenInclude(p=>p!.Seller)
                 .Include(o => o.Payments)
                 .Include(o => o.Contract)
                 .FirstOrDefaultAsync(o => o.Id == request.Id 
@@ -274,6 +275,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .AsNoTracking()
                 .Include(o => o.Buyer)
                 .Include(o => o.Property)
+                    .ThenInclude(p => p!.Seller)
                 .Include(o => o.Contract)
                 .Include(o => o.Payments)
                 .FirstOrDefaultAsync(o => o.PropertyId == request.PropertyId
@@ -310,6 +312,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .AsNoTracking()
                 .Include(o => o.Buyer)
                 .Include(o => o.Property)
+                    .ThenInclude(p => p!.Seller)
                 .Include(o => o.Payments)
                 .Include(o => o.Contract)
                 .Where(o => o.PropertyId == request.PropertyId
@@ -362,6 +365,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .AsNoTracking()
                 .Include(o => o.Buyer)
                 .Include(o => o.Property)
+                    .ThenInclude(p => p!.Seller)
                 .Include(o => o.Payments)
                 .Include(o => o.Contract)
                 .Where(o => o.BuyerId == request.CustomerId
@@ -402,6 +406,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .AsNoTracking()
                 .Include(o => o.Buyer)
                 .Include(o => o.Property)
+                    .ThenInclude(p => p!.Seller)
                 .Include(o => o.Payments)
                 .Include(o=>o.Contract)
                 .Where(o => o.UserId == request.UserId);
