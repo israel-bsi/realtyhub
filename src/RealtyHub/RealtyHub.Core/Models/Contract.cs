@@ -18,7 +18,7 @@ public class Contract : Entity
     public string Content { get; set; } = string.Empty;
     public bool IsActive { get; set; }
     public string UserId { get; set; } = string.Empty;
-    public Offer Offer { get; set; } = null!;
+    public Offer? Offer { get; set; } = new();
     public Customer? Seller { get; set; }
     public Customer? Buyer { get; set; }
 }

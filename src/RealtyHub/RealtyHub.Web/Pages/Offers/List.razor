@@ -24,9 +24,10 @@
                             Clearable="true" />
     </ToolBarContent>
     <Columns>
-        <PropertyColumn Property="v=>v.SubmissionDate" Title="Data"></PropertyColumn>
-        <PropertyColumn Property="v=>v.Buyer!.Name" Title="Cliente"></PropertyColumn>
-        <PropertyColumn Property="v=>v.Property!.Title" Title="Imóvel"></PropertyColumn>
+        <PropertyColumn Property="v => v.Id" Title="Id"></PropertyColumn>
+        <PropertyColumn Property="v => v.SubmissionDate" Title="Data"></PropertyColumn>
+        <PropertyColumn Property="v => v.Buyer!.Name" Title="Cliente"></PropertyColumn>
+        <PropertyColumn Property="v => v.Property!.Title" Title="Imóvel"></PropertyColumn>
         <TemplateColumn Title="Valor">
             <CellTemplate>
                 @context.Item.Amount.ToString("C")

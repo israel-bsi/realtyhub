@@ -36,21 +36,39 @@ else
 
             <MudTextField Class="mb-2"
                           ReadOnly="true"
-                          Label="@(InputModel.Offer.Buyer == null ? "Clique aqui para pesquisar o cliente" : "Cliente Selecionado")"
-                          AdornmentIcon="@Icons.Material.Filled.PersonSearch"
-                          @onclick="@OpenCustomerDialog"
-                          OnAdornmentClick="OpenCustomerDialog"
+                          Label="@(InputModel.OfferId == 0 ? "Clique aqui para pesquisar a proposta" : "Proposta selecionada")"
+                          AdornmentIcon="@Icons.Material.Filled.Search"
+                          @onclick="@OpenOfferDialog"
+                          OnAdornmentClick="OpenOfferDialog"
                           Adornment="Adornment.End"
-                          Value="@InputModel.Offer.Buyer?.Name" />
+                          Value="@InputModel.Offer?.Property?.Title" />
 
             <MudTextField Class="mb-2"
                           ReadOnly="true"
-                          Label="@(InputModel.Offer.Property == null ? "Clique aqui para pesquisar o imóvel" : "Imóvel Selecionado")"
+                          Label="@(InputModel.Offer?.BuyerId == 0 ? "Clique aqui para pesquisar o comprador" : "Comprador selecionado")"
+                          AdornmentIcon="@Icons.Material.Filled.PersonSearch"
+                          @onclick="@OpenBuyerDialog"
+                          OnAdornmentClick="OpenBuyerDialog"
+                          Adornment="Adornment.End"
+                          Value="@InputModel.Offer?.Buyer?.Name" />
+            
+            <MudTextField Class="mb-2"
+                          ReadOnly="true"
+                          Label="@(InputModel.Offer?.Property?.SellerId == 0 ? "Clique aqui para pesquisar o vendedor" : "Vendedor selecionado")"
+                          AdornmentIcon="@Icons.Material.Filled.PersonSearch"
+                          @onclick="@OpenSellerDialog"
+                          OnAdornmentClick="OpenSellerDialog"
+                          Adornment="Adornment.End"
+                          Value="@InputModel.Offer?.Property?.Seller?.Name" />
+
+            <MudTextField Class="mb-2"
+                          ReadOnly="true"
+                          Label="@(InputModel.Offer?.PropertyId == 0 ? "Clique aqui para pesquisar o imóvel" : "Imóvel selecionado")"
                           AdornmentIcon="@Icons.Material.Filled.Search"
                           @onclick="@OpenPropertyDialog"
                           OnAdornmentClick="OpenPropertyDialog"
                           Adornment="Adornment.End"
-                          Value="@InputModel.Offer.Property?.Title" />
+                          Value="@InputModel.Offer?.Property?.Title" />
 
             <MudButton ButtonType="ButtonType.Submit"
                        Variant="Variant.Filled"

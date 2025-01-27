@@ -5,6 +5,7 @@ using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.Contracts;
 using RealtyHub.Core.Requests.Offers;
 using RealtyHub.Web.Components.Customers;
+using RealtyHub.Web.Components.Offers;
 using RealtyHub.Web.Components.Properties;
 
 namespace RealtyHub.Web.Components.Contracts;
@@ -14,6 +15,7 @@ public partial class ContractFormComponent : ComponentBase
     #region Parameters
 
     [Parameter]
+    [SupplyParameterFromQuery(Name = "Id")]
     public long ContractId { get; set; }
 
     [Parameter]
@@ -112,35 +114,6 @@ public partial class ContractFormComponent : ComponentBase
             await OnSubmitButtonClicked.InvokeAsync();
     }
 
-    public async Task OpenCustomerDialog()
-    {
-        if (LockCustomerSearch) return;
-        var parameters = new DialogParameters
-        {
-            { "OnCustomerSelected", EventCallback.Factory
-                .Create<Customer>(this, SelectedCustomer) }
-        };
-        var options = new DialogOptions
-        {
-            CloseButton = true,
-            MaxWidth = MaxWidth.Large,
-            FullWidth = true
-        };
-        var dialog = await DialogService
-            .ShowAsync<CustomerDialog>("Informe o Cliente", parameters, options);
-        var result = await dialog.Result;
-
-        if (result is { Canceled: false, Data: Customer selectedCustomer })
-            SelectedCustomer(selectedCustomer);
-    }
-    private void SelectedCustomer(Customer customer)
-    {
-        InputModel.Offer.Buyer = customer;
-        InputModel.Offer.BuyerId = customer.Id;
-        EditFormKey++;
-        StateHasChanged();
-    }
-
     public async Task OpenPropertyDialog()
     {
         if (LockPropertySearch) return;
@@ -165,8 +138,98 @@ public partial class ContractFormComponent : ComponentBase
     }
     private void SelectedProperty(Property property)
     {
-        InputModel.Offer.Property = property;
+        InputModel.Offer!.Property = property;
         InputModel.Offer.PropertyId = property.Id;
+        EditFormKey++;
+        StateHasChanged();
+    }
+
+    public async Task OpenOfferDialog()
+    {
+        if (LockPropertySearch) return;
+        var parameters = new DialogParameters
+        {
+            { "OnOfferSelected", EventCallback.Factory
+                .Create<Offer>(this, SelectedOffer) }
+        };
+        var options = new DialogOptions
+        {
+            CloseButton = true,
+            MaxWidth = MaxWidth.Large,
+            FullWidth = true
+        };
+        var dialog = await DialogService
+            .ShowAsync<OfferDialog>("Informe a proposta", parameters, options);
+        var result = await dialog.Result;
+        if (result is { Canceled: false, Data: Offer offer })
+            SelectedOffer(offer);
+    }
+    private void SelectedOffer(Offer offer)
+    {
+        InputModel.OfferId = offer.Id;
+        InputModel.Offer = offer;
+        InputModel.Seller = offer.Property!.Seller;
+        InputModel.SellerId = offer.Property.SellerId;
+        InputModel.Buyer = offer.Buyer;
+        InputModel.BuyerId = offer.BuyerId;
+        EditFormKey++;
+        StateHasChanged();
+    }
+
+    public async Task OpenBuyerDialog()
+    {
+        if (LockCustomerSearch) return;
+        var parameters = new DialogParameters
+        {
+            { "OnCustomerSelected", EventCallback.Factory
+                .Create<Customer>(this, SelectedBuyer) }
+        };
+        var options = new DialogOptions
+        {
+            CloseButton = true,
+            MaxWidth = MaxWidth.Large,
+            FullWidth = true
+        };
+        var dialog = await DialogService
+            .ShowAsync<CustomerDialog>("Informe o comprador", parameters, options);
+        var result = await dialog.Result;
+
+        if (result is { Canceled: false, Data: Customer buyer })
+            SelectedBuyer(buyer);
+    }
+    private void SelectedBuyer(Customer buyer)
+    {
+        InputModel.Buyer = buyer;
+        InputModel.BuyerId = buyer.Id;
+        EditFormKey++;
+        StateHasChanged();
+    }
+
+    public async Task OpenSellerDialog()
+    {
+        if (LockCustomerSearch) return;
+        var parameters = new DialogParameters
+        {
+            { "OnCustomerSelected", EventCallback.Factory
+                .Create<Customer>(this, SelectedSeller) }
+        };
+        var options = new DialogOptions
+        {
+            CloseButton = true,
+            MaxWidth = MaxWidth.Large,
+            FullWidth = true
+        };
+        var dialog = await DialogService
+            .ShowAsync<CustomerDialog>("Informe o vendedor", parameters, options);
+        var result = await dialog.Result;
+
+        if (result is { Canceled: false, Data: Customer seller })
+            SelectedSeller(seller);
+    }
+    private void SelectedSeller(Customer seller)
+    {
+        InputModel.Seller = seller;
+        InputModel.SellerId = seller.Id;
         EditFormKey++;
         StateHasChanged();
     }
@@ -190,8 +253,9 @@ public partial class ContractFormComponent : ComponentBase
                     return;
                 }
                 Snackbar.Add(response.Message ?? string.Empty, Severity.Error);
+                return;
             }
-            else if (OfferId != 0)
+            if (OfferId != 0)
             {
                 var request = new GetOfferByIdRequest { Id = OfferId };
                 var response = await OfferHandler.GetByIdAsync(request);
@@ -202,8 +266,9 @@ public partial class ContractFormComponent : ComponentBase
                     return;
                 }
                 Snackbar.Add(response.Message ?? string.Empty, Severity.Error);
+                return;
             }
-            else if (PropertyId != 0)
+            if (PropertyId != 0)
             {
                 var request = new GetOfferAcceptedByProperty { PropertyId = PropertyId };
                 var response = await OfferHandler.GetAcceptedByProperty(request);
