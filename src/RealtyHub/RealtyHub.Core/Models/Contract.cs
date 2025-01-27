@@ -15,7 +15,7 @@ public class Contract : Entity
     [Required(ErrorMessage = "A data de término é obrigatoria")]
     public DateTime? TermEndDate { get; set; }
     public DateTime? SignatureDate { get; set; }
-    public string Content { get; set; } = string.Empty;
+    public string FileId { get; set; } = string.Empty;
     public bool IsActive { get; set; }
     public string UserId { get; set; } = string.Empty;
     public Offer? Offer { get; set; } = new();

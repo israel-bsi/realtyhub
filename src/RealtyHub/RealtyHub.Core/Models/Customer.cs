@@ -31,6 +31,8 @@ public class Customer : Entity
     [ValidateComplexType]
     public Address Address { get; set; } = new();
     public string Rg { get; set; } = string.Empty;
+    public string IssuingAuthority { get; set; } = string.Empty;
+    public DateTime? RgIssueDate { get; set; }
     public string BusinessName { get; set; } = string.Empty;
     public EMaritalStatus MaritalStatus { get; set; } = EMaritalStatus.Single;
     public bool IsActive { get; set; }

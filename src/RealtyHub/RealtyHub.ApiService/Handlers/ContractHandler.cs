@@ -36,21 +36,9 @@ public class ContractHandler(AppDbContext context) : IContractHandler
                 SignatureDate = request.SignatureDate,
                 EffectiveDate = request.EffectiveDate,
                 TermEndDate = request.TermEndDate,
-                Content = $"Contrato do cliente {offer.Buyer!.Name}\n" +
-                                    $"Documento: {offer.Buyer.DocumentNumber}\n" +
-                                    $"Tipo Cliente: {offer.Buyer.PersonType}\n" +
-                                    $"Telefone: {offer.Buyer.Phone}\n" +
-                                    $"Email: {offer.Buyer.Email}\n" +
-                                    $"Valor: {offer.Amount}\n" +
-                                    $"Data de emissão: {request.IssueDate}\n" +
-                                    $"Data de assinatura: {request.SignatureDate}\n" +
-                                    $"Data de vigência: {request.EffectiveDate}\n" +
-                                    $"Data de término: {request.TermEndDate}\n" +
-                                    $"Imovel: {offer.Property!.Title}\n" +
-                                    $"Endereço: {offer.Property.Address.Neighborhood}\n",
                 Buyer = offer.Buyer,
                 BuyerId = offer.Buyer!.Id,
-                SellerId = offer.Property.SellerId,
+                SellerId = offer.Property!.SellerId,
                 Seller = offer.Property.Seller,
                 Offer = offer,
                 OfferId = offer.Id,

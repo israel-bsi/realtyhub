@@ -44,7 +44,7 @@ public class ContractContentMapping : IEntityTypeConfiguration<ContractContent>
         builder.HasData(new ContractContent
         {
             Id = "a2c16556-5098-4496-ae7a-1f9b6d0e8fcf",
-            Extension = ".pdf",
+            Extension = ".docx",
             Type = EContractModelType.PJPJ,
             Name = "Modelo de Contrato - PJPJ",
             UserId = "",
@@ -55,7 +55,7 @@ public class ContractContentMapping : IEntityTypeConfiguration<ContractContent>
         builder.HasData(new ContractContent
         {
             Id = "f7581a63-f4f0-4881-b6ed-6a4100b4182e",
-            Extension = ".pdf",
+            Extension = ".docx",
             Type = EContractModelType.PFPF,
             Name = "Modelo de Contrato - PFPF",
             UserId = "",
@@ -66,7 +66,7 @@ public class ContractContentMapping : IEntityTypeConfiguration<ContractContent>
         builder.HasData(new ContractContent
         {
             Id = "2f4c556d-6850-4b3d-afe9-d7c2bd282718",
-            Extension = ".pdf",
+            Extension = ".docx",
             Type = EContractModelType.PFPJ,
             Name = "Modelo de Contrato - PFPJ",
             UserId = "",
@@ -77,7 +77,7 @@ public class ContractContentMapping : IEntityTypeConfiguration<ContractContent>
         builder.HasData(new ContractContent
         {
             Id = "fd7ed50d-8f42-4288-8877-3cb8095370e7",
-            Extension = ".pdf",
+            Extension = ".docx",
             Type = EContractModelType.PJPF,
             Name = "Modelo de Contrato - PJPF",
             UserId = "",

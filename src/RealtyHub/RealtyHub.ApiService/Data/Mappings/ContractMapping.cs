@@ -20,7 +20,7 @@ public class ContractMapping : IEntityTypeConfiguration<Contract>
 
         builder.Property(c => c.TermEndDate);
 
-        builder.Property(c => c.Content)
+        builder.Property(c => c.FileId)
             .IsRequired();
 
         builder.Property(c => c.UserId)
