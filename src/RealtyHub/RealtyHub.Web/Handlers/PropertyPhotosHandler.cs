@@ -30,12 +30,8 @@ public class PropertyPhotosHandler(IHttpClientFactory httpClientFactory) : IProp
         var url = $"/v1/properties/{request.PropertyId}/photos";
         var response = await _httpClient.PostAsync(url, content);
 
-        var data = await response.Content.ReadFromJsonAsync<Response<PropertyPhoto?>>();
-
-        if (!response.IsSuccessStatusCode)
-            return new Response<PropertyPhoto?>(null, (int)response.StatusCode, data?.Message);
-
-        return data ?? new Response<PropertyPhoto?>(null, 400, "Falha ao adicionar as fotos");
+        return await response.Content.ReadFromJsonAsync<Response<PropertyPhoto?>>() 
+               ?? new Response<PropertyPhoto?>(null, 400, "Falha ao adicionar as fotos");
     }
 
     public async Task<Response<List<PropertyPhoto>?>> UpdateAsync(UpdatePorpertyPhotosRequest request)
@@ -43,12 +39,8 @@ public class PropertyPhotosHandler(IHttpClientFactory httpClientFactory) : IProp
         var url = $"/v1/properties/{request.PropertyId}/photos";
         var result = await _httpClient.PutAsJsonAsync(url, request);
 
-        if (!result.IsSuccessStatusCode)
-            return new Response<List<PropertyPhoto>?>(null, 400, "Falha ao atualizar as fotos");
-
-        var data = await result.Content.ReadFromJsonAsync<Response<List<PropertyPhoto>?>>();
-
-        return data ?? new Response<List<PropertyPhoto>?>(data?.Data, 400, data?.Message);
+        return await result.Content.ReadFromJsonAsync<Response<List<PropertyPhoto>?>>() 
+               ?? new Response<List<PropertyPhoto>?>(null, 400, "Falha ao atualizar as fotos");
     }
 
     public async Task<Response<PropertyPhoto?>> DeleteAsync(DeletePropertyPhotoRequest request)
@@ -57,11 +49,8 @@ public class PropertyPhotosHandler(IHttpClientFactory httpClientFactory) : IProp
 
         var response = await _httpClient.DeleteAsync(url);
 
-        var data = await response.Content.ReadFromJsonAsync<Response<PropertyPhoto?>>();
-        if (!response.IsSuccessStatusCode)
-
-            return new Response<PropertyPhoto?>(null, (int)response.StatusCode, data?.Message);
-        return data ?? new Response<PropertyPhoto?>(null, 400, "Falha ao deletar a foto");
+        return await response.Content.ReadFromJsonAsync<Response<PropertyPhoto?>>() 
+               ?? new Response<PropertyPhoto?>(null, 400, "Falha ao deletar a foto");
     }
 
     public async Task<Response<List<PropertyPhoto>?>> GetAllByPropertyAsync(
@@ -71,10 +60,7 @@ public class PropertyPhotosHandler(IHttpClientFactory httpClientFactory) : IProp
 
         var response = await _httpClient.GetAsync(url);
 
-        var data = await response.Content.ReadFromJsonAsync<Response<List<PropertyPhoto>?>>();
-        if (!response.IsSuccessStatusCode)
-
-            return new Response<List<PropertyPhoto>?>(null, (int)response.StatusCode, data?.Message);
-        return data ?? new Response<List<PropertyPhoto>?>(null, 400, "Falha ao buscar as fotos");
+        return await response.Content.ReadFromJsonAsync<Response<List<PropertyPhoto>?>>() 
+               ?? new Response<List<PropertyPhoto>?>(null, 400, "Falha ao buscar as fotos");
     }
 }

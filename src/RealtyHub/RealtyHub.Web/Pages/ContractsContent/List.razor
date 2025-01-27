@@ -1,5 +1,30 @@
-﻿<h3>List</h3>
+﻿@page "/contratos/modelos"
+@using RealtyHub.Core.Models
+@inherits ListContractsContentPage
 
-@code {
+<MudText Typo="Typo.h3">Modelos de Contratos</MudText>
 
-}
+<MudDataGrid T="ContractContent"
+             Class="mt-4"
+             ServerData="LoadServerData"
+             @ref="DataGrid"
+             RowsPerPage="@Core.Configuration.DefaultPageSize">
+
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">Modelos de Contratos</MudText>
+        <MudSpacer />
+    </ToolBarContent>
+    <Columns>
+        <PropertyColumn Property="c => c.Id" Title="Id"></PropertyColumn>
+        <PropertyColumn Property="c => c.Name" Title="Nome"></PropertyColumn>
+        <TemplateColumn Class="justify-end" Title="Exibir">
+            <CellTemplate>
+                <MudTooltip Text="Exibir em nova página">
+                    <MudIconButton Icon="@Icons.Material.Filled.OpenInBrowser"
+                                   Color="Color.Primary" 
+                                   OnClick="() => ShowInNewPage(context.Item)" />
+                </MudTooltip>
+            </CellTemplate>
+        </TemplateColumn>
+    </Columns>
+</MudDataGrid>

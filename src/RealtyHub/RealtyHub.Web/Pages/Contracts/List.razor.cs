@@ -4,7 +4,6 @@ using RealtyHub.Core.Extensions;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.Contracts;
-using RealtyHub.Core.Requests.Customers;
 using RealtyHub.Web.Components.Common;
 
 namespace RealtyHub.Web.Pages.Contracts;

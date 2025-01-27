@@ -7,4 +7,6 @@ public class ContractContent : Entity
     public string Name { get; set; } = string.Empty;
     public string UserId { get; set; } = string.Empty;
     public bool IsActive { get; set; }
+    public string Path => 
+        $"{Configuration.BackendUrl}/contracts/{Id}{Extension}";
 }
