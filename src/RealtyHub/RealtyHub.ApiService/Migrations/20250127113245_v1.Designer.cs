@@ -12,8 +12,8 @@ using RealtyHub.ApiService.Data;
 namespace RealtyHub.ApiService.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250126020218_v2")]
-    partial class v2
+    [Migration("20250127113245_v1")]
+    partial class v1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -307,6 +307,37 @@ namespace RealtyHub.ApiService.Migrations
                     b.ToTable("Contract", (string)null);
                 });
 
+            modelBuilder.Entity("RealtyHub.Core.Models.ContractContent", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Extension")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ContractsContent");
+                });
+
             modelBuilder.Entity("RealtyHub.Core.Models.Customer", b =>
                 {
                     b.Property<long>("Id")
@@ -526,8 +557,15 @@ namespace RealtyHub.ApiService.Migrations
                     b.Property<int>("PropertyType")
                         .HasColumnType("integer");
 
+                    b.Property<string>("RegistryNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("RegistryRecord")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<long>("SellerId")
-                        .HasMaxLength(120)
                         .HasColumnType("bigint");
 
                     b.Property<bool>("ShowInHome")
@@ -605,13 +643,13 @@ namespace RealtyHub.ApiService.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
+                    b.Property<long>("BuyerId")
+                        .HasColumnType("bigint");
+
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
                         .HasDefaultValueSql("NOW()");
-
-                    b.Property<long>("CustomerId")
-                        .HasColumnType("bigint");
 
                     b.Property<long>("PropertyId")
                         .HasColumnType("bigint");
@@ -634,7 +672,7 @@ namespace RealtyHub.ApiService.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("BuyerId");
 
                     b.HasIndex("PropertyId");
 
@@ -894,9 +932,9 @@ namespace RealtyHub.ApiService.Migrations
 
             modelBuilder.Entity("RealtyHub.Core.Models.Viewing", b =>
                 {
-                    b.HasOne("RealtyHub.Core.Models.Customer", "Customer")
+                    b.HasOne("RealtyHub.Core.Models.Customer", "Buyer")
                         .WithMany()
-                        .HasForeignKey("CustomerId")
+                        .HasForeignKey("BuyerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -906,7 +944,7 @@ namespace RealtyHub.ApiService.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Customer");
+                    b.Navigation("Buyer");
 
                     b.Navigation("Property");
                 });

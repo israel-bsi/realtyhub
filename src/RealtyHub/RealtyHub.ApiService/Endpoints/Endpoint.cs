@@ -49,15 +49,15 @@ public static class Endpoint
             .MapEndpoint<CreatePropertyEndpoint>()
             .MapEndpoint<UpdatePropertyEndpoint>()
             .MapEndpoint<DeletePropertyEndpoint>()
-            .MapEndpoint<GetPropertyByIdEndpoint>()
             .MapEndpoint<CreatePropertyPhotosEndpoint>()
             .MapEndpoint<DeletePropertyPhotoEndpoint>()
-            .MapEndpoint<GetAllPropertyPhotosByPropertyEndpoint>()
             .MapEndpoint<GetAllViewingsByPropertyEndpoint>()
             .MapEndpoint<UpdatePropertyPhotosEndpoint>();
 
         endpoints.MapGroup("v1/properties")
             .WithTags("Properties")
+            .MapEndpoint<GetPropertyByIdEndpoint>()
+            .MapEndpoint<GetAllPropertyPhotosByPropertyEndpoint>()
             .MapEndpoint<GetAllPropertiesEndpoint>();
 
         endpoints.MapGroup("v1/viewings")

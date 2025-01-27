@@ -37,6 +37,7 @@ public partial class ListCustomersPage : ComponentBase
     #endregion
 
     #region Services
+
     [Inject]
     public ISnackbar Snackbar { get; set; } = null!;
 

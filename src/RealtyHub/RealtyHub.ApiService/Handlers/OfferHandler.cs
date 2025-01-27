@@ -19,7 +19,6 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .Properties
                 .AsNoTracking()
                 .FirstOrDefaultAsync(p => p.Id == request.PropertyId
-                                          && p.UserId == request.UserId
                                           && p.IsActive);
 
             if (property is null)
@@ -82,8 +81,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .Include(o => o.Property)
                 .Include(o => o.Payments)
                 .Include(o => o.Contract)
-                .FirstOrDefaultAsync(o => o.Id == request.Id 
-                                          && o.UserId == request.UserId);
+                .FirstOrDefaultAsync(o => o.Id == request.Id);
 
             if (offer is null)
                 return new Response<Offer?>(null, 404,
@@ -169,8 +167,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .Include(o => o.Property)
                 .Include(o => o.Payments)
                 .Include(o => o.Contract)
-                .FirstOrDefaultAsync(o => o.Id == request.Id 
-                                          && o.UserId == request.UserId);
+                .FirstOrDefaultAsync(o => o.Id == request.Id);
 
             if (offer is null)
                 return new Response<Offer?>(null, 404,
@@ -210,8 +207,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .Include(o => o.Property)
                 .Include(o => o.Payments)
                 .Include(o => o.Contract)
-                .FirstOrDefaultAsync(o => o.Id == request.Id 
-                                          && o.UserId == request.UserId);
+                .FirstOrDefaultAsync(o => o.Id == request.Id);
 
             if (offer is null)
                 return new Response<Offer?>(null, 404,
@@ -253,8 +249,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                     .ThenInclude(p=>p!.Seller)
                 .Include(o => o.Payments)
                 .Include(o => o.Contract)
-                .FirstOrDefaultAsync(o => o.Id == request.Id 
-                                          && o.UserId == request.UserId);
+                .FirstOrDefaultAsync(o => o.Id == request.Id);
 
             return offer == null
                 ? new Response<Offer?>(null, 404, "Proposta não encontrada")
@@ -279,7 +274,6 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .Include(o => o.Contract)
                 .Include(o => o.Payments)
                 .FirstOrDefaultAsync(o => o.PropertyId == request.PropertyId
-                                          && o.UserId == request.UserId
                                           && o.OfferStatus == EOfferStatus.Accepted);
             return offer is null
                 ? new Response<Offer?>(null, 404, "Proposta aceita não encontrada")
@@ -300,7 +294,6 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .Properties
                 .AsNoTracking()
                 .FirstOrDefaultAsync(p => p.Id == request.PropertyId 
-                                          && p.UserId == request.UserId 
                                           && p.IsActive);
 
             if (property is null)
@@ -315,8 +308,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                     .ThenInclude(p => p!.Seller)
                 .Include(o => o.Payments)
                 .Include(o => o.Contract)
-                .Where(o => o.PropertyId == request.PropertyId
-                            && o.UserId == request.UserId);
+                .Where(o => o.PropertyId == request.PropertyId);
 
             if (request.StartDate is not null && request.EndDate is not null)
             {
@@ -353,7 +345,6 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .Customers
                 .AsNoTracking()
                 .FirstOrDefaultAsync(p => p.Id == request.CustomerId 
-                                          && p.UserId == request.UserId 
                                           && p.IsActive);
 
             if (customer is null)
@@ -406,10 +397,9 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .AsNoTracking()
                 .Include(o => o.Buyer)
                 .Include(o => o.Property)
-                    .ThenInclude(p => p!.Seller)
+                .ThenInclude(p => p!.Seller)
                 .Include(o => o.Payments)
-                .Include(o=>o.Contract)
-                .Where(o => o.UserId == request.UserId);
+                .Include(o => o.Contract);
 
             var offers = await query
                 .Skip((request.PageNumber - 1) * request.PageSize)

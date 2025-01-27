@@ -304,6 +304,37 @@ namespace RealtyHub.ApiService.Migrations
                     b.ToTable("Contract", (string)null);
                 });
 
+            modelBuilder.Entity("RealtyHub.Core.Models.ContractContent", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Extension")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ContractsContent");
+                });
+
             modelBuilder.Entity("RealtyHub.Core.Models.Customer", b =>
                 {
                     b.Property<long>("Id")
@@ -532,7 +563,6 @@ namespace RealtyHub.ApiService.Migrations
                         .HasColumnType("text");
 
                     b.Property<long>("SellerId")
-                        .HasMaxLength(120)
                         .HasColumnType("bigint");
 
                     b.Property<bool>("ShowInHome")

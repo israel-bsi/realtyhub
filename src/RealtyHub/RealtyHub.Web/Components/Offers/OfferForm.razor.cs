@@ -5,6 +5,7 @@ using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.Offers;
 using RealtyHub.Core.Requests.Properties;
+using System.Text.RegularExpressions;
 
 namespace RealtyHub.Web.Components.Offers;
 
@@ -35,6 +36,7 @@ public partial class OfferFormComponent : ComponentBase
     public Offer InputModel { get; set; } = new();
     public string Operation => OfferId == 0 ? "Enviar" : "Editar";
     public bool DisableAddPayment => InputModel.Payments.Count >= 5;
+    public string Pattern = @"\D";
 
     #endregion
 
@@ -62,12 +64,14 @@ public partial class OfferFormComponent : ComponentBase
         try
         {
             string message;
+            InputModel.Buyer!.Phone = Regex.Replace(InputModel.Buyer.Phone, Pattern, "");
             if (OfferId == 0)
             {
                 var response = await OfferHandler.CreateAsync(InputModel);
                 if (response.IsSuccess)
                 {
-                    Snackbar.Add("Proposta cadastrada com sucesso", Severity.Success);
+                    Snackbar.Add("Proposta enviada com sucesso", Severity.Success);
+                    Snackbar.Add("Aguarde nosso contato", Severity.Success);
                     await OnSubmitButtonClickedAsync();
                     NavigationManager.NavigateTo("/home");
                     return;

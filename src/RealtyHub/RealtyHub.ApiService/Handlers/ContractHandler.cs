@@ -19,8 +19,7 @@ public class ContractHandler(AppDbContext context) : IContractHandler
                 .Include(o => o.Buyer)
                 .Include(o => o.Property)
                 .ThenInclude(o=>o!.Seller)
-                .FirstOrDefaultAsync(o => o.Id == request.OfferId
-                                          && o.UserId == request.UserId);
+                .FirstOrDefaultAsync(o => o.Id == request.OfferId);
 
             if (offer is null)
                 return new Response<Contract?>(null, 404, "Proposta não encontrada");
@@ -79,7 +78,7 @@ public class ContractHandler(AppDbContext context) : IContractHandler
                 .Include(o => o.Seller)
                 .Include(o => o.Buyer)
                 .Include(o => o.Offer)
-                .ThenInclude(o => o.Property)
+                .ThenInclude(o => o!.Property)
                 .FirstOrDefaultAsync(c => c.Id == request.Id 
                                           && c.UserId == request.UserId 
                                           && c.IsActive);
@@ -91,8 +90,7 @@ public class ContractHandler(AppDbContext context) : IContractHandler
                 .Offers
                 .Include(offer => offer.Property)
                 .ThenInclude(property => property!.Seller)
-                .FirstOrDefaultAsync(o => o.Id == request.OfferId 
-                                          && o.UserId == request.UserId);
+                .FirstOrDefaultAsync(o => o.Id == request.OfferId);
 
             if (offer is null)
                 return new Response<Contract?>(null, 404, "Proposta não encontrada");
@@ -153,9 +151,9 @@ public class ContractHandler(AppDbContext context) : IContractHandler
                 .Contracts
                 .AsNoTracking()
                 .Include(c => c.Offer)
-                .ThenInclude(o => o.Buyer)
-                .Include(c => c.Offer.Property)
-                .ThenInclude(p => p!.Seller)
+                .ThenInclude(o=>o!.Property)
+                .Include(c=>c.Buyer)
+                .Include(c=>c.Seller)
                 .FirstOrDefaultAsync(c => c.Id == request.Id 
                                           && c.UserId == request.UserId
                                           && c.IsActive);
@@ -178,9 +176,9 @@ public class ContractHandler(AppDbContext context) : IContractHandler
                 .Contracts
                 .AsNoTracking()
                 .Include(c => c.Offer)
-                .ThenInclude(o => o.Buyer)
-                .Include(c => c.Offer.Property)
-                .ThenInclude(p => p!.Seller)
+                .ThenInclude(o => o!.Property)
+                .Include(c => c.Buyer)
+                .Include(c => c.Seller)
                 .Where(c => c.UserId == request.UserId && c.IsActive);
 
             var contracts = await query

@@ -15,7 +15,6 @@ public partial class ContractFormComponent : ComponentBase
     #region Parameters
 
     [Parameter]
-    [SupplyParameterFromQuery(Name = "Id")]
     public long ContractId { get; set; }
 
     [Parameter]
@@ -91,6 +90,7 @@ public partial class ContractFormComponent : ComponentBase
                 if (response.IsSuccess)
                 {
                     Snackbar.Add("Contrato alterado com sucesso", Severity.Success);
+                    NavigationManager.NavigateTo("/contratos");
                     await OnSubmitButtonClickedAsync();
                     return;
                 }
@@ -282,6 +282,12 @@ public partial class ContractFormComponent : ComponentBase
                 if (response is { IsSuccess: true, Data: not null })
                 {
                     InputModel = response.Data;
+                    InputModel.Offer = response.Data.Offer;
+                    InputModel.OfferId = response.Data.OfferId;
+                    InputModel.Seller = response.Data.Seller;
+                    InputModel.SellerId = response.Data.SellerId;
+                    InputModel.Buyer = response.Data.Buyer;
+                    InputModel.BuyerId = response.Data.BuyerId;
                     return;
                 }
                 Snackbar.Add(response.Message ?? string.Empty, Severity.Error);
@@ -295,6 +301,10 @@ public partial class ContractFormComponent : ComponentBase
                 {
                     InputModel.Offer = response.Data;
                     InputModel.OfferId = OfferId;
+                    InputModel.Seller = response.Data.Property!.Seller;
+                    InputModel.SellerId = response.Data.Property.SellerId;
+                    InputModel.Buyer = response.Data.Buyer;
+                    InputModel.BuyerId = response.Data.BuyerId;
                     return;
                 }
                 Snackbar.Add(response.Message ?? string.Empty, Severity.Error);
@@ -308,6 +318,8 @@ public partial class ContractFormComponent : ComponentBase
                 {
                     InputModel.Offer = response.Data;
                     InputModel.OfferId = response.Data.Id;
+                    InputModel.Seller = response.Data.Property!.Seller;
+                    InputModel.SellerId = response.Data.Property.SellerId;
                     return;
                 }
                 Snackbar.Add(response.Message ?? string.Empty, Severity.Error);

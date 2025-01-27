@@ -7,7 +7,6 @@ using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.Offers;
 using RealtyHub.Web.Components.Common;
 using RealtyHub.Web.Components.Offers;
-using RealtyHub.Web.Components.Contracts;
 
 namespace RealtyHub.Web.Pages.Offers;
 
@@ -150,29 +149,6 @@ public partial class ListOffersPage : ComponentBase
         };
 
         await DialogService.ShowAsync<OfferDialog>("Visualizar proposta", parameters, options);
-    }
-
-    public async Task OnIssueContractClickedAsync(Offer offer)
-    {
-        var options = new DialogOptions
-        {
-            CloseButton = true,
-            MaxWidth = MaxWidth.Medium,
-            CloseOnEscapeKey = true,
-            FullWidth = true
-        };
-
-        var parameters = new DialogParameters
-        {
-            { "OfferId", offer.Id }
-        };
-
-        await DialogService.ShowAsync<ContractDialog>("Emitir contrato", parameters, options);
-    }
-
-    public async Task DownloadContract()
-    {
-        Snackbar.Add("Contrato gerado com sucesso", Severity.Success);
     }
 
     public async Task SelectOffer(Offer offer)

@@ -21,6 +21,7 @@ public partial class CustomerFormComponent : ComponentBase
     #endregion
 
     #region Properties
+    
     public EditContext EditContext = null!;
     private ValidationMessageStore? MessageStore;
     public string Operation => Id != 0
@@ -40,7 +41,6 @@ public partial class CustomerFormComponent : ComponentBase
 
     [Inject]
     public ICustomerHandler Handler { get; set; } = null!;
-
 
     [Inject]
     public NavigationManager NavigationManager { get; set; } = null!;
