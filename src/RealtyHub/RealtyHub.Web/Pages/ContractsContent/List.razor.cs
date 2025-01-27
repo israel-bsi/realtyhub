@@ -27,7 +27,7 @@ public partial class ListContractsContentPage : ComponentBase
     [Inject]
     public IDialogService DialogService { get; set; } = null!;
 
-    [Inject] 
+    [Inject]
     public IJSRuntime JsRuntime { get; set; } = null!;
 
     #endregion
@@ -47,7 +47,9 @@ public partial class ListContractsContentPage : ComponentBase
                 ContractContents = response.Data ?? [];
                 return new GridData<ContractContent>
                 {
-                    Items = ContractContents.OrderByDescending(c => c.UpdatedAt),
+                    Items = ContractContents
+                        .Where(c => c.ShowInPage)
+                        .OrderByDescending(c => c.UpdatedAt),
                     TotalItems = ContractContents.Count
                 };
             }

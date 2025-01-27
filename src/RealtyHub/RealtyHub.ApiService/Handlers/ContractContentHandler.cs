@@ -70,7 +70,6 @@ public class ContractContentHandler(AppDbContext context) : IContractContentHand
                 .ContractsContent
                 .FirstOrDefaultAsync(c =>
                     c.Id == request.Id
-                    && c.UserId == request.UserId
                     && c.IsActive);
 
             if (contractContent is null)
@@ -132,7 +131,6 @@ public class ContractContentHandler(AppDbContext context) : IContractContentHand
                 .ContractsContent
                 .FirstOrDefaultAsync(c =>
                     c.Id == request.Id
-                    && c.UserId == request.UserId
                     && c.IsActive);
 
             if (contractContent is null)
@@ -157,7 +155,7 @@ public class ContractContentHandler(AppDbContext context) : IContractContentHand
             var contracts = await context
                 .ContractsContent
                 .AsNoTracking()
-                .Where(c => c.UserId == request.UserId && c.IsActive)
+                .Where(c => c.IsActive)
                 .ToListAsync();
 
             return new Response<List<ContractContent>?>(contracts);

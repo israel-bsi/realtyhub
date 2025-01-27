@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using RealtyHub.ApiService.Data;
@@ -11,9 +12,11 @@ using RealtyHub.ApiService.Data;
 namespace RealtyHub.ApiService.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250127150653_v3")]
+    partial class v3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -325,9 +328,6 @@ namespace RealtyHub.ApiService.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<bool>("ShowInPage")
-                        .HasColumnType("boolean");
-
                     b.Property<int>("Type")
                         .HasColumnType("integer");
 
@@ -352,7 +352,6 @@ namespace RealtyHub.ApiService.Migrations
                             Extension = ".pdf",
                             IsActive = true,
                             Name = "Modelo de Contrato - PJPJ",
-                            ShowInPage = false,
                             Type = 1,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = ""
@@ -364,7 +363,6 @@ namespace RealtyHub.ApiService.Migrations
                             Extension = ".pdf",
                             IsActive = true,
                             Name = "Modelo de Contrato - PFPF",
-                            ShowInPage = false,
                             Type = 2,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = ""
@@ -376,7 +374,6 @@ namespace RealtyHub.ApiService.Migrations
                             Extension = ".pdf",
                             IsActive = true,
                             Name = "Modelo de Contrato - PFPJ",
-                            ShowInPage = false,
                             Type = 3,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = ""
@@ -388,7 +385,6 @@ namespace RealtyHub.ApiService.Migrations
                             Extension = ".pdf",
                             IsActive = true,
                             Name = "Modelo de Contrato - PJPF",
-                            ShowInPage = false,
                             Type = 4,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = ""
@@ -400,7 +396,6 @@ namespace RealtyHub.ApiService.Migrations
                             Extension = ".pdf",
                             IsActive = true,
                             Name = "Modelo Padrão",
-                            ShowInPage = true,
                             Type = 0,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = ""
