@@ -20,8 +20,8 @@ public class PropertyFake
             .RuleFor(p => p.TransactionsDetails, p => p.Commerce.ProductMaterial())
             .RuleFor(p => p.Address, AddressFake.GetFakeAddress)
             .RuleFor(p => p.SellerId, 1)
-            .RuleFor(p=>p.RegistryNumber, p=>p.Random.Int().ToString())
-            .RuleFor(p=>p.RegistryRecord, p=>p.Random.Int().ToString())
+            .RuleFor(p=>p.RegistryNumber, p=>p.Random.UInt().ToString())
+            .RuleFor(p=>p.RegistryRecord, p=>p.Random.UInt().ToString())
             .RuleFor(p => p.IsNew, true)
             .RuleFor(p => p.ShowInHome, true)
             .RuleFor(p => p.IsActive, true);

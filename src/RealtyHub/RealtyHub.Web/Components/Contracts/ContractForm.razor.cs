@@ -157,7 +157,8 @@ public partial class ContractFormComponent : ComponentBase
         var parameters = new DialogParameters
         {
             { "OnOfferSelected", EventCallback.Factory
-                .Create<Offer>(this, SelectedOffer) }
+                .Create<Offer>(this, SelectedOffer) },
+            { "OnlyAccepted", true }
         };
         var options = new DialogOptions
         {

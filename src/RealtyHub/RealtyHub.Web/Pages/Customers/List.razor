@@ -55,16 +55,19 @@
         <TemplateColumn Class="justify-end" Title="Ações">
             <CellTemplate>
                 <MudStack Row>
-                    <MudIconButton Icon="@Icons.Material.Filled.Edit"
-                                   Href="@($"/clientes/editar/{context.Item.Id}")"
-                                   Color="Color.Primary">
-                    </MudIconButton>
-                    <MudIconButton Icon="@Icons.Material.Filled.Delete"
-                                   Color="Color.Error"
-                                   aria-label="Excluir"
-                                   OnClick="() => OnDeleteButtonClickedAsync
-                                                    (context.Item.Id, context.Item.Name)">
-                    </MudIconButton>
+                    <MudTooltip Text="Editar">
+                        <MudIconButton Icon="@Icons.Material.Filled.Edit"
+                                       Href="@($"/clientes/editar/{context.Item.Id}")"
+                                       Color="Color.Primary">
+                        </MudIconButton>
+                    </MudTooltip>
+                    <MudTooltip Text="Excluir">
+                        <MudIconButton Icon="@Icons.Material.Filled.Delete"
+                                       Color="Color.Error"
+                                       OnClick="() => OnDeleteButtonClickedAsync
+                                           (context.Item.Id, context.Item.Name)">
+                        </MudIconButton>
+                    </MudTooltip>
                 </MudStack>
             </CellTemplate>
         </TemplateColumn>

@@ -21,4 +21,6 @@ public class Contract : Entity
     public Offer? Offer { get; set; } = new();
     public Customer? Seller { get; set; }
     public Customer? Buyer { get; set; }
+    public string FilePath =>
+        $"{Configuration.BackendUrl}/contracts/{FileId}.pdf";
 }

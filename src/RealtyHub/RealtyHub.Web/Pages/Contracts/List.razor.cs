@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using MudBlazor;
 using RealtyHub.Core.Extensions;
 using RealtyHub.Core.Handlers;
@@ -29,6 +30,9 @@ public partial class ListContractsPage : ComponentBase
 
     [Inject]
     public IDialogService DialogService { get; set; } = null!;
+
+    [Inject]
+    public IJSRuntime JsRuntime { get; set; } = null!;
 
     #endregion
 
@@ -74,9 +78,9 @@ public partial class ListContractsPage : ComponentBase
         DataGrid.ReloadServerData();
     }
 
-    public async Task DownloadContract()
+    public async Task ShowInNewPage(Contract contract)
     {
-        Snackbar.Add("Contrato gerado com sucesso", Severity.Success);
+        await JsRuntime.InvokeVoidAsync("openContractPdfInNewTab", contract.FilePath);
     }
 
     public async Task OnDeleteButtonClickedAsync(long id)

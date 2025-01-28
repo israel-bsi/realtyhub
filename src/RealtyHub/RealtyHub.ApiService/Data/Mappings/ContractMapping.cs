@@ -48,5 +48,7 @@ public class ContractMapping : IEntityTypeConfiguration<Contract>
         builder.HasOne(c => c.Buyer)
             .WithMany()
             .HasForeignKey(c => c.BuyerId);
+
+        builder.Ignore(c => c.FilePath);
     }
 }

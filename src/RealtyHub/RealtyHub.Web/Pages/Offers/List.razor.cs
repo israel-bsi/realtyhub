@@ -20,6 +20,9 @@ public partial class ListOffersPage : ComponentBase
     [Parameter]
     public string RowStyle { get; set; } = string.Empty;
 
+    [Parameter] 
+    public bool OnlyAccepted { get; set; }
+
     #endregion
 
     #region Properties
@@ -61,7 +64,13 @@ public partial class ListOffersPage : ComponentBase
             var response = await Handler.GetAllAsync(request);
             if (response.IsSuccess)
             {
-                Items = response.Data ?? new List<Offer>();
+                if (OnlyAccepted)
+                    Items = response.Data?
+                        .Where(o => o.OfferStatus == EOfferStatus.Accepted)
+                        .ToList() ?? new List<Offer>();
+                else
+                    Items = response.Data ?? new List<Offer>();
+
                 return new GridData<Offer>
                 {
                     Items = Items.OrderByDescending(o => o.UpdatedAt),

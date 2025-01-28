@@ -48,13 +48,13 @@
                 </MudTooltip>
                 <MudTooltip Text="Aceitar">
                     <MudIconButton Icon="@Icons.Material.Filled.Done"
-                                   Color="Color.Primary"
+                                   Color="Color.Success"
                                    OnClick="() => OnAcceptClickedAsync(context.Item)"
                                    Disabled="@(context.Item.OfferStatus != EOfferStatus.Analysis)"/>
                 </MudTooltip>
                 <MudTooltip Text="Rejeitar">
                     <MudIconButton Icon="@Icons.Material.Filled.Cancel"
-                                   Color="Color.Primary"
+                                   Color="Color.Error"
                                    OnClick="() => OnRejectClickedAsync(context.Item)"
                                    Disabled="@(context.Item.OfferStatus != EOfferStatus.Analysis)"/>
                 </MudTooltip>

@@ -45,10 +45,10 @@
                                    Color="Color.Error"
                                    OnClick="() => OnDeleteButtonClickedAsync(context.Item.Id)"/>
                 </MudTooltip>
-                <MudTooltip Text="Baixar contrato">
-                    <MudIconButton Icon="@Icons.Material.Filled.Download"
+                <MudTooltip Text="Abrir em nova página">
+                    <MudIconButton Icon="@Icons.Material.Filled.OpenInBrowser"
                                    Color="Color.Primary"
-                                   OnClick="() => DownloadContract()"/>
+                                   OnClick="() => ShowInNewPage(context.Item)" />
                 </MudTooltip>
             </CellTemplate>
         </TemplateColumn>

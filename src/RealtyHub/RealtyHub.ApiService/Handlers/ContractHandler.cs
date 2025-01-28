@@ -212,12 +212,11 @@ public class ContractHandler(AppDbContext context, IHostEnvironment host) : ICon
             .ContractsContent
             .FirstOrDefaultAsync(cm => cm.Type == contractModelType);
 
-        var docxContractGenerator = new DocXContractGenerator();
+        var docxContractGenerator = new ContractGenerator();
         var pathContracts = Path.Combine(host.ContentRootPath, "Sources", "Contracts");
-        var output = Path.Combine(pathContracts, $"{contract.FileId}.docx");
+        var pathContactFile = Path.Combine(pathContracts, $"{contract.Id}.docx");
         if (update)
-            File.Delete(output);
-        var template = Path.Combine(pathContracts, $"{contractModel?.Id}.docx");
-        docxContractGenerator.GenerateContractDocx(template, output, contract);
+            File.Delete(pathContactFile);
+        docxContractGenerator.GenerateContract(pathContracts, contract, contractModel);
     }
 }

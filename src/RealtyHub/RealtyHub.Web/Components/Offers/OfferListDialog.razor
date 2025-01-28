@@ -3,7 +3,9 @@
 
 <MudDialog>
     <DialogContent>
-        <List OnOfferSelected="SelectOffer" RowStyle="cursor: pointer" />
+        <List OnOfferSelected="SelectOffer" 
+              RowStyle="cursor: pointer" 
+              OnlyAccepted="OnlyAccepted" />
     </DialogContent>
     <DialogActions>
         <MudButton OnClick="CloseDialog" Color="Color.Primary">Fechar</MudButton>
@@ -17,6 +19,9 @@
 
     [Parameter]
     public EventCallback<Offer> OnOfferSelected { get; set; }
+
+    [Parameter] 
+    public bool OnlyAccepted { get; set; }
 
     void CloseDialog() => MudDialog.Close();
 
