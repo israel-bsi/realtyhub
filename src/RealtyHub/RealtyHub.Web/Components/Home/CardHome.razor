@@ -1,6 +1,6 @@
 ﻿@inherits CardHomeComponent
 
-<MudItem xs="7" sm="3">
+<MudItem lg="4" md="6" xs="12">
     <MudPaper Elevation="2">
         <MudCard Class="@("mb-4 " + Class)">
             <MudCardHeader>
@@ -8,7 +8,7 @@
                     <MudText Typo="Typo.body2">@Property.Title</MudText>
                 </CardHeaderContent>
             </MudCardHeader>
-            <MudCardMedia Image="@GetSrcPhoto()" Height="250" />
+            <MudCardMedia Image="@GetSrcPhoto()" Height="400" />
             <MudCardContent>
                 <MudText Typo="Typo.caption">@Property.Description</MudText>
             </MudCardContent>

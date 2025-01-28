@@ -20,36 +20,41 @@
              Class="mt-4"
              ServerData="LoadServerData"
              @ref="DataGrid"
-             RowsPerPage="@Core.Configuration.DefaultPageSize" 
-             RowClick="@(e => SelectProperty(e.Item))" 
+             RowsPerPage="@Core.Configuration.DefaultPageSize"
+             RowClick="@(e => SelectProperty(e.Item))"
              RowStyle="@RowStyle">
+
     <ToolBarContent>
         <MudText Typo="Typo.h6">Imóveis</MudText>
         <MudSpacer />
         <MudTextField @bind-Value="SearchTerm"
-                      Placeholder="Filtrar por Título, Descrição e Endereço"
+                      Placeholder="Filtrar por título, descrição e endereço"
                       Adornment="Adornment.Start"
                       AdornmentIcon="@Icons.Material.Filled.Search"
                       Clearable="true"
-                      OnClearButtonClick="@(() => @SearchTerm = "" )"
+                      OnClearButtonClick="@(() => @SearchTerm = "")"
                       Immediate="true"
                       IconSize="Size.Medium"
                       Class="mt-0">
         </MudTextField>
     </ToolBarContent>
     <Columns>
-        <PropertyColumn Property="x => x.Title" Title="Título" />
-        <PropertyColumn Property="x => x.Description" Title="Descrição" />
-        <TemplateColumn Title="Imóvel Novo">
+        <TemplateColumn Title="Foto principal">
             <CellTemplate>
-                @if (context.Item.IsNew)
-                {
-                    <span>Sim</span>
-                }
-                else
-                {
-                    <span>Não</span>
-                }
+                <MudImage Src="@GetSrcThumbnailPhoto(context.Item)"
+                          Width="300"
+                          Height="300"
+                          ObjectFit="ObjectFit.Cover" />
+            </CellTemplate>
+        </TemplateColumn>
+        <PropertyColumn Property="x => x.Title" Title="Título" />
+        <PropertyColumn Property="x => x.Bedroom" Title="Quartos" />
+        <PropertyColumn Property="x => x.Bathroom" Title="Banheiros" />
+        <PropertyColumn Property="x => x.Garage" Title="Garagens" />
+        <PropertyColumn Property="x => x.Area" Title="Área" />
+        <TemplateColumn Title="Preço">
+            <CellTemplate>
+                @context.Item.Price.ToString("C")
             </CellTemplate>
         </TemplateColumn>
         <TemplateColumn Title="Tipo">
@@ -70,14 +75,7 @@
                         <MudIconButton Icon="@Icons.Material.Filled.Delete"
                                        Color="Color.Error"
                                        aria-label="Excluir"
-                                       OnClick="() => OnDeleteButtonClickedAsync
-                                                      (context.Item.Id, context.Item.Title)">
-                        </MudIconButton>
-                    </MudTooltip>
-                    <MudTooltip Text="Agendar Visita">
-                        <MudIconButton Icon="@Icons.Material.Filled.ScheduleSend" 
-                                       Color="Color.Primary" 
-                                       OnClick="() => OnScheduleButtonClickedAsync(context.Item)">
+                                       OnClick="() => OnDeleteButtonClickedAsync(context.Item.Id, context.Item.Title)">
                         </MudIconButton>
                     </MudTooltip>
                 </MudStack>
