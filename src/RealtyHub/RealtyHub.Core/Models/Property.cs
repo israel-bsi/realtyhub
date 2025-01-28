@@ -41,3 +41,9 @@ public class Property : Entity
     public List<PropertyPhoto> PropertyPhotos { get; set; } = [];
     public Customer? Seller { get; set; }
 }
+
+public class FilterOption
+{
+    public string DisplayName { get; set; }
+    public string PropertyName { get; set; }
+}

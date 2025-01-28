@@ -23,17 +23,20 @@ public partial class ListPropertiesPage : ComponentBase
 
     public MudDataGrid<Property> DataGrid { get; set; } = null!;
     public List<Property> Properties { get; set; } = [];
-    private string _searchTerm = string.Empty;
-    public string SearchTerm
+    public string SearchTerm { get; set; } = string.Empty;
+    public string SelectedFilter { get; set; } = string.Empty;
+
+    public readonly List<FilterOption> FilterOptions = new()
     {
-        get => _searchTerm;
-        set
-        {
-            if (_searchTerm == value) return;
-            _searchTerm = value;
-            _ = DataGrid.ReloadServerData();
-        }
-    }
+        new FilterOption { DisplayName = "Título", PropertyName = "Title" },
+        new FilterOption { DisplayName = "Descrição", PropertyName = "Description" },
+        new FilterOption { DisplayName = "Bairro", PropertyName = "Address.Neighborhood" },
+        new FilterOption { DisplayName = "Rua", PropertyName = "Address.Street" },
+        new FilterOption { DisplayName = "Cidade", PropertyName = "Address.City" },
+        new FilterOption { DisplayName = "Estado", PropertyName = "Address.State" },
+        new FilterOption { DisplayName = "CEP", PropertyName = "Address.ZipCode" },
+        new FilterOption { DisplayName = "País", PropertyName = "Address.Country" }
+    };
 
     #endregion
 
@@ -76,6 +79,7 @@ public partial class ListPropertiesPage : ComponentBase
         await OnDeleteAsync(id, title);
         StateHasChanged();
     }
+
     private async Task OnDeleteAsync(long id, string name)
     {
         try
@@ -90,6 +94,7 @@ public partial class ListPropertiesPage : ComponentBase
             Snackbar.Add(e.Message, Severity.Success);
         }
     }
+    
     public async Task<GridData<Property>> LoadServerData(GridState<Property> state)
     {
         try
@@ -98,7 +103,8 @@ public partial class ListPropertiesPage : ComponentBase
             {
                 PageNumber = state.Page + 1,
                 PageSize = state.PageSize,
-                SearchTerm = SearchTerm
+                SearchTerm = SearchTerm,
+                FilterBy = SelectedFilter
             };
 
             var response = await Handler.GetAllAsync(request);
@@ -118,11 +124,27 @@ public partial class ListPropertiesPage : ComponentBase
             return new GridData<Property>();
         }
     }
+
+    public void OnButtonSearchClick() => DataGrid.ReloadServerData();
+
+    public void OnClearSearchClick()
+    {
+        SearchTerm = string.Empty;
+        DataGrid.ReloadServerData();
+    }
+
+    public void OnValueFilterChanged(string newValue)
+    {
+        SelectedFilter = newValue;
+        StateHasChanged();
+    }
+
     public async Task SelectProperty(Property property)
     {
         if (OnPropertySelected.HasDelegate)
             await OnPropertySelected.InvokeAsync(property);
     }
+    
     public string GetSrcThumbnailPhoto(Property property)
     {
         var photo = property

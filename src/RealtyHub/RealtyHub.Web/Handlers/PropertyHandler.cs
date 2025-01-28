@@ -55,6 +55,9 @@ public class PropertyHandler(IHttpClientFactory httpClientFactory) : IPropertyHa
     {
         var url = $"v1/properties?pageNumber={request.PageNumber}&pageSize={request.PageSize}";
 
+        if (!string.IsNullOrEmpty(request.FilterBy))
+            url = $"{url}&filterBy={request.FilterBy}";
+
         if (!string.IsNullOrEmpty(request.SearchTerm))
             url = $"{url}&searchTerm={request.SearchTerm}";
 
@@ -70,6 +73,9 @@ public class PropertyHandler(IHttpClientFactory httpClientFactory) : IPropertyHa
 
         if (!string.IsNullOrEmpty(request.SearchTerm))
             url = $"{url}&searchTerm={request.SearchTerm}";
+
+        if (!string.IsNullOrEmpty(request.FilterBy))
+            url = $"{url}&filterBy={request.FilterBy}";
 
         if (request.StartDate is not null & request.EndDate is not null)
             url = $"{url}&startDate={request.StartDate}&endDate={request.EndDate}";

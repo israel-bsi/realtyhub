@@ -5,6 +5,8 @@ using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.Properties;
 using RealtyHub.Core.Responses;
 
+using System.Linq.Dynamic.Core;
+
 namespace RealtyHub.ApiService.Handlers;
 
 public class PropertyHandler(AppDbContext context) : IPropertyHandler
@@ -119,9 +121,9 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
             var query = context
                 .Properties
                 .AsNoTracking()
-                .Include(p=>p.Seller)
-                .Include(p => p.PropertyPhotos.Where(photo=>photo.IsActive))
-                .Where(p=>p.Id == request.Id && p.IsActive);
+                .Include(p => p.Seller)
+                .Include(p => p.PropertyPhotos.Where(photo => photo.IsActive))
+                .Where(p => p.Id == request.Id && p.IsActive);
 
             if (!string.IsNullOrEmpty(request.UserId))
                 query = query.Where(p => p.UserId == request.UserId);
@@ -146,22 +148,15 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
                 .Properties
                 .AsNoTracking()
                 .Include(p => p.Seller)
-                .Include(p => p.PropertyPhotos.Where(photos=> photos.IsActive))
+                .Include(p => p.PropertyPhotos.Where(photos => photos.IsActive))
                 .Where(p => p.IsActive);
 
             if (!string.IsNullOrEmpty(request.UserId))
                 query = query.Where(v => v.UserId == request.UserId);
 
-            if (!string.IsNullOrEmpty(request.SearchTerm))
+            if (!string.IsNullOrEmpty(request.SearchTerm) && !string.IsNullOrEmpty(request.FilterBy))
             {
-                query = query.Where(p => p.Title.Contains(request.SearchTerm)
-                                         || p.Description.Contains(request.SearchTerm)
-                                         || p.Address.Neighborhood.Contains(request.SearchTerm)
-                                         || p.Address.Street.Contains(request.SearchTerm)
-                                         || p.Address.City.Contains(request.SearchTerm)
-                                         || p.Address.State.Contains(request.SearchTerm)
-                                         || p.Address.ZipCode.Contains(request.SearchTerm)
-                                         || p.Address.Country.Contains(request.SearchTerm));
+                query = query.Where($"{request.FilterBy}.Contains(@0)", request.SearchTerm);
             }
 
             query = query.OrderBy(p => p.Title);

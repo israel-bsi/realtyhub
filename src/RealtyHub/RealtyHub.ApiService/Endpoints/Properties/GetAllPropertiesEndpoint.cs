@@ -22,6 +22,7 @@ public class GetAllPropertiesEndpoint : IEndpoint
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
         IPropertyHandler handler,
+        [FromQuery] string filterBy = "",
         [FromQuery] int pageNumber = Core.Configuration.DefaultPageNumber,
         [FromQuery] int pageSize = Core.Configuration.DefaultPageSize,
         [FromQuery] string searchTerm = "")
@@ -30,7 +31,8 @@ public class GetAllPropertiesEndpoint : IEndpoint
         {
             PageNumber = pageNumber,
             PageSize = pageSize,
-            SearchTerm = searchTerm
+            SearchTerm = searchTerm,
+            FilterBy = filterBy
         };
 
         var result = await handler.GetAllAsync(request);
