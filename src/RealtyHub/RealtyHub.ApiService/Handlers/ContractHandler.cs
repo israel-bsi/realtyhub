@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RealtyHub.ApiService.Data;
+using RealtyHub.ApiService.Services;
 using RealtyHub.Core.Enums;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
@@ -8,7 +9,7 @@ using RealtyHub.Core.Responses;
 
 namespace RealtyHub.ApiService.Handlers;
 
-public class ContractHandler(AppDbContext context) : IContractHandler
+public class ContractHandler(AppDbContext context, IHostEnvironment host) : IContractHandler
 {
     public async Task<Response<Contract?>> CreateAsync(Contract request)
     {
@@ -18,7 +19,8 @@ public class ContractHandler(AppDbContext context) : IContractHandler
                 .Offers
                 .Include(o => o.Buyer)
                 .Include(o => o.Property)
-                .ThenInclude(o=>o!.Seller)
+                .ThenInclude(o => o!.Seller)
+                .Include(o=>o.Payments)
                 .FirstOrDefaultAsync(o => o.Id == request.OfferId);
 
             if (offer is null)
@@ -36,6 +38,7 @@ public class ContractHandler(AppDbContext context) : IContractHandler
                 SignatureDate = request.SignatureDate,
                 EffectiveDate = request.EffectiveDate,
                 TermEndDate = request.TermEndDate,
+                FileId = Guid.NewGuid().ToString(),
                 Buyer = offer.Buyer,
                 BuyerId = offer.Buyer!.Id,
                 SellerId = offer.Property!.SellerId,
@@ -45,6 +48,8 @@ public class ContractHandler(AppDbContext context) : IContractHandler
                 IsActive = true,
                 UserId = request.UserId
             };
+
+            await CreateOrUpdateContract(contract, false);
 
             await context.Contracts.AddAsync(contract);
             await context.SaveChangesAsync();
@@ -78,6 +83,7 @@ public class ContractHandler(AppDbContext context) : IContractHandler
                 .Offers
                 .Include(offer => offer.Property)
                 .ThenInclude(property => property!.Seller)
+                .Include(o => o.Payments)
                 .FirstOrDefaultAsync(o => o.Id == request.OfferId);
 
             if (offer is null)
@@ -93,8 +99,11 @@ public class ContractHandler(AppDbContext context) : IContractHandler
             contract.Seller = offer.Property.Seller;
             contract.Offer = offer;
             contract.OfferId = request.OfferId;
+            contract.FileId = request.FileId;
             contract.IsActive = request.IsActive;
             contract.UpdatedAt = DateTime.UtcNow;
+
+            await CreateOrUpdateContract(contract, true);
 
             await context.SaveChangesAsync();
 
@@ -184,5 +193,31 @@ public class ContractHandler(AppDbContext context) : IContractHandler
             return new PagedResponse<List<Contract>?>(null, 500, 
                 "Não foi possível retornar os contratos");
         }
+    }
+
+    private async Task CreateOrUpdateContract(Contract contract, bool update)
+    {
+        var contractModelType = contract.Buyer?.PersonType switch
+        {
+            EPersonType.Business when contract.Seller?.PersonType == EPersonType.Business 
+                => EContractModelType.PJPJ,
+            EPersonType.Individual when contract.Seller?.PersonType == EPersonType.Individual 
+                => EContractModelType.PFPF,
+            EPersonType.Business when contract.Seller?.PersonType == EPersonType.Individual 
+                => EContractModelType.PFPJ,
+            _ => EContractModelType.PJPF
+        };
+
+        var contractModel = await context
+            .ContractsContent
+            .FirstOrDefaultAsync(cm => cm.Type == contractModelType);
+
+        var docxContractGenerator = new DocXContractGenerator();
+        var pathContracts = Path.Combine(host.ContentRootPath, "Sources", "Contracts");
+        var output = Path.Combine(pathContracts, $"{contract.FileId}.docx");
+        if (update)
+            File.Delete(output);
+        var template = Path.Combine(pathContracts, $"{contractModel?.Id}.docx");
+        docxContractGenerator.GenerateContractDocx(template, output, contract);
     }
 }

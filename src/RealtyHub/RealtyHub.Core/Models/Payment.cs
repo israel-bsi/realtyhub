@@ -1,6 +1,9 @@
 ﻿using RealtyHub.Core.Enums;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
+using System.Text;
 using System.Text.Json.Serialization;
+using RealtyHub.Core.Extensions;
 
 namespace RealtyHub.Core.Models;
 
@@ -19,4 +22,14 @@ public class Payment : Entity
     public string UserId { get; set; } = string.Empty;
     [JsonIgnore] 
     public Offer Offer { get; set; } = null!;
+
+    public override string ToString()
+    {
+        var text = new StringBuilder();
+        text.Append($"Valor: {Amount.ToString(CultureInfo.CurrentCulture)}, ");
+        text.Append($"Forma: {PaymentType.GetDisplayName()}, ");
+        if (Installments)
+            text.Append($"Parcelas: {InstallmentsCount}");
+        return text.ToString();
+    }
 }

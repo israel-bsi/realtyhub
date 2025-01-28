@@ -37,6 +37,8 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
             {
                 Amount = paymentRequest.Amount,
                 PaymentType = paymentRequest.PaymentType,
+                Installments = paymentRequest.Installments,
+                InstallmentsCount = paymentRequest.InstallmentsCount,
                 UserId = request.UserId,
                 IsActive = true
             }).ToList();
@@ -117,6 +119,8 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 {
                     payment.Amount = updatePaymentRequest.Amount;
                     payment.PaymentType = updatePaymentRequest.PaymentType;
+                    payment.Installments = updatePaymentRequest.Installments;
+                    payment.InstallmentsCount = updatePaymentRequest.InstallmentsCount;
                     payment.UpdatedAt = DateTime.UtcNow;
                     payment.IsActive = true;
                 }
@@ -136,6 +140,8 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 {
                     Amount = payment.Amount,
                     PaymentType = payment.PaymentType,
+                    Installments = payment.Installments,
+                    InstallmentsCount = payment.InstallmentsCount,
                     IsActive = true,
                     OfferId = offer.Id,
                     Offer = offer,
