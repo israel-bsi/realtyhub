@@ -1,14 +1,20 @@
 # Direitos Autorais e Agradecimentos
 
 - **Autores:** Israel Barbosa Silva, Danniel Cristie Matos da Silva, Kleiton Linneker Barbosa Pinheiro, Franklin Delano Costa Araujo.
-<!-- - **Data da Última Versão:** 10/11/23 -->
-<!-- - **Versão:** 1.0 -->
+- **Contatos:** ib.silva@discente.ufma.br, danniel.cristie@discente.ufma.br, kleiton.linneker@discente.ufma.br, delano.franklin@discente.ufma.br
+- **Data da Última Versão:** 28/01/25
+- **Versão:** 1.0
+- **Outros repositórios**: [israel-bsi](https://github.com/israel-bsi), [dannielcristie](https://github.com/dannielcristie), [De11ano](https://github.com/De11ano), [kleitonlinneker](https://github.com/kleitonlinneker)
 
-<!-- @Agradecimentos: Universidade Federal do Maranhão (UFMA), Professor Doutor Thales Levi Azevedo Valente, e colegas de curso.
+## Agradecimentos 
 
-Copyright/License
+Universidade Federal do Maranhão (UFMA), Professor Doutor Thales Levi Azevedo Valente, e colegas de curso.
 
-Este material é resultado de um trabalho acadêmico para a disciplina "NOME_DISCIPLINA", sob a orientação do professor Dr. THALES LEVI AZEVEDO VALENTE, semestre letivo 2024.2, curso Engenharia da Computação, na Universidade Federal do Maranhão (UFMA). Todo o material sob esta licença é software livre: pode ser usado para fins acadêmicos e comerciais sem nenhum custo. Não há papelada, nem royalties, nem restrições de "copyleft" do tipo GNU. Ele é licenciado sob os termos da Licença MIT, conforme descrito abaixo, e, portanto, é compatível com a GPL e também se qualifica como software de código aberto. É de domínio público. Os detalhes legais estão abaixo. O espírito desta licença é que você é livre para usar este material para qualquer finalidade, sem nenhum custo. O único requisito é que, se você usá-los, nos dê crédito.
+## Copyright/License
+
+Este material é resultado de um trabalho acadêmico para a disciplina Projeto e Desenvolvimento de Software, sob a orientação do professor Dr. THALES LEVI AZEVEDO VALENTE, semestre letivo 2024.2, curso Engenharia da Computação, na Universidade Federal do Maranhão (UFMA). 
+
+Todo o material sob esta licença é software livre: pode ser usado para fins acadêmicos e comerciais sem nenhum custo. Não há papelada, nem royalties, nem restrições de "copyleft" do tipo GNU. Ele é licenciado sob os termos da Licença MIT, conforme descrito abaixo, e, portanto, é compatível com a GPL e também se qualifica como software de código aberto. É de domínio público. Os detalhes legais estão abaixo. O espírito desta licença é que você é livre para usar este material para qualquer finalidade, sem nenhum custo. O único requisito é que, se você usá-los, nos dê crédito.
 
 Licenciado sob a Licença MIT. Permissão é concedida, gratuitamente, a qualquer pessoa que obtenha uma cópia deste software e dos arquivos de documentação associados (o "Software"), para lidar no Software sem restrição, incluindo sem limitação os direitos de usar, copiar, modificar, mesclar, publicar, distribuir, sublicenciar e/ou vender cópias do Software, e permitir pessoas a quem o Software é fornecido a fazê-lo, sujeito às seguintes condições:
 
