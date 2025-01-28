@@ -349,7 +349,7 @@ namespace RealtyHub.ApiService.Migrations
                         {
                             Id = "a2c16556-5098-4496-ae7a-1f9b6d0e8fcf",
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Extension = ".pdf",
+                            Extension = ".docx",
                             IsActive = true,
                             Name = "Modelo de Contrato - PJPJ",
                             ShowInPage = false,
@@ -361,7 +361,7 @@ namespace RealtyHub.ApiService.Migrations
                         {
                             Id = "f7581a63-f4f0-4881-b6ed-6a4100b4182e",
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Extension = ".pdf",
+                            Extension = ".docx",
                             IsActive = true,
                             Name = "Modelo de Contrato - PFPF",
                             ShowInPage = false,
@@ -373,7 +373,7 @@ namespace RealtyHub.ApiService.Migrations
                         {
                             Id = "2f4c556d-6850-4b3d-afe9-d7c2bd282718",
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Extension = ".pdf",
+                            Extension = ".docx",
                             IsActive = true,
                             Name = "Modelo de Contrato - PFPJ",
                             ShowInPage = false,
@@ -385,7 +385,7 @@ namespace RealtyHub.ApiService.Migrations
                         {
                             Id = "fd7ed50d-8f42-4288-8877-3cb8095370e7",
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Extension = ".pdf",
+                            Extension = ".docx",
                             IsActive = true,
                             Name = "Modelo de Contrato - PJPF",
                             ShowInPage = false,

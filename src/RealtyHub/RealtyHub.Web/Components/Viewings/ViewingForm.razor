@@ -17,15 +17,12 @@ else
             <MudDatePicker Class="mb-2"
                            Label="Data da Visita"
                            @bind-Date="@InputModel.ViewingDate"
-                           Editable="true"
-                           Mask="@Utility.Masks.Date" />
+                           For="@(() => InputModel.ViewingDate)" />
 
             <MudTimePicker Class="mb-2"
                            Label="Hora da Visita"
                            @bind-Time="@ViewingTime"
-                           Editable="true" 
-                           ImmediateText="true"
-                           Validation="@(new Func<string, IEnumerable<string>>(ValidateTime))" />
+                           For="@(() => ViewingTime)" />
 
             <MudTextField Class="mb-2"
                           ReadOnly="true"

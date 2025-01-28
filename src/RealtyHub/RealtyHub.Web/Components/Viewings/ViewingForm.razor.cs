@@ -110,7 +110,7 @@ public partial class ViewingFormComponent : ComponentBase
 
     private bool IsFormInvalid()
     {
-        if (InputModel.Buyer is null && InputModel.Buyer is null)
+        if (InputModel.Buyer is null && InputModel.Property is null)
         {
             Snackbar.Add("Informe o cliente e o imóvel", Severity.Error);
             return true;
@@ -120,7 +120,7 @@ public partial class ViewingFormComponent : ComponentBase
             Snackbar.Add("Informe o cliente", Severity.Error);
             return true;
         }
-        if (InputModel.Buyer is null)
+        if (InputModel.Property is null)
         {
             Snackbar.Add("Informe o imóvel", Severity.Error);
             return true;
@@ -244,14 +244,6 @@ public partial class ViewingFormComponent : ComponentBase
     {
         if (OnSubmitButtonClicked.HasDelegate)
             await OnSubmitButtonClicked.InvokeAsync();
-    }
-    public IEnumerable<string> ValidateTime(string timeInput)
-    {
-        if (string.IsNullOrWhiteSpace(timeInput))
-            yield return "O campo Hora da Visita é obrigatório.";
-
-        if (!Utility.Validations.TimeRegex.IsMatch(timeInput))
-            yield return "Formato de hora inválido. Utilize o formato HH:mm.";
     }
     #endregion
 

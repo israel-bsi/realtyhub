@@ -19,7 +19,7 @@ public class PropertyFake
             .RuleFor(p => p.Area, p => p.Random.Double(50, 500))
             .RuleFor(p => p.TransactionsDetails, p => p.Commerce.ProductMaterial())
             .RuleFor(p => p.Address, AddressFake.GetFakeAddress)
-            .RuleFor(p => p.SellerId, 14)
+            .RuleFor(p => p.SellerId, 1)
             .RuleFor(p=>p.RegistryNumber, p=>p.Random.Int().ToString())
             .RuleFor(p=>p.RegistryRecord, p=>p.Random.Int().ToString())
             .RuleFor(p => p.IsNew, true)

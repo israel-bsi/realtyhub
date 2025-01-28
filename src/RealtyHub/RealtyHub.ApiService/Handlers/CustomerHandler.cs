@@ -35,6 +35,8 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
                 CustomerType = request.CustomerType,
                 Address = request.Address,
                 Rg = request.Rg,
+                IssuingAuthority = request.IssuingAuthority,
+                RgIssueDate = request.RgIssueDate,
                 BusinessName = request.BusinessName,
                 UserId = request.UserId,
                 IsActive = true
@@ -68,6 +70,8 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
             customer.Nationality = request.Nationality;
             customer.MaritalStatus = request.MaritalStatus;
             customer.Occupation = request.Occupation;
+            customer.IssuingAuthority = request.IssuingAuthority;
+            customer.RgIssueDate = request.RgIssueDate;
             customer.PersonType = request.PersonType;
             customer.CustomerType = request.CustomerType;
             customer.Address = request.Address;

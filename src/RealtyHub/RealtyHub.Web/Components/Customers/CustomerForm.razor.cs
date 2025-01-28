@@ -57,12 +57,14 @@ public partial class CustomerFormComponent : ComponentBase
 
     public async Task OnValidSubmitAsync()
     {
+        if(IsIndividualPersonFieldsInvalid()) return;
         IsBusy = true;
         try
         {
             InputModel.Phone = Regex.Replace(InputModel.Phone, Pattern, "");
             InputModel.DocumentNumber = Regex.Replace(InputModel.DocumentNumber, Pattern, "");
             InputModel.Address.ZipCode = Regex.Replace(InputModel.Address.ZipCode, Pattern, "");
+            InputModel.RgIssueDate = InputModel.RgIssueDate?.ToUniversalTime();
 
             Response<Customer?> result;
             if (InputModel.Id > 0)
@@ -118,6 +120,48 @@ public partial class CustomerFormComponent : ComponentBase
         ChangeDocumentMask(newPersonType);
         ValidateDocument();
     }
+
+    private bool IsIndividualPersonFieldsInvalid()
+    {
+        if (InputModel.PersonType is not EPersonType.Individual) return false;
+        MessageStore?.Clear();
+        var isInvalid = false;
+
+        if (string.IsNullOrEmpty(InputModel.Nationality))
+        {
+            MessageStore?.Add(() => InputModel.Nationality, "Campo obrigatório");
+            isInvalid = true;
+        }
+
+        if (string.IsNullOrEmpty(InputModel.Occupation))
+        {
+            MessageStore?.Add(() => InputModel.Occupation, "Campo obrigatório");
+            isInvalid = true;
+        }
+
+        if (string.IsNullOrEmpty(InputModel.Rg))
+        {
+            MessageStore?.Add(() => InputModel.Rg, "Campo obrigatório");
+            isInvalid = true;
+        }
+
+        if (string.IsNullOrEmpty(InputModel.IssuingAuthority))
+        {
+            MessageStore?.Add(() => InputModel.IssuingAuthority, "Campo obrigatório");
+            isInvalid = true;
+        }
+
+        if (InputModel.RgIssueDate is null)
+        {
+            MessageStore?.Add(() => InputModel.RgIssueDate!, "Campo obrigatório");
+            isInvalid = true;
+        }
+
+        EditContext.NotifyValidationStateChanged();
+        MessageStore?.Clear();
+
+        return isInvalid;
+    }
     private void ChangeDocumentMask(EPersonType personType)
     {
         DocumentCustomerMask = personType switch
@@ -155,6 +199,7 @@ public partial class CustomerFormComponent : ComponentBase
             InputModel.CustomerType = response.Data.CustomerType;
             InputModel.Occupation = response.Data.Occupation;
             InputModel.Nationality = response.Data.Nationality;
+            InputModel.MaritalStatus = response.Data.MaritalStatus;
             InputModel.Address.ZipCode = response.Data.Address.ZipCode;
             InputModel.Address.Street = response.Data.Address.Street;
             InputModel.Address.Number = response.Data.Address.Number;
@@ -164,6 +209,8 @@ public partial class CustomerFormComponent : ComponentBase
             InputModel.Address.State = response.Data.Address.State;
             InputModel.Address.Country = response.Data.Address.Country;
             InputModel.Rg = response.Data.Rg;
+            InputModel.IssuingAuthority = response.Data.IssuingAuthority;
+            InputModel.RgIssueDate = response.Data.RgIssueDate;
             InputModel.BusinessName = response.Data.BusinessName;
             InputModel.IsActive = response.Data.IsActive;
             InputModel.UserId = response.Data.UserId;

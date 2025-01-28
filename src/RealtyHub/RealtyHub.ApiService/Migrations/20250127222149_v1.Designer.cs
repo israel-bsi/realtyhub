@@ -12,8 +12,8 @@ using RealtyHub.ApiService.Data;
 namespace RealtyHub.ApiService.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250127141354_v2")]
-    partial class v2
+    [Migration("20250127222149_v1")]
+    partial class v1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -253,10 +253,6 @@ namespace RealtyHub.ApiService.Migrations
                     b.Property<long>("BuyerId")
                         .HasColumnType("bigint");
 
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
@@ -265,6 +261,10 @@ namespace RealtyHub.ApiService.Migrations
                     b.Property<DateTime?>("EffectiveDate")
                         .IsRequired()
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("FileId")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("boolean");
@@ -328,6 +328,12 @@ namespace RealtyHub.ApiService.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<bool>("ShowInPage")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
@@ -340,6 +346,68 @@ namespace RealtyHub.ApiService.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ContractContent", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "a2c16556-5098-4496-ae7a-1f9b6d0e8fcf",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Extension = ".docx",
+                            IsActive = true,
+                            Name = "Modelo de Contrato - PJPJ",
+                            ShowInPage = false,
+                            Type = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserId = ""
+                        },
+                        new
+                        {
+                            Id = "f7581a63-f4f0-4881-b6ed-6a4100b4182e",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Extension = ".docx",
+                            IsActive = true,
+                            Name = "Modelo de Contrato - PFPF",
+                            ShowInPage = false,
+                            Type = 2,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserId = ""
+                        },
+                        new
+                        {
+                            Id = "2f4c556d-6850-4b3d-afe9-d7c2bd282718",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Extension = ".docx",
+                            IsActive = true,
+                            Name = "Modelo de Contrato - PFPJ",
+                            ShowInPage = false,
+                            Type = 3,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserId = ""
+                        },
+                        new
+                        {
+                            Id = "fd7ed50d-8f42-4288-8877-3cb8095370e7",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Extension = ".docx",
+                            IsActive = true,
+                            Name = "Modelo de Contrato - PJPF",
+                            ShowInPage = false,
+                            Type = 4,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserId = ""
+                        },
+                        new
+                        {
+                            Id = "2824aec3-3219-4d81-a97a-c3b80ca72844",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Extension = ".pdf",
+                            IsActive = true,
+                            Name = "Modelo Padrão",
+                            ShowInPage = true,
+                            Type = 0,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserId = ""
+                        });
                 });
 
             modelBuilder.Entity("RealtyHub.Core.Models.Customer", b =>
@@ -378,6 +446,11 @@ namespace RealtyHub.ApiService.Migrations
                         .HasColumnType("boolean")
                         .HasDefaultValue(true);
 
+                    b.Property<string>("IssuingAuthority")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("character varying(80)");
+
                     b.Property<int>("MaritalStatus")
                         .HasColumnType("integer");
 
@@ -408,6 +481,9 @@ namespace RealtyHub.ApiService.Migrations
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("character varying(20)");
+
+                    b.Property<DateTime?>("RgIssueDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAdd()
