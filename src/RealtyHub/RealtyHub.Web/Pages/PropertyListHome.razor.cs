@@ -3,6 +3,7 @@ using MudBlazor;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.Properties;
+using RealtyHub.Web.Components.Offers;
 
 namespace RealtyHub.Web.Pages;
 
@@ -10,69 +11,111 @@ public partial class PropertyListHomePage : ComponentBase
 {
     #region Properties
 
-    public List<Property> Properties { get; set; } = [];
-    public int TotalPages { get; set; }
-    public int CurrentPage { get; set; } = 1;
-    public int PageSize { get; set; } = 8;
     public bool IsBusy { get; set; }
+    public MudDataGrid<Property> DataGrid { get; set; } = null!;
+    public List<Property> Properties { get; set; } = [];
+    public string SearchTerm { get; set; } = string.Empty;
+    public string SelectedFilter { get; set; } = string.Empty;
+
+    public readonly List<FilterOption> FilterOptions = new()
+    {
+        new FilterOption { DisplayName = "Título", PropertyName = "Title" },
+        new FilterOption { DisplayName = "Descrição", PropertyName = "Description" },
+        new FilterOption { DisplayName = "Bairro", PropertyName = "Address.Neighborhood" },
+        new FilterOption { DisplayName = "Garagens", PropertyName = "Garage" },
+        new FilterOption { DisplayName = "Quartos", PropertyName = "Bedroom" },
+        new FilterOption { DisplayName = "Banheiros", PropertyName = "Bathroom" },
+        new FilterOption { DisplayName = "Área", PropertyName = "Area" },
+        new FilterOption { DisplayName = "Preço", PropertyName = "Price" },
+    };
 
     #endregion
 
     #region Services
 
     [Inject]
-    public IPropertyHandler PropertyHandler { get; set; } = null!;
-
-    [Inject]
     public ISnackbar Snackbar { get; set; } = null!;
 
-    #endregion
+    [Inject]
+    public IPropertyHandler Handler { get; set; } = null!;
 
-    #region Override
-
-    protected override async Task OnInitializedAsync()
-    {
-        IsBusy = true;
-        try
-        {
-            await LoadDataAsync(CurrentPage);
-        }
-        catch
-        {
-            Snackbar.Add("Erro ao exibir os imóveis", Severity.Error);
-        }
-        finally
-        {
-            await Task.Delay(1000);
-            IsBusy = false;
-        }
-    }
+    [Inject]
+    public IDialogService DialogService { get; set; } = null!;
 
     #endregion
 
     #region Methods
-    public async Task OnPageChanged(int newPage)
+
+
+    public async Task<GridData<Property>> LoadServerData(GridState<Property> state)
     {
-        CurrentPage = newPage;
-        await LoadDataAsync(newPage);
+        try
+        {
+            var request = new GetAllPropertiesRequest
+            {
+                PageNumber = state.Page + 1,
+                PageSize = state.PageSize,
+                SearchTerm = SearchTerm,
+                FilterBy = SelectedFilter
+            };
+
+            var response = await Handler.GetAllAsync(request);
+            if (response.IsSuccess)
+                return new GridData<Property>
+                {
+                    Items = response.Data ?? [],
+                    TotalItems = response.TotalCount
+                };
+
+            Snackbar.Add(response.Message ?? string.Empty, Severity.Error);
+            return new GridData<Property>();
+        }
+        catch (Exception e)
+        {
+            Snackbar.Add(e.Message, Severity.Error);
+            return new GridData<Property>();
+        }
     }
 
-    private async Task LoadDataAsync(int pageNumber)
-    {
-        var request = new GetAllPropertiesRequest
-        {
-            PageNumber = pageNumber,
-            PageSize = PageSize
-        };
-        var response = await PropertyHandler.GetAllAsync(request);
-        if (response is { IsSuccess: true, Data: not null })
-        {
-            Properties = response.Data.Where(p => p.ShowInHome).ToList();
-            TotalPages = response.TotalPages;
-            return;
-        }
+    public void OnButtonSearchClick() => DataGrid.ReloadServerData();
 
-        Snackbar.Add("Não foi possível exibir os imóveis", Severity.Error);
+    public void OnClearSearchClick()
+    {
+        SearchTerm = string.Empty;
+        DataGrid.ReloadServerData();
+    }
+
+    public void OnValueFilterChanged(string newValue)
+    {
+        SelectedFilter = newValue;
+        StateHasChanged();
+    }
+
+    public string GetSrcThumbnailPhoto(Property property)
+    {
+        var photo = property
+            .PropertyPhotos
+            .FirstOrDefault(p => p.IsThumbnail);
+
+        return $"{Configuration.BackendUrl}/photos/{photo?.Id}{photo?.Extension}";
+    }
+
+    public async Task OnSendOfferClickedAsync(Property property)
+    {
+        var options = new DialogOptions
+        {
+            CloseButton = true,
+            MaxWidth = MaxWidth.Medium,
+            CloseOnEscapeKey = true,
+            FullWidth = true
+        };
+
+        var parameters = new DialogParameters
+        {
+            { "PropertyId", property.Id }
+        };
+
+        await DialogService.ShowAsync<OfferDialog>("Enviar proposta", parameters, options);
     }
 
     #endregion

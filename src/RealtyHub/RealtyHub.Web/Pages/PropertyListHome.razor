@@ -1,4 +1,5 @@
 ﻿@page "/listar-imoveis"
+@using RealtyHub.Core.Models
 @inherits PropertyListHomePage
 @layout PublicLayout
 
@@ -13,21 +14,84 @@
 else
 {
     <MudPaper Class="mb-4">
-        <MudGrid Justify="Justify.FlexStart">
-            @foreach (var property in Properties)
-            {
-                <CardHome Property="property"></CardHome>
-            }
-        </MudGrid>
-        <div class="d-flex justify-center align-center mt-4 mb-4">
-            <MudPagination Count="@TotalPages"
-                           Selected="@CurrentPage"
-                           ShowPreviousButton="true"
-                           ShowNextButton="true"
-                           ShowPageButtons="true" 
-                           ShowFirstButton="true"
-                           ShowLastButton="true" 
-                           SelectedChanged="@OnPageChanged"/>
-        </div>
+        <MudDataGrid T="Property"
+                     Class="mt-4"
+                     ServerData="LoadServerData"
+                     @ref="DataGrid"
+                     RowsPerPage="@Core.Configuration.DefaultPageSize">
+
+            <ToolBarContent>
+                <MudText Typo="Typo.h6">Imóveis</MudText>
+                <MudSpacer />
+                <MudSelect T="string"
+                           Label="Selecione o Filtro"
+                           Value="SelectedFilter"
+                           ValueChanged="OnValueFilterChanged"
+                           Class="me-2">
+                    @foreach (var option in FilterOptions)
+                    {
+                        <MudSelectItem Value="@option.PropertyName">@option.DisplayName</MudSelectItem>
+                    }
+                </MudSelect>
+                <MudTextField @bind-Value="SearchTerm"
+                              Placeholder="Filtrar..."
+                              Adornment="Adornment.Start"
+                              AdornmentIcon="@Icons.Material.Filled.Search"
+                              Clearable="true"
+                              OnClearButtonClick="OnClearSearchClick"
+                              IconSize="Size.Medium"
+                              Class="me-2">
+                </MudTextField>
+                <MudButton StartIcon="@Icons.Material.Filled.Search"
+                           OnClick="OnButtonSearchClick"
+                           ButtonType="ButtonType.Button"
+                           Color="Color.Primary"
+                           Variant="Variant.Filled">
+                    Pesquisar
+                </MudButton>
+            </ToolBarContent>
+            <Columns>
+                <TemplateColumn Title="">
+                    <CellTemplate>
+                        <MudImage Src="@GetSrcThumbnailPhoto(context.Item)"
+                                  Width="300"
+                                  Height="300"
+                                  ObjectFit="ObjectFit.Cover" />
+                    </CellTemplate>
+                </TemplateColumn>
+                <TemplateColumn Title="">
+                    <CellTemplate>
+                        <MudText Typo="Typo.body2">@context.Item.Description</MudText> <br />
+                        <MudText Typo="Typo.body2">@context.Item.Bedroom @(context.Item.Bedroom > 1 ? "Quartos" : "Quarto")</MudText> <br />
+                        <MudText Typo="Typo.body2">@context.Item.Bathroom @(context.Item.Bathroom > 1 ? "Banheiros" : "Banheiro")</MudText> <br />
+                        <MudText Typo="Typo.body2">@context.Item.Garage @(context.Item.Garage > 1 ? "Garagens" : "Garagem")</MudText> <br />
+                        <MudText Typo="Typo.body2">Localização: @context.Item.Address.Neighborhood</MudText> <br />
+                        <MudText Typo="Typo.body2">@context.Item.Area M²: </MudText> <br />
+                        <MudText Typo="Typo.body2">@context.Item.Price.ToString("C")</MudText> <br />
+                    </CellTemplate>
+                </TemplateColumn>
+                <TemplateColumn Class="justify-end" Title="">
+                    <CellTemplate>
+                        <MudStack Row>
+                            <MudTooltip Text="Enviar proposta">
+                                <MudIconButton Icon="@Icons.Material.Filled.Send"
+                                               OnClick="@(() => OnSendOfferClickedAsync(context.Item))"
+                                               Color="Color.Primary">
+                                </MudIconButton>
+                            </MudTooltip>
+                            <MudTooltip Text="Mais informações">
+                                <MudIconButton Icon="@Icons.Material.Filled.Info"
+                                               Color="Color.Primary"
+                                               Href="@($"/imoveis/detalhes/{context.Item.Id}")">
+                                </MudIconButton>
+                            </MudTooltip>
+                        </MudStack>
+                    </CellTemplate>
+                </TemplateColumn>
+            </Columns>
+            <PagerContent>
+                <MudDataGridPager T="Property" />
+            </PagerContent>
+        </MudDataGrid>
     </MudPaper>
 }
