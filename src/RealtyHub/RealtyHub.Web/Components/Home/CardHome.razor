@@ -1,16 +1,21 @@
 ﻿@inherits CardHomeComponent
 
-<MudItem lg="4" md="6" xs="12">
+<MudItem lg="3" md="6" xs="12">
     <MudPaper Elevation="2">
-        <MudCard Class="@("mb-4 " + Class)">
+        <MudCard Class="@("mb-2 " + Class)">
             <MudCardHeader>
                 <CardHeaderContent>
-                    <MudText Typo="Typo.body2">@Property.Title</MudText>
+                    <MudText Typo="Typo.body1">@Property.Title</MudText>
                 </CardHeaderContent>
             </MudCardHeader>
-            <MudCardMedia Image="@GetSrcPhoto()" Height="400" />
+            <MudCardMedia Image="@GetSrcPhoto()" Height="300" />
             <MudCardContent>
-                <MudText Typo="Typo.caption">@Property.Description</MudText>
+                <MudText Typo="Typo.body2">@Property.Description</MudText> <br />
+                <MudText Typo="Typo.body2">@Property.Bedroom @(Property.Bedroom > 1 ? "Quartos" : "Quarto")</MudText> <br />
+                <MudText Typo="Typo.body2">@Property.Bathroom @(Property.Bathroom > 1 ? "Banheiros" : "Banheiro")</MudText> <br />
+                <MudText Typo="Typo.body2">@Property.Garage @(Property.Garage > 1 ? "Garagens" : "Garagem")</MudText> <br />
+                <MudText Typo="Typo.body2">@Property.Area M²: </MudText> <br />
+                <MudText Typo="Typo.body2">@Property.Price Preço</MudText> <br />
             </MudCardContent>
             <MudCardActions>
                 <MudTooltip Text="Enviar proposta">

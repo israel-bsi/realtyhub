@@ -1,0 +1,33 @@
+﻿@page "/listar-imoveis"
+@inherits PropertyListHomePage
+@layout PublicLayout
+
+<PageTitle>Imóveis</PageTitle>
+
+@if (IsBusy)
+{
+    <div class="d-flex justify-center align-center" style="height: 50vh">
+        <MudProgressCircular Size="Size.Large" Color="Color.Info" Indeterminate="true" />
+    </div>
+}
+else
+{
+    <MudPaper Class="mb-4">
+        <MudGrid Justify="Justify.FlexStart">
+            @foreach (var property in Properties)
+            {
+                <CardHome Property="property"></CardHome>
+            }
+        </MudGrid>
+        <div class="d-flex justify-center align-center mt-4 mb-4">
+            <MudPagination Count="@TotalPages"
+                           Selected="@CurrentPage"
+                           ShowPreviousButton="true"
+                           ShowNextButton="true"
+                           ShowPageButtons="true" 
+                           ShowFirstButton="true"
+                           ShowLastButton="true" 
+                           SelectedChanged="@OnPageChanged"/>
+        </div>
+    </MudPaper>
+}

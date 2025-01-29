@@ -1,33 +1,103 @@
 ﻿@page "/home"
-@inherits HomePage
 @layout PublicLayout
 
 <PageTitle>Home</PageTitle>
 
-@if (IsBusy)
-{
-    <div class="d-flex justify-center align-center" style="height: 50vh">
-        <MudProgressCircular Size="Size.Large" Color="Color.Info" Indeterminate="true" />
-    </div>
-}
-else
-{
-    <MudPaper Class="mb-4">
-        <MudGrid Justify="Justify.FlexStart">
-            @foreach (var property in Properties)
-            {
-                <CardHome Property="property"></CardHome>
-            }
-        </MudGrid>
-        <div class="d-flex justify-center align-center mt-4 mb-4">
-            <MudPagination Count="@TotalPages"
-                           Selected="@CurrentPage"
-                           ShowPreviousButton="true"
-                           ShowNextButton="true"
-                           ShowPageButtons="true" 
-                           ShowFirstButton="true"
-                           ShowLastButton="true" 
-                           SelectedChanged="@OnPageChanged"/>
-        </div>
+<MudPaper Class="pa-4">
+    <MudPaper Class="p-4 d-flex flex-column align-items-center justify-center mud-elevation-1">
+        <MudText Typo="Typo.h3" Align="Align.Center" Class="mb-2">
+            Bem-vindo ao RealtyHub
+        </MudText>
+        <MudText Align="Align.Center">
+            Conectando corretores e clientes de forma simples e eficiente!
+        </MudText>
+        <MudButton Variant="Variant.Filled" 
+                   Color="Color.Primary" 
+                   Class="mt-3" 
+                   Href="/comecar">
+            Começar agora
+        </MudButton>
     </MudPaper>
+
+    <MudGrid Class="mt-6">
+        @foreach (var feature in Features)
+        {
+            <MudItem xs="12" sm="6" md="3">
+                <MudCard Class="mb-4">
+                    <MudCardHeader>
+                        <MudText Typo="Typo.h6" Class="mb-0">@feature.Title</MudText>
+                    </MudCardHeader>
+                    <MudCardContent>
+                        <MudText>
+                            @feature.Description
+                        </MudText>
+                    </MudCardContent>
+                </MudCard>
+            </MudItem>
+        }
+    </MudGrid>
+
+    <MudPaper Class="pa-4 p-4 mt-4 text-center mud-elevation-1">
+        <MudText Class="mb-2" Typo="Typo.h5">Quer visualizar os imóveis disponíveis para venda?</MudText>
+        <MudText>
+            Clique no botão abaixo.
+        </MudText>
+        <MudButton Color="Color.Primary"
+                   Class="mt-2" 
+                   Href="/listar-imoveis">
+            Imóveis
+        </MudButton>
+    </MudPaper>
+</MudPaper>
+
+@code {
+    public class FeatureItem
+    {
+        public string Title { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+    }
+
+    private List<FeatureItem> Features = new()
+    {
+        new FeatureItem
+        {
+            Title = "Maior Alcance",
+            Description = "Liste imóveis e seja visto por mais potenciais clientes em poucos cliques."
+        },
+        new FeatureItem
+        {
+            Title = "Facilidade de Uso",
+            Description = "Interface intuitiva para gerenciar seus imóveis e acompanhar negociações."
+        },
+        new FeatureItem
+        {
+            Title = "Melhor Custo-Benefício",
+            Description = "Planos flexíveis e suporte especializado para alavancar suas vendas."
+        },
+        new FeatureItem
+        {
+            Title = "Gerenciamento de Imóveis",
+            Description = "Cadastre e edite informações completas dos imóveis em um só lugar."
+        },
+        new FeatureItem
+        {
+            Title = "Gerenciamento de Clientes",
+            Description = "Organize dados de compradores e vendedores para um atendimento personalizado."
+        },
+        new FeatureItem
+        {
+            Title = "Gerenciamento de Visitas",
+            Description = "Controle data e horários de cada visita realizada aos imóveis."
+        },
+        new FeatureItem
+        {
+            Title = "Propostas",
+            Description = "Permita que visitantes enviem propostas de compra sem precisar criar conta."
+        },
+        new FeatureItem
+        {
+            Title = "Geração e Envio de Contratos",
+            Description = "Otimize o fechamento de negócio com contratos e envio."
+        }
+    };
 }

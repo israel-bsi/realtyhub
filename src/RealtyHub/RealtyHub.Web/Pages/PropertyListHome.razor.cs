@@ -6,7 +6,7 @@ using RealtyHub.Core.Requests.Properties;
 
 namespace RealtyHub.Web.Pages;
 
-public partial class HomePage : ComponentBase
+public partial class PropertyListHomePage : ComponentBase
 {
     #region Properties
 
