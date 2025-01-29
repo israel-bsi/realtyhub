@@ -8,7 +8,8 @@ namespace RealtyHub.Web.Handlers;
 
 public class ContractHandler(IHttpClientFactory httpClientFactory) : IContractHandler
 {
-    private readonly HttpClient _httpClient = httpClientFactory.CreateClient(Configuration.HttpClientName);
+    private readonly HttpClient _httpClient = httpClientFactory
+        .CreateClient(Configuration.HttpClientName);
     public async Task<Response<Contract?>> CreateAsync(Contract request)
     {
         request.IssueDate = request.IssueDate?.Date.ToUniversalTime();
@@ -18,12 +19,8 @@ public class ContractHandler(IHttpClientFactory httpClientFactory) : IContractHa
 
         var result = await _httpClient.PostAsJsonAsync("v1/contracts", request);
 
-        var data = await result.Content.ReadFromJsonAsync<Response<Contract?>>();
-
-        if (!result.IsSuccessStatusCode)
-            return new Response<Contract?>(null, 400, data?.Message);
-
-        return data ?? new Response<Contract?>(null, 400, "Falha ao criar o contrato");
+        return await result.Content.ReadFromJsonAsync<Response<Contract?>>() 
+               ?? new Response<Contract?>(null, 400, "Falha ao criar o contrato");
     }
 
     public async Task<Response<Contract?>> UpdateAsync(Contract request)
@@ -46,12 +43,8 @@ public class ContractHandler(IHttpClientFactory httpClientFactory) : IContractHa
     {
         var result = await _httpClient.GetAsync($"v1/contracts/{request.Id}");
 
-        if (!result.IsSuccessStatusCode)
-            return new Response<Contract?>(null, 400, "Não foi possível obter o contrato");
-
-        var data = await result.Content.ReadFromJsonAsync<Response<Contract?>>();
-
-        return data ?? new Response<Contract?>(null, 400, "Não foi possível obter o contrato");
+        return await result.Content.ReadFromJsonAsync<Response<Contract?>>() 
+               ?? new Response<Contract?>(null, 400, "Não foi possível obter o contrato");
     }
 
     public async Task<PagedResponse<List<Contract>?>> GetAllAsync(GetAllContractsRequest request)
@@ -59,6 +52,7 @@ public class ContractHandler(IHttpClientFactory httpClientFactory) : IContractHa
         var url = $"v1/contracts?pageNumber={request.PageNumber}&pageSize={request.PageSize}";
         
         return await _httpClient.GetFromJsonAsync<PagedResponse<List<Contract>?>>(url)
-               ?? new PagedResponse<List<Contract>?>(null, 400, "Não foi possível obter os contratos");
+               ?? new PagedResponse<List<Contract>?>(null, 400, 
+                   "Não foi possível obter os contratos");
     }
 }

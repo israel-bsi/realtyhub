@@ -2,34 +2,28 @@
 using RealtyHub.ApiService.Common.Api;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
-using RealtyHub.Core.Requests.ContractsContent;
 using RealtyHub.Core.Responses;
 
-namespace RealtyHub.ApiService.Endpoints.ContractsContent;
+namespace RealtyHub.ApiService.Endpoints.ContractsTemplates;
 
-public class GetAllContractContentByUserEndpoint : IEndpoint
+public class GetAllContractTemplatesEndpoint : IEndpoint
 {
     public static void Map(IEndpointRouteBuilder app)
     {
         app.MapGet("/", HandlerAsync)
-            .WithName("ContractContent: Get ContractsContent By User")
+            .WithName("ContractTemplates: Get All ContractTemplates")
             .WithSummary("Recupera todos os modelos de contrato")
             .WithDescription("Recupera todos os modelos de contrato")
             .WithOrder(4)
-            .Produces<Response<List<PropertyPhoto>?>>()
-            .Produces<Response<Property?>>(StatusCodes.Status400BadRequest);
+            .Produces<Response<ContractTemplate?>>()
+            .Produces<Response<ContractTemplate?>>(StatusCodes.Status400BadRequest);
     }
 
     private static async Task<IResult> HandlerAsync(
-        IContractContentHandler handler,
+        IContractTemplateHandler handler,
         ClaimsPrincipal user)
     {
-        var request = new GetAllContractContentByUserRequest
-        {
-            UserId = user.Identity?.Name ?? string.Empty
-        };
-
-        var result = await handler.GetAllByUserAsync(request);
+        var result = await handler.GetAllAsync();
 
         return result.IsSuccess
             ? Results.Ok(result)

@@ -1,13 +1,12 @@
 ﻿@page "/contratos/modelos"
 @using RealtyHub.Core.Models
-@inherits ListContractsContentPage
+@inherits ListContractTemplatesPage
 
 <MudText Typo="Typo.h3">Modelos de Contratos</MudText>
 
-<MudDataGrid T="ContractContent"
+<MudDataGrid T="ContractTemplate"
              Class="mt-4"
              ServerData="LoadServerData"
-             @ref="DataGrid"
              RowsPerPage="@Core.Configuration.DefaultPageSize">
 
     <ToolBarContent>

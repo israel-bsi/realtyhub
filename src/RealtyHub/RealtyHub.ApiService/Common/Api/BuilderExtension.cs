@@ -99,6 +99,6 @@ public static class BuilderExtension
         builder.Services.AddTransient<IContractHandler, ContractHandler>();
         builder.Services.AddTransient<IEmailService, EmailService>();
         builder.Services.AddTransient<IPropertyPhotosHandler, PropertyPhotosHandler>();
-        builder.Services.AddTransient<IContractContentHandler, ContractContentHandler>();
+        builder.Services.AddTransient<IContractTemplateHandler, ContractTemplatesHandler>();
     }
 }

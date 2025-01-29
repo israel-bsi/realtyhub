@@ -9,7 +9,7 @@ namespace RealtyHub.ApiService.Services;
 
 public class ContractGenerator
 {
-    public void GenerateContract(string pathContracts, Contract contract, ContractContent? model)
+    public void GenerateContract(string pathContracts, Contract contract, ContractTemplate? model)
     {
 
         var pathOutputDocx = Path.Combine(pathContracts, $"{contract.FileId}.docx");

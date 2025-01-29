@@ -9,7 +9,8 @@ namespace RealtyHub.Web.Handlers;
 
 public class PropertyPhotosHandler(IHttpClientFactory httpClientFactory) : IPropertyPhotosHandler
 {
-    private readonly HttpClient _httpClient = httpClientFactory.CreateClient(Configuration.HttpClientName);
+    private readonly HttpClient _httpClient = httpClientFactory
+        .CreateClient(Configuration.HttpClientName);
     public async Task<Response<PropertyPhoto?>> CreateAsync(CreatePropertyPhotosRequest request)
     {
         if (request.FileBytes is null || request.FileBytes.Count == 0)

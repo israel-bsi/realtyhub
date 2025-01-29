@@ -9,13 +9,15 @@ namespace RealtyHub.Web.Handlers;
 
 public class AccountHandler(IHttpClientFactory httpClientFactory) : IAccountHandler
 {
-    private readonly HttpClient _httpClient = httpClientFactory.CreateClient(Configuration.HttpClientName);
+    private readonly HttpClient _httpClient = httpClientFactory
+        .CreateClient(Configuration.HttpClientName);
     public async Task<Response<string>> LoginAsync(LoginRequest request)
     {
-        var result = await _httpClient.PostAsJsonAsync("v1/identity/login?useCookies=true", request);
+        var result = await _httpClient
+            .PostAsJsonAsync("v1/identity/login?useCookies=true", request);
 
         return result.IsSuccessStatusCode
-            ? new Response<string>("Login realizado com sucesso!", 200, "Login realizado com sucesso!")
+            ? new Response<string>()
             : new Response<string>(null, (int)result.StatusCode, "Não foi possível realizar login");
     }
     public async Task<Response<string>> RegisterAsync(RegisterRequest request)

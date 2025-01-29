@@ -209,7 +209,7 @@ public class ContractHandler(AppDbContext context, IHostEnvironment host) : ICon
         };
 
         var contractModel = await context
-            .ContractsContent
+            .ContractTemplates
             .FirstOrDefaultAsync(cm => cm.Type == contractModelType);
 
         var docxContractGenerator = new ContractGenerator();

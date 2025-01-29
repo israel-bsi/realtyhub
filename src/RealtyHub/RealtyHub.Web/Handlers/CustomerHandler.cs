@@ -8,17 +8,14 @@ namespace RealtyHub.Web.Handlers;
 
 public class CustomerHandler(IHttpClientFactory httpClientFactory) : ICustomerHandler
 {
-    private readonly HttpClient _httpClient = httpClientFactory.CreateClient(Configuration.HttpClientName);
+    private readonly HttpClient _httpClient = httpClientFactory
+        .CreateClient(Configuration.HttpClientName);
     public async Task<Response<Customer?>> CreateAsync(Customer request)
     {
         var result = await _httpClient.PostAsJsonAsync("v1/customers", request);
 
-        var data = await result.Content.ReadFromJsonAsync<Response<Customer?>>();
-
-        if (!result.IsSuccessStatusCode)
-            return new Response<Customer?>(null, 400, data?.Message);
-
-        return data ?? new Response<Customer?>(null, 400, "Falha ao criar o cliente");
+        return await result.Content.ReadFromJsonAsync<Response<Customer?>>() 
+               ?? new Response<Customer?>(null, 400, "Falha ao criar o cliente");
     }
 
     public async Task<Response<Customer?>> UpdateAsync(Customer request)
@@ -41,12 +38,8 @@ public class CustomerHandler(IHttpClientFactory httpClientFactory) : ICustomerHa
     {
         var response = await _httpClient.GetAsync($"v1/customers/{request.Id}");
 
-        if (!response.IsSuccessStatusCode)
-            return new Response<Customer?>(null, 400, "Não foi possível obter o cliente");
-
-        var data = await response.Content.ReadFromJsonAsync<Response<Customer?>>();
-
-        return data ?? new Response<Customer?>(null, 400, "Não foi possível obter o cliente");
+        return await response.Content.ReadFromJsonAsync<Response<Customer?>>() 
+               ?? new Response<Customer?>(null, 400, "Falha ao obter o cliente");
     }
 
     public async Task<PagedResponse<List<Customer>?>> GetAllAsync(GetAllCustomersRequest request)
@@ -57,6 +50,6 @@ public class CustomerHandler(IHttpClientFactory httpClientFactory) : ICustomerHa
             url = $"{url}&searchTerm={request.SearchTerm}";
 
         return await _httpClient.GetFromJsonAsync<PagedResponse<List<Customer>?>>(url)
-               ?? new PagedResponse<List<Customer>?>(null, 400, "Não foi possível obter os clientes");
+               ?? new PagedResponse<List<Customer>?>(null, 400, "Falha ao obter os clientes");
     }
 }
