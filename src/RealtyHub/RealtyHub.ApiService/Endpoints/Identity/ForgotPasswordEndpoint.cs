@@ -38,7 +38,6 @@ public class ForgotPasswordEndpoint : IEndpoint
         var message = new ResetPasswordMessage
         {
             EmailTo = user.Email!,
-            Name = user.GivenName,
             ResetPasswordLink = resetLink
         };
         await emailService.SendResetPasswordLinkAsync(message);

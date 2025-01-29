@@ -1,0 +1,23 @@
+﻿@using RealtyHub.Core.Extensions
+
+@switch (Status)
+{
+    case EViewingStatus.Scheduled:
+        <MudChip T="Enum" Color="Color.Primary">@Status.GetDisplayName()</MudChip>
+        break;
+
+    case EViewingStatus.Done:
+        <MudChip T="Enum" Color="Color.Success">@Status.GetDisplayName()</MudChip>
+        break;
+
+    case EViewingStatus.Canceled:
+        <MudChip T="Enum" Color="Color.Error">@Status.GetDisplayName()</MudChip>
+        break;
+
+}
+
+@code
+{
+    [Parameter, EditorRequired]
+    public EViewingStatus Status { get; set; }
+}

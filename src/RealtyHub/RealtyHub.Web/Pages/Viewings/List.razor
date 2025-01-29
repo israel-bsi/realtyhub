@@ -1,7 +1,6 @@
 ﻿@page "/visitas/imoveis/{propertyId:long}"
 @page "/visitas/imoveis"
 @page "/visitas"
-@using RealtyHub.Core.Extensions
 @using RealtyHub.Core.Models
 @inherits ListViewingsPage
 
@@ -41,26 +40,29 @@
         }
         <TemplateColumn Title="Status">
             <CellTemplate>
-                @context.Item.ViewingStatus.GetDisplayName()
+                <ViewingStatus Status="@context.Item.ViewingStatus" />
             </CellTemplate>
         </TemplateColumn>
         <TemplateColumn Class="justify-end" Title="Ações">
             <CellTemplate>
                 <MudStack Row>
                     <MudTooltip Text="Reagendar">
-                        <MudIconButton Icon="@Icons.Material.Filled.Schedule" 
-                                       Color="Color.Primary" 
-                                       OnClick="() => OnRescheduleButtonClickedAsync(context.Item)" />
+                        <MudIconButton Icon="@Icons.Material.Filled.Schedule"
+                                       Color="Color.Primary"
+                                       OnClick="() => OnRescheduleButtonClickedAsync(context.Item)"
+                                       Disabled="@(context.Item.ViewingStatus != EViewingStatus.Scheduled)" />
                     </MudTooltip>
                     <MudTooltip Text="Finalizar">
-                        <MudIconButton Icon="@Icons.Material.Filled.Done" 
-                                       Color="Color.Primary" 
-                                       OnClick="() => OnDoneButtonClickedAsync(context.Item)"/>
+                        <MudIconButton Icon="@Icons.Material.Filled.Done"
+                                       Color="Color.Primary"
+                                       OnClick="() => OnDoneButtonClickedAsync(context.Item)" 
+                                       Disabled="@(context.Item.ViewingStatus != EViewingStatus.Scheduled)" />
                     </MudTooltip>
                     <MudTooltip Text="Cancelar">
-                        <MudIconButton Icon="@Icons.Material.Filled.Cancel" 
+                        <MudIconButton Icon="@Icons.Material.Filled.Cancel"
                                        Color="Color.Error"
-                                       OnClick="() => OnCancelButtonClickedAsync(context.Item)" />
+                                       OnClick="() => OnCancelButtonClickedAsync(context.Item)" 
+                                       Disabled="@(context.Item.ViewingStatus != EViewingStatus.Scheduled)" />
                     </MudTooltip>
                 </MudStack>
             </CellTemplate>

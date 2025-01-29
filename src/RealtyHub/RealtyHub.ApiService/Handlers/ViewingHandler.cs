@@ -32,6 +32,14 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
             if (property is null)
                 return new Response<Viewing?>(null, 404, "Imóvel não encontrado");
 
+            var isViewingExist = await context
+                .Viewing
+                .AnyAsync(v => v.PropertyId == request.PropertyId
+                               && v.ViewingDate == request.ViewingDate);
+
+            if (isViewingExist)
+                return new Response<Viewing?>(null, 400, "Visita já agendada para esta data");
+
             var viewing = new Viewing
             {
                 ViewingDate = request.ViewingDate,
@@ -175,7 +183,7 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
                 .AsNoTracking()
                 .Include(v => v.Buyer)
                 .Include(v => v.Property)
-                .ThenInclude(p=>p!.Seller)
+                .ThenInclude(p => p!.Seller)
                 .FirstOrDefaultAsync(v => v.Id == request.Id
                                           && v.UserId == request.UserId);
 

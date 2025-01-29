@@ -49,8 +49,31 @@ public class EmailService : IEmailService
         }
         catch (Exception ex)
         {
-            return Task.FromResult(new Response<bool>(
-                false, 500, ex.Message));
+            return Task.FromResult(new Response<bool>(false, 500, ex.Message));
+        }
+    }
+
+    public Task<Response<bool>> SendContractAsync(AttachmentMessage message)
+    {
+        var smtpClient = ConfigureClient();
+        var mailMessage = ConfigureMailMessage();
+
+        var attachment = new Attachment(message.AttachmentPath);
+        mailMessage.Attachments.Add(attachment);
+
+        mailMessage.To.Add(message.EmailTo);
+        mailMessage.Subject = message.Subject;
+        mailMessage.Body = message.Body;
+        mailMessage.IsBodyHtml = true;
+
+        try
+        {
+            smtpClient.Send(mailMessage);
+            return Task.FromResult(new Response<bool>(true));
+        }
+        catch (Exception ex)
+        {
+            return Task.FromResult(new Response<bool>(false, 500, ex.Message));
         }
     }
 
@@ -67,6 +90,7 @@ public class EmailService : IEmailService
                 Configuration.EmailSettings.EmailPassword)
         };
     }
+
     private static MailMessage ConfigureMailMessage()
     {
         return new MailMessage

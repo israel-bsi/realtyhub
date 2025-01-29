@@ -4,7 +4,9 @@ using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.Contracts;
 using RealtyHub.Core.Requests.Offers;
+using RealtyHub.Web.Components.Common;
 using RealtyHub.Web.Components.Customers;
+using RealtyHub.Web.Components.Email;
 using RealtyHub.Web.Components.Offers;
 using RealtyHub.Web.Components.Properties;
 
@@ -72,31 +74,35 @@ public partial class ContractFormComponent : ComponentBase
         IsBusy = true;
         try
         {
-            string message;
+            bool success;
             if (ContractId == 0)
             {
                 var response = await ContractHandler.CreateAsync(InputModel);
+                success = response.IsSuccess;
                 if (response.IsSuccess)
                 {
                     Snackbar.Add("Contrato emitido com sucesso", Severity.Success);
                     await OnSubmitButtonClickedAsync();
-                    return;
                 }
-                message = response.Message ?? string.Empty;
+                else
+                    Snackbar.Add(response.Message ?? string.Empty, Severity.Error);
             }
             else
             {
                 var response = await ContractHandler.UpdateAsync(InputModel);
+                success = response.IsSuccess;
                 if (response.IsSuccess)
                 {
                     Snackbar.Add("Contrato alterado com sucesso", Severity.Success);
                     NavigationManager.NavigateTo("/contratos");
                     await OnSubmitButtonClickedAsync();
-                    return;
                 }
-                message = response.Message ?? string.Empty;
+                else
+                    Snackbar.Add(response.Message ?? string.Empty, Severity.Error);
             }
-            Snackbar.Add(message, Severity.Error);
+
+            if (success)
+                await OpenEmailDialog();
         }
         catch (Exception e)
         {
@@ -106,6 +112,45 @@ public partial class ContractFormComponent : ComponentBase
         {
             IsBusy = false;
         }
+    }
+
+    private async Task OpenEmailDialog()
+    {
+        var parametersConfirm = new DialogParameters
+        {
+            { "ContentText", "Deseja enviar os contrados via e-mail? " },
+            { "ButtonText", "Confirmar" },
+            { "ButtonColor", Color.Success }
+        };
+
+        var optionsConfirm = new DialogOptions
+        {
+            CloseButton = true,
+            MaxWidth = MaxWidth.Small
+        };
+
+        var dialogConfirm = await DialogService
+            .ShowAsync<DialogConfirm>("Emails", parametersConfirm, optionsConfirm);
+        var confirmResult = await dialogConfirm.Result;
+
+        if (confirmResult is { Canceled: true }) return;
+
+        var parameters = new DialogParameters
+        {
+            { "ContractId", InputModel.Id },
+            { "BuyerEmail", InputModel.Buyer?.Email },
+            { "SellerEmail", InputModel.Seller?.Email }
+        };
+        var options = new DialogOptions
+        {
+            CloseButton = true,
+            MaxWidth = MaxWidth.Medium,
+            FullWidth = true
+        };
+        var dialog = await DialogService
+            .ShowAsync<EmailDialog>("Enviar contrato por e-mail", parameters, options);
+        
+
     }
 
     private async Task OnSubmitButtonClickedAsync()
@@ -283,12 +328,6 @@ public partial class ContractFormComponent : ComponentBase
                 if (response is { IsSuccess: true, Data: not null })
                 {
                     InputModel = response.Data;
-                    InputModel.Offer = response.Data.Offer;
-                    InputModel.OfferId = response.Data.OfferId;
-                    InputModel.Seller = response.Data.Seller;
-                    InputModel.SellerId = response.Data.SellerId;
-                    InputModel.Buyer = response.Data.Buyer;
-                    InputModel.BuyerId = response.Data.BuyerId;
                     return;
                 }
                 Snackbar.Add(response.Message ?? string.Empty, Severity.Error);
@@ -321,6 +360,8 @@ public partial class ContractFormComponent : ComponentBase
                     InputModel.OfferId = response.Data.Id;
                     InputModel.Seller = response.Data.Property!.Seller;
                     InputModel.SellerId = response.Data.Property.SellerId;
+                    InputModel.Buyer = response.Data.Buyer;
+                    InputModel.BuyerId = response.Data.BuyerId;
                     return;
                 }
                 Snackbar.Add(response.Message ?? string.Empty, Severity.Error);

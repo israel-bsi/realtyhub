@@ -148,10 +148,10 @@ public partial class ViewingFormComponent : ComponentBase
             InputModel.Id = response.Data.Id;
             InputModel.ViewingDate = response.Data.ViewingDate;
             InputModel.ViewingStatus = response.Data.ViewingStatus;
+            InputModel.Buyer = response.Data.Buyer;
             InputModel.BuyerId = response.Data.BuyerId;
+            InputModel.Property = response.Data.Property;
             InputModel.PropertyId = response.Data.PropertyId;
-            InputModel.Buyer = response.Data.Buyer;
-            InputModel.Buyer = response.Data.Buyer;
             InputModel.UserId = response.Data.UserId;
             ViewingTime = InputModel.ViewingDate!.Value.TimeOfDay;
         }

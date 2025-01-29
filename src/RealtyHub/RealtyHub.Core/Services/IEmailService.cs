@@ -7,4 +7,5 @@ public interface IEmailService
 {
     Task<Response<bool>> SendConfirmationLinkAsync(ConfirmEmailMessage message);
     Task<Response<bool>> SendResetPasswordLinkAsync(ResetPasswordMessage message);
+    Task<Response<bool>> SendContractAsync(AttachmentMessage message);
 }

@@ -2,6 +2,7 @@
 using RealtyHub.ApiService.Endpoints.Contracts;
 using RealtyHub.ApiService.Endpoints.ContractsTemplates;
 using RealtyHub.ApiService.Endpoints.Customers;
+using RealtyHub.ApiService.Endpoints.Emails;
 using RealtyHub.ApiService.Endpoints.Identity;
 using RealtyHub.ApiService.Endpoints.Offers;
 using RealtyHub.ApiService.Endpoints.Properties;
@@ -107,6 +108,11 @@ public static class Endpoint
             .MapEndpoint<ViewingReportEndpoint>()
             .MapEndpoint<OfferReportEndpoint>()
             .MapEndpoint<PropertyReportEndpoint>();
+
+        endpoints.MapGroup("v1/emails")
+            .WithTags("Emails")
+            .RequireAuthorization()
+            .MapEndpoint<SendContractEmailEndpoint>();
     }
 
     private static IEndpointRouteBuilder MapEndpoint<TEndpoint>(this IEndpointRouteBuilder app)

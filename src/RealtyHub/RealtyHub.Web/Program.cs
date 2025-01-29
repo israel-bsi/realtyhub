@@ -44,6 +44,7 @@ builder.Services.AddTransient<IOfferHandler, OfferHandler>();
 builder.Services.AddTransient<IContractHandler, ContractHandler>();
 builder.Services.AddTransient<IContractTemplateHandler, ContractTemplateHandler>();
 builder.Services.AddTransient<IViaCepService, ViaCepService>();
+builder.Services.AddTransient<IEmailService, EmailService>();
 builder.Services.AddTransient<ShowDialogConfirm>();
 builder.Services.AddTransient<DocumentValidator>();
 

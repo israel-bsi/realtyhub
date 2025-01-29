@@ -1,0 +1,127 @@
+﻿@using RealtyHub.Core.Requests.Emails
+@using RealtyHub.Core.Services
+
+<MudPaper Class="pa-4">
+    <MudGrid>
+        <MudItem lg="6" md="8" xs="12">
+            <MudTextField T="string"
+            Label="E-mail do comprador"
+            @bind-Value="BuyerEmail"
+            For="@(() => BuyerEmail)"
+            InputType="InputType.Email" />
+        </MudItem>
+        <MudItem lg="6" md="8" xs="12">
+            <MudTextField T="string"
+            Label="E-mail do vendedor"
+            @bind-Value="SellerEmail"
+            For="@(() => SellerEmail)"
+            InputType="InputType.Email" />
+        </MudItem>
+    </MudGrid>
+    <div class="d-flex mt-8">
+        @if (IsBusy)
+        {
+            <MudProgressLinear Color="Color.Info" Indeterminate="true" />
+        }
+        else
+        {
+            <MudButton Class="mt-4"
+            Variant="Variant.Filled"
+            Color="Color.Primary"
+            OnClick="OnClickAsync">
+                Enviar e-mails
+            </MudButton>
+        }
+    </div>
+
+</MudPaper>
+
+@code
+{
+    [Parameter]
+    public EventCallback OnEmailSent { get; set; }
+
+    [Parameter]
+    public string BuyerEmail { get; set; } = string.Empty;
+
+    [Parameter]
+    public string SellerEmail { get; set; } = string.Empty;
+
+    [Parameter]
+    public long ContractId { get; set; }
+
+    [Inject]
+    public IEmailService EmailService { get; set; } = null!;
+
+    [Inject]
+    public ISnackbar Snackbar { get; set; } = null!;
+
+    public bool IsBusy { get; set; }
+    private bool _success;
+
+    public async Task OnClickAsync()
+    {
+        IsBusy = true;
+        if (string.IsNullOrWhiteSpace(BuyerEmail) || string.IsNullOrWhiteSpace(SellerEmail))
+        {
+            Snackbar.Add("Os e-mails são obrigatórios", Severity.Error);
+            return;
+        }
+        try
+        {
+            _success = await SendEmailToBuyerAsync();
+            _success = await SendEmailToSellerAsync();
+            if (_success)
+                Snackbar.Add("E-mails enviados com sucesso", Severity.Success);
+
+            if (OnEmailSent.HasDelegate)
+                await OnEmailSent.InvokeAsync();
+        }
+        catch
+        {
+            Snackbar.Add("Erro ao enviar e-mail", Severity.Error);
+        }
+        finally
+        {
+            IsBusy = false;
+        }
+    }
+
+    private async Task<bool> SendEmailToBuyerAsync()
+    {
+        var request = new AttachmentMessage
+        {
+            ContractId = ContractId,
+            EmailTo = BuyerEmail,
+            Subject = "Contrato de compra e venda",
+            Body = "Segue em anexo o contrato referente a aquisição do seu novo imóvel"
+        };
+        var result = await EmailService.SendContractAsync(request);
+        if (!result.IsSuccess)
+            Snackbar.Add("Erro ao enviar e-mail para o comprador", Severity.Error);
+
+        return result.IsSuccess;
+    }
+
+    private async Task<bool> SendEmailToSellerAsync()
+    {
+        var request = new AttachmentMessage
+        {
+            ContractId = ContractId,
+            EmailTo = SellerEmail,
+            Subject = "Contrato de compra e venda",
+            Body = "Segue em anexo o contrato referente a venda do seu imóvel"
+        };
+        var result = await EmailService.SendContractAsync(request);
+        if (!result.IsSuccess)
+            Snackbar.Add("Erro ao enviar e-mail para o vendedor", Severity.Error);
+
+        return result.IsSuccess;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnParametersSetAsync();
+        await base.OnInitializedAsync();
+    }
+}

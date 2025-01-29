@@ -373,7 +373,6 @@ public partial class PropertyFormComponent : ComponentBase
     {
         InputModel.Seller = seller;
         InputModel.SellerId = seller.Id;
-        //EditFormKey++;
         StateHasChanged();
     }
     #endregion

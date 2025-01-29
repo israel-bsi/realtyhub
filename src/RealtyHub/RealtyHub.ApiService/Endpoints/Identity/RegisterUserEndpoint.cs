@@ -58,7 +58,6 @@ public class RegisterUserEndpoint : IEndpoint
         var emailMessage = new ConfirmEmailMessage
         {
             EmailTo = user.Email,
-            Name = user.GivenName,
             ConfirmationLink = confirmationLink
         };
 

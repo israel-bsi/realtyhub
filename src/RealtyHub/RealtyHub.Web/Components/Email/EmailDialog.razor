@@ -1,0 +1,27 @@
+﻿<MudDialog>
+    <DialogContent>
+        <EmailForm ContractId="ContractId"
+                   BuyerEmail="@BuyerEmail"
+                   SellerEmail="@SellerEmail"
+                   OnEmailSent="@CloseDialog"/>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="CloseDialog" Color="Color.Primary">Fechar</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter]
+    MudDialogInstance MudDialog { get; set; } = null!;
+
+    [Parameter]
+    public long ContractId { get; set; }
+
+    [Parameter]
+    public string BuyerEmail { get; set; } = string.Empty;
+
+    [Parameter]
+    public string SellerEmail { get; set; } = string.Empty;
+
+    void CloseDialog() => MudDialog.Close();
+}
