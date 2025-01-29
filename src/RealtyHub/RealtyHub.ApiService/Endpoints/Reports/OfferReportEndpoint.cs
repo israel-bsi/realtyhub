@@ -7,15 +7,15 @@ using RealtyHub.ApiService.Services.Reports;
 
 namespace RealtyHub.ApiService.Endpoints.Reports;
 
-public class ViewingReportEndpoint : IEndpoint
+public class OfferReportEndpoint : IEndpoint
 {
     public static void Map(IEndpointRouteBuilder app)
     {
-        app.MapGet("/viewing", HandleAsync)
-            .WithName("Reports: Viewing")
-            .WithSummary("Relatório de Visitas a Imóveis")
-            .WithDescription("Gera um relatório de visitas a imóveis")
-            .WithOrder(1)
+        app.MapGet("/offer", HandleAsync)
+            .WithName("Reports: Offer")
+            .WithSummary("Relatório de Propostas a Imóveis")
+            .WithDescription("Gera um relatório de propostas a imóveis")
+            .WithOrder(2)
             .Produces(StatusCodes.Status200OK)
             .Produces(StatusCodes.Status401Unauthorized)
             .Produces(StatusCodes.Status500InternalServerError)
@@ -28,22 +28,21 @@ public class ViewingReportEndpoint : IEndpoint
         IHostEnvironment environment,
         HttpContext httpContext)
     {
-        var visitsData = await dbContext.Viewing
-            .Include(v => v.Property)
+        var offersData = await dbContext.Offers
+            .Include(o => o.Property)
             .ThenInclude(p => p!.Seller)
-            .Include(v => v.Buyer)
+            .Include(o => o.Buyer)
             .ToListAsync();
 
         var basePath = environment.ContentRootPath;
-        var report = new VisitReportService(visitsData, basePath);
+        var report = new OfferReportService(offersData, basePath);
         var pdfBytes = report.GeneratePdf();
         var reportsFolder = Path.Combine(basePath, "Sources", "Reports");
-        if(!Directory.Exists(reportsFolder))
+        if (!Directory.Exists(reportsFolder))
             Directory.CreateDirectory(reportsFolder);
 
-        var fileName = Path.Combine($"RelatórioVisitas{DateTime.Now:yyyyMMddHHmmss}.pdf");
+        var fileName = Path.Combine($"RelatórioPropostas{DateTime.Now:yyyyMMddHHmmss}.pdf");
         var filePath = Path.Combine(reportsFolder, fileName);
-
         await File.WriteAllBytesAsync(filePath, pdfBytes);
 
         var reportUrl = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}/reports/{fileName}";

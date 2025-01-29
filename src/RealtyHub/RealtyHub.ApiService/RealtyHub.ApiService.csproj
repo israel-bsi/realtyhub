@@ -55,6 +55,7 @@
   <ItemGroup>
     <Folder Include="Sources\Photos\" />
     <Folder Include="Sources\Contracts\" />
+    <Folder Include="Sources\Reports\" />
   </ItemGroup>
 
 </Project>

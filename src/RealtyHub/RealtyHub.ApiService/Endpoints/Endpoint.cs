@@ -104,7 +104,9 @@ public static class Endpoint
         endpoints.MapGroup("v1/reports")
             .WithTags("Reports")
             .RequireAuthorization()
-            .MapEndpoint<ViewingReportEndpoint>();
+            .MapEndpoint<ViewingReportEndpoint>()
+            .MapEndpoint<OfferReportEndpoint>()
+            .MapEndpoint<PropertyReportEndpoint>();
     }
 
     private static IEndpointRouteBuilder MapEndpoint<TEndpoint>(this IEndpointRouteBuilder app)

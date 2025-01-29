@@ -5,11 +5,11 @@ using RealtyHub.Core.Models;
 
 namespace RealtyHub.ApiService.Services.Reports;
 
-public class VisitReportService(List<Viewing> viewings, string rootPath) : IDocument
+public class OfferReportService(List<Offer> offers, string rootPath) : IDocument
 {
     public DocumentMetadata GetMetadata() => new()
     {
-        Title = "Relatório de Visitas a Imóveis",
+        Title = "Relatório de Propostas a Imóveis",
         Author = "RealtyHub",
     };
 
@@ -18,6 +18,7 @@ public class VisitReportService(List<Viewing> viewings, string rootPath) : IDocu
         container.Page(page =>
         {
             page.Margin(30);
+            page.DefaultTextStyle(x=>x.FontSize(8));
             page.Header().Element(ComposeHeader);
             page.Content().Element(ComposeContent);
             page.Footer().Element(ComposeFooter);
@@ -29,7 +30,7 @@ public class VisitReportService(List<Viewing> viewings, string rootPath) : IDocu
         var pathLogo = Path.Combine(rootPath, "Sources", "Logos", "white-logo-nobg.png");
         container.Row(row =>
         {
-            row.RelativeItem().Text("Relatório de Visitas a Imóveis")
+            row.RelativeItem().Text("Relatório de Propostas a Imóveis")
                 .FontSize(16)
                 .Bold();
 
@@ -52,10 +53,12 @@ public class VisitReportService(List<Viewing> viewings, string rootPath) : IDocu
     {
         container.Section("Main").Table(table =>
         {
+
             table.ColumnsDefinition(columns =>
             {
-                columns.RelativeColumn();
-                columns.RelativeColumn();
+                columns.ConstantColumn(50);
+                columns.ConstantColumn(70);
+                columns.ConstantColumn(60);
                 columns.RelativeColumn();
                 columns.RelativeColumn();
                 columns.RelativeColumn();
@@ -63,20 +66,22 @@ public class VisitReportService(List<Viewing> viewings, string rootPath) : IDocu
 
             table.Header(header =>
             {
-                header.Cell().Background("#EEE").Text("Imóvel");
+                header.Cell().Background("#EEE").Text("Proposta");
                 header.Cell().Background("#EEE").Text("Data");
                 header.Cell().Background("#EEE").Text("Status");
+                header.Cell().Background("#EEE").Text("Valor proposto");
                 header.Cell().Background("#EEE").Text("Comprador");
                 header.Cell().Background("#EEE").Text("Vendedor");
             });
 
-            foreach (var viewing in viewings)
+            foreach (var offer in offers)
             {
-                table.Cell().Text($"{viewing.PropertyId}");
-                table.Cell().Text($"{viewing.ViewingDate:dd/MM/yyyy}");
-                table.Cell().Text($"{viewing.ViewingStatus.GetDisplayName()}");
-                table.Cell().Text(viewing.Buyer!.Name);
-                table.Cell().Text(viewing.Property!.Seller!.Name);
+                table.Cell().Text($"{offer.PropertyId}");
+                table.Cell().Text($"{offer.SubmissionDate:dd/MM/yyyy}");
+                table.Cell().Text($"{offer.OfferStatus.GetDisplayName()}");
+                table.Cell().Text(offer.Amount.ToString("C"));
+                table.Cell().Text(offer.Buyer!.Name);
+                table.Cell().Text(offer.Property!.Seller!.Name);
             }
         });
     }
