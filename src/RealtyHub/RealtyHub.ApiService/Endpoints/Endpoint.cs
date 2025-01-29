@@ -5,6 +5,7 @@ using RealtyHub.ApiService.Endpoints.Customers;
 using RealtyHub.ApiService.Endpoints.Identity;
 using RealtyHub.ApiService.Endpoints.Offers;
 using RealtyHub.ApiService.Endpoints.Properties;
+using RealtyHub.ApiService.Endpoints.Reports;
 using RealtyHub.ApiService.Endpoints.Viewings;
 using RealtyHub.ApiService.Models;
 
@@ -99,6 +100,11 @@ public static class Endpoint
             .WithTags("Contract Templates")
             .RequireAuthorization()
             .MapEndpoint<GetAllContractTemplatesEndpoint>();
+
+        endpoints.MapGroup("v1/reports")
+            .WithTags("Reports")
+            .RequireAuthorization()
+            .MapEndpoint<ViewingReportEndpoint>();
     }
 
     private static IEndpointRouteBuilder MapEndpoint<TEndpoint>(this IEndpointRouteBuilder app)

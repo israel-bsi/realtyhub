@@ -2,11 +2,14 @@ using RealtyHub.ApiService;
 using RealtyHub.ApiService.Common.Api;
 using RealtyHub.ApiService.Endpoints;
 using System.Globalization;
+using QuestPDF.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
 CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("pt-BR");
 CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("pt-BR");
+
+QuestPDF.Settings.License = LicenseType.Community;
 
 builder.Logging.AddConsole();
 builder.AddConfiguration();

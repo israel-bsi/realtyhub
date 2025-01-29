@@ -77,6 +77,16 @@ public static class AppExtension
             FileProvider = new PhysicalFileProvider(pathContracts),
             RequestPath = "/contracts"
         });
+
+        var reportsPath = Path.Combine(Directory.GetCurrentDirectory(), "Sources", "Reports");
+        if (!Directory.Exists(reportsPath))
+            Directory.CreateDirectory(reportsPath);
+
+        app.UseStaticFiles(new StaticFileOptions
+        {
+            FileProvider = new PhysicalFileProvider(reportsPath),
+            RequestPath = "/reports"
+        });
     }
     public static void ApplyMigrations(this WebApplication app)
     {
