@@ -49,7 +49,7 @@ public partial class LoginPage : ComponentBase
             {
                 await AuthenticationStateProvider.GetAuthenticationStateAsync();
                 AuthenticationStateProvider.NotifyAuthenticationStateChanged();
-                NavigationManager.NavigateTo("/dashboard");
+                NavigationManager.NavigateTo("/listar-imoveis");
             }
             else
                 Snackbar.Add(result.Message ?? string.Empty, Severity.Error);

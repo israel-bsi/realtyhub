@@ -53,6 +53,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Sources\ContractTemplates\" />
     <Folder Include="Sources\Photos\" />
     <Folder Include="Sources\Contracts\" />
     <Folder Include="Sources\Reports\" />

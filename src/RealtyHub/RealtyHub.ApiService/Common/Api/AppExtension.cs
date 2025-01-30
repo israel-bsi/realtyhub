@@ -58,33 +58,27 @@ public static class AppExtension
     }
     public static void UseStaticFiles(this WebApplication app)
     {
-        var pathPhotos = Path.Combine(Directory.GetCurrentDirectory(), "Sources", "Photos");
-        if (!Directory.Exists(pathPhotos))
-            Directory.CreateDirectory(pathPhotos);
-
         app.UseStaticFiles(new StaticFileOptions
         {
-            FileProvider = new PhysicalFileProvider(pathPhotos),
+            FileProvider = new PhysicalFileProvider(Configuration.PhotosPath),
             RequestPath = "/photos"
         });
 
-        var pathContracts = Path.Combine(Directory.GetCurrentDirectory(), "Sources", "Contracts");
-        if (!Directory.Exists(pathContracts))
-            Directory.CreateDirectory(pathContracts);
-
         app.UseStaticFiles(new StaticFileOptions
         {
-            FileProvider = new PhysicalFileProvider(pathContracts),
+            FileProvider = new PhysicalFileProvider(Configuration.ContractsPath),
             RequestPath = "/contracts"
         });
 
-        var reportsPath = Path.Combine(Directory.GetCurrentDirectory(), "Sources", "Reports");
-        if (!Directory.Exists(reportsPath))
-            Directory.CreateDirectory(reportsPath);
+        app.UseStaticFiles(new StaticFileOptions
+        {
+            FileProvider = new PhysicalFileProvider(Configuration.ContractTemplatesPath),
+            RequestPath = "/contracts-templates"
+        });
 
         app.UseStaticFiles(new StaticFileOptions
         {
-            FileProvider = new PhysicalFileProvider(reportsPath),
+            FileProvider = new PhysicalFileProvider(Configuration.ReportsPath),
             RequestPath = "/reports"
         });
     }

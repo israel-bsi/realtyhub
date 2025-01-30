@@ -5,7 +5,7 @@ using RealtyHub.Core.Models;
 
 namespace RealtyHub.ApiService.Services.Reports;
 
-public class OfferReportService(List<Offer> offers, string rootPath) : IDocument
+public class OfferReportService(List<Offer> offers) : IDocument
 {
     public DocumentMetadata GetMetadata() => new()
     {
@@ -27,7 +27,7 @@ public class OfferReportService(List<Offer> offers, string rootPath) : IDocument
 
     private void ComposeHeader(IContainer container)
     {
-        var pathLogo = Path.Combine(rootPath, "Sources", "Logos", "white-logo-nobg.png");
+        var pathLogo = Path.Combine(Configuration.LogosPath, "white-logo-nobg.png");
         container.Row(row =>
         {
             row.RelativeItem().Text("Relatório de Propostas a Imóveis")

@@ -20,9 +20,6 @@ public partial class CardHomeComponent : ComponentBase
     #region Services
 
     [Inject]
-    public ISnackbar Snackbar { get; set; } = null!;
-
-    [Inject]
     public IDialogService DialogService { get; set; } = null!;
 
     #endregion

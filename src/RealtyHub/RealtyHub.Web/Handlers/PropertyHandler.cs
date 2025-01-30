@@ -30,8 +30,9 @@ public class PropertyHandler(IHttpClientFactory httpClientFactory) : IPropertyHa
     {
         var result = await _httpClient.DeleteAsync($"v1/properties/{request.Id}");
 
-        return await result.Content.ReadFromJsonAsync<Response<Property?>>()
-               ?? new Response<Property?>(null, 400, "Falha ao excluir o imóvel");
+        return result.IsSuccessStatusCode
+            ? new Response<Property?>(null, 200, "Imóvel excluído com sucesso")
+            : new Response<Property?>(null, 400, "Falha ao excluir o imóvel");
     }
 
     public async Task<Response<Property?>> GetByIdAsync(GetPropertyByIdRequest request)

@@ -30,8 +30,9 @@ public class CustomerHandler(IHttpClientFactory httpClientFactory) : ICustomerHa
     {
         var result = await _httpClient.DeleteAsync($"v1/customers/{request.Id}");
 
-        return await result.Content.ReadFromJsonAsync<Response<Customer?>>()
-               ?? new Response<Customer?>(null, 400, "Falha ao excluir o cliente");
+        return result.IsSuccessStatusCode
+            ? new Response<Customer?>(null, 200, "Cliente excluído com sucesso")
+            : new Response<Customer?>(null, 400, "Falha ao excluir o cliente");
     }
 
     public async Task<Response<Customer?>> GetByIdAsync(GetCustomerByIdRequest request)

@@ -4,6 +4,8 @@ using QuestPDF.Fluent;
 using RealtyHub.ApiService.Common.Api;
 using RealtyHub.ApiService.Data;
 using RealtyHub.ApiService.Services.Reports;
+using RealtyHub.Core.Models;
+using RealtyHub.Core.Responses;
 
 namespace RealtyHub.ApiService.Endpoints.Reports;
 
@@ -16,10 +18,10 @@ public class PropertyReportEndpoint : IEndpoint
             .WithSummary("Relatório de Imóveis")
             .WithDescription("Gera um relatório de imóveis")
             .WithOrder(1)
-            .Produces(StatusCodes.Status200OK)
-            .Produces(StatusCodes.Status401Unauthorized)
-            .Produces(StatusCodes.Status500InternalServerError)
-            .Produces(StatusCodes.Status400BadRequest);
+            .Produces<Response<Report>>()
+            .Produces<Response<Report>>(StatusCodes.Status401Unauthorized)
+            .Produces<Response<Report>>(StatusCodes.Status500InternalServerError)
+            .Produces<Response<Report>>(StatusCodes.Status400BadRequest);
     }
 
     private static async Task<IResult> HandleAsync(
@@ -31,19 +33,16 @@ public class PropertyReportEndpoint : IEndpoint
         var propertiesData = await dbContext.Properties
             .ToListAsync();
 
-        var basePath = environment.ContentRootPath;
-        var report = new PropertyReportService(propertiesData, basePath);
+        var report = new PropertyReportService(propertiesData);
         var pdfBytes = report.GeneratePdf();
-        var reportsFolder = Path.Combine(basePath, "Sources", "Reports");
-        if (!Directory.Exists(reportsFolder))
-            Directory.CreateDirectory(reportsFolder);
 
-        var fileName = Path.Combine($"RelatórioImóveis{DateTime.Now:yyyyMMddHHmmss}.pdf");
-        var filePath = Path.Combine(reportsFolder, fileName);
+        var fileName = Path.Combine($"Relatorio Imoveis {DateTime.Now:yyyyMMddHHmmss}.pdf");
+        var filePath = Path.Combine(Configuration.ReportsPath, fileName);
         await File.WriteAllBytesAsync(filePath, pdfBytes);
 
         var reportUrl = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}/reports/{fileName}";
+        var reportData = new Report { Url = reportUrl };
 
-        return Results.Ok(new { url = reportUrl });
+        return Results.Ok(new Response<Report>(reportData));
     }
 }

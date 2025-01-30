@@ -125,9 +125,6 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
                 .Include(p => p.PropertyPhotos.Where(photo => photo.IsActive))
                 .Where(p => p.Id == request.Id && p.IsActive);
 
-            if (!string.IsNullOrEmpty(request.UserId))
-                query = query.Where(p => p.UserId == request.UserId);
-
             var property = await query.FirstOrDefaultAsync();
 
             return property is null
@@ -156,7 +153,20 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
 
             if (!string.IsNullOrEmpty(request.SearchTerm) && !string.IsNullOrEmpty(request.FilterBy))
             {
-                query = query.Where($"{request.FilterBy}.Contains(@0)", request.SearchTerm);
+                var propertyType = typeof(Property).GetProperty(request.FilterBy)?.PropertyType;
+
+                if (propertyType != null)
+                {
+                    if (propertyType == typeof(string))
+                    {
+                        query = query.Where($"{request.FilterBy}.ToLower().Contains(@0.ToLower())", request.SearchTerm);
+                    }
+                    else if (propertyType.IsValueType)
+                    {
+                        var searchValue = Convert.ChangeType(request.SearchTerm, propertyType);
+                        query = query.Where($"{request.FilterBy} == @0", searchValue);
+                    }
+                }
             }
 
             query = query.OrderBy(p => p.Title);
@@ -187,8 +197,7 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
                 .AsNoTracking()
                 .Include(v => v.Buyer)
                 .Include(v => v.Property)
-                .Where(v => v.PropertyId == request.PropertyId
-                            && v.UserId == request.UserId);
+                .Where(v => v.PropertyId == request.PropertyId);
 
             if (request.StartDate is not null && request.EndDate is not null)
             {

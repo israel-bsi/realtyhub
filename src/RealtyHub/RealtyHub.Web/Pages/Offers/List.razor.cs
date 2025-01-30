@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using MudBlazor;
 using RealtyHub.Core.Enums;
 using RealtyHub.Core.Extensions;
@@ -7,6 +8,7 @@ using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.Offers;
 using RealtyHub.Web.Components.Common;
 using RealtyHub.Web.Components.Offers;
+using RealtyHub.Web.Services;
 
 namespace RealtyHub.Web.Pages.Offers;
 
@@ -44,9 +46,26 @@ public partial class ListOffersPage : ComponentBase
     [Inject]
     public IOfferHandler Handler { get; set; } = null!;
 
+    [Inject]
+    public OfferReport OfferReport { get; set; } = null!;
+
+    [Inject] 
+    public IJSRuntime JsRuntime { get; set; } = null!;
+
     #endregion
 
     #region Methods
+
+    public async Task OnReportClickedAsync()
+    {
+        var result = await OfferReport.GetOfferAsync();
+        if (result.IsSuccess)
+        {
+            await JsRuntime.InvokeVoidAsync("openContractPdfInNewTab", result.Data?.Url);
+            return;
+        }
+        Snackbar.Add(result.Message ?? string.Empty, Severity.Error);
+    }
 
     public async Task<GridData<Offer>> LoadServerData(GridState<Offer> state)
     {

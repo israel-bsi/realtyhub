@@ -11,6 +11,30 @@ namespace RealtyHub.ApiService.Common.Api;
 
 public static class BuilderExtension
 {
+    public static void AddDirectories(this WebApplicationBuilder builder)
+    {
+        var basePath = builder.Environment.ContentRootPath;
+
+        Configuration.ContractsPath = Path.Combine(basePath, "Sources", "Contracts");
+        if (!Directory.Exists(Configuration.ContractsPath))
+            Directory.CreateDirectory(Configuration.ContractsPath);
+
+        Configuration.PhotosPath = Path.Combine(basePath, "Sources", "Photos");
+        if (!Directory.Exists(Configuration.PhotosPath))
+            Directory.CreateDirectory(Configuration.PhotosPath);
+
+        Configuration.ContractTemplatesPath = Path.Combine(basePath, "Sources", "ContractTemplates");
+        if (!Directory.Exists(Configuration.ContractTemplatesPath))
+            Directory.CreateDirectory(Configuration.ContractTemplatesPath);
+
+        Configuration.ReportsPath = Path.Combine(basePath, "Sources", "Reports");
+        if (!Directory.Exists(Configuration.ReportsPath))
+            Directory.CreateDirectory(Configuration.ReportsPath);
+
+        Configuration.LogosPath = Path.Combine(basePath, "Sources", "Logos");
+        if (!Directory.Exists(Configuration.LogosPath))
+            Directory.CreateDirectory(Configuration.LogosPath);
+    }
     public static void AddConfiguration(this WebApplicationBuilder builder)
     {
         Core.Configuration.ConnectionString =

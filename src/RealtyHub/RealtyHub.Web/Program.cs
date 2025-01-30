@@ -47,6 +47,8 @@ builder.Services.AddTransient<IViaCepService, ViaCepService>();
 builder.Services.AddTransient<IEmailService, EmailService>();
 builder.Services.AddTransient<ShowDialogConfirm>();
 builder.Services.AddTransient<DocumentValidator>();
+builder.Services.AddTransient<PropertyReport>();
+builder.Services.AddTransient<OfferReport>();
 
 builder.Services.AddLocalization();
 CultureInfo.DefaultThreadCurrentCulture = CultureInfo.CurrentCulture;

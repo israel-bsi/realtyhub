@@ -10,5 +10,5 @@ public class ContractTemplate
     public EContractModelType Type { get; set; }
     public bool ShowInPage { get; set; }
     public string Path => 
-        $"{Configuration.BackendUrl}/contracts/{Id}{Extension}";
+        $"{Configuration.BackendUrl}/contracts-templates/{Id}{Extension}";
 }

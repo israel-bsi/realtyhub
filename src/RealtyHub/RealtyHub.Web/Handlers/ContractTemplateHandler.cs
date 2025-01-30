@@ -12,7 +12,7 @@ public class ContractTemplateHandler(IHttpClientFactory httpClientFactory) :
         .CreateClient(Configuration.HttpClientName);
     public async Task<Response<List<ContractTemplate>?>> GetAllAsync()
     {
-        var response = await _httpClient.GetAsync("v1/contracts-template");
+        var response = await _httpClient.GetAsync("v1/contracts-templates");
 
         return await response.Content.ReadFromJsonAsync<Response<List<ContractTemplate>?>>()
             ?? new Response<List<ContractTemplate>?>(null, 400, "Falha ao buscar os contratos");

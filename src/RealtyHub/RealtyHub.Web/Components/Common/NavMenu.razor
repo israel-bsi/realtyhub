@@ -8,7 +8,6 @@
         <MudText Typo="Typo.body1" Class="px-4">@Configuration.GivenName</MudText>
     </div>
     <MudDivider Class="my-2" />
-    <MudNavLink Icon="@Icons.Material.Filled.Dashboard" Href="/dashboard">Dashboard</MudNavLink>
     <MudNavGroup Icon="@Icons.Material.Filled.Person" Title="Clientes" Expanded="true">
         <MudNavLink Icon="@Icons.Material.Filled.PersonAddAlt1" Href="/clientes/adicionar" Match="NavLinkMatch.All">Cadastro</MudNavLink>
         <MudNavLink Icon="@Icons.Material.Filled.Person" Href="/clientes" Match="NavLinkMatch.All">Listar</MudNavLink>
@@ -16,6 +15,7 @@
     <MudNavGroup Icon="@Icons.Material.Filled.Home" Title="Imóveis" Expanded="true">
         <MudNavLink Icon="@Icons.Material.Filled.AddHome" Href="/imoveis/adicionar" Match="NavLinkMatch.All">Cadastro</MudNavLink>
         <MudNavLink Icon="@Icons.Material.Filled.Home" Href="/imoveis" Match="NavLinkMatch.All">Listar</MudNavLink>
+        <MudNavLink Icon="@Icons.Material.Filled.Home" Href="/listar-imoveis" Match="NavLinkMatch.All">Visualizar como visitante</MudNavLink>
         <MudNavGroup Icon="@Icons.Material.Filled.Pageview" Title="Visitas" Expanded="true">
             <MudNavLink Icon="@Icons.Material.Filled.ScheduleSend" Href="/visitas/agendar" Match="NavLinkMatch.All">Agendar</MudNavLink>
             <MudNavLink Icon="@Icons.Material.Filled.Schedule" Href="/visitas" Match="NavLinkMatch.All">Listar</MudNavLink>

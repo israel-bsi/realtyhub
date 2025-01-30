@@ -257,9 +257,12 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .Include(o => o.Contract)
                 .FirstOrDefaultAsync(o => o.Id == request.Id);
 
-            return offer == null
-                ? new Response<Offer?>(null, 404, "Proposta não encontrada")
-                : new Response<Offer?>(offer, 200, "Proposta encontrada");
+            if (offer is null)
+                return new Response<Offer?>(null, 404, "Proposta não encontrada");
+
+            offer.SubmissionDate = offer.SubmissionDate?.ToLocalTime();
+
+            return new Response<Offer?>(offer);
         }
         catch
         {
@@ -281,9 +284,13 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .Include(o => o.Payments)
                 .FirstOrDefaultAsync(o => o.PropertyId == request.PropertyId
                                           && o.OfferStatus == EOfferStatus.Accepted);
-            return offer is null
-                ? new Response<Offer?>(null, 404, "Proposta aceita não encontrada")
-                : new Response<Offer?>(offer);
+
+            if (offer is null)
+                return new Response<Offer?>(null, 404, "Proposta aceita não encontrada");
+
+            offer.SubmissionDate = offer.SubmissionDate?.ToLocalTime();
+
+            return new Response<Offer?>(offer, 200, "Proposta aceita encontrada");
         }
         catch
         {
@@ -331,6 +338,11 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .Skip((request.PageNumber - 1) * request.PageSize)
                 .Take(request.PageSize)
                 .ToListAsync();
+
+            foreach (var offer in offers)
+            {
+                offer.SubmissionDate = offer.SubmissionDate?.ToLocalTime();
+            }
 
             var count = await query.CountAsync();
 
@@ -384,6 +396,11 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .Take(request.PageSize)
                 .ToListAsync();
 
+            foreach (var offer in offers)
+            {
+                offer.SubmissionDate = offer.SubmissionDate?.ToLocalTime();
+            }
+
             var count = await query.CountAsync();
 
             return new PagedResponse<List<Offer>?>(offers, count, request.PageNumber, request.PageSize);
@@ -398,7 +415,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
     {
         try
         {
-            var query = context
+            IQueryable<Offer> query = context
                 .Offers
                 .AsNoTracking()
                 .Include(o => o.Buyer)
@@ -407,10 +424,24 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 .Include(o => o.Payments)
                 .Include(o => o.Contract);
 
+            if (request.StartDate is not null && request.EndDate is not null)
+            {
+                var startDate = DateTime.Parse(request.StartDate).ToUniversalTime();
+                var endDate = DateTime.Parse(request.EndDate).ToUniversalTime();
+
+                query = query.Where(o => o.SubmissionDate >= startDate
+                                         && o.SubmissionDate <= endDate);
+            }
+
             var offers = await query
                 .Skip((request.PageNumber - 1) * request.PageSize)
                 .Take(request.PageSize)
                 .ToListAsync();
+
+            foreach (var offer in offers)
+            {
+                offer.SubmissionDate = offer.SubmissionDate?.ToLocalTime();
+            }
 
             var count = await query.CountAsync();
 

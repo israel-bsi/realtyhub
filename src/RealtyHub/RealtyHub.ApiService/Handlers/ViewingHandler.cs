@@ -187,9 +187,11 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
                 .FirstOrDefaultAsync(v => v.Id == request.Id
                                           && v.UserId == request.UserId);
 
-            return viewing is null
-                ? new Response<Viewing?>(null, 404, "Visita não encontrada")
-                : new Response<Viewing?>(viewing);
+            if (viewing is null)
+                return new Response<Viewing?>(null, 404, "Visita não encontrada");
+
+            viewing.ViewingDate = viewing.ViewingDate?.ToLocalTime();
+            return new Response<Viewing?>(viewing);
         }
         catch
         {
@@ -224,6 +226,11 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
                 .Skip((request.PageNumber - 1) * request.PageSize)
                 .Take(request.PageSize)
                 .ToListAsync();
+
+            foreach (var viewing in viewings)
+            {
+                viewing.ViewingDate = viewing.ViewingDate?.ToLocalTime();
+            }
 
             var count = await query.CountAsync();
 

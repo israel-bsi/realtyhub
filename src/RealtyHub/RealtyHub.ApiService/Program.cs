@@ -11,6 +11,7 @@ CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("pt-BR");
 
 QuestPDF.Settings.License = LicenseType.Community;
 
+builder.AddDirectories();
 builder.Logging.AddConsole();
 builder.AddConfiguration();
 builder.AddSecurity();

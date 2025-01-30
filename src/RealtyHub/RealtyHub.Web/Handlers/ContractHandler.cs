@@ -19,7 +19,7 @@ public class ContractHandler(IHttpClientFactory httpClientFactory) : IContractHa
 
         var result = await _httpClient.PostAsJsonAsync("v1/contracts", request);
 
-        return await result.Content.ReadFromJsonAsync<Response<Contract?>>() 
+        return await result.Content.ReadFromJsonAsync<Response<Contract?>>()
                ?? new Response<Contract?>(null, 400, "Falha ao criar o contrato");
     }
 
@@ -35,24 +35,25 @@ public class ContractHandler(IHttpClientFactory httpClientFactory) : IContractHa
     {
         var result = await _httpClient.DeleteAsync($"v1/contracts/{request.Id}");
 
-        return await result.Content.ReadFromJsonAsync<Response<Contract?>>()
-               ?? new Response<Contract?>(null, 400, "Falha ao excluir o contrato");
+        return result.IsSuccessStatusCode
+            ? new Response<Contract?>(null, 200, "Contrato excluído com sucesso")
+            : new Response<Contract?>(null, 400, "Falha ao excluir o contrato");
     }
 
     public async Task<Response<Contract?>> GetByIdAsync(GetContractByIdRequest request)
     {
         var result = await _httpClient.GetAsync($"v1/contracts/{request.Id}");
 
-        return await result.Content.ReadFromJsonAsync<Response<Contract?>>() 
+        return await result.Content.ReadFromJsonAsync<Response<Contract?>>()
                ?? new Response<Contract?>(null, 400, "Não foi possível obter o contrato");
     }
 
     public async Task<PagedResponse<List<Contract>?>> GetAllAsync(GetAllContractsRequest request)
     {
         var url = $"v1/contracts?pageNumber={request.PageNumber}&pageSize={request.PageSize}";
-        
+
         return await _httpClient.GetFromJsonAsync<PagedResponse<List<Contract>?>>(url)
-               ?? new PagedResponse<List<Contract>?>(null, 400, 
+               ?? new PagedResponse<List<Contract>?>(null, 400,
                    "Não foi possível obter os contratos");
     }
 }

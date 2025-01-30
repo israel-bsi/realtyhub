@@ -34,7 +34,7 @@ public class CustomerFake
             .RuleFor(c => c.Address, AddressFake.GetFakeAddress)
             .RuleFor(c => c.Rg, c => c.Person.Cpf(false))
             .RuleFor(c => c.IssuingAuthority, c => c.Address.City())
-            .RuleFor(c => c.RgIssueDate, c => c.Date.Past())
+            .RuleFor(c => c.RgIssueDate, c => c.Date.Past().ToUniversalTime())
             .RuleFor(c=>c.MaritalStatus, c=>c.Random.Enum<EMaritalStatus>())
             .RuleFor(c=>c.Occupation, c=>c.Company.CompanyName())
             .RuleFor(c=>c.Nationality, c=>c.Address.Country())

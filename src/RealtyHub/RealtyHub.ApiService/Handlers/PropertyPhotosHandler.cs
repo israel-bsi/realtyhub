@@ -49,8 +49,8 @@ public class PropertyPhotosHandler(AppDbContext context) : IPropertyPhotosHandle
                 var idPhoto = string.IsNullOrEmpty(id) ? Guid.NewGuid().ToString() : id;
                 var extension = Path.GetExtension(file.FileName);
                 var fileName = $"{idPhoto}{extension}";
-                var currentDirectory = Directory.GetCurrentDirectory();
-                var fullFileName = Path.Combine(currentDirectory, "Sources", "Photos", fileName);
+                
+                var fullFileName = Path.Combine(Configuration.PhotosPath, fileName);
 
                 await using var stream = new FileStream(fullFileName, FileMode.Create);
                 await file.CopyToAsync(stream);

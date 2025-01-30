@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using MudBlazor;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.Properties;
 using RealtyHub.Web.Components.Common;
+using RealtyHub.Web.Services;
 
 namespace RealtyHub.Web.Pages.Properties;
 
@@ -35,7 +37,12 @@ public partial class ListPropertiesPage : ComponentBase
         new FilterOption { DisplayName = "Cidade", PropertyName = "Address.City" },
         new FilterOption { DisplayName = "Estado", PropertyName = "Address.State" },
         new FilterOption { DisplayName = "CEP", PropertyName = "Address.ZipCode" },
-        new FilterOption { DisplayName = "País", PropertyName = "Address.Country" }
+        new FilterOption { DisplayName = "País", PropertyName = "Address.Country" },
+        new FilterOption { DisplayName = "Garagens", PropertyName = "Garage" },
+        new FilterOption { DisplayName = "Quartos", PropertyName = "Bedroom" },
+        new FilterOption { DisplayName = "Banheiros", PropertyName = "Bathroom" },
+        new FilterOption { DisplayName = "Área", PropertyName = "Area" },
+        new FilterOption { DisplayName = "Preço", PropertyName = "Price" },
     };
 
     #endregion
@@ -51,9 +58,26 @@ public partial class ListPropertiesPage : ComponentBase
     [Inject]
     public IDialogService DialogService { get; set; } = null!;
 
+    [Inject]
+    public IJSRuntime JsRuntime { get; set; } = null!;
+
+    [Inject] 
+    public PropertyReport PropertyReport { get; set; } = null!;
+
     #endregion
 
     #region Methods
+
+    public async Task OnReportClickedAsync()
+    {
+        var result = await PropertyReport.GetPropertyAsync();
+        if (result.IsSuccess)
+        {
+            await JsRuntime.InvokeVoidAsync("openContractPdfInNewTab", result.Data?.Url);
+            return;
+        }
+        Snackbar.Add(result.Message ?? string.Empty, Severity.Error);
+    }
 
     public async Task OnDeleteButtonClickedAsync(long id, string title)
     {
@@ -94,7 +118,7 @@ public partial class ListPropertiesPage : ComponentBase
             Snackbar.Add(e.Message, Severity.Success);
         }
     }
-    
+
     public async Task<GridData<Property>> LoadServerData(GridState<Property> state)
     {
         try
@@ -144,12 +168,13 @@ public partial class ListPropertiesPage : ComponentBase
         if (OnPropertySelected.HasDelegate)
             await OnPropertySelected.InvokeAsync(property);
     }
-    
+
     public string GetSrcThumbnailPhoto(Property property)
     {
         var photo = property
-            .PropertyPhotos
-            .FirstOrDefault(p=>p.IsThumbnail);
+                        .PropertyPhotos
+                        .FirstOrDefault(p => p.IsThumbnail)
+                        ?? property.PropertyPhotos.FirstOrDefault();
 
         return $"{Configuration.BackendUrl}/photos/{photo?.Id}{photo?.Extension}";
     }

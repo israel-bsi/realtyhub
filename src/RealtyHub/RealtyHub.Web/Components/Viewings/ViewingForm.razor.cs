@@ -222,7 +222,7 @@ public partial class ViewingFormComponent : ComponentBase
         var options = new DialogOptions
         {
             CloseButton = true,
-            MaxWidth = MaxWidth.Large,
+            MaxWidth = MaxWidth.ExtraLarge,
             FullWidth = true
         };
         var dialog = await DialogService

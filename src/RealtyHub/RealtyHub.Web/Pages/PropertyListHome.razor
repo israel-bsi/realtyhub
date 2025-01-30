@@ -1,7 +1,6 @@
 ﻿@page "/listar-imoveis"
 @using RealtyHub.Core.Models
 @inherits PropertyListHomePage
-@layout PublicLayout
 
 <PageTitle>Imóveis</PageTitle>
 
@@ -68,6 +67,7 @@ else
                         <MudText Typo="Typo.body2">Localização: @context.Item.Address.Neighborhood</MudText> <br />
                         <MudText Typo="Typo.body2">@context.Item.Area M²: </MudText> <br />
                         <MudText Typo="Typo.body2">@context.Item.Price.ToString("C")</MudText> <br />
+                        <MudText Typo="Typo.body2">@context.Item.TransactionsDetails</MudText> <br />
                     </CellTemplate>
                 </TemplateColumn>
                 <TemplateColumn Class="justify-end" Title="">

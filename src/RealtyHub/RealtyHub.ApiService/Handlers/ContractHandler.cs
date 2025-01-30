@@ -9,7 +9,7 @@ using RealtyHub.Core.Responses;
 
 namespace RealtyHub.ApiService.Handlers;
 
-public class ContractHandler(AppDbContext context, IHostEnvironment host) : IContractHandler
+public class ContractHandler(AppDbContext context) : IContractHandler
 {
     public async Task<Response<Contract?>> CreateAsync(Contract request)
     {
@@ -155,9 +155,15 @@ public class ContractHandler(AppDbContext context, IHostEnvironment host) : ICon
                                           && c.UserId == request.UserId
                                           && c.IsActive);
 
-            return contract is null 
-                ? new Response<Contract?>(null, 404, "Contrato não encontrado") 
-                : new Response<Contract?>(contract);
+            if (contract is null)
+                return new Response<Contract?>(null, 404, "Contrato não encontrado");
+
+            contract.EffectiveDate = contract.EffectiveDate?.ToLocalTime();
+            contract.IssueDate = contract.IssueDate?.ToLocalTime();
+            contract.SignatureDate = contract.SignatureDate?.ToLocalTime();
+            contract.TermEndDate = contract.TermEndDate?.ToLocalTime();
+
+            return new Response<Contract?>(contract);
         }
         catch
         {
@@ -178,10 +184,27 @@ public class ContractHandler(AppDbContext context, IHostEnvironment host) : ICon
                 .Include(c => c.Seller)
                 .Where(c => c.UserId == request.UserId && c.IsActive);
 
+            if (request.StartDate is not null && request.EndDate is not null)
+            {
+                var startDate = DateTime.Parse(request.StartDate).ToUniversalTime();
+                var endDate = DateTime.Parse(request.EndDate).ToUniversalTime();
+
+                query = query.Where(v => v.IssueDate >= startDate
+                                         && v.IssueDate <= endDate);
+            }
+
             var contracts = await query
                 .Skip((request.PageNumber - 1) * request.PageSize)
                 .Take(request.PageSize)
                 .ToListAsync();
+
+            foreach (var contract in contracts)
+            {
+                contract.EffectiveDate = contract.EffectiveDate?.ToLocalTime();
+                contract.IssueDate = contract.IssueDate?.ToLocalTime();
+                contract.SignatureDate = contract.SignatureDate?.ToLocalTime();
+                contract.TermEndDate = contract.TermEndDate?.ToLocalTime();
+            }
 
             var count = await query.CountAsync();
 
@@ -213,10 +236,9 @@ public class ContractHandler(AppDbContext context, IHostEnvironment host) : ICon
             .FirstOrDefaultAsync(cm => cm.Type == contractModelType);
 
         var docxContractGenerator = new ContractGenerator();
-        var pathContracts = Path.Combine(host.ContentRootPath, "Sources", "Contracts");
-        var pathContactFile = Path.Combine(pathContracts, $"{contract.Id}.docx");
+        var pathContactFile = Path.Combine(Configuration.ContractsPath, $"{contract.Id}.docx");
         if (update)
             File.Delete(pathContactFile);
-        docxContractGenerator.GenerateContract(pathContracts, contract, contractModel);
+        docxContractGenerator.GenerateContract(contract, contractModel);
     }
 }

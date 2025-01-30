@@ -19,7 +19,6 @@ public partial class PropertyListHomePage : ComponentBase
 
     public readonly List<FilterOption> FilterOptions = new()
     {
-        new FilterOption { DisplayName = "Título", PropertyName = "Title" },
         new FilterOption { DisplayName = "Descrição", PropertyName = "Description" },
         new FilterOption { DisplayName = "Bairro", PropertyName = "Address.Neighborhood" },
         new FilterOption { DisplayName = "Garagens", PropertyName = "Garage" },
@@ -95,7 +94,8 @@ public partial class PropertyListHomePage : ComponentBase
     {
         var photo = property
             .PropertyPhotos
-            .FirstOrDefault(p => p.IsThumbnail);
+            .FirstOrDefault(p => p.IsThumbnail)
+            ?? property.PropertyPhotos.FirstOrDefault();
 
         return $"{Configuration.BackendUrl}/photos/{photo?.Id}{photo?.Extension}";
     }

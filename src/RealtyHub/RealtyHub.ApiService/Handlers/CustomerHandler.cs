@@ -152,9 +152,10 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
 
             if (!string.IsNullOrEmpty(request.SearchTerm))
             {
-                query = query.Where(c => c.Name.Contains(request.SearchTerm)
-                                         || c.Email.Contains(request.SearchTerm)
-                                         || c.DocumentNumber.Contains(request.SearchTerm));
+                var lowerSearchTerm = request.SearchTerm.ToLower();
+                query = query.Where(c => c.Name.ToLower().Contains(lowerSearchTerm) ||
+                                         c.Email.ToLower().Contains(lowerSearchTerm) ||
+                                         c.DocumentNumber.ToLower().Contains(lowerSearchTerm));
             }
 
             query = query.OrderBy(c => c.Name);

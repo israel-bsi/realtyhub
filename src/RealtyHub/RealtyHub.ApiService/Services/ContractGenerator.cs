@@ -9,11 +9,11 @@ namespace RealtyHub.ApiService.Services;
 
 public class ContractGenerator
 {
-    public void GenerateContract(string pathContracts, Contract contract, ContractTemplate? model)
+    public void GenerateContract(Contract contract, ContractTemplate? model)
     {
 
-        var pathOutputDocx = Path.Combine(pathContracts, $"{contract.FileId}.docx");
-        var pathTemplateDocx = Path.Combine(pathContracts, $"{model?.Id}{model?.Extension}");
+        var pathOutputDocx = Path.Combine(Configuration.ContractsPath, $"{contract.FileId}.docx");
+        var pathTemplateDocx = Path.Combine(Configuration.ContractTemplatesPath, $"{model?.Id}{model?.Extension}");
         using var doc = DocX.Load(pathTemplateDocx);
 
         var mappings = new VariablesContractMappings(contract);
@@ -41,7 +41,7 @@ public class ContractGenerator
                 ConformanceLevel = GrapeCity.Documents.Pdf.PdfAConformanceLevel.PdfA1a
             };
 
-            layoyt.SaveAsPdf(Path.Combine(pathContracts, $"{contract.FileId}.pdf"), null, pdfOutpuSettings);
+            layoyt.SaveAsPdf(Path.Combine(Configuration.ContractsPath, $"{contract.FileId}.pdf"), null, pdfOutpuSettings);
         }
         File.Delete(pathOutputDocx);
     }

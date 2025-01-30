@@ -31,7 +31,7 @@ public class PropertyPhotosHandler(IHttpClientFactory httpClientFactory) : IProp
         var url = $"/v1/properties/{request.PropertyId}/photos";
         var response = await _httpClient.PostAsync(url, content);
 
-        return await response.Content.ReadFromJsonAsync<Response<PropertyPhoto?>>() 
+        return await response.Content.ReadFromJsonAsync<Response<PropertyPhoto?>>()
                ?? new Response<PropertyPhoto?>(null, 400, "Falha ao adicionar as fotos");
     }
 
@@ -40,7 +40,7 @@ public class PropertyPhotosHandler(IHttpClientFactory httpClientFactory) : IProp
         var url = $"/v1/properties/{request.PropertyId}/photos";
         var result = await _httpClient.PutAsJsonAsync(url, request);
 
-        return await result.Content.ReadFromJsonAsync<Response<List<PropertyPhoto>?>>() 
+        return await result.Content.ReadFromJsonAsync<Response<List<PropertyPhoto>?>>()
                ?? new Response<List<PropertyPhoto>?>(null, 400, "Falha ao atualizar as fotos");
     }
 
@@ -50,8 +50,9 @@ public class PropertyPhotosHandler(IHttpClientFactory httpClientFactory) : IProp
 
         var response = await _httpClient.DeleteAsync(url);
 
-        return await response.Content.ReadFromJsonAsync<Response<PropertyPhoto?>>() 
-               ?? new Response<PropertyPhoto?>(null, 400, "Falha ao deletar a foto");
+        return response.IsSuccessStatusCode 
+            ? new Response<PropertyPhoto?>(null, 204)
+            : new Response<PropertyPhoto?>(null, 400, "Falha ao deletar a foto");
     }
 
     public async Task<Response<List<PropertyPhoto>?>> GetAllByPropertyAsync(
@@ -61,7 +62,7 @@ public class PropertyPhotosHandler(IHttpClientFactory httpClientFactory) : IProp
 
         var response = await _httpClient.GetAsync(url);
 
-        return await response.Content.ReadFromJsonAsync<Response<List<PropertyPhoto>?>>() 
+        return await response.Content.ReadFromJsonAsync<Response<List<PropertyPhoto>?>>()
                ?? new Response<List<PropertyPhoto>?>(null, 400, "Falha ao buscar as fotos");
     }
 }

@@ -6,6 +6,16 @@
 
 <PageTitle>Propostas</PageTitle>
 
+<div class="d-flex justify-end">
+    <MudButton Class="ml-4"
+               Variant="Variant.Filled"
+               Color="Color.Primary"
+               StartIcon="@Icons.Material.Filled.FileOpen"
+               OnClick="OnReportClickedAsync">
+        Gerar Relatório
+    </MudButton>
+</div>
+
 <MudDataGrid T="Offer"
              Class="mt-4"
              ServerData="LoadServerData"

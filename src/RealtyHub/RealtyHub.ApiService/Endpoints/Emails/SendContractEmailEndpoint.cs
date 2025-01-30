@@ -23,8 +23,7 @@ public class SendContractEmailEndpoint : IEndpoint
     private static async Task<IResult> HandlerAsync(
         IEmailService emailService,
         AttachmentMessage request,
-        AppDbContext context,
-        IHostEnvironment environment)
+        AppDbContext context)
     {
         var contract = await context
             .Contracts
@@ -33,8 +32,7 @@ public class SendContractEmailEndpoint : IEndpoint
         if (contract is null)
             return Results.BadRequest(new Response<string>(null, 404, "Contrato não encontrado"));
 
-        var basePath = environment.ContentRootPath;
-        var attachmentPath = Path.Combine(basePath, "Sources", "Contracts", $"{contract.FileId}.pdf");
+        var attachmentPath = Path.Combine(Configuration.ContractsPath, $"{contract.FileId}.pdf");
 
         request.AttachmentPath = attachmentPath;
 
