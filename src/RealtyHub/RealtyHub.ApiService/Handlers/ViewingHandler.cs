@@ -17,7 +17,7 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
             var customer = await context
                 .Customers
                 .FirstOrDefaultAsync(c => c.Id == request.BuyerId
-                                          && c.UserId == request.UserId
+                                          && (string.IsNullOrEmpty(c.UserId) || c.UserId == request.UserId)
                                           && c.IsActive);
 
             if (customer is null)
@@ -26,7 +26,7 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
             var property = await context
                 .Properties
                 .FirstOrDefaultAsync(p => p.Id == request.PropertyId
-                                          && p.UserId == request.UserId
+                                          && (string.IsNullOrEmpty(p.UserId) || p.UserId == request.UserId)
                                           && p.IsActive);
 
             if (property is null)
@@ -71,7 +71,7 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
                 .Include(v => v.Buyer)
                 .Include(v => v.Property)
                 .FirstOrDefaultAsync(v => v.Id == request.Id
-                                         && v.UserId == request.UserId);
+                                          && (string.IsNullOrEmpty(v.UserId) || v.UserId == request.UserId));
 
             if (viewing is null)
                 return new Response<Viewing?>(null, 404, "Visita não encontrada");
@@ -109,7 +109,7 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
                 .Include(v => v.Buyer)
                 .Include(v => v.Property)
                 .FirstOrDefaultAsync(v => v.Id == request.Id
-                                          && v.UserId == request.UserId);
+                                          && (string.IsNullOrEmpty(v.UserId) || v.UserId == request.UserId));
 
             if (viewing is null)
                 return new Response<Viewing?>(null, 404, "Visita não encontrada");
@@ -146,7 +146,7 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
                 .Include(v => v.Buyer)
                 .Include(v => v.Property)
                 .FirstOrDefaultAsync(v => v.Id == request.Id
-                                          && v.UserId == request.UserId);
+                                          && (string.IsNullOrEmpty(v.UserId) || v.UserId == request.UserId));
 
             if (viewing is null)
                 return new Response<Viewing?>(null, 404, "Visita não encontrada");
@@ -185,7 +185,7 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
                 .Include(v => v.Property)
                 .ThenInclude(p => p!.Seller)
                 .FirstOrDefaultAsync(v => v.Id == request.Id
-                                          && v.UserId == request.UserId);
+                                          && (string.IsNullOrEmpty(v.UserId) || v.UserId == request.UserId));
 
             if (viewing is null)
                 return new Response<Viewing?>(null, 404, "Visita não encontrada");
@@ -209,7 +209,7 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
                 .Include(v => v.Buyer)
                 .Include(v => v.Property)
                 .ThenInclude(p => p!.Seller)
-                .Where(v => v.UserId == request.UserId);
+                .Where(v => string.IsNullOrEmpty(v.UserId) || v.UserId == request.UserId);
 
             if (request.StartDate is not null && request.EndDate is not null)
             {

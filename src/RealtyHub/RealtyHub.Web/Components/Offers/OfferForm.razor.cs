@@ -73,7 +73,7 @@ public partial class OfferFormComponent : ComponentBase
                     Snackbar.Add("Proposta enviada com sucesso", Severity.Success);
                     Snackbar.Add("Aguarde nosso contato", Severity.Success);
                     await OnSubmitButtonClickedAsync();
-                    NavigationManager.NavigateTo("/home");
+                    NavigationManager.NavigateTo("/listar-imoveis");
                     return;
                 }
                 message = response.Message ?? string.Empty;

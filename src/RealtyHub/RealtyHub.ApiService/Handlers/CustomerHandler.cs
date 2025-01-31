@@ -58,7 +58,9 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
         {
             var customer = await context
                 .Customers
-                .FirstOrDefaultAsync(c => c.Id == request.Id && c.IsActive);
+                .FirstOrDefaultAsync(c => c.Id == request.Id
+                                          && (string.IsNullOrEmpty(c.UserId) || c.UserId == request.UserId)
+                                          && c.IsActive);
 
             if (customer is null)
                 return new Response<Customer?>(null, 404, "Cliente não encontrado");
@@ -98,7 +100,7 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
             var customer = await context
                 .Customers
                 .FirstOrDefaultAsync(c => c.Id == request.Id
-                                          && c.UserId == request.UserId
+                                          && (string.IsNullOrEmpty(c.UserId) || c.UserId == request.UserId)
                                           && c.IsActive);
 
             if (customer is null)
