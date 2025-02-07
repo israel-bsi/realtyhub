@@ -57,7 +57,7 @@ public static class Endpoint
             .MapEndpoint<GetAllViewingsByPropertyEndpoint>()
             .MapEndpoint<UpdatePropertyPhotosEndpoint>();
 
-        endpoints.MapGroup("v1/Condominiums")
+        endpoints.MapGroup("v1/condominiums")
             .WithTags("Condominiums")
             .RequireAuthorization()
             .MapEndpoint<CreateCondominiumEndpoint>()

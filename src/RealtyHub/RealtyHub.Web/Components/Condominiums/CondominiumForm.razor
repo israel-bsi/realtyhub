@@ -1,0 +1,16 @@
+﻿@inherits CondominiumFormComponent
+
+<PageTitle>@Operation Condomínio</PageTitle>
+
+<MudText Typo="Typo.h4">@Operation Condomínio</MudText>
+
+@if (IsBusy)
+{
+    <SkeletonWave />
+}
+else
+{
+    <MudPaper>
+
+    </MudPaper>
+}

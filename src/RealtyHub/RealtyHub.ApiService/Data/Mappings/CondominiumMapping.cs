@@ -43,6 +43,14 @@ public class CondominiumMapping : IEntityTypeConfiguration<Condominium>
         builder.Property(x => x.IsActive)
             .IsRequired();
 
+        builder.Property(p => p.CreatedAt)
+            .HasDefaultValueSql("NOW()")
+            .IsRequired();
+
+        builder.Property(p => p.UpdatedAt)
+            .HasDefaultValueSql("NOW()")
+            .IsRequired();
+
         builder.HasMany(x => x.Properties)
             .WithOne()
             .HasForeignKey(x => x.Id);
