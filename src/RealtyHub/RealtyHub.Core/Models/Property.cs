@@ -7,6 +7,7 @@ public class Property : Entity
 {
     public long Id { get; set; }
     public long SellerId { get; set; }
+    public long CondominiumId { get; set; }
     [Required(ErrorMessage = "Título é um campo obrigatório")]
     [MaxLength(120, ErrorMessage = "O Título deve conter até 120 caracteres")]
     public string Title { get; set; } = string.Empty;
@@ -40,4 +41,5 @@ public class Property : Entity
     public string UserId { get; set; } = string.Empty;
     public List<PropertyPhoto> PropertyPhotos { get; set; } = [];
     public Customer? Seller { get; set; }
+    public Condominium? Condominium { get; set; }
 }

@@ -12,7 +12,7 @@ using RealtyHub.ApiService.Data;
 namespace RealtyHub.ApiService.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250127222149_v1")]
+    [Migration("20250207012644_v1")]
     partial class v1
     {
         /// <inheritdoc />
@@ -242,6 +242,61 @@ namespace RealtyHub.ApiService.Migrations
                     b.ToTable("IdentityUser", (string)null);
                 });
 
+            modelBuilder.Entity("RealtyHub.Core.Models.Condominium", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<decimal>("CondominiumValue")
+                        .HasColumnType("numeric");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("Floors")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("HasElevator")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("HasFitnessRoom")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("HasPartyRoom")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("HasPlayground")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("HasSwimmingPool")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(120)
+                        .HasColumnType("character varying(120)");
+
+                    b.Property<int>("Units")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Condominium", (string)null);
+                });
+
             modelBuilder.Entity("RealtyHub.Core.Models.Contract", b =>
                 {
                     b.Property<long>("Id")
@@ -307,22 +362,14 @@ namespace RealtyHub.ApiService.Migrations
                     b.ToTable("Contract", (string)null);
                 });
 
-            modelBuilder.Entity("RealtyHub.Core.Models.ContractContent", b =>
+            modelBuilder.Entity("RealtyHub.Core.Models.ContractTemplate", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("NOW()");
-
                     b.Property<string>("Extension")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("boolean");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -334,79 +381,50 @@ namespace RealtyHub.ApiService.Migrations
                     b.Property<int>("Type")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("UpdatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("NOW()");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
 
-                    b.ToTable("ContractContent", (string)null);
+                    b.ToTable("ContractTemplate", (string)null);
 
                     b.HasData(
                         new
                         {
                             Id = "a2c16556-5098-4496-ae7a-1f9b6d0e8fcf",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Extension = ".docx",
-                            IsActive = true,
                             Name = "Modelo de Contrato - PJPJ",
                             ShowInPage = false,
-                            Type = 1,
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = ""
+                            Type = 1
                         },
                         new
                         {
                             Id = "f7581a63-f4f0-4881-b6ed-6a4100b4182e",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Extension = ".docx",
-                            IsActive = true,
                             Name = "Modelo de Contrato - PFPF",
                             ShowInPage = false,
-                            Type = 2,
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = ""
+                            Type = 2
                         },
                         new
                         {
                             Id = "2f4c556d-6850-4b3d-afe9-d7c2bd282718",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Extension = ".docx",
-                            IsActive = true,
                             Name = "Modelo de Contrato - PFPJ",
                             ShowInPage = false,
-                            Type = 3,
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = ""
+                            Type = 3
                         },
                         new
                         {
                             Id = "fd7ed50d-8f42-4288-8877-3cb8095370e7",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Extension = ".docx",
-                            IsActive = true,
                             Name = "Modelo de Contrato - PJPF",
                             ShowInPage = false,
-                            Type = 4,
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = ""
+                            Type = 4
                         },
                         new
                         {
                             Id = "2824aec3-3219-4d81-a97a-c3b80ca72844",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Extension = ".pdf",
-                            IsActive = true,
                             Name = "Modelo Padrão",
                             ShowInPage = true,
-                            Type = 0,
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = ""
+                            Type = 0
                         });
                 });
 
@@ -598,10 +616,7 @@ namespace RealtyHub.ApiService.Migrations
             modelBuilder.Entity("RealtyHub.Core.Models.Property", b =>
                 {
                     b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<double>("Area")
                         .HasColumnType("double precision");
@@ -611,6 +626,9 @@ namespace RealtyHub.ApiService.Migrations
 
                     b.Property<int>("Bedroom")
                         .HasColumnType("integer");
+
+                    b.Property<long>("CondominiumId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
@@ -670,6 +688,8 @@ namespace RealtyHub.ApiService.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CondominiumId");
 
                     b.HasIndex("SellerId");
 
@@ -802,6 +822,72 @@ namespace RealtyHub.ApiService.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("RealtyHub.Core.Models.Condominium", b =>
+                {
+                    b.OwnsOne("RealtyHub.Core.Models.Address", "Address", b1 =>
+                        {
+                            b1.Property<long>("CondominiumId")
+                                .HasColumnType("bigint");
+
+                            b1.Property<string>("City")
+                                .IsRequired()
+                                .HasMaxLength(80)
+                                .HasColumnType("character varying(80)")
+                                .HasColumnName("City");
+
+                            b1.Property<string>("Complement")
+                                .IsRequired()
+                                .HasMaxLength(80)
+                                .HasColumnType("character varying(80)")
+                                .HasColumnName("Complement");
+
+                            b1.Property<string>("Country")
+                                .IsRequired()
+                                .HasMaxLength(80)
+                                .HasColumnType("character varying(80)")
+                                .HasColumnName("Country");
+
+                            b1.Property<string>("Neighborhood")
+                                .IsRequired()
+                                .HasMaxLength(80)
+                                .HasColumnType("character varying(80)")
+                                .HasColumnName("Neighborhood");
+
+                            b1.Property<string>("Number")
+                                .IsRequired()
+                                .HasColumnType("text")
+                                .HasColumnName("Number");
+
+                            b1.Property<string>("State")
+                                .IsRequired()
+                                .HasMaxLength(80)
+                                .HasColumnType("character varying(80)")
+                                .HasColumnName("State");
+
+                            b1.Property<string>("Street")
+                                .IsRequired()
+                                .HasMaxLength(80)
+                                .HasColumnType("character varying(80)")
+                                .HasColumnName("Street");
+
+                            b1.Property<string>("ZipCode")
+                                .IsRequired()
+                                .HasMaxLength(20)
+                                .HasColumnType("character varying(20)")
+                                .HasColumnName("ZipCode");
+
+                            b1.HasKey("CondominiumId");
+
+                            b1.ToTable("Condominium");
+
+                            b1.WithOwner()
+                                .HasForeignKey("CondominiumId");
+                        });
+
+                    b.Navigation("Address")
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("RealtyHub.Core.Models.Contract", b =>
                 {
                     b.HasOne("RealtyHub.Core.Models.Customer", "Buyer")
@@ -927,6 +1013,18 @@ namespace RealtyHub.ApiService.Migrations
 
             modelBuilder.Entity("RealtyHub.Core.Models.Property", b =>
                 {
+                    b.HasOne("RealtyHub.Core.Models.Condominium", "Condominium")
+                        .WithMany()
+                        .HasForeignKey("CondominiumId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RealtyHub.Core.Models.Condominium", null)
+                        .WithMany("Properties")
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("RealtyHub.Core.Models.Customer", "Seller")
                         .WithMany("Properties")
                         .HasForeignKey("SellerId")
@@ -996,6 +1094,8 @@ namespace RealtyHub.ApiService.Migrations
                     b.Navigation("Address")
                         .IsRequired();
 
+                    b.Navigation("Condominium");
+
                     b.Navigation("Seller");
                 });
 
@@ -1032,6 +1132,11 @@ namespace RealtyHub.ApiService.Migrations
             modelBuilder.Entity("RealtyHub.ApiService.Models.User", b =>
                 {
                     b.Navigation("Roles");
+                });
+
+            modelBuilder.Entity("RealtyHub.Core.Models.Condominium", b =>
+                {
+                    b.Navigation("Properties");
                 });
 
             modelBuilder.Entity("RealtyHub.Core.Models.Customer", b =>

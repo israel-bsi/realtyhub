@@ -15,7 +15,7 @@ public class DeletePropertyEndpoint : IEndpoint
             .WithSummary("Deleta um imóvel")
             .WithDescription("Deleta um imóvel")
             .WithOrder(3)
-            .Produces<Response<Property?>>(StatusCodes.Status204NoContent)
+            .Produces(StatusCodes.Status204NoContent)
             .Produces<Response<Property?>>(StatusCodes.Status400BadRequest);
 
     private static async Task<IResult> HandlerAsync(

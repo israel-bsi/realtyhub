@@ -239,6 +239,61 @@ namespace RealtyHub.ApiService.Migrations
                     b.ToTable("IdentityUser", (string)null);
                 });
 
+            modelBuilder.Entity("RealtyHub.Core.Models.Condominium", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<decimal>("CondominiumValue")
+                        .HasColumnType("numeric");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("Floors")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("HasElevator")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("HasFitnessRoom")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("HasPartyRoom")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("HasPlayground")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("HasSwimmingPool")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(120)
+                        .HasColumnType("character varying(120)");
+
+                    b.Property<int>("Units")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Condominium", (string)null);
+                });
+
             modelBuilder.Entity("RealtyHub.Core.Models.Contract", b =>
                 {
                     b.Property<long>("Id")
@@ -558,10 +613,7 @@ namespace RealtyHub.ApiService.Migrations
             modelBuilder.Entity("RealtyHub.Core.Models.Property", b =>
                 {
                     b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<double>("Area")
                         .HasColumnType("double precision");
@@ -571,6 +623,9 @@ namespace RealtyHub.ApiService.Migrations
 
                     b.Property<int>("Bedroom")
                         .HasColumnType("integer");
+
+                    b.Property<long>("CondominiumId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
@@ -630,6 +685,8 @@ namespace RealtyHub.ApiService.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CondominiumId");
 
                     b.HasIndex("SellerId");
 
@@ -762,6 +819,72 @@ namespace RealtyHub.ApiService.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("RealtyHub.Core.Models.Condominium", b =>
+                {
+                    b.OwnsOne("RealtyHub.Core.Models.Address", "Address", b1 =>
+                        {
+                            b1.Property<long>("CondominiumId")
+                                .HasColumnType("bigint");
+
+                            b1.Property<string>("City")
+                                .IsRequired()
+                                .HasMaxLength(80)
+                                .HasColumnType("character varying(80)")
+                                .HasColumnName("City");
+
+                            b1.Property<string>("Complement")
+                                .IsRequired()
+                                .HasMaxLength(80)
+                                .HasColumnType("character varying(80)")
+                                .HasColumnName("Complement");
+
+                            b1.Property<string>("Country")
+                                .IsRequired()
+                                .HasMaxLength(80)
+                                .HasColumnType("character varying(80)")
+                                .HasColumnName("Country");
+
+                            b1.Property<string>("Neighborhood")
+                                .IsRequired()
+                                .HasMaxLength(80)
+                                .HasColumnType("character varying(80)")
+                                .HasColumnName("Neighborhood");
+
+                            b1.Property<string>("Number")
+                                .IsRequired()
+                                .HasColumnType("text")
+                                .HasColumnName("Number");
+
+                            b1.Property<string>("State")
+                                .IsRequired()
+                                .HasMaxLength(80)
+                                .HasColumnType("character varying(80)")
+                                .HasColumnName("State");
+
+                            b1.Property<string>("Street")
+                                .IsRequired()
+                                .HasMaxLength(80)
+                                .HasColumnType("character varying(80)")
+                                .HasColumnName("Street");
+
+                            b1.Property<string>("ZipCode")
+                                .IsRequired()
+                                .HasMaxLength(20)
+                                .HasColumnType("character varying(20)")
+                                .HasColumnName("ZipCode");
+
+                            b1.HasKey("CondominiumId");
+
+                            b1.ToTable("Condominium");
+
+                            b1.WithOwner()
+                                .HasForeignKey("CondominiumId");
+                        });
+
+                    b.Navigation("Address")
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("RealtyHub.Core.Models.Contract", b =>
                 {
                     b.HasOne("RealtyHub.Core.Models.Customer", "Buyer")
@@ -887,6 +1010,18 @@ namespace RealtyHub.ApiService.Migrations
 
             modelBuilder.Entity("RealtyHub.Core.Models.Property", b =>
                 {
+                    b.HasOne("RealtyHub.Core.Models.Condominium", "Condominium")
+                        .WithMany()
+                        .HasForeignKey("CondominiumId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RealtyHub.Core.Models.Condominium", null)
+                        .WithMany("Properties")
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("RealtyHub.Core.Models.Customer", "Seller")
                         .WithMany("Properties")
                         .HasForeignKey("SellerId")
@@ -956,6 +1091,8 @@ namespace RealtyHub.ApiService.Migrations
                     b.Navigation("Address")
                         .IsRequired();
 
+                    b.Navigation("Condominium");
+
                     b.Navigation("Seller");
                 });
 
@@ -992,6 +1129,11 @@ namespace RealtyHub.ApiService.Migrations
             modelBuilder.Entity("RealtyHub.ApiService.Models.User", b =>
                 {
                     b.Navigation("Roles");
+                });
+
+            modelBuilder.Entity("RealtyHub.Core.Models.Condominium", b =>
+                {
+                    b.Navigation("Properties");
                 });
 
             modelBuilder.Entity("RealtyHub.Core.Models.Customer", b =>

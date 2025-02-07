@@ -85,7 +85,7 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
             context.Customers.Update(customer);
             await context.SaveChangesAsync();
 
-            return new Response<Customer?>(customer, message: "Cliente atualizado com sucesso");
+            return new Response<Customer?>(customer);
         }
         catch
         {
@@ -174,7 +174,8 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
         }
         catch
         {
-            return new PagedResponse<List<Customer>?>(null, 500, "Não foi possível consultar os clientes");
+            return new PagedResponse<List<Customer>?>(null, 500, 
+                "Não foi possível consultar os clientes");
         }
     }
 }

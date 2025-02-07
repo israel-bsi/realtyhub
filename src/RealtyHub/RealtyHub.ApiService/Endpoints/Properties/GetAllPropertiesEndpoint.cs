@@ -17,7 +17,7 @@ public class GetAllPropertiesEndpoint : IEndpoint
             .WithDescription("Recupera todos os imóvels")
             .WithOrder(5)
             .Produces<PagedResponse<List<Property>?>>()
-            .Produces<Response<Property?>>(StatusCodes.Status400BadRequest);
+            .Produces<PagedResponse<Property?>>(StatusCodes.Status400BadRequest);
 
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,

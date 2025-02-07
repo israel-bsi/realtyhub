@@ -4,7 +4,6 @@ using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.Properties;
 using RealtyHub.Core.Responses;
-
 using System.Linq.Dynamic.Core;
 
 namespace RealtyHub.ApiService.Handlers;
@@ -31,6 +30,7 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
                 RegistryRecord = request.RegistryRecord,
                 TransactionsDetails = request.TransactionsDetails,
                 UserId = request.UserId,
+                CondominiumId = request.CondominiumId,
                 ShowInHome = request.ShowInHome,
                 SellerId = request.SellerId,
                 IsActive = true
@@ -75,6 +75,7 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
             property.UserId = request.UserId;
             property.ShowInHome = request.ShowInHome;
             property.SellerId = request.SellerId;
+            property.CondominiumId = request.CondominiumId;
             property.UpdatedAt = DateTime.UtcNow;
 
             context.Properties.Update(property);
@@ -121,6 +122,7 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
             var query = context
                 .Properties
                 .AsNoTracking()
+                .Include(p => p.Condominium)
                 .Include(p => p.Seller)
                 .Include(p => p.PropertyPhotos.Where(photo => photo.IsActive))
                 .Where(p => p.Id == request.Id && p.IsActive);
@@ -144,6 +146,7 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
             var query = context
                 .Properties
                 .AsNoTracking()
+                .Include(p => p.Condominium)
                 .Include(p => p.Seller)
                 .Include(p => p.PropertyPhotos.Where(photos => photos.IsActive))
                 .Where(p => p.IsActive);

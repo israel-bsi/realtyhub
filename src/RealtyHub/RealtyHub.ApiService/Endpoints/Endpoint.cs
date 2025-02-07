@@ -1,4 +1,5 @@
 ﻿using RealtyHub.ApiService.Common.Api;
+using RealtyHub.ApiService.Endpoints.Condominiums;
 using RealtyHub.ApiService.Endpoints.Contracts;
 using RealtyHub.ApiService.Endpoints.ContractsTemplates;
 using RealtyHub.ApiService.Endpoints.Customers;
@@ -55,6 +56,15 @@ public static class Endpoint
             .MapEndpoint<DeletePropertyPhotoEndpoint>()
             .MapEndpoint<GetAllViewingsByPropertyEndpoint>()
             .MapEndpoint<UpdatePropertyPhotosEndpoint>();
+
+        endpoints.MapGroup("v1/Condominiums")
+            .WithTags("Condominiums")
+            .RequireAuthorization()
+            .MapEndpoint<CreateCondominiumEndpoint>()
+            .MapEndpoint<UpdateCondominiumEndpoint>()
+            .MapEndpoint<DeleteCondominiumEndpoint>()
+            .MapEndpoint<GetCondominiumByIdEndpoint>()
+            .MapEndpoint<GetAllCondominiumsEndpoint>();
 
         endpoints.MapGroup("v1/properties")
             .WithTags("Properties")

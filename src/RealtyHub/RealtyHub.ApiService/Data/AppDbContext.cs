@@ -28,6 +28,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) :
     public DbSet<Contract> Contracts { get; set; } = null!;
     public DbSet<PropertyPhoto> PropertyPhotos { get; set; } = null!;
     public DbSet<ContractTemplate> ContractTemplates { get; set; } = null!;
+    public DbSet<Condominium> Condominiums { get; set; } = null!;
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
