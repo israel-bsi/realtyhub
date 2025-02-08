@@ -4,7 +4,7 @@ using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.Condominiums;
 using RealtyHub.Core.Responses;
-using System.Linq.Dynamic.Core;
+using RealtyHub.Core.Extensions;
 
 namespace RealtyHub.ApiService.Handlers;
 
@@ -125,23 +125,8 @@ public class CondominiumHandler(AppDbContext context) : ICondominiumHandler
                 .AsNoTracking()
                 .Where(c => c.IsActive);
 
-            if (!string.IsNullOrEmpty(request.SearchTerm) && !string.IsNullOrEmpty(request.FilterBy))
-            {
-                var propertyType = typeof(Condominium).GetProperty(request.FilterBy)?.PropertyType;
-
-                if (propertyType != null)
-                {
-                    if (propertyType == typeof(string))
-                    {
-                        query = query.Where($"{request.FilterBy}.ToLower().Contains(@0.ToLower())", request.SearchTerm);
-                    }
-                    else if (propertyType.IsValueType)
-                    {
-                        var searchValue = Convert.ChangeType(request.SearchTerm, propertyType);
-                        query = query.Where($"{request.FilterBy} == @0", searchValue);
-                    }
-                }
-            }
+            if (!string.IsNullOrEmpty(request.FilterBy))
+                query = query.FilterByProperty(request.SearchTerm, request.FilterBy);
 
             var count = await query.CountAsync();
 

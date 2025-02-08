@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RealtyHub.ApiService.Data;
+using RealtyHub.Core.Extensions;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.Properties;
 using RealtyHub.Core.Responses;
-using System.Linq.Dynamic.Core;
 
 namespace RealtyHub.ApiService.Handlers;
 
@@ -154,23 +154,8 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
             if (!string.IsNullOrEmpty(request.UserId))
                 query = query.Where(v => v.UserId == request.UserId);
 
-            if (!string.IsNullOrEmpty(request.SearchTerm) && !string.IsNullOrEmpty(request.FilterBy))
-            {
-                var propertyType = typeof(Property).GetProperty(request.FilterBy)?.PropertyType;
-
-                if (propertyType != null)
-                {
-                    if (propertyType == typeof(string))
-                    {
-                        query = query.Where($"{request.FilterBy}.ToLower().Contains(@0.ToLower())", request.SearchTerm);
-                    }
-                    else if (propertyType.IsValueType)
-                    {
-                        var searchValue = Convert.ChangeType(request.SearchTerm, propertyType);
-                        query = query.Where($"{request.FilterBy} == @0", searchValue);
-                    }
-                }
-            }
+            if (!string.IsNullOrEmpty(request.FilterBy)) 
+                query = query.FilterByProperty(request.SearchTerm, request.FilterBy);
 
             query = query.OrderBy(p => p.Title);
 

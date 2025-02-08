@@ -41,5 +41,5 @@ public class Property : Entity
     public string UserId { get; set; } = string.Empty;
     public List<PropertyPhoto> PropertyPhotos { get; set; } = [];
     public Customer? Seller { get; set; }
-    public Condominium? Condominium { get; set; }
+    public Condominium Condominium { get; set; } = new();
 }

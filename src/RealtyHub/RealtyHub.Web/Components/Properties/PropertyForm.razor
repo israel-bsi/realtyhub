@@ -140,12 +140,26 @@ else
                 <MudItem lg="8" xs="12" sm="6">
                     <MudTextField Class="mb-2"
                                   ReadOnly="true"
-                                  Label="@(InputModel.Seller == null ? "Clique aqui para pesquisar o cliente" : "Cliente Selecionado")"
+                                  Label="@(InputModel.Seller == null ? "Clique aqui para pesquisar o cliente" : "Cliente selecionado")"
                                   AdornmentIcon="@Icons.Material.Filled.PersonSearch"
-                                  @onclick="@OpenCustomerDialog"
-                                  OnAdornmentClick="OpenCustomerDialog"
+                                  @onclick="@OpenSellerDialog"
+                                  OnAdornmentClick="OpenSellerDialog"
                                   Adornment="Adornment.End"
                                   Value="@InputModel.Seller?.Name" />
+                </MudItem>
+            </MudGrid>
+
+            <MudText Class="mb-4 mt-4" Typo="Typo.h6">Condomínio</MudText>
+            <MudGrid>
+                <MudItem lg="8" md="10" xs="12">
+                    <MudTextField Class="mb-2"
+                                  ReadOnly="true"
+                                  Label="@(InputModel.Condominium == null ? "Clique aqui para pesquisar o condomínio" : "Condomínio selecionado")"
+                                  AdornmentIcon="@Icons.Material.Filled.Search"
+                                  @onclick="OpenCondominiumDialog"
+                                  OnAdornmentClick="OpenCondominiumDialog"
+                                  Adornment="Adornment.End"
+                                  Value="InputModel.Condominium?.Name"/>
                 </MudItem>
             </MudGrid>
 

@@ -38,11 +38,13 @@ public static class AppExtension
         app.MapPost("v1/properties/createmany", async (
             AppDbContext context,
             [FromQuery] int quantity = 0,
-            [FromQuery] int customerId = 0) =>
+            [FromQuery] int customerId = 0,
+            [FromQuery] int condominiumId = 0) =>
         {
             if (quantity > 0)
             {
-                var properties = PropertyFake.GetFakeProperties(quantity, customerId);
+                var properties = PropertyFake
+                    .GetFakeProperties(quantity, customerId, condominiumId);
                 await context.Properties.AddRangeAsync(properties);
             }
 

@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.Extensions.FileSystemGlobbing.Internal;
 using MudBlazor;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
@@ -63,7 +62,7 @@ public class CondominiumFormComponent : ComponentBase
             }
 
             Snackbar.Add("Condomínio cadastrado com sucesso", Severity.Success);
-            NavigationManager.NavigateTo("/condominiums");
+            NavigationManager.NavigateTo("/condominios");
         }
         catch (Exception e)
         {
@@ -87,7 +86,7 @@ public class CondominiumFormComponent : ComponentBase
         {
             request = new GetCondominiumByIdRequest { Id = Id };
         }
-        catch (Exception e)
+        catch
         {
             Snackbar.Add("Parâmetro inválido", Severity.Error);
         }
@@ -104,10 +103,6 @@ public class CondominiumFormComponent : ComponentBase
                     InputModel = result.Data;
                 else
                     Snackbar.Add(result.Message ?? string.Empty, Severity.Error);
-            }
-            else
-            {
-                NavigationManager.NavigateTo("/condominiums/adicionar");
             }
         }
         catch (Exception e)

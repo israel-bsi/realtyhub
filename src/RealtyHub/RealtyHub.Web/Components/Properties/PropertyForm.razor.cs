@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.AspNetCore.Components.Web;
 using MudBlazor;
 using RealtyHub.Core.Enums;
 using RealtyHub.Core.Handlers;
@@ -8,6 +9,7 @@ using RealtyHub.Core.Requests.Properties;
 using RealtyHub.Core.Requests.PropertiesPhotos;
 using RealtyHub.Core.Responses;
 using RealtyHub.Web.Components.Common;
+using RealtyHub.Web.Components.Condominiums;
 using RealtyHub.Web.Components.Customers;
 
 namespace RealtyHub.Web.Components.Properties;
@@ -309,33 +311,7 @@ public partial class PropertyFormComponent : ComponentBase
         var response = await PropertyHandler.GetByIdAsync(request);
         if (response is { IsSuccess: true, Data: not null })
         {
-            InputModel.Id = response.Data.Id;
-            InputModel.Title = response.Data.Title;
-            InputModel.Description = response.Data.Description;
-            InputModel.Price = response.Data.Price;
-            InputModel.PropertyType = response.Data.PropertyType;
-            InputModel.Bedroom = response.Data.Bedroom;
-            InputModel.Bathroom = response.Data.Bathroom;
-            InputModel.Garage = response.Data.Garage;
-            InputModel.Area = response.Data.Area;
-            InputModel.TransactionsDetails = response.Data.TransactionsDetails;
-            InputModel.Address.ZipCode = response.Data.Address.ZipCode;
-            InputModel.Address.Street = response.Data.Address.Street;
-            InputModel.Address.Number = response.Data.Address.Number;
-            InputModel.Address.Complement = response.Data.Address.Complement;
-            InputModel.Address.Neighborhood = response.Data.Address.Neighborhood;
-            InputModel.Address.City = response.Data.Address.City;
-            InputModel.Address.State = response.Data.Address.State;
-            InputModel.Address.Country = response.Data.Address.Country;
-            InputModel.RegistryNumber = response.Data.RegistryNumber;
-            InputModel.RegistryRecord = response.Data.RegistryRecord;
-            InputModel.IsNew = response.Data.IsNew;
-            InputModel.ShowInHome = response.Data.ShowInHome;
-            InputModel.PropertyPhotos = response.Data.PropertyPhotos;
-            InputModel.IsActive = response.Data.IsActive;
-            InputModel.UserId = response.Data.UserId;
-            InputModel.Seller = response.Data.Seller;
-            InputModel.SellerId = response.Data.SellerId;
+            InputModel = response.Data;
             await LoadPhotosFromServerAsync();
         }
         else
@@ -349,7 +325,7 @@ public partial class PropertyFormComponent : ComponentBase
         InputModel.PropertyType = EPropertyType.House;
         NavigationManager.NavigateTo("/imoveis/adicionar");
     }
-    public async Task OpenCustomerDialog()
+    public async Task OpenSellerDialog()
     {
         var parameters = new DialogParameters
         {
@@ -375,6 +351,35 @@ public partial class PropertyFormComponent : ComponentBase
         InputModel.SellerId = seller.Id;
         StateHasChanged();
     }
+
+    public async Task OpenCondominiumDialog()
+    {
+        var parameters = new DialogParameters
+        {
+            { "OnCondominiumSelected", EventCallback.Factory
+                .Create<Condominium>(this, SelectedCondominium) }
+        };
+        var options = new DialogOptions
+        {
+            CloseButton = true,
+            MaxWidth = MaxWidth.Large,
+            FullWidth = true
+        };
+        var dialog = await DialogService
+            .ShowAsync<CondominiumDialog>("Informe o condomínio", parameters, options);
+        var result = await dialog.Result;
+
+        if (result is { Canceled: false, Data: Condominium selectedCondominium })
+            SelectedCondominium(selectedCondominium);
+    }
+
+    private void SelectedCondominium(Condominium condominium)
+    {
+        InputModel.Condominium = condominium;
+        InputModel.CondominiumId = condominium.Id;
+        StateHasChanged();
+    }
+
     #endregion
 
     #region Overrides

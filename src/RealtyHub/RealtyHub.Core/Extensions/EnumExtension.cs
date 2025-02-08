@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace RealtyHub.Core.Extensions;
 
-public static class ExtensionsEnum
+public static class EnumExtension
 {
     public static string GetDisplayName(this Enum value)
     {

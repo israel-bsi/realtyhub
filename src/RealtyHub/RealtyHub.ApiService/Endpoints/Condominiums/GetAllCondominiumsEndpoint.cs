@@ -25,13 +25,13 @@ public class GetAllCondominiumsEndpoint : IEndpoint
         [FromQuery] string filterBy = "",
         [FromQuery] int pageNumber = Core.Configuration.DefaultPageNumber,
         [FromQuery] int pageSize = Core.Configuration.DefaultPageSize,
-        [FromQuery] string searchterm = "")
+        [FromQuery] string searchTerm = "")
     {
         var request = new GetAllCondominiumsRequest
         {
             PageNumber = pageNumber,
             PageSize = pageSize,
-            SearchTerm = searchterm,
+            SearchTerm = searchTerm,
             FilterBy = filterBy
         };
 

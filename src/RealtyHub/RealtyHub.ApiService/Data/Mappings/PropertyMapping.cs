@@ -61,6 +61,10 @@ public class PropertyMapping : IEntityTypeConfiguration<Property>
             .WithMany(c => c.Properties)
             .HasForeignKey(p => p.SellerId);
 
+        builder.HasOne(p => p.Condominium)
+            .WithMany(c => c.Properties)
+            .HasForeignKey(p => p.CondominiumId);
+
         builder.Property(p => p.CreatedAt)
             .HasDefaultValueSql("NOW()")
             .IsRequired();

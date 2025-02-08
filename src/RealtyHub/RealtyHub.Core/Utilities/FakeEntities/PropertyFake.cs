@@ -6,7 +6,7 @@ namespace RealtyHub.Core.Utilities.FakeEntities;
 
 public class PropertyFake
 {
-    public static List<Property> GetFakeProperties(int quantity, int customerId)
+    public static List<Property> GetFakeProperties(int quantity, int customerId, int condominiumId)
     {
         var propertyFake = new Faker<Property>(Configuration.Locale)
             .RuleFor(p => p.Title, p => p.Commerce.ProductName())
@@ -20,6 +20,7 @@ public class PropertyFake
             .RuleFor(p => p.TransactionsDetails, p => p.Commerce.ProductMaterial())
             .RuleFor(p => p.Address, AddressFake.GetFakeAddress)
             .RuleFor(p => p.SellerId, customerId)
+            .RuleFor(p => p.CondominiumId, condominiumId)
             .RuleFor(p=>p.RegistryNumber, p=>p.Random.UInt().ToString())
             .RuleFor(p=>p.RegistryRecord, p=>p.Random.UInt().ToString())
             .RuleFor(p => p.IsNew, true)

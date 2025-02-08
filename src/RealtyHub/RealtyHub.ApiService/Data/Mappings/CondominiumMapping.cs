@@ -51,10 +51,6 @@ public class CondominiumMapping : IEntityTypeConfiguration<Condominium>
             .HasDefaultValueSql("NOW()")
             .IsRequired();
 
-        builder.HasMany(x => x.Properties)
-            .WithOne()
-            .HasForeignKey(x => x.Id);
-
         builder.OwnsOne(a => a.Address, address =>
         {
             address.Property(a => a.Street)

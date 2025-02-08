@@ -10,7 +10,70 @@
 }
 else
 {
-    <MudPaper>
+    <MudPaper Class="pa-8 mt-4" Elevation="2">
+        <EditForm OnValidSubmit="OnValidSubmitAsync" Model="InputModel">
+            <ObjectGraphDataAnnotationsValidator />
+            
+            <MudText Typo="Typo.h6">Informações sobre o condomínio</MudText>
 
+            <MudGrid Class="mb-4" Justify="Justify.FlexStart">
+                <MudItem lg="5" md="7" xs="12">
+                    <MudTextField T="string"
+                                  Label="Nome"
+                                  @bind-Value="InputModel.Name"
+                                  For="@(() => InputModel.Name)"
+                                  InputType="InputType.Text" />
+                </MudItem>
+
+                <MudItem lg="2" md="5" xs="12">
+                    <MudNumericField Label="Valor mensal"
+                                     @bind-Value="InputModel.CondominiumValue"
+                                     For="@(() => InputModel.CondominiumValue)"
+                                     InputMode="InputMode.numeric" />
+                </MudItem>
+            </MudGrid>
+
+            <MudGrid Justify="Justify.FlexStart">
+                <MudItem lg="1" md="2" xs="12">
+                    <MudCheckBox Label="Elevador"
+                                 @bind-Value="InputModel.HasElevator"
+                                 For="@(() => InputModel.HasElevator)" />
+                </MudItem>
+
+                <MudItem lg="1" md="2" xs="12">
+                    <MudCheckBox Label="Piscina"
+                                 @bind-Value="InputModel.HasSwimmingPool"
+                                 For="@(() => InputModel.HasSwimmingPool)" />
+                </MudItem>
+
+                <MudItem lg="1" md="2" xs="12">
+                    <MudCheckBox Label="Playground"
+                                 @bind-Value="InputModel.HasPlayground"
+                                 For="@(() => InputModel.HasPlayground)" />
+                </MudItem>
+
+                <MudItem lg="1" md="2" xs="12">
+                    <MudCheckBox Label="Academia"
+                                 @bind-Value="InputModel.HasFitnessRoom"
+                                 For="@(() => InputModel.HasFitnessRoom)" />
+                </MudItem>
+
+                <MudItem lg="2" md="3" xs="12">
+                    <MudCheckBox Label="Salão de Festas"
+                                 @bind-Value="InputModel.HasPartyRoom"
+                                 For="@(() => InputModel.HasPartyRoom)" />
+                </MudItem>
+            </MudGrid>
+
+            <AddressInput @bind-InputModel="InputModel.Address" />
+
+            <MudButton ButtonType="ButtonType.Submit"
+                       Variant="Variant.Filled"
+                       Color="Color.Primary"
+                       Class="mt-6"
+                       StartIcon="@Icons.Material.Filled.Save">
+                Salvar
+            </MudButton>
+        </EditForm>
     </MudPaper>
 }

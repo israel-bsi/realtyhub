@@ -32,6 +32,7 @@ public partial class ListPropertiesPage : ComponentBase
     {
         new FilterOption { DisplayName = "Título", PropertyName = "Title" },
         new FilterOption { DisplayName = "Descrição", PropertyName = "Description" },
+        new FilterOption { DisplayName = "Nome do condomínio", PropertyName = "Condominium.Name" },
         new FilterOption { DisplayName = "Bairro", PropertyName = "Address.Neighborhood" },
         new FilterOption { DisplayName = "Rua", PropertyName = "Address.Street" },
         new FilterOption { DisplayName = "Cidade", PropertyName = "Address.City" },

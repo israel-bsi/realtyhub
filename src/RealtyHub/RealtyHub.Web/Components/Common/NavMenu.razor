@@ -8,24 +8,28 @@
         <MudText Typo="Typo.body1" Class="px-4">@Configuration.GivenName</MudText>
     </div>
     <MudDivider Class="my-2" />
-    <MudNavGroup Icon="@Icons.Material.Filled.Person" Title="Clientes" Expanded="true">
+    <MudNavGroup Icon="@Icons.Material.Filled.Person" Title="Clientes" @bind-Expanded="ExpandedCustomers">
         <MudNavLink Icon="@Icons.Material.Filled.PersonAddAlt1" Href="/clientes/adicionar" Match="NavLinkMatch.All">Cadastro</MudNavLink>
         <MudNavLink Icon="@Icons.Material.Filled.Person" Href="/clientes" Match="NavLinkMatch.All">Listar</MudNavLink>
     </MudNavGroup>
-    <MudNavGroup Icon="@Icons.Material.Filled.Home" Title="Imóveis" Expanded="true">
+    <MudNavGroup Icon="fa-solid fa-building" Title="Condomínios" @bind-Expanded="ExpandedCondominiums">
+        <MudNavLink Icon="fa-solid fa-building-circle-arrow-right" Href="/condominios/adicionar" Match="NavLinkMatch.All">Cadastro</MudNavLink>
+        <MudNavLink Icon="fa-solid fa-building" Href="/condominios" Match="NavLinkMatch.All">Listar</MudNavLink>
+    </MudNavGroup>
+    <MudNavGroup Icon="@Icons.Material.Filled.Home" Title="Imóveis" @bind-Expanded="ExpandedProperties">
         <MudNavLink Icon="@Icons.Material.Filled.AddHome" Href="/imoveis/adicionar" Match="NavLinkMatch.All">Cadastro</MudNavLink>
         <MudNavLink Icon="@Icons.Material.Filled.Home" Href="/imoveis" Match="NavLinkMatch.All">Listar</MudNavLink>
         <MudNavLink Icon="@Icons.Material.Filled.Home" Href="/listar-imoveis" Match="NavLinkMatch.All">Visualizar como visitante</MudNavLink>
-        <MudNavGroup Icon="@Icons.Material.Filled.Pageview" Title="Visitas" Expanded="true">
-            <MudNavLink Icon="@Icons.Material.Filled.ScheduleSend" Href="/visitas/agendar" Match="NavLinkMatch.All">Agendar</MudNavLink>
-            <MudNavLink Icon="@Icons.Material.Filled.Schedule" Href="/visitas" Match="NavLinkMatch.All">Listar</MudNavLink>
-        </MudNavGroup>
-        <MudNavLink Icon="@Icons.Material.Filled.LocalOffer" Href="/propostas" Match="NavLinkMatch.All">Propostas</MudNavLink>
-        <MudNavGroup Icon="fa-solid fa-file-contract" Title="Contratos" Expanded="true">
-            <MudNavLink Icon="fa-solid fa-file-signature" Href="/contratos/emitir" Match="NavLinkMatch.All">Emitir</MudNavLink>
-            <MudNavLink Icon="fa-solid fa-file-contract" Href="/contratos" Match="NavLinkMatch.All">Listar</MudNavLink>
-            <MudNavLink Icon="@Icons.Material.Filled.Settings" Href="/contratos/modelos" Match="NavLinkMatch.All">Modelos</MudNavLink>
-        </MudNavGroup>
+    </MudNavGroup>
+    <MudNavGroup Icon="@Icons.Material.Filled.Pageview" Title="Visitas" @bind-Expanded="ExpandedViewings">
+        <MudNavLink Icon="@Icons.Material.Filled.ScheduleSend" Href="/visitas/agendar" Match="NavLinkMatch.All">Agendar</MudNavLink>
+        <MudNavLink Icon="@Icons.Material.Filled.Schedule" Href="/visitas" Match="NavLinkMatch.All">Listar</MudNavLink>
+    </MudNavGroup>
+    <MudNavLink Icon="@Icons.Material.Filled.LocalOffer" Href="/propostas" Match="NavLinkMatch.All">Propostas</MudNavLink>
+    <MudNavGroup Icon="fa-solid fa-file-contract" Title="Contratos" @bind-Expanded="ExpandedContracts">
+        <MudNavLink Icon="fa-solid fa-file-signature" Href="/contratos/emitir" Match="NavLinkMatch.All">Emitir</MudNavLink>
+        <MudNavLink Icon="fa-solid fa-file-contract" Href="/contratos" Match="NavLinkMatch.All">Listar</MudNavLink>
+        <MudNavLink Icon="@Icons.Material.Filled.Settings" Href="/contratos/modelos" Match="NavLinkMatch.All">Modelos</MudNavLink>
     </MudNavGroup>
     
 </MudNavMenu>
@@ -34,4 +38,10 @@
 {
     [Parameter]
     public int MudNavMenuKey { get; set; }
+
+    public bool ExpandedCustomers { get; set; }
+    public bool ExpandedCondominiums { get; set; }
+    public bool ExpandedProperties { get; set; }
+    public bool ExpandedViewings { get; set; }
+    public bool ExpandedContracts { get; set; }
 }
