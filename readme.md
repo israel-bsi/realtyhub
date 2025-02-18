@@ -1,10 +1,10 @@
 # Direitos Autorais e Agradecimentos
 
-- **Autores:** Israel Barbosa Silva, Danniel Cristie Matos da Silva, Kleiton Linneker Barbosa Pinheiro, Franklin Delano Costa Araujo.
-- **Contatos:** ib.silva@discente.ufma.br, danniel.cristie@discente.ufma.br, kleiton.linneker@discente.ufma.br, delano.franklin@discente.ufma.br
-- **Data da Última Versão:** 28/01/25
+- **Autores:** Israel Barbosa Silva, Kleiton Linneker Barbosa Pinheiro, Franklin Delano Costa Araujo.
+- **Contatos:** ib.silva@discente.ufma.br, kleiton.linneker@discente.ufma.br, delano.franklin@discente.ufma.br
+- **Data da Última Versão:** 18/02/2025
 - **Versão:** 1.0
-- **Outros repositórios**: [israel-bsi](https://github.com/israel-bsi), [dannielcristie](https://github.com/dannielcristie), [De11ano](https://github.com/De11ano), [kleitonlinneker](https://github.com/kleitonlinneker)
+- **Outros repositórios**: [israel-bsi](https://github.com/israel-bsi), [De11ano](https://github.com/De11ano), [kleitonlinneker](https://github.com/kleitonlinneker)
 
 ## Agradecimentos 
 
