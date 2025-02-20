@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 OPR/116.0.0.0" version="26.0.10">
+  <diagram name="Relatórios de Desempenho de Imóveis e Transações" id="7DBIRZh-4n7vkL4NUqmp">
+    <mxGraphModel dx="331" dy="625" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="ymio0jUGBjH1uwj2NT5S-104" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1190" y="780" width="460" height="290" as="geometry" />
+        </mxCell>
+        <mxCell id="ymio0jUGBjH1uwj2NT5S-105" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="endArrow=open;startArrow=none;endFill=0;startFill=0;endSize=8;html=1;verticalAlign=bottom;dashed=1;labelBackgroundColor=none;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="ymio0jUGBjH1uwj2NT5S-110" target="ymio0jUGBjH1uwj2NT5S-108">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="1540" y="1070.02" as="sourcePoint" />
+            <mxPoint x="1394" y="1131" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ymio0jUGBjH1uwj2NT5S-106" value="Corretor" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="1130" y="890" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ymio0jUGBjH1uwj2NT5S-107" value="Criar&amp;nbsp;&lt;span style=&quot;text-wrap-mode: nowrap;&quot;&gt;Condomínios&lt;/span&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1510" y="790" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ymio0jUGBjH1uwj2NT5S-108" value="Listar&amp;nbsp;&lt;span style=&quot;text-wrap-mode: nowrap;&quot;&gt;Condomínios&lt;/span&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1220" y="890" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ymio0jUGBjH1uwj2NT5S-109" value="Atualizar&amp;nbsp;&lt;span style=&quot;text-wrap-mode: nowrap;&quot;&gt;Condomínios&lt;/span&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1490" y="885" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="ymio0jUGBjH1uwj2NT5S-110" value="Desativar&amp;nbsp;&lt;span style=&quot;text-wrap-mode: nowrap;&quot;&gt;Condomínios&lt;/span&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1470" y="990" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ymio0jUGBjH1uwj2NT5S-111" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="ymio0jUGBjH1uwj2NT5S-106" target="ymio0jUGBjH1uwj2NT5S-108">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1155" y="951" as="sourcePoint" />
+            <mxPoint x="1330" y="880" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ymio0jUGBjH1uwj2NT5S-112" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="endArrow=open;startArrow=none;endFill=0;startFill=0;endSize=8;html=1;verticalAlign=bottom;dashed=1;labelBackgroundColor=none;rounded=0;" edge="1" parent="1" source="ymio0jUGBjH1uwj2NT5S-109" target="ymio0jUGBjH1uwj2NT5S-108">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="1583" y="1111" as="sourcePoint" />
+            <mxPoint x="1434" y="1059" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ymio0jUGBjH1uwj2NT5S-113" value="Caso de Uso Gerenciamento de Condomínios" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="1175" y="750" width="270" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ymio0jUGBjH1uwj2NT5S-114" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="endArrow=open;startArrow=none;endFill=0;startFill=0;endSize=8;html=1;verticalAlign=bottom;dashed=1;labelBackgroundColor=none;rounded=0;entryX=1;entryY=0;entryDx=0;entryDy=0;exitX=0.083;exitY=0.833;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="ymio0jUGBjH1uwj2NT5S-107" target="ymio0jUGBjH1uwj2NT5S-108">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="1430" y="850" as="sourcePoint" />
+            <mxPoint x="1295" y="918" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
