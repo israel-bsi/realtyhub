@@ -1,0 +1,6 @@
+var namespace_realty_hub_1_1_core_1_1_requests_1_1_properties =
+[
+    [ "DeletePropertyRequest", "class_realty_hub_1_1_core_1_1_requests_1_1_properties_1_1_delete_property_request.html", "class_realty_hub_1_1_core_1_1_requests_1_1_properties_1_1_delete_property_request" ],
+    [ "GetAllViewingsByPropertyRequest", "class_realty_hub_1_1_core_1_1_requests_1_1_properties_1_1_get_all_viewings_by_property_request.html", "class_realty_hub_1_1_core_1_1_requests_1_1_properties_1_1_get_all_viewings_by_property_request" ],
+    [ "GetPropertyByIdRequest", "class_realty_hub_1_1_core_1_1_requests_1_1_properties_1_1_get_property_by_id_request.html", "class_realty_hub_1_1_core_1_1_requests_1_1_properties_1_1_get_property_by_id_request" ]
+];

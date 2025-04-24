@@ -1,0 +1,46 @@
+\doxysection{Referência do Arquivo Realty\+Hub.\+App\+Host/\+Program.cs}
+\hypertarget{_realty_hub_8_app_host_2_program_8cs}{}\label{_realty_hub_8_app_host_2_program_8cs}\index{RealtyHub.AppHost/Program.cs@{RealtyHub.AppHost/Program.cs}}
+\doxysubsubsection*{Funções}
+\begin{DoxyCompactItemize}
+\item 
+builder. \mbox{\hyperlink{_realty_hub_8_app_host_2_program_8cs_a01f90700527c0407705197ca3f62a5ea}{Add\+Project$<$ Projects.\+Realty\+Hub\+\_\+\+Web $>$}} ("{}webfrontend"{}) .With\+External\+Http\+Endpoints() .With\+Reference(\mbox{\hyperlink{_realty_hub_8_app_host_2_program_8cs_a70463e1a35304e6091a119771bdb074e}{api\+Service}}) .Wait\+For(\mbox{\hyperlink{_realty_hub_8_app_host_2_program_8cs_a70463e1a35304e6091a119771bdb074e}{api\+Service}})
+\item 
+builder. \mbox{\hyperlink{_realty_hub_8_app_host_2_program_8cs_a2a0360d8454cd37d8ea59618e0e703ee}{Build}} ().\mbox{\hyperlink{_realty_hub_8_api_service_2_program_8cs_aaa3dbf02e269c3ef7e8546d290c6b3dd}{Run}}()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variáveis}
+\begin{DoxyCompactItemize}
+\item 
+var \mbox{\hyperlink{_realty_hub_8_app_host_2_program_8cs_a2f78352277081c620fd4cf92a5ce15e5}{builder}} = Distributed\+Application.\+Create\+Builder(args)
+\item 
+var \mbox{\hyperlink{_realty_hub_8_app_host_2_program_8cs_a70463e1a35304e6091a119771bdb074e}{api\+Service}} = builder.\+Add\+Project$<$\mbox{\hyperlink{class_projects_1_1_realty_hub___api_service}{Projects.\+Realty\+Hub\+\_\+\+Api\+Service}}$>$("{}apiservice"{})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Funções}
+\Hypertarget{_realty_hub_8_app_host_2_program_8cs_a01f90700527c0407705197ca3f62a5ea}\index{Program.cs@{Program.cs}!AddProject$<$ Projects.RealtyHub\_Web $>$@{AddProject$<$ Projects.RealtyHub\_Web $>$}}
+\index{AddProject$<$ Projects.RealtyHub\_Web $>$@{AddProject$<$ Projects.RealtyHub\_Web $>$}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{AddProject$<$ Projects.RealtyHub\_Web $>$()}{AddProject< Projects.RealtyHub\_Web >()}}
+{\footnotesize\ttfamily \label{_realty_hub_8_app_host_2_program_8cs_a01f90700527c0407705197ca3f62a5ea} 
+builder. Add\+Project$<$ \mbox{\hyperlink{class_projects_1_1_realty_hub___web}{Projects.\+Realty\+Hub\+\_\+\+Web}} $>$ (\begin{DoxyParamCaption}\item[{"{}webfrontend"{}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_realty_hub_8_app_host_2_program_8cs_a2a0360d8454cd37d8ea59618e0e703ee}\index{Program.cs@{Program.cs}!Build@{Build}}
+\index{Build@{Build}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{Build()}{Build()}}
+{\footnotesize\ttfamily \label{_realty_hub_8_app_host_2_program_8cs_a2a0360d8454cd37d8ea59618e0e703ee} 
+builder. Build (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variáveis}
+\Hypertarget{_realty_hub_8_app_host_2_program_8cs_a70463e1a35304e6091a119771bdb074e}\index{Program.cs@{Program.cs}!apiService@{apiService}}
+\index{apiService@{apiService}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{apiService}{apiService}}
+{\footnotesize\ttfamily \label{_realty_hub_8_app_host_2_program_8cs_a70463e1a35304e6091a119771bdb074e} 
+var api\+Service = builder.\+Add\+Project$<$\mbox{\hyperlink{class_projects_1_1_realty_hub___api_service}{Projects.\+Realty\+Hub\+\_\+\+Api\+Service}}$>$("{}apiservice"{})}
+
+\Hypertarget{_realty_hub_8_app_host_2_program_8cs_a2f78352277081c620fd4cf92a5ce15e5}\index{Program.cs@{Program.cs}!builder@{builder}}
+\index{builder@{builder}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{builder}{builder}}
+{\footnotesize\ttfamily \label{_realty_hub_8_app_host_2_program_8cs_a2f78352277081c620fd4cf92a5ce15e5} 
+var builder = Distributed\+Application.\+Create\+Builder(args)}
+

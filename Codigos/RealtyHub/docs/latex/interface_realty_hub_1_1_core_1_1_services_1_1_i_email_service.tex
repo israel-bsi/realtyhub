@@ -1,0 +1,55 @@
+\doxysection{Referência da Interface Realty\+Hub.\+Core.\+Services.\+IEmail\+Service}
+\hypertarget{interface_realty_hub_1_1_core_1_1_services_1_1_i_email_service}{}\label{interface_realty_hub_1_1_core_1_1_services_1_1_i_email_service}\index{RealtyHub.Core.Services.IEmailService@{RealtyHub.Core.Services.IEmailService}}
+Diagrama de hierarquia da classe Realty\+Hub.\+Core.\+Services.\+IEmail\+Service\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{interface_realty_hub_1_1_core_1_1_services_1_1_i_email_service}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Membros Públicos}
+\begin{DoxyCompactItemize}
+\item 
+Task$<$ Response$<$ bool $>$ $>$ \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_services_1_1_i_email_service_a2f8f5af9b542760e3bfe09a461ecc498}{Send\+Confirmation\+Link\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_emails_1_1_confirm_email_message}{Confirm\+Email\+Message}} message)
+\item 
+Task$<$ Response$<$ bool $>$ $>$ \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_services_1_1_i_email_service_a7a0aa00d5e47b47690785b9015608ef7}{Send\+Reset\+Password\+Link\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_emails_1_1_reset_password_message}{Reset\+Password\+Message}} message)
+\item 
+Task$<$ Response$<$ bool $>$ $>$ \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_services_1_1_i_email_service_aa2fb78e84d13ff2342e3d1016e34ecbf}{Send\+Contract\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_emails_1_1_attachment_message}{Attachment\+Message}} message)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Documentação das funções}
+\Hypertarget{interface_realty_hub_1_1_core_1_1_services_1_1_i_email_service_a2f8f5af9b542760e3bfe09a461ecc498}\index{RealtyHub.Core.Services.IEmailService@{RealtyHub.Core.Services.IEmailService}!SendConfirmationLinkAsync@{SendConfirmationLinkAsync}}
+\index{SendConfirmationLinkAsync@{SendConfirmationLinkAsync}!RealtyHub.Core.Services.IEmailService@{RealtyHub.Core.Services.IEmailService}}
+\doxysubsubsection{\texorpdfstring{SendConfirmationLinkAsync()}{SendConfirmationLinkAsync()}}
+{\footnotesize\ttfamily \label{interface_realty_hub_1_1_core_1_1_services_1_1_i_email_service_a2f8f5af9b542760e3bfe09a461ecc498} 
+Task$<$ Response$<$ bool $>$ $>$ Realty\+Hub.\+Core.\+Services.\+IEmail\+Service.\+Send\+Confirmation\+Link\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_emails_1_1_confirm_email_message}{Confirm\+Email\+Message}}}]{message}{}\end{DoxyParamCaption})}
+
+
+
+Implementado por \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_services_1_1_email_service_a8f4f23c36a9a3ed7f1bcd095b264c400}{Realty\+Hub.\+Api\+Service.\+Services.\+Email\+Service}} e \mbox{\hyperlink{class_realty_hub_1_1_web_1_1_services_1_1_email_service_a65ee35b51d18cc869604769088c2d8b6}{Realty\+Hub.\+Web.\+Services.\+Email\+Service}}.
+
+\Hypertarget{interface_realty_hub_1_1_core_1_1_services_1_1_i_email_service_aa2fb78e84d13ff2342e3d1016e34ecbf}\index{RealtyHub.Core.Services.IEmailService@{RealtyHub.Core.Services.IEmailService}!SendContractAsync@{SendContractAsync}}
+\index{SendContractAsync@{SendContractAsync}!RealtyHub.Core.Services.IEmailService@{RealtyHub.Core.Services.IEmailService}}
+\doxysubsubsection{\texorpdfstring{SendContractAsync()}{SendContractAsync()}}
+{\footnotesize\ttfamily \label{interface_realty_hub_1_1_core_1_1_services_1_1_i_email_service_aa2fb78e84d13ff2342e3d1016e34ecbf} 
+Task$<$ Response$<$ bool $>$ $>$ Realty\+Hub.\+Core.\+Services.\+IEmail\+Service.\+Send\+Contract\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_emails_1_1_attachment_message}{Attachment\+Message}}}]{message}{}\end{DoxyParamCaption})}
+
+
+
+Implementado por \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_services_1_1_email_service_acd6c46f7fdace0cd1f7ed87fb06d58a5}{Realty\+Hub.\+Api\+Service.\+Services.\+Email\+Service}} e \mbox{\hyperlink{class_realty_hub_1_1_web_1_1_services_1_1_email_service_a75a8c8b3f18896114d5b88a61955b8ed}{Realty\+Hub.\+Web.\+Services.\+Email\+Service}}.
+
+\Hypertarget{interface_realty_hub_1_1_core_1_1_services_1_1_i_email_service_a7a0aa00d5e47b47690785b9015608ef7}\index{RealtyHub.Core.Services.IEmailService@{RealtyHub.Core.Services.IEmailService}!SendResetPasswordLinkAsync@{SendResetPasswordLinkAsync}}
+\index{SendResetPasswordLinkAsync@{SendResetPasswordLinkAsync}!RealtyHub.Core.Services.IEmailService@{RealtyHub.Core.Services.IEmailService}}
+\doxysubsubsection{\texorpdfstring{SendResetPasswordLinkAsync()}{SendResetPasswordLinkAsync()}}
+{\footnotesize\ttfamily \label{interface_realty_hub_1_1_core_1_1_services_1_1_i_email_service_a7a0aa00d5e47b47690785b9015608ef7} 
+Task$<$ Response$<$ bool $>$ $>$ Realty\+Hub.\+Core.\+Services.\+IEmail\+Service.\+Send\+Reset\+Password\+Link\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_emails_1_1_reset_password_message}{Reset\+Password\+Message}}}]{message}{}\end{DoxyParamCaption})}
+
+
+
+Implementado por \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_services_1_1_email_service_a5c7bce1c070bd5246551603f294a9ae9}{Realty\+Hub.\+Api\+Service.\+Services.\+Email\+Service}} e \mbox{\hyperlink{class_realty_hub_1_1_web_1_1_services_1_1_email_service_a5ed47d31cc4e7beea07b13f9c9c69cc9}{Realty\+Hub.\+Web.\+Services.\+Email\+Service}}.
+
+
+
+A documentação para essa interface foi gerada a partir do seguinte arquivo\+:\begin{DoxyCompactItemize}
+\item 
+Realty\+Hub.\+Core/\+Services/\mbox{\hyperlink{_i_email_service_8cs}{IEmail\+Service.\+cs}}\end{DoxyCompactItemize}

@@ -1,0 +1,4 @@
+var _contracts_templates_2_list_8razor_8cs =
+[
+    [ "RealtyHub.Web.Pages.ContractsTemplates.ListContractTemplatesPage", "class_realty_hub_1_1_web_1_1_pages_1_1_contracts_templates_1_1_list_contract_templates_page.html", "class_realty_hub_1_1_web_1_1_pages_1_1_contracts_templates_1_1_list_contract_templates_page" ]
+];

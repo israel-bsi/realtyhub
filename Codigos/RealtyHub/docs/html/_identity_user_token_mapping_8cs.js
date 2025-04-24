@@ -1,0 +1,4 @@
+var _identity_user_token_mapping_8cs =
+[
+    [ "RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserTokenMapping", "class_realty_hub_1_1_api_service_1_1_data_1_1_mappings_1_1_identity_1_1_identity_user_token_mapping.html", "class_realty_hub_1_1_api_service_1_1_data_1_1_mappings_1_1_identity_1_1_identity_user_token_mapping" ]
+];

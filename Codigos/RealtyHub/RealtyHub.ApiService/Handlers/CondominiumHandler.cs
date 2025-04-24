@@ -8,15 +8,27 @@ using RealtyHub.Core.Extensions;
 
 namespace RealtyHub.ApiService.Handlers;
 
+/// <summary>
+/// Responsável pelas operações relacionadas a condomínios.
+/// </summary>
 public class CondominiumHandler : ICondominiumHandler
 {
     private readonly AppDbContext _context;
 
+    /// <summary>
+    /// Inicializa uma nova instância de <see cref="CondominiumHandler"/>.
+    /// </summary>
+    /// <param name="context">Contexto do banco de dados para interação com condomínios.</param>
     public CondominiumHandler(AppDbContext context)
     {
         _context = context;
     }
 
+    /// <summary>
+    /// Cria um novo condomínio no banco de dados.
+    /// </summary>
+    /// <param name="request">Objeto contendo as informações para criação do condomínio.</param>
+    /// <returns>Retorna uma resposta com o condomínio criado e o código de status.</returns>
     public async Task<Response<Condominium?>> CreateAsync(Condominium request)
     {
         try
@@ -47,13 +59,18 @@ public class CondominiumHandler : ICondominiumHandler
         }
     }
 
+    /// <summary>
+    /// Atualiza um condomínio existente.
+    /// </summary>
+    /// <param name="request">Objeto contendo as novas informações do condomínio.</param>
+    /// <returns>Retorna a resposta com o condomínio atualizado ou um erro se não for encontrado.</returns>
     public async Task<Response<Condominium?>> UpdateAsync(Condominium request)
     {
         try
         {
             var condominuim = await _context
                 .Condominiums
-                .FirstOrDefaultAsync(c=>c.Id == request.Id && c.IsActive);
+                .FirstOrDefaultAsync(c => c.Id == request.Id && c.IsActive);
 
             if (condominuim is null)
                 return new Response<Condominium?>(null, 404, "Condomínio não encontrado");
@@ -81,6 +98,11 @@ public class CondominiumHandler : ICondominiumHandler
         }
     }
 
+    /// <summary>
+    /// Realiza a exclusão lógica de um condomínio, marcando-o como inativo.
+    /// </summary>
+    /// <param name="request">Requisição que contém o ID do condomínio a ser excluído.</param>
+    /// <returns>Retorna a resposta com o condomínio atualizado ou um erro se não for encontrado.</returns>
     public async Task<Response<Condominium?>> DeleteAsync(DeleteCondominiumRequest request)
     {
         try
@@ -88,6 +110,7 @@ public class CondominiumHandler : ICondominiumHandler
             var condominuim = await _context
                 .Condominiums
                 .FirstOrDefaultAsync(c => c.Id == request.Id && c.IsActive);
+
             if (condominuim is null)
                 return new Response<Condominium?>(null, 404, "Condomínio não encontrado");
 
@@ -105,6 +128,11 @@ public class CondominiumHandler : ICondominiumHandler
         }
     }
 
+    /// <summary>
+    /// Obtém um condomínio específico pelo ID.
+    /// </summary>
+    /// <param name="request">Requisição que contém o ID do condomínio desejado.</param>
+    /// <returns>Retorna o objeto do condomínio ou um erro caso não seja encontrado.</returns>
     public async Task<Response<Condominium?>> GetByIdAsync(GetCondominiumByIdRequest request)
     {
         try
@@ -113,6 +141,7 @@ public class CondominiumHandler : ICondominiumHandler
                 .Condominiums
                 .AsNoTracking()
                 .FirstOrDefaultAsync(c => c.Id == request.Id && c.IsActive);
+
             return condominuim is null
                 ? new Response<Condominium?>(null, 404, "Condomínio não encontrado")
                 : new Response<Condominium?>(condominuim);
@@ -123,6 +152,11 @@ public class CondominiumHandler : ICondominiumHandler
         }
     }
 
+    /// <summary>
+    /// Retorna uma lista paginada de todos os condomínios ativos, com opção de filtro por busca.
+    /// </summary>
+    /// <param name="request">Requisição que contém parâmetros de paginação e filtro.</param>
+    /// <returns>Retorna uma resposta paginada com os condomínios ativos ou um erro em caso de falha.</returns>
     public async Task<PagedResponse<List<Condominium>?>> GetAllAsync(GetAllCondominiumsRequest request)
     {
         try

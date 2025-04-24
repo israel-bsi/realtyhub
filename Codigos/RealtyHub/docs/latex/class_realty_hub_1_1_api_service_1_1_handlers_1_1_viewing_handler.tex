@@ -1,0 +1,102 @@
+\doxysection{Referência da Classe Realty\+Hub.\+Api\+Service.\+Handlers.\+Viewing\+Handler}
+\hypertarget{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler}{}\label{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler}\index{RealtyHub.ApiService.Handlers.ViewingHandler@{RealtyHub.ApiService.Handlers.ViewingHandler}}
+Diagrama de hierarquia da classe Realty\+Hub.\+Api\+Service.\+Handlers.\+Viewing\+Handler\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Membros Públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler_abd4683d7b414e960962ff69109550cc7}{Viewing\+Handler}} (\mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_data_1_1_app_db_context}{App\+Db\+Context}} context)
+\item 
+async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}}?$>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler_a5b5a468ecdbae1960224f6dff50cf2c9}{Schedule\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}} request)
+\item 
+async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}}?$>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler_af91f1849698e02da90eecaabd6780ea9}{Reschedule\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}} request)
+\item 
+async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}}?$>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler_af4118954503ed7bfd7897dfb53a3a719}{Done\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_viewings_1_1_done_viewing_request}{Done\+Viewing\+Request}} request)
+\item 
+async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}}?$>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler_a4503633fe35bfa9d9f22b3feb829ec84}{Cancel\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_viewings_1_1_cancel_viewing_request}{Cancel\+Viewing\+Request}} request)
+\item 
+async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}}?$>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler_a8c223c42175f525db2486118ef105fe4}{Get\+By\+Id\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_viewings_1_1_get_viewing_by_id_request}{Get\+Viewing\+By\+Id\+Request}} request)
+\item 
+async Task$<$ Paged\+Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}} $>$?$>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler_a4868d3ff694bd4a9b126bd95534cc95e}{Get\+All\+Async}} (Get\+All\+Viewings\+Request request)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Construtores e Destrutores}
+\Hypertarget{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler_abd4683d7b414e960962ff69109550cc7}\index{RealtyHub.ApiService.Handlers.ViewingHandler@{RealtyHub.ApiService.Handlers.ViewingHandler}!ViewingHandler@{ViewingHandler}}
+\index{ViewingHandler@{ViewingHandler}!RealtyHub.ApiService.Handlers.ViewingHandler@{RealtyHub.ApiService.Handlers.ViewingHandler}}
+\doxysubsubsection{\texorpdfstring{ViewingHandler()}{ViewingHandler()}}
+{\footnotesize\ttfamily \label{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler_abd4683d7b414e960962ff69109550cc7} 
+Realty\+Hub.\+Api\+Service.\+Handlers.\+Viewing\+Handler.\+Viewing\+Handler (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_data_1_1_app_db_context}{App\+Db\+Context}}}]{context}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Documentação das funções}
+\Hypertarget{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler_a4503633fe35bfa9d9f22b3feb829ec84}\index{RealtyHub.ApiService.Handlers.ViewingHandler@{RealtyHub.ApiService.Handlers.ViewingHandler}!CancelAsync@{CancelAsync}}
+\index{CancelAsync@{CancelAsync}!RealtyHub.ApiService.Handlers.ViewingHandler@{RealtyHub.ApiService.Handlers.ViewingHandler}}
+\doxysubsubsection{\texorpdfstring{CancelAsync()}{CancelAsync()}}
+{\footnotesize\ttfamily \label{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler_a4503633fe35bfa9d9f22b3feb829ec84} 
+async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}}?$>$ $>$ Realty\+Hub.\+Api\+Service.\+Handlers.\+Viewing\+Handler.\+Cancel\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_viewings_1_1_cancel_viewing_request}{Cancel\+Viewing\+Request}}}]{request}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_viewing_handler_a1738455b39d517c5bf6e5387e7e0d25e}{Realty\+Hub.\+Core.\+Handlers.\+IViewing\+Handler}}.
+
+\Hypertarget{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler_af4118954503ed7bfd7897dfb53a3a719}\index{RealtyHub.ApiService.Handlers.ViewingHandler@{RealtyHub.ApiService.Handlers.ViewingHandler}!DoneAsync@{DoneAsync}}
+\index{DoneAsync@{DoneAsync}!RealtyHub.ApiService.Handlers.ViewingHandler@{RealtyHub.ApiService.Handlers.ViewingHandler}}
+\doxysubsubsection{\texorpdfstring{DoneAsync()}{DoneAsync()}}
+{\footnotesize\ttfamily \label{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler_af4118954503ed7bfd7897dfb53a3a719} 
+async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}}?$>$ $>$ Realty\+Hub.\+Api\+Service.\+Handlers.\+Viewing\+Handler.\+Done\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_viewings_1_1_done_viewing_request}{Done\+Viewing\+Request}}}]{request}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_viewing_handler_ae0a41018d3dbcda4927538dec8e7561d}{Realty\+Hub.\+Core.\+Handlers.\+IViewing\+Handler}}.
+
+\Hypertarget{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler_a4868d3ff694bd4a9b126bd95534cc95e}\index{RealtyHub.ApiService.Handlers.ViewingHandler@{RealtyHub.ApiService.Handlers.ViewingHandler}!GetAllAsync@{GetAllAsync}}
+\index{GetAllAsync@{GetAllAsync}!RealtyHub.ApiService.Handlers.ViewingHandler@{RealtyHub.ApiService.Handlers.ViewingHandler}}
+\doxysubsubsection{\texorpdfstring{GetAllAsync()}{GetAllAsync()}}
+{\footnotesize\ttfamily \label{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler_a4868d3ff694bd4a9b126bd95534cc95e} 
+async Task$<$ Paged\+Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}} $>$?$>$ $>$ Realty\+Hub.\+Api\+Service.\+Handlers.\+Viewing\+Handler.\+Get\+All\+Async (\begin{DoxyParamCaption}\item[{Get\+All\+Viewings\+Request}]{request}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_viewing_handler_ac8c2f31cb236cbc97b7e9c1c5c02940c}{Realty\+Hub.\+Core.\+Handlers.\+IViewing\+Handler}}.
+
+\Hypertarget{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler_a8c223c42175f525db2486118ef105fe4}\index{RealtyHub.ApiService.Handlers.ViewingHandler@{RealtyHub.ApiService.Handlers.ViewingHandler}!GetByIdAsync@{GetByIdAsync}}
+\index{GetByIdAsync@{GetByIdAsync}!RealtyHub.ApiService.Handlers.ViewingHandler@{RealtyHub.ApiService.Handlers.ViewingHandler}}
+\doxysubsubsection{\texorpdfstring{GetByIdAsync()}{GetByIdAsync()}}
+{\footnotesize\ttfamily \label{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler_a8c223c42175f525db2486118ef105fe4} 
+async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}}?$>$ $>$ Realty\+Hub.\+Api\+Service.\+Handlers.\+Viewing\+Handler.\+Get\+By\+Id\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_viewings_1_1_get_viewing_by_id_request}{Get\+Viewing\+By\+Id\+Request}}}]{request}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_viewing_handler_a887181041c7cff0c90f6148f6387ca35}{Realty\+Hub.\+Core.\+Handlers.\+IViewing\+Handler}}.
+
+\Hypertarget{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler_af91f1849698e02da90eecaabd6780ea9}\index{RealtyHub.ApiService.Handlers.ViewingHandler@{RealtyHub.ApiService.Handlers.ViewingHandler}!RescheduleAsync@{RescheduleAsync}}
+\index{RescheduleAsync@{RescheduleAsync}!RealtyHub.ApiService.Handlers.ViewingHandler@{RealtyHub.ApiService.Handlers.ViewingHandler}}
+\doxysubsubsection{\texorpdfstring{RescheduleAsync()}{RescheduleAsync()}}
+{\footnotesize\ttfamily \label{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler_af91f1849698e02da90eecaabd6780ea9} 
+async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}}?$>$ $>$ Realty\+Hub.\+Api\+Service.\+Handlers.\+Viewing\+Handler.\+Reschedule\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}}}]{request}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_viewing_handler_af1ecf5a8f2d331cdbe977d55022afe3d}{Realty\+Hub.\+Core.\+Handlers.\+IViewing\+Handler}}.
+
+\Hypertarget{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler_a5b5a468ecdbae1960224f6dff50cf2c9}\index{RealtyHub.ApiService.Handlers.ViewingHandler@{RealtyHub.ApiService.Handlers.ViewingHandler}!ScheduleAsync@{ScheduleAsync}}
+\index{ScheduleAsync@{ScheduleAsync}!RealtyHub.ApiService.Handlers.ViewingHandler@{RealtyHub.ApiService.Handlers.ViewingHandler}}
+\doxysubsubsection{\texorpdfstring{ScheduleAsync()}{ScheduleAsync()}}
+{\footnotesize\ttfamily \label{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler_a5b5a468ecdbae1960224f6dff50cf2c9} 
+async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}}?$>$ $>$ Realty\+Hub.\+Api\+Service.\+Handlers.\+Viewing\+Handler.\+Schedule\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}}}]{request}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_viewing_handler_a4e50a7195a53173af75b6aff501db64e}{Realty\+Hub.\+Core.\+Handlers.\+IViewing\+Handler}}.
+
+
+
+A documentação para essa classe foi gerada a partir do seguinte arquivo\+:\begin{DoxyCompactItemize}
+\item 
+Realty\+Hub.\+Api\+Service/\+Handlers/\mbox{\hyperlink{_realty_hub_8_api_service_2_handlers_2_viewing_handler_8cs}{Viewing\+Handler.\+cs}}\end{DoxyCompactItemize}

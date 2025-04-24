@@ -7,15 +7,27 @@ using RealtyHub.Core.Responses;
 
 namespace RealtyHub.ApiService.Handlers;
 
+/// <summary>
+/// Responsável pelas operações relacionadas a clientes.
+/// </summary>
 public class CustomerHandler : ICustomerHandler
 {
     private readonly AppDbContext _context;
 
+    /// <summary>
+    /// Inicializa uma nova instância de <see cref="CustomerHandler"/>.
+    /// </summary>
+    /// <param name="context">Contexto do banco de dados para interação com clientes.</param>
     public CustomerHandler(AppDbContext context)
     {
         _context = context;
     }
 
+    /// <summary>
+    /// Cria um novo cliente no banco de dados.
+    /// </summary>
+    /// <param name="request">Objeto contendo as informações para criação do cliente.</param>
+    /// <returns>Retorna uma resposta com o cliente criado e o código de status.</returns>
     public async Task<Response<Customer?>> CreateAsync(Customer request)
     {
         try
@@ -59,6 +71,11 @@ public class CustomerHandler : ICustomerHandler
         }
     }
 
+    /// <summary>
+    /// Atualiza um cliente existente no banco de dados.
+    /// </summary>
+    /// <param name="request">Objeto contendo as novas informações do cliente.</param>
+    /// <returns>Retorna a resposta com o cliente atualizado ou um erro se não for encontrado.</returns>
     public async Task<Response<Customer?>> UpdateAsync(Customer request)
     {
         try
@@ -100,6 +117,11 @@ public class CustomerHandler : ICustomerHandler
         }
     }
 
+    /// <summary>
+    /// Realiza a exclusão lógica de um cliente, marcando-o como inativo.
+    /// </summary>
+    /// <param name="request">Requisição que contém o ID do cliente a ser excluído.</param>
+    /// <returns>Retorna a resposta com o status da exclusão ou um erro se não for encontrado.</returns>
     public async Task<Response<Customer?>> DeleteAsync(DeleteCustomerRequest request)
     {
         try
@@ -126,13 +148,18 @@ public class CustomerHandler : ICustomerHandler
         }
     }
 
+    /// <summary>
+    /// Obtém um cliente específico pelo ID.
+    /// </summary>
+    /// <param name="request">Requisição que contém o ID do cliente desejado.</param>
+    /// <returns>Retorna o objeto do cliente ou um erro caso não seja encontrado.</returns>
     public async Task<Response<Customer?>> GetByIdAsync(GetCustomerByIdRequest request)
     {
         try
         {
             var customer = await _context
                 .Customers
-                .Include(c=>c.Properties)
+                .Include(c => c.Properties)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(c => c.Id == request.Id
                                           && (c.UserId == request.UserId || string.IsNullOrEmpty(c.UserId))
@@ -148,6 +175,11 @@ public class CustomerHandler : ICustomerHandler
         }
     }
 
+    /// <summary>
+    /// Retorna uma lista paginada de todos os clientes ativos, com opção de filtro por busca.
+    /// </summary>
+    /// <param name="request">Requisição que contém parâmetros de paginação e filtro.</param>
+    /// <returns>Retorna uma resposta paginada com os clientes ativos ou um erro em caso de falha.</returns>
     public async Task<PagedResponse<List<Customer>?>> GetAllAsync(GetAllCustomersRequest request)
     {
         try
@@ -176,13 +208,11 @@ public class CustomerHandler : ICustomerHandler
 
             var count = await query.CountAsync();
 
-            return new PagedResponse<List<Customer>?>(
-               customers, count, request.PageNumber, request.PageSize);
+            return new PagedResponse<List<Customer>?>(customers, count, request.PageNumber, request.PageSize);
         }
         catch
         {
-            return new PagedResponse<List<Customer>?>(null, 500, 
-                "Não foi possível consultar os clientes");
+            return new PagedResponse<List<Customer>?>(null, 500, "Não foi possível consultar os clientes");
         }
     }
 }
