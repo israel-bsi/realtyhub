@@ -6,10 +6,16 @@ using System.Net.Http.Json;
 
 namespace RealtyHub.Web.Handlers;
 
-public class PropertyHandler(IHttpClientFactory httpClientFactory) : IPropertyHandler
+public class PropertyHandler : IPropertyHandler
 {
-    private readonly HttpClient _httpClient = httpClientFactory
-        .CreateClient(Configuration.HttpClientName);
+    private readonly HttpClient _httpClient;
+
+    public PropertyHandler(IHttpClientFactory httpClientFactory)
+    {
+        _httpClient = httpClientFactory
+            .CreateClient(Configuration.HttpClientName);
+    }
+
     public async Task<Response<Property?>> CreateAsync(Property request)
     {
         var result = await _httpClient.PostAsJsonAsync("v1/properties", request);

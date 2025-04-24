@@ -37,5 +37,21 @@ public class MockData
 
         return client;
     }
-    private record Login(string email, string password);
+    private record Login
+    {
+        public Login(string Email, string Password)
+        {
+            email = Email;
+            password = Password;
+        }
+
+        public string email { get; init; }
+        public string password { get; init; }
+
+        public void Deconstruct(out string email, out string password)
+        {
+            email = this.email;
+            password = this.password;
+        }
+    }
 }

@@ -6,10 +6,16 @@ using RealtyHub.Core.Responses;
 
 namespace RealtyHub.Web.Handlers;
 
-public class ContractHandler(IHttpClientFactory httpClientFactory) : IContractHandler
+public class ContractHandler : IContractHandler
 {
-    private readonly HttpClient _httpClient = httpClientFactory
-        .CreateClient(Configuration.HttpClientName);
+    private readonly HttpClient _httpClient;
+
+    public ContractHandler(IHttpClientFactory httpClientFactory)
+    {
+        _httpClient = httpClientFactory
+            .CreateClient(Configuration.HttpClientName);
+    }
+
     public async Task<Response<Contract?>> CreateAsync(Contract request)
     {
         request.IssueDate = request.IssueDate?.Date.ToUniversalTime();

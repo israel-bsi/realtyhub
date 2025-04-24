@@ -6,10 +6,16 @@ using System.Net.Http.Json;
 
 namespace RealtyHub.Web.Handlers;
 
-public class ViewingHandler(IHttpClientFactory httpClientFactory) : IViewingHandler
+public class ViewingHandler : IViewingHandler
 {
-    private readonly HttpClient _httpClient = httpClientFactory
-       .CreateClient(Configuration.HttpClientName);
+    private readonly HttpClient _httpClient;
+
+    public ViewingHandler(IHttpClientFactory httpClientFactory)
+    {
+        _httpClient = httpClientFactory
+            .CreateClient(Configuration.HttpClientName);
+    }
+
     public async Task<Response<Viewing?>> ScheduleAsync(Viewing request)
     {
         var result = await _httpClient.PostAsJsonAsync("v1/viewings", request);

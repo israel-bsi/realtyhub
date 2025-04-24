@@ -5,10 +5,16 @@ using System.Net.Http.Json;
 
 namespace RealtyHub.Web.Services;
 
-public class EmailService(IHttpClientFactory httpClientFactory) : IEmailService
+public class EmailService : IEmailService
 {
-    private readonly HttpClient _httpClient = httpClientFactory
-        .CreateClient(Configuration.HttpClientName);
+    private readonly HttpClient _httpClient;
+
+    public EmailService(IHttpClientFactory httpClientFactory)
+    {
+        _httpClient = httpClientFactory
+            .CreateClient(Configuration.HttpClientName);
+    }
+
     public Task<Response<bool>> SendConfirmationLinkAsync(ConfirmEmailMessage message)
     {
         throw new NotImplementedException();

@@ -7,8 +7,15 @@ using RealtyHub.Core.Responses;
 
 namespace RealtyHub.ApiService.Handlers;
 
-public class PropertyPhotosHandler(AppDbContext context) : IPropertyPhotosHandler
+public class PropertyPhotosHandler : IPropertyPhotosHandler
 {
+    private readonly AppDbContext _context;
+
+    public PropertyPhotosHandler(AppDbContext context)
+    {
+        _context = context;
+    }
+
     public async Task<Response<PropertyPhoto?>> CreateAsync(CreatePropertyPhotosRequest request)
     {
         try
@@ -16,7 +23,7 @@ public class PropertyPhotosHandler(AppDbContext context) : IPropertyPhotosHandle
             if (request.HttpRequest is null)
                 return new Response<PropertyPhoto?>(null, 400, "Requisição inválida");
 
-            var property = await context
+            var property = await _context
                 .Properties
                 .AsNoTracking()
                 .FirstOrDefaultAsync(p =>
@@ -27,7 +34,7 @@ public class PropertyPhotosHandler(AppDbContext context) : IPropertyPhotosHandle
             if (property is null)
                 return new Response<PropertyPhoto?>(null, 404, "Imóvel não encontrado");
 
-            context.Attach(property);
+            _context.Attach(property);
 
             if (!request.HttpRequest.HasFormContentType)
                 return new Response<PropertyPhoto?>(null, 400,
@@ -73,7 +80,7 @@ public class PropertyPhotosHandler(AppDbContext context) : IPropertyPhotosHandle
 
             if (photosToCreate.Any(p => p.IsThumbnail))
             {
-                await context.PropertyPhotos
+                await _context.PropertyPhotos
                     .Where(pi =>
                         pi.PropertyId == request.PropertyId
                         && pi.UserId == request.UserId
@@ -81,15 +88,15 @@ public class PropertyPhotosHandler(AppDbContext context) : IPropertyPhotosHandle
                         && pi.IsThumbnail)
                     .ForEachAsync(pi =>
                     {
-                        context.Attach(pi);
+                        _context.Attach(pi);
                         pi.IsThumbnail = false;
                         pi.UpdatedAt = DateTime.UtcNow;
                     });
             }
 
-            await context.PropertyPhotos.AddRangeAsync(photosToCreate);
-            context.PropertyPhotos.UpdateRange(photosToUpdate);
-            await context.SaveChangesAsync();
+            await _context.PropertyPhotos.AddRangeAsync(photosToCreate);
+            _context.PropertyPhotos.UpdateRange(photosToUpdate);
+            await _context.SaveChangesAsync();
 
             return new Response<PropertyPhoto?>(null, 201);
         }
@@ -105,7 +112,7 @@ public class PropertyPhotosHandler(AppDbContext context) : IPropertyPhotosHandle
         {
             if (request.Photos.Any(p => p.IsThumbnail))
             {
-                await context.PropertyPhotos
+                await _context.PropertyPhotos
                     .Where(pi =>
                         pi.PropertyId == request.PropertyId
                         && pi.UserId == request.UserId
@@ -113,7 +120,7 @@ public class PropertyPhotosHandler(AppDbContext context) : IPropertyPhotosHandle
                         && pi.IsThumbnail)
                     .ForEachAsync(pi =>
                     {
-                        context.Attach(pi);
+                        _context.Attach(pi);
                         pi.IsThumbnail = false;
                         pi.UpdatedAt = DateTime.UtcNow;
                     });
@@ -121,7 +128,7 @@ public class PropertyPhotosHandler(AppDbContext context) : IPropertyPhotosHandle
 
             foreach (var photo in request.Photos)
             {
-                var existingEntity = await context
+                var existingEntity = await _context
                     .PropertyPhotos
                     .FirstOrDefaultAsync(pi =>
                         pi.Id == photo.Id
@@ -131,13 +138,13 @@ public class PropertyPhotosHandler(AppDbContext context) : IPropertyPhotosHandle
                 if (existingEntity is null)
                     continue;
 
-                context.Attach(existingEntity);
+                _context.Attach(existingEntity);
 
                 existingEntity.IsThumbnail = photo.IsThumbnail;
                 existingEntity.UpdatedAt = DateTime.UtcNow;
             }
 
-            await context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
             return new Response<List<PropertyPhoto>?>();
         }
@@ -151,7 +158,7 @@ public class PropertyPhotosHandler(AppDbContext context) : IPropertyPhotosHandle
     {
         try
         {
-            var propertyPhoto = await context
+            var propertyPhoto = await _context
                 .PropertyPhotos
                 .FirstOrDefaultAsync(pi =>
                     pi.Id == request.Id
@@ -161,13 +168,13 @@ public class PropertyPhotosHandler(AppDbContext context) : IPropertyPhotosHandle
             if (propertyPhoto is null)
                 return new Response<PropertyPhoto?>(null, 404, "Foto não encontrada");
 
-            context.Attach(propertyPhoto);
+            _context.Attach(propertyPhoto);
 
             propertyPhoto.IsActive = false;
             propertyPhoto.IsThumbnail = false;
             propertyPhoto.UpdatedAt = DateTime.UtcNow; 
 
-            await context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
             return new Response<PropertyPhoto?>(null, 204, "Foto excluída com sucesso");
         }
@@ -182,7 +189,7 @@ public class PropertyPhotosHandler(AppDbContext context) : IPropertyPhotosHandle
     {
         try
         {
-            var propertyPhotos = await context
+            var propertyPhotos = await _context
                 .PropertyPhotos
                 .AsNoTracking()
                 .Where(p =>

@@ -4,10 +4,15 @@ using RealtyHub.Core.Responses;
 
 namespace RealtyHub.Web.Services;
 
-public class OfferReport(IHttpClientFactory httpClientFactory)
+public class OfferReport
 {
-    private readonly HttpClient _httpClient = httpClientFactory
-        .CreateClient(Configuration.HttpClientName);
+    private readonly HttpClient _httpClient;
+
+    public OfferReport(IHttpClientFactory httpClientFactory)
+    {
+        _httpClient = httpClientFactory
+            .CreateClient(Configuration.HttpClientName);
+    }
 
     public async Task<Response<Report>> GetOfferAsync()
     {

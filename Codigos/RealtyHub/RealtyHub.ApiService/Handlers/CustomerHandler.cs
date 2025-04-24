@@ -7,13 +7,20 @@ using RealtyHub.Core.Responses;
 
 namespace RealtyHub.ApiService.Handlers;
 
-public class CustomerHandler(AppDbContext context) : ICustomerHandler
+public class CustomerHandler : ICustomerHandler
 {
+    private readonly AppDbContext _context;
+
+    public CustomerHandler(AppDbContext context)
+    {
+        _context = context;
+    }
+
     public async Task<Response<Customer?>> CreateAsync(Customer request)
     {
         try
         {
-            var isCustomerExists = await context
+            var isCustomerExists = await _context
                 .Customers
                 .AnyAsync(c => (c.DocumentNumber == request.DocumentNumber
                                || c.Email == request.Email)
@@ -41,8 +48,8 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
                 UserId = request.UserId,
                 IsActive = true
             };
-            await context.Customers.AddAsync(customer);
-            await context.SaveChangesAsync();
+            await _context.Customers.AddAsync(customer);
+            await _context.SaveChangesAsync();
 
             return new Response<Customer?>(customer, 201, "Cliente criado com sucesso");
         }
@@ -56,7 +63,7 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
     {
         try
         {
-            var customer = await context
+            var customer = await _context
                 .Customers
                 .FirstOrDefaultAsync(c => c.Id == request.Id
                                           && (string.IsNullOrEmpty(c.UserId) || c.UserId == request.UserId)
@@ -82,8 +89,8 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
             customer.UserId = request.UserId;
             customer.UpdatedAt = DateTime.UtcNow;
 
-            context.Customers.Update(customer);
-            await context.SaveChangesAsync();
+            _context.Customers.Update(customer);
+            await _context.SaveChangesAsync();
 
             return new Response<Customer?>(customer);
         }
@@ -97,7 +104,7 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
     {
         try
         {
-            var customer = await context
+            var customer = await _context
                 .Customers
                 .FirstOrDefaultAsync(c => c.Id == request.Id
                                           && (string.IsNullOrEmpty(c.UserId) || c.UserId == request.UserId)
@@ -109,7 +116,7 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
             customer.IsActive = false;
             customer.UpdatedAt = DateTime.UtcNow;
 
-            await context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
             return new Response<Customer?>(null, 204, "Cliente excluído com sucesso");
         }
@@ -123,7 +130,7 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
     {
         try
         {
-            var customer = await context
+            var customer = await _context
                 .Customers
                 .Include(c=>c.Properties)
                 .AsNoTracking()
@@ -145,7 +152,7 @@ public class CustomerHandler(AppDbContext context) : ICustomerHandler
     {
         try
         {
-            var query = context
+            var query = _context
                 .Customers
                 .Include(c => c.Properties)
                 .AsNoTracking()

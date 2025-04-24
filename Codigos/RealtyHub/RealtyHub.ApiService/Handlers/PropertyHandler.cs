@@ -8,8 +8,15 @@ using RealtyHub.Core.Responses;
 
 namespace RealtyHub.ApiService.Handlers;
 
-public class PropertyHandler(AppDbContext context) : IPropertyHandler
+public class PropertyHandler : IPropertyHandler
 {
+    private readonly AppDbContext _context;
+
+    public PropertyHandler(AppDbContext context)
+    {
+        _context = context;
+    }
+
     public async Task<Response<Property?>> CreateAsync(Property request)
     {
         try
@@ -36,8 +43,8 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
                 IsActive = true
             };
 
-            await context.Properties.AddAsync(property);
-            await context.SaveChangesAsync();
+            await _context.Properties.AddAsync(property);
+            await _context.SaveChangesAsync();
 
             return new Response<Property?>(property, 201, "Imóvel criado com sucesso");
         }
@@ -51,7 +58,7 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
     {
         try
         {
-            var property = await context
+            var property = await _context
                 .Properties
                 .FirstOrDefaultAsync(p => p.Id == request.Id && p.IsActive);
 
@@ -78,8 +85,8 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
             property.CondominiumId = request.CondominiumId;
             property.UpdatedAt = DateTime.UtcNow;
 
-            context.Properties.Update(property);
-            await context.SaveChangesAsync();
+            _context.Properties.Update(property);
+            await _context.SaveChangesAsync();
 
             return new Response<Property?>(property, 200, "Imóvel atualizado com sucesso");
         }
@@ -93,7 +100,7 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
     {
         try
         {
-            var property = await context
+            var property = await _context
                 .Properties
                 .FirstOrDefaultAsync(p => p.Id == request.Id
                                           && p.UserId == request.UserId
@@ -105,7 +112,7 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
             property.IsActive = false;
             property.UpdatedAt = DateTime.UtcNow;
 
-            await context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
             return new Response<Property?>(null, 204, "Imóvel deletado com sucesso");
         }
@@ -119,7 +126,7 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
     {
         try
         {
-            var query = context
+            var query = _context
                 .Properties
                 .AsNoTracking()
                 .Include(p => p.Condominium)
@@ -143,7 +150,7 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
     {
         try
         {
-            var query = context
+            var query = _context
                 .Properties
                 .AsNoTracking()
                 .Include(p => p.Condominium)
@@ -180,7 +187,7 @@ public class PropertyHandler(AppDbContext context) : IPropertyHandler
     {
         try
         {
-            var query = context
+            var query = _context
                 .Viewing
                 .AsNoTracking()
                 .Include(v => v.Buyer)

@@ -5,8 +5,15 @@ using RealtyHub.Core.Models;
 
 namespace RealtyHub.ApiService.Services.Reports;
 
-public class OfferReportService(List<Offer> offers) : IDocument
+public class OfferReportService : IDocument
 {
+    private readonly List<Offer> _offers;
+
+    public OfferReportService(List<Offer> offers)
+    {
+        _offers = offers;
+    }
+
     public DocumentMetadata GetMetadata() => new()
     {
         Title = "Relatório de Propostas a Imóveis",
@@ -74,7 +81,7 @@ public class OfferReportService(List<Offer> offers) : IDocument
                 header.Cell().Background("#EEE").Text("Vendedor");
             });
 
-            foreach (var offer in offers)
+            foreach (var offer in _offers)
             {
                 table.Cell().Text($"{offer.PropertyId}");
                 table.Cell().Text($"{offer.SubmissionDate:dd/MM/yyyy}");

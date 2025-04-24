@@ -8,8 +8,15 @@ using RealtyHub.Core.Extensions;
 
 namespace RealtyHub.ApiService.Handlers;
 
-public class CondominiumHandler(AppDbContext context) : ICondominiumHandler
+public class CondominiumHandler : ICondominiumHandler
 {
+    private readonly AppDbContext _context;
+
+    public CondominiumHandler(AppDbContext context)
+    {
+        _context = context;
+    }
+
     public async Task<Response<Condominium?>> CreateAsync(Condominium request)
     {
         try
@@ -29,8 +36,8 @@ public class CondominiumHandler(AppDbContext context) : ICondominiumHandler
                 IsActive = true
             };
 
-            await context.Condominiums.AddAsync(condominium);
-            await context.SaveChangesAsync();
+            await _context.Condominiums.AddAsync(condominium);
+            await _context.SaveChangesAsync();
 
             return new Response<Condominium?>(condominium, 201);
         }
@@ -44,7 +51,7 @@ public class CondominiumHandler(AppDbContext context) : ICondominiumHandler
     {
         try
         {
-            var condominuim = await context
+            var condominuim = await _context
                 .Condominiums
                 .FirstOrDefaultAsync(c=>c.Id == request.Id && c.IsActive);
 
@@ -63,8 +70,8 @@ public class CondominiumHandler(AppDbContext context) : ICondominiumHandler
             condominuim.CondominiumValue = request.CondominiumValue;
             condominuim.UpdatedAt = DateTime.UtcNow;
 
-            context.Condominiums.Update(condominuim);
-            await context.SaveChangesAsync();
+            _context.Condominiums.Update(condominuim);
+            await _context.SaveChangesAsync();
 
             return new Response<Condominium?>(condominuim);
         }
@@ -78,7 +85,7 @@ public class CondominiumHandler(AppDbContext context) : ICondominiumHandler
     {
         try
         {
-            var condominuim = await context
+            var condominuim = await _context
                 .Condominiums
                 .FirstOrDefaultAsync(c => c.Id == request.Id && c.IsActive);
             if (condominuim is null)
@@ -87,8 +94,8 @@ public class CondominiumHandler(AppDbContext context) : ICondominiumHandler
             condominuim.IsActive = false;
             condominuim.UpdatedAt = DateTime.UtcNow;
 
-            context.Condominiums.Update(condominuim);
-            await context.SaveChangesAsync();
+            _context.Condominiums.Update(condominuim);
+            await _context.SaveChangesAsync();
 
             return new Response<Condominium?>(condominuim);
         }
@@ -102,7 +109,7 @@ public class CondominiumHandler(AppDbContext context) : ICondominiumHandler
     {
         try
         {
-            var condominuim = await context
+            var condominuim = await _context
                 .Condominiums
                 .AsNoTracking()
                 .FirstOrDefaultAsync(c => c.Id == request.Id && c.IsActive);
@@ -120,7 +127,7 @@ public class CondominiumHandler(AppDbContext context) : ICondominiumHandler
     {
         try
         {
-            var query = context
+            var query = _context
                 .Condominiums
                 .AsNoTracking()
                 .Where(c => c.IsActive);

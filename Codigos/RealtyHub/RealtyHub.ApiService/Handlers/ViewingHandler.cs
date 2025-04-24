@@ -8,13 +8,20 @@ using RealtyHub.Core.Responses;
 
 namespace RealtyHub.ApiService.Handlers;
 
-public class ViewingHandler(AppDbContext context) : IViewingHandler
+public class ViewingHandler : IViewingHandler
 {
+    private readonly AppDbContext _context;
+
+    public ViewingHandler(AppDbContext context)
+    {
+        _context = context;
+    }
+
     public async Task<Response<Viewing?>> ScheduleAsync(Viewing request)
     {
         try
         {
-            var customer = await context
+            var customer = await _context
                 .Customers
                 .FirstOrDefaultAsync(c => c.Id == request.BuyerId
                                           && (string.IsNullOrEmpty(c.UserId) || c.UserId == request.UserId)
@@ -23,7 +30,7 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
             if (customer is null)
                 return new Response<Viewing?>(null, 404, "Cliente não encontrado");
 
-            var property = await context
+            var property = await _context
                 .Properties
                 .FirstOrDefaultAsync(p => p.Id == request.PropertyId
                                           && (string.IsNullOrEmpty(p.UserId) || p.UserId == request.UserId)
@@ -32,7 +39,7 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
             if (property is null)
                 return new Response<Viewing?>(null, 404, "Imóvel não encontrado");
 
-            var isViewingExist = await context
+            var isViewingExist = await _context
                 .Viewing
                 .AnyAsync(v => v.PropertyId == request.PropertyId
                                && v.ViewingDate == request.ViewingDate);
@@ -51,8 +58,8 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
                 UserId = request.UserId
             };
 
-            context.Viewing.Add(viewing);
-            await context.SaveChangesAsync();
+            _context.Viewing.Add(viewing);
+            await _context.SaveChangesAsync();
 
             return new Response<Viewing?>(viewing, 201, "Visita agendada com sucesso");
         }
@@ -66,7 +73,7 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
     {
         try
         {
-            var viewing = await context
+            var viewing = await _context
                 .Viewing
                 .Include(v => v.Buyer)
                 .Include(v => v.Property)
@@ -89,8 +96,8 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
             viewing.ViewingDate = request.ViewingDate;
             viewing.UpdatedAt = DateTime.UtcNow;
 
-            context.Viewing.Update(viewing);
-            await context.SaveChangesAsync();
+            _context.Viewing.Update(viewing);
+            await _context.SaveChangesAsync();
 
             return new Response<Viewing?>(viewing, message: "Visita reagendada com sucesso");
         }
@@ -104,7 +111,7 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
     {
         try
         {
-            var viewing = await context
+            var viewing = await _context
                 .Viewing
                 .Include(v => v.Buyer)
                 .Include(v => v.Property)
@@ -127,7 +134,7 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
             viewing.ViewingStatus = EViewingStatus.Done;
             viewing.UpdatedAt = DateTime.UtcNow;
 
-            await context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
             return new Response<Viewing?>(viewing, message: "Visita finalizada com sucesso");
         }
@@ -141,7 +148,7 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
     {
         try
         {
-            var viewing = await context
+            var viewing = await _context
                 .Viewing
                 .Include(v => v.Buyer)
                 .Include(v => v.Property)
@@ -164,7 +171,7 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
             viewing.ViewingStatus = EViewingStatus.Canceled;
             viewing.UpdatedAt = DateTime.UtcNow;
 
-            await context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
             return new Response<Viewing?>(viewing, message: "Visita cancelada com sucesso");
         }
@@ -178,7 +185,7 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
     {
         try
         {
-            var viewing = await context
+            var viewing = await _context
                 .Viewing
                 .AsNoTracking()
                 .Include(v => v.Buyer)
@@ -203,7 +210,7 @@ public class ViewingHandler(AppDbContext context) : IViewingHandler
     {
         try
         {
-            var query = context
+            var query = _context
                 .Viewing
                 .AsNoTracking()
                 .Include(v => v.Buyer)

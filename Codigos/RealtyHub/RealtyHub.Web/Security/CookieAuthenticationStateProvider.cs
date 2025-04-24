@@ -5,11 +5,17 @@ using System.Security.Claims;
 
 namespace RealtyHub.Web.Security;
 
-public class CookieAuthenticationStateProvider(IHttpClientFactory clientFactory) :
+public class CookieAuthenticationStateProvider :
     AuthenticationStateProvider, ICookieAuthenticationStateProvider
 {
-    private readonly HttpClient _httpClient = clientFactory.CreateClient(Configuration.HttpClientName);
+    private readonly HttpClient _httpClient;
     private bool _isAuthenticated;
+
+    public CookieAuthenticationStateProvider(IHttpClientFactory clientFactory)
+    {
+        _httpClient = clientFactory.CreateClient(Configuration.HttpClientName);
+    }
+
     public async Task<bool> CheckAuthenticatedAsync()
     {
         await GetAuthenticationStateAsync();

@@ -4,10 +4,15 @@ using RealtyHub.Core.Responses;
 
 namespace RealtyHub.Web.Services;
 
-public class PropertyReport(IHttpClientFactory httpClientFactory)
+public class PropertyReport
 {
-    private readonly HttpClient _httpClient = httpClientFactory
-        .CreateClient(Configuration.HttpClientName);
+    private readonly HttpClient _httpClient;
+
+    public PropertyReport(IHttpClientFactory httpClientFactory)
+    {
+        _httpClient = httpClientFactory
+            .CreateClient(Configuration.HttpClientName);
+    }
 
     public async Task<Response<Report>> GetPropertyAsync()
     {

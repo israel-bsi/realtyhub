@@ -6,13 +6,20 @@ using RealtyHub.Core.Responses;
 
 namespace RealtyHub.ApiService.Handlers;
 
-public class ContractTemplatesHandler(AppDbContext context) : IContractTemplateHandler
+public class ContractTemplatesHandler : IContractTemplateHandler
 {
+    private readonly AppDbContext _context;
+
+    public ContractTemplatesHandler(AppDbContext context)
+    {
+        _context = context;
+    }
+
     public async Task<Response<List<ContractTemplate>?>> GetAllAsync()
     {
         try
         {
-            var contracts = await context
+            var contracts = await _context
                 .ContractTemplates
                 .AsNoTracking()
                 .ToListAsync();

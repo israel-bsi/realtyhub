@@ -5,9 +5,15 @@ using System.Text.Json;
 
 namespace RealtyHub.Web.Services;
 
-public class ViaCepService(IHttpClientFactory httpClientFactory) : IViaCepService
+public class ViaCepService : IViaCepService
 {
-    private readonly HttpClient _httpClient = httpClientFactory.CreateClient();
+    private readonly HttpClient _httpClient;
+
+    public ViaCepService(IHttpClientFactory httpClientFactory)
+    {
+        _httpClient = httpClientFactory.CreateClient();
+    }
+
     public async Task<Response<ViaCepResponse?>> SearchAddressAsync(string cep)
     {
         try

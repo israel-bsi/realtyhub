@@ -8,14 +8,21 @@ using RealtyHub.Core.Responses;
 
 namespace RealtyHub.ApiService.Handlers;
 
-public class OfferHandler(AppDbContext context) : IOfferHandler
+public class OfferHandler : IOfferHandler
 {
+    private readonly AppDbContext _context;
+
+    public OfferHandler(AppDbContext context)
+    {
+        _context = context;
+    }
+
     public async Task<Response<Offer?>> CreateAsync(Offer request)
     {
         Property? property;
         try
         {
-            property = await context
+            property = await _context
                 .Properties
                 .AsNoTracking()
                 .FirstOrDefaultAsync(p => p.Id == request.PropertyId
@@ -24,7 +31,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
             if (property is null)
                 return new Response<Offer?>(null, 404, "Imóvel não encontrado");
 
-            context.Attach(property);
+            _context.Attach(property);
         }
         catch
         {
@@ -62,8 +69,8 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 UserId = request.UserId
             };
 
-            await context.Offers.AddAsync(offer);
-            await context.SaveChangesAsync();
+            await _context.Offers.AddAsync(offer);
+            await _context.SaveChangesAsync();
 
             return new Response<Offer?>(offer, 201, "Proposta criada com sucesso");
         }
@@ -77,7 +84,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
     {
         try
         {
-            var offer = await context
+            var offer = await _context
                 .Offers
                 .Include(o => o.Buyer)
                 .Include(o => o.Property)
@@ -98,7 +105,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 return new Response<Offer?>(null, 400,
                     "O valor total dos pagamentos não corresponde ao valor da proposta");
 
-            var payments = await context
+            var payments = await _context
                 .Payments
                 .Where(p => p.OfferId == request.Id
                             && p.UserId == request.UserId)
@@ -148,12 +155,12 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                     UserId = request.UserId
                 };
 
-                context.Attach(newPayment);
+                _context.Attach(newPayment);
                 offer.Payments.Add(newPayment);
             }
 
-            context.Offers.Update(offer);
-            await context.SaveChangesAsync();
+            _context.Offers.Update(offer);
+            await _context.SaveChangesAsync();
 
             return new Response<Offer?>(offer, 200, "Proposta atualizada com sucesso");
         }
@@ -167,7 +174,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
     {
         try
         {
-            var offer = await context
+            var offer = await _context
                 .Offers
                 .Include(o => o.Buyer)
                 .Include(o => o.Property)
@@ -192,8 +199,8 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
             offer.OfferStatus = EOfferStatus.Rejected;
             offer.UpdatedAt = DateTime.UtcNow;
 
-            context.Offers.Update(offer);
-            await context.SaveChangesAsync();
+            _context.Offers.Update(offer);
+            await _context.SaveChangesAsync();
 
             return new Response<Offer?>(offer, 200, "Proposta rejeitada com sucesso");
         }
@@ -207,7 +214,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
     {
         try
         {
-            var offer = await context
+            var offer = await _context
                 .Offers
                 .Include(o => o.Buyer)
                 .Include(o => o.Property)
@@ -232,8 +239,8 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
             offer.OfferStatus = EOfferStatus.Accepted;
             offer.UpdatedAt = DateTime.UtcNow;
 
-            context.Offers.Update(offer);
-            await context.SaveChangesAsync();
+            _context.Offers.Update(offer);
+            await _context.SaveChangesAsync();
 
             return new Response<Offer?>(offer, 200, "Proposta aceita com sucesso");
         }
@@ -247,7 +254,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
     {
         try
         {
-            var offer = await context
+            var offer = await _context
                 .Offers
                 .AsNoTracking()
                 .Include(o => o.Buyer)
@@ -274,7 +281,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
     {
         try
         {
-            var offer = await context
+            var offer = await _context
                 .Offers
                 .AsNoTracking()
                 .Include(o => o.Buyer)
@@ -303,7 +310,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
     {
         try
         {
-            var property = await context
+            var property = await _context
                 .Properties
                 .AsNoTracking()
                 .FirstOrDefaultAsync(p => p.Id == request.PropertyId 
@@ -313,7 +320,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 return new PagedResponse<List<Offer>?>(null, 404,
                     "Imóvel não encontrado");
 
-            var query = context
+            var query = _context
                 .Offers
                 .AsNoTracking()
                 .Include(o => o.Buyer)
@@ -359,7 +366,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
     {
         try
         {
-            var customer = await context
+            var customer = await _context
                 .Customers
                 .AsNoTracking()
                 .FirstOrDefaultAsync(p => p.Id == request.CustomerId 
@@ -369,7 +376,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
                 return new PagedResponse<List<Offer>?>(null, 404,
                     "Cliente não encontrado");
 
-            var query = context
+            var query = _context
                 .Offers
                 .AsNoTracking()
                 .Include(o => o.Buyer)
@@ -415,7 +422,7 @@ public class OfferHandler(AppDbContext context) : IOfferHandler
     {
         try
         {
-            IQueryable<Offer> query = context
+            IQueryable<Offer> query = _context
                 .Offers
                 .AsNoTracking()
                 .Include(o => o.Buyer)

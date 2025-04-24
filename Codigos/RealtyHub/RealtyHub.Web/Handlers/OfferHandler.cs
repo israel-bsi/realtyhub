@@ -6,10 +6,16 @@ using System.Net.Http.Json;
 
 namespace RealtyHub.Web.Handlers;
 
-public class OfferHandler(IHttpClientFactory httpClientFactory) : IOfferHandler
+public class OfferHandler : IOfferHandler
 {
-    private readonly HttpClient _httpClient = httpClientFactory
-        .CreateClient(Configuration.HttpClientName);
+    private readonly HttpClient _httpClient;
+
+    public OfferHandler(IHttpClientFactory httpClientFactory)
+    {
+        _httpClient = httpClientFactory
+            .CreateClient(Configuration.HttpClientName);
+    }
+
     public async Task<Response<Offer?>> CreateAsync(Offer request)
     {
         var result = await _httpClient

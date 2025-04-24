@@ -9,13 +9,20 @@ using RealtyHub.Core.Responses;
 
 namespace RealtyHub.ApiService.Handlers;
 
-public class ContractHandler(AppDbContext context) : IContractHandler
+public class ContractHandler : IContractHandler
 {
+    private readonly AppDbContext _context;
+
+    public ContractHandler(AppDbContext context)
+    {
+        _context = context;
+    }
+
     public async Task<Response<Contract?>> CreateAsync(Contract request)
     {
         try
         {
-            var offer = await context
+            var offer = await _context
                 .Offers
                 .Include(o => o.Buyer)
                 .Include(o => o.Property)
@@ -30,7 +37,7 @@ public class ContractHandler(AppDbContext context) : IContractHandler
                 return new Response<Contract?>(null, 400,
                     "A proposta precisa estar aceita para criar um contrato");
 
-            context.Attach(offer);
+            _context.Attach(offer);
 
             var contract = new Contract
             {
@@ -51,8 +58,8 @@ public class ContractHandler(AppDbContext context) : IContractHandler
 
             await CreateOrUpdateContract(contract, false);
 
-            await context.Contracts.AddAsync(contract);
-            await context.SaveChangesAsync();
+            await _context.Contracts.AddAsync(contract);
+            await _context.SaveChangesAsync();
 
             return new Response<Contract?>(contract, 201, "Contrato criado com sucesso");
         }
@@ -66,7 +73,7 @@ public class ContractHandler(AppDbContext context) : IContractHandler
     {
         try
         {
-            var contract = await context
+            var contract = await _context
                 .Contracts
                 .Include(o => o.Seller)
                 .Include(o => o.Buyer)
@@ -79,7 +86,7 @@ public class ContractHandler(AppDbContext context) : IContractHandler
             if (contract is null)
                 return new Response<Contract?>(null, 404, "Contrato não encontrado");
 
-            var offer = await context
+            var offer = await _context
                 .Offers
                 .Include(offer => offer.Property)
                 .ThenInclude(property => property!.Seller)
@@ -105,7 +112,7 @@ public class ContractHandler(AppDbContext context) : IContractHandler
 
             await CreateOrUpdateContract(contract, true);
 
-            await context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
             return new Response<Contract?>(contract, 200, "Contrato atualizado com sucesso");
         }
@@ -119,7 +126,7 @@ public class ContractHandler(AppDbContext context) : IContractHandler
     {
         try
         {
-            var contract = await context
+            var contract = await _context
                 .Contracts
                 .FirstOrDefaultAsync(c => c.Id == request.Id 
                                           && c.UserId == request.UserId 
@@ -130,7 +137,7 @@ public class ContractHandler(AppDbContext context) : IContractHandler
 
             contract.IsActive = false;
             contract.UpdatedAt = DateTime.UtcNow;
-            await context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
             return new Response<Contract?>(null, 204, "Contrato excluído com sucesso");
         }
@@ -144,7 +151,7 @@ public class ContractHandler(AppDbContext context) : IContractHandler
     {
         try
         {
-            var contract = await context
+            var contract = await _context
                 .Contracts
                 .AsNoTracking()
                 .Include(c => c.Offer)
@@ -175,7 +182,7 @@ public class ContractHandler(AppDbContext context) : IContractHandler
     {
         try
         {
-            var query = context
+            var query = _context
                 .Contracts
                 .AsNoTracking()
                 .Include(c => c.Offer)
@@ -231,7 +238,7 @@ public class ContractHandler(AppDbContext context) : IContractHandler
             _ => EContractModelType.PJPF
         };
 
-        var contractModel = await context
+        var contractModel = await _context
             .ContractTemplates
             .FirstOrDefaultAsync(cm => cm.Type == contractModelType);
 

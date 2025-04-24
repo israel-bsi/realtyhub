@@ -7,10 +7,16 @@ using System.Text;
 
 namespace RealtyHub.Web.Handlers;
 
-public class AccountHandler(IHttpClientFactory httpClientFactory) : IAccountHandler
+public class AccountHandler : IAccountHandler
 {
-    private readonly HttpClient _httpClient = httpClientFactory
-        .CreateClient(Configuration.HttpClientName);
+    private readonly HttpClient _httpClient;
+
+    public AccountHandler(IHttpClientFactory httpClientFactory)
+    {
+        _httpClient = httpClientFactory
+            .CreateClient(Configuration.HttpClientName);
+    }
+
     public async Task<Response<string>> LoginAsync(LoginRequest request)
     {
         var result = await _httpClient

@@ -5,11 +5,17 @@ using RealtyHub.Core.Responses;
 
 namespace RealtyHub.Web.Handlers;
 
-public class ContractTemplateHandler(IHttpClientFactory httpClientFactory) : 
+public class ContractTemplateHandler : 
     IContractTemplateHandler
 {
-    private readonly HttpClient _httpClient = httpClientFactory
-        .CreateClient(Configuration.HttpClientName);
+    private readonly HttpClient _httpClient;
+
+    public ContractTemplateHandler(IHttpClientFactory httpClientFactory)
+    {
+        _httpClient = httpClientFactory
+            .CreateClient(Configuration.HttpClientName);
+    }
+
     public async Task<Response<List<ContractTemplate>?>> GetAllAsync()
     {
         var response = await _httpClient.GetAsync("v1/contracts-templates");

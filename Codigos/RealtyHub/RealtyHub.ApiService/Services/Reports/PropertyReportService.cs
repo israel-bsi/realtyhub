@@ -4,8 +4,15 @@ using RealtyHub.Core.Models;
 
 namespace RealtyHub.ApiService.Services.Reports;
 
-public class PropertyReportService(List<Property> properties) : IDocument
+public class PropertyReportService : IDocument
 {
+    private readonly List<Property> _properties;
+
+    public PropertyReportService(List<Property> properties)
+    {
+        _properties = properties;
+    }
+
     public DocumentMetadata GetMetadata() => new()
     {
         Title = "Relatório de Imóveis",
@@ -81,7 +88,7 @@ public class PropertyReportService(List<Property> properties) : IDocument
                 header.Cell().Background("#EEE").Text("Ativo");
             });
 
-            foreach (var property in properties)
+            foreach (var property in _properties)
             {
                 table.Cell().Text($"{property.Id}");
                 table.Cell().Text($"{property.CreatedAt:dd/MM/yyyy}");

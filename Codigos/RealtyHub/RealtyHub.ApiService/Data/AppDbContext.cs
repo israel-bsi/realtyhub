@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace RealtyHub.ApiService.Data;
 
-public class AppDbContext(DbContextOptions<AppDbContext> options) :
+public class AppDbContext :
     IdentityDbContext
     <
         User,
@@ -18,8 +18,12 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) :
         IdentityUserLogin<long>,
         IdentityRoleClaim<long>,
         IdentityUserToken<long>
-    >(options)
+    >
 {
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+    {
+    }
+
     public DbSet<Customer> Customers { get; set; } = null!;
     public DbSet<Property> Properties { get; set; } = null!;
     public DbSet<Viewing> Viewing { get; set; } = null!;

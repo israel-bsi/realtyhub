@@ -6,10 +6,16 @@ using RealtyHub.Core.Responses;
 
 namespace RealtyHub.Web.Handlers;
 
-public class CondominiumHandler(IHttpClientFactory httpClientFactory) : ICondominiumHandler
+public class CondominiumHandler : ICondominiumHandler
 {
-    private readonly HttpClient _httpClient = httpClientFactory
-        .CreateClient(Configuration.HttpClientName);
+    private readonly HttpClient _httpClient;
+
+    public CondominiumHandler(IHttpClientFactory httpClientFactory)
+    {
+        _httpClient = httpClientFactory
+            .CreateClient(Configuration.HttpClientName);
+    }
+
     public async Task<Response<Condominium?>> CreateAsync(Condominium request)
     {
         var result = await _httpClient.PostAsJsonAsync("v1/condominiums", request);
