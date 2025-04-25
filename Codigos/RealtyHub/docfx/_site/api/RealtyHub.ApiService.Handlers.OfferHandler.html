@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="Class OfferHandler | realtyhub ">
       
-      
+      <meta name="description" content="Respons&#225;vel pelas opera&#231;&#245;es relacionadas a propostas.">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -89,7 +89,7 @@
 
 
   <h1 id="RealtyHub_ApiService_Handlers_OfferHandler" data-uid="RealtyHub.ApiService.Handlers.OfferHandler" class="text-break">
-Class OfferHandler  <a class="header-action link-secondary" title="View source" href="https://github.com/israel-bsi/realtyhub/blob/main/Codigos/RealtyHub/RealtyHub.ApiService/Handlers/OfferHandler.cs/#L11"><i class="bi bi-code-slash"></i></a>
+Class OfferHandler  <a class="header-action link-secondary" title="View source" href="https://github.com/israel-bsi/realtyhub/blob/main/Codigos/RealtyHub/RealtyHub.ApiService/Handlers/OfferHandler.cs/#L14"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -97,7 +97,8 @@ Class OfferHandler  <a class="header-action link-secondary" title="View source" 
   <dl><dt>Assembly</dt><dd>RealtyHub.ApiService.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"></div>
+  <div class="markdown summary"><p>Responsável pelas operações relacionadas a propostas.</p>
+</div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
@@ -162,10 +163,11 @@ Class OfferHandler  <a class="header-action link-secondary" title="View source" 
 
   <h3 id="RealtyHub_ApiService_Handlers_OfferHandler__ctor_RealtyHub_ApiService_Data_AppDbContext_" data-uid="RealtyHub.ApiService.Handlers.OfferHandler.#ctor(RealtyHub.ApiService.Data.AppDbContext)">
   OfferHandler(AppDbContext)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/israel-bsi/realtyhub/blob/main/Codigos/RealtyHub/RealtyHub.ApiService/Handlers/OfferHandler.cs/#L15"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/israel-bsi/realtyhub/blob/main/Codigos/RealtyHub/RealtyHub.ApiService/Handlers/OfferHandler.cs/#L22"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Inicializa uma nova instância de <a class="xref" href="RealtyHub.ApiService.Handlers.OfferHandler.html">OfferHandler</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -175,7 +177,8 @@ Class OfferHandler  <a class="header-action link-secondary" title="View source" 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>context</code> <a class="xref" href="RealtyHub.ApiService.Data.AppDbContext.html">AppDbContext</a></dt>
-    <dd></dd>
+    <dd><p>Contexto do banco de dados para interação com propostas.</p>
+</dd>
   </dl>
 
 
@@ -197,10 +200,11 @@ Class OfferHandler  <a class="header-action link-secondary" title="View source" 
 
   <h3 id="RealtyHub_ApiService_Handlers_OfferHandler_AcceptAsync_RealtyHub_Core_Requests_Offers_AcceptOfferRequest_" data-uid="RealtyHub.ApiService.Handlers.OfferHandler.AcceptAsync(RealtyHub.Core.Requests.Offers.AcceptOfferRequest)">
   AcceptAsync(AcceptOfferRequest)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/israel-bsi/realtyhub/blob/main/Codigos/RealtyHub/RealtyHub.ApiService/Handlers/OfferHandler.cs/#L213"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/israel-bsi/realtyhub/blob/main/Codigos/RealtyHub/RealtyHub.ApiService/Handlers/OfferHandler.cs/#L240"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Aceita uma proposta existente.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -210,13 +214,15 @@ Class OfferHandler  <a class="header-action link-secondary" title="View source" 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>request</code> <span class="xref">AcceptOfferRequest</span></dt>
-    <dd></dd>
+    <dd><p>Requisição contendo o ID da proposta a ser aceita.</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<span class="xref">Response</span>&lt;<span class="xref">Offer</span>&gt;&gt;</dt>
-    <dd></dd>
+    <dd><p>Retorna a resposta com a proposta aceita ou um erro se não for encontrada.</p>
+</dd>
   </dl>
 
 
@@ -233,10 +239,11 @@ Class OfferHandler  <a class="header-action link-secondary" title="View source" 
 
   <h3 id="RealtyHub_ApiService_Handlers_OfferHandler_CreateAsync_RealtyHub_Core_Models_Offer_" data-uid="RealtyHub.ApiService.Handlers.OfferHandler.CreateAsync(RealtyHub.Core.Models.Offer)">
   CreateAsync(Offer)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/israel-bsi/realtyhub/blob/main/Codigos/RealtyHub/RealtyHub.ApiService/Handlers/OfferHandler.cs/#L20"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/israel-bsi/realtyhub/blob/main/Codigos/RealtyHub/RealtyHub.ApiService/Handlers/OfferHandler.cs/#L32"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Cria uma nova proposta no banco de dados.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -246,13 +253,15 @@ Class OfferHandler  <a class="header-action link-secondary" title="View source" 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>request</code> <span class="xref">Offer</span></dt>
-    <dd></dd>
+    <dd><p>Objeto contendo as informações para criação da proposta.</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<span class="xref">Response</span>&lt;<span class="xref">Offer</span>&gt;&gt;</dt>
-    <dd></dd>
+    <dd><p>Retorna uma resposta com a proposta criada e o código de status.</p>
+</dd>
   </dl>
 
 
@@ -269,10 +278,11 @@ Class OfferHandler  <a class="header-action link-secondary" title="View source" 
 
   <h3 id="RealtyHub_ApiService_Handlers_OfferHandler_GetAcceptedByProperty_RealtyHub_Core_Requests_Offers_GetOfferAcceptedByProperty_" data-uid="RealtyHub.ApiService.Handlers.OfferHandler.GetAcceptedByProperty(RealtyHub.Core.Requests.Offers.GetOfferAcceptedByProperty)">
   GetAcceptedByProperty(GetOfferAcceptedByProperty)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/israel-bsi/realtyhub/blob/main/Codigos/RealtyHub/RealtyHub.ApiService/Handlers/OfferHandler.cs/#L280"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/israel-bsi/realtyhub/blob/main/Codigos/RealtyHub/RealtyHub.ApiService/Handlers/OfferHandler.cs/#L317"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Obtém a proposta aceita para um imóvel específico.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -282,13 +292,15 @@ Class OfferHandler  <a class="header-action link-secondary" title="View source" 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>request</code> <span class="xref">GetOfferAcceptedByProperty</span></dt>
-    <dd></dd>
+    <dd><p>Requisição contendo o ID do imóvel.</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<span class="xref">Response</span>&lt;<span class="xref">Offer</span>&gt;&gt;</dt>
-    <dd></dd>
+    <dd><p>Retorna a proposta aceita ou um erro caso não seja encontrada.</p>
+</dd>
   </dl>
 
 
@@ -305,10 +317,11 @@ Class OfferHandler  <a class="header-action link-secondary" title="View source" 
 
   <h3 id="RealtyHub_ApiService_Handlers_OfferHandler_GetAllAsync_RealtyHub_Core_Requests_Offers_GetAllOffersRequest_" data-uid="RealtyHub.ApiService.Handlers.OfferHandler.GetAllAsync(RealtyHub.Core.Requests.Offers.GetAllOffersRequest)">
   GetAllAsync(GetAllOffersRequest)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/israel-bsi/realtyhub/blob/main/Codigos/RealtyHub/RealtyHub.ApiService/Handlers/OfferHandler.cs/#L421"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/israel-bsi/realtyhub/blob/main/Codigos/RealtyHub/RealtyHub.ApiService/Handlers/OfferHandler.cs/#L473"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Retorna uma lista paginada de todas as propostas no sistema.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -318,13 +331,15 @@ Class OfferHandler  <a class="header-action link-secondary" title="View source" 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>request</code> <span class="xref">GetAllOffersRequest</span></dt>
-    <dd></dd>
+    <dd><p>Requisição contendo parâmetros de paginação e filtro.</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<span class="xref">PagedResponse</span>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<span class="xref">Offer</span>&gt;&gt;&gt;</dt>
-    <dd></dd>
+    <dd><p>Retorna uma resposta paginada com as propostas ou um erro em caso de falha.</p>
+</dd>
   </dl>
 
 
@@ -341,10 +356,11 @@ Class OfferHandler  <a class="header-action link-secondary" title="View source" 
 
   <h3 id="RealtyHub_ApiService_Handlers_OfferHandler_GetAllOffersByCustomerAsync_RealtyHub_Core_Requests_Offers_GetAllOffersByCustomerRequest_" data-uid="RealtyHub.ApiService.Handlers.OfferHandler.GetAllOffersByCustomerAsync(RealtyHub.Core.Requests.Offers.GetAllOffersByCustomerRequest)">
   GetAllOffersByCustomerAsync(GetAllOffersByCustomerRequest)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/israel-bsi/realtyhub/blob/main/Codigos/RealtyHub/RealtyHub.ApiService/Handlers/OfferHandler.cs/#L364"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/israel-bsi/realtyhub/blob/main/Codigos/RealtyHub/RealtyHub.ApiService/Handlers/OfferHandler.cs/#L411"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Retorna uma lista paginada de todas as propostas de um cliente específico.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -354,13 +370,15 @@ Class OfferHandler  <a class="header-action link-secondary" title="View source" 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>request</code> <span class="xref">GetAllOffersByCustomerRequest</span></dt>
-    <dd></dd>
+    <dd><p>Requisição contendo parâmetros de paginação e filtro por cliente.</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<span class="xref">PagedResponse</span>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<span class="xref">Offer</span>&gt;&gt;&gt;</dt>
-    <dd></dd>
+    <dd><p>Retorna uma resposta paginada com as propostas ou um erro em caso de falha.</p>
+</dd>
   </dl>
 
 
@@ -377,10 +395,11 @@ Class OfferHandler  <a class="header-action link-secondary" title="View source" 
 
   <h3 id="RealtyHub_ApiService_Handlers_OfferHandler_GetAllOffersByPropertyAsync_RealtyHub_Core_Requests_Offers_GetAllOffersByPropertyRequest_" data-uid="RealtyHub.ApiService.Handlers.OfferHandler.GetAllOffersByPropertyAsync(RealtyHub.Core.Requests.Offers.GetAllOffersByPropertyRequest)">
   GetAllOffersByPropertyAsync(GetAllOffersByPropertyRequest)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/israel-bsi/realtyhub/blob/main/Codigos/RealtyHub/RealtyHub.ApiService/Handlers/OfferHandler.cs/#L308"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/israel-bsi/realtyhub/blob/main/Codigos/RealtyHub/RealtyHub.ApiService/Handlers/OfferHandler.cs/#L350"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Retorna uma lista paginada de todas as propostas de um imóvel específico.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -390,13 +409,15 @@ Class OfferHandler  <a class="header-action link-secondary" title="View source" 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>request</code> <span class="xref">GetAllOffersByPropertyRequest</span></dt>
-    <dd></dd>
+    <dd><p>Requisição contendo parâmetros de paginação e filtro por imóvel.</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<span class="xref">PagedResponse</span>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<span class="xref">Offer</span>&gt;&gt;&gt;</dt>
-    <dd></dd>
+    <dd><p>Retorna uma resposta paginada com as propostas ou um erro em caso de falha.</p>
+</dd>
   </dl>
 
 
@@ -413,10 +434,11 @@ Class OfferHandler  <a class="header-action link-secondary" title="View source" 
 
   <h3 id="RealtyHub_ApiService_Handlers_OfferHandler_GetByIdAsync_RealtyHub_Core_Requests_Offers_GetOfferByIdRequest_" data-uid="RealtyHub.ApiService.Handlers.OfferHandler.GetByIdAsync(RealtyHub.Core.Requests.Offers.GetOfferByIdRequest)">
   GetByIdAsync(GetOfferByIdRequest)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/israel-bsi/realtyhub/blob/main/Codigos/RealtyHub/RealtyHub.ApiService/Handlers/OfferHandler.cs/#L253"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/israel-bsi/realtyhub/blob/main/Codigos/RealtyHub/RealtyHub.ApiService/Handlers/OfferHandler.cs/#L285"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Obtém uma proposta específica pelo ID.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -426,13 +448,15 @@ Class OfferHandler  <a class="header-action link-secondary" title="View source" 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>request</code> <span class="xref">GetOfferByIdRequest</span></dt>
-    <dd></dd>
+    <dd><p>Requisição contendo o ID da proposta desejada.</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<span class="xref">Response</span>&lt;<span class="xref">Offer</span>&gt;&gt;</dt>
-    <dd></dd>
+    <dd><p>Retorna a proposta ou um erro caso não seja encontrada.</p>
+</dd>
   </dl>
 
 
@@ -449,10 +473,11 @@ Class OfferHandler  <a class="header-action link-secondary" title="View source" 
 
   <h3 id="RealtyHub_ApiService_Handlers_OfferHandler_RejectAsync_RealtyHub_Core_Requests_Offers_RejectOfferRequest_" data-uid="RealtyHub.ApiService.Handlers.OfferHandler.RejectAsync(RealtyHub.Core.Requests.Offers.RejectOfferRequest)">
   RejectAsync(RejectOfferRequest)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/israel-bsi/realtyhub/blob/main/Codigos/RealtyHub/RealtyHub.ApiService/Handlers/OfferHandler.cs/#L173"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/israel-bsi/realtyhub/blob/main/Codigos/RealtyHub/RealtyHub.ApiService/Handlers/OfferHandler.cs/#L195"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Rejeita uma proposta existente.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -462,13 +487,15 @@ Class OfferHandler  <a class="header-action link-secondary" title="View source" 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>request</code> <span class="xref">RejectOfferRequest</span></dt>
-    <dd></dd>
+    <dd><p>Requisição contendo o ID da proposta a ser rejeitada.</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<span class="xref">Response</span>&lt;<span class="xref">Offer</span>&gt;&gt;</dt>
-    <dd></dd>
+    <dd><p>Retorna a resposta com a proposta rejeitada ou um erro se não for encontrada.</p>
+</dd>
   </dl>
 
 
@@ -485,10 +512,11 @@ Class OfferHandler  <a class="header-action link-secondary" title="View source" 
 
   <h3 id="RealtyHub_ApiService_Handlers_OfferHandler_UpdateAsync_RealtyHub_Core_Models_Offer_" data-uid="RealtyHub.ApiService.Handlers.OfferHandler.UpdateAsync(RealtyHub.Core.Models.Offer)">
   UpdateAsync(Offer)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/israel-bsi/realtyhub/blob/main/Codigos/RealtyHub/RealtyHub.ApiService/Handlers/OfferHandler.cs/#L83"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/israel-bsi/realtyhub/blob/main/Codigos/RealtyHub/RealtyHub.ApiService/Handlers/OfferHandler.cs/#L100"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Atualiza uma proposta existente no banco de dados.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -498,13 +526,15 @@ Class OfferHandler  <a class="header-action link-secondary" title="View source" 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>request</code> <span class="xref">Offer</span></dt>
-    <dd></dd>
+    <dd><p>Objeto contendo as novas informações da proposta.</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<span class="xref">Response</span>&lt;<span class="xref">Offer</span>&gt;&gt;</dt>
-    <dd></dd>
+    <dd><p>Retorna a resposta com a proposta atualizada ou um erro se não for encontrada.</p>
+</dd>
   </dl>
 
 
@@ -521,7 +551,7 @@ Class OfferHandler  <a class="header-action link-secondary" title="View source" 
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/israel-bsi/realtyhub/blob/main/Codigos/RealtyHub/RealtyHub.ApiService/Handlers/OfferHandler.cs/#L11" class="edit-link">Edit this page</a>
+          <a href="https://github.com/israel-bsi/realtyhub/blob/main/Codigos/RealtyHub/RealtyHub.ApiService/Handlers/OfferHandler.cs/#L14" class="edit-link">Edit this page</a>
         </div>
 
 

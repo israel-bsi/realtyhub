@@ -1,6 +1,6 @@
 var indexSectionsWithContent =
 {
-  0: ".2_abcdefghijklmnoprstuvwz",
+  0: ".2_abcdefghijklmnopqrstuvwz",
   1: "acdefgilmoprsuv",
   2: "pr",
   3: ".2_abcdefgilmoprstuv",
@@ -8,7 +8,8 @@ var indexSectionsWithContent =
   5: "abcdeflnpz",
   6: "e",
   7: "abcdefhiklmnoprsw",
-  8: "abcdefghijlmnoprstuvz"
+  8: "abcdefghijlmnoprstuvz",
+  9: "gis"
 };
 
 var indexSectionNames =
@@ -21,7 +22,8 @@ var indexSectionNames =
   5: "variables",
   6: "enums",
   7: "enumvalues",
-  8: "properties"
+  8: "properties",
+  9: "pages"
 };
 
 var indexSectionLabels =
@@ -34,6 +36,7 @@ var indexSectionLabels =
   5: "Variáveis",
   6: "Enumerações",
   7: "Enumeradores",
-  8: "Propriedades"
+  8: "Propriedades",
+  9: "Páginas"
 };
 

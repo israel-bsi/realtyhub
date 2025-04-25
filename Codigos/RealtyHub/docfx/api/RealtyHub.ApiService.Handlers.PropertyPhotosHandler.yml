@@ -24,10 +24,12 @@ items:
       repo: https://github.com/israel-bsi/realtyhub
     id: PropertyPhotosHandler
     path: ../RealtyHub.ApiService/Handlers/PropertyPhotosHandler.cs
-    startLine: 9
+    startLine: 12
   assemblies:
   - RealtyHub.ApiService
   namespace: RealtyHub.ApiService.Handlers
+  summary: Responsável pelas operações relacionadas às fotos de imóveis.
+  example: []
   syntax:
     content: 'public class PropertyPhotosHandler : IPropertyPhotosHandler'
     content.vb: Public Class PropertyPhotosHandler Implements IPropertyPhotosHandler
@@ -61,15 +63,18 @@ items:
       repo: https://github.com/israel-bsi/realtyhub
     id: .ctor
     path: ../RealtyHub.ApiService/Handlers/PropertyPhotosHandler.cs
-    startLine: 13
+    startLine: 20
   assemblies:
   - RealtyHub.ApiService
   namespace: RealtyHub.ApiService.Handlers
+  summary: Inicializa uma nova instância de <xref href="RealtyHub.ApiService.Handlers.PropertyPhotosHandler" data-throw-if-not-resolved="false"></xref>.
+  example: []
   syntax:
     content: public PropertyPhotosHandler(AppDbContext context)
     parameters:
     - id: context
       type: RealtyHub.ApiService.Data.AppDbContext
+      description: Contexto do banco de dados para interação com as fotos de imóveis.
     content.vb: Public Sub New(context As AppDbContext)
   overload: RealtyHub.ApiService.Handlers.PropertyPhotosHandler.#ctor*
   nameWithType.vb: PropertyPhotosHandler.New(AppDbContext)
@@ -93,18 +98,21 @@ items:
       repo: https://github.com/israel-bsi/realtyhub
     id: CreateAsync
     path: ../RealtyHub.ApiService/Handlers/PropertyPhotosHandler.cs
-    startLine: 18
+    startLine: 30
   assemblies:
   - RealtyHub.ApiService
   namespace: RealtyHub.ApiService.Handlers
+  summary: Cria novas fotos para um imóvel.
   example: []
   syntax:
     content: public Task<Response<PropertyPhoto?>> CreateAsync(CreatePropertyPhotosRequest request)
     parameters:
     - id: request
       type: RealtyHub.Core.Requests.PropertiesPhotos.CreatePropertyPhotosRequest
+      description: Requisição contendo as informações e os arquivos para criação das fotos.
     return:
       type: System.Threading.Tasks.Task{RealtyHub.Core.Responses.Response{RealtyHub.Core.Models.PropertyPhoto}}
+      description: Retorna uma resposta indicando o sucesso ou falha da operação.
     content.vb: Public Function CreateAsync(request As CreatePropertyPhotosRequest) As Task(Of Response(Of PropertyPhoto))
   overload: RealtyHub.ApiService.Handlers.PropertyPhotosHandler.CreateAsync*
   implements:
@@ -127,18 +135,21 @@ items:
       repo: https://github.com/israel-bsi/realtyhub
     id: UpdateAsync
     path: ../RealtyHub.ApiService/Handlers/PropertyPhotosHandler.cs
-    startLine: 108
+    startLine: 123
   assemblies:
   - RealtyHub.ApiService
   namespace: RealtyHub.ApiService.Handlers
+  summary: Atualiza as informações de fotos de um imóvel.
   example: []
   syntax:
     content: public Task<Response<List<PropertyPhoto>?>> UpdateAsync(UpdatePorpertyPhotosRequest request)
     parameters:
     - id: request
       type: RealtyHub.Core.Requests.PropertiesPhotos.UpdatePorpertyPhotosRequest
+      description: Requisição contendo as informações das fotos a serem atualizadas.
     return:
       type: System.Threading.Tasks.Task{RealtyHub.Core.Responses.Response{System.Collections.Generic.List{RealtyHub.Core.Models.PropertyPhoto}}}
+      description: Retorna uma resposta indicando o sucesso ou falha da operação.
     content.vb: Public Function UpdateAsync(request As UpdatePorpertyPhotosRequest) As Task(Of Response(Of List(Of PropertyPhoto)))
   overload: RealtyHub.ApiService.Handlers.PropertyPhotosHandler.UpdateAsync*
   implements:
@@ -161,18 +172,21 @@ items:
       repo: https://github.com/israel-bsi/realtyhub
     id: DeleteAsync
     path: ../RealtyHub.ApiService/Handlers/PropertyPhotosHandler.cs
-    startLine: 156
+    startLine: 176
   assemblies:
   - RealtyHub.ApiService
   namespace: RealtyHub.ApiService.Handlers
+  summary: Exclui uma foto de um imóvel.
   example: []
   syntax:
     content: public Task<Response<PropertyPhoto?>> DeleteAsync(DeletePropertyPhotoRequest request)
     parameters:
     - id: request
       type: RealtyHub.Core.Requests.PropertiesPhotos.DeletePropertyPhotoRequest
+      description: Requisição contendo o ID da foto a ser excluída.
     return:
       type: System.Threading.Tasks.Task{RealtyHub.Core.Responses.Response{RealtyHub.Core.Models.PropertyPhoto}}
+      description: Retorna uma resposta indicando o sucesso ou falha da operação.
     content.vb: Public Function DeleteAsync(request As DeletePropertyPhotoRequest) As Task(Of Response(Of PropertyPhoto))
   overload: RealtyHub.ApiService.Handlers.PropertyPhotosHandler.DeleteAsync*
   implements:
@@ -195,18 +209,21 @@ items:
       repo: https://github.com/israel-bsi/realtyhub
     id: GetAllByPropertyAsync
     path: ../RealtyHub.ApiService/Handlers/PropertyPhotosHandler.cs
-    startLine: 186
+    startLine: 211
   assemblies:
   - RealtyHub.ApiService
   namespace: RealtyHub.ApiService.Handlers
+  summary: Obtém todas as fotos de um imóvel específico.
   example: []
   syntax:
     content: public Task<Response<List<PropertyPhoto>?>> GetAllByPropertyAsync(GetAllPropertyPhotosByPropertyRequest request)
     parameters:
     - id: request
       type: RealtyHub.Core.Requests.PropertiesPhotos.GetAllPropertyPhotosByPropertyRequest
+      description: Requisição contendo o ID do imóvel.
     return:
       type: System.Threading.Tasks.Task{RealtyHub.Core.Responses.Response{System.Collections.Generic.List{RealtyHub.Core.Models.PropertyPhoto}}}
+      description: Retorna uma lista de fotos do imóvel ou um erro em caso de falha.
     content.vb: Public Function GetAllByPropertyAsync(request As GetAllPropertyPhotosByPropertyRequest) As Task(Of Response(Of List(Of PropertyPhoto)))
   overload: RealtyHub.ApiService.Handlers.PropertyPhotosHandler.GetAllByPropertyAsync*
   implements:
@@ -508,6 +525,12 @@ references:
   - name: .
   - uid: RealtyHub.Core.Handlers
     name: Handlers
+- uid: RealtyHub.ApiService.Handlers.PropertyPhotosHandler
+  commentId: T:RealtyHub.ApiService.Handlers.PropertyPhotosHandler
+  href: RealtyHub.ApiService.Handlers.PropertyPhotosHandler.html
+  name: PropertyPhotosHandler
+  nameWithType: PropertyPhotosHandler
+  fullName: RealtyHub.ApiService.Handlers.PropertyPhotosHandler
 - uid: RealtyHub.ApiService.Handlers.PropertyPhotosHandler.#ctor*
   commentId: Overload:RealtyHub.ApiService.Handlers.PropertyPhotosHandler.#ctor
   href: RealtyHub.ApiService.Handlers.PropertyPhotosHandler.html#RealtyHub_ApiService_Handlers_PropertyPhotosHandler__ctor_RealtyHub_ApiService_Data_AppDbContext_

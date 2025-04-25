@@ -1,5 +1,10 @@
 \doxysection{Referência da Classe Realty\+Hub.\+Api\+Service.\+Handlers.\+Viewing\+Handler}
 \hypertarget{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler}{}\label{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler}\index{RealtyHub.ApiService.Handlers.ViewingHandler@{RealtyHub.ApiService.Handlers.ViewingHandler}}
+
+
+Responsável pelas operações relacionadas às visitas de imóveis.  
+
+
 Diagrama de hierarquia da classe Realty\+Hub.\+Api\+Service.\+Handlers.\+Viewing\+Handler\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -10,20 +15,23 @@ Diagrama de hierarquia da classe Realty\+Hub.\+Api\+Service.\+Handlers.\+Viewing
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler_abd4683d7b414e960962ff69109550cc7}{Viewing\+Handler}} (\mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_data_1_1_app_db_context}{App\+Db\+Context}} context)
-\item 
+\begin{DoxyCompactList}\small\item\em Inicializa uma nova instância de \doxylink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler}{Viewing\+Handler}. \end{DoxyCompactList}\item 
 async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}}?$>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler_a5b5a468ecdbae1960224f6dff50cf2c9}{Schedule\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}} request)
-\item 
+\begin{DoxyCompactList}\small\item\em Agenda uma nova visita para um imóvel. \end{DoxyCompactList}\item 
 async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}}?$>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler_af91f1849698e02da90eecaabd6780ea9}{Reschedule\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}} request)
-\item 
+\begin{DoxyCompactList}\small\item\em Reagenda uma visita existente. \end{DoxyCompactList}\item 
 async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}}?$>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler_af4118954503ed7bfd7897dfb53a3a719}{Done\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_viewings_1_1_done_viewing_request}{Done\+Viewing\+Request}} request)
-\item 
+\begin{DoxyCompactList}\small\item\em Finaliza uma visita existente. \end{DoxyCompactList}\item 
 async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}}?$>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler_a4503633fe35bfa9d9f22b3feb829ec84}{Cancel\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_viewings_1_1_cancel_viewing_request}{Cancel\+Viewing\+Request}} request)
-\item 
+\begin{DoxyCompactList}\small\item\em Cancela uma visita existente. \end{DoxyCompactList}\item 
 async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}}?$>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler_a8c223c42175f525db2486118ef105fe4}{Get\+By\+Id\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_viewings_1_1_get_viewing_by_id_request}{Get\+Viewing\+By\+Id\+Request}} request)
-\item 
+\begin{DoxyCompactList}\small\item\em Obtém uma visita específica pelo ID. \end{DoxyCompactList}\item 
 async Task$<$ Paged\+Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}} $>$?$>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler_a4868d3ff694bd4a9b126bd95534cc95e}{Get\+All\+Async}} (Get\+All\+Viewings\+Request request)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Retorna uma lista paginada de todas as visitas. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
+
+\doxysubsection{Descrição detalhada}
+Responsável pelas operações relacionadas às visitas de imóveis. 
 
 \doxysubsection{Construtores e Destrutores}
 \Hypertarget{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler_abd4683d7b414e960962ff69109550cc7}\index{RealtyHub.ApiService.Handlers.ViewingHandler@{RealtyHub.ApiService.Handlers.ViewingHandler}!ViewingHandler@{ViewingHandler}}
@@ -34,6 +42,15 @@ Realty\+Hub.\+Api\+Service.\+Handlers.\+Viewing\+Handler.\+Viewing\+Handler (\be
 
 
 
+Inicializa uma nova instância de \doxylink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler}{Viewing\+Handler}. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em context} & Contexto do banco de dados para interação com as visitas.\\
+\hline
+\end{DoxyParams}
+
+
 \doxysubsection{Documentação das funções}
 \Hypertarget{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler_a4503633fe35bfa9d9f22b3feb829ec84}\index{RealtyHub.ApiService.Handlers.ViewingHandler@{RealtyHub.ApiService.Handlers.ViewingHandler}!CancelAsync@{CancelAsync}}
 \index{CancelAsync@{CancelAsync}!RealtyHub.ApiService.Handlers.ViewingHandler@{RealtyHub.ApiService.Handlers.ViewingHandler}}
@@ -41,6 +58,18 @@ Realty\+Hub.\+Api\+Service.\+Handlers.\+Viewing\+Handler.\+Viewing\+Handler (\be
 {\footnotesize\ttfamily \label{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler_a4503633fe35bfa9d9f22b3feb829ec84} 
 async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}}?$>$ $>$ Realty\+Hub.\+Api\+Service.\+Handlers.\+Viewing\+Handler.\+Cancel\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_viewings_1_1_cancel_viewing_request}{Cancel\+Viewing\+Request}}}]{request}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+
+
+Cancela uma visita existente. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & Requisição contendo o ID da visita a ser cancelada.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna uma resposta com a visita cancelada ou um erro em caso de falha.
+\end{DoxyReturn}
 
 
 Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_viewing_handler_a1738455b39d517c5bf6e5387e7e0d25e}{Realty\+Hub.\+Core.\+Handlers.\+IViewing\+Handler}}.
@@ -53,6 +82,18 @@ async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_
 
 
 
+Finaliza uma visita existente. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & Requisição contendo o ID da visita a ser finalizada.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna uma resposta com a visita finalizada ou um erro em caso de falha.
+\end{DoxyReturn}
+
+
 Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_viewing_handler_ae0a41018d3dbcda4927538dec8e7561d}{Realty\+Hub.\+Core.\+Handlers.\+IViewing\+Handler}}.
 
 \Hypertarget{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler_a4868d3ff694bd4a9b126bd95534cc95e}\index{RealtyHub.ApiService.Handlers.ViewingHandler@{RealtyHub.ApiService.Handlers.ViewingHandler}!GetAllAsync@{GetAllAsync}}
@@ -61,6 +102,18 @@ Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_vie
 {\footnotesize\ttfamily \label{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler_a4868d3ff694bd4a9b126bd95534cc95e} 
 async Task$<$ Paged\+Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}} $>$?$>$ $>$ Realty\+Hub.\+Api\+Service.\+Handlers.\+Viewing\+Handler.\+Get\+All\+Async (\begin{DoxyParamCaption}\item[{Get\+All\+Viewings\+Request}]{request}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+
+
+Retorna uma lista paginada de todas as visitas. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & Requisição contendo parâmetros de paginação e filtro.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna uma resposta paginada com as visitas ou um erro em caso de falha.
+\end{DoxyReturn}
 
 
 Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_viewing_handler_ac8c2f31cb236cbc97b7e9c1c5c02940c}{Realty\+Hub.\+Core.\+Handlers.\+IViewing\+Handler}}.
@@ -73,6 +126,18 @@ async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_
 
 
 
+Obtém uma visita específica pelo ID. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & Requisição contendo o ID da visita desejada.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna a visita ou um erro caso não seja encontrada.
+\end{DoxyReturn}
+
+
 Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_viewing_handler_a887181041c7cff0c90f6148f6387ca35}{Realty\+Hub.\+Core.\+Handlers.\+IViewing\+Handler}}.
 
 \Hypertarget{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler_af91f1849698e02da90eecaabd6780ea9}\index{RealtyHub.ApiService.Handlers.ViewingHandler@{RealtyHub.ApiService.Handlers.ViewingHandler}!RescheduleAsync@{RescheduleAsync}}
@@ -83,6 +148,18 @@ async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_
 
 
 
+Reagenda uma visita existente. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & Objeto contendo as informações para reagendamento da visita.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna uma resposta com a visita reagendada ou um erro em caso de falha.
+\end{DoxyReturn}
+
+
 Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_viewing_handler_af1ecf5a8f2d331cdbe977d55022afe3d}{Realty\+Hub.\+Core.\+Handlers.\+IViewing\+Handler}}.
 
 \Hypertarget{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler_a5b5a468ecdbae1960224f6dff50cf2c9}\index{RealtyHub.ApiService.Handlers.ViewingHandler@{RealtyHub.ApiService.Handlers.ViewingHandler}!ScheduleAsync@{ScheduleAsync}}
@@ -91,6 +168,18 @@ Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_vie
 {\footnotesize\ttfamily \label{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler_a5b5a468ecdbae1960224f6dff50cf2c9} 
 async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}}?$>$ $>$ Realty\+Hub.\+Api\+Service.\+Handlers.\+Viewing\+Handler.\+Schedule\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}}}]{request}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+
+
+Agenda uma nova visita para um imóvel. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & Objeto contendo as informações para agendamento da visita.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna uma resposta com a visita agendada ou um erro em caso de falha.
+\end{DoxyReturn}
 
 
 Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_viewing_handler_a4e50a7195a53173af75b6aff501db64e}{Realty\+Hub.\+Core.\+Handlers.\+IViewing\+Handler}}.

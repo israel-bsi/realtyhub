@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['zipcode_0',['ZipCode',['../class_realty_hub_1_1_core_1_1_models_1_1_address.html#a8ff9ba3a5a5cded1725ee628bd146c8d',1,'RealtyHub.Core.Models.Address.ZipCode'],['../class_realty_hub_1_1_web_1_1_utility_1_1_mask.html#a45884bb13f50a59d20fd831b3f0b8c86',1,'RealtyHub.Web.Utility.Mask.ZipCode']]]
+  ['widowed_0',['Widowed',['../namespace_realty_hub_1_1_core_1_1_enums.html#a3cef7f746fbcede20a0b43ec9f5e9994a2ef86623469f785760c19802da21e7fd',1,'RealtyHub::Core::Enums']]]
 ];

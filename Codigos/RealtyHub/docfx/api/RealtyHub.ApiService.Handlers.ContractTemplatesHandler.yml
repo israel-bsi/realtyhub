@@ -21,10 +21,12 @@ items:
       repo: https://github.com/israel-bsi/realtyhub
     id: ContractTemplatesHandler
     path: ../RealtyHub.ApiService/Handlers/ContractTemplatesHandler.cs
-    startLine: 8
+    startLine: 11
   assemblies:
   - RealtyHub.ApiService
   namespace: RealtyHub.ApiService.Handlers
+  summary: Responsável pelas operações relacionadas aos modelos de contrato.
+  example: []
   syntax:
     content: 'public class ContractTemplatesHandler : IContractTemplateHandler'
     content.vb: Public Class ContractTemplatesHandler Implements IContractTemplateHandler
@@ -58,15 +60,18 @@ items:
       repo: https://github.com/israel-bsi/realtyhub
     id: .ctor
     path: ../RealtyHub.ApiService/Handlers/ContractTemplatesHandler.cs
-    startLine: 12
+    startLine: 19
   assemblies:
   - RealtyHub.ApiService
   namespace: RealtyHub.ApiService.Handlers
+  summary: Inicializa uma nova instância de <xref href="RealtyHub.ApiService.Handlers.ContractTemplatesHandler" data-throw-if-not-resolved="false"></xref>.
+  example: []
   syntax:
     content: public ContractTemplatesHandler(AppDbContext context)
     parameters:
     - id: context
       type: RealtyHub.ApiService.Data.AppDbContext
+      description: Contexto do banco de dados para interação com os modelos de contrato.
     content.vb: Public Sub New(context As AppDbContext)
   overload: RealtyHub.ApiService.Handlers.ContractTemplatesHandler.#ctor*
   nameWithType.vb: ContractTemplatesHandler.New(AppDbContext)
@@ -90,15 +95,17 @@ items:
       repo: https://github.com/israel-bsi/realtyhub
     id: GetAllAsync
     path: ../RealtyHub.ApiService/Handlers/ContractTemplatesHandler.cs
-    startLine: 17
+    startLine: 28
   assemblies:
   - RealtyHub.ApiService
   namespace: RealtyHub.ApiService.Handlers
+  summary: Obtém todos os modelos de contrato disponíveis no banco de dados.
   example: []
   syntax:
     content: public Task<Response<List<ContractTemplate>?>> GetAllAsync()
     return:
       type: System.Threading.Tasks.Task{RealtyHub.Core.Responses.Response{System.Collections.Generic.List{RealtyHub.Core.Models.ContractTemplate}}}
+      description: Retorna uma lista de modelos de contrato ou um erro em caso de falha.
     content.vb: Public Function GetAllAsync() As Task(Of Response(Of List(Of ContractTemplate)))
   overload: RealtyHub.ApiService.Handlers.ContractTemplatesHandler.GetAllAsync*
   implements:
@@ -400,6 +407,12 @@ references:
   - name: .
   - uid: RealtyHub.Core.Handlers
     name: Handlers
+- uid: RealtyHub.ApiService.Handlers.ContractTemplatesHandler
+  commentId: T:RealtyHub.ApiService.Handlers.ContractTemplatesHandler
+  href: RealtyHub.ApiService.Handlers.ContractTemplatesHandler.html
+  name: ContractTemplatesHandler
+  nameWithType: ContractTemplatesHandler
+  fullName: RealtyHub.ApiService.Handlers.ContractTemplatesHandler
 - uid: RealtyHub.ApiService.Handlers.ContractTemplatesHandler.#ctor*
   commentId: Overload:RealtyHub.ApiService.Handlers.ContractTemplatesHandler.#ctor
   href: RealtyHub.ApiService.Handlers.ContractTemplatesHandler.html#RealtyHub_ApiService_Handlers_ContractTemplatesHandler__ctor_RealtyHub_ApiService_Data_AppDbContext_

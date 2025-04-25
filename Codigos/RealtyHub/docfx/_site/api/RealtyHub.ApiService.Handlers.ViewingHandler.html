@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="Class ViewingHandler | realtyhub ">
       
-      
+      <meta name="description" content="Respons&#225;vel pelas opera&#231;&#245;es relacionadas &#224;s visitas de im&#243;veis.">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -89,7 +89,7 @@
 
 
   <h1 id="RealtyHub_ApiService_Handlers_ViewingHandler" data-uid="RealtyHub.ApiService.Handlers.ViewingHandler" class="text-break">
-Class ViewingHandler  <a class="header-action link-secondary" title="View source" href="https://github.com/israel-bsi/realtyhub/blob/main/Codigos/RealtyHub/RealtyHub.ApiService/Handlers/ViewingHandler.cs/#L11"><i class="bi bi-code-slash"></i></a>
+Class ViewingHandler  <a class="header-action link-secondary" title="View source" href="https://github.com/israel-bsi/realtyhub/blob/main/Codigos/RealtyHub/RealtyHub.ApiService/Handlers/ViewingHandler.cs/#L14"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -97,7 +97,8 @@ Class ViewingHandler  <a class="header-action link-secondary" title="View source
   <dl><dt>Assembly</dt><dd>RealtyHub.ApiService.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"></div>
+  <div class="markdown summary"><p>Responsável pelas operações relacionadas às visitas de imóveis.</p>
+</div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
@@ -162,10 +163,11 @@ Class ViewingHandler  <a class="header-action link-secondary" title="View source
 
   <h3 id="RealtyHub_ApiService_Handlers_ViewingHandler__ctor_RealtyHub_ApiService_Data_AppDbContext_" data-uid="RealtyHub.ApiService.Handlers.ViewingHandler.#ctor(RealtyHub.ApiService.Data.AppDbContext)">
   ViewingHandler(AppDbContext)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/israel-bsi/realtyhub/blob/main/Codigos/RealtyHub/RealtyHub.ApiService/Handlers/ViewingHandler.cs/#L15"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/israel-bsi/realtyhub/blob/main/Codigos/RealtyHub/RealtyHub.ApiService/Handlers/ViewingHandler.cs/#L22"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Inicializa uma nova instância de <a class="xref" href="RealtyHub.ApiService.Handlers.ViewingHandler.html">ViewingHandler</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -175,7 +177,8 @@ Class ViewingHandler  <a class="header-action link-secondary" title="View source
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>context</code> <a class="xref" href="RealtyHub.ApiService.Data.AppDbContext.html">AppDbContext</a></dt>
-    <dd></dd>
+    <dd><p>Contexto do banco de dados para interação com as visitas.</p>
+</dd>
   </dl>
 
 
@@ -197,10 +200,11 @@ Class ViewingHandler  <a class="header-action link-secondary" title="View source
 
   <h3 id="RealtyHub_ApiService_Handlers_ViewingHandler_CancelAsync_RealtyHub_Core_Requests_Viewings_CancelViewingRequest_" data-uid="RealtyHub.ApiService.Handlers.ViewingHandler.CancelAsync(RealtyHub.Core.Requests.Viewings.CancelViewingRequest)">
   CancelAsync(CancelViewingRequest)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/israel-bsi/realtyhub/blob/main/Codigos/RealtyHub/RealtyHub.ApiService/Handlers/ViewingHandler.cs/#L147"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/israel-bsi/realtyhub/blob/main/Codigos/RealtyHub/RealtyHub.ApiService/Handlers/ViewingHandler.cs/#L170"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Cancela uma visita existente.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -210,13 +214,15 @@ Class ViewingHandler  <a class="header-action link-secondary" title="View source
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>request</code> <span class="xref">CancelViewingRequest</span></dt>
-    <dd></dd>
+    <dd><p>Requisição contendo o ID da visita a ser cancelada.</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<span class="xref">Response</span>&lt;<span class="xref">Viewing</span>&gt;&gt;</dt>
-    <dd></dd>
+    <dd><p>Retorna uma resposta com a visita cancelada ou um erro em caso de falha.</p>
+</dd>
   </dl>
 
 
@@ -233,10 +239,11 @@ Class ViewingHandler  <a class="header-action link-secondary" title="View source
 
   <h3 id="RealtyHub_ApiService_Handlers_ViewingHandler_DoneAsync_RealtyHub_Core_Requests_Viewings_DoneViewingRequest_" data-uid="RealtyHub.ApiService.Handlers.ViewingHandler.DoneAsync(RealtyHub.Core.Requests.Viewings.DoneViewingRequest)">
   DoneAsync(DoneViewingRequest)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/israel-bsi/realtyhub/blob/main/Codigos/RealtyHub/RealtyHub.ApiService/Handlers/ViewingHandler.cs/#L110"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/israel-bsi/realtyhub/blob/main/Codigos/RealtyHub/RealtyHub.ApiService/Handlers/ViewingHandler.cs/#L130"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Finaliza uma visita existente.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -246,13 +253,15 @@ Class ViewingHandler  <a class="header-action link-secondary" title="View source
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>request</code> <span class="xref">DoneViewingRequest</span></dt>
-    <dd></dd>
+    <dd><p>Requisição contendo o ID da visita a ser finalizada.</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<span class="xref">Response</span>&lt;<span class="xref">Viewing</span>&gt;&gt;</dt>
-    <dd></dd>
+    <dd><p>Retorna uma resposta com a visita finalizada ou um erro em caso de falha.</p>
+</dd>
   </dl>
 
 
@@ -269,10 +278,11 @@ Class ViewingHandler  <a class="header-action link-secondary" title="View source
 
   <h3 id="RealtyHub_ApiService_Handlers_ViewingHandler_GetAllAsync_RealtyHub_Core_Requests_Viewings_GetAllViewingsRequest_" data-uid="RealtyHub.ApiService.Handlers.ViewingHandler.GetAllAsync(RealtyHub.Core.Requests.Viewings.GetAllViewingsRequest)">
   GetAllAsync(GetAllViewingsRequest)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/israel-bsi/realtyhub/blob/main/Codigos/RealtyHub/RealtyHub.ApiService/Handlers/ViewingHandler.cs/#L209"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/israel-bsi/realtyhub/blob/main/Codigos/RealtyHub/RealtyHub.ApiService/Handlers/ViewingHandler.cs/#L240"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Retorna uma lista paginada de todas as visitas.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -282,13 +292,15 @@ Class ViewingHandler  <a class="header-action link-secondary" title="View source
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>request</code> <span class="xref">GetAllViewingsRequest</span></dt>
-    <dd></dd>
+    <dd><p>Requisição contendo parâmetros de paginação e filtro.</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<span class="xref">PagedResponse</span>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<span class="xref">Viewing</span>&gt;&gt;&gt;</dt>
-    <dd></dd>
+    <dd><p>Retorna uma resposta paginada com as visitas ou um erro em caso de falha.</p>
+</dd>
   </dl>
 
 
@@ -305,10 +317,11 @@ Class ViewingHandler  <a class="header-action link-secondary" title="View source
 
   <h3 id="RealtyHub_ApiService_Handlers_ViewingHandler_GetByIdAsync_RealtyHub_Core_Requests_Viewings_GetViewingByIdRequest_" data-uid="RealtyHub.ApiService.Handlers.ViewingHandler.GetByIdAsync(RealtyHub.Core.Requests.Viewings.GetViewingByIdRequest)">
   GetByIdAsync(GetViewingByIdRequest)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/israel-bsi/realtyhub/blob/main/Codigos/RealtyHub/RealtyHub.ApiService/Handlers/ViewingHandler.cs/#L184"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/israel-bsi/realtyhub/blob/main/Codigos/RealtyHub/RealtyHub.ApiService/Handlers/ViewingHandler.cs/#L210"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Obtém uma visita específica pelo ID.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -318,13 +331,15 @@ Class ViewingHandler  <a class="header-action link-secondary" title="View source
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>request</code> <span class="xref">GetViewingByIdRequest</span></dt>
-    <dd></dd>
+    <dd><p>Requisição contendo o ID da visita desejada.</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<span class="xref">Response</span>&lt;<span class="xref">Viewing</span>&gt;&gt;</dt>
-    <dd></dd>
+    <dd><p>Retorna a visita ou um erro caso não seja encontrada.</p>
+</dd>
   </dl>
 
 
@@ -341,10 +356,11 @@ Class ViewingHandler  <a class="header-action link-secondary" title="View source
 
   <h3 id="RealtyHub_ApiService_Handlers_ViewingHandler_RescheduleAsync_RealtyHub_Core_Models_Viewing_" data-uid="RealtyHub.ApiService.Handlers.ViewingHandler.RescheduleAsync(RealtyHub.Core.Models.Viewing)">
   RescheduleAsync(Viewing)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/israel-bsi/realtyhub/blob/main/Codigos/RealtyHub/RealtyHub.ApiService/Handlers/ViewingHandler.cs/#L72"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/israel-bsi/realtyhub/blob/main/Codigos/RealtyHub/RealtyHub.ApiService/Handlers/ViewingHandler.cs/#L89"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Reagenda uma visita existente.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -354,13 +370,15 @@ Class ViewingHandler  <a class="header-action link-secondary" title="View source
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>request</code> <span class="xref">Viewing</span></dt>
-    <dd></dd>
+    <dd><p>Objeto contendo as informações para reagendamento da visita.</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<span class="xref">Response</span>&lt;<span class="xref">Viewing</span>&gt;&gt;</dt>
-    <dd></dd>
+    <dd><p>Retorna uma resposta com a visita reagendada ou um erro em caso de falha.</p>
+</dd>
   </dl>
 
 
@@ -377,10 +395,11 @@ Class ViewingHandler  <a class="header-action link-secondary" title="View source
 
   <h3 id="RealtyHub_ApiService_Handlers_ViewingHandler_ScheduleAsync_RealtyHub_Core_Models_Viewing_" data-uid="RealtyHub.ApiService.Handlers.ViewingHandler.ScheduleAsync(RealtyHub.Core.Models.Viewing)">
   ScheduleAsync(Viewing)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/israel-bsi/realtyhub/blob/main/Codigos/RealtyHub/RealtyHub.ApiService/Handlers/ViewingHandler.cs/#L20"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/israel-bsi/realtyhub/blob/main/Codigos/RealtyHub/RealtyHub.ApiService/Handlers/ViewingHandler.cs/#L32"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Agenda uma nova visita para um imóvel.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -390,13 +409,15 @@ Class ViewingHandler  <a class="header-action link-secondary" title="View source
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>request</code> <span class="xref">Viewing</span></dt>
-    <dd></dd>
+    <dd><p>Objeto contendo as informações para agendamento da visita.</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<span class="xref">Response</span>&lt;<span class="xref">Viewing</span>&gt;&gt;</dt>
-    <dd></dd>
+    <dd><p>Retorna uma resposta com a visita agendada ou um erro em caso de falha.</p>
+</dd>
   </dl>
 
 
@@ -413,7 +434,7 @@ Class ViewingHandler  <a class="header-action link-secondary" title="View source
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/israel-bsi/realtyhub/blob/main/Codigos/RealtyHub/RealtyHub.ApiService/Handlers/ViewingHandler.cs/#L11" class="edit-link">Edit this page</a>
+          <a href="https://github.com/israel-bsi/realtyhub/blob/main/Codigos/RealtyHub/RealtyHub.ApiService/Handlers/ViewingHandler.cs/#L14" class="edit-link">Edit this page</a>
         </div>
 
 

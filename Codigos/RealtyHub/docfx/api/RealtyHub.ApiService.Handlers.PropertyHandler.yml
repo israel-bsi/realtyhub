@@ -26,10 +26,12 @@ items:
       repo: https://github.com/israel-bsi/realtyhub
     id: PropertyHandler
     path: ../RealtyHub.ApiService/Handlers/PropertyHandler.cs
-    startLine: 10
+    startLine: 13
   assemblies:
   - RealtyHub.ApiService
   namespace: RealtyHub.ApiService.Handlers
+  summary: Responsável pelas operações relacionadas a imóveis.
+  example: []
   syntax:
     content: 'public class PropertyHandler : IPropertyHandler'
     content.vb: Public Class PropertyHandler Implements IPropertyHandler
@@ -63,15 +65,18 @@ items:
       repo: https://github.com/israel-bsi/realtyhub
     id: .ctor
     path: ../RealtyHub.ApiService/Handlers/PropertyHandler.cs
-    startLine: 14
+    startLine: 21
   assemblies:
   - RealtyHub.ApiService
   namespace: RealtyHub.ApiService.Handlers
+  summary: Inicializa uma nova instância de <xref href="RealtyHub.ApiService.Handlers.PropertyHandler" data-throw-if-not-resolved="false"></xref>.
+  example: []
   syntax:
     content: public PropertyHandler(AppDbContext context)
     parameters:
     - id: context
       type: RealtyHub.ApiService.Data.AppDbContext
+      description: Contexto do banco de dados para interação com imóveis.
     content.vb: Public Sub New(context As AppDbContext)
   overload: RealtyHub.ApiService.Handlers.PropertyHandler.#ctor*
   nameWithType.vb: PropertyHandler.New(AppDbContext)
@@ -95,18 +100,21 @@ items:
       repo: https://github.com/israel-bsi/realtyhub
     id: CreateAsync
     path: ../RealtyHub.ApiService/Handlers/PropertyHandler.cs
-    startLine: 19
+    startLine: 31
   assemblies:
   - RealtyHub.ApiService
   namespace: RealtyHub.ApiService.Handlers
+  summary: Cria um novo imóvel no banco de dados.
   example: []
   syntax:
     content: public Task<Response<Property?>> CreateAsync(Property request)
     parameters:
     - id: request
       type: RealtyHub.Core.Models.Property
+      description: Objeto contendo as informações para criação do imóvel.
     return:
       type: System.Threading.Tasks.Task{RealtyHub.Core.Responses.Response{RealtyHub.Core.Models.Property}}
+      description: Retorna uma resposta com o imóvel criado e o código de status.
     content.vb: Public Function CreateAsync(request As [Property]) As Task(Of Response(Of [Property]))
   overload: RealtyHub.ApiService.Handlers.PropertyHandler.CreateAsync*
   implements:
@@ -129,18 +137,21 @@ items:
       repo: https://github.com/israel-bsi/realtyhub
     id: UpdateAsync
     path: ../RealtyHub.ApiService/Handlers/PropertyHandler.cs
-    startLine: 56
+    startLine: 73
   assemblies:
   - RealtyHub.ApiService
   namespace: RealtyHub.ApiService.Handlers
+  summary: Atualiza um imóvel existente no banco de dados.
   example: []
   syntax:
     content: public Task<Response<Property?>> UpdateAsync(Property request)
     parameters:
     - id: request
       type: RealtyHub.Core.Models.Property
+      description: Objeto contendo as novas informações do imóvel.
     return:
       type: System.Threading.Tasks.Task{RealtyHub.Core.Responses.Response{RealtyHub.Core.Models.Property}}
+      description: Retorna a resposta com o imóvel atualizado ou um erro se não for encontrado.
     content.vb: Public Function UpdateAsync(request As [Property]) As Task(Of Response(Of [Property]))
   overload: RealtyHub.ApiService.Handlers.PropertyHandler.UpdateAsync*
   implements:
@@ -163,18 +174,21 @@ items:
       repo: https://github.com/israel-bsi/realtyhub
     id: DeleteAsync
     path: ../RealtyHub.ApiService/Handlers/PropertyHandler.cs
-    startLine: 98
+    startLine: 119
   assemblies:
   - RealtyHub.ApiService
   namespace: RealtyHub.ApiService.Handlers
+  summary: Realiza a exclusão lógica de um imóvel, marcando-o como inativo.
   example: []
   syntax:
     content: public Task<Response<Property?>> DeleteAsync(DeletePropertyRequest request)
     parameters:
     - id: request
       type: RealtyHub.Core.Requests.Properties.DeletePropertyRequest
+      description: Requisição que contém o ID do imóvel a ser excluído.
     return:
       type: System.Threading.Tasks.Task{RealtyHub.Core.Responses.Response{RealtyHub.Core.Models.Property}}
+      description: Retorna a resposta com o status da exclusão ou um erro se não for encontrado.
     content.vb: Public Function DeleteAsync(request As DeletePropertyRequest) As Task(Of Response(Of [Property]))
   overload: RealtyHub.ApiService.Handlers.PropertyHandler.DeleteAsync*
   implements:
@@ -197,18 +211,21 @@ items:
       repo: https://github.com/israel-bsi/realtyhub
     id: GetByIdAsync
     path: ../RealtyHub.ApiService/Handlers/PropertyHandler.cs
-    startLine: 124
+    startLine: 150
   assemblies:
   - RealtyHub.ApiService
   namespace: RealtyHub.ApiService.Handlers
+  summary: Obtém um imóvel específico pelo ID.
   example: []
   syntax:
     content: public Task<Response<Property?>> GetByIdAsync(GetPropertyByIdRequest request)
     parameters:
     - id: request
       type: RealtyHub.Core.Requests.Properties.GetPropertyByIdRequest
+      description: Requisição que contém o ID do imóvel desejado.
     return:
       type: System.Threading.Tasks.Task{RealtyHub.Core.Responses.Response{RealtyHub.Core.Models.Property}}
+      description: Retorna o objeto do imóvel ou um erro caso não seja encontrado.
     content.vb: Public Function GetByIdAsync(request As GetPropertyByIdRequest) As Task(Of Response(Of [Property]))
   overload: RealtyHub.ApiService.Handlers.PropertyHandler.GetByIdAsync*
   implements:
@@ -231,18 +248,21 @@ items:
       repo: https://github.com/israel-bsi/realtyhub
     id: GetAllAsync
     path: ../RealtyHub.ApiService/Handlers/PropertyHandler.cs
-    startLine: 148
+    startLine: 179
   assemblies:
   - RealtyHub.ApiService
   namespace: RealtyHub.ApiService.Handlers
+  summary: Retorna uma lista paginada de todos os imóveis ativos, com opção de filtro por busca.
   example: []
   syntax:
     content: public Task<PagedResponse<List<Property>?>> GetAllAsync(GetAllPropertiesRequest request)
     parameters:
     - id: request
       type: RealtyHub.Core.Requests.Properties.GetAllPropertiesRequest
+      description: Requisição que contém parâmetros de paginação e filtro.
     return:
       type: System.Threading.Tasks.Task{RealtyHub.Core.Responses.PagedResponse{System.Collections.Generic.List{RealtyHub.Core.Models.Property}}}
+      description: Retorna uma resposta paginada com os imóveis ativos ou um erro em caso de falha.
     content.vb: Public Function GetAllAsync(request As GetAllPropertiesRequest) As Task(Of PagedResponse(Of List(Of [Property])))
   overload: RealtyHub.ApiService.Handlers.PropertyHandler.GetAllAsync*
   implements:
@@ -265,18 +285,21 @@ items:
       repo: https://github.com/israel-bsi/realtyhub
     id: GetAllViewingsAsync
     path: ../RealtyHub.ApiService/Handlers/PropertyHandler.cs
-    startLine: 184
+    startLine: 219
   assemblies:
   - RealtyHub.ApiService
   namespace: RealtyHub.ApiService.Handlers
+  summary: Retorna uma lista paginada de todas as visitas de um imóvel específico.
   example: []
   syntax:
     content: public Task<PagedResponse<List<Viewing>?>> GetAllViewingsAsync(GetAllViewingsByPropertyRequest request)
     parameters:
     - id: request
       type: RealtyHub.Core.Requests.Properties.GetAllViewingsByPropertyRequest
+      description: Requisição que contém parâmetros de paginação e filtro por data.
     return:
       type: System.Threading.Tasks.Task{RealtyHub.Core.Responses.PagedResponse{System.Collections.Generic.List{RealtyHub.Core.Models.Viewing}}}
+      description: Retorna uma resposta paginada com as visitas ou um erro em caso de falha.
     content.vb: Public Function GetAllViewingsAsync(request As GetAllViewingsByPropertyRequest) As Task(Of PagedResponse(Of List(Of Viewing)))
   overload: RealtyHub.ApiService.Handlers.PropertyHandler.GetAllViewingsAsync*
   implements:
@@ -578,6 +601,12 @@ references:
   - name: .
   - uid: RealtyHub.Core.Handlers
     name: Handlers
+- uid: RealtyHub.ApiService.Handlers.PropertyHandler
+  commentId: T:RealtyHub.ApiService.Handlers.PropertyHandler
+  href: RealtyHub.ApiService.Handlers.PropertyHandler.html
+  name: PropertyHandler
+  nameWithType: PropertyHandler
+  fullName: RealtyHub.ApiService.Handlers.PropertyHandler
 - uid: RealtyHub.ApiService.Handlers.PropertyHandler.#ctor*
   commentId: Overload:RealtyHub.ApiService.Handlers.PropertyHandler.#ctor
   href: RealtyHub.ApiService.Handlers.PropertyHandler.html#RealtyHub_ApiService_Handlers_PropertyHandler__ctor_RealtyHub_ApiService_Data_AppDbContext_

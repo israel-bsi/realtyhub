@@ -22,7 +22,7 @@ public class CustomerHandler : ICustomerHandler
     {
         _context = context;
     }
-
+    
     /// <summary>
     /// Cria um novo cliente no banco de dados.
     /// </summary>

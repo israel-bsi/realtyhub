@@ -25,6 +25,15 @@
 var NAVTREE =
 [
   [ "RealtyHub", "index.html", [
+    [ "Getting Started", "md_docfx_2docs_2getting-started.html", null ],
+    [ "Introduction", "md_docfx_2docs_2introduction.html", null ],
+    [ "index", "md_docfx_2index.html", [
+      [ "This is the HOMEPAGE.", "md_docfx_2index.html#autotoc_md4", [
+        [ "autotoc_md2", "md_docfx_2index.html#autotoc_md2", null ],
+        [ "_layout: landing", "md_docfx_2index.html#autotoc_md3", null ],
+        [ "Quick Start Notes:", "md_docfx_2index.html#autotoc_md5", null ]
+      ] ]
+    ] ],
     [ "Namespaces", "namespaces.html", [
       [ "Lista de Namespaces", "namespaces.html", "namespaces_dup" ],
       [ "Membros do namespace", "namespacemembers.html", [
@@ -57,15 +66,16 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "20250207012644__v1_8_designer_8cs.html",
-"_realty_hub_8_web_2_program_8cs.html#a6d3787ee466a0ef33d2c66c636825549",
-"class_realty_hub_1_1_api_service_1_1_endpoints_1_1_viewings_1_1_cancel_viewing_endpoint.html",
-"class_realty_hub_1_1_core_1_1_models_1_1_address.html#ae3970cdf6e782aca10888af5e69acea9",
-"class_realty_hub_1_1_core_1_1_models_1_1_property_photo.html",
-"class_realty_hub_1_1_core_1_1_responses_1_1_via_cep_response.html#a85a205d725cdc228a9072c4121bd1322",
-"class_realty_hub_1_1_web_1_1_components_1_1_properties_1_1_property_form_component.html#ad3961e1d2226ea4b450c4cbd58f7efab",
-"class_realty_hub_1_1_web_1_1_pages_1_1_contracts_templates_1_1_list_contract_templates_page.html#ac61de92dae9f036be6de0ba04cd9e565",
-"class_realty_hub_1_1_web_1_1_pages_1_1_viewings_1_1_list_viewings_page.html#a3fa4aa39aa917c60514e76e806896881",
-"interface_realty_hub_1_1_core_1_1_handlers_1_1_i_account_handler.html#aaea04b5297a3823006cef84fa1d3e318"
+"_realty_hub_8_web_2_program_8cs.html#a62dc9b943951015c7b9c834558dc06f0",
+"class_realty_hub_1_1_api_service_1_1_endpoints_1_1_properties_1_1_update_property_photos_endpoint.html",
+"class_realty_hub_1_1_core_1_1_models_1_1_address.html#a6ffcb00308038a780b5dc6298e12b976",
+"class_realty_hub_1_1_core_1_1_models_1_1_property.html#abb03184a59cecc340c93770711857e80",
+"class_realty_hub_1_1_core_1_1_responses_1_1_user_response.html#a95175532a8b23b66fabfe79a8f24b98e",
+"class_realty_hub_1_1_web_1_1_components_1_1_properties_1_1_property_form_component.html#ab7ccd1544fd22591fff374f6c3d7a19f",
+"class_realty_hub_1_1_web_1_1_pages_1_1_contracts_templates_1_1_list_contract_templates_page.html#a4347dce3529a51cfc5ec6c18fbabe211",
+"class_realty_hub_1_1_web_1_1_pages_1_1_viewings_1_1_list_viewings_page.html#a21215999d7d51c27a8d22be46f8c217a",
+"interface_realty_hub_1_1_api_service_1_1_common_1_1_api_1_1_i_endpoint.html",
+"namespace_realty_hub_1_1_web_1_1_pages_1_1_offers.html"
 ];
 
 var SYNCONMSG = 'clique para desativar a sincronização do painel';

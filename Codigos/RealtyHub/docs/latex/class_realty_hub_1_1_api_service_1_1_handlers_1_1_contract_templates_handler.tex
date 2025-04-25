@@ -1,5 +1,10 @@
 \doxysection{Referência da Classe Realty\+Hub.\+Api\+Service.\+Handlers.\+Contract\+Templates\+Handler}
 \hypertarget{class_realty_hub_1_1_api_service_1_1_handlers_1_1_contract_templates_handler}{}\label{class_realty_hub_1_1_api_service_1_1_handlers_1_1_contract_templates_handler}\index{RealtyHub.ApiService.Handlers.ContractTemplatesHandler@{RealtyHub.ApiService.Handlers.ContractTemplatesHandler}}
+
+
+Responsável pelas operações relacionadas aos modelos de contrato.  
+
+
 Diagrama de hierarquia da classe Realty\+Hub.\+Api\+Service.\+Handlers.\+Contract\+Templates\+Handler\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -10,10 +15,13 @@ Diagrama de hierarquia da classe Realty\+Hub.\+Api\+Service.\+Handlers.\+Contrac
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_contract_templates_handler_a0e59457000abda8a69506832b3f0c96a}{Contract\+Templates\+Handler}} (\mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_data_1_1_app_db_context}{App\+Db\+Context}} context)
-\item 
+\begin{DoxyCompactList}\small\item\em Inicializa uma nova instância de \doxylink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_contract_templates_handler}{Contract\+Templates\+Handler}. \end{DoxyCompactList}\item 
 async Task$<$ Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_contract_template}{Contract\+Template}} $>$?$>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_contract_templates_handler_a5383a9a214b2bf0745239875392e9db9}{Get\+All\+Async}} ()
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Obtém todos os modelos de contrato disponíveis no banco de dados. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
+
+\doxysubsection{Descrição detalhada}
+Responsável pelas operações relacionadas aos modelos de contrato. 
 
 \doxysubsection{Construtores e Destrutores}
 \Hypertarget{class_realty_hub_1_1_api_service_1_1_handlers_1_1_contract_templates_handler_a0e59457000abda8a69506832b3f0c96a}\index{RealtyHub.ApiService.Handlers.ContractTemplatesHandler@{RealtyHub.ApiService.Handlers.ContractTemplatesHandler}!ContractTemplatesHandler@{ContractTemplatesHandler}}
@@ -24,6 +32,15 @@ Realty\+Hub.\+Api\+Service.\+Handlers.\+Contract\+Templates\+Handler.\+Contract\
 
 
 
+Inicializa uma nova instância de \doxylink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_contract_templates_handler}{Contract\+Templates\+Handler}. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em context} & Contexto do banco de dados para interação com os modelos de contrato.\\
+\hline
+\end{DoxyParams}
+
+
 \doxysubsection{Documentação das funções}
 \Hypertarget{class_realty_hub_1_1_api_service_1_1_handlers_1_1_contract_templates_handler_a5383a9a214b2bf0745239875392e9db9}\index{RealtyHub.ApiService.Handlers.ContractTemplatesHandler@{RealtyHub.ApiService.Handlers.ContractTemplatesHandler}!GetAllAsync@{GetAllAsync}}
 \index{GetAllAsync@{GetAllAsync}!RealtyHub.ApiService.Handlers.ContractTemplatesHandler@{RealtyHub.ApiService.Handlers.ContractTemplatesHandler}}
@@ -31,6 +48,13 @@ Realty\+Hub.\+Api\+Service.\+Handlers.\+Contract\+Templates\+Handler.\+Contract\
 {\footnotesize\ttfamily \label{class_realty_hub_1_1_api_service_1_1_handlers_1_1_contract_templates_handler_a5383a9a214b2bf0745239875392e9db9} 
 async Task$<$ Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_contract_template}{Contract\+Template}} $>$?$>$ $>$ Realty\+Hub.\+Api\+Service.\+Handlers.\+Contract\+Templates\+Handler.\+Get\+All\+Async (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+
+
+Obtém todos os modelos de contrato disponíveis no banco de dados. 
+
+\begin{DoxyReturn}{Retorna}
+Retorna uma lista de modelos de contrato ou um erro em caso de falha.
+\end{DoxyReturn}
 
 
 Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_contract_template_handler_aeb3f2ed1f6315ad9a23491878116e434}{Realty\+Hub.\+Core.\+Handlers.\+IContract\+Template\+Handler}}.

@@ -1,11 +1,11 @@
 var searchData=
 [
-  ['realtyhub_2eapiservice_2eassemblyinfo_2ecs_0',['RealtyHub.ApiService.AssemblyInfo.cs',['../_realty_hub_8_api_service_8_assembly_info_8cs.html',1,'']]],
-  ['realtyhub_2eapiservice_2eglobalusings_2eg_2ecs_1',['RealtyHub.ApiService.GlobalUsings.g.cs',['../_realty_hub_8_api_service_8_global_usings_8g_8cs.html',1,'']]],
+  ['realtyhub_2eapiservice_2eassemblyinfo_2ecs_0',['RealtyHub.ApiService.AssemblyInfo.cs',['../_debug_2net8_80_2_realty_hub_8_api_service_8_assembly_info_8cs.html',1,'(Namespace global)'],['../_release_2net8_80_2_realty_hub_8_api_service_8_assembly_info_8cs.html',1,'(Namespace global)']]],
+  ['realtyhub_2eapiservice_2eglobalusings_2eg_2ecs_1',['RealtyHub.ApiService.GlobalUsings.g.cs',['../_debug_2net8_80_2_realty_hub_8_api_service_8_global_usings_8g_8cs.html',1,'(Namespace global)'],['../_release_2net8_80_2_realty_hub_8_api_service_8_global_usings_8g_8cs.html',1,'(Namespace global)']]],
   ['realtyhub_2eapphost_2eassemblyinfo_2ecs_2',['RealtyHub.AppHost.AssemblyInfo.cs',['../_realty_hub_8_app_host_8_assembly_info_8cs.html',1,'']]],
   ['realtyhub_2eapphost_2eglobalusings_2eg_2ecs_3',['RealtyHub.AppHost.GlobalUsings.g.cs',['../_realty_hub_8_app_host_8_global_usings_8g_8cs.html',1,'']]],
-  ['realtyhub_2ecore_2eassemblyinfo_2ecs_4',['RealtyHub.Core.AssemblyInfo.cs',['../_realty_hub_8_core_8_assembly_info_8cs.html',1,'']]],
-  ['realtyhub_2ecore_2eglobalusings_2eg_2ecs_5',['RealtyHub.Core.GlobalUsings.g.cs',['../_realty_hub_8_core_8_global_usings_8g_8cs.html',1,'']]],
+  ['realtyhub_2ecore_2eassemblyinfo_2ecs_4',['RealtyHub.Core.AssemblyInfo.cs',['../_debug_2net8_80_2_realty_hub_8_core_8_assembly_info_8cs.html',1,'(Namespace global)'],['../_release_2net8_80_2_realty_hub_8_core_8_assembly_info_8cs.html',1,'(Namespace global)']]],
+  ['realtyhub_2ecore_2eglobalusings_2eg_2ecs_5',['RealtyHub.Core.GlobalUsings.g.cs',['../_debug_2net8_80_2_realty_hub_8_core_8_global_usings_8g_8cs.html',1,'(Namespace global)'],['../_release_2net8_80_2_realty_hub_8_core_8_global_usings_8g_8cs.html',1,'(Namespace global)']]],
   ['realtyhub_2etests_2eassemblyinfo_2ecs_6',['RealtyHub.Tests.AssemblyInfo.cs',['../_realty_hub_8_tests_8_assembly_info_8cs.html',1,'']]],
   ['realtyhub_2etests_2eglobalusings_2eg_2ecs_7',['RealtyHub.Tests.GlobalUsings.g.cs',['../_realty_hub_8_tests_8_global_usings_8g_8cs.html',1,'']]],
   ['realtyhub_2eweb_2eassemblyinfo_2ecs_8',['RealtyHub.Web.AssemblyInfo.cs',['../_realty_hub_8_web_8_assembly_info_8cs.html',1,'']]],

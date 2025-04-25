@@ -8,6 +8,7 @@ var searchData=
   ['hasswimmingpool_5',['HasSwimmingPool',['../class_realty_hub_1_1_core_1_1_models_1_1_condominium.html#a8cc677b63ffd2529dda1a9390b2694ba',1,'RealtyHub::Core::Models::Condominium']]],
   ['headertext_6',['HeaderText',['../class_realty_hub_1_1_web_1_1_pages_1_1_identity_1_1_reset_password_page.html#a00c6ccbd057591cf45d120db6f94210c',1,'RealtyHub::Web::Pages::Identity::ResetPasswordPage']]],
   ['headertitle_7',['HeaderTitle',['../class_realty_hub_1_1_web_1_1_pages_1_1_viewings_1_1_list_viewings_page.html#a63796b1e0083d425e0143f0d5dc734e9',1,'RealtyHub::Web::Pages::Viewings::ListViewingsPage']]],
-  ['house_8',['House',['../namespace_realty_hub_1_1_core_1_1_enums.html#aff857c080e4960e6c80fcf6b6966c221aaebfe46795575772b7cf413e25caeab9',1,'RealtyHub::Core::Enums']]],
-  ['httprequest_9',['HttpRequest',['../class_realty_hub_1_1_core_1_1_requests_1_1_properties_photos_1_1_create_property_photos_request.html#a1f001703c463d845ab492913732bd7ed',1,'RealtyHub::Core::Requests::PropertiesPhotos::CreatePropertyPhotosRequest']]]
+  ['homepage_20strong_8',['This is the &lt;strong&gt;HOMEPAGE&lt;/strong&gt;.',['../md_docfx_2index.html#autotoc_md4',1,'']]],
+  ['house_9',['House',['../namespace_realty_hub_1_1_core_1_1_enums.html#aff857c080e4960e6c80fcf6b6966c221aaebfe46795575772b7cf413e25caeab9',1,'RealtyHub::Core::Enums']]],
+  ['httprequest_10',['HttpRequest',['../class_realty_hub_1_1_core_1_1_requests_1_1_properties_photos_1_1_create_property_photos_request.html#a1f001703c463d845ab492913732bd7ed',1,'RealtyHub::Core::Requests::PropertiesPhotos::CreatePropertyPhotosRequest']]]
 ];

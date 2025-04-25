@@ -108,6 +108,9 @@ $(function(){initNavTree('class_realty_hub_1_1_api_service_1_1_handlers_1_1_prop
   <div class="headertitle"><div class="title">Referência da Classe RealtyHub.ApiService.Handlers.PropertyHandler</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Responsável pelas operações relacionadas a imóveis.  
+ <a href="#details">Mais...</a></p>
 <div class="dynheader">
 Diagrama de hierarquia da classe RealtyHub.ApiService.Handlers.PropertyHandler:</div>
 <div class="dyncontent">
@@ -121,21 +124,30 @@ Diagrama de hierarquia da classe RealtyHub.ApiService.Handlers.PropertyHandler:<
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Membros Públicos</h2></td></tr>
 <tr class="memitem:af523d0081c0305a0b10f24eef336ac51" id="r_af523d0081c0305a0b10f24eef336ac51"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af523d0081c0305a0b10f24eef336ac51">PropertyHandler</a> (<a class="el" href="class_realty_hub_1_1_api_service_1_1_data_1_1_app_db_context.html">AppDbContext</a> context)</td></tr>
+<tr class="memdesc:af523d0081c0305a0b10f24eef336ac51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inicializa uma nova instância de <a class="el" href="class_realty_hub_1_1_api_service_1_1_handlers_1_1_property_handler.html" title="Responsável pelas operações relacionadas a imóveis.">PropertyHandler</a>.  <br /></td></tr>
 <tr class="separator:af523d0081c0305a0b10f24eef336ac51"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adeec3f988551a1d40a5b2d360a0ededc" id="r_adeec3f988551a1d40a5b2d360a0ededc"><td class="memItemLeft" align="right" valign="top">async Task&lt; Response&lt; <a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_property.html">Property</a>?&gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adeec3f988551a1d40a5b2d360a0ededc">CreateAsync</a> (<a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_property.html">Property</a> request)</td></tr>
+<tr class="memdesc:adeec3f988551a1d40a5b2d360a0ededc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cria um novo imóvel no banco de dados.  <br /></td></tr>
 <tr class="separator:adeec3f988551a1d40a5b2d360a0ededc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afd9bd8149132dc65e451451d45290bf6" id="r_afd9bd8149132dc65e451451d45290bf6"><td class="memItemLeft" align="right" valign="top">async Task&lt; Response&lt; <a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_property.html">Property</a>?&gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afd9bd8149132dc65e451451d45290bf6">UpdateAsync</a> (<a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_property.html">Property</a> request)</td></tr>
+<tr class="memdesc:afd9bd8149132dc65e451451d45290bf6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Atualiza um imóvel existente no banco de dados.  <br /></td></tr>
 <tr class="separator:afd9bd8149132dc65e451451d45290bf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99a7e0a4c67fffb4b7a44ef5ca711726" id="r_a99a7e0a4c67fffb4b7a44ef5ca711726"><td class="memItemLeft" align="right" valign="top">async Task&lt; Response&lt; <a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_property.html">Property</a>?&gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a99a7e0a4c67fffb4b7a44ef5ca711726">DeleteAsync</a> (<a class="el" href="class_realty_hub_1_1_core_1_1_requests_1_1_properties_1_1_delete_property_request.html">DeletePropertyRequest</a> request)</td></tr>
+<tr class="memdesc:a99a7e0a4c67fffb4b7a44ef5ca711726"><td class="mdescLeft">&#160;</td><td class="mdescRight">Realiza a exclusão lógica de um imóvel, marcando-o como inativo.  <br /></td></tr>
 <tr class="separator:a99a7e0a4c67fffb4b7a44ef5ca711726"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad8df43a09bbf10fe0dc786abd061cd26" id="r_ad8df43a09bbf10fe0dc786abd061cd26"><td class="memItemLeft" align="right" valign="top">async Task&lt; Response&lt; <a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_property.html">Property</a>?&gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad8df43a09bbf10fe0dc786abd061cd26">GetByIdAsync</a> (<a class="el" href="class_realty_hub_1_1_core_1_1_requests_1_1_properties_1_1_get_property_by_id_request.html">GetPropertyByIdRequest</a> request)</td></tr>
+<tr class="memdesc:ad8df43a09bbf10fe0dc786abd061cd26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtém um imóvel específico pelo ID.  <br /></td></tr>
 <tr class="separator:ad8df43a09bbf10fe0dc786abd061cd26"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0b1e4a38416b68278814ed1c2d9b179" id="r_ae0b1e4a38416b68278814ed1c2d9b179"><td class="memItemLeft" align="right" valign="top">async Task&lt; PagedResponse&lt; List&lt; <a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_property.html">Property</a> &gt;?&gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae0b1e4a38416b68278814ed1c2d9b179">GetAllAsync</a> (GetAllPropertiesRequest request)</td></tr>
+<tr class="memdesc:ae0b1e4a38416b68278814ed1c2d9b179"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retorna uma lista paginada de todos os imóveis ativos, com opção de filtro por busca.  <br /></td></tr>
 <tr class="separator:ae0b1e4a38416b68278814ed1c2d9b179"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7b38c6f65cabf54116f7d23548f7746d" id="r_a7b38c6f65cabf54116f7d23548f7746d"><td class="memItemLeft" align="right" valign="top">async Task&lt; PagedResponse&lt; List&lt; <a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_viewing.html">Viewing</a> &gt;?&gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7b38c6f65cabf54116f7d23548f7746d">GetAllViewingsAsync</a> (<a class="el" href="class_realty_hub_1_1_core_1_1_requests_1_1_properties_1_1_get_all_viewings_by_property_request.html">GetAllViewingsByPropertyRequest</a> request)</td></tr>
+<tr class="memdesc:a7b38c6f65cabf54116f7d23548f7746d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retorna uma lista paginada de todas as visitas de um imóvel específico.  <br /></td></tr>
 <tr class="separator:a7b38c6f65cabf54116f7d23548f7746d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Construtores e Destrutores</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Descrição detalhada</h2>
+<div class="textblock"><p>Responsável pelas operações relacionadas a imóveis. </p>
+</div><h2 class="groupheader">Construtores e Destrutores</h2>
 <a id="af523d0081c0305a0b10f24eef336ac51" name="af523d0081c0305a0b10f24eef336ac51"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af523d0081c0305a0b10f24eef336ac51">&#9670;&#160;</a></span>PropertyHandler()</h2>
 
@@ -158,6 +170,14 @@ Membros Públicos</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Inicializa uma nova instância de <a class="el" href="class_realty_hub_1_1_api_service_1_1_handlers_1_1_property_handler.html" title="Responsável pelas operações relacionadas a imóveis.">PropertyHandler</a>. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">context</td><td>Contexto do banco de dados para interação com imóveis.</td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -184,6 +204,15 @@ Membros Públicos</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Cria um novo imóvel no banco de dados. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>Objeto contendo as informações para criação do imóvel.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>Retorna uma resposta com o imóvel criado e o código de status.</dd></dl>
 
 <p>Implementa <a class="el" href="interface_realty_hub_1_1_core_1_1_handlers_1_1_i_property_handler.html#a37a716d7160a10c1870b2bf53ced2724">RealtyHub.Core.Handlers.IPropertyHandler</a>.</p>
 
@@ -212,6 +241,15 @@ Membros Públicos</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Realiza a exclusão lógica de um imóvel, marcando-o como inativo. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>Requisição que contém o ID do imóvel a ser excluído.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>Retorna a resposta com o status da exclusão ou um erro se não for encontrado.</dd></dl>
+
 <p>Implementa <a class="el" href="interface_realty_hub_1_1_core_1_1_handlers_1_1_i_property_handler.html#aa3793b23b845db7327b02cb0f2eb3976">RealtyHub.Core.Handlers.IPropertyHandler</a>.</p>
 
 </div>
@@ -238,6 +276,15 @@ Membros Públicos</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Retorna uma lista paginada de todos os imóveis ativos, com opção de filtro por busca. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>Requisição que contém parâmetros de paginação e filtro.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>Retorna uma resposta paginada com os imóveis ativos ou um erro em caso de falha.</dd></dl>
 
 <p>Implementa <a class="el" href="interface_realty_hub_1_1_core_1_1_handlers_1_1_i_property_handler.html#a72706e58fbe98201134597d6050f678f">RealtyHub.Core.Handlers.IPropertyHandler</a>.</p>
 
@@ -266,6 +313,15 @@ Membros Públicos</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Retorna uma lista paginada de todas as visitas de um imóvel específico. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>Requisição que contém parâmetros de paginação e filtro por data.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>Retorna uma resposta paginada com as visitas ou um erro em caso de falha.</dd></dl>
+
 <p>Implementa <a class="el" href="interface_realty_hub_1_1_core_1_1_handlers_1_1_i_property_handler.html#aef2887ad7a2010a4825786eb1ab67348">RealtyHub.Core.Handlers.IPropertyHandler</a>.</p>
 
 </div>
@@ -293,6 +349,15 @@ Membros Públicos</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Obtém um imóvel específico pelo ID. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>Requisição que contém o ID do imóvel desejado.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>Retorna o objeto do imóvel ou um erro caso não seja encontrado.</dd></dl>
+
 <p>Implementa <a class="el" href="interface_realty_hub_1_1_core_1_1_handlers_1_1_i_property_handler.html#a515d209b4aca96d951bacc8e41abb81a">RealtyHub.Core.Handlers.IPropertyHandler</a>.</p>
 
 </div>
@@ -319,6 +384,15 @@ Membros Públicos</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Atualiza um imóvel existente no banco de dados. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>Objeto contendo as novas informações do imóvel.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>Retorna a resposta com o imóvel atualizado ou um erro se não for encontrado.</dd></dl>
 
 <p>Implementa <a class="el" href="interface_realty_hub_1_1_core_1_1_handlers_1_1_i_property_handler.html#aefe34fa516200431f773005291c3c9a7">RealtyHub.Core.Handlers.IPropertyHandler</a>.</p>
 

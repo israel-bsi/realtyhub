@@ -1,5 +1,10 @@
 \doxysection{Referência da Classe Realty\+Hub.\+Api\+Service.\+Handlers.\+Offer\+Handler}
 \hypertarget{class_realty_hub_1_1_api_service_1_1_handlers_1_1_offer_handler}{}\label{class_realty_hub_1_1_api_service_1_1_handlers_1_1_offer_handler}\index{RealtyHub.ApiService.Handlers.OfferHandler@{RealtyHub.ApiService.Handlers.OfferHandler}}
+
+
+Responsável pelas operações relacionadas a propostas.  
+
+
 Diagrama de hierarquia da classe Realty\+Hub.\+Api\+Service.\+Handlers.\+Offer\+Handler\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -10,26 +15,29 @@ Diagrama de hierarquia da classe Realty\+Hub.\+Api\+Service.\+Handlers.\+Offer\+
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_offer_handler_a2ac81c757f2f12777e0af925593a22d1}{Offer\+Handler}} (\mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_data_1_1_app_db_context}{App\+Db\+Context}} context)
-\item 
+\begin{DoxyCompactList}\small\item\em Inicializa uma nova instância de \doxylink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_offer_handler}{Offer\+Handler}. \end{DoxyCompactList}\item 
 async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_offer}{Offer}}?$>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_offer_handler_ab4a385e7e1562c559257f5bf8ff5aa1b}{Create\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_offer}{Offer}} request)
-\item 
+\begin{DoxyCompactList}\small\item\em Cria uma nova proposta no banco de dados. \end{DoxyCompactList}\item 
 async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_offer}{Offer}}?$>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_offer_handler_a02a508408f2200d5c1138840e0cde5f4}{Update\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_offer}{Offer}} request)
-\item 
+\begin{DoxyCompactList}\small\item\em Atualiza uma proposta existente no banco de dados. \end{DoxyCompactList}\item 
 async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_offer}{Offer}}?$>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_offer_handler_a0c0f3a3000235064bd2b42586125b3cb}{Reject\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_offers_1_1_reject_offer_request}{Reject\+Offer\+Request}} request)
-\item 
+\begin{DoxyCompactList}\small\item\em Rejeita uma proposta existente. \end{DoxyCompactList}\item 
 async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_offer}{Offer}}?$>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_offer_handler_a0681d79ef8243000a7682d6575fd48bd}{Accept\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_offers_1_1_accept_offer_request}{Accept\+Offer\+Request}} request)
-\item 
+\begin{DoxyCompactList}\small\item\em Aceita uma proposta existente. \end{DoxyCompactList}\item 
 async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_offer}{Offer}}?$>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_offer_handler_a147a44533cc9e5913ce27c562a117e72}{Get\+By\+Id\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_offers_1_1_get_offer_by_id_request}{Get\+Offer\+By\+Id\+Request}} request)
-\item 
+\begin{DoxyCompactList}\small\item\em Obtém uma proposta específica pelo ID. \end{DoxyCompactList}\item 
 async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_offer}{Offer}}?$>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_offer_handler_ac28ffb76610f0d5c8076aada3ea63005}{Get\+Accepted\+By\+Property}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_offers_1_1_get_offer_accepted_by_property}{Get\+Offer\+Accepted\+By\+Property}} request)
-\item 
+\begin{DoxyCompactList}\small\item\em Obtém a proposta aceita para um imóvel específico. \end{DoxyCompactList}\item 
 async Task$<$ Paged\+Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_offer}{Offer}} $>$?$>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_offer_handler_a41e5389c155e9aa3536a1a7bf2b1a298}{Get\+All\+Offers\+By\+Property\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_offers_1_1_get_all_offers_by_property_request}{Get\+All\+Offers\+By\+Property\+Request}} request)
-\item 
+\begin{DoxyCompactList}\small\item\em Retorna uma lista paginada de todas as propostas de um imóvel específico. \end{DoxyCompactList}\item 
 async Task$<$ Paged\+Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_offer}{Offer}} $>$?$>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_offer_handler_ae5092589246a7516e90b48f2815d9d92}{Get\+All\+Offers\+By\+Customer\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_offers_1_1_get_all_offers_by_customer_request}{Get\+All\+Offers\+By\+Customer\+Request}} request)
-\item 
+\begin{DoxyCompactList}\small\item\em Retorna uma lista paginada de todas as propostas de um cliente específico. \end{DoxyCompactList}\item 
 async Task$<$ Paged\+Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_offer}{Offer}} $>$?$>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_offer_handler_a85c2a57dcbaf385b012c1514e0c45136}{Get\+All\+Async}} (Get\+All\+Offers\+Request request)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Retorna uma lista paginada de todas as propostas no sistema. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
+
+\doxysubsection{Descrição detalhada}
+Responsável pelas operações relacionadas a propostas. 
 
 \doxysubsection{Construtores e Destrutores}
 \Hypertarget{class_realty_hub_1_1_api_service_1_1_handlers_1_1_offer_handler_a2ac81c757f2f12777e0af925593a22d1}\index{RealtyHub.ApiService.Handlers.OfferHandler@{RealtyHub.ApiService.Handlers.OfferHandler}!OfferHandler@{OfferHandler}}
@@ -40,6 +48,15 @@ Realty\+Hub.\+Api\+Service.\+Handlers.\+Offer\+Handler.\+Offer\+Handler (\begin{
 
 
 
+Inicializa uma nova instância de \doxylink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_offer_handler}{Offer\+Handler}. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em context} & Contexto do banco de dados para interação com propostas.\\
+\hline
+\end{DoxyParams}
+
+
 \doxysubsection{Documentação das funções}
 \Hypertarget{class_realty_hub_1_1_api_service_1_1_handlers_1_1_offer_handler_a0681d79ef8243000a7682d6575fd48bd}\index{RealtyHub.ApiService.Handlers.OfferHandler@{RealtyHub.ApiService.Handlers.OfferHandler}!AcceptAsync@{AcceptAsync}}
 \index{AcceptAsync@{AcceptAsync}!RealtyHub.ApiService.Handlers.OfferHandler@{RealtyHub.ApiService.Handlers.OfferHandler}}
@@ -47,6 +64,18 @@ Realty\+Hub.\+Api\+Service.\+Handlers.\+Offer\+Handler.\+Offer\+Handler (\begin{
 {\footnotesize\ttfamily \label{class_realty_hub_1_1_api_service_1_1_handlers_1_1_offer_handler_a0681d79ef8243000a7682d6575fd48bd} 
 async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_offer}{Offer}}?$>$ $>$ Realty\+Hub.\+Api\+Service.\+Handlers.\+Offer\+Handler.\+Accept\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_offers_1_1_accept_offer_request}{Accept\+Offer\+Request}}}]{request}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+
+
+Aceita uma proposta existente. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & Requisição contendo o ID da proposta a ser aceita.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna a resposta com a proposta aceita ou um erro se não for encontrada.
+\end{DoxyReturn}
 
 
 Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_offer_handler_a5fda4d7a648705bae9200e30b49ebcd1}{Realty\+Hub.\+Core.\+Handlers.\+IOffer\+Handler}}.
@@ -59,6 +88,18 @@ async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_
 
 
 
+Cria uma nova proposta no banco de dados. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & Objeto contendo as informações para criação da proposta.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna uma resposta com a proposta criada e o código de status.
+\end{DoxyReturn}
+
+
 Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_offer_handler_a14e9b2432cf879d1cb119c28eefc3d9a}{Realty\+Hub.\+Core.\+Handlers.\+IOffer\+Handler}}.
 
 \Hypertarget{class_realty_hub_1_1_api_service_1_1_handlers_1_1_offer_handler_ac28ffb76610f0d5c8076aada3ea63005}\index{RealtyHub.ApiService.Handlers.OfferHandler@{RealtyHub.ApiService.Handlers.OfferHandler}!GetAcceptedByProperty@{GetAcceptedByProperty}}
@@ -67,6 +108,18 @@ Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_off
 {\footnotesize\ttfamily \label{class_realty_hub_1_1_api_service_1_1_handlers_1_1_offer_handler_ac28ffb76610f0d5c8076aada3ea63005} 
 async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_offer}{Offer}}?$>$ $>$ Realty\+Hub.\+Api\+Service.\+Handlers.\+Offer\+Handler.\+Get\+Accepted\+By\+Property (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_offers_1_1_get_offer_accepted_by_property}{Get\+Offer\+Accepted\+By\+Property}}}]{request}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+
+
+Obtém a proposta aceita para um imóvel específico. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & Requisição contendo o ID do imóvel.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna a proposta aceita ou um erro caso não seja encontrada.
+\end{DoxyReturn}
 
 
 Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_offer_handler_a5c916c5154d9763295bf64657e654502}{Realty\+Hub.\+Core.\+Handlers.\+IOffer\+Handler}}.
@@ -79,6 +132,18 @@ async Task$<$ Paged\+Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_c
 
 
 
+Retorna uma lista paginada de todas as propostas no sistema. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & Requisição contendo parâmetros de paginação e filtro.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna uma resposta paginada com as propostas ou um erro em caso de falha.
+\end{DoxyReturn}
+
+
 Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_offer_handler_aefdd1b1cbb77a5ab1fb89b0461e98f85}{Realty\+Hub.\+Core.\+Handlers.\+IOffer\+Handler}}.
 
 \Hypertarget{class_realty_hub_1_1_api_service_1_1_handlers_1_1_offer_handler_ae5092589246a7516e90b48f2815d9d92}\index{RealtyHub.ApiService.Handlers.OfferHandler@{RealtyHub.ApiService.Handlers.OfferHandler}!GetAllOffersByCustomerAsync@{GetAllOffersByCustomerAsync}}
@@ -87,6 +152,18 @@ Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_off
 {\footnotesize\ttfamily \label{class_realty_hub_1_1_api_service_1_1_handlers_1_1_offer_handler_ae5092589246a7516e90b48f2815d9d92} 
 async Task$<$ Paged\+Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_offer}{Offer}} $>$?$>$ $>$ Realty\+Hub.\+Api\+Service.\+Handlers.\+Offer\+Handler.\+Get\+All\+Offers\+By\+Customer\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_offers_1_1_get_all_offers_by_customer_request}{Get\+All\+Offers\+By\+Customer\+Request}}}]{request}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+
+
+Retorna uma lista paginada de todas as propostas de um cliente específico. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & Requisição contendo parâmetros de paginação e filtro por cliente.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna uma resposta paginada com as propostas ou um erro em caso de falha.
+\end{DoxyReturn}
 
 
 Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_offer_handler_ad9f2b3b5565187c986fc1c0e890cf408}{Realty\+Hub.\+Core.\+Handlers.\+IOffer\+Handler}}.
@@ -99,6 +176,18 @@ async Task$<$ Paged\+Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_c
 
 
 
+Retorna uma lista paginada de todas as propostas de um imóvel específico. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & Requisição contendo parâmetros de paginação e filtro por imóvel.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna uma resposta paginada com as propostas ou um erro em caso de falha.
+\end{DoxyReturn}
+
+
 Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_offer_handler_a18995cebce6f18bc876176b9e3bdfeba}{Realty\+Hub.\+Core.\+Handlers.\+IOffer\+Handler}}.
 
 \Hypertarget{class_realty_hub_1_1_api_service_1_1_handlers_1_1_offer_handler_a147a44533cc9e5913ce27c562a117e72}\index{RealtyHub.ApiService.Handlers.OfferHandler@{RealtyHub.ApiService.Handlers.OfferHandler}!GetByIdAsync@{GetByIdAsync}}
@@ -107,6 +196,18 @@ Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_off
 {\footnotesize\ttfamily \label{class_realty_hub_1_1_api_service_1_1_handlers_1_1_offer_handler_a147a44533cc9e5913ce27c562a117e72} 
 async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_offer}{Offer}}?$>$ $>$ Realty\+Hub.\+Api\+Service.\+Handlers.\+Offer\+Handler.\+Get\+By\+Id\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_offers_1_1_get_offer_by_id_request}{Get\+Offer\+By\+Id\+Request}}}]{request}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+
+
+Obtém uma proposta específica pelo ID. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & Requisição contendo o ID da proposta desejada.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna a proposta ou um erro caso não seja encontrada.
+\end{DoxyReturn}
 
 
 Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_offer_handler_ab6f96711795614787cb0c8d6ecc02347}{Realty\+Hub.\+Core.\+Handlers.\+IOffer\+Handler}}.
@@ -119,6 +220,18 @@ async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_
 
 
 
+Rejeita uma proposta existente. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & Requisição contendo o ID da proposta a ser rejeitada.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna a resposta com a proposta rejeitada ou um erro se não for encontrada.
+\end{DoxyReturn}
+
+
 Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_offer_handler_ac909b82536f8d9911ed6ac2f13c97e89}{Realty\+Hub.\+Core.\+Handlers.\+IOffer\+Handler}}.
 
 \Hypertarget{class_realty_hub_1_1_api_service_1_1_handlers_1_1_offer_handler_a02a508408f2200d5c1138840e0cde5f4}\index{RealtyHub.ApiService.Handlers.OfferHandler@{RealtyHub.ApiService.Handlers.OfferHandler}!UpdateAsync@{UpdateAsync}}
@@ -127,6 +240,18 @@ Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_off
 {\footnotesize\ttfamily \label{class_realty_hub_1_1_api_service_1_1_handlers_1_1_offer_handler_a02a508408f2200d5c1138840e0cde5f4} 
 async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_offer}{Offer}}?$>$ $>$ Realty\+Hub.\+Api\+Service.\+Handlers.\+Offer\+Handler.\+Update\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_offer}{Offer}}}]{request}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+
+
+Atualiza uma proposta existente no banco de dados. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & Objeto contendo as novas informações da proposta.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna a resposta com a proposta atualizada ou um erro se não for encontrada.
+\end{DoxyReturn}
 
 
 Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_offer_handler_a4d4747b836fa12447bac4b0ee4204bf8}{Realty\+Hub.\+Core.\+Handlers.\+IOffer\+Handler}}.

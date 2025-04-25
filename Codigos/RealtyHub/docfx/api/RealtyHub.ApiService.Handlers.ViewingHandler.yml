@@ -26,10 +26,12 @@ items:
       repo: https://github.com/israel-bsi/realtyhub
     id: ViewingHandler
     path: ../RealtyHub.ApiService/Handlers/ViewingHandler.cs
-    startLine: 10
+    startLine: 13
   assemblies:
   - RealtyHub.ApiService
   namespace: RealtyHub.ApiService.Handlers
+  summary: Responsável pelas operações relacionadas às visitas de imóveis.
+  example: []
   syntax:
     content: 'public class ViewingHandler : IViewingHandler'
     content.vb: Public Class ViewingHandler Implements IViewingHandler
@@ -63,15 +65,18 @@ items:
       repo: https://github.com/israel-bsi/realtyhub
     id: .ctor
     path: ../RealtyHub.ApiService/Handlers/ViewingHandler.cs
-    startLine: 14
+    startLine: 21
   assemblies:
   - RealtyHub.ApiService
   namespace: RealtyHub.ApiService.Handlers
+  summary: Inicializa uma nova instância de <xref href="RealtyHub.ApiService.Handlers.ViewingHandler" data-throw-if-not-resolved="false"></xref>.
+  example: []
   syntax:
     content: public ViewingHandler(AppDbContext context)
     parameters:
     - id: context
       type: RealtyHub.ApiService.Data.AppDbContext
+      description: Contexto do banco de dados para interação com as visitas.
     content.vb: Public Sub New(context As AppDbContext)
   overload: RealtyHub.ApiService.Handlers.ViewingHandler.#ctor*
   nameWithType.vb: ViewingHandler.New(AppDbContext)
@@ -95,18 +100,21 @@ items:
       repo: https://github.com/israel-bsi/realtyhub
     id: ScheduleAsync
     path: ../RealtyHub.ApiService/Handlers/ViewingHandler.cs
-    startLine: 19
+    startLine: 31
   assemblies:
   - RealtyHub.ApiService
   namespace: RealtyHub.ApiService.Handlers
+  summary: Agenda uma nova visita para um imóvel.
   example: []
   syntax:
     content: public Task<Response<Viewing?>> ScheduleAsync(Viewing request)
     parameters:
     - id: request
       type: RealtyHub.Core.Models.Viewing
+      description: Objeto contendo as informações para agendamento da visita.
     return:
       type: System.Threading.Tasks.Task{RealtyHub.Core.Responses.Response{RealtyHub.Core.Models.Viewing}}
+      description: Retorna uma resposta com a visita agendada ou um erro em caso de falha.
     content.vb: Public Function ScheduleAsync(request As Viewing) As Task(Of Response(Of Viewing))
   overload: RealtyHub.ApiService.Handlers.ViewingHandler.ScheduleAsync*
   implements:
@@ -129,18 +137,21 @@ items:
       repo: https://github.com/israel-bsi/realtyhub
     id: RescheduleAsync
     path: ../RealtyHub.ApiService/Handlers/ViewingHandler.cs
-    startLine: 71
+    startLine: 88
   assemblies:
   - RealtyHub.ApiService
   namespace: RealtyHub.ApiService.Handlers
+  summary: Reagenda uma visita existente.
   example: []
   syntax:
     content: public Task<Response<Viewing?>> RescheduleAsync(Viewing request)
     parameters:
     - id: request
       type: RealtyHub.Core.Models.Viewing
+      description: Objeto contendo as informações para reagendamento da visita.
     return:
       type: System.Threading.Tasks.Task{RealtyHub.Core.Responses.Response{RealtyHub.Core.Models.Viewing}}
+      description: Retorna uma resposta com a visita reagendada ou um erro em caso de falha.
     content.vb: Public Function RescheduleAsync(request As Viewing) As Task(Of Response(Of Viewing))
   overload: RealtyHub.ApiService.Handlers.ViewingHandler.RescheduleAsync*
   implements:
@@ -163,18 +174,21 @@ items:
       repo: https://github.com/israel-bsi/realtyhub
     id: DoneAsync
     path: ../RealtyHub.ApiService/Handlers/ViewingHandler.cs
-    startLine: 109
+    startLine: 129
   assemblies:
   - RealtyHub.ApiService
   namespace: RealtyHub.ApiService.Handlers
+  summary: Finaliza uma visita existente.
   example: []
   syntax:
     content: public Task<Response<Viewing?>> DoneAsync(DoneViewingRequest request)
     parameters:
     - id: request
       type: RealtyHub.Core.Requests.Viewings.DoneViewingRequest
+      description: Requisição contendo o ID da visita a ser finalizada.
     return:
       type: System.Threading.Tasks.Task{RealtyHub.Core.Responses.Response{RealtyHub.Core.Models.Viewing}}
+      description: Retorna uma resposta com a visita finalizada ou um erro em caso de falha.
     content.vb: Public Function DoneAsync(request As DoneViewingRequest) As Task(Of Response(Of Viewing))
   overload: RealtyHub.ApiService.Handlers.ViewingHandler.DoneAsync*
   implements:
@@ -197,18 +211,21 @@ items:
       repo: https://github.com/israel-bsi/realtyhub
     id: CancelAsync
     path: ../RealtyHub.ApiService/Handlers/ViewingHandler.cs
-    startLine: 146
+    startLine: 169
   assemblies:
   - RealtyHub.ApiService
   namespace: RealtyHub.ApiService.Handlers
+  summary: Cancela uma visita existente.
   example: []
   syntax:
     content: public Task<Response<Viewing?>> CancelAsync(CancelViewingRequest request)
     parameters:
     - id: request
       type: RealtyHub.Core.Requests.Viewings.CancelViewingRequest
+      description: Requisição contendo o ID da visita a ser cancelada.
     return:
       type: System.Threading.Tasks.Task{RealtyHub.Core.Responses.Response{RealtyHub.Core.Models.Viewing}}
+      description: Retorna uma resposta com a visita cancelada ou um erro em caso de falha.
     content.vb: Public Function CancelAsync(request As CancelViewingRequest) As Task(Of Response(Of Viewing))
   overload: RealtyHub.ApiService.Handlers.ViewingHandler.CancelAsync*
   implements:
@@ -231,18 +248,21 @@ items:
       repo: https://github.com/israel-bsi/realtyhub
     id: GetByIdAsync
     path: ../RealtyHub.ApiService/Handlers/ViewingHandler.cs
-    startLine: 183
+    startLine: 209
   assemblies:
   - RealtyHub.ApiService
   namespace: RealtyHub.ApiService.Handlers
+  summary: Obtém uma visita específica pelo ID.
   example: []
   syntax:
     content: public Task<Response<Viewing?>> GetByIdAsync(GetViewingByIdRequest request)
     parameters:
     - id: request
       type: RealtyHub.Core.Requests.Viewings.GetViewingByIdRequest
+      description: Requisição contendo o ID da visita desejada.
     return:
       type: System.Threading.Tasks.Task{RealtyHub.Core.Responses.Response{RealtyHub.Core.Models.Viewing}}
+      description: Retorna a visita ou um erro caso não seja encontrada.
     content.vb: Public Function GetByIdAsync(request As GetViewingByIdRequest) As Task(Of Response(Of Viewing))
   overload: RealtyHub.ApiService.Handlers.ViewingHandler.GetByIdAsync*
   implements:
@@ -265,18 +285,21 @@ items:
       repo: https://github.com/israel-bsi/realtyhub
     id: GetAllAsync
     path: ../RealtyHub.ApiService/Handlers/ViewingHandler.cs
-    startLine: 208
+    startLine: 239
   assemblies:
   - RealtyHub.ApiService
   namespace: RealtyHub.ApiService.Handlers
+  summary: Retorna uma lista paginada de todas as visitas.
   example: []
   syntax:
     content: public Task<PagedResponse<List<Viewing>?>> GetAllAsync(GetAllViewingsRequest request)
     parameters:
     - id: request
       type: RealtyHub.Core.Requests.Viewings.GetAllViewingsRequest
+      description: Requisição contendo parâmetros de paginação e filtro.
     return:
       type: System.Threading.Tasks.Task{RealtyHub.Core.Responses.PagedResponse{System.Collections.Generic.List{RealtyHub.Core.Models.Viewing}}}
+      description: Retorna uma resposta paginada com as visitas ou um erro em caso de falha.
     content.vb: Public Function GetAllAsync(request As GetAllViewingsRequest) As Task(Of PagedResponse(Of List(Of Viewing)))
   overload: RealtyHub.ApiService.Handlers.ViewingHandler.GetAllAsync*
   implements:
@@ -578,6 +601,12 @@ references:
   - name: .
   - uid: RealtyHub.Core.Handlers
     name: Handlers
+- uid: RealtyHub.ApiService.Handlers.ViewingHandler
+  commentId: T:RealtyHub.ApiService.Handlers.ViewingHandler
+  href: RealtyHub.ApiService.Handlers.ViewingHandler.html
+  name: ViewingHandler
+  nameWithType: ViewingHandler
+  fullName: RealtyHub.ApiService.Handlers.ViewingHandler
 - uid: RealtyHub.ApiService.Handlers.ViewingHandler.#ctor*
   commentId: Overload:RealtyHub.ApiService.Handlers.ViewingHandler.#ctor
   href: RealtyHub.ApiService.Handlers.ViewingHandler.html#RealtyHub_ApiService_Handlers_ViewingHandler__ctor_RealtyHub_ApiService_Data_AppDbContext_

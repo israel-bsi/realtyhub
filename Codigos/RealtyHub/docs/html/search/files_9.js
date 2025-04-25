@@ -33,6 +33,7 @@ var searchData=
   ['getofferbyidrequest_2ecs_30',['GetOfferByIdRequest.cs',['../_get_offer_by_id_request_8cs.html',1,'']]],
   ['getpropertybyidendpoint_2ecs_31',['GetPropertyByIdEndpoint.cs',['../_get_property_by_id_endpoint_8cs.html',1,'']]],
   ['getpropertybyidrequest_2ecs_32',['GetPropertyByIdRequest.cs',['../_get_property_by_id_request_8cs.html',1,'']]],
-  ['getviewingbyidendpoint_2ecs_33',['GetViewingByIdEndpoint.cs',['../_get_viewing_by_id_endpoint_8cs.html',1,'']]],
-  ['getviewingbyidrequest_2ecs_34',['GetViewingByIdRequest.cs',['../_get_viewing_by_id_request_8cs.html',1,'']]]
+  ['getting_2dstarted_2emd_33',['getting-started.md',['../getting-started_8md.html',1,'']]],
+  ['getviewingbyidendpoint_2ecs_34',['GetViewingByIdEndpoint.cs',['../_get_viewing_by_id_endpoint_8cs.html',1,'']]],
+  ['getviewingbyidrequest_2ecs_35',['GetViewingByIdRequest.cs',['../_get_viewing_by_id_request_8cs.html',1,'']]]
 ];

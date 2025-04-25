@@ -29,10 +29,12 @@ items:
       repo: https://github.com/israel-bsi/realtyhub
     id: OfferHandler
     path: ../RealtyHub.ApiService/Handlers/OfferHandler.cs
-    startLine: 10
+    startLine: 13
   assemblies:
   - RealtyHub.ApiService
   namespace: RealtyHub.ApiService.Handlers
+  summary: Responsável pelas operações relacionadas a propostas.
+  example: []
   syntax:
     content: 'public class OfferHandler : IOfferHandler'
     content.vb: Public Class OfferHandler Implements IOfferHandler
@@ -66,15 +68,18 @@ items:
       repo: https://github.com/israel-bsi/realtyhub
     id: .ctor
     path: ../RealtyHub.ApiService/Handlers/OfferHandler.cs
-    startLine: 14
+    startLine: 21
   assemblies:
   - RealtyHub.ApiService
   namespace: RealtyHub.ApiService.Handlers
+  summary: Inicializa uma nova instância de <xref href="RealtyHub.ApiService.Handlers.OfferHandler" data-throw-if-not-resolved="false"></xref>.
+  example: []
   syntax:
     content: public OfferHandler(AppDbContext context)
     parameters:
     - id: context
       type: RealtyHub.ApiService.Data.AppDbContext
+      description: Contexto do banco de dados para interação com propostas.
     content.vb: Public Sub New(context As AppDbContext)
   overload: RealtyHub.ApiService.Handlers.OfferHandler.#ctor*
   nameWithType.vb: OfferHandler.New(AppDbContext)
@@ -98,18 +103,21 @@ items:
       repo: https://github.com/israel-bsi/realtyhub
     id: CreateAsync
     path: ../RealtyHub.ApiService/Handlers/OfferHandler.cs
-    startLine: 19
+    startLine: 31
   assemblies:
   - RealtyHub.ApiService
   namespace: RealtyHub.ApiService.Handlers
+  summary: Cria uma nova proposta no banco de dados.
   example: []
   syntax:
     content: public Task<Response<Offer?>> CreateAsync(Offer request)
     parameters:
     - id: request
       type: RealtyHub.Core.Models.Offer
+      description: Objeto contendo as informações para criação da proposta.
     return:
       type: System.Threading.Tasks.Task{RealtyHub.Core.Responses.Response{RealtyHub.Core.Models.Offer}}
+      description: Retorna uma resposta com a proposta criada e o código de status.
     content.vb: Public Function CreateAsync(request As Offer) As Task(Of Response(Of Offer))
   overload: RealtyHub.ApiService.Handlers.OfferHandler.CreateAsync*
   implements:
@@ -132,18 +140,21 @@ items:
       repo: https://github.com/israel-bsi/realtyhub
     id: UpdateAsync
     path: ../RealtyHub.ApiService/Handlers/OfferHandler.cs
-    startLine: 82
+    startLine: 99
   assemblies:
   - RealtyHub.ApiService
   namespace: RealtyHub.ApiService.Handlers
+  summary: Atualiza uma proposta existente no banco de dados.
   example: []
   syntax:
     content: public Task<Response<Offer?>> UpdateAsync(Offer request)
     parameters:
     - id: request
       type: RealtyHub.Core.Models.Offer
+      description: Objeto contendo as novas informações da proposta.
     return:
       type: System.Threading.Tasks.Task{RealtyHub.Core.Responses.Response{RealtyHub.Core.Models.Offer}}
+      description: Retorna a resposta com a proposta atualizada ou um erro se não for encontrada.
     content.vb: Public Function UpdateAsync(request As Offer) As Task(Of Response(Of Offer))
   overload: RealtyHub.ApiService.Handlers.OfferHandler.UpdateAsync*
   implements:
@@ -166,18 +177,21 @@ items:
       repo: https://github.com/israel-bsi/realtyhub
     id: RejectAsync
     path: ../RealtyHub.ApiService/Handlers/OfferHandler.cs
-    startLine: 172
+    startLine: 194
   assemblies:
   - RealtyHub.ApiService
   namespace: RealtyHub.ApiService.Handlers
+  summary: Rejeita uma proposta existente.
   example: []
   syntax:
     content: public Task<Response<Offer?>> RejectAsync(RejectOfferRequest request)
     parameters:
     - id: request
       type: RealtyHub.Core.Requests.Offers.RejectOfferRequest
+      description: Requisição contendo o ID da proposta a ser rejeitada.
     return:
       type: System.Threading.Tasks.Task{RealtyHub.Core.Responses.Response{RealtyHub.Core.Models.Offer}}
+      description: Retorna a resposta com a proposta rejeitada ou um erro se não for encontrada.
     content.vb: Public Function RejectAsync(request As RejectOfferRequest) As Task(Of Response(Of Offer))
   overload: RealtyHub.ApiService.Handlers.OfferHandler.RejectAsync*
   implements:
@@ -200,18 +214,21 @@ items:
       repo: https://github.com/israel-bsi/realtyhub
     id: AcceptAsync
     path: ../RealtyHub.ApiService/Handlers/OfferHandler.cs
-    startLine: 212
+    startLine: 239
   assemblies:
   - RealtyHub.ApiService
   namespace: RealtyHub.ApiService.Handlers
+  summary: Aceita uma proposta existente.
   example: []
   syntax:
     content: public Task<Response<Offer?>> AcceptAsync(AcceptOfferRequest request)
     parameters:
     - id: request
       type: RealtyHub.Core.Requests.Offers.AcceptOfferRequest
+      description: Requisição contendo o ID da proposta a ser aceita.
     return:
       type: System.Threading.Tasks.Task{RealtyHub.Core.Responses.Response{RealtyHub.Core.Models.Offer}}
+      description: Retorna a resposta com a proposta aceita ou um erro se não for encontrada.
     content.vb: Public Function AcceptAsync(request As AcceptOfferRequest) As Task(Of Response(Of Offer))
   overload: RealtyHub.ApiService.Handlers.OfferHandler.AcceptAsync*
   implements:
@@ -234,18 +251,21 @@ items:
       repo: https://github.com/israel-bsi/realtyhub
     id: GetByIdAsync
     path: ../RealtyHub.ApiService/Handlers/OfferHandler.cs
-    startLine: 252
+    startLine: 284
   assemblies:
   - RealtyHub.ApiService
   namespace: RealtyHub.ApiService.Handlers
+  summary: Obtém uma proposta específica pelo ID.
   example: []
   syntax:
     content: public Task<Response<Offer?>> GetByIdAsync(GetOfferByIdRequest request)
     parameters:
     - id: request
       type: RealtyHub.Core.Requests.Offers.GetOfferByIdRequest
+      description: Requisição contendo o ID da proposta desejada.
     return:
       type: System.Threading.Tasks.Task{RealtyHub.Core.Responses.Response{RealtyHub.Core.Models.Offer}}
+      description: Retorna a proposta ou um erro caso não seja encontrada.
     content.vb: Public Function GetByIdAsync(request As GetOfferByIdRequest) As Task(Of Response(Of Offer))
   overload: RealtyHub.ApiService.Handlers.OfferHandler.GetByIdAsync*
   implements:
@@ -268,18 +288,21 @@ items:
       repo: https://github.com/israel-bsi/realtyhub
     id: GetAcceptedByProperty
     path: ../RealtyHub.ApiService/Handlers/OfferHandler.cs
-    startLine: 279
+    startLine: 316
   assemblies:
   - RealtyHub.ApiService
   namespace: RealtyHub.ApiService.Handlers
+  summary: Obtém a proposta aceita para um imóvel específico.
   example: []
   syntax:
     content: public Task<Response<Offer?>> GetAcceptedByProperty(GetOfferAcceptedByProperty request)
     parameters:
     - id: request
       type: RealtyHub.Core.Requests.Offers.GetOfferAcceptedByProperty
+      description: Requisição contendo o ID do imóvel.
     return:
       type: System.Threading.Tasks.Task{RealtyHub.Core.Responses.Response{RealtyHub.Core.Models.Offer}}
+      description: Retorna a proposta aceita ou um erro caso não seja encontrada.
     content.vb: Public Function GetAcceptedByProperty(request As GetOfferAcceptedByProperty) As Task(Of Response(Of Offer))
   overload: RealtyHub.ApiService.Handlers.OfferHandler.GetAcceptedByProperty*
   implements:
@@ -302,18 +325,21 @@ items:
       repo: https://github.com/israel-bsi/realtyhub
     id: GetAllOffersByPropertyAsync
     path: ../RealtyHub.ApiService/Handlers/OfferHandler.cs
-    startLine: 307
+    startLine: 349
   assemblies:
   - RealtyHub.ApiService
   namespace: RealtyHub.ApiService.Handlers
+  summary: Retorna uma lista paginada de todas as propostas de um imóvel específico.
   example: []
   syntax:
     content: public Task<PagedResponse<List<Offer>?>> GetAllOffersByPropertyAsync(GetAllOffersByPropertyRequest request)
     parameters:
     - id: request
       type: RealtyHub.Core.Requests.Offers.GetAllOffersByPropertyRequest
+      description: Requisição contendo parâmetros de paginação e filtro por imóvel.
     return:
       type: System.Threading.Tasks.Task{RealtyHub.Core.Responses.PagedResponse{System.Collections.Generic.List{RealtyHub.Core.Models.Offer}}}
+      description: Retorna uma resposta paginada com as propostas ou um erro em caso de falha.
     content.vb: Public Function GetAllOffersByPropertyAsync(request As GetAllOffersByPropertyRequest) As Task(Of PagedResponse(Of List(Of Offer)))
   overload: RealtyHub.ApiService.Handlers.OfferHandler.GetAllOffersByPropertyAsync*
   implements:
@@ -336,18 +362,21 @@ items:
       repo: https://github.com/israel-bsi/realtyhub
     id: GetAllOffersByCustomerAsync
     path: ../RealtyHub.ApiService/Handlers/OfferHandler.cs
-    startLine: 363
+    startLine: 410
   assemblies:
   - RealtyHub.ApiService
   namespace: RealtyHub.ApiService.Handlers
+  summary: Retorna uma lista paginada de todas as propostas de um cliente específico.
   example: []
   syntax:
     content: public Task<PagedResponse<List<Offer>?>> GetAllOffersByCustomerAsync(GetAllOffersByCustomerRequest request)
     parameters:
     - id: request
       type: RealtyHub.Core.Requests.Offers.GetAllOffersByCustomerRequest
+      description: Requisição contendo parâmetros de paginação e filtro por cliente.
     return:
       type: System.Threading.Tasks.Task{RealtyHub.Core.Responses.PagedResponse{System.Collections.Generic.List{RealtyHub.Core.Models.Offer}}}
+      description: Retorna uma resposta paginada com as propostas ou um erro em caso de falha.
     content.vb: Public Function GetAllOffersByCustomerAsync(request As GetAllOffersByCustomerRequest) As Task(Of PagedResponse(Of List(Of Offer)))
   overload: RealtyHub.ApiService.Handlers.OfferHandler.GetAllOffersByCustomerAsync*
   implements:
@@ -370,18 +399,21 @@ items:
       repo: https://github.com/israel-bsi/realtyhub
     id: GetAllAsync
     path: ../RealtyHub.ApiService/Handlers/OfferHandler.cs
-    startLine: 420
+    startLine: 472
   assemblies:
   - RealtyHub.ApiService
   namespace: RealtyHub.ApiService.Handlers
+  summary: Retorna uma lista paginada de todas as propostas no sistema.
   example: []
   syntax:
     content: public Task<PagedResponse<List<Offer>?>> GetAllAsync(GetAllOffersRequest request)
     parameters:
     - id: request
       type: RealtyHub.Core.Requests.Offers.GetAllOffersRequest
+      description: Requisição contendo parâmetros de paginação e filtro.
     return:
       type: System.Threading.Tasks.Task{RealtyHub.Core.Responses.PagedResponse{System.Collections.Generic.List{RealtyHub.Core.Models.Offer}}}
+      description: Retorna uma resposta paginada com as propostas ou um erro em caso de falha.
     content.vb: Public Function GetAllAsync(request As GetAllOffersRequest) As Task(Of PagedResponse(Of List(Of Offer)))
   overload: RealtyHub.ApiService.Handlers.OfferHandler.GetAllAsync*
   implements:
@@ -683,6 +715,12 @@ references:
   - name: .
   - uid: RealtyHub.Core.Handlers
     name: Handlers
+- uid: RealtyHub.ApiService.Handlers.OfferHandler
+  commentId: T:RealtyHub.ApiService.Handlers.OfferHandler
+  href: RealtyHub.ApiService.Handlers.OfferHandler.html
+  name: OfferHandler
+  nameWithType: OfferHandler
+  fullName: RealtyHub.ApiService.Handlers.OfferHandler
 - uid: RealtyHub.ApiService.Handlers.OfferHandler.#ctor*
   commentId: Overload:RealtyHub.ApiService.Handlers.OfferHandler.#ctor
   href: RealtyHub.ApiService.Handlers.OfferHandler.html#RealtyHub_ApiService_Handlers_OfferHandler__ctor_RealtyHub_ApiService_Data_AppDbContext_
