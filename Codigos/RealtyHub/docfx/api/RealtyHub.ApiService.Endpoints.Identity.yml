@@ -1,0 +1,58 @@
+### YamlMime:ManagedReference
+items:
+- uid: RealtyHub.ApiService.Endpoints.Identity
+  commentId: N:RealtyHub.ApiService.Endpoints.Identity
+  id: RealtyHub.ApiService.Endpoints.Identity
+  children:
+  - RealtyHub.ApiService.Endpoints.Identity.ConfirmEmailEndpoint
+  - RealtyHub.ApiService.Endpoints.Identity.ForgotPasswordEndpoint
+  - RealtyHub.ApiService.Endpoints.Identity.LogoutEndpoint
+  - RealtyHub.ApiService.Endpoints.Identity.ManageInfoEndpoint
+  - RealtyHub.ApiService.Endpoints.Identity.RegisterUserEndpoint
+  - RealtyHub.ApiService.Endpoints.Identity.ResetPasswordEndpoint
+  langs:
+  - csharp
+  - vb
+  name: RealtyHub.ApiService.Endpoints.Identity
+  nameWithType: RealtyHub.ApiService.Endpoints.Identity
+  fullName: RealtyHub.ApiService.Endpoints.Identity
+  type: Namespace
+  assemblies:
+  - RealtyHub.ApiService
+references:
+- uid: RealtyHub.ApiService.Endpoints.Identity.ConfirmEmailEndpoint
+  commentId: T:RealtyHub.ApiService.Endpoints.Identity.ConfirmEmailEndpoint
+  href: RealtyHub.ApiService.Endpoints.Identity.ConfirmEmailEndpoint.html
+  name: ConfirmEmailEndpoint
+  nameWithType: ConfirmEmailEndpoint
+  fullName: RealtyHub.ApiService.Endpoints.Identity.ConfirmEmailEndpoint
+- uid: RealtyHub.ApiService.Endpoints.Identity.ForgotPasswordEndpoint
+  commentId: T:RealtyHub.ApiService.Endpoints.Identity.ForgotPasswordEndpoint
+  href: RealtyHub.ApiService.Endpoints.Identity.ForgotPasswordEndpoint.html
+  name: ForgotPasswordEndpoint
+  nameWithType: ForgotPasswordEndpoint
+  fullName: RealtyHub.ApiService.Endpoints.Identity.ForgotPasswordEndpoint
+- uid: RealtyHub.ApiService.Endpoints.Identity.LogoutEndpoint
+  commentId: T:RealtyHub.ApiService.Endpoints.Identity.LogoutEndpoint
+  href: RealtyHub.ApiService.Endpoints.Identity.LogoutEndpoint.html
+  name: LogoutEndpoint
+  nameWithType: LogoutEndpoint
+  fullName: RealtyHub.ApiService.Endpoints.Identity.LogoutEndpoint
+- uid: RealtyHub.ApiService.Endpoints.Identity.ManageInfoEndpoint
+  commentId: T:RealtyHub.ApiService.Endpoints.Identity.ManageInfoEndpoint
+  href: RealtyHub.ApiService.Endpoints.Identity.ManageInfoEndpoint.html
+  name: ManageInfoEndpoint
+  nameWithType: ManageInfoEndpoint
+  fullName: RealtyHub.ApiService.Endpoints.Identity.ManageInfoEndpoint
+- uid: RealtyHub.ApiService.Endpoints.Identity.RegisterUserEndpoint
+  commentId: T:RealtyHub.ApiService.Endpoints.Identity.RegisterUserEndpoint
+  href: RealtyHub.ApiService.Endpoints.Identity.RegisterUserEndpoint.html
+  name: RegisterUserEndpoint
+  nameWithType: RegisterUserEndpoint
+  fullName: RealtyHub.ApiService.Endpoints.Identity.RegisterUserEndpoint
+- uid: RealtyHub.ApiService.Endpoints.Identity.ResetPasswordEndpoint
+  commentId: T:RealtyHub.ApiService.Endpoints.Identity.ResetPasswordEndpoint
+  href: RealtyHub.ApiService.Endpoints.Identity.ResetPasswordEndpoint.html
+  name: ResetPasswordEndpoint
+  nameWithType: ResetPasswordEndpoint
+  fullName: RealtyHub.ApiService.Endpoints.Identity.ResetPasswordEndpoint

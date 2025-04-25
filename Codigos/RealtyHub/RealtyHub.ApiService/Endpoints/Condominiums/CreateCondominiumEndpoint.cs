@@ -16,7 +16,7 @@ public class CreateCondominiumEndpoint : IEndpoint
             .WithOrder(1)
             .Produces<Response<Condominium?>>(StatusCodes.Status201Created)
             .Produces<Response<Condominium?>>(StatusCodes.Status400BadRequest);
-
+    
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
         ICondominiumHandler handler,

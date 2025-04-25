@@ -1,0 +1,76 @@
+### YamlMime:ManagedReference
+items:
+- uid: RealtyHub.ApiService.Common.Api
+  commentId: N:RealtyHub.ApiService.Common.Api
+  id: RealtyHub.ApiService.Common.Api
+  children:
+  - RealtyHub.ApiService.Common.Api.AppExtension
+  - RealtyHub.ApiService.Common.Api.BuilderExtension
+  - RealtyHub.ApiService.Common.Api.IEndpoint
+  langs:
+  - csharp
+  - vb
+  name: RealtyHub.ApiService.Common.Api
+  nameWithType: RealtyHub.ApiService.Common.Api
+  fullName: RealtyHub.ApiService.Common.Api
+  type: Namespace
+  assemblies:
+  - RealtyHub.ApiService
+references:
+- uid: RealtyHub.ApiService.Common.Api.AppExtension
+  commentId: T:RealtyHub.ApiService.Common.Api.AppExtension
+  href: RealtyHub.ApiService.Common.Api.AppExtension.html
+  name: AppExtension
+  nameWithType: AppExtension
+  fullName: RealtyHub.ApiService.Common.Api.AppExtension
+- uid: RealtyHub.ApiService.Common.Api.BuilderExtension
+  commentId: T:RealtyHub.ApiService.Common.Api.BuilderExtension
+  href: RealtyHub.ApiService.Common.Api.BuilderExtension.html
+  name: BuilderExtension
+  nameWithType: BuilderExtension
+  fullName: RealtyHub.ApiService.Common.Api.BuilderExtension
+- uid: RealtyHub.ApiService.Common.Api.IEndpoint
+  commentId: T:RealtyHub.ApiService.Common.Api.IEndpoint
+  parent: RealtyHub.ApiService.Common.Api
+  href: RealtyHub.ApiService.Common.Api.IEndpoint.html
+  name: IEndpoint
+  nameWithType: IEndpoint
+  fullName: RealtyHub.ApiService.Common.Api.IEndpoint
+- uid: RealtyHub.ApiService.Common.Api
+  commentId: N:RealtyHub.ApiService.Common.Api
+  href: RealtyHub.html
+  name: RealtyHub.ApiService.Common.Api
+  nameWithType: RealtyHub.ApiService.Common.Api
+  fullName: RealtyHub.ApiService.Common.Api
+  spec.csharp:
+  - uid: RealtyHub
+    name: RealtyHub
+    href: RealtyHub.html
+  - name: .
+  - uid: RealtyHub.ApiService
+    name: ApiService
+    href: RealtyHub.ApiService.html
+  - name: .
+  - uid: RealtyHub.ApiService.Common
+    name: Common
+    href: RealtyHub.ApiService.Common.html
+  - name: .
+  - uid: RealtyHub.ApiService.Common.Api
+    name: Api
+    href: RealtyHub.ApiService.Common.Api.html
+  spec.vb:
+  - uid: RealtyHub
+    name: RealtyHub
+    href: RealtyHub.html
+  - name: .
+  - uid: RealtyHub.ApiService
+    name: ApiService
+    href: RealtyHub.ApiService.html
+  - name: .
+  - uid: RealtyHub.ApiService.Common
+    name: Common
+    href: RealtyHub.ApiService.Common.html
+  - name: .
+  - uid: RealtyHub.ApiService.Common.Api
+    name: Api
+    href: RealtyHub.ApiService.Common.Api.html

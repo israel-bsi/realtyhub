@@ -7,15 +7,27 @@ using RealtyHub.Core.Responses;
 
 namespace RealtyHub.ApiService.Handlers;
 
+/// <summary>
+/// Responsável pelas operações relacionadas às fotos de imóveis.
+/// </summary>
 public class PropertyPhotosHandler : IPropertyPhotosHandler
 {
     private readonly AppDbContext _context;
 
+    /// <summary>
+    /// Inicializa uma nova instância de <see cref="PropertyPhotosHandler"/>.
+    /// </summary>
+    /// <param name="context">Contexto do banco de dados para interação com as fotos de imóveis.</param>
     public PropertyPhotosHandler(AppDbContext context)
     {
         _context = context;
     }
 
+    /// <summary>
+    /// Cria novas fotos para um imóvel.
+    /// </summary>
+    /// <param name="request">Requisição contendo as informações e os arquivos para criação das fotos.</param>
+    /// <returns>Retorna uma resposta indicando o sucesso ou falha da operação.</returns>
     public async Task<Response<PropertyPhoto?>> CreateAsync(CreatePropertyPhotosRequest request)
     {
         try
@@ -37,8 +49,7 @@ public class PropertyPhotosHandler : IPropertyPhotosHandler
             _context.Attach(property);
 
             if (!request.HttpRequest.HasFormContentType)
-                return new Response<PropertyPhoto?>(null, 400,
-                   "Conteúdo do tipo multipart/form-data esperado");
+                return new Response<PropertyPhoto?>(null, 400, "Conteúdo do tipo multipart/form-data esperado");
 
             var form = await request.HttpRequest.ReadFormAsync();
             var files = form.Files;
@@ -56,7 +67,6 @@ public class PropertyPhotosHandler : IPropertyPhotosHandler
                 var idPhoto = string.IsNullOrEmpty(id) ? Guid.NewGuid().ToString() : id;
                 var extension = Path.GetExtension(file.FileName);
                 var fileName = $"{idPhoto}{extension}";
-                
                 var fullFileName = Path.Combine(Configuration.PhotosPath, fileName);
 
                 await using var stream = new FileStream(fullFileName, FileMode.Create);
@@ -106,6 +116,11 @@ public class PropertyPhotosHandler : IPropertyPhotosHandler
         }
     }
 
+    /// <summary>
+    /// Atualiza as informações de fotos de um imóvel.
+    /// </summary>
+    /// <param name="request">Requisição contendo as informações das fotos a serem atualizadas.</param>
+    /// <returns>Retorna uma resposta indicando o sucesso ou falha da operação.</returns>
     public async Task<Response<List<PropertyPhoto>?>> UpdateAsync(UpdatePorpertyPhotosRequest request)
     {
         try
@@ -153,7 +168,12 @@ public class PropertyPhotosHandler : IPropertyPhotosHandler
             return new Response<List<PropertyPhoto>?>(null, 500, "Não foi possível atualizar as fotos");
         }
     }
-    
+
+    /// <summary>
+    /// Exclui uma foto de um imóvel.
+    /// </summary>
+    /// <param name="request">Requisição contendo o ID da foto a ser excluída.</param>
+    /// <returns>Retorna uma resposta indicando o sucesso ou falha da operação.</returns>
     public async Task<Response<PropertyPhoto?>> DeleteAsync(DeletePropertyPhotoRequest request)
     {
         try
@@ -172,7 +192,7 @@ public class PropertyPhotosHandler : IPropertyPhotosHandler
 
             propertyPhoto.IsActive = false;
             propertyPhoto.IsThumbnail = false;
-            propertyPhoto.UpdatedAt = DateTime.UtcNow; 
+            propertyPhoto.UpdatedAt = DateTime.UtcNow;
 
             await _context.SaveChangesAsync();
 
@@ -184,6 +204,11 @@ public class PropertyPhotosHandler : IPropertyPhotosHandler
         }
     }
 
+    /// <summary>
+    /// Obtém todas as fotos de um imóvel específico.
+    /// </summary>
+    /// <param name="request">Requisição contendo o ID do imóvel.</param>
+    /// <returns>Retorna uma lista de fotos do imóvel ou um erro em caso de falha.</returns>
     public async Task<Response<List<PropertyPhoto>?>> GetAllByPropertyAsync(
        GetAllPropertyPhotosByPropertyRequest request)
     {
@@ -196,7 +221,7 @@ public class PropertyPhotosHandler : IPropertyPhotosHandler
                     p.PropertyId == request.PropertyId
                     && p.UserId == request.UserId
                     && p.IsActive)
-                .OrderBy(p=>p.IsThumbnail)
+                .OrderBy(p => p.IsThumbnail)
                 .ToListAsync();
 
             return new Response<List<PropertyPhoto>?>(propertyPhotos);

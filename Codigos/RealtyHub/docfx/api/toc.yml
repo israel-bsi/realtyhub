@@ -1,0 +1,360 @@
+### YamlMime:TableOfContent
+items:
+- uid: RealtyHub.ApiService
+  name: RealtyHub.ApiService
+  type: Namespace
+  items:
+  - uid: RealtyHub.ApiService.Configuration
+    name: Configuration
+    type: Class
+  - uid: RealtyHub.ApiService.Configuration.EmailConfiguration
+    name: Configuration.EmailConfiguration
+    type: Class
+  - uid: RealtyHub.ApiService.Program
+    name: Program
+    type: Class
+- uid: RealtyHub.ApiService.Common.Api
+  name: RealtyHub.ApiService.Common.Api
+  type: Namespace
+  items:
+  - uid: RealtyHub.ApiService.Common.Api.AppExtension
+    name: AppExtension
+    type: Class
+  - uid: RealtyHub.ApiService.Common.Api.BuilderExtension
+    name: BuilderExtension
+    type: Class
+  - uid: RealtyHub.ApiService.Common.Api.IEndpoint
+    name: IEndpoint
+    type: Interface
+- uid: RealtyHub.ApiService.Data
+  name: RealtyHub.ApiService.Data
+  type: Namespace
+  items:
+  - uid: RealtyHub.ApiService.Data.AppDbContext
+    name: AppDbContext
+    type: Class
+- uid: RealtyHub.ApiService.Data.Mappings
+  name: RealtyHub.ApiService.Data.Mappings
+  type: Namespace
+  items:
+  - uid: RealtyHub.ApiService.Data.Mappings.CondominiumMapping
+    name: CondominiumMapping
+    type: Class
+  - uid: RealtyHub.ApiService.Data.Mappings.ContractMapping
+    name: ContractMapping
+    type: Class
+  - uid: RealtyHub.ApiService.Data.Mappings.ContractTemplatesMapping
+    name: ContractTemplatesMapping
+    type: Class
+  - uid: RealtyHub.ApiService.Data.Mappings.CustomerMapping
+    name: CustomerMapping
+    type: Class
+  - uid: RealtyHub.ApiService.Data.Mappings.OfferMapping
+    name: OfferMapping
+    type: Class
+  - uid: RealtyHub.ApiService.Data.Mappings.PaymentMapping
+    name: PaymentMapping
+    type: Class
+  - uid: RealtyHub.ApiService.Data.Mappings.PropertyMapping
+    name: PropertyMapping
+    type: Class
+  - uid: RealtyHub.ApiService.Data.Mappings.PropertyPhotosMapping
+    name: PropertyPhotosMapping
+    type: Class
+  - uid: RealtyHub.ApiService.Data.Mappings.ViewingMapping
+    name: ViewingMapping
+    type: Class
+- uid: RealtyHub.ApiService.Data.Mappings.Identity
+  name: RealtyHub.ApiService.Data.Mappings.Identity
+  type: Namespace
+  items:
+  - uid: RealtyHub.ApiService.Data.Mappings.Identity.IdentityRoleClaimMapping
+    name: IdentityRoleClaimMapping
+    type: Class
+  - uid: RealtyHub.ApiService.Data.Mappings.Identity.IdentityRoleMapping
+    name: IdentityRoleMapping
+    type: Class
+  - uid: RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserClaimMapping
+    name: IdentityUserClaimMapping
+    type: Class
+  - uid: RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserLoginMapping
+    name: IdentityUserLoginMapping
+    type: Class
+  - uid: RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserMapping
+    name: IdentityUserMapping
+    type: Class
+  - uid: RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserRoleMapping
+    name: IdentityUserRoleMapping
+    type: Class
+  - uid: RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserTokenMapping
+    name: IdentityUserTokenMapping
+    type: Class
+- uid: RealtyHub.ApiService.Endpoints
+  name: RealtyHub.ApiService.Endpoints
+  type: Namespace
+  items:
+  - uid: RealtyHub.ApiService.Endpoints.Endpoint
+    name: Endpoint
+    type: Class
+- uid: RealtyHub.ApiService.Endpoints.Condominiums
+  name: RealtyHub.ApiService.Endpoints.Condominiums
+  type: Namespace
+  items:
+  - uid: RealtyHub.ApiService.Endpoints.Condominiums.CreateCondominiumEndpoint
+    name: CreateCondominiumEndpoint
+    type: Class
+  - uid: RealtyHub.ApiService.Endpoints.Condominiums.DeleteCondominiumEndpoint
+    name: DeleteCondominiumEndpoint
+    type: Class
+  - uid: RealtyHub.ApiService.Endpoints.Condominiums.GetAllCondominiumsEndpoint
+    name: GetAllCondominiumsEndpoint
+    type: Class
+  - uid: RealtyHub.ApiService.Endpoints.Condominiums.GetCondominiumByIdEndpoint
+    name: GetCondominiumByIdEndpoint
+    type: Class
+  - uid: RealtyHub.ApiService.Endpoints.Condominiums.UpdateCondominiumEndpoint
+    name: UpdateCondominiumEndpoint
+    type: Class
+- uid: RealtyHub.ApiService.Endpoints.Contracts
+  name: RealtyHub.ApiService.Endpoints.Contracts
+  type: Namespace
+  items:
+  - uid: RealtyHub.ApiService.Endpoints.Contracts.CreateContractEndpoint
+    name: CreateContractEndpoint
+    type: Class
+  - uid: RealtyHub.ApiService.Endpoints.Contracts.DeleteContractEndpoint
+    name: DeleteContractEndpoint
+    type: Class
+  - uid: RealtyHub.ApiService.Endpoints.Contracts.GetAllContractsEndpoint
+    name: GetAllContractsEndpoint
+    type: Class
+  - uid: RealtyHub.ApiService.Endpoints.Contracts.GetContractByIdEndpoint
+    name: GetContractByIdEndpoint
+    type: Class
+  - uid: RealtyHub.ApiService.Endpoints.Contracts.UpdateContractEndpoint
+    name: UpdateContractEndpoint
+    type: Class
+- uid: RealtyHub.ApiService.Endpoints.ContractsTemplates
+  name: RealtyHub.ApiService.Endpoints.ContractsTemplates
+  type: Namespace
+  items:
+  - uid: RealtyHub.ApiService.Endpoints.ContractsTemplates.GetAllContractTemplatesEndpoint
+    name: GetAllContractTemplatesEndpoint
+    type: Class
+- uid: RealtyHub.ApiService.Endpoints.Customers
+  name: RealtyHub.ApiService.Endpoints.Customers
+  type: Namespace
+  items:
+  - uid: RealtyHub.ApiService.Endpoints.Customers.CreateCustomerEndpoint
+    name: CreateCustomerEndpoint
+    type: Class
+  - uid: RealtyHub.ApiService.Endpoints.Customers.DeleteCustomerEndpoint
+    name: DeleteCustomerEndpoint
+    type: Class
+  - uid: RealtyHub.ApiService.Endpoints.Customers.GetAllCustomersEndpoint
+    name: GetAllCustomersEndpoint
+    type: Class
+  - uid: RealtyHub.ApiService.Endpoints.Customers.GetCustomerByIdEndpoint
+    name: GetCustomerByIdEndpoint
+    type: Class
+  - uid: RealtyHub.ApiService.Endpoints.Customers.UpdateCustomerEndpoint
+    name: UpdateCustomerEndpoint
+    type: Class
+- uid: RealtyHub.ApiService.Endpoints.Emails
+  name: RealtyHub.ApiService.Endpoints.Emails
+  type: Namespace
+  items:
+  - uid: RealtyHub.ApiService.Endpoints.Emails.SendContractEmailEndpoint
+    name: SendContractEmailEndpoint
+    type: Class
+- uid: RealtyHub.ApiService.Endpoints.Identity
+  name: RealtyHub.ApiService.Endpoints.Identity
+  type: Namespace
+  items:
+  - uid: RealtyHub.ApiService.Endpoints.Identity.ConfirmEmailEndpoint
+    name: ConfirmEmailEndpoint
+    type: Class
+  - uid: RealtyHub.ApiService.Endpoints.Identity.ForgotPasswordEndpoint
+    name: ForgotPasswordEndpoint
+    type: Class
+  - uid: RealtyHub.ApiService.Endpoints.Identity.LogoutEndpoint
+    name: LogoutEndpoint
+    type: Class
+  - uid: RealtyHub.ApiService.Endpoints.Identity.ManageInfoEndpoint
+    name: ManageInfoEndpoint
+    type: Class
+  - uid: RealtyHub.ApiService.Endpoints.Identity.RegisterUserEndpoint
+    name: RegisterUserEndpoint
+    type: Class
+  - uid: RealtyHub.ApiService.Endpoints.Identity.ResetPasswordEndpoint
+    name: ResetPasswordEndpoint
+    type: Class
+- uid: RealtyHub.ApiService.Endpoints.Offers
+  name: RealtyHub.ApiService.Endpoints.Offers
+  type: Namespace
+  items:
+  - uid: RealtyHub.ApiService.Endpoints.Offers.AcceptOfferEndpoint
+    name: AcceptOfferEndpoint
+    type: Class
+  - uid: RealtyHub.ApiService.Endpoints.Offers.CreateOfferEndpoint
+    name: CreateOfferEndpoint
+    type: Class
+  - uid: RealtyHub.ApiService.Endpoints.Offers.GetAllOffersByCustomerEndpoint
+    name: GetAllOffersByCustomerEndpoint
+    type: Class
+  - uid: RealtyHub.ApiService.Endpoints.Offers.GetAllOffersByPropertyEndpoint
+    name: GetAllOffersByPropertyEndpoint
+    type: Class
+  - uid: RealtyHub.ApiService.Endpoints.Offers.GetAllOffersEndpoint
+    name: GetAllOffersEndpoint
+    type: Class
+  - uid: RealtyHub.ApiService.Endpoints.Offers.GetOfferAcceptedEndpoint
+    name: GetOfferAcceptedEndpoint
+    type: Class
+  - uid: RealtyHub.ApiService.Endpoints.Offers.GetOfferByIdEndpoint
+    name: GetOfferByIdEndpoint
+    type: Class
+  - uid: RealtyHub.ApiService.Endpoints.Offers.RejectOfferEndpoint
+    name: RejectOfferEndpoint
+    type: Class
+  - uid: RealtyHub.ApiService.Endpoints.Offers.UpdateOfferEndpoint
+    name: UpdateOfferEndpoint
+    type: Class
+- uid: RealtyHub.ApiService.Endpoints.Properties
+  name: RealtyHub.ApiService.Endpoints.Properties
+  type: Namespace
+  items:
+  - uid: RealtyHub.ApiService.Endpoints.Properties.CreatePropertyEndpoint
+    name: CreatePropertyEndpoint
+    type: Class
+  - uid: RealtyHub.ApiService.Endpoints.Properties.CreatePropertyPhotosEndpoint
+    name: CreatePropertyPhotosEndpoint
+    type: Class
+  - uid: RealtyHub.ApiService.Endpoints.Properties.DeletePropertyEndpoint
+    name: DeletePropertyEndpoint
+    type: Class
+  - uid: RealtyHub.ApiService.Endpoints.Properties.DeletePropertyPhotoEndpoint
+    name: DeletePropertyPhotoEndpoint
+    type: Class
+  - uid: RealtyHub.ApiService.Endpoints.Properties.GetAllPropertiesEndpoint
+    name: GetAllPropertiesEndpoint
+    type: Class
+  - uid: RealtyHub.ApiService.Endpoints.Properties.GetAllPropertyPhotosByPropertyEndpoint
+    name: GetAllPropertyPhotosByPropertyEndpoint
+    type: Class
+  - uid: RealtyHub.ApiService.Endpoints.Properties.GetAllViewingsByPropertyEndpoint
+    name: GetAllViewingsByPropertyEndpoint
+    type: Class
+  - uid: RealtyHub.ApiService.Endpoints.Properties.GetPropertyByIdEndpoint
+    name: GetPropertyByIdEndpoint
+    type: Class
+  - uid: RealtyHub.ApiService.Endpoints.Properties.UpdatePropertyEndpoint
+    name: UpdatePropertyEndpoint
+    type: Class
+  - uid: RealtyHub.ApiService.Endpoints.Properties.UpdatePropertyPhotosEndpoint
+    name: UpdatePropertyPhotosEndpoint
+    type: Class
+- uid: RealtyHub.ApiService.Endpoints.Reports
+  name: RealtyHub.ApiService.Endpoints.Reports
+  type: Namespace
+  items:
+  - uid: RealtyHub.ApiService.Endpoints.Reports.OfferReportEndpoint
+    name: OfferReportEndpoint
+    type: Class
+  - uid: RealtyHub.ApiService.Endpoints.Reports.PropertyReportEndpoint
+    name: PropertyReportEndpoint
+    type: Class
+- uid: RealtyHub.ApiService.Endpoints.Viewings
+  name: RealtyHub.ApiService.Endpoints.Viewings
+  type: Namespace
+  items:
+  - uid: RealtyHub.ApiService.Endpoints.Viewings.CancelViewingEndpoint
+    name: CancelViewingEndpoint
+    type: Class
+  - uid: RealtyHub.ApiService.Endpoints.Viewings.DoneViewingEndpoint
+    name: DoneViewingEndpoint
+    type: Class
+  - uid: RealtyHub.ApiService.Endpoints.Viewings.GetAllViewingsEndpoint
+    name: GetAllViewingsEndpoint
+    type: Class
+  - uid: RealtyHub.ApiService.Endpoints.Viewings.GetViewingByIdEndpoint
+    name: GetViewingByIdEndpoint
+    type: Class
+  - uid: RealtyHub.ApiService.Endpoints.Viewings.RescheduleViewingEndpoint
+    name: RescheduleViewingEndpoint
+    type: Class
+  - uid: RealtyHub.ApiService.Endpoints.Viewings.ScheduleViewingEndpoint
+    name: ScheduleViewingEndpoint
+    type: Class
+- uid: RealtyHub.ApiService.Handlers
+  name: RealtyHub.ApiService.Handlers
+  type: Namespace
+  items:
+  - uid: RealtyHub.ApiService.Handlers.CondominiumHandler
+    name: CondominiumHandler
+    type: Class
+  - uid: RealtyHub.ApiService.Handlers.ContractHandler
+    name: ContractHandler
+    type: Class
+  - uid: RealtyHub.ApiService.Handlers.ContractTemplatesHandler
+    name: ContractTemplatesHandler
+    type: Class
+  - uid: RealtyHub.ApiService.Handlers.CustomerHandler
+    name: CustomerHandler
+    type: Class
+  - uid: RealtyHub.ApiService.Handlers.OfferHandler
+    name: OfferHandler
+    type: Class
+  - uid: RealtyHub.ApiService.Handlers.PropertyHandler
+    name: PropertyHandler
+    type: Class
+  - uid: RealtyHub.ApiService.Handlers.PropertyPhotosHandler
+    name: PropertyPhotosHandler
+    type: Class
+  - uid: RealtyHub.ApiService.Handlers.ViewingHandler
+    name: ViewingHandler
+    type: Class
+- uid: RealtyHub.ApiService.Migrations
+  name: RealtyHub.ApiService.Migrations
+  type: Namespace
+  items:
+  - uid: RealtyHub.ApiService.Migrations.v1
+    name: v1
+    type: Class
+  - uid: RealtyHub.ApiService.Migrations.v2
+    name: v2
+    type: Class
+  - uid: RealtyHub.ApiService.Migrations.v3
+    name: v3
+    type: Class
+- uid: RealtyHub.ApiService.Models
+  name: RealtyHub.ApiService.Models
+  type: Namespace
+  items:
+  - uid: RealtyHub.ApiService.Models.User
+    name: User
+    type: Class
+- uid: RealtyHub.ApiService.Services
+  name: RealtyHub.ApiService.Services
+  type: Namespace
+  items:
+  - uid: RealtyHub.ApiService.Services.ContractGenerator
+    name: ContractGenerator
+    type: Class
+  - uid: RealtyHub.ApiService.Services.EmailService
+    name: EmailService
+    type: Class
+  - uid: RealtyHub.ApiService.Services.VariablesContractMappings
+    name: VariablesContractMappings
+    type: Class
+- uid: RealtyHub.ApiService.Services.Reports
+  name: RealtyHub.ApiService.Services.Reports
+  type: Namespace
+  items:
+  - uid: RealtyHub.ApiService.Services.Reports.OfferReportService
+    name: OfferReportService
+    type: Class
+  - uid: RealtyHub.ApiService.Services.Reports.PropertyReportService
+    name: PropertyReportService
+    type: Class
+memberLayout: SamePage

@@ -8,15 +8,27 @@ using RealtyHub.Core.Responses;
 
 namespace RealtyHub.ApiService.Handlers;
 
+/// <summary>
+/// Responsável pelas operações relacionadas a propostas.
+/// </summary>
 public class OfferHandler : IOfferHandler
 {
     private readonly AppDbContext _context;
 
+    /// <summary>
+    /// Inicializa uma nova instância de <see cref="OfferHandler"/>.
+    /// </summary>
+    /// <param name="context">Contexto do banco de dados para interação com propostas.</param>
     public OfferHandler(AppDbContext context)
     {
         _context = context;
     }
 
+    /// <summary>
+    /// Cria uma nova proposta no banco de dados.
+    /// </summary>
+    /// <param name="request">Objeto contendo as informações para criação da proposta.</param>
+    /// <returns>Retorna uma resposta com a proposta criada e o código de status.</returns>
     public async Task<Response<Offer?>> CreateAsync(Offer request)
     {
         Property? property;
@@ -80,6 +92,11 @@ public class OfferHandler : IOfferHandler
         }
     }
 
+    /// <summary>
+    /// Atualiza uma proposta existente no banco de dados.
+    /// </summary>
+    /// <param name="request">Objeto contendo as novas informações da proposta.</param>
+    /// <returns>Retorna a resposta com a proposta atualizada ou um erro se não for encontrada.</returns>
     public async Task<Response<Offer?>> UpdateAsync(Offer request)
     {
         try
@@ -170,6 +187,11 @@ public class OfferHandler : IOfferHandler
         }
     }
 
+    /// <summary>
+    /// Rejeita uma proposta existente.
+    /// </summary>
+    /// <param name="request">Requisição contendo o ID da proposta a ser rejeitada.</param>
+    /// <returns>Retorna a resposta com a proposta rejeitada ou um erro se não for encontrada.</returns>
     public async Task<Response<Offer?>> RejectAsync(RejectOfferRequest request)
     {
         try
@@ -210,6 +232,11 @@ public class OfferHandler : IOfferHandler
         }
     }
 
+    /// <summary>
+    /// Aceita uma proposta existente.
+    /// </summary>
+    /// <param name="request">Requisição contendo o ID da proposta a ser aceita.</param>
+    /// <returns>Retorna a resposta com a proposta aceita ou um erro se não for encontrada.</returns>
     public async Task<Response<Offer?>> AcceptAsync(AcceptOfferRequest request)
     {
         try
@@ -250,6 +277,11 @@ public class OfferHandler : IOfferHandler
         }
     }
 
+    /// <summary>
+    /// Obtém uma proposta específica pelo ID.
+    /// </summary>
+    /// <param name="request">Requisição contendo o ID da proposta desejada.</param>
+    /// <returns>Retorna a proposta ou um erro caso não seja encontrada.</returns>
     public async Task<Response<Offer?>> GetByIdAsync(GetOfferByIdRequest request)
     {
         try
@@ -277,6 +309,11 @@ public class OfferHandler : IOfferHandler
         }
     }
 
+    /// <summary>
+    /// Obtém a proposta aceita para um imóvel específico.
+    /// </summary>
+    /// <param name="request">Requisição contendo o ID do imóvel.</param>
+    /// <returns>Retorna a proposta aceita ou um erro caso não seja encontrada.</returns>
     public async Task<Response<Offer?>> GetAcceptedByProperty(GetOfferAcceptedByProperty request)
     {
         try
@@ -305,6 +342,11 @@ public class OfferHandler : IOfferHandler
         }
     }
 
+    /// <summary>
+    /// Retorna uma lista paginada de todas as propostas de um imóvel específico.
+    /// </summary>
+    /// <param name="request">Requisição contendo parâmetros de paginação e filtro por imóvel.</param>
+    /// <returns>Retorna uma resposta paginada com as propostas ou um erro em caso de falha.</returns>
     public async Task<PagedResponse<List<Offer>?>> GetAllOffersByPropertyAsync(
         GetAllOffersByPropertyRequest request)
     {
@@ -361,6 +403,11 @@ public class OfferHandler : IOfferHandler
         }
     }
 
+    /// <summary>
+    /// Retorna uma lista paginada de todas as propostas de um cliente específico.
+    /// </summary>
+    /// <param name="request">Requisição contendo parâmetros de paginação e filtro por cliente.</param>
+    /// <returns>Retorna uma resposta paginada com as propostas ou um erro em caso de falha.</returns>
     public async Task<PagedResponse<List<Offer>?>> GetAllOffersByCustomerAsync(
        GetAllOffersByCustomerRequest request)
     {
@@ -418,6 +465,11 @@ public class OfferHandler : IOfferHandler
         }
     }
 
+    /// <summary>
+    /// Retorna uma lista paginada de todas as propostas no sistema.
+    /// </summary>
+    /// <param name="request">Requisição contendo parâmetros de paginação e filtro.</param>
+    /// <returns>Retorna uma resposta paginada com as propostas ou um erro em caso de falha.</returns>
     public async Task<PagedResponse<List<Offer>?>> GetAllAsync(GetAllOffersRequest request)
     {
         try

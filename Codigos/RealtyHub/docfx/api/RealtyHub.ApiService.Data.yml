@@ -1,0 +1,54 @@
+### YamlMime:ManagedReference
+items:
+- uid: RealtyHub.ApiService.Data
+  commentId: N:RealtyHub.ApiService.Data
+  id: RealtyHub.ApiService.Data
+  children:
+  - RealtyHub.ApiService.Data.AppDbContext
+  langs:
+  - csharp
+  - vb
+  name: RealtyHub.ApiService.Data
+  nameWithType: RealtyHub.ApiService.Data
+  fullName: RealtyHub.ApiService.Data
+  type: Namespace
+  assemblies:
+  - RealtyHub.ApiService
+references:
+- uid: RealtyHub.ApiService.Data.AppDbContext
+  commentId: T:RealtyHub.ApiService.Data.AppDbContext
+  parent: RealtyHub.ApiService.Data
+  href: RealtyHub.ApiService.Data.AppDbContext.html
+  name: AppDbContext
+  nameWithType: AppDbContext
+  fullName: RealtyHub.ApiService.Data.AppDbContext
+- uid: RealtyHub.ApiService.Data
+  commentId: N:RealtyHub.ApiService.Data
+  href: RealtyHub.html
+  name: RealtyHub.ApiService.Data
+  nameWithType: RealtyHub.ApiService.Data
+  fullName: RealtyHub.ApiService.Data
+  spec.csharp:
+  - uid: RealtyHub
+    name: RealtyHub
+    href: RealtyHub.html
+  - name: .
+  - uid: RealtyHub.ApiService
+    name: ApiService
+    href: RealtyHub.ApiService.html
+  - name: .
+  - uid: RealtyHub.ApiService.Data
+    name: Data
+    href: RealtyHub.ApiService.Data.html
+  spec.vb:
+  - uid: RealtyHub
+    name: RealtyHub
+    href: RealtyHub.html
+  - name: .
+  - uid: RealtyHub.ApiService
+    name: ApiService
+    href: RealtyHub.ApiService.html
+  - name: .
+  - uid: RealtyHub.ApiService.Data
+    name: Data
+    href: RealtyHub.ApiService.Data.html

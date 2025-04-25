@@ -1,0 +1,65 @@
+### YamlMime:ManagedReference
+items:
+- uid: RealtyHub.ApiService.Data.Mappings.Identity
+  commentId: N:RealtyHub.ApiService.Data.Mappings.Identity
+  id: RealtyHub.ApiService.Data.Mappings.Identity
+  children:
+  - RealtyHub.ApiService.Data.Mappings.Identity.IdentityRoleClaimMapping
+  - RealtyHub.ApiService.Data.Mappings.Identity.IdentityRoleMapping
+  - RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserClaimMapping
+  - RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserLoginMapping
+  - RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserMapping
+  - RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserRoleMapping
+  - RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserTokenMapping
+  langs:
+  - csharp
+  - vb
+  name: RealtyHub.ApiService.Data.Mappings.Identity
+  nameWithType: RealtyHub.ApiService.Data.Mappings.Identity
+  fullName: RealtyHub.ApiService.Data.Mappings.Identity
+  type: Namespace
+  assemblies:
+  - RealtyHub.ApiService
+references:
+- uid: RealtyHub.ApiService.Data.Mappings.Identity.IdentityRoleClaimMapping
+  commentId: T:RealtyHub.ApiService.Data.Mappings.Identity.IdentityRoleClaimMapping
+  href: RealtyHub.ApiService.Data.Mappings.Identity.IdentityRoleClaimMapping.html
+  name: IdentityRoleClaimMapping
+  nameWithType: IdentityRoleClaimMapping
+  fullName: RealtyHub.ApiService.Data.Mappings.Identity.IdentityRoleClaimMapping
+- uid: RealtyHub.ApiService.Data.Mappings.Identity.IdentityRoleMapping
+  commentId: T:RealtyHub.ApiService.Data.Mappings.Identity.IdentityRoleMapping
+  href: RealtyHub.ApiService.Data.Mappings.Identity.IdentityRoleMapping.html
+  name: IdentityRoleMapping
+  nameWithType: IdentityRoleMapping
+  fullName: RealtyHub.ApiService.Data.Mappings.Identity.IdentityRoleMapping
+- uid: RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserClaimMapping
+  commentId: T:RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserClaimMapping
+  href: RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserClaimMapping.html
+  name: IdentityUserClaimMapping
+  nameWithType: IdentityUserClaimMapping
+  fullName: RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserClaimMapping
+- uid: RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserLoginMapping
+  commentId: T:RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserLoginMapping
+  href: RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserLoginMapping.html
+  name: IdentityUserLoginMapping
+  nameWithType: IdentityUserLoginMapping
+  fullName: RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserLoginMapping
+- uid: RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserMapping
+  commentId: T:RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserMapping
+  href: RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserMapping.html
+  name: IdentityUserMapping
+  nameWithType: IdentityUserMapping
+  fullName: RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserMapping
+- uid: RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserRoleMapping
+  commentId: T:RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserRoleMapping
+  href: RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserRoleMapping.html
+  name: IdentityUserRoleMapping
+  nameWithType: IdentityUserRoleMapping
+  fullName: RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserRoleMapping
+- uid: RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserTokenMapping
+  commentId: T:RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserTokenMapping
+  href: RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserTokenMapping.html
+  name: IdentityUserTokenMapping
+  nameWithType: IdentityUserTokenMapping
+  fullName: RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserTokenMapping

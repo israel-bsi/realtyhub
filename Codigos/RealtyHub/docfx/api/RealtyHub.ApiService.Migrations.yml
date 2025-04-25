@@ -1,0 +1,37 @@
+### YamlMime:ManagedReference
+items:
+- uid: RealtyHub.ApiService.Migrations
+  commentId: N:RealtyHub.ApiService.Migrations
+  id: RealtyHub.ApiService.Migrations
+  children:
+  - RealtyHub.ApiService.Migrations.v1
+  - RealtyHub.ApiService.Migrations.v2
+  - RealtyHub.ApiService.Migrations.v3
+  langs:
+  - csharp
+  - vb
+  name: RealtyHub.ApiService.Migrations
+  nameWithType: RealtyHub.ApiService.Migrations
+  fullName: RealtyHub.ApiService.Migrations
+  type: Namespace
+  assemblies:
+  - RealtyHub.ApiService
+references:
+- uid: RealtyHub.ApiService.Migrations.v1
+  commentId: T:RealtyHub.ApiService.Migrations.v1
+  href: RealtyHub.ApiService.Migrations.v1.html
+  name: v1
+  nameWithType: v1
+  fullName: RealtyHub.ApiService.Migrations.v1
+- uid: RealtyHub.ApiService.Migrations.v2
+  commentId: T:RealtyHub.ApiService.Migrations.v2
+  href: RealtyHub.ApiService.Migrations.v2.html
+  name: v2
+  nameWithType: v2
+  fullName: RealtyHub.ApiService.Migrations.v2
+- uid: RealtyHub.ApiService.Migrations.v3
+  commentId: T:RealtyHub.ApiService.Migrations.v3
+  href: RealtyHub.ApiService.Migrations.v3.html
+  name: v3
+  nameWithType: v3
+  fullName: RealtyHub.ApiService.Migrations.v3

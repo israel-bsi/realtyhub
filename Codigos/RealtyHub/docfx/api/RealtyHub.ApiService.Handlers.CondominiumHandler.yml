@@ -1,0 +1,984 @@
+### YamlMime:ManagedReference
+items:
+- uid: RealtyHub.ApiService.Handlers.CondominiumHandler
+  commentId: T:RealtyHub.ApiService.Handlers.CondominiumHandler
+  id: CondominiumHandler
+  parent: RealtyHub.ApiService.Handlers
+  children:
+  - RealtyHub.ApiService.Handlers.CondominiumHandler.#ctor(RealtyHub.ApiService.Data.AppDbContext)
+  - RealtyHub.ApiService.Handlers.CondominiumHandler.CreateAsync(RealtyHub.Core.Models.Condominium)
+  - RealtyHub.ApiService.Handlers.CondominiumHandler.DeleteAsync(RealtyHub.Core.Requests.Condominiums.DeleteCondominiumRequest)
+  - RealtyHub.ApiService.Handlers.CondominiumHandler.GetAllAsync(RealtyHub.Core.Requests.Condominiums.GetAllCondominiumsRequest)
+  - RealtyHub.ApiService.Handlers.CondominiumHandler.GetByIdAsync(RealtyHub.Core.Requests.Condominiums.GetCondominiumByIdRequest)
+  - RealtyHub.ApiService.Handlers.CondominiumHandler.UpdateAsync(RealtyHub.Core.Models.Condominium)
+  langs:
+  - csharp
+  - vb
+  name: CondominiumHandler
+  nameWithType: CondominiumHandler
+  fullName: RealtyHub.ApiService.Handlers.CondominiumHandler
+  type: Class
+  source:
+    remote:
+      path: Codigos/RealtyHub/RealtyHub.ApiService/Handlers/CondominiumHandler.cs
+      branch: main
+      repo: https://github.com/israel-bsi/realtyhub
+    id: CondominiumHandler
+    path: ../RealtyHub.ApiService/Handlers/CondominiumHandler.cs
+    startLine: 13
+  assemblies:
+  - RealtyHub.ApiService
+  namespace: RealtyHub.ApiService.Handlers
+  summary: Responsável pelas operações relacionadas a condomínios.
+  example: []
+  syntax:
+    content: 'public class CondominiumHandler : ICondominiumHandler'
+    content.vb: Public Class CondominiumHandler Implements ICondominiumHandler
+  inheritance:
+  - System.Object
+  implements:
+  - RealtyHub.Core.Handlers.ICondominiumHandler
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: RealtyHub.ApiService.Handlers.CondominiumHandler.#ctor(RealtyHub.ApiService.Data.AppDbContext)
+  commentId: M:RealtyHub.ApiService.Handlers.CondominiumHandler.#ctor(RealtyHub.ApiService.Data.AppDbContext)
+  id: '#ctor(RealtyHub.ApiService.Data.AppDbContext)'
+  parent: RealtyHub.ApiService.Handlers.CondominiumHandler
+  langs:
+  - csharp
+  - vb
+  name: CondominiumHandler(AppDbContext)
+  nameWithType: CondominiumHandler.CondominiumHandler(AppDbContext)
+  fullName: RealtyHub.ApiService.Handlers.CondominiumHandler.CondominiumHandler(RealtyHub.ApiService.Data.AppDbContext)
+  type: Constructor
+  source:
+    remote:
+      path: Codigos/RealtyHub/RealtyHub.ApiService/Handlers/CondominiumHandler.cs
+      branch: main
+      repo: https://github.com/israel-bsi/realtyhub
+    id: .ctor
+    path: ../RealtyHub.ApiService/Handlers/CondominiumHandler.cs
+    startLine: 21
+  assemblies:
+  - RealtyHub.ApiService
+  namespace: RealtyHub.ApiService.Handlers
+  summary: Inicializa uma nova instância de <xref href="RealtyHub.ApiService.Handlers.CondominiumHandler" data-throw-if-not-resolved="false"></xref>.
+  example: []
+  syntax:
+    content: public CondominiumHandler(AppDbContext context)
+    parameters:
+    - id: context
+      type: RealtyHub.ApiService.Data.AppDbContext
+      description: Contexto do banco de dados para interação com condomínios.
+    content.vb: Public Sub New(context As AppDbContext)
+  overload: RealtyHub.ApiService.Handlers.CondominiumHandler.#ctor*
+  nameWithType.vb: CondominiumHandler.New(AppDbContext)
+  fullName.vb: RealtyHub.ApiService.Handlers.CondominiumHandler.New(RealtyHub.ApiService.Data.AppDbContext)
+  name.vb: New(AppDbContext)
+- uid: RealtyHub.ApiService.Handlers.CondominiumHandler.CreateAsync(RealtyHub.Core.Models.Condominium)
+  commentId: M:RealtyHub.ApiService.Handlers.CondominiumHandler.CreateAsync(RealtyHub.Core.Models.Condominium)
+  id: CreateAsync(RealtyHub.Core.Models.Condominium)
+  parent: RealtyHub.ApiService.Handlers.CondominiumHandler
+  langs:
+  - csharp
+  - vb
+  name: CreateAsync(Condominium)
+  nameWithType: CondominiumHandler.CreateAsync(Condominium)
+  fullName: RealtyHub.ApiService.Handlers.CondominiumHandler.CreateAsync(RealtyHub.Core.Models.Condominium)
+  type: Method
+  source:
+    remote:
+      path: Codigos/RealtyHub/RealtyHub.ApiService/Handlers/CondominiumHandler.cs
+      branch: main
+      repo: https://github.com/israel-bsi/realtyhub
+    id: CreateAsync
+    path: ../RealtyHub.ApiService/Handlers/CondominiumHandler.cs
+    startLine: 31
+  assemblies:
+  - RealtyHub.ApiService
+  namespace: RealtyHub.ApiService.Handlers
+  summary: Cria um novo condomínio no banco de dados.
+  example: []
+  syntax:
+    content: public Task<Response<Condominium?>> CreateAsync(Condominium request)
+    parameters:
+    - id: request
+      type: RealtyHub.Core.Models.Condominium
+      description: Objeto contendo as informações para criação do condomínio.
+    return:
+      type: System.Threading.Tasks.Task{RealtyHub.Core.Responses.Response{RealtyHub.Core.Models.Condominium}}
+      description: Retorna uma resposta com o condomínio criado e o código de status.
+    content.vb: Public Function CreateAsync(request As Condominium) As Task(Of Response(Of Condominium))
+  overload: RealtyHub.ApiService.Handlers.CondominiumHandler.CreateAsync*
+  implements:
+  - RealtyHub.Core.Handlers.ICondominiumHandler.CreateAsync(RealtyHub.Core.Models.Condominium)
+- uid: RealtyHub.ApiService.Handlers.CondominiumHandler.UpdateAsync(RealtyHub.Core.Models.Condominium)
+  commentId: M:RealtyHub.ApiService.Handlers.CondominiumHandler.UpdateAsync(RealtyHub.Core.Models.Condominium)
+  id: UpdateAsync(RealtyHub.Core.Models.Condominium)
+  parent: RealtyHub.ApiService.Handlers.CondominiumHandler
+  langs:
+  - csharp
+  - vb
+  name: UpdateAsync(Condominium)
+  nameWithType: CondominiumHandler.UpdateAsync(Condominium)
+  fullName: RealtyHub.ApiService.Handlers.CondominiumHandler.UpdateAsync(RealtyHub.Core.Models.Condominium)
+  type: Method
+  source:
+    remote:
+      path: Codigos/RealtyHub/RealtyHub.ApiService/Handlers/CondominiumHandler.cs
+      branch: main
+      repo: https://github.com/israel-bsi/realtyhub
+    id: UpdateAsync
+    path: ../RealtyHub.ApiService/Handlers/CondominiumHandler.cs
+    startLine: 66
+  assemblies:
+  - RealtyHub.ApiService
+  namespace: RealtyHub.ApiService.Handlers
+  summary: Atualiza um condomínio existente.
+  example: []
+  syntax:
+    content: public Task<Response<Condominium?>> UpdateAsync(Condominium request)
+    parameters:
+    - id: request
+      type: RealtyHub.Core.Models.Condominium
+      description: Objeto contendo as novas informações do condomínio.
+    return:
+      type: System.Threading.Tasks.Task{RealtyHub.Core.Responses.Response{RealtyHub.Core.Models.Condominium}}
+      description: Retorna a resposta com o condomínio atualizado ou um erro se não for encontrado.
+    content.vb: Public Function UpdateAsync(request As Condominium) As Task(Of Response(Of Condominium))
+  overload: RealtyHub.ApiService.Handlers.CondominiumHandler.UpdateAsync*
+  implements:
+  - RealtyHub.Core.Handlers.ICondominiumHandler.UpdateAsync(RealtyHub.Core.Models.Condominium)
+- uid: RealtyHub.ApiService.Handlers.CondominiumHandler.DeleteAsync(RealtyHub.Core.Requests.Condominiums.DeleteCondominiumRequest)
+  commentId: M:RealtyHub.ApiService.Handlers.CondominiumHandler.DeleteAsync(RealtyHub.Core.Requests.Condominiums.DeleteCondominiumRequest)
+  id: DeleteAsync(RealtyHub.Core.Requests.Condominiums.DeleteCondominiumRequest)
+  parent: RealtyHub.ApiService.Handlers.CondominiumHandler
+  langs:
+  - csharp
+  - vb
+  name: DeleteAsync(DeleteCondominiumRequest)
+  nameWithType: CondominiumHandler.DeleteAsync(DeleteCondominiumRequest)
+  fullName: RealtyHub.ApiService.Handlers.CondominiumHandler.DeleteAsync(RealtyHub.Core.Requests.Condominiums.DeleteCondominiumRequest)
+  type: Method
+  source:
+    remote:
+      path: Codigos/RealtyHub/RealtyHub.ApiService/Handlers/CondominiumHandler.cs
+      branch: main
+      repo: https://github.com/israel-bsi/realtyhub
+    id: DeleteAsync
+    path: ../RealtyHub.ApiService/Handlers/CondominiumHandler.cs
+    startLine: 105
+  assemblies:
+  - RealtyHub.ApiService
+  namespace: RealtyHub.ApiService.Handlers
+  summary: Realiza a exclusão lógica de um condomínio, marcando-o como inativo.
+  example: []
+  syntax:
+    content: public Task<Response<Condominium?>> DeleteAsync(DeleteCondominiumRequest request)
+    parameters:
+    - id: request
+      type: RealtyHub.Core.Requests.Condominiums.DeleteCondominiumRequest
+      description: Requisição que contém o ID do condomínio a ser excluído.
+    return:
+      type: System.Threading.Tasks.Task{RealtyHub.Core.Responses.Response{RealtyHub.Core.Models.Condominium}}
+      description: Retorna a resposta com o condomínio atualizado ou um erro se não for encontrado.
+    content.vb: Public Function DeleteAsync(request As DeleteCondominiumRequest) As Task(Of Response(Of Condominium))
+  overload: RealtyHub.ApiService.Handlers.CondominiumHandler.DeleteAsync*
+  implements:
+  - RealtyHub.Core.Handlers.ICondominiumHandler.DeleteAsync(RealtyHub.Core.Requests.Condominiums.DeleteCondominiumRequest)
+- uid: RealtyHub.ApiService.Handlers.CondominiumHandler.GetByIdAsync(RealtyHub.Core.Requests.Condominiums.GetCondominiumByIdRequest)
+  commentId: M:RealtyHub.ApiService.Handlers.CondominiumHandler.GetByIdAsync(RealtyHub.Core.Requests.Condominiums.GetCondominiumByIdRequest)
+  id: GetByIdAsync(RealtyHub.Core.Requests.Condominiums.GetCondominiumByIdRequest)
+  parent: RealtyHub.ApiService.Handlers.CondominiumHandler
+  langs:
+  - csharp
+  - vb
+  name: GetByIdAsync(GetCondominiumByIdRequest)
+  nameWithType: CondominiumHandler.GetByIdAsync(GetCondominiumByIdRequest)
+  fullName: RealtyHub.ApiService.Handlers.CondominiumHandler.GetByIdAsync(RealtyHub.Core.Requests.Condominiums.GetCondominiumByIdRequest)
+  type: Method
+  source:
+    remote:
+      path: Codigos/RealtyHub/RealtyHub.ApiService/Handlers/CondominiumHandler.cs
+      branch: main
+      repo: https://github.com/israel-bsi/realtyhub
+    id: GetByIdAsync
+    path: ../RealtyHub.ApiService/Handlers/CondominiumHandler.cs
+    startLine: 135
+  assemblies:
+  - RealtyHub.ApiService
+  namespace: RealtyHub.ApiService.Handlers
+  summary: Obtém um condomínio específico pelo ID.
+  example: []
+  syntax:
+    content: public Task<Response<Condominium?>> GetByIdAsync(GetCondominiumByIdRequest request)
+    parameters:
+    - id: request
+      type: RealtyHub.Core.Requests.Condominiums.GetCondominiumByIdRequest
+      description: Requisição que contém o ID do condomínio desejado.
+    return:
+      type: System.Threading.Tasks.Task{RealtyHub.Core.Responses.Response{RealtyHub.Core.Models.Condominium}}
+      description: Retorna o objeto do condomínio ou um erro caso não seja encontrado.
+    content.vb: Public Function GetByIdAsync(request As GetCondominiumByIdRequest) As Task(Of Response(Of Condominium))
+  overload: RealtyHub.ApiService.Handlers.CondominiumHandler.GetByIdAsync*
+  implements:
+  - RealtyHub.Core.Handlers.ICondominiumHandler.GetByIdAsync(RealtyHub.Core.Requests.Condominiums.GetCondominiumByIdRequest)
+- uid: RealtyHub.ApiService.Handlers.CondominiumHandler.GetAllAsync(RealtyHub.Core.Requests.Condominiums.GetAllCondominiumsRequest)
+  commentId: M:RealtyHub.ApiService.Handlers.CondominiumHandler.GetAllAsync(RealtyHub.Core.Requests.Condominiums.GetAllCondominiumsRequest)
+  id: GetAllAsync(RealtyHub.Core.Requests.Condominiums.GetAllCondominiumsRequest)
+  parent: RealtyHub.ApiService.Handlers.CondominiumHandler
+  langs:
+  - csharp
+  - vb
+  name: GetAllAsync(GetAllCondominiumsRequest)
+  nameWithType: CondominiumHandler.GetAllAsync(GetAllCondominiumsRequest)
+  fullName: RealtyHub.ApiService.Handlers.CondominiumHandler.GetAllAsync(RealtyHub.Core.Requests.Condominiums.GetAllCondominiumsRequest)
+  type: Method
+  source:
+    remote:
+      path: Codigos/RealtyHub/RealtyHub.ApiService/Handlers/CondominiumHandler.cs
+      branch: main
+      repo: https://github.com/israel-bsi/realtyhub
+    id: GetAllAsync
+    path: ../RealtyHub.ApiService/Handlers/CondominiumHandler.cs
+    startLine: 159
+  assemblies:
+  - RealtyHub.ApiService
+  namespace: RealtyHub.ApiService.Handlers
+  summary: Retorna uma lista paginada de todos os condomínios ativos, com opção de filtro por busca.
+  example: []
+  syntax:
+    content: public Task<PagedResponse<List<Condominium>?>> GetAllAsync(GetAllCondominiumsRequest request)
+    parameters:
+    - id: request
+      type: RealtyHub.Core.Requests.Condominiums.GetAllCondominiumsRequest
+      description: Requisição que contém parâmetros de paginação e filtro.
+    return:
+      type: System.Threading.Tasks.Task{RealtyHub.Core.Responses.PagedResponse{System.Collections.Generic.List{RealtyHub.Core.Models.Condominium}}}
+      description: Retorna uma resposta paginada com os condomínios ativos ou um erro em caso de falha.
+    content.vb: Public Function GetAllAsync(request As GetAllCondominiumsRequest) As Task(Of PagedResponse(Of List(Of Condominium)))
+  overload: RealtyHub.ApiService.Handlers.CondominiumHandler.GetAllAsync*
+  implements:
+  - RealtyHub.Core.Handlers.ICondominiumHandler.GetAllAsync(RealtyHub.Core.Requests.Condominiums.GetAllCondominiumsRequest)
+references:
+- uid: RealtyHub.ApiService.Handlers
+  commentId: N:RealtyHub.ApiService.Handlers
+  href: RealtyHub.html
+  name: RealtyHub.ApiService.Handlers
+  nameWithType: RealtyHub.ApiService.Handlers
+  fullName: RealtyHub.ApiService.Handlers
+  spec.csharp:
+  - uid: RealtyHub
+    name: RealtyHub
+    href: RealtyHub.html
+  - name: .
+  - uid: RealtyHub.ApiService
+    name: ApiService
+    href: RealtyHub.ApiService.html
+  - name: .
+  - uid: RealtyHub.ApiService.Handlers
+    name: Handlers
+    href: RealtyHub.ApiService.Handlers.html
+  spec.vb:
+  - uid: RealtyHub
+    name: RealtyHub
+    href: RealtyHub.html
+  - name: .
+  - uid: RealtyHub.ApiService
+    name: ApiService
+    href: RealtyHub.ApiService.html
+  - name: .
+  - uid: RealtyHub.ApiService.Handlers
+    name: Handlers
+    href: RealtyHub.ApiService.Handlers.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: RealtyHub.Core.Handlers.ICondominiumHandler
+  commentId: T:RealtyHub.Core.Handlers.ICondominiumHandler
+  parent: RealtyHub.Core.Handlers
+  name: ICondominiumHandler
+  nameWithType: ICondominiumHandler
+  fullName: RealtyHub.Core.Handlers.ICondominiumHandler
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: RealtyHub.Core.Handlers
+  commentId: N:RealtyHub.Core.Handlers
+  name: RealtyHub.Core.Handlers
+  nameWithType: RealtyHub.Core.Handlers
+  fullName: RealtyHub.Core.Handlers
+  spec.csharp:
+  - uid: RealtyHub
+    name: RealtyHub
+  - name: .
+  - uid: RealtyHub.Core
+    name: Core
+  - name: .
+  - uid: RealtyHub.Core.Handlers
+    name: Handlers
+  spec.vb:
+  - uid: RealtyHub
+    name: RealtyHub
+  - name: .
+  - uid: RealtyHub.Core
+    name: Core
+  - name: .
+  - uid: RealtyHub.Core.Handlers
+    name: Handlers
+- uid: RealtyHub.ApiService.Handlers.CondominiumHandler
+  commentId: T:RealtyHub.ApiService.Handlers.CondominiumHandler
+  href: RealtyHub.ApiService.Handlers.CondominiumHandler.html
+  name: CondominiumHandler
+  nameWithType: CondominiumHandler
+  fullName: RealtyHub.ApiService.Handlers.CondominiumHandler
+- uid: RealtyHub.ApiService.Handlers.CondominiumHandler.#ctor*
+  commentId: Overload:RealtyHub.ApiService.Handlers.CondominiumHandler.#ctor
+  href: RealtyHub.ApiService.Handlers.CondominiumHandler.html#RealtyHub_ApiService_Handlers_CondominiumHandler__ctor_RealtyHub_ApiService_Data_AppDbContext_
+  name: CondominiumHandler
+  nameWithType: CondominiumHandler.CondominiumHandler
+  fullName: RealtyHub.ApiService.Handlers.CondominiumHandler.CondominiumHandler
+  nameWithType.vb: CondominiumHandler.New
+  fullName.vb: RealtyHub.ApiService.Handlers.CondominiumHandler.New
+  name.vb: New
+- uid: RealtyHub.ApiService.Data.AppDbContext
+  commentId: T:RealtyHub.ApiService.Data.AppDbContext
+  parent: RealtyHub.ApiService.Data
+  href: RealtyHub.ApiService.Data.AppDbContext.html
+  name: AppDbContext
+  nameWithType: AppDbContext
+  fullName: RealtyHub.ApiService.Data.AppDbContext
+- uid: RealtyHub.ApiService.Data
+  commentId: N:RealtyHub.ApiService.Data
+  href: RealtyHub.html
+  name: RealtyHub.ApiService.Data
+  nameWithType: RealtyHub.ApiService.Data
+  fullName: RealtyHub.ApiService.Data
+  spec.csharp:
+  - uid: RealtyHub
+    name: RealtyHub
+    href: RealtyHub.html
+  - name: .
+  - uid: RealtyHub.ApiService
+    name: ApiService
+    href: RealtyHub.ApiService.html
+  - name: .
+  - uid: RealtyHub.ApiService.Data
+    name: Data
+    href: RealtyHub.ApiService.Data.html
+  spec.vb:
+  - uid: RealtyHub
+    name: RealtyHub
+    href: RealtyHub.html
+  - name: .
+  - uid: RealtyHub.ApiService
+    name: ApiService
+    href: RealtyHub.ApiService.html
+  - name: .
+  - uid: RealtyHub.ApiService.Data
+    name: Data
+    href: RealtyHub.ApiService.Data.html
+- uid: RealtyHub.ApiService.Handlers.CondominiumHandler.CreateAsync*
+  commentId: Overload:RealtyHub.ApiService.Handlers.CondominiumHandler.CreateAsync
+  href: RealtyHub.ApiService.Handlers.CondominiumHandler.html#RealtyHub_ApiService_Handlers_CondominiumHandler_CreateAsync_RealtyHub_Core_Models_Condominium_
+  name: CreateAsync
+  nameWithType: CondominiumHandler.CreateAsync
+  fullName: RealtyHub.ApiService.Handlers.CondominiumHandler.CreateAsync
+- uid: RealtyHub.Core.Handlers.ICondominiumHandler.CreateAsync(RealtyHub.Core.Models.Condominium)
+  commentId: M:RealtyHub.Core.Handlers.ICondominiumHandler.CreateAsync(RealtyHub.Core.Models.Condominium)
+  parent: RealtyHub.Core.Handlers.ICondominiumHandler
+  name: CreateAsync(Condominium)
+  nameWithType: ICondominiumHandler.CreateAsync(Condominium)
+  fullName: RealtyHub.Core.Handlers.ICondominiumHandler.CreateAsync(RealtyHub.Core.Models.Condominium)
+  spec.csharp:
+  - uid: RealtyHub.Core.Handlers.ICondominiumHandler.CreateAsync(RealtyHub.Core.Models.Condominium)
+    name: CreateAsync
+  - name: (
+  - uid: RealtyHub.Core.Models.Condominium
+    name: Condominium
+  - name: )
+  spec.vb:
+  - uid: RealtyHub.Core.Handlers.ICondominiumHandler.CreateAsync(RealtyHub.Core.Models.Condominium)
+    name: CreateAsync
+  - name: (
+  - uid: RealtyHub.Core.Models.Condominium
+    name: Condominium
+  - name: )
+- uid: RealtyHub.Core.Models.Condominium
+  commentId: T:RealtyHub.Core.Models.Condominium
+  parent: RealtyHub.Core.Models
+  name: Condominium
+  nameWithType: Condominium
+  fullName: RealtyHub.Core.Models.Condominium
+- uid: System.Threading.Tasks.Task{RealtyHub.Core.Responses.Response{RealtyHub.Core.Models.Condominium}}
+  commentId: T:System.Threading.Tasks.Task{RealtyHub.Core.Responses.Response{RealtyHub.Core.Models.Condominium}}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<Response<Condominium>>
+  nameWithType: Task<Response<Condominium>>
+  fullName: System.Threading.Tasks.Task<RealtyHub.Core.Responses.Response<RealtyHub.Core.Models.Condominium>>
+  nameWithType.vb: Task(Of Response(Of Condominium))
+  fullName.vb: System.Threading.Tasks.Task(Of RealtyHub.Core.Responses.Response(Of RealtyHub.Core.Models.Condominium))
+  name.vb: Task(Of Response(Of Condominium))
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - uid: RealtyHub.Core.Responses.Response`1
+    name: Response
+  - name: <
+  - uid: RealtyHub.Core.Models.Condominium
+    name: Condominium
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: RealtyHub.Core.Responses.Response`1
+    name: Response
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: RealtyHub.Core.Models.Condominium
+    name: Condominium
+  - name: )
+  - name: )
+- uid: RealtyHub.Core.Models
+  commentId: N:RealtyHub.Core.Models
+  name: RealtyHub.Core.Models
+  nameWithType: RealtyHub.Core.Models
+  fullName: RealtyHub.Core.Models
+  spec.csharp:
+  - uid: RealtyHub
+    name: RealtyHub
+  - name: .
+  - uid: RealtyHub.Core
+    name: Core
+  - name: .
+  - uid: RealtyHub.Core.Models
+    name: Models
+  spec.vb:
+  - uid: RealtyHub
+    name: RealtyHub
+  - name: .
+  - uid: RealtyHub.Core
+    name: Core
+  - name: .
+  - uid: RealtyHub.Core.Models
+    name: Models
+- uid: System.Threading.Tasks.Task`1
+  commentId: T:System.Threading.Tasks.Task`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<TResult>
+  nameWithType: Task<TResult>
+  fullName: System.Threading.Tasks.Task<TResult>
+  nameWithType.vb: Task(Of TResult)
+  fullName.vb: System.Threading.Tasks.Task(Of TResult)
+  name.vb: Task(Of TResult)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+- uid: RealtyHub.ApiService.Handlers.CondominiumHandler.UpdateAsync*
+  commentId: Overload:RealtyHub.ApiService.Handlers.CondominiumHandler.UpdateAsync
+  href: RealtyHub.ApiService.Handlers.CondominiumHandler.html#RealtyHub_ApiService_Handlers_CondominiumHandler_UpdateAsync_RealtyHub_Core_Models_Condominium_
+  name: UpdateAsync
+  nameWithType: CondominiumHandler.UpdateAsync
+  fullName: RealtyHub.ApiService.Handlers.CondominiumHandler.UpdateAsync
+- uid: RealtyHub.Core.Handlers.ICondominiumHandler.UpdateAsync(RealtyHub.Core.Models.Condominium)
+  commentId: M:RealtyHub.Core.Handlers.ICondominiumHandler.UpdateAsync(RealtyHub.Core.Models.Condominium)
+  parent: RealtyHub.Core.Handlers.ICondominiumHandler
+  name: UpdateAsync(Condominium)
+  nameWithType: ICondominiumHandler.UpdateAsync(Condominium)
+  fullName: RealtyHub.Core.Handlers.ICondominiumHandler.UpdateAsync(RealtyHub.Core.Models.Condominium)
+  spec.csharp:
+  - uid: RealtyHub.Core.Handlers.ICondominiumHandler.UpdateAsync(RealtyHub.Core.Models.Condominium)
+    name: UpdateAsync
+  - name: (
+  - uid: RealtyHub.Core.Models.Condominium
+    name: Condominium
+  - name: )
+  spec.vb:
+  - uid: RealtyHub.Core.Handlers.ICondominiumHandler.UpdateAsync(RealtyHub.Core.Models.Condominium)
+    name: UpdateAsync
+  - name: (
+  - uid: RealtyHub.Core.Models.Condominium
+    name: Condominium
+  - name: )
+- uid: RealtyHub.ApiService.Handlers.CondominiumHandler.DeleteAsync*
+  commentId: Overload:RealtyHub.ApiService.Handlers.CondominiumHandler.DeleteAsync
+  href: RealtyHub.ApiService.Handlers.CondominiumHandler.html#RealtyHub_ApiService_Handlers_CondominiumHandler_DeleteAsync_RealtyHub_Core_Requests_Condominiums_DeleteCondominiumRequest_
+  name: DeleteAsync
+  nameWithType: CondominiumHandler.DeleteAsync
+  fullName: RealtyHub.ApiService.Handlers.CondominiumHandler.DeleteAsync
+- uid: RealtyHub.Core.Handlers.ICondominiumHandler.DeleteAsync(RealtyHub.Core.Requests.Condominiums.DeleteCondominiumRequest)
+  commentId: M:RealtyHub.Core.Handlers.ICondominiumHandler.DeleteAsync(RealtyHub.Core.Requests.Condominiums.DeleteCondominiumRequest)
+  parent: RealtyHub.Core.Handlers.ICondominiumHandler
+  name: DeleteAsync(DeleteCondominiumRequest)
+  nameWithType: ICondominiumHandler.DeleteAsync(DeleteCondominiumRequest)
+  fullName: RealtyHub.Core.Handlers.ICondominiumHandler.DeleteAsync(RealtyHub.Core.Requests.Condominiums.DeleteCondominiumRequest)
+  spec.csharp:
+  - uid: RealtyHub.Core.Handlers.ICondominiumHandler.DeleteAsync(RealtyHub.Core.Requests.Condominiums.DeleteCondominiumRequest)
+    name: DeleteAsync
+  - name: (
+  - uid: RealtyHub.Core.Requests.Condominiums.DeleteCondominiumRequest
+    name: DeleteCondominiumRequest
+  - name: )
+  spec.vb:
+  - uid: RealtyHub.Core.Handlers.ICondominiumHandler.DeleteAsync(RealtyHub.Core.Requests.Condominiums.DeleteCondominiumRequest)
+    name: DeleteAsync
+  - name: (
+  - uid: RealtyHub.Core.Requests.Condominiums.DeleteCondominiumRequest
+    name: DeleteCondominiumRequest
+  - name: )
+- uid: RealtyHub.Core.Requests.Condominiums.DeleteCondominiumRequest
+  commentId: T:RealtyHub.Core.Requests.Condominiums.DeleteCondominiumRequest
+  parent: RealtyHub.Core.Requests.Condominiums
+  name: DeleteCondominiumRequest
+  nameWithType: DeleteCondominiumRequest
+  fullName: RealtyHub.Core.Requests.Condominiums.DeleteCondominiumRequest
+- uid: RealtyHub.Core.Requests.Condominiums
+  commentId: N:RealtyHub.Core.Requests.Condominiums
+  name: RealtyHub.Core.Requests.Condominiums
+  nameWithType: RealtyHub.Core.Requests.Condominiums
+  fullName: RealtyHub.Core.Requests.Condominiums
+  spec.csharp:
+  - uid: RealtyHub
+    name: RealtyHub
+  - name: .
+  - uid: RealtyHub.Core
+    name: Core
+  - name: .
+  - uid: RealtyHub.Core.Requests
+    name: Requests
+  - name: .
+  - uid: RealtyHub.Core.Requests.Condominiums
+    name: Condominiums
+  spec.vb:
+  - uid: RealtyHub
+    name: RealtyHub
+  - name: .
+  - uid: RealtyHub.Core
+    name: Core
+  - name: .
+  - uid: RealtyHub.Core.Requests
+    name: Requests
+  - name: .
+  - uid: RealtyHub.Core.Requests.Condominiums
+    name: Condominiums
+- uid: RealtyHub.ApiService.Handlers.CondominiumHandler.GetByIdAsync*
+  commentId: Overload:RealtyHub.ApiService.Handlers.CondominiumHandler.GetByIdAsync
+  href: RealtyHub.ApiService.Handlers.CondominiumHandler.html#RealtyHub_ApiService_Handlers_CondominiumHandler_GetByIdAsync_RealtyHub_Core_Requests_Condominiums_GetCondominiumByIdRequest_
+  name: GetByIdAsync
+  nameWithType: CondominiumHandler.GetByIdAsync
+  fullName: RealtyHub.ApiService.Handlers.CondominiumHandler.GetByIdAsync
+- uid: RealtyHub.Core.Handlers.ICondominiumHandler.GetByIdAsync(RealtyHub.Core.Requests.Condominiums.GetCondominiumByIdRequest)
+  commentId: M:RealtyHub.Core.Handlers.ICondominiumHandler.GetByIdAsync(RealtyHub.Core.Requests.Condominiums.GetCondominiumByIdRequest)
+  parent: RealtyHub.Core.Handlers.ICondominiumHandler
+  name: GetByIdAsync(GetCondominiumByIdRequest)
+  nameWithType: ICondominiumHandler.GetByIdAsync(GetCondominiumByIdRequest)
+  fullName: RealtyHub.Core.Handlers.ICondominiumHandler.GetByIdAsync(RealtyHub.Core.Requests.Condominiums.GetCondominiumByIdRequest)
+  spec.csharp:
+  - uid: RealtyHub.Core.Handlers.ICondominiumHandler.GetByIdAsync(RealtyHub.Core.Requests.Condominiums.GetCondominiumByIdRequest)
+    name: GetByIdAsync
+  - name: (
+  - uid: RealtyHub.Core.Requests.Condominiums.GetCondominiumByIdRequest
+    name: GetCondominiumByIdRequest
+  - name: )
+  spec.vb:
+  - uid: RealtyHub.Core.Handlers.ICondominiumHandler.GetByIdAsync(RealtyHub.Core.Requests.Condominiums.GetCondominiumByIdRequest)
+    name: GetByIdAsync
+  - name: (
+  - uid: RealtyHub.Core.Requests.Condominiums.GetCondominiumByIdRequest
+    name: GetCondominiumByIdRequest
+  - name: )
+- uid: RealtyHub.Core.Requests.Condominiums.GetCondominiumByIdRequest
+  commentId: T:RealtyHub.Core.Requests.Condominiums.GetCondominiumByIdRequest
+  parent: RealtyHub.Core.Requests.Condominiums
+  name: GetCondominiumByIdRequest
+  nameWithType: GetCondominiumByIdRequest
+  fullName: RealtyHub.Core.Requests.Condominiums.GetCondominiumByIdRequest
+- uid: RealtyHub.ApiService.Handlers.CondominiumHandler.GetAllAsync*
+  commentId: Overload:RealtyHub.ApiService.Handlers.CondominiumHandler.GetAllAsync
+  href: RealtyHub.ApiService.Handlers.CondominiumHandler.html#RealtyHub_ApiService_Handlers_CondominiumHandler_GetAllAsync_RealtyHub_Core_Requests_Condominiums_GetAllCondominiumsRequest_
+  name: GetAllAsync
+  nameWithType: CondominiumHandler.GetAllAsync
+  fullName: RealtyHub.ApiService.Handlers.CondominiumHandler.GetAllAsync
+- uid: RealtyHub.Core.Handlers.ICondominiumHandler.GetAllAsync(RealtyHub.Core.Requests.Condominiums.GetAllCondominiumsRequest)
+  commentId: M:RealtyHub.Core.Handlers.ICondominiumHandler.GetAllAsync(RealtyHub.Core.Requests.Condominiums.GetAllCondominiumsRequest)
+  parent: RealtyHub.Core.Handlers.ICondominiumHandler
+  name: GetAllAsync(GetAllCondominiumsRequest)
+  nameWithType: ICondominiumHandler.GetAllAsync(GetAllCondominiumsRequest)
+  fullName: RealtyHub.Core.Handlers.ICondominiumHandler.GetAllAsync(RealtyHub.Core.Requests.Condominiums.GetAllCondominiumsRequest)
+  spec.csharp:
+  - uid: RealtyHub.Core.Handlers.ICondominiumHandler.GetAllAsync(RealtyHub.Core.Requests.Condominiums.GetAllCondominiumsRequest)
+    name: GetAllAsync
+  - name: (
+  - uid: RealtyHub.Core.Requests.Condominiums.GetAllCondominiumsRequest
+    name: GetAllCondominiumsRequest
+  - name: )
+  spec.vb:
+  - uid: RealtyHub.Core.Handlers.ICondominiumHandler.GetAllAsync(RealtyHub.Core.Requests.Condominiums.GetAllCondominiumsRequest)
+    name: GetAllAsync
+  - name: (
+  - uid: RealtyHub.Core.Requests.Condominiums.GetAllCondominiumsRequest
+    name: GetAllCondominiumsRequest
+  - name: )
+- uid: RealtyHub.Core.Requests.Condominiums.GetAllCondominiumsRequest
+  commentId: T:RealtyHub.Core.Requests.Condominiums.GetAllCondominiumsRequest
+  parent: RealtyHub.Core.Requests.Condominiums
+  name: GetAllCondominiumsRequest
+  nameWithType: GetAllCondominiumsRequest
+  fullName: RealtyHub.Core.Requests.Condominiums.GetAllCondominiumsRequest
+- uid: System.Threading.Tasks.Task{RealtyHub.Core.Responses.PagedResponse{System.Collections.Generic.List{RealtyHub.Core.Models.Condominium}}}
+  commentId: T:System.Threading.Tasks.Task{RealtyHub.Core.Responses.PagedResponse{System.Collections.Generic.List{RealtyHub.Core.Models.Condominium}}}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<PagedResponse<List<Condominium>>>
+  nameWithType: Task<PagedResponse<List<Condominium>>>
+  fullName: System.Threading.Tasks.Task<RealtyHub.Core.Responses.PagedResponse<System.Collections.Generic.List<RealtyHub.Core.Models.Condominium>>>
+  nameWithType.vb: Task(Of PagedResponse(Of List(Of Condominium)))
+  fullName.vb: System.Threading.Tasks.Task(Of RealtyHub.Core.Responses.PagedResponse(Of System.Collections.Generic.List(Of RealtyHub.Core.Models.Condominium)))
+  name.vb: Task(Of PagedResponse(Of List(Of Condominium)))
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - uid: RealtyHub.Core.Responses.PagedResponse`1
+    name: PagedResponse
+  - name: <
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - uid: RealtyHub.Core.Models.Condominium
+    name: Condominium
+  - name: '>'
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: RealtyHub.Core.Responses.PagedResponse`1
+    name: PagedResponse
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: RealtyHub.Core.Models.Condominium
+    name: Condominium
+  - name: )
+  - name: )
+  - name: )

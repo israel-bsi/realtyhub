@@ -8,15 +8,27 @@ using RealtyHub.Core.Responses;
 
 namespace RealtyHub.ApiService.Handlers;
 
+/// <summary>
+/// Responsável pelas operações relacionadas às visitas de imóveis.
+/// </summary>
 public class ViewingHandler : IViewingHandler
 {
     private readonly AppDbContext _context;
 
+    /// <summary>
+    /// Inicializa uma nova instância de <see cref="ViewingHandler"/>.
+    /// </summary>
+    /// <param name="context">Contexto do banco de dados para interação com as visitas.</param>
     public ViewingHandler(AppDbContext context)
     {
         _context = context;
     }
 
+    /// <summary>
+    /// Agenda uma nova visita para um imóvel.
+    /// </summary>
+    /// <param name="request">Objeto contendo as informações para agendamento da visita.</param>
+    /// <returns>Retorna uma resposta com a visita agendada ou um erro em caso de falha.</returns>
     public async Task<Response<Viewing?>> ScheduleAsync(Viewing request)
     {
         try
@@ -69,6 +81,11 @@ public class ViewingHandler : IViewingHandler
         }
     }
 
+    /// <summary>
+    /// Reagenda uma visita existente.
+    /// </summary>
+    /// <param name="request">Objeto contendo as informações para reagendamento da visita.</param>
+    /// <returns>Retorna uma resposta com a visita reagendada ou um erro em caso de falha.</returns>
     public async Task<Response<Viewing?>> RescheduleAsync(Viewing request)
     {
         try
@@ -86,11 +103,9 @@ public class ViewingHandler : IViewingHandler
             switch (viewing.ViewingStatus)
             {
                 case EViewingStatus.Canceled:
-                    return new Response<Viewing?>(null, 400,
-                       "Não é possível reagendar uma visita cancelada");
+                    return new Response<Viewing?>(null, 400, "Não é possível reagendar uma visita cancelada");
                 case EViewingStatus.Done:
-                    return new Response<Viewing?>(null, 400,
-                        "Não é possível reagendar uma visita finalizada");
+                    return new Response<Viewing?>(null, 400, "Não é possível reagendar uma visita finalizada");
             }
 
             viewing.ViewingDate = request.ViewingDate;
@@ -107,6 +122,11 @@ public class ViewingHandler : IViewingHandler
         }
     }
 
+    /// <summary>
+    /// Finaliza uma visita existente.
+    /// </summary>
+    /// <param name="request">Requisição contendo o ID da visita a ser finalizada.</param>
+    /// <returns>Retorna uma resposta com a visita finalizada ou um erro em caso de falha.</returns>
     public async Task<Response<Viewing?>> DoneAsync(DoneViewingRequest request)
     {
         try
@@ -124,11 +144,9 @@ public class ViewingHandler : IViewingHandler
             switch (viewing.ViewingStatus)
             {
                 case EViewingStatus.Canceled:
-                    return new Response<Viewing?>(null, 400,
-                        "Não é possível finalizar uma visita cancelada");
+                    return new Response<Viewing?>(null, 400, "Não é possível finalizar uma visita cancelada");
                 case EViewingStatus.Done:
-                    return new Response<Viewing?>(null, 400,
-                        "Visita já finalizada");
+                    return new Response<Viewing?>(null, 400, "Visita já finalizada");
             }
 
             viewing.ViewingStatus = EViewingStatus.Done;
@@ -144,6 +162,11 @@ public class ViewingHandler : IViewingHandler
         }
     }
 
+    /// <summary>
+    /// Cancela uma visita existente.
+    /// </summary>
+    /// <param name="request">Requisição contendo o ID da visita a ser cancelada.</param>
+    /// <returns>Retorna uma resposta com a visita cancelada ou um erro em caso de falha.</returns>
     public async Task<Response<Viewing?>> CancelAsync(CancelViewingRequest request)
     {
         try
@@ -161,11 +184,9 @@ public class ViewingHandler : IViewingHandler
             switch (viewing.ViewingStatus)
             {
                 case EViewingStatus.Done:
-                    return new Response<Viewing?>(null, 400,
-                        "Não é possível cancelar uma visita finalizada");
+                    return new Response<Viewing?>(null, 400, "Não é possível cancelar uma visita finalizada");
                 case EViewingStatus.Canceled:
-                    return new Response<Viewing?>(null, 400,
-                        "Visita já cancelada");
+                    return new Response<Viewing?>(null, 400, "Visita já cancelada");
             }
 
             viewing.ViewingStatus = EViewingStatus.Canceled;
@@ -181,6 +202,11 @@ public class ViewingHandler : IViewingHandler
         }
     }
 
+    /// <summary>
+    /// Obtém uma visita específica pelo ID.
+    /// </summary>
+    /// <param name="request">Requisição contendo o ID da visita desejada.</param>
+    /// <returns>Retorna a visita ou um erro caso não seja encontrada.</returns>
     public async Task<Response<Viewing?>> GetByIdAsync(GetViewingByIdRequest request)
     {
         try
@@ -206,6 +232,11 @@ public class ViewingHandler : IViewingHandler
         }
     }
 
+    /// <summary>
+    /// Retorna uma lista paginada de todas as visitas.
+    /// </summary>
+    /// <param name="request">Requisição contendo parâmetros de paginação e filtro.</param>
+    /// <returns>Retorna uma resposta paginada com as visitas ou um erro em caso de falha.</returns>
     public async Task<PagedResponse<List<Viewing>?>> GetAllAsync(GetAllViewingsRequest request)
     {
         try
@@ -246,8 +277,7 @@ public class ViewingHandler : IViewingHandler
         }
         catch
         {
-            return new PagedResponse<List<Viewing>?>(null, 500,
-              message: "Não foi possível retornar as visitas");
+            return new PagedResponse<List<Viewing>?>(null, 500, "Não foi possível retornar as visitas");
         }
     }
 }

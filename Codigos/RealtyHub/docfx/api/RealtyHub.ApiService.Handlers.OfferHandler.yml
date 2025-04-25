@@ -1,0 +1,1226 @@
+### YamlMime:ManagedReference
+items:
+- uid: RealtyHub.ApiService.Handlers.OfferHandler
+  commentId: T:RealtyHub.ApiService.Handlers.OfferHandler
+  id: OfferHandler
+  parent: RealtyHub.ApiService.Handlers
+  children:
+  - RealtyHub.ApiService.Handlers.OfferHandler.#ctor(RealtyHub.ApiService.Data.AppDbContext)
+  - RealtyHub.ApiService.Handlers.OfferHandler.AcceptAsync(RealtyHub.Core.Requests.Offers.AcceptOfferRequest)
+  - RealtyHub.ApiService.Handlers.OfferHandler.CreateAsync(RealtyHub.Core.Models.Offer)
+  - RealtyHub.ApiService.Handlers.OfferHandler.GetAcceptedByProperty(RealtyHub.Core.Requests.Offers.GetOfferAcceptedByProperty)
+  - RealtyHub.ApiService.Handlers.OfferHandler.GetAllAsync(RealtyHub.Core.Requests.Offers.GetAllOffersRequest)
+  - RealtyHub.ApiService.Handlers.OfferHandler.GetAllOffersByCustomerAsync(RealtyHub.Core.Requests.Offers.GetAllOffersByCustomerRequest)
+  - RealtyHub.ApiService.Handlers.OfferHandler.GetAllOffersByPropertyAsync(RealtyHub.Core.Requests.Offers.GetAllOffersByPropertyRequest)
+  - RealtyHub.ApiService.Handlers.OfferHandler.GetByIdAsync(RealtyHub.Core.Requests.Offers.GetOfferByIdRequest)
+  - RealtyHub.ApiService.Handlers.OfferHandler.RejectAsync(RealtyHub.Core.Requests.Offers.RejectOfferRequest)
+  - RealtyHub.ApiService.Handlers.OfferHandler.UpdateAsync(RealtyHub.Core.Models.Offer)
+  langs:
+  - csharp
+  - vb
+  name: OfferHandler
+  nameWithType: OfferHandler
+  fullName: RealtyHub.ApiService.Handlers.OfferHandler
+  type: Class
+  source:
+    remote:
+      path: Codigos/RealtyHub/RealtyHub.ApiService/Handlers/OfferHandler.cs
+      branch: main
+      repo: https://github.com/israel-bsi/realtyhub
+    id: OfferHandler
+    path: ../RealtyHub.ApiService/Handlers/OfferHandler.cs
+    startLine: 10
+  assemblies:
+  - RealtyHub.ApiService
+  namespace: RealtyHub.ApiService.Handlers
+  syntax:
+    content: 'public class OfferHandler : IOfferHandler'
+    content.vb: Public Class OfferHandler Implements IOfferHandler
+  inheritance:
+  - System.Object
+  implements:
+  - RealtyHub.Core.Handlers.IOfferHandler
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: RealtyHub.ApiService.Handlers.OfferHandler.#ctor(RealtyHub.ApiService.Data.AppDbContext)
+  commentId: M:RealtyHub.ApiService.Handlers.OfferHandler.#ctor(RealtyHub.ApiService.Data.AppDbContext)
+  id: '#ctor(RealtyHub.ApiService.Data.AppDbContext)'
+  parent: RealtyHub.ApiService.Handlers.OfferHandler
+  langs:
+  - csharp
+  - vb
+  name: OfferHandler(AppDbContext)
+  nameWithType: OfferHandler.OfferHandler(AppDbContext)
+  fullName: RealtyHub.ApiService.Handlers.OfferHandler.OfferHandler(RealtyHub.ApiService.Data.AppDbContext)
+  type: Constructor
+  source:
+    remote:
+      path: Codigos/RealtyHub/RealtyHub.ApiService/Handlers/OfferHandler.cs
+      branch: main
+      repo: https://github.com/israel-bsi/realtyhub
+    id: .ctor
+    path: ../RealtyHub.ApiService/Handlers/OfferHandler.cs
+    startLine: 14
+  assemblies:
+  - RealtyHub.ApiService
+  namespace: RealtyHub.ApiService.Handlers
+  syntax:
+    content: public OfferHandler(AppDbContext context)
+    parameters:
+    - id: context
+      type: RealtyHub.ApiService.Data.AppDbContext
+    content.vb: Public Sub New(context As AppDbContext)
+  overload: RealtyHub.ApiService.Handlers.OfferHandler.#ctor*
+  nameWithType.vb: OfferHandler.New(AppDbContext)
+  fullName.vb: RealtyHub.ApiService.Handlers.OfferHandler.New(RealtyHub.ApiService.Data.AppDbContext)
+  name.vb: New(AppDbContext)
+- uid: RealtyHub.ApiService.Handlers.OfferHandler.CreateAsync(RealtyHub.Core.Models.Offer)
+  commentId: M:RealtyHub.ApiService.Handlers.OfferHandler.CreateAsync(RealtyHub.Core.Models.Offer)
+  id: CreateAsync(RealtyHub.Core.Models.Offer)
+  parent: RealtyHub.ApiService.Handlers.OfferHandler
+  langs:
+  - csharp
+  - vb
+  name: CreateAsync(Offer)
+  nameWithType: OfferHandler.CreateAsync(Offer)
+  fullName: RealtyHub.ApiService.Handlers.OfferHandler.CreateAsync(RealtyHub.Core.Models.Offer)
+  type: Method
+  source:
+    remote:
+      path: Codigos/RealtyHub/RealtyHub.ApiService/Handlers/OfferHandler.cs
+      branch: main
+      repo: https://github.com/israel-bsi/realtyhub
+    id: CreateAsync
+    path: ../RealtyHub.ApiService/Handlers/OfferHandler.cs
+    startLine: 19
+  assemblies:
+  - RealtyHub.ApiService
+  namespace: RealtyHub.ApiService.Handlers
+  example: []
+  syntax:
+    content: public Task<Response<Offer?>> CreateAsync(Offer request)
+    parameters:
+    - id: request
+      type: RealtyHub.Core.Models.Offer
+    return:
+      type: System.Threading.Tasks.Task{RealtyHub.Core.Responses.Response{RealtyHub.Core.Models.Offer}}
+    content.vb: Public Function CreateAsync(request As Offer) As Task(Of Response(Of Offer))
+  overload: RealtyHub.ApiService.Handlers.OfferHandler.CreateAsync*
+  implements:
+  - RealtyHub.Core.Handlers.IOfferHandler.CreateAsync(RealtyHub.Core.Models.Offer)
+- uid: RealtyHub.ApiService.Handlers.OfferHandler.UpdateAsync(RealtyHub.Core.Models.Offer)
+  commentId: M:RealtyHub.ApiService.Handlers.OfferHandler.UpdateAsync(RealtyHub.Core.Models.Offer)
+  id: UpdateAsync(RealtyHub.Core.Models.Offer)
+  parent: RealtyHub.ApiService.Handlers.OfferHandler
+  langs:
+  - csharp
+  - vb
+  name: UpdateAsync(Offer)
+  nameWithType: OfferHandler.UpdateAsync(Offer)
+  fullName: RealtyHub.ApiService.Handlers.OfferHandler.UpdateAsync(RealtyHub.Core.Models.Offer)
+  type: Method
+  source:
+    remote:
+      path: Codigos/RealtyHub/RealtyHub.ApiService/Handlers/OfferHandler.cs
+      branch: main
+      repo: https://github.com/israel-bsi/realtyhub
+    id: UpdateAsync
+    path: ../RealtyHub.ApiService/Handlers/OfferHandler.cs
+    startLine: 82
+  assemblies:
+  - RealtyHub.ApiService
+  namespace: RealtyHub.ApiService.Handlers
+  example: []
+  syntax:
+    content: public Task<Response<Offer?>> UpdateAsync(Offer request)
+    parameters:
+    - id: request
+      type: RealtyHub.Core.Models.Offer
+    return:
+      type: System.Threading.Tasks.Task{RealtyHub.Core.Responses.Response{RealtyHub.Core.Models.Offer}}
+    content.vb: Public Function UpdateAsync(request As Offer) As Task(Of Response(Of Offer))
+  overload: RealtyHub.ApiService.Handlers.OfferHandler.UpdateAsync*
+  implements:
+  - RealtyHub.Core.Handlers.IOfferHandler.UpdateAsync(RealtyHub.Core.Models.Offer)
+- uid: RealtyHub.ApiService.Handlers.OfferHandler.RejectAsync(RealtyHub.Core.Requests.Offers.RejectOfferRequest)
+  commentId: M:RealtyHub.ApiService.Handlers.OfferHandler.RejectAsync(RealtyHub.Core.Requests.Offers.RejectOfferRequest)
+  id: RejectAsync(RealtyHub.Core.Requests.Offers.RejectOfferRequest)
+  parent: RealtyHub.ApiService.Handlers.OfferHandler
+  langs:
+  - csharp
+  - vb
+  name: RejectAsync(RejectOfferRequest)
+  nameWithType: OfferHandler.RejectAsync(RejectOfferRequest)
+  fullName: RealtyHub.ApiService.Handlers.OfferHandler.RejectAsync(RealtyHub.Core.Requests.Offers.RejectOfferRequest)
+  type: Method
+  source:
+    remote:
+      path: Codigos/RealtyHub/RealtyHub.ApiService/Handlers/OfferHandler.cs
+      branch: main
+      repo: https://github.com/israel-bsi/realtyhub
+    id: RejectAsync
+    path: ../RealtyHub.ApiService/Handlers/OfferHandler.cs
+    startLine: 172
+  assemblies:
+  - RealtyHub.ApiService
+  namespace: RealtyHub.ApiService.Handlers
+  example: []
+  syntax:
+    content: public Task<Response<Offer?>> RejectAsync(RejectOfferRequest request)
+    parameters:
+    - id: request
+      type: RealtyHub.Core.Requests.Offers.RejectOfferRequest
+    return:
+      type: System.Threading.Tasks.Task{RealtyHub.Core.Responses.Response{RealtyHub.Core.Models.Offer}}
+    content.vb: Public Function RejectAsync(request As RejectOfferRequest) As Task(Of Response(Of Offer))
+  overload: RealtyHub.ApiService.Handlers.OfferHandler.RejectAsync*
+  implements:
+  - RealtyHub.Core.Handlers.IOfferHandler.RejectAsync(RealtyHub.Core.Requests.Offers.RejectOfferRequest)
+- uid: RealtyHub.ApiService.Handlers.OfferHandler.AcceptAsync(RealtyHub.Core.Requests.Offers.AcceptOfferRequest)
+  commentId: M:RealtyHub.ApiService.Handlers.OfferHandler.AcceptAsync(RealtyHub.Core.Requests.Offers.AcceptOfferRequest)
+  id: AcceptAsync(RealtyHub.Core.Requests.Offers.AcceptOfferRequest)
+  parent: RealtyHub.ApiService.Handlers.OfferHandler
+  langs:
+  - csharp
+  - vb
+  name: AcceptAsync(AcceptOfferRequest)
+  nameWithType: OfferHandler.AcceptAsync(AcceptOfferRequest)
+  fullName: RealtyHub.ApiService.Handlers.OfferHandler.AcceptAsync(RealtyHub.Core.Requests.Offers.AcceptOfferRequest)
+  type: Method
+  source:
+    remote:
+      path: Codigos/RealtyHub/RealtyHub.ApiService/Handlers/OfferHandler.cs
+      branch: main
+      repo: https://github.com/israel-bsi/realtyhub
+    id: AcceptAsync
+    path: ../RealtyHub.ApiService/Handlers/OfferHandler.cs
+    startLine: 212
+  assemblies:
+  - RealtyHub.ApiService
+  namespace: RealtyHub.ApiService.Handlers
+  example: []
+  syntax:
+    content: public Task<Response<Offer?>> AcceptAsync(AcceptOfferRequest request)
+    parameters:
+    - id: request
+      type: RealtyHub.Core.Requests.Offers.AcceptOfferRequest
+    return:
+      type: System.Threading.Tasks.Task{RealtyHub.Core.Responses.Response{RealtyHub.Core.Models.Offer}}
+    content.vb: Public Function AcceptAsync(request As AcceptOfferRequest) As Task(Of Response(Of Offer))
+  overload: RealtyHub.ApiService.Handlers.OfferHandler.AcceptAsync*
+  implements:
+  - RealtyHub.Core.Handlers.IOfferHandler.AcceptAsync(RealtyHub.Core.Requests.Offers.AcceptOfferRequest)
+- uid: RealtyHub.ApiService.Handlers.OfferHandler.GetByIdAsync(RealtyHub.Core.Requests.Offers.GetOfferByIdRequest)
+  commentId: M:RealtyHub.ApiService.Handlers.OfferHandler.GetByIdAsync(RealtyHub.Core.Requests.Offers.GetOfferByIdRequest)
+  id: GetByIdAsync(RealtyHub.Core.Requests.Offers.GetOfferByIdRequest)
+  parent: RealtyHub.ApiService.Handlers.OfferHandler
+  langs:
+  - csharp
+  - vb
+  name: GetByIdAsync(GetOfferByIdRequest)
+  nameWithType: OfferHandler.GetByIdAsync(GetOfferByIdRequest)
+  fullName: RealtyHub.ApiService.Handlers.OfferHandler.GetByIdAsync(RealtyHub.Core.Requests.Offers.GetOfferByIdRequest)
+  type: Method
+  source:
+    remote:
+      path: Codigos/RealtyHub/RealtyHub.ApiService/Handlers/OfferHandler.cs
+      branch: main
+      repo: https://github.com/israel-bsi/realtyhub
+    id: GetByIdAsync
+    path: ../RealtyHub.ApiService/Handlers/OfferHandler.cs
+    startLine: 252
+  assemblies:
+  - RealtyHub.ApiService
+  namespace: RealtyHub.ApiService.Handlers
+  example: []
+  syntax:
+    content: public Task<Response<Offer?>> GetByIdAsync(GetOfferByIdRequest request)
+    parameters:
+    - id: request
+      type: RealtyHub.Core.Requests.Offers.GetOfferByIdRequest
+    return:
+      type: System.Threading.Tasks.Task{RealtyHub.Core.Responses.Response{RealtyHub.Core.Models.Offer}}
+    content.vb: Public Function GetByIdAsync(request As GetOfferByIdRequest) As Task(Of Response(Of Offer))
+  overload: RealtyHub.ApiService.Handlers.OfferHandler.GetByIdAsync*
+  implements:
+  - RealtyHub.Core.Handlers.IOfferHandler.GetByIdAsync(RealtyHub.Core.Requests.Offers.GetOfferByIdRequest)
+- uid: RealtyHub.ApiService.Handlers.OfferHandler.GetAcceptedByProperty(RealtyHub.Core.Requests.Offers.GetOfferAcceptedByProperty)
+  commentId: M:RealtyHub.ApiService.Handlers.OfferHandler.GetAcceptedByProperty(RealtyHub.Core.Requests.Offers.GetOfferAcceptedByProperty)
+  id: GetAcceptedByProperty(RealtyHub.Core.Requests.Offers.GetOfferAcceptedByProperty)
+  parent: RealtyHub.ApiService.Handlers.OfferHandler
+  langs:
+  - csharp
+  - vb
+  name: GetAcceptedByProperty(GetOfferAcceptedByProperty)
+  nameWithType: OfferHandler.GetAcceptedByProperty(GetOfferAcceptedByProperty)
+  fullName: RealtyHub.ApiService.Handlers.OfferHandler.GetAcceptedByProperty(RealtyHub.Core.Requests.Offers.GetOfferAcceptedByProperty)
+  type: Method
+  source:
+    remote:
+      path: Codigos/RealtyHub/RealtyHub.ApiService/Handlers/OfferHandler.cs
+      branch: main
+      repo: https://github.com/israel-bsi/realtyhub
+    id: GetAcceptedByProperty
+    path: ../RealtyHub.ApiService/Handlers/OfferHandler.cs
+    startLine: 279
+  assemblies:
+  - RealtyHub.ApiService
+  namespace: RealtyHub.ApiService.Handlers
+  example: []
+  syntax:
+    content: public Task<Response<Offer?>> GetAcceptedByProperty(GetOfferAcceptedByProperty request)
+    parameters:
+    - id: request
+      type: RealtyHub.Core.Requests.Offers.GetOfferAcceptedByProperty
+    return:
+      type: System.Threading.Tasks.Task{RealtyHub.Core.Responses.Response{RealtyHub.Core.Models.Offer}}
+    content.vb: Public Function GetAcceptedByProperty(request As GetOfferAcceptedByProperty) As Task(Of Response(Of Offer))
+  overload: RealtyHub.ApiService.Handlers.OfferHandler.GetAcceptedByProperty*
+  implements:
+  - RealtyHub.Core.Handlers.IOfferHandler.GetAcceptedByProperty(RealtyHub.Core.Requests.Offers.GetOfferAcceptedByProperty)
+- uid: RealtyHub.ApiService.Handlers.OfferHandler.GetAllOffersByPropertyAsync(RealtyHub.Core.Requests.Offers.GetAllOffersByPropertyRequest)
+  commentId: M:RealtyHub.ApiService.Handlers.OfferHandler.GetAllOffersByPropertyAsync(RealtyHub.Core.Requests.Offers.GetAllOffersByPropertyRequest)
+  id: GetAllOffersByPropertyAsync(RealtyHub.Core.Requests.Offers.GetAllOffersByPropertyRequest)
+  parent: RealtyHub.ApiService.Handlers.OfferHandler
+  langs:
+  - csharp
+  - vb
+  name: GetAllOffersByPropertyAsync(GetAllOffersByPropertyRequest)
+  nameWithType: OfferHandler.GetAllOffersByPropertyAsync(GetAllOffersByPropertyRequest)
+  fullName: RealtyHub.ApiService.Handlers.OfferHandler.GetAllOffersByPropertyAsync(RealtyHub.Core.Requests.Offers.GetAllOffersByPropertyRequest)
+  type: Method
+  source:
+    remote:
+      path: Codigos/RealtyHub/RealtyHub.ApiService/Handlers/OfferHandler.cs
+      branch: main
+      repo: https://github.com/israel-bsi/realtyhub
+    id: GetAllOffersByPropertyAsync
+    path: ../RealtyHub.ApiService/Handlers/OfferHandler.cs
+    startLine: 307
+  assemblies:
+  - RealtyHub.ApiService
+  namespace: RealtyHub.ApiService.Handlers
+  example: []
+  syntax:
+    content: public Task<PagedResponse<List<Offer>?>> GetAllOffersByPropertyAsync(GetAllOffersByPropertyRequest request)
+    parameters:
+    - id: request
+      type: RealtyHub.Core.Requests.Offers.GetAllOffersByPropertyRequest
+    return:
+      type: System.Threading.Tasks.Task{RealtyHub.Core.Responses.PagedResponse{System.Collections.Generic.List{RealtyHub.Core.Models.Offer}}}
+    content.vb: Public Function GetAllOffersByPropertyAsync(request As GetAllOffersByPropertyRequest) As Task(Of PagedResponse(Of List(Of Offer)))
+  overload: RealtyHub.ApiService.Handlers.OfferHandler.GetAllOffersByPropertyAsync*
+  implements:
+  - RealtyHub.Core.Handlers.IOfferHandler.GetAllOffersByPropertyAsync(RealtyHub.Core.Requests.Offers.GetAllOffersByPropertyRequest)
+- uid: RealtyHub.ApiService.Handlers.OfferHandler.GetAllOffersByCustomerAsync(RealtyHub.Core.Requests.Offers.GetAllOffersByCustomerRequest)
+  commentId: M:RealtyHub.ApiService.Handlers.OfferHandler.GetAllOffersByCustomerAsync(RealtyHub.Core.Requests.Offers.GetAllOffersByCustomerRequest)
+  id: GetAllOffersByCustomerAsync(RealtyHub.Core.Requests.Offers.GetAllOffersByCustomerRequest)
+  parent: RealtyHub.ApiService.Handlers.OfferHandler
+  langs:
+  - csharp
+  - vb
+  name: GetAllOffersByCustomerAsync(GetAllOffersByCustomerRequest)
+  nameWithType: OfferHandler.GetAllOffersByCustomerAsync(GetAllOffersByCustomerRequest)
+  fullName: RealtyHub.ApiService.Handlers.OfferHandler.GetAllOffersByCustomerAsync(RealtyHub.Core.Requests.Offers.GetAllOffersByCustomerRequest)
+  type: Method
+  source:
+    remote:
+      path: Codigos/RealtyHub/RealtyHub.ApiService/Handlers/OfferHandler.cs
+      branch: main
+      repo: https://github.com/israel-bsi/realtyhub
+    id: GetAllOffersByCustomerAsync
+    path: ../RealtyHub.ApiService/Handlers/OfferHandler.cs
+    startLine: 363
+  assemblies:
+  - RealtyHub.ApiService
+  namespace: RealtyHub.ApiService.Handlers
+  example: []
+  syntax:
+    content: public Task<PagedResponse<List<Offer>?>> GetAllOffersByCustomerAsync(GetAllOffersByCustomerRequest request)
+    parameters:
+    - id: request
+      type: RealtyHub.Core.Requests.Offers.GetAllOffersByCustomerRequest
+    return:
+      type: System.Threading.Tasks.Task{RealtyHub.Core.Responses.PagedResponse{System.Collections.Generic.List{RealtyHub.Core.Models.Offer}}}
+    content.vb: Public Function GetAllOffersByCustomerAsync(request As GetAllOffersByCustomerRequest) As Task(Of PagedResponse(Of List(Of Offer)))
+  overload: RealtyHub.ApiService.Handlers.OfferHandler.GetAllOffersByCustomerAsync*
+  implements:
+  - RealtyHub.Core.Handlers.IOfferHandler.GetAllOffersByCustomerAsync(RealtyHub.Core.Requests.Offers.GetAllOffersByCustomerRequest)
+- uid: RealtyHub.ApiService.Handlers.OfferHandler.GetAllAsync(RealtyHub.Core.Requests.Offers.GetAllOffersRequest)
+  commentId: M:RealtyHub.ApiService.Handlers.OfferHandler.GetAllAsync(RealtyHub.Core.Requests.Offers.GetAllOffersRequest)
+  id: GetAllAsync(RealtyHub.Core.Requests.Offers.GetAllOffersRequest)
+  parent: RealtyHub.ApiService.Handlers.OfferHandler
+  langs:
+  - csharp
+  - vb
+  name: GetAllAsync(GetAllOffersRequest)
+  nameWithType: OfferHandler.GetAllAsync(GetAllOffersRequest)
+  fullName: RealtyHub.ApiService.Handlers.OfferHandler.GetAllAsync(RealtyHub.Core.Requests.Offers.GetAllOffersRequest)
+  type: Method
+  source:
+    remote:
+      path: Codigos/RealtyHub/RealtyHub.ApiService/Handlers/OfferHandler.cs
+      branch: main
+      repo: https://github.com/israel-bsi/realtyhub
+    id: GetAllAsync
+    path: ../RealtyHub.ApiService/Handlers/OfferHandler.cs
+    startLine: 420
+  assemblies:
+  - RealtyHub.ApiService
+  namespace: RealtyHub.ApiService.Handlers
+  example: []
+  syntax:
+    content: public Task<PagedResponse<List<Offer>?>> GetAllAsync(GetAllOffersRequest request)
+    parameters:
+    - id: request
+      type: RealtyHub.Core.Requests.Offers.GetAllOffersRequest
+    return:
+      type: System.Threading.Tasks.Task{RealtyHub.Core.Responses.PagedResponse{System.Collections.Generic.List{RealtyHub.Core.Models.Offer}}}
+    content.vb: Public Function GetAllAsync(request As GetAllOffersRequest) As Task(Of PagedResponse(Of List(Of Offer)))
+  overload: RealtyHub.ApiService.Handlers.OfferHandler.GetAllAsync*
+  implements:
+  - RealtyHub.Core.Handlers.IOfferHandler.GetAllAsync(RealtyHub.Core.Requests.Offers.GetAllOffersRequest)
+references:
+- uid: RealtyHub.ApiService.Handlers
+  commentId: N:RealtyHub.ApiService.Handlers
+  href: RealtyHub.html
+  name: RealtyHub.ApiService.Handlers
+  nameWithType: RealtyHub.ApiService.Handlers
+  fullName: RealtyHub.ApiService.Handlers
+  spec.csharp:
+  - uid: RealtyHub
+    name: RealtyHub
+    href: RealtyHub.html
+  - name: .
+  - uid: RealtyHub.ApiService
+    name: ApiService
+    href: RealtyHub.ApiService.html
+  - name: .
+  - uid: RealtyHub.ApiService.Handlers
+    name: Handlers
+    href: RealtyHub.ApiService.Handlers.html
+  spec.vb:
+  - uid: RealtyHub
+    name: RealtyHub
+    href: RealtyHub.html
+  - name: .
+  - uid: RealtyHub.ApiService
+    name: ApiService
+    href: RealtyHub.ApiService.html
+  - name: .
+  - uid: RealtyHub.ApiService.Handlers
+    name: Handlers
+    href: RealtyHub.ApiService.Handlers.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: RealtyHub.Core.Handlers.IOfferHandler
+  commentId: T:RealtyHub.Core.Handlers.IOfferHandler
+  parent: RealtyHub.Core.Handlers
+  name: IOfferHandler
+  nameWithType: IOfferHandler
+  fullName: RealtyHub.Core.Handlers.IOfferHandler
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: RealtyHub.Core.Handlers
+  commentId: N:RealtyHub.Core.Handlers
+  name: RealtyHub.Core.Handlers
+  nameWithType: RealtyHub.Core.Handlers
+  fullName: RealtyHub.Core.Handlers
+  spec.csharp:
+  - uid: RealtyHub
+    name: RealtyHub
+  - name: .
+  - uid: RealtyHub.Core
+    name: Core
+  - name: .
+  - uid: RealtyHub.Core.Handlers
+    name: Handlers
+  spec.vb:
+  - uid: RealtyHub
+    name: RealtyHub
+  - name: .
+  - uid: RealtyHub.Core
+    name: Core
+  - name: .
+  - uid: RealtyHub.Core.Handlers
+    name: Handlers
+- uid: RealtyHub.ApiService.Handlers.OfferHandler.#ctor*
+  commentId: Overload:RealtyHub.ApiService.Handlers.OfferHandler.#ctor
+  href: RealtyHub.ApiService.Handlers.OfferHandler.html#RealtyHub_ApiService_Handlers_OfferHandler__ctor_RealtyHub_ApiService_Data_AppDbContext_
+  name: OfferHandler
+  nameWithType: OfferHandler.OfferHandler
+  fullName: RealtyHub.ApiService.Handlers.OfferHandler.OfferHandler
+  nameWithType.vb: OfferHandler.New
+  fullName.vb: RealtyHub.ApiService.Handlers.OfferHandler.New
+  name.vb: New
+- uid: RealtyHub.ApiService.Data.AppDbContext
+  commentId: T:RealtyHub.ApiService.Data.AppDbContext
+  parent: RealtyHub.ApiService.Data
+  href: RealtyHub.ApiService.Data.AppDbContext.html
+  name: AppDbContext
+  nameWithType: AppDbContext
+  fullName: RealtyHub.ApiService.Data.AppDbContext
+- uid: RealtyHub.ApiService.Data
+  commentId: N:RealtyHub.ApiService.Data
+  href: RealtyHub.html
+  name: RealtyHub.ApiService.Data
+  nameWithType: RealtyHub.ApiService.Data
+  fullName: RealtyHub.ApiService.Data
+  spec.csharp:
+  - uid: RealtyHub
+    name: RealtyHub
+    href: RealtyHub.html
+  - name: .
+  - uid: RealtyHub.ApiService
+    name: ApiService
+    href: RealtyHub.ApiService.html
+  - name: .
+  - uid: RealtyHub.ApiService.Data
+    name: Data
+    href: RealtyHub.ApiService.Data.html
+  spec.vb:
+  - uid: RealtyHub
+    name: RealtyHub
+    href: RealtyHub.html
+  - name: .
+  - uid: RealtyHub.ApiService
+    name: ApiService
+    href: RealtyHub.ApiService.html
+  - name: .
+  - uid: RealtyHub.ApiService.Data
+    name: Data
+    href: RealtyHub.ApiService.Data.html
+- uid: RealtyHub.ApiService.Handlers.OfferHandler.CreateAsync*
+  commentId: Overload:RealtyHub.ApiService.Handlers.OfferHandler.CreateAsync
+  href: RealtyHub.ApiService.Handlers.OfferHandler.html#RealtyHub_ApiService_Handlers_OfferHandler_CreateAsync_RealtyHub_Core_Models_Offer_
+  name: CreateAsync
+  nameWithType: OfferHandler.CreateAsync
+  fullName: RealtyHub.ApiService.Handlers.OfferHandler.CreateAsync
+- uid: RealtyHub.Core.Handlers.IOfferHandler.CreateAsync(RealtyHub.Core.Models.Offer)
+  commentId: M:RealtyHub.Core.Handlers.IOfferHandler.CreateAsync(RealtyHub.Core.Models.Offer)
+  parent: RealtyHub.Core.Handlers.IOfferHandler
+  name: CreateAsync(Offer)
+  nameWithType: IOfferHandler.CreateAsync(Offer)
+  fullName: RealtyHub.Core.Handlers.IOfferHandler.CreateAsync(RealtyHub.Core.Models.Offer)
+  spec.csharp:
+  - uid: RealtyHub.Core.Handlers.IOfferHandler.CreateAsync(RealtyHub.Core.Models.Offer)
+    name: CreateAsync
+  - name: (
+  - uid: RealtyHub.Core.Models.Offer
+    name: Offer
+  - name: )
+  spec.vb:
+  - uid: RealtyHub.Core.Handlers.IOfferHandler.CreateAsync(RealtyHub.Core.Models.Offer)
+    name: CreateAsync
+  - name: (
+  - uid: RealtyHub.Core.Models.Offer
+    name: Offer
+  - name: )
+- uid: RealtyHub.Core.Models.Offer
+  commentId: T:RealtyHub.Core.Models.Offer
+  parent: RealtyHub.Core.Models
+  name: Offer
+  nameWithType: Offer
+  fullName: RealtyHub.Core.Models.Offer
+- uid: System.Threading.Tasks.Task{RealtyHub.Core.Responses.Response{RealtyHub.Core.Models.Offer}}
+  commentId: T:System.Threading.Tasks.Task{RealtyHub.Core.Responses.Response{RealtyHub.Core.Models.Offer}}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<Response<Offer>>
+  nameWithType: Task<Response<Offer>>
+  fullName: System.Threading.Tasks.Task<RealtyHub.Core.Responses.Response<RealtyHub.Core.Models.Offer>>
+  nameWithType.vb: Task(Of Response(Of Offer))
+  fullName.vb: System.Threading.Tasks.Task(Of RealtyHub.Core.Responses.Response(Of RealtyHub.Core.Models.Offer))
+  name.vb: Task(Of Response(Of Offer))
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - uid: RealtyHub.Core.Responses.Response`1
+    name: Response
+  - name: <
+  - uid: RealtyHub.Core.Models.Offer
+    name: Offer
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: RealtyHub.Core.Responses.Response`1
+    name: Response
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: RealtyHub.Core.Models.Offer
+    name: Offer
+  - name: )
+  - name: )
+- uid: RealtyHub.Core.Models
+  commentId: N:RealtyHub.Core.Models
+  name: RealtyHub.Core.Models
+  nameWithType: RealtyHub.Core.Models
+  fullName: RealtyHub.Core.Models
+  spec.csharp:
+  - uid: RealtyHub
+    name: RealtyHub
+  - name: .
+  - uid: RealtyHub.Core
+    name: Core
+  - name: .
+  - uid: RealtyHub.Core.Models
+    name: Models
+  spec.vb:
+  - uid: RealtyHub
+    name: RealtyHub
+  - name: .
+  - uid: RealtyHub.Core
+    name: Core
+  - name: .
+  - uid: RealtyHub.Core.Models
+    name: Models
+- uid: System.Threading.Tasks.Task`1
+  commentId: T:System.Threading.Tasks.Task`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<TResult>
+  nameWithType: Task<TResult>
+  fullName: System.Threading.Tasks.Task<TResult>
+  nameWithType.vb: Task(Of TResult)
+  fullName.vb: System.Threading.Tasks.Task(Of TResult)
+  name.vb: Task(Of TResult)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+- uid: RealtyHub.ApiService.Handlers.OfferHandler.UpdateAsync*
+  commentId: Overload:RealtyHub.ApiService.Handlers.OfferHandler.UpdateAsync
+  href: RealtyHub.ApiService.Handlers.OfferHandler.html#RealtyHub_ApiService_Handlers_OfferHandler_UpdateAsync_RealtyHub_Core_Models_Offer_
+  name: UpdateAsync
+  nameWithType: OfferHandler.UpdateAsync
+  fullName: RealtyHub.ApiService.Handlers.OfferHandler.UpdateAsync
+- uid: RealtyHub.Core.Handlers.IOfferHandler.UpdateAsync(RealtyHub.Core.Models.Offer)
+  commentId: M:RealtyHub.Core.Handlers.IOfferHandler.UpdateAsync(RealtyHub.Core.Models.Offer)
+  parent: RealtyHub.Core.Handlers.IOfferHandler
+  name: UpdateAsync(Offer)
+  nameWithType: IOfferHandler.UpdateAsync(Offer)
+  fullName: RealtyHub.Core.Handlers.IOfferHandler.UpdateAsync(RealtyHub.Core.Models.Offer)
+  spec.csharp:
+  - uid: RealtyHub.Core.Handlers.IOfferHandler.UpdateAsync(RealtyHub.Core.Models.Offer)
+    name: UpdateAsync
+  - name: (
+  - uid: RealtyHub.Core.Models.Offer
+    name: Offer
+  - name: )
+  spec.vb:
+  - uid: RealtyHub.Core.Handlers.IOfferHandler.UpdateAsync(RealtyHub.Core.Models.Offer)
+    name: UpdateAsync
+  - name: (
+  - uid: RealtyHub.Core.Models.Offer
+    name: Offer
+  - name: )
+- uid: RealtyHub.ApiService.Handlers.OfferHandler.RejectAsync*
+  commentId: Overload:RealtyHub.ApiService.Handlers.OfferHandler.RejectAsync
+  href: RealtyHub.ApiService.Handlers.OfferHandler.html#RealtyHub_ApiService_Handlers_OfferHandler_RejectAsync_RealtyHub_Core_Requests_Offers_RejectOfferRequest_
+  name: RejectAsync
+  nameWithType: OfferHandler.RejectAsync
+  fullName: RealtyHub.ApiService.Handlers.OfferHandler.RejectAsync
+- uid: RealtyHub.Core.Handlers.IOfferHandler.RejectAsync(RealtyHub.Core.Requests.Offers.RejectOfferRequest)
+  commentId: M:RealtyHub.Core.Handlers.IOfferHandler.RejectAsync(RealtyHub.Core.Requests.Offers.RejectOfferRequest)
+  parent: RealtyHub.Core.Handlers.IOfferHandler
+  name: RejectAsync(RejectOfferRequest)
+  nameWithType: IOfferHandler.RejectAsync(RejectOfferRequest)
+  fullName: RealtyHub.Core.Handlers.IOfferHandler.RejectAsync(RealtyHub.Core.Requests.Offers.RejectOfferRequest)
+  spec.csharp:
+  - uid: RealtyHub.Core.Handlers.IOfferHandler.RejectAsync(RealtyHub.Core.Requests.Offers.RejectOfferRequest)
+    name: RejectAsync
+  - name: (
+  - uid: RealtyHub.Core.Requests.Offers.RejectOfferRequest
+    name: RejectOfferRequest
+  - name: )
+  spec.vb:
+  - uid: RealtyHub.Core.Handlers.IOfferHandler.RejectAsync(RealtyHub.Core.Requests.Offers.RejectOfferRequest)
+    name: RejectAsync
+  - name: (
+  - uid: RealtyHub.Core.Requests.Offers.RejectOfferRequest
+    name: RejectOfferRequest
+  - name: )
+- uid: RealtyHub.Core.Requests.Offers.RejectOfferRequest
+  commentId: T:RealtyHub.Core.Requests.Offers.RejectOfferRequest
+  parent: RealtyHub.Core.Requests.Offers
+  name: RejectOfferRequest
+  nameWithType: RejectOfferRequest
+  fullName: RealtyHub.Core.Requests.Offers.RejectOfferRequest
+- uid: RealtyHub.Core.Requests.Offers
+  commentId: N:RealtyHub.Core.Requests.Offers
+  name: RealtyHub.Core.Requests.Offers
+  nameWithType: RealtyHub.Core.Requests.Offers
+  fullName: RealtyHub.Core.Requests.Offers
+  spec.csharp:
+  - uid: RealtyHub
+    name: RealtyHub
+  - name: .
+  - uid: RealtyHub.Core
+    name: Core
+  - name: .
+  - uid: RealtyHub.Core.Requests
+    name: Requests
+  - name: .
+  - uid: RealtyHub.Core.Requests.Offers
+    name: Offers
+  spec.vb:
+  - uid: RealtyHub
+    name: RealtyHub
+  - name: .
+  - uid: RealtyHub.Core
+    name: Core
+  - name: .
+  - uid: RealtyHub.Core.Requests
+    name: Requests
+  - name: .
+  - uid: RealtyHub.Core.Requests.Offers
+    name: Offers
+- uid: RealtyHub.ApiService.Handlers.OfferHandler.AcceptAsync*
+  commentId: Overload:RealtyHub.ApiService.Handlers.OfferHandler.AcceptAsync
+  href: RealtyHub.ApiService.Handlers.OfferHandler.html#RealtyHub_ApiService_Handlers_OfferHandler_AcceptAsync_RealtyHub_Core_Requests_Offers_AcceptOfferRequest_
+  name: AcceptAsync
+  nameWithType: OfferHandler.AcceptAsync
+  fullName: RealtyHub.ApiService.Handlers.OfferHandler.AcceptAsync
+- uid: RealtyHub.Core.Handlers.IOfferHandler.AcceptAsync(RealtyHub.Core.Requests.Offers.AcceptOfferRequest)
+  commentId: M:RealtyHub.Core.Handlers.IOfferHandler.AcceptAsync(RealtyHub.Core.Requests.Offers.AcceptOfferRequest)
+  parent: RealtyHub.Core.Handlers.IOfferHandler
+  name: AcceptAsync(AcceptOfferRequest)
+  nameWithType: IOfferHandler.AcceptAsync(AcceptOfferRequest)
+  fullName: RealtyHub.Core.Handlers.IOfferHandler.AcceptAsync(RealtyHub.Core.Requests.Offers.AcceptOfferRequest)
+  spec.csharp:
+  - uid: RealtyHub.Core.Handlers.IOfferHandler.AcceptAsync(RealtyHub.Core.Requests.Offers.AcceptOfferRequest)
+    name: AcceptAsync
+  - name: (
+  - uid: RealtyHub.Core.Requests.Offers.AcceptOfferRequest
+    name: AcceptOfferRequest
+  - name: )
+  spec.vb:
+  - uid: RealtyHub.Core.Handlers.IOfferHandler.AcceptAsync(RealtyHub.Core.Requests.Offers.AcceptOfferRequest)
+    name: AcceptAsync
+  - name: (
+  - uid: RealtyHub.Core.Requests.Offers.AcceptOfferRequest
+    name: AcceptOfferRequest
+  - name: )
+- uid: RealtyHub.Core.Requests.Offers.AcceptOfferRequest
+  commentId: T:RealtyHub.Core.Requests.Offers.AcceptOfferRequest
+  parent: RealtyHub.Core.Requests.Offers
+  name: AcceptOfferRequest
+  nameWithType: AcceptOfferRequest
+  fullName: RealtyHub.Core.Requests.Offers.AcceptOfferRequest
+- uid: RealtyHub.ApiService.Handlers.OfferHandler.GetByIdAsync*
+  commentId: Overload:RealtyHub.ApiService.Handlers.OfferHandler.GetByIdAsync
+  href: RealtyHub.ApiService.Handlers.OfferHandler.html#RealtyHub_ApiService_Handlers_OfferHandler_GetByIdAsync_RealtyHub_Core_Requests_Offers_GetOfferByIdRequest_
+  name: GetByIdAsync
+  nameWithType: OfferHandler.GetByIdAsync
+  fullName: RealtyHub.ApiService.Handlers.OfferHandler.GetByIdAsync
+- uid: RealtyHub.Core.Handlers.IOfferHandler.GetByIdAsync(RealtyHub.Core.Requests.Offers.GetOfferByIdRequest)
+  commentId: M:RealtyHub.Core.Handlers.IOfferHandler.GetByIdAsync(RealtyHub.Core.Requests.Offers.GetOfferByIdRequest)
+  parent: RealtyHub.Core.Handlers.IOfferHandler
+  name: GetByIdAsync(GetOfferByIdRequest)
+  nameWithType: IOfferHandler.GetByIdAsync(GetOfferByIdRequest)
+  fullName: RealtyHub.Core.Handlers.IOfferHandler.GetByIdAsync(RealtyHub.Core.Requests.Offers.GetOfferByIdRequest)
+  spec.csharp:
+  - uid: RealtyHub.Core.Handlers.IOfferHandler.GetByIdAsync(RealtyHub.Core.Requests.Offers.GetOfferByIdRequest)
+    name: GetByIdAsync
+  - name: (
+  - uid: RealtyHub.Core.Requests.Offers.GetOfferByIdRequest
+    name: GetOfferByIdRequest
+  - name: )
+  spec.vb:
+  - uid: RealtyHub.Core.Handlers.IOfferHandler.GetByIdAsync(RealtyHub.Core.Requests.Offers.GetOfferByIdRequest)
+    name: GetByIdAsync
+  - name: (
+  - uid: RealtyHub.Core.Requests.Offers.GetOfferByIdRequest
+    name: GetOfferByIdRequest
+  - name: )
+- uid: RealtyHub.Core.Requests.Offers.GetOfferByIdRequest
+  commentId: T:RealtyHub.Core.Requests.Offers.GetOfferByIdRequest
+  parent: RealtyHub.Core.Requests.Offers
+  name: GetOfferByIdRequest
+  nameWithType: GetOfferByIdRequest
+  fullName: RealtyHub.Core.Requests.Offers.GetOfferByIdRequest
+- uid: RealtyHub.ApiService.Handlers.OfferHandler.GetAcceptedByProperty*
+  commentId: Overload:RealtyHub.ApiService.Handlers.OfferHandler.GetAcceptedByProperty
+  href: RealtyHub.ApiService.Handlers.OfferHandler.html#RealtyHub_ApiService_Handlers_OfferHandler_GetAcceptedByProperty_RealtyHub_Core_Requests_Offers_GetOfferAcceptedByProperty_
+  name: GetAcceptedByProperty
+  nameWithType: OfferHandler.GetAcceptedByProperty
+  fullName: RealtyHub.ApiService.Handlers.OfferHandler.GetAcceptedByProperty
+- uid: RealtyHub.Core.Handlers.IOfferHandler.GetAcceptedByProperty(RealtyHub.Core.Requests.Offers.GetOfferAcceptedByProperty)
+  commentId: M:RealtyHub.Core.Handlers.IOfferHandler.GetAcceptedByProperty(RealtyHub.Core.Requests.Offers.GetOfferAcceptedByProperty)
+  parent: RealtyHub.Core.Handlers.IOfferHandler
+  name: GetAcceptedByProperty(GetOfferAcceptedByProperty)
+  nameWithType: IOfferHandler.GetAcceptedByProperty(GetOfferAcceptedByProperty)
+  fullName: RealtyHub.Core.Handlers.IOfferHandler.GetAcceptedByProperty(RealtyHub.Core.Requests.Offers.GetOfferAcceptedByProperty)
+  spec.csharp:
+  - uid: RealtyHub.Core.Handlers.IOfferHandler.GetAcceptedByProperty(RealtyHub.Core.Requests.Offers.GetOfferAcceptedByProperty)
+    name: GetAcceptedByProperty
+  - name: (
+  - uid: RealtyHub.Core.Requests.Offers.GetOfferAcceptedByProperty
+    name: GetOfferAcceptedByProperty
+  - name: )
+  spec.vb:
+  - uid: RealtyHub.Core.Handlers.IOfferHandler.GetAcceptedByProperty(RealtyHub.Core.Requests.Offers.GetOfferAcceptedByProperty)
+    name: GetAcceptedByProperty
+  - name: (
+  - uid: RealtyHub.Core.Requests.Offers.GetOfferAcceptedByProperty
+    name: GetOfferAcceptedByProperty
+  - name: )
+- uid: RealtyHub.Core.Requests.Offers.GetOfferAcceptedByProperty
+  commentId: T:RealtyHub.Core.Requests.Offers.GetOfferAcceptedByProperty
+  parent: RealtyHub.Core.Requests.Offers
+  name: GetOfferAcceptedByProperty
+  nameWithType: GetOfferAcceptedByProperty
+  fullName: RealtyHub.Core.Requests.Offers.GetOfferAcceptedByProperty
+- uid: RealtyHub.ApiService.Handlers.OfferHandler.GetAllOffersByPropertyAsync*
+  commentId: Overload:RealtyHub.ApiService.Handlers.OfferHandler.GetAllOffersByPropertyAsync
+  href: RealtyHub.ApiService.Handlers.OfferHandler.html#RealtyHub_ApiService_Handlers_OfferHandler_GetAllOffersByPropertyAsync_RealtyHub_Core_Requests_Offers_GetAllOffersByPropertyRequest_
+  name: GetAllOffersByPropertyAsync
+  nameWithType: OfferHandler.GetAllOffersByPropertyAsync
+  fullName: RealtyHub.ApiService.Handlers.OfferHandler.GetAllOffersByPropertyAsync
+- uid: RealtyHub.Core.Handlers.IOfferHandler.GetAllOffersByPropertyAsync(RealtyHub.Core.Requests.Offers.GetAllOffersByPropertyRequest)
+  commentId: M:RealtyHub.Core.Handlers.IOfferHandler.GetAllOffersByPropertyAsync(RealtyHub.Core.Requests.Offers.GetAllOffersByPropertyRequest)
+  parent: RealtyHub.Core.Handlers.IOfferHandler
+  name: GetAllOffersByPropertyAsync(GetAllOffersByPropertyRequest)
+  nameWithType: IOfferHandler.GetAllOffersByPropertyAsync(GetAllOffersByPropertyRequest)
+  fullName: RealtyHub.Core.Handlers.IOfferHandler.GetAllOffersByPropertyAsync(RealtyHub.Core.Requests.Offers.GetAllOffersByPropertyRequest)
+  spec.csharp:
+  - uid: RealtyHub.Core.Handlers.IOfferHandler.GetAllOffersByPropertyAsync(RealtyHub.Core.Requests.Offers.GetAllOffersByPropertyRequest)
+    name: GetAllOffersByPropertyAsync
+  - name: (
+  - uid: RealtyHub.Core.Requests.Offers.GetAllOffersByPropertyRequest
+    name: GetAllOffersByPropertyRequest
+  - name: )
+  spec.vb:
+  - uid: RealtyHub.Core.Handlers.IOfferHandler.GetAllOffersByPropertyAsync(RealtyHub.Core.Requests.Offers.GetAllOffersByPropertyRequest)
+    name: GetAllOffersByPropertyAsync
+  - name: (
+  - uid: RealtyHub.Core.Requests.Offers.GetAllOffersByPropertyRequest
+    name: GetAllOffersByPropertyRequest
+  - name: )
+- uid: RealtyHub.Core.Requests.Offers.GetAllOffersByPropertyRequest
+  commentId: T:RealtyHub.Core.Requests.Offers.GetAllOffersByPropertyRequest
+  parent: RealtyHub.Core.Requests.Offers
+  name: GetAllOffersByPropertyRequest
+  nameWithType: GetAllOffersByPropertyRequest
+  fullName: RealtyHub.Core.Requests.Offers.GetAllOffersByPropertyRequest
+- uid: System.Threading.Tasks.Task{RealtyHub.Core.Responses.PagedResponse{System.Collections.Generic.List{RealtyHub.Core.Models.Offer}}}
+  commentId: T:System.Threading.Tasks.Task{RealtyHub.Core.Responses.PagedResponse{System.Collections.Generic.List{RealtyHub.Core.Models.Offer}}}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<PagedResponse<List<Offer>>>
+  nameWithType: Task<PagedResponse<List<Offer>>>
+  fullName: System.Threading.Tasks.Task<RealtyHub.Core.Responses.PagedResponse<System.Collections.Generic.List<RealtyHub.Core.Models.Offer>>>
+  nameWithType.vb: Task(Of PagedResponse(Of List(Of Offer)))
+  fullName.vb: System.Threading.Tasks.Task(Of RealtyHub.Core.Responses.PagedResponse(Of System.Collections.Generic.List(Of RealtyHub.Core.Models.Offer)))
+  name.vb: Task(Of PagedResponse(Of List(Of Offer)))
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - uid: RealtyHub.Core.Responses.PagedResponse`1
+    name: PagedResponse
+  - name: <
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - uid: RealtyHub.Core.Models.Offer
+    name: Offer
+  - name: '>'
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: RealtyHub.Core.Responses.PagedResponse`1
+    name: PagedResponse
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: RealtyHub.Core.Models.Offer
+    name: Offer
+  - name: )
+  - name: )
+  - name: )
+- uid: RealtyHub.ApiService.Handlers.OfferHandler.GetAllOffersByCustomerAsync*
+  commentId: Overload:RealtyHub.ApiService.Handlers.OfferHandler.GetAllOffersByCustomerAsync
+  href: RealtyHub.ApiService.Handlers.OfferHandler.html#RealtyHub_ApiService_Handlers_OfferHandler_GetAllOffersByCustomerAsync_RealtyHub_Core_Requests_Offers_GetAllOffersByCustomerRequest_
+  name: GetAllOffersByCustomerAsync
+  nameWithType: OfferHandler.GetAllOffersByCustomerAsync
+  fullName: RealtyHub.ApiService.Handlers.OfferHandler.GetAllOffersByCustomerAsync
+- uid: RealtyHub.Core.Handlers.IOfferHandler.GetAllOffersByCustomerAsync(RealtyHub.Core.Requests.Offers.GetAllOffersByCustomerRequest)
+  commentId: M:RealtyHub.Core.Handlers.IOfferHandler.GetAllOffersByCustomerAsync(RealtyHub.Core.Requests.Offers.GetAllOffersByCustomerRequest)
+  parent: RealtyHub.Core.Handlers.IOfferHandler
+  name: GetAllOffersByCustomerAsync(GetAllOffersByCustomerRequest)
+  nameWithType: IOfferHandler.GetAllOffersByCustomerAsync(GetAllOffersByCustomerRequest)
+  fullName: RealtyHub.Core.Handlers.IOfferHandler.GetAllOffersByCustomerAsync(RealtyHub.Core.Requests.Offers.GetAllOffersByCustomerRequest)
+  spec.csharp:
+  - uid: RealtyHub.Core.Handlers.IOfferHandler.GetAllOffersByCustomerAsync(RealtyHub.Core.Requests.Offers.GetAllOffersByCustomerRequest)
+    name: GetAllOffersByCustomerAsync
+  - name: (
+  - uid: RealtyHub.Core.Requests.Offers.GetAllOffersByCustomerRequest
+    name: GetAllOffersByCustomerRequest
+  - name: )
+  spec.vb:
+  - uid: RealtyHub.Core.Handlers.IOfferHandler.GetAllOffersByCustomerAsync(RealtyHub.Core.Requests.Offers.GetAllOffersByCustomerRequest)
+    name: GetAllOffersByCustomerAsync
+  - name: (
+  - uid: RealtyHub.Core.Requests.Offers.GetAllOffersByCustomerRequest
+    name: GetAllOffersByCustomerRequest
+  - name: )
+- uid: RealtyHub.Core.Requests.Offers.GetAllOffersByCustomerRequest
+  commentId: T:RealtyHub.Core.Requests.Offers.GetAllOffersByCustomerRequest
+  parent: RealtyHub.Core.Requests.Offers
+  name: GetAllOffersByCustomerRequest
+  nameWithType: GetAllOffersByCustomerRequest
+  fullName: RealtyHub.Core.Requests.Offers.GetAllOffersByCustomerRequest
+- uid: RealtyHub.ApiService.Handlers.OfferHandler.GetAllAsync*
+  commentId: Overload:RealtyHub.ApiService.Handlers.OfferHandler.GetAllAsync
+  href: RealtyHub.ApiService.Handlers.OfferHandler.html#RealtyHub_ApiService_Handlers_OfferHandler_GetAllAsync_RealtyHub_Core_Requests_Offers_GetAllOffersRequest_
+  name: GetAllAsync
+  nameWithType: OfferHandler.GetAllAsync
+  fullName: RealtyHub.ApiService.Handlers.OfferHandler.GetAllAsync
+- uid: RealtyHub.Core.Handlers.IOfferHandler.GetAllAsync(RealtyHub.Core.Requests.Offers.GetAllOffersRequest)
+  commentId: M:RealtyHub.Core.Handlers.IOfferHandler.GetAllAsync(RealtyHub.Core.Requests.Offers.GetAllOffersRequest)
+  parent: RealtyHub.Core.Handlers.IOfferHandler
+  name: GetAllAsync(GetAllOffersRequest)
+  nameWithType: IOfferHandler.GetAllAsync(GetAllOffersRequest)
+  fullName: RealtyHub.Core.Handlers.IOfferHandler.GetAllAsync(RealtyHub.Core.Requests.Offers.GetAllOffersRequest)
+  spec.csharp:
+  - uid: RealtyHub.Core.Handlers.IOfferHandler.GetAllAsync(RealtyHub.Core.Requests.Offers.GetAllOffersRequest)
+    name: GetAllAsync
+  - name: (
+  - uid: RealtyHub.Core.Requests.Offers.GetAllOffersRequest
+    name: GetAllOffersRequest
+  - name: )
+  spec.vb:
+  - uid: RealtyHub.Core.Handlers.IOfferHandler.GetAllAsync(RealtyHub.Core.Requests.Offers.GetAllOffersRequest)
+    name: GetAllAsync
+  - name: (
+  - uid: RealtyHub.Core.Requests.Offers.GetAllOffersRequest
+    name: GetAllOffersRequest
+  - name: )
+- uid: RealtyHub.Core.Requests.Offers.GetAllOffersRequest
+  commentId: T:RealtyHub.Core.Requests.Offers.GetAllOffersRequest
+  parent: RealtyHub.Core.Requests.Offers
+  name: GetAllOffersRequest
+  nameWithType: GetAllOffersRequest
+  fullName: RealtyHub.Core.Requests.Offers.GetAllOffersRequest

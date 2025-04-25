@@ -1,0 +1,23 @@
+### YamlMime:ManagedReference
+items:
+- uid: RealtyHub.ApiService.Models
+  commentId: N:RealtyHub.ApiService.Models
+  id: RealtyHub.ApiService.Models
+  children:
+  - RealtyHub.ApiService.Models.User
+  langs:
+  - csharp
+  - vb
+  name: RealtyHub.ApiService.Models
+  nameWithType: RealtyHub.ApiService.Models
+  fullName: RealtyHub.ApiService.Models
+  type: Namespace
+  assemblies:
+  - RealtyHub.ApiService
+references:
+- uid: RealtyHub.ApiService.Models.User
+  commentId: T:RealtyHub.ApiService.Models.User
+  href: RealtyHub.ApiService.Models.User.html
+  name: User
+  nameWithType: User
+  fullName: RealtyHub.ApiService.Models.User

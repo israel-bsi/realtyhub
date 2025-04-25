@@ -1,0 +1,30 @@
+### YamlMime:ManagedReference
+items:
+- uid: RealtyHub.ApiService.Services.Reports
+  commentId: N:RealtyHub.ApiService.Services.Reports
+  id: RealtyHub.ApiService.Services.Reports
+  children:
+  - RealtyHub.ApiService.Services.Reports.OfferReportService
+  - RealtyHub.ApiService.Services.Reports.PropertyReportService
+  langs:
+  - csharp
+  - vb
+  name: RealtyHub.ApiService.Services.Reports
+  nameWithType: RealtyHub.ApiService.Services.Reports
+  fullName: RealtyHub.ApiService.Services.Reports
+  type: Namespace
+  assemblies:
+  - RealtyHub.ApiService
+references:
+- uid: RealtyHub.ApiService.Services.Reports.OfferReportService
+  commentId: T:RealtyHub.ApiService.Services.Reports.OfferReportService
+  href: RealtyHub.ApiService.Services.Reports.OfferReportService.html
+  name: OfferReportService
+  nameWithType: OfferReportService
+  fullName: RealtyHub.ApiService.Services.Reports.OfferReportService
+- uid: RealtyHub.ApiService.Services.Reports.PropertyReportService
+  commentId: T:RealtyHub.ApiService.Services.Reports.PropertyReportService
+  href: RealtyHub.ApiService.Services.Reports.PropertyReportService.html
+  name: PropertyReportService
+  nameWithType: PropertyReportService
+  fullName: RealtyHub.ApiService.Services.Reports.PropertyReportService

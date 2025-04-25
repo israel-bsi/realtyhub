@@ -1,0 +1,23 @@
+### YamlMime:ManagedReference
+items:
+- uid: RealtyHub.ApiService.Endpoints.ContractsTemplates
+  commentId: N:RealtyHub.ApiService.Endpoints.ContractsTemplates
+  id: RealtyHub.ApiService.Endpoints.ContractsTemplates
+  children:
+  - RealtyHub.ApiService.Endpoints.ContractsTemplates.GetAllContractTemplatesEndpoint
+  langs:
+  - csharp
+  - vb
+  name: RealtyHub.ApiService.Endpoints.ContractsTemplates
+  nameWithType: RealtyHub.ApiService.Endpoints.ContractsTemplates
+  fullName: RealtyHub.ApiService.Endpoints.ContractsTemplates
+  type: Namespace
+  assemblies:
+  - RealtyHub.ApiService
+references:
+- uid: RealtyHub.ApiService.Endpoints.ContractsTemplates.GetAllContractTemplatesEndpoint
+  commentId: T:RealtyHub.ApiService.Endpoints.ContractsTemplates.GetAllContractTemplatesEndpoint
+  href: RealtyHub.ApiService.Endpoints.ContractsTemplates.GetAllContractTemplatesEndpoint.html
+  name: GetAllContractTemplatesEndpoint
+  nameWithType: GetAllContractTemplatesEndpoint
+  fullName: RealtyHub.ApiService.Endpoints.ContractsTemplates.GetAllContractTemplatesEndpoint

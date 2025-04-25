@@ -1,0 +1,23 @@
+### YamlMime:ManagedReference
+items:
+- uid: RealtyHub.ApiService.Endpoints
+  commentId: N:RealtyHub.ApiService.Endpoints
+  id: RealtyHub.ApiService.Endpoints
+  children:
+  - RealtyHub.ApiService.Endpoints.Endpoint
+  langs:
+  - csharp
+  - vb
+  name: RealtyHub.ApiService.Endpoints
+  nameWithType: RealtyHub.ApiService.Endpoints
+  fullName: RealtyHub.ApiService.Endpoints
+  type: Namespace
+  assemblies:
+  - RealtyHub.ApiService
+references:
+- uid: RealtyHub.ApiService.Endpoints.Endpoint
+  commentId: T:RealtyHub.ApiService.Endpoints.Endpoint
+  href: RealtyHub.ApiService.Endpoints.Endpoint.html
+  name: Endpoint
+  nameWithType: Endpoint
+  fullName: RealtyHub.ApiService.Endpoints.Endpoint

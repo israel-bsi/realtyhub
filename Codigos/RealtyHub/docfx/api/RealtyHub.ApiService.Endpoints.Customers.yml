@@ -1,0 +1,51 @@
+### YamlMime:ManagedReference
+items:
+- uid: RealtyHub.ApiService.Endpoints.Customers
+  commentId: N:RealtyHub.ApiService.Endpoints.Customers
+  id: RealtyHub.ApiService.Endpoints.Customers
+  children:
+  - RealtyHub.ApiService.Endpoints.Customers.CreateCustomerEndpoint
+  - RealtyHub.ApiService.Endpoints.Customers.DeleteCustomerEndpoint
+  - RealtyHub.ApiService.Endpoints.Customers.GetAllCustomersEndpoint
+  - RealtyHub.ApiService.Endpoints.Customers.GetCustomerByIdEndpoint
+  - RealtyHub.ApiService.Endpoints.Customers.UpdateCustomerEndpoint
+  langs:
+  - csharp
+  - vb
+  name: RealtyHub.ApiService.Endpoints.Customers
+  nameWithType: RealtyHub.ApiService.Endpoints.Customers
+  fullName: RealtyHub.ApiService.Endpoints.Customers
+  type: Namespace
+  assemblies:
+  - RealtyHub.ApiService
+references:
+- uid: RealtyHub.ApiService.Endpoints.Customers.CreateCustomerEndpoint
+  commentId: T:RealtyHub.ApiService.Endpoints.Customers.CreateCustomerEndpoint
+  href: RealtyHub.ApiService.Endpoints.Customers.CreateCustomerEndpoint.html
+  name: CreateCustomerEndpoint
+  nameWithType: CreateCustomerEndpoint
+  fullName: RealtyHub.ApiService.Endpoints.Customers.CreateCustomerEndpoint
+- uid: RealtyHub.ApiService.Endpoints.Customers.DeleteCustomerEndpoint
+  commentId: T:RealtyHub.ApiService.Endpoints.Customers.DeleteCustomerEndpoint
+  href: RealtyHub.ApiService.Endpoints.Customers.DeleteCustomerEndpoint.html
+  name: DeleteCustomerEndpoint
+  nameWithType: DeleteCustomerEndpoint
+  fullName: RealtyHub.ApiService.Endpoints.Customers.DeleteCustomerEndpoint
+- uid: RealtyHub.ApiService.Endpoints.Customers.GetAllCustomersEndpoint
+  commentId: T:RealtyHub.ApiService.Endpoints.Customers.GetAllCustomersEndpoint
+  href: RealtyHub.ApiService.Endpoints.Customers.GetAllCustomersEndpoint.html
+  name: GetAllCustomersEndpoint
+  nameWithType: GetAllCustomersEndpoint
+  fullName: RealtyHub.ApiService.Endpoints.Customers.GetAllCustomersEndpoint
+- uid: RealtyHub.ApiService.Endpoints.Customers.GetCustomerByIdEndpoint
+  commentId: T:RealtyHub.ApiService.Endpoints.Customers.GetCustomerByIdEndpoint
+  href: RealtyHub.ApiService.Endpoints.Customers.GetCustomerByIdEndpoint.html
+  name: GetCustomerByIdEndpoint
+  nameWithType: GetCustomerByIdEndpoint
+  fullName: RealtyHub.ApiService.Endpoints.Customers.GetCustomerByIdEndpoint
+- uid: RealtyHub.ApiService.Endpoints.Customers.UpdateCustomerEndpoint
+  commentId: T:RealtyHub.ApiService.Endpoints.Customers.UpdateCustomerEndpoint
+  href: RealtyHub.ApiService.Endpoints.Customers.UpdateCustomerEndpoint.html
+  name: UpdateCustomerEndpoint
+  nameWithType: UpdateCustomerEndpoint
+  fullName: RealtyHub.ApiService.Endpoints.Customers.UpdateCustomerEndpoint

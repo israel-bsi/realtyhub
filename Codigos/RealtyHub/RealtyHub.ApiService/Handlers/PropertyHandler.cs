@@ -8,15 +8,27 @@ using RealtyHub.Core.Responses;
 
 namespace RealtyHub.ApiService.Handlers;
 
+/// <summary>
+/// Responsável pelas operações relacionadas a imóveis.
+/// </summary>
 public class PropertyHandler : IPropertyHandler
 {
     private readonly AppDbContext _context;
 
+    /// <summary>
+    /// Inicializa uma nova instância de <see cref="PropertyHandler"/>.
+    /// </summary>
+    /// <param name="context">Contexto do banco de dados para interação com imóveis.</param>
     public PropertyHandler(AppDbContext context)
     {
         _context = context;
     }
 
+    /// <summary>
+    /// Cria um novo imóvel no banco de dados.
+    /// </summary>
+    /// <param name="request">Objeto contendo as informações para criação do imóvel.</param>
+    /// <returns>Retorna uma resposta com o imóvel criado e o código de status.</returns>
     public async Task<Response<Property?>> CreateAsync(Property request)
     {
         try
@@ -54,6 +66,11 @@ public class PropertyHandler : IPropertyHandler
         }
     }
 
+    /// <summary>
+    /// Atualiza um imóvel existente no banco de dados.
+    /// </summary>
+    /// <param name="request">Objeto contendo as novas informações do imóvel.</param>
+    /// <returns>Retorna a resposta com o imóvel atualizado ou um erro se não for encontrado.</returns>
     public async Task<Response<Property?>> UpdateAsync(Property request)
     {
         try
@@ -63,8 +80,7 @@ public class PropertyHandler : IPropertyHandler
                 .FirstOrDefaultAsync(p => p.Id == request.Id && p.IsActive);
 
             if (property is null)
-                return new Response<Property?>(null, 404,
-                    "Imóvel não encontrado");
+                return new Response<Property?>(null, 404, "Imóvel não encontrado");
 
             property.Title = request.Title;
             property.Description = request.Description;
@@ -96,6 +112,11 @@ public class PropertyHandler : IPropertyHandler
         }
     }
 
+    /// <summary>
+    /// Realiza a exclusão lógica de um imóvel, marcando-o como inativo.
+    /// </summary>
+    /// <param name="request">Requisição que contém o ID do imóvel a ser excluído.</param>
+    /// <returns>Retorna a resposta com o status da exclusão ou um erro se não for encontrado.</returns>
     public async Task<Response<Property?>> DeleteAsync(DeletePropertyRequest request)
     {
         try
@@ -122,6 +143,11 @@ public class PropertyHandler : IPropertyHandler
         }
     }
 
+    /// <summary>
+    /// Obtém um imóvel específico pelo ID.
+    /// </summary>
+    /// <param name="request">Requisição que contém o ID do imóvel desejado.</param>
+    /// <returns>Retorna o objeto do imóvel ou um erro caso não seja encontrado.</returns>
     public async Task<Response<Property?>> GetByIdAsync(GetPropertyByIdRequest request)
     {
         try
@@ -146,6 +172,11 @@ public class PropertyHandler : IPropertyHandler
         }
     }
 
+    /// <summary>
+    /// Retorna uma lista paginada de todos os imóveis ativos, com opção de filtro por busca.
+    /// </summary>
+    /// <param name="request">Requisição que contém parâmetros de paginação e filtro.</param>
+    /// <returns>Retorna uma resposta paginada com os imóveis ativos ou um erro em caso de falha.</returns>
     public async Task<PagedResponse<List<Property>?>> GetAllAsync(GetAllPropertiesRequest request)
     {
         try
@@ -161,7 +192,7 @@ public class PropertyHandler : IPropertyHandler
             if (!string.IsNullOrEmpty(request.UserId))
                 query = query.Where(v => v.UserId == request.UserId);
 
-            if (!string.IsNullOrEmpty(request.FilterBy)) 
+            if (!string.IsNullOrEmpty(request.FilterBy))
                 query = query.FilterByProperty(request.SearchTerm, request.FilterBy);
 
             query = query.OrderBy(p => p.Title);
@@ -173,8 +204,7 @@ public class PropertyHandler : IPropertyHandler
 
             var count = await query.CountAsync();
 
-            return new PagedResponse<List<Property>?>(
-               properties, count, request.PageNumber, request.PageSize);
+            return new PagedResponse<List<Property>?>(properties, count, request.PageNumber, request.PageSize);
         }
         catch
         {
@@ -182,8 +212,12 @@ public class PropertyHandler : IPropertyHandler
         }
     }
 
-    public async Task<PagedResponse<List<Viewing>?>> GetAllViewingsAsync(
-        GetAllViewingsByPropertyRequest request)
+    /// <summary>
+    /// Retorna uma lista paginada de todas as visitas de um imóvel específico.
+    /// </summary>
+    /// <param name="request">Requisição que contém parâmetros de paginação e filtro por data.</param>
+    /// <returns>Retorna uma resposta paginada com as visitas ou um erro em caso de falha.</returns>
+    public async Task<PagedResponse<List<Viewing>?>> GetAllViewingsAsync(GetAllViewingsByPropertyRequest request)
     {
         try
         {
@@ -212,8 +246,7 @@ public class PropertyHandler : IPropertyHandler
 
             var count = await query.CountAsync();
 
-            return new PagedResponse<List<Viewing>?>(
-               viewings, count, request.PageNumber, request.PageSize);
+            return new PagedResponse<List<Viewing>?>(viewings, count, request.PageNumber, request.PageSize);
         }
         catch
         {

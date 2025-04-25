@@ -1,0 +1,51 @@
+### YamlMime:ManagedReference
+items:
+- uid: RealtyHub.ApiService.Endpoints.Condominiums
+  commentId: N:RealtyHub.ApiService.Endpoints.Condominiums
+  id: RealtyHub.ApiService.Endpoints.Condominiums
+  children:
+  - RealtyHub.ApiService.Endpoints.Condominiums.CreateCondominiumEndpoint
+  - RealtyHub.ApiService.Endpoints.Condominiums.DeleteCondominiumEndpoint
+  - RealtyHub.ApiService.Endpoints.Condominiums.GetAllCondominiumsEndpoint
+  - RealtyHub.ApiService.Endpoints.Condominiums.GetCondominiumByIdEndpoint
+  - RealtyHub.ApiService.Endpoints.Condominiums.UpdateCondominiumEndpoint
+  langs:
+  - csharp
+  - vb
+  name: RealtyHub.ApiService.Endpoints.Condominiums
+  nameWithType: RealtyHub.ApiService.Endpoints.Condominiums
+  fullName: RealtyHub.ApiService.Endpoints.Condominiums
+  type: Namespace
+  assemblies:
+  - RealtyHub.ApiService
+references:
+- uid: RealtyHub.ApiService.Endpoints.Condominiums.CreateCondominiumEndpoint
+  commentId: T:RealtyHub.ApiService.Endpoints.Condominiums.CreateCondominiumEndpoint
+  href: RealtyHub.ApiService.Endpoints.Condominiums.CreateCondominiumEndpoint.html
+  name: CreateCondominiumEndpoint
+  nameWithType: CreateCondominiumEndpoint
+  fullName: RealtyHub.ApiService.Endpoints.Condominiums.CreateCondominiumEndpoint
+- uid: RealtyHub.ApiService.Endpoints.Condominiums.DeleteCondominiumEndpoint
+  commentId: T:RealtyHub.ApiService.Endpoints.Condominiums.DeleteCondominiumEndpoint
+  href: RealtyHub.ApiService.Endpoints.Condominiums.DeleteCondominiumEndpoint.html
+  name: DeleteCondominiumEndpoint
+  nameWithType: DeleteCondominiumEndpoint
+  fullName: RealtyHub.ApiService.Endpoints.Condominiums.DeleteCondominiumEndpoint
+- uid: RealtyHub.ApiService.Endpoints.Condominiums.GetAllCondominiumsEndpoint
+  commentId: T:RealtyHub.ApiService.Endpoints.Condominiums.GetAllCondominiumsEndpoint
+  href: RealtyHub.ApiService.Endpoints.Condominiums.GetAllCondominiumsEndpoint.html
+  name: GetAllCondominiumsEndpoint
+  nameWithType: GetAllCondominiumsEndpoint
+  fullName: RealtyHub.ApiService.Endpoints.Condominiums.GetAllCondominiumsEndpoint
+- uid: RealtyHub.ApiService.Endpoints.Condominiums.GetCondominiumByIdEndpoint
+  commentId: T:RealtyHub.ApiService.Endpoints.Condominiums.GetCondominiumByIdEndpoint
+  href: RealtyHub.ApiService.Endpoints.Condominiums.GetCondominiumByIdEndpoint.html
+  name: GetCondominiumByIdEndpoint
+  nameWithType: GetCondominiumByIdEndpoint
+  fullName: RealtyHub.ApiService.Endpoints.Condominiums.GetCondominiumByIdEndpoint
+- uid: RealtyHub.ApiService.Endpoints.Condominiums.UpdateCondominiumEndpoint
+  commentId: T:RealtyHub.ApiService.Endpoints.Condominiums.UpdateCondominiumEndpoint
+  href: RealtyHub.ApiService.Endpoints.Condominiums.UpdateCondominiumEndpoint.html
+  name: UpdateCondominiumEndpoint
+  nameWithType: UpdateCondominiumEndpoint
+  fullName: RealtyHub.ApiService.Endpoints.Condominiums.UpdateCondominiumEndpoint

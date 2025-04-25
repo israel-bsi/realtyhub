@@ -1,0 +1,1656 @@
+{
+  "source_base_path": "D:/Repos/realtyhub/Codigos/RealtyHub/docfx",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      }
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Common.Api.AppExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Common.Api.AppExtension.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Common.Api.AppExtension",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Common.Api.BuilderExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Common.Api.BuilderExtension.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Common.Api.BuilderExtension",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Common.Api.IEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Common.Api.IEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Common.Api.IEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Common.Api.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Common.Api.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Common.Api",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Configuration.EmailConfiguration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Configuration.EmailConfiguration.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Configuration.EmailConfiguration",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Configuration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Configuration.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Configuration",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Data.AppDbContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Data.AppDbContext.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Data.AppDbContext",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Data.Mappings.CondominiumMapping.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Data.Mappings.CondominiumMapping.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Data.Mappings.CondominiumMapping",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Data.Mappings.ContractMapping.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Data.Mappings.ContractMapping.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Data.Mappings.ContractMapping",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Data.Mappings.ContractTemplatesMapping.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Data.Mappings.ContractTemplatesMapping.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Data.Mappings.ContractTemplatesMapping",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Data.Mappings.CustomerMapping.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Data.Mappings.CustomerMapping.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Data.Mappings.CustomerMapping",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Data.Mappings.Identity.IdentityRoleClaimMapping.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Data.Mappings.Identity.IdentityRoleClaimMapping.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Data.Mappings.Identity.IdentityRoleClaimMapping",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Data.Mappings.Identity.IdentityRoleMapping.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Data.Mappings.Identity.IdentityRoleMapping.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Data.Mappings.Identity.IdentityRoleMapping",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserClaimMapping.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserClaimMapping.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserClaimMapping",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserLoginMapping.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserLoginMapping.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserLoginMapping",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserMapping.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserMapping.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserMapping",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserRoleMapping.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserRoleMapping.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserRoleMapping",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserTokenMapping.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserTokenMapping.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserTokenMapping",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Data.Mappings.Identity.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Data.Mappings.Identity.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Data.Mappings.Identity",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Data.Mappings.OfferMapping.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Data.Mappings.OfferMapping.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Data.Mappings.OfferMapping",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Data.Mappings.PaymentMapping.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Data.Mappings.PaymentMapping.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Data.Mappings.PaymentMapping",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Data.Mappings.PropertyMapping.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Data.Mappings.PropertyMapping.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Data.Mappings.PropertyMapping",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Data.Mappings.PropertyPhotosMapping.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Data.Mappings.PropertyPhotosMapping.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Data.Mappings.PropertyPhotosMapping",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Data.Mappings.ViewingMapping.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Data.Mappings.ViewingMapping.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Data.Mappings.ViewingMapping",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Data.Mappings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Data.Mappings.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Data.Mappings",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Data.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Data.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Data",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Condominiums.CreateCondominiumEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Condominiums.CreateCondominiumEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Condominiums.CreateCondominiumEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Condominiums.DeleteCondominiumEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Condominiums.DeleteCondominiumEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Condominiums.DeleteCondominiumEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Condominiums.GetAllCondominiumsEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Condominiums.GetAllCondominiumsEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Condominiums.GetAllCondominiumsEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Condominiums.GetCondominiumByIdEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Condominiums.GetCondominiumByIdEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Condominiums.GetCondominiumByIdEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Condominiums.UpdateCondominiumEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Condominiums.UpdateCondominiumEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Condominiums.UpdateCondominiumEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Condominiums.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Condominiums.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Condominiums",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Contracts.CreateContractEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Contracts.CreateContractEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Contracts.CreateContractEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Contracts.DeleteContractEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Contracts.DeleteContractEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Contracts.DeleteContractEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Contracts.GetAllContractsEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Contracts.GetAllContractsEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Contracts.GetAllContractsEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Contracts.GetContractByIdEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Contracts.GetContractByIdEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Contracts.GetContractByIdEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Contracts.UpdateContractEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Contracts.UpdateContractEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Contracts.UpdateContractEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Contracts.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Contracts.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Contracts",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.ContractsTemplates.GetAllContractTemplatesEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.ContractsTemplates.GetAllContractTemplatesEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.ContractsTemplates.GetAllContractTemplatesEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.ContractsTemplates.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.ContractsTemplates.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.ContractsTemplates",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Customers.CreateCustomerEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Customers.CreateCustomerEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Customers.CreateCustomerEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Customers.DeleteCustomerEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Customers.DeleteCustomerEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Customers.DeleteCustomerEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Customers.GetAllCustomersEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Customers.GetAllCustomersEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Customers.GetAllCustomersEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Customers.GetCustomerByIdEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Customers.GetCustomerByIdEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Customers.GetCustomerByIdEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Customers.UpdateCustomerEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Customers.UpdateCustomerEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Customers.UpdateCustomerEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Customers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Customers.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Customers",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Emails.SendContractEmailEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Emails.SendContractEmailEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Emails.SendContractEmailEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Emails.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Emails.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Emails",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Endpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Endpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Endpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Identity.ConfirmEmailEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Identity.ConfirmEmailEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Identity.ConfirmEmailEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Identity.ForgotPasswordEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Identity.ForgotPasswordEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Identity.ForgotPasswordEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Identity.LogoutEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Identity.LogoutEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Identity.LogoutEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Identity.ManageInfoEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Identity.ManageInfoEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Identity.ManageInfoEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Identity.RegisterUserEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Identity.RegisterUserEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Identity.RegisterUserEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Identity.ResetPasswordEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Identity.ResetPasswordEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Identity.ResetPasswordEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Identity.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Identity.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Identity",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Offers.AcceptOfferEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Offers.AcceptOfferEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Offers.AcceptOfferEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Offers.CreateOfferEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Offers.CreateOfferEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Offers.CreateOfferEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Offers.GetAllOffersByCustomerEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Offers.GetAllOffersByCustomerEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Offers.GetAllOffersByCustomerEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Offers.GetAllOffersByPropertyEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Offers.GetAllOffersByPropertyEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Offers.GetAllOffersByPropertyEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Offers.GetAllOffersEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Offers.GetAllOffersEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Offers.GetAllOffersEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Offers.GetOfferAcceptedEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Offers.GetOfferAcceptedEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Offers.GetOfferAcceptedEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Offers.GetOfferByIdEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Offers.GetOfferByIdEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Offers.GetOfferByIdEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Offers.RejectOfferEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Offers.RejectOfferEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Offers.RejectOfferEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Offers.UpdateOfferEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Offers.UpdateOfferEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Offers.UpdateOfferEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Offers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Offers.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Offers",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Properties.CreatePropertyEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Properties.CreatePropertyEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Properties.CreatePropertyEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Properties.CreatePropertyPhotosEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Properties.CreatePropertyPhotosEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Properties.CreatePropertyPhotosEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Properties.DeletePropertyEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Properties.DeletePropertyEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Properties.DeletePropertyEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Properties.DeletePropertyPhotoEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Properties.DeletePropertyPhotoEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Properties.DeletePropertyPhotoEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Properties.GetAllPropertiesEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Properties.GetAllPropertiesEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Properties.GetAllPropertiesEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Properties.GetAllPropertyPhotosByPropertyEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Properties.GetAllPropertyPhotosByPropertyEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Properties.GetAllPropertyPhotosByPropertyEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Properties.GetAllViewingsByPropertyEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Properties.GetAllViewingsByPropertyEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Properties.GetAllViewingsByPropertyEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Properties.GetPropertyByIdEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Properties.GetPropertyByIdEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Properties.GetPropertyByIdEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Properties.UpdatePropertyEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Properties.UpdatePropertyEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Properties.UpdatePropertyEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Properties.UpdatePropertyPhotosEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Properties.UpdatePropertyPhotosEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Properties.UpdatePropertyPhotosEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Properties.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Properties.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Properties",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Reports.OfferReportEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Reports.OfferReportEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Reports.OfferReportEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Reports.PropertyReportEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Reports.PropertyReportEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Reports.PropertyReportEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Reports.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Reports.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Reports",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Viewings.CancelViewingEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Viewings.CancelViewingEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Viewings.CancelViewingEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Viewings.DoneViewingEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Viewings.DoneViewingEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Viewings.DoneViewingEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Viewings.GetAllViewingsEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Viewings.GetAllViewingsEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Viewings.GetAllViewingsEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Viewings.GetViewingByIdEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Viewings.GetViewingByIdEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Viewings.GetViewingByIdEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Viewings.RescheduleViewingEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Viewings.RescheduleViewingEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Viewings.RescheduleViewingEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Viewings.ScheduleViewingEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Viewings.ScheduleViewingEndpoint.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Viewings.ScheduleViewingEndpoint",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.Viewings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.Viewings.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints.Viewings",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Endpoints.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Endpoints.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Endpoints",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Handlers.CondominiumHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Handlers.CondominiumHandler.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Handlers.CondominiumHandler",
+      "Summary": "<p sourcefile=\"api/RealtyHub.ApiService.Handlers.CondominiumHandler.yml\" sourcestartlinenumber=\"1\">Responsável pelas operações relacionadas a condomínios.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Handlers.ContractHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Handlers.ContractHandler.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Handlers.ContractHandler",
+      "Summary": "<p sourcefile=\"api/RealtyHub.ApiService.Handlers.ContractHandler.yml\" sourcestartlinenumber=\"1\">Responsável pelas operações relacionadas a contratos.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Handlers.ContractTemplatesHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Handlers.ContractTemplatesHandler.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Handlers.ContractTemplatesHandler",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Handlers.CustomerHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Handlers.CustomerHandler.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Handlers.CustomerHandler",
+      "Summary": "<p sourcefile=\"api/RealtyHub.ApiService.Handlers.CustomerHandler.yml\" sourcestartlinenumber=\"1\">Responsável pelas operações relacionadas a clientes.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Handlers.OfferHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Handlers.OfferHandler.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Handlers.OfferHandler",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Handlers.PropertyHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Handlers.PropertyHandler.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Handlers.PropertyHandler",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Handlers.PropertyPhotosHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Handlers.PropertyPhotosHandler.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Handlers.PropertyPhotosHandler",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Handlers.ViewingHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Handlers.ViewingHandler.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Handlers.ViewingHandler",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Handlers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Handlers.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Handlers",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Migrations.v1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Migrations.v1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Migrations.v1",
+      "Summary": "<p sourcefile=\"api/RealtyHub.ApiService.Migrations.v1.yml\" sourcestartlinenumber=\"1\">A base class inherited by each EF Core migration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Migrations.v2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Migrations.v2.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Migrations.v2",
+      "Summary": "<p sourcefile=\"api/RealtyHub.ApiService.Migrations.v2.yml\" sourcestartlinenumber=\"1\">A base class inherited by each EF Core migration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Migrations.v3.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Migrations.v3.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Migrations.v3",
+      "Summary": "<p sourcefile=\"api/RealtyHub.ApiService.Migrations.v3.yml\" sourcestartlinenumber=\"1\">A base class inherited by each EF Core migration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Migrations.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Migrations.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Migrations",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Models.User.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Models.User.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Models.User",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Models.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Models.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Models",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Program.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Program.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Program",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Services.ContractGenerator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Services.ContractGenerator.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Services.ContractGenerator",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Services.EmailService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Services.EmailService.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Services.EmailService",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Services.Reports.OfferReportService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Services.Reports.OfferReportService.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Services.Reports.OfferReportService",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Services.Reports.PropertyReportService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Services.Reports.PropertyReportService.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Services.Reports.PropertyReportService",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Services.Reports.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Services.Reports.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Services.Reports",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Services.VariablesContractMappings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Services.VariablesContractMappings.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Services.VariablesContractMappings",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.Services.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.Services.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService.Services",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RealtyHub.ApiService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RealtyHub.ApiService.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RealtyHub.ApiService",
+      "Summary": null
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html"
+        },
+        ".json": {
+          "relative_path": "api/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/getting-started.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/getting-started.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/introduction.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/introduction.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "docs/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docs/toc.html"
+        },
+        ".json": {
+          "relative_path": "docs/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html"
+        },
+        ".json": {
+          "relative_path": "toc.json"
+        }
+      },
+      "version": ""
+    }
+  ],
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
