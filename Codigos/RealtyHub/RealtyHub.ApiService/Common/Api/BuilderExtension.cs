@@ -14,11 +14,21 @@ namespace RealtyHub.ApiService.Common.Api;
 /// documentações, diretórios, autenticação, autorização e serviços
 /// da aplicação.
 /// </summary>
+/// remarks>
+/// Esta classe contém métodos para configurar o ambiente
+/// da aplicação, incluindo diretórios, segurança,
+/// documentação e serviços.
+/// </remarks>
 public static class BuilderExtension
 {
     /// <summary>
     /// Configura diretórios necessários para a aplicação.
     /// </summary>
+    /// <remarks>
+    /// Este método cria diretórios para armazenar contratos,
+    /// fotos, templates de contratos, relatórios e logos.
+    /// </remarks>
+    /// <param name="builder">Instância do construtor da aplicação.</param>
     public static void AddDirectories(this WebApplicationBuilder builder)
     {
         var basePath = builder.Environment.ContentRootPath;
@@ -47,6 +57,11 @@ public static class BuilderExtension
     /// <summary>
     /// Configura as variáveis de ambiente e caminhos de conexão.
     /// </summary>
+    /// <remarks>
+    /// Este método lê as variáveis de ambiente e configura
+    /// as strings de conexão necessárias para a aplicação.
+    /// </remarks>
+    /// <param name="builder">Instância do construtor da aplicação.</param>
     public static void AddConfiguration(this WebApplicationBuilder builder)
     {
         Core.Configuration.ConnectionString =
@@ -68,6 +83,11 @@ public static class BuilderExtension
     /// <summary>
     /// Configura e ativa a documentação da API com Swagger.
     /// </summary>
+    /// <remarks>
+    /// Este método adiciona o Swagger à aplicação, permitindo
+    /// visualizar a documentação da API e testar os endpoints.
+    /// </remarks>
+    /// <param name="builder">Instância do construtor da aplicação.</param>
     public static void AddDocumentation(this WebApplicationBuilder builder)
     {
         builder.Services.AddEndpointsApiExplorer();
@@ -81,6 +101,11 @@ public static class BuilderExtension
     /// <summary>
     /// Adiciona e configura a autenticação e autorização da aplicação.
     /// </summary>
+    /// <remarks>
+    /// Este método configura a autenticação com cookies e JWT,
+    /// permitindo o uso de autenticação baseada em token.
+    /// </remarks>
+    /// <param name="builder">Instância do construtor da aplicação.</param>
     public static void AddSecurity(this WebApplicationBuilder builder)
     {
         builder.Services
@@ -93,6 +118,11 @@ public static class BuilderExtension
     /// <summary>
     /// Configura os contextos de dados, habilitando o Entity Framework e Identity.
     /// </summary>
+    /// <remarks>
+    /// Este método adiciona o DbContext da aplicação e configura
+    /// o Identity para gerenciar usuários e roles.
+    /// </remarks>
+    /// <param name="builder">Instância do construtor da aplicação.</param>
     public static void AddDataContexts(this WebApplicationBuilder builder)
     {
         builder
@@ -126,6 +156,11 @@ public static class BuilderExtension
     /// <summary>
     /// Configura o CORS para permitir chamadas de origens específicas.
     /// </summary>
+    /// <remarks>
+    /// Este método adiciona uma política de CORS que permite
+    /// chamadas de origens específicas, como o frontend e o backend.
+    /// </remarks>
+    /// /// <param name="builder">Instância do construtor da aplicação.</param>
     public static void AddCrossOrigin(this WebApplicationBuilder builder)
     {
         builder.Services.AddCors(
@@ -145,6 +180,12 @@ public static class BuilderExtension
     /// <summary>
     /// Registra serviços adicionais necessários para a aplicação.
     /// </summary>
+    /// <remarks>
+    /// Este método adiciona serviços como manipuladores de
+    /// propriedades, condomínios, visualizações, ofertas e contratos,
+    /// além de serviços de email e templates de contratos.
+    /// </remarks>
+    /// /// <param name="builder">Instância do construtor da aplicação.</param>
     public static void AddServices(this WebApplicationBuilder builder)
     {
         builder.Services.AddProblemDetails();

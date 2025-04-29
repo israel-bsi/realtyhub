@@ -10,12 +10,21 @@ namespace RealtyHub.ApiService.Common.Api;
 /// Classe estática que agrupa métodos de extensão para configurar
 /// e inicializar o ambiente da aplicação.
 /// </summary>
+/// remarks>
+/// Esta classe contém métodos para configurar rotas, autenticação,
+/// autorização, arquivos estáticos e migrações do banco de dados.
+/// </remarks>
 public static class AppExtension
 {
     /// <summary>
     /// Configura rotas de criação de dados de teste em ambiente
     /// de desenvolvimento (clientes e propriedades).
     /// </summary>
+    /// <remarks>
+    /// Este método é utilizado para popular o banco de dados
+    /// com dados de teste durante o desenvolvimento.
+    /// </remarks>
+    /// <param name="app">Instância do aplicativo.</param>
     public static void ConfigureDevEnvironment(this WebApplication app)
     {
         app.MapPost("v1/customers/createmany", async (
@@ -65,6 +74,12 @@ public static class AppExtension
     /// <summary>
     /// Habilita a autenticação e autorização na aplicação.
     /// </summary>
+    /// <remarks>
+    /// Este método habilita a autenticação e autorização
+    /// para a aplicação, permitindo o uso de cookies
+    /// e tokens JWT.
+    /// </remarks>
+    /// <param name="app">Instância do aplicativo.</param>
     public static void UseSecurity(this WebApplication app)
     {
         app.UseAuthentication();
@@ -75,6 +90,11 @@ public static class AppExtension
     /// Configura a exibição de arquivos estáticos, definindo
     /// os caminhos físicos e lógicos para cada pasta.
     /// </summary>
+    /// <remarks>
+    /// Este método configura os diretórios para armazenar
+    /// fotos, contratos, templates de contratos e relatórios.
+    /// </remarks>
+    /// <param name="app">Instância do aplicativo.</param>
     public static void UseStaticFiles(this WebApplication app)
     {
         app.UseStaticFiles(new StaticFileOptions
@@ -106,6 +126,11 @@ public static class AppExtension
     /// Aplica automaticamente as migrações do banco de dados
     /// ao iniciar a aplicação.
     /// </summary>
+    /// <remarks>
+    /// Este método garante que o banco de dados esteja atualizado
+    /// com as últimas migrações antes de iniciar a aplicação.
+    /// </remarks>
+    /// <param name="app">Instância do aplicativo.</param>
     public static void ApplyMigrations(this WebApplication app)
     {
         using var scope = app.Services.CreateScope();

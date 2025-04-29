@@ -6,39 +6,69 @@ using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.Condominiums;
 using RealtyHub.Core.Responses;
 
-namespace RealtyHub.ApiService.Endpoints.Condominiums;
-
-public class GetAllCondominiumsEndpoint : IEndpoint
+namespace RealtyHub.ApiService.Endpoints.Condominiums
 {
-    public static void Map(IEndpointRouteBuilder app) =>
-        app.MapGet("/", HandlerAsync)
-            .WithName("Condominiums: Get All")
-            .WithSummary("Obtém todos os condomínios")
-            .WithDescription("Obtém todos os condomínios")
-            .WithOrder(5)
-            .Produces<PagedResponse<List<Condominium>>>()
-            .Produces<PagedResponse<List<Condominium>>>(StatusCodes.Status400BadRequest);
-
-    private static async Task<IResult> HandlerAsync(
-        ClaimsPrincipal user,
-        ICondominiumHandler handler,
-        [FromQuery] string filterBy = "",
-        [FromQuery] int pageNumber = Core.Configuration.DefaultPageNumber,
-        [FromQuery] int pageSize = Core.Configuration.DefaultPageSize,
-        [FromQuery] string searchTerm = "")
+    /// <summary>
+    /// Endpoint responsável por obter todos os condomínios.
+    /// </summary>
+    /// <remarks>
+    /// Implementa <see cref="IEndpoint"/> para mapear a rota de listagem de condomínios.
+    /// </remarks>
+    public class GetAllCondominiumsEndpoint : IEndpoint
     {
-        var request = new GetAllCondominiumsRequest
+        /// <summary>
+        /// Mapeia o endpoint para obter todos os condomínios.
+        /// </summary>
+        /// <remarks>
+        /// Registra a rota responsável por retornar a lista de condomínios, com paginação e opção de filtro.
+        /// </remarks>
+        /// <param name="app">O construtor de rotas do aplicativo.</param>
+        public static void Map(IEndpointRouteBuilder app) =>
+            app.MapGet("/", HandlerAsync)
+                .WithName("Condominiums: Get All")
+                .WithSummary("Obtém todos os condomínios")
+                .WithDescription("Obtém todos os condomínios")
+                .WithOrder(5)
+                .Produces<PagedResponse<List<Condominium>>>()
+                .Produces<PagedResponse<List<Condominium>>>(StatusCodes.Status400BadRequest);
+
+        /// <summary>
+        /// Manipulador da rota que recebe a requisição para obter todos os condomínios.
+        /// </summary>
+        /// <remarks>
+        /// Aplica paginação, possibilita filtrar pelo campo desejado,
+        /// e retorna apenas condomínios ativos.
+        /// </remarks>
+        /// <param name="user">Informações do usuário autenticado, se houver.</param>
+        /// <param name="handler">Handler responsável pelas operações de condomínio.</param>
+        /// <param name="filterBy">Campo utilizado para filtrar a busca.</param>
+        /// <param name="pageNumber">Número da página solicitada.</param>
+        /// <param name="pageSize">Quantidade de itens por página.</param>
+        /// <param name="searchTerm">Termo utilizado na busca de condomínios.</param>
+        /// <returns>
+        /// Retorna uma lista paginada de condomínios ou um erro em caso de falha.
+        /// </returns>
+        private static async Task<IResult> HandlerAsync(
+            ClaimsPrincipal user,
+            ICondominiumHandler handler,
+            [FromQuery] string filterBy = "",
+            [FromQuery] int pageNumber = Core.Configuration.DefaultPageNumber,
+            [FromQuery] int pageSize = Core.Configuration.DefaultPageSize,
+            [FromQuery] string searchTerm = "")
         {
-            PageNumber = pageNumber,
-            PageSize = pageSize,
-            SearchTerm = searchTerm,
-            FilterBy = filterBy
-        };
+            var request = new GetAllCondominiumsRequest
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                SearchTerm = searchTerm,
+                FilterBy = filterBy
+            };
 
-        var result = await handler.GetAllAsync(request);
+            var result = await handler.GetAllAsync(request);
 
-        return result.IsSuccess
-            ? Results.Ok(result)
-            : Results.BadRequest(result);
+            return result.IsSuccess
+                ? Results.Ok(result)
+                : Results.BadRequest(result);
+        }
     }
 }
