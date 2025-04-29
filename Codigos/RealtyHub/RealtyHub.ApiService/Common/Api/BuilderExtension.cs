@@ -9,8 +9,16 @@ using RealtyHub.Core.Services;
 
 namespace RealtyHub.ApiService.Common.Api;
 
+/// <summary>
+/// Classe estática que agrupa métodos de extensão para configurar
+/// documentações, diretórios, autenticação, autorização e serviços
+/// da aplicação.
+/// </summary>
 public static class BuilderExtension
 {
+    /// <summary>
+    /// Configura diretórios necessários para a aplicação.
+    /// </summary>
     public static void AddDirectories(this WebApplicationBuilder builder)
     {
         var basePath = builder.Environment.ContentRootPath;
@@ -35,6 +43,10 @@ public static class BuilderExtension
         if (!Directory.Exists(Configuration.LogosPath))
             Directory.CreateDirectory(Configuration.LogosPath);
     }
+
+    /// <summary>
+    /// Configura as variáveis de ambiente e caminhos de conexão.
+    /// </summary>
     public static void AddConfiguration(this WebApplicationBuilder builder)
     {
         Core.Configuration.ConnectionString =
@@ -48,10 +60,14 @@ public static class BuilderExtension
 
         Core.Configuration.FrontendUrl = builder.Configuration
             .GetValue<string>("FrontendUrl") ?? string.Empty;
-        
+
         Configuration.EmailSettings.EmailPassword =
             builder.Configuration.GetValue<string>("EmailPassword") ?? string.Empty;
     }
+
+    /// <summary>
+    /// Configura e ativa a documentação da API com Swagger.
+    /// </summary>
     public static void AddDocumentation(this WebApplicationBuilder builder)
     {
         builder.Services.AddEndpointsApiExplorer();
@@ -61,6 +77,10 @@ public static class BuilderExtension
             options.CustomSchemaIds(n => n.FullName);
         });
     }
+
+    /// <summary>
+    /// Adiciona e configura a autenticação e autorização da aplicação.
+    /// </summary>
     public static void AddSecurity(this WebApplicationBuilder builder)
     {
         builder.Services
@@ -69,6 +89,10 @@ public static class BuilderExtension
 
         builder.Services.AddAuthorization();
     }
+
+    /// <summary>
+    /// Configura os contextos de dados, habilitando o Entity Framework e Identity.
+    /// </summary>
     public static void AddDataContexts(this WebApplicationBuilder builder)
     {
         builder
@@ -98,6 +122,10 @@ public static class BuilderExtension
             .AddEntityFrameworkStores<AppDbContext>()
             .AddApiEndpoints();
     }
+
+    /// <summary>
+    /// Configura o CORS para permitir chamadas de origens específicas.
+    /// </summary>
     public static void AddCrossOrigin(this WebApplicationBuilder builder)
     {
         builder.Services.AddCors(
@@ -113,6 +141,10 @@ public static class BuilderExtension
                     .AllowCredentials()
             ));
     }
+
+    /// <summary>
+    /// Registra serviços adicionais necessários para a aplicação.
+    /// </summary>
     public static void AddServices(this WebApplicationBuilder builder)
     {
         builder.Services.AddProblemDetails();

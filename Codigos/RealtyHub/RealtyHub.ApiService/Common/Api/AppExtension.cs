@@ -6,8 +6,16 @@ using RealtyHub.Core.Utilities.FakeEntities;
 
 namespace RealtyHub.ApiService.Common.Api;
 
+/// <summary>
+/// Classe estática que agrupa métodos de extensão para configurar
+/// e inicializar o ambiente da aplicação.
+/// </summary>
 public static class AppExtension
 {
+    /// <summary>
+    /// Configura rotas de criação de dados de teste em ambiente
+    /// de desenvolvimento (clientes e propriedades).
+    /// </summary>
     public static void ConfigureDevEnvironment(this WebApplication app)
     {
         app.MapPost("v1/customers/createmany", async (
@@ -53,11 +61,20 @@ public static class AppExtension
             return Results.Created();
         });
     }
+
+    /// <summary>
+    /// Habilita a autenticação e autorização na aplicação.
+    /// </summary>
     public static void UseSecurity(this WebApplication app)
     {
         app.UseAuthentication();
         app.UseAuthorization();
     }
+
+    /// <summary>
+    /// Configura a exibição de arquivos estáticos, definindo
+    /// os caminhos físicos e lógicos para cada pasta.
+    /// </summary>
     public static void UseStaticFiles(this WebApplication app)
     {
         app.UseStaticFiles(new StaticFileOptions
@@ -84,6 +101,11 @@ public static class AppExtension
             RequestPath = "/reports"
         });
     }
+
+    /// <summary>
+    /// Aplica automaticamente as migrações do banco de dados
+    /// ao iniciar a aplicação.
+    /// </summary>
     public static void ApplyMigrations(this WebApplication app)
     {
         using var scope = app.Services.CreateScope();
