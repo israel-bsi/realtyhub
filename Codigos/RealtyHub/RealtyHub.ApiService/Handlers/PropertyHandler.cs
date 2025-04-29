@@ -11,13 +11,27 @@ namespace RealtyHub.ApiService.Handlers;
 /// <summary>
 /// Responsável pelas operações relacionadas a imóveis.
 /// </summary>
+/// <remarks>
+/// Esta classe implementa a interface <see cref="IPropertyHandler"/> e fornece
+/// métodos para criar, atualizar, deletar e buscar imóveis no banco de dados.
+/// </remarks>
 public class PropertyHandler : IPropertyHandler
 {
+    /// <summary>
+    /// Contexto do banco de dados para interação com imóveis.
+    /// </summary>
+    /// <remarks>
+    /// Este campo é utilizado para realizar operações CRUD nos imóveis.
+    /// </remarks>
     private readonly AppDbContext _context;
 
     /// <summary>
     /// Inicializa uma nova instância de <see cref="PropertyHandler"/>.
     /// </summary>
+    /// <remarks>
+    /// Este construtor é utilizado para injetar o contexto do banco de dados
+    /// necessário para realizar operações CRUD nos imóveis.
+    /// </remarks>
     /// <param name="context">Contexto do banco de dados para interação com imóveis.</param>
     public PropertyHandler(AppDbContext context)
     {
@@ -27,6 +41,9 @@ public class PropertyHandler : IPropertyHandler
     /// <summary>
     /// Cria um novo imóvel no banco de dados.
     /// </summary>
+    /// <remarks>
+    /// Este método adiciona um novo imóvel à base de dados e salva as alterações.
+    /// </remarks>
     /// <param name="request">Objeto contendo as informações para criação do imóvel.</param>
     /// <returns>Retorna uma resposta com o imóvel criado e o código de status.</returns>
     public async Task<Response<Property?>> CreateAsync(Property request)
@@ -69,6 +86,9 @@ public class PropertyHandler : IPropertyHandler
     /// <summary>
     /// Atualiza um imóvel existente no banco de dados.
     /// </summary>
+    /// <remarks>
+    /// Este método atualiza as informações de um imóvel existente e salva as alterações.
+    /// </remarks>
     /// <param name="request">Objeto contendo as novas informações do imóvel.</param>
     /// <returns>Retorna a resposta com o imóvel atualizado ou um erro se não for encontrado.</returns>
     public async Task<Response<Property?>> UpdateAsync(Property request)
@@ -115,6 +135,9 @@ public class PropertyHandler : IPropertyHandler
     /// <summary>
     /// Realiza a exclusão lógica de um imóvel, marcando-o como inativo.
     /// </summary>
+    /// <remarks>
+    /// Este método altera o status de um imóvel para inativo no banco de dados.
+    /// </remarks>
     /// <param name="request">Requisição que contém o ID do imóvel a ser excluído.</param>
     /// <returns>Retorna a resposta com o status da exclusão ou um erro se não for encontrado.</returns>
     public async Task<Response<Property?>> DeleteAsync(DeletePropertyRequest request)
@@ -146,6 +169,9 @@ public class PropertyHandler : IPropertyHandler
     /// <summary>
     /// Obtém um imóvel específico pelo ID.
     /// </summary>
+    /// <remarks>
+    /// Este método busca um imóvel no banco de dados com base no ID fornecido.
+    /// </remarks>
     /// <param name="request">Requisição que contém o ID do imóvel desejado.</param>
     /// <returns>Retorna o objeto do imóvel ou um erro caso não seja encontrado.</returns>
     public async Task<Response<Property?>> GetByIdAsync(GetPropertyByIdRequest request)
@@ -175,6 +201,11 @@ public class PropertyHandler : IPropertyHandler
     /// <summary>
     /// Retorna uma lista paginada de todos os imóveis ativos, com opção de filtro por busca.
     /// </summary>
+    /// <remarks>
+    /// <para> Este método busca todos os imóveis ativos no banco de dados e aplica
+    /// filtros de paginação e busca, se fornecidos.</para>    
+    /// <para> Caso o filtro não seja fornecido, retorna todos os imóveis ativos.</para>
+    /// </remarks>
     /// <param name="request">Requisição que contém parâmetros de paginação e filtro.</param>
     /// <returns>Retorna uma resposta paginada com os imóveis ativos ou um erro em caso de falha.</returns>
     public async Task<PagedResponse<List<Property>?>> GetAllAsync(GetAllPropertiesRequest request)
@@ -215,6 +246,11 @@ public class PropertyHandler : IPropertyHandler
     /// <summary>
     /// Retorna uma lista paginada de todas as visitas de um imóvel específico.
     /// </summary>
+    /// <remarks>
+    /// <para> Este método busca todas as visitas de um imóvel específico no banco de dados e aplica
+    /// filtros de paginação e busca, se fornecidos.</para>
+    /// <para> Caso o filtro não seja fornecido, retorna todas as visitas do imóvel.</para>
+    /// </remarks>
     /// <param name="request">Requisição que contém parâmetros de paginação e filtro por data.</param>
     /// <returns>Retorna uma resposta paginada com as visitas ou um erro em caso de falha.</returns>
     public async Task<PagedResponse<List<Viewing>?>> GetAllViewingsAsync(GetAllViewingsByPropertyRequest request)

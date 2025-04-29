@@ -11,13 +11,27 @@ namespace RealtyHub.ApiService.Handlers;
 /// <summary>
 /// Responsável pelas operações relacionadas a propostas.
 /// </summary>
+/// <remarks>
+/// Esta classe implementa a interface <see cref="IOfferHandler"/> e fornece
+/// métodos para criar, atualizar, rejeitar, aceitar e buscar propostas no banco de dados.
+/// </remarks>
 public class OfferHandler : IOfferHandler
 {
+    /// <summary>
+    /// Contexto do banco de dados para interação com propostas.
+    /// </summary>
+    /// <remarks>
+    /// Este campo é utilizado para realizar operações CRUD nas propostas.
+    /// </remarks>
     private readonly AppDbContext _context;
 
     /// <summary>
     /// Inicializa uma nova instância de <see cref="OfferHandler"/>.
     /// </summary>
+    /// <remarks>
+    /// Este construtor é utilizado para injetar o contexto do banco de dados
+    /// necessário para realizar operações CRUD nas propostas.
+    /// </remarks>
     /// <param name="context">Contexto do banco de dados para interação com propostas.</param>
     public OfferHandler(AppDbContext context)
     {
@@ -27,8 +41,11 @@ public class OfferHandler : IOfferHandler
     /// <summary>
     /// Cria uma nova proposta no banco de dados.
     /// </summary>
+    /// <remarks>
+    /// Este método adiciona uma nova proposta à base de dados e salva as alterações.
+    /// </remarks>
     /// <param name="request">Objeto contendo as informações para criação da proposta.</param>
-    /// <returns>Retorna uma resposta com a proposta criada e o código de status.</returns>
+    /// <returns>Retorna uma resposta com a proposta criada ou um erro.</returns>
     public async Task<Response<Offer?>> CreateAsync(Offer request)
     {
         Property? property;
@@ -95,6 +112,12 @@ public class OfferHandler : IOfferHandler
     /// <summary>
     /// Atualiza uma proposta existente no banco de dados.
     /// </summary>
+    /// <remarks>
+    /// <para>Este método atualiza as informações de uma proposta existente no banco de dados.</para> 
+    /// <para>O método verifica se a proposta existe e se o status da proposta permite a atualização.</para> 
+    /// <para>Além disso, ele valida se o valor total dos pagamentos corresponde ao valor da proposta.</para> 
+    /// <para>Se a proposta for encontrada e o status permitir, as informações da proposta são atualizadas.</para> 
+    /// </remarks>
     /// <param name="request">Objeto contendo as novas informações da proposta.</param>
     /// <returns>Retorna a resposta com a proposta atualizada ou um erro se não for encontrada.</returns>
     public async Task<Response<Offer?>> UpdateAsync(Offer request)
@@ -190,6 +213,9 @@ public class OfferHandler : IOfferHandler
     /// <summary>
     /// Rejeita uma proposta existente.
     /// </summary>
+    /// <remarks>
+    /// Este método rejeita uma proposta existente no banco de dados.
+    /// </remarks>
     /// <param name="request">Requisição contendo o ID da proposta a ser rejeitada.</param>
     /// <returns>Retorna a resposta com a proposta rejeitada ou um erro se não for encontrada.</returns>
     public async Task<Response<Offer?>> RejectAsync(RejectOfferRequest request)
@@ -235,6 +261,9 @@ public class OfferHandler : IOfferHandler
     /// <summary>
     /// Aceita uma proposta existente.
     /// </summary>
+    /// <remarks>
+    /// Este método aceita uma proposta existente no banco de dados.
+    /// </remarks>
     /// <param name="request">Requisição contendo o ID da proposta a ser aceita.</param>
     /// <returns>Retorna a resposta com a proposta aceita ou um erro se não for encontrada.</returns>
     public async Task<Response<Offer?>> AcceptAsync(AcceptOfferRequest request)
@@ -280,6 +309,9 @@ public class OfferHandler : IOfferHandler
     /// <summary>
     /// Obtém uma proposta específica pelo ID.
     /// </summary>
+    /// <remarks>
+    /// Este método busca uma proposta no banco de dados com base no ID fornecido.
+    /// </remarks>
     /// <param name="request">Requisição contendo o ID da proposta desejada.</param>
     /// <returns>Retorna a proposta ou um erro caso não seja encontrada.</returns>
     public async Task<Response<Offer?>> GetByIdAsync(GetOfferByIdRequest request)
@@ -291,7 +323,7 @@ public class OfferHandler : IOfferHandler
                 .AsNoTracking()
                 .Include(o => o.Buyer)
                 .Include(o => o.Property)
-                    .ThenInclude(p=>p!.Seller)
+                    .ThenInclude(p => p!.Seller)
                 .Include(o => o.Payments)
                 .Include(o => o.Contract)
                 .FirstOrDefaultAsync(o => o.Id == request.Id);
@@ -312,6 +344,9 @@ public class OfferHandler : IOfferHandler
     /// <summary>
     /// Obtém a proposta aceita para um imóvel específico.
     /// </summary>
+    /// <remarks>
+    /// Este método busca a proposta aceita para um imóvel específico no banco de dados.
+    /// </remarks>
     /// <param name="request">Requisição contendo o ID do imóvel.</param>
     /// <returns>Retorna a proposta aceita ou um erro caso não seja encontrada.</returns>
     public async Task<Response<Offer?>> GetAcceptedByProperty(GetOfferAcceptedByProperty request)
@@ -345,6 +380,10 @@ public class OfferHandler : IOfferHandler
     /// <summary>
     /// Retorna uma lista paginada de todas as propostas de um imóvel específico.
     /// </summary>
+    /// <remarks>
+    /// <para> Este método busca todas as propostas de um imóvel específico no banco de dados.</para>
+    /// <para>Ele aplica filtros de data e paginação, retornando uma lista de propostas.</para>
+    /// </remarks>
     /// <param name="request">Requisição contendo parâmetros de paginação e filtro por imóvel.</param>
     /// <returns>Retorna uma resposta paginada com as propostas ou um erro em caso de falha.</returns>
     public async Task<PagedResponse<List<Offer>?>> GetAllOffersByPropertyAsync(
@@ -355,7 +394,7 @@ public class OfferHandler : IOfferHandler
             var property = await _context
                 .Properties
                 .AsNoTracking()
-                .FirstOrDefaultAsync(p => p.Id == request.PropertyId 
+                .FirstOrDefaultAsync(p => p.Id == request.PropertyId
                                           && p.IsActive);
 
             if (property is null)
@@ -406,6 +445,10 @@ public class OfferHandler : IOfferHandler
     /// <summary>
     /// Retorna uma lista paginada de todas as propostas de um cliente específico.
     /// </summary>
+    /// <remarks>
+    /// <para> Este método busca todas as propostas de um cliente específico no banco de dados.</para>
+    /// <para>Ele aplica filtros de data e paginação, retornando uma lista de propostas.</para>
+    /// </remarks>
     /// <param name="request">Requisição contendo parâmetros de paginação e filtro por cliente.</param>
     /// <returns>Retorna uma resposta paginada com as propostas ou um erro em caso de falha.</returns>
     public async Task<PagedResponse<List<Offer>?>> GetAllOffersByCustomerAsync(
@@ -416,7 +459,7 @@ public class OfferHandler : IOfferHandler
             var customer = await _context
                 .Customers
                 .AsNoTracking()
-                .FirstOrDefaultAsync(p => p.Id == request.CustomerId 
+                .FirstOrDefaultAsync(p => p.Id == request.CustomerId
                                           && p.IsActive);
 
             if (customer is null)
@@ -468,6 +511,10 @@ public class OfferHandler : IOfferHandler
     /// <summary>
     /// Retorna uma lista paginada de todas as propostas no sistema.
     /// </summary>
+    /// <remarks>
+    /// <para> Este método busca todas as propostas no banco de dados.</para>
+    /// <para>Ele aplica filtros de data e paginação, retornando uma lista de propostas.</para>
+    /// </remarks>
     /// <param name="request">Requisição contendo parâmetros de paginação e filtro.</param>
     /// <returns>Retorna uma resposta paginada com as propostas ou um erro em caso de falha.</returns>
     public async Task<PagedResponse<List<Offer>?>> GetAllAsync(GetAllOffersRequest request)

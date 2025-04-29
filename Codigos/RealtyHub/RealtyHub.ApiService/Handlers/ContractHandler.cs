@@ -12,14 +12,28 @@ namespace RealtyHub.ApiService.Handlers;
 /// <summary>
 /// Responsável pelas operações relacionadas a contratos.
 /// </summary>
+/// <remarks>
+/// Esta classe implementa a interface <see cref="IContractHandler"/> e fornece
+/// métodos para criar, atualizar, deletar e buscar contratos no banco de dados.
+/// </remarks>
 public class ContractHandler : IContractHandler
 {
+    /// <summary>
+    /// Contexto do banco de dados para interação com contratos.
+    /// </summary>
+    /// <remarks>
+    /// Este campo é utilizado para realizar operações CRUD nos contratos.
+    /// </remarks>
     private readonly AppDbContext _context;
 
     /// <summary>
     /// Inicializa uma nova instância de <see cref="ContractHandler"/>.
     /// </summary>
     /// <param name="context">Contexto do banco de dados para interação com contratos.</param>
+    /// <remarks>
+    /// Este construtor é utilizado para injetar o contexto do banco de dados
+    /// necessário para realizar operações CRUD nos contratos.
+    /// </remarks>
     public ContractHandler(AppDbContext context)
     {
         _context = context;
@@ -28,6 +42,10 @@ public class ContractHandler : IContractHandler
     /// <summary>
     /// Cria um novo contrato no banco de dados.
     /// </summary>
+    /// <remarks>
+    /// Este método cria um novo contrato baseado em uma proposta aceita, 
+    /// associando comprador, vendedor e dados adicionais.
+    /// </remarks>
     /// <param name="request">Objeto contendo as informações para criação do contrato.</param>
     /// <returns>Retorna uma resposta com o contrato criado e o código de status.</returns>
     public async Task<Response<Contract?>> CreateAsync(Contract request)
@@ -83,6 +101,9 @@ public class ContractHandler : IContractHandler
     /// <summary>
     /// Atualiza um contrato existente no banco de dados.
     /// </summary>
+    /// <remarks>
+    /// Este método busca o contrato e ajusta as informações conforme a requisição fornecida.
+    /// </remarks>
     /// <param name="request">Objeto contendo as novas informações do contrato.</param>
     /// <returns>Retorna a resposta com o contrato atualizado ou um erro se não for encontrado.</returns>
     public async Task<Response<Contract?>> UpdateAsync(Contract request)
@@ -141,6 +162,9 @@ public class ContractHandler : IContractHandler
     /// <summary>
     /// Realiza a exclusão lógica de um contrato, marcando-o como inativo.
     /// </summary>
+    /// <remarks>
+    /// Não remove o registro do banco, apenas altera seu status de ativo para inativo.
+    /// </remarks>
     /// <param name="request">Requisição que contém o ID do contrato a ser excluído.</param>
     /// <returns>Retorna a resposta com o status da exclusão ou um erro se não for encontrado.</returns>
     public async Task<Response<Contract?>> DeleteAsync(DeleteContractRequest request)
@@ -171,6 +195,10 @@ public class ContractHandler : IContractHandler
     /// <summary>
     /// Obtém um contrato específico pelo ID.
     /// </summary>
+    /// <remarks>
+    /// Este método localiza o contrato correspondente ao ID fornecido 
+    /// e retorna o objeto completo, se encontrado.
+    /// </remarks>
     /// <param name="request">Requisição que contém o ID do contrato desejado.</param>
     /// <returns>Retorna o objeto do contrato ou um erro caso não seja encontrado.</returns>
     public async Task<Response<Contract?>> GetByIdAsync(GetContractByIdRequest request)
@@ -207,6 +235,11 @@ public class ContractHandler : IContractHandler
     /// <summary>
     /// Retorna uma lista paginada de todos os contratos ativos, com opção de filtro por data.
     /// </summary>
+    /// <remarks>
+    /// <para>Este método aplica paginação, filtra por data de emissão e
+    /// retorna apenas contratos marcados como ativos. </para>
+    /// <para> Caso o filtro não seja fornecido, retorna todos os contratos ativos.</para>
+    /// </remarks>
     /// <param name="request">Requisição que contém parâmetros de paginação e filtro.</param>
     /// <returns>Retorna uma resposta paginada com os contratos ativos ou um erro em caso de falha.</returns>
     public async Task<PagedResponse<List<Contract>?>> GetAllAsync(GetAllContractsRequest request)
@@ -255,8 +288,11 @@ public class ContractHandler : IContractHandler
     }
 
     /// <summary>
-    /// Gera ou atualiza o arquivo de contrato com base no modelo e nas informações fornecidas.
+    /// Gera ou atualiza o arquivo de contrato com base nas informações fornecidas e no modelo apropriado.
     /// </summary>
+    /// <remarks>
+    /// Este método carrega o modelo correto, atualiza o documento de contrato e salva em disco.
+    /// </remarks>
     /// <param name="contract">Objeto do contrato a ser gerado ou atualizado.</param>
     /// <param name="update">Indica se o contrato está sendo atualizado.</param>
     private async Task CreateOrUpdateContract(Contract contract, bool update)

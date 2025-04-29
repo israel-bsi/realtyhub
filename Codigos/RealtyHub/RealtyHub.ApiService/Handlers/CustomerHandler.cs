@@ -10,24 +10,41 @@ namespace RealtyHub.ApiService.Handlers;
 /// <summary>
 /// Responsável pelas operações relacionadas a clientes.
 /// </summary>
+/// <remarks>
+/// Esta classe implementa a interface <see cref="ICustomerHandler"/> e fornece
+/// métodos para criar, atualizar, deletar e buscar clientes no banco de dados.
+/// </remarks>
 public class CustomerHandler : ICustomerHandler
 {
+    /// <summary>
+    /// Contexto do banco de dados para interação com clientes.
+    /// </summary>
+    /// <remarks>
+    /// Este campo é utilizado para realizar operações CRUD nos clientes.
+    /// </remarks>
     private readonly AppDbContext _context;
 
     /// <summary>
     /// Inicializa uma nova instância de <see cref="CustomerHandler"/>.
     /// </summary>
+    /// <remarks>
+    /// Este construtor é utilizado para injetar o contexto do banco de dados
+    /// necessário para realizar operações CRUD nos clientes.
+    /// </remarks>
     /// <param name="context">Contexto do banco de dados para interação com clientes.</param>
     public CustomerHandler(AppDbContext context)
     {
         _context = context;
     }
-    
+
     /// <summary>
     /// Cria um novo cliente no banco de dados.
     /// </summary>
+    /// <remarks>
+    /// Este método adiciona um novo cliente à base de dados e salva as alterações.    
+    /// </remarks>
     /// <param name="request">Objeto contendo as informações para criação do cliente.</param>
-    /// <returns>Retorna uma resposta com o cliente criado e o código de status.</returns>
+    /// <returns>Retorna uma resposta com o cliente criado ou um erro se o cliente já existir.</returns>
     public async Task<Response<Customer?>> CreateAsync(Customer request)
     {
         try
@@ -74,6 +91,9 @@ public class CustomerHandler : ICustomerHandler
     /// <summary>
     /// Atualiza um cliente existente no banco de dados.
     /// </summary>
+    /// <remarks>
+    /// Este método atualiza as informações de um cliente existente no banco de dados.    
+    /// </remarks>
     /// <param name="request">Objeto contendo as novas informações do cliente.</param>
     /// <returns>Retorna a resposta com o cliente atualizado ou um erro se não for encontrado.</returns>
     public async Task<Response<Customer?>> UpdateAsync(Customer request)
@@ -120,6 +140,9 @@ public class CustomerHandler : ICustomerHandler
     /// <summary>
     /// Realiza a exclusão lógica de um cliente, marcando-o como inativo.
     /// </summary>
+    /// <remarks>
+    /// Este método altera o status de um cliente para inativo no banco de dados.
+    /// </remarks>
     /// <param name="request">Requisição que contém o ID do cliente a ser excluído.</param>
     /// <returns>Retorna a resposta com o status da exclusão ou um erro se não for encontrado.</returns>
     public async Task<Response<Customer?>> DeleteAsync(DeleteCustomerRequest request)
@@ -151,6 +174,9 @@ public class CustomerHandler : ICustomerHandler
     /// <summary>
     /// Obtém um cliente específico pelo ID.
     /// </summary>
+    /// <remarks>
+    /// Este método busca um cliente no banco de dados com base no ID fornecido.
+    /// </remarks>
     /// <param name="request">Requisição que contém o ID do cliente desejado.</param>
     /// <returns>Retorna o objeto do cliente ou um erro caso não seja encontrado.</returns>
     public async Task<Response<Customer?>> GetByIdAsync(GetCustomerByIdRequest request)
@@ -178,6 +204,11 @@ public class CustomerHandler : ICustomerHandler
     /// <summary>
     /// Retorna uma lista paginada de todos os clientes ativos, com opção de filtro por busca.
     /// </summary>
+    /// <remarks>
+    /// <para> Este método busca todos os clientes ativos no banco de dados e aplica
+    /// filtros de busca e paginação. </para>
+    /// <para> Caso nenhum filtro seja fornecido, retorna todos os clientes ativos. </para>
+    /// </remarks>
     /// <param name="request">Requisição que contém parâmetros de paginação e filtro.</param>
     /// <returns>Retorna uma resposta paginada com os clientes ativos ou um erro em caso de falha.</returns>
     public async Task<PagedResponse<List<Customer>?>> GetAllAsync(GetAllCustomersRequest request)

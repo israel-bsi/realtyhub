@@ -11,13 +11,28 @@ namespace RealtyHub.ApiService.Handlers;
 /// <summary>
 /// Responsável pelas operações relacionadas às visitas de imóveis.
 /// </summary>
+/// <remarks>
+/// Esta classe implementa a interface <see cref="IViewingHandler"/> e fornece
+/// métodos para agendar, reagendar, finalizar e cancelar visitas,
+/// além de buscar visitas específicas ou todas as visitas.
+/// </remarks>
 public class ViewingHandler : IViewingHandler
 {
+    /// <summary>
+    /// Contexto do banco de dados para interação com visitas.
+    /// </summary>
+    /// <remarks>
+    /// Este campo é utilizado para realizar operações CRUD nas visitas.
+    /// </remarks>
     private readonly AppDbContext _context;
 
     /// <summary>
     /// Inicializa uma nova instância de <see cref="ViewingHandler"/>.
     /// </summary>
+    /// <remarks>
+    /// Este construtor é utilizado para injetar o contexto do banco de dados
+    /// necessário para realizar operações CRUD nas visitas.
+    /// </remarks>
     /// <param name="context">Contexto do banco de dados para interação com as visitas.</param>
     public ViewingHandler(AppDbContext context)
     {
@@ -27,6 +42,12 @@ public class ViewingHandler : IViewingHandler
     /// <summary>
     /// Agenda uma nova visita para um imóvel.
     /// </summary>
+    /// <remarks>
+    /// <para>Este método adiciona uma nova visita à base de dados e salva as alterações. </para>
+    /// <para>Ele verifica se o cliente e o imóvel existem e estão ativos antes de agendar a visita.</para>
+    /// <para>Se a visita já estiver agendada para a mesma data, retorna um erro.</para>
+    /// <para>O status da visita é definido como "Pendente" por padrão.</para>
+    /// </remarks>
     /// <param name="request">Objeto contendo as informações para agendamento da visita.</param>
     /// <returns>Retorna uma resposta com a visita agendada ou um erro em caso de falha.</returns>
     public async Task<Response<Viewing?>> ScheduleAsync(Viewing request)
@@ -84,6 +105,11 @@ public class ViewingHandler : IViewingHandler
     /// <summary>
     /// Reagenda uma visita existente.
     /// </summary>
+    /// <remarks>
+    /// <para>Este método atualiza a data e o status de uma visita existente.</para>
+    /// <para>Ele verifica se a visita existe e se não está cancelada ou finalizada.</para>
+    /// <para>Se a visita não existir ou já estiver cancelada ou finalizada, retorna um erro.</para>
+    /// </remarks>
     /// <param name="request">Objeto contendo as informações para reagendamento da visita.</param>
     /// <returns>Retorna uma resposta com a visita reagendada ou um erro em caso de falha.</returns>
     public async Task<Response<Viewing?>> RescheduleAsync(Viewing request)
@@ -125,6 +151,11 @@ public class ViewingHandler : IViewingHandler
     /// <summary>
     /// Finaliza uma visita existente.
     /// </summary>
+    /// <remarks>
+    /// <para>Este método atualiza o status de uma visita para "Finalizada".</para>
+    /// <para>Ele verifica se a visita existe e se não está cancelada ou já finalizada.</para>
+    /// <para>Se a visita não existir ou já estiver cancelada ou finalizada, retorna um erro.</para>
+    /// </remarks>
     /// <param name="request">Requisição contendo o ID da visita a ser finalizada.</param>
     /// <returns>Retorna uma resposta com a visita finalizada ou um erro em caso de falha.</returns>
     public async Task<Response<Viewing?>> DoneAsync(DoneViewingRequest request)
@@ -165,6 +196,11 @@ public class ViewingHandler : IViewingHandler
     /// <summary>
     /// Cancela uma visita existente.
     /// </summary>
+    /// <remarks>
+    /// <para>Este método atualiza o status de uma visita para "Cancelada".</para>
+    /// <para>Ele verifica se a visita existe e se não está finalizada.</para>
+    /// <para>Se a visita não existir ou já estiver finalizada, retorna um erro.</para>
+    /// </remarks>
     /// <param name="request">Requisição contendo o ID da visita a ser cancelada.</param>
     /// <returns>Retorna uma resposta com a visita cancelada ou um erro em caso de falha.</returns>
     public async Task<Response<Viewing?>> CancelAsync(CancelViewingRequest request)
@@ -205,6 +241,11 @@ public class ViewingHandler : IViewingHandler
     /// <summary>
     /// Obtém uma visita específica pelo ID.
     /// </summary>
+    /// <remarks>
+    /// <para>Este método busca uma visita no banco de dados com base no ID fornecido.</para>
+    /// <para>Ele verifica se a visita existe e se não está cancelada ou finalizada.</para>
+    /// <para>Se a visita não existir ou já estiver cancelada ou finalizada, retorna um erro.</para>
+    /// </remarks>
     /// <param name="request">Requisição contendo o ID da visita desejada.</param>
     /// <returns>Retorna a visita ou um erro caso não seja encontrada.</returns>
     public async Task<Response<Viewing?>> GetByIdAsync(GetViewingByIdRequest request)
@@ -235,6 +276,10 @@ public class ViewingHandler : IViewingHandler
     /// <summary>
     /// Retorna uma lista paginada de todas as visitas.
     /// </summary>
+    /// <remarks>
+    /// <para>Este método busca todas as visitas no banco de dados e aplica filtros de data e paginação.</para>
+    /// <para>Caso o filtro de data não seja fornecido, retorna todas as visitas.</para>
+    /// </remarks>
     /// <param name="request">Requisição contendo parâmetros de paginação e filtro.</param>
     /// <returns>Retorna uma resposta paginada com as visitas ou um erro em caso de falha.</returns>
     public async Task<PagedResponse<List<Viewing>?>> GetAllAsync(GetAllViewingsRequest request)

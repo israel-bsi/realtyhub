@@ -11,13 +11,27 @@ namespace RealtyHub.ApiService.Handlers;
 /// <summary>
 /// Responsável pelas operações relacionadas a condomínios.
 /// </summary>
+/// <remarks>
+/// Esta classe implementa a interface <see cref="ICondominiumHandler"/> e fornece
+/// métodos para criar, atualizar, deletar e buscar condomínios no banco de dados.
+/// </remarks>
 public class CondominiumHandler : ICondominiumHandler
 {
+    /// <summary>
+    /// Contexto do banco de dados para interação com condomínios.
+    /// </summary>
+    /// <remarks>
+    /// Este campo é utilizado para realizar operações CRUD nos condomínios.
+    /// </remarks>
     private readonly AppDbContext _context;
 
     /// <summary>
     /// Inicializa uma nova instância de <see cref="CondominiumHandler"/>.
     /// </summary>
+    /// <remarks>
+    /// Este construtor é utilizado para injetar o contexto do banco de dados
+    /// necessário para realizar operações CRUD nos condomínios.
+    /// </remarks>
     /// <param name="context">Contexto do banco de dados para interação com condomínios.</param>
     public CondominiumHandler(AppDbContext context)
     {
@@ -27,6 +41,9 @@ public class CondominiumHandler : ICondominiumHandler
     /// <summary>
     /// Cria um novo condomínio no banco de dados.
     /// </summary>
+    /// <remarks>
+    /// Este método adiciona um novo condomínio à base de dados e salva as alterações.
+    /// </remarks>
     /// <param name="request">Objeto contendo as informações para criação do condomínio.</param>
     /// <returns>Retorna uma resposta com o condomínio criado e o código de status.</returns>
     public async Task<Response<Condominium?>> CreateAsync(Condominium request)
@@ -62,6 +79,9 @@ public class CondominiumHandler : ICondominiumHandler
     /// <summary>
     /// Atualiza um condomínio existente.
     /// </summary>
+    /// <remarks>
+    /// Este método atualiza as informações de um condomínio existente no banco de dados.
+    /// </remarks>
     /// <param name="request">Objeto contendo as novas informações do condomínio.</param>
     /// <returns>Retorna a resposta com o condomínio atualizado ou um erro se não for encontrado.</returns>
     public async Task<Response<Condominium?>> UpdateAsync(Condominium request)
@@ -101,6 +121,9 @@ public class CondominiumHandler : ICondominiumHandler
     /// <summary>
     /// Realiza a exclusão lógica de um condomínio, marcando-o como inativo.
     /// </summary>
+    /// <remarks>
+    /// Este método altera o status de um condomínio para inativo no banco de dados.    
+    /// </remarks>
     /// <param name="request">Requisição que contém o ID do condomínio a ser excluído.</param>
     /// <returns>Retorna a resposta com o condomínio atualizado ou um erro se não for encontrado.</returns>
     public async Task<Response<Condominium?>> DeleteAsync(DeleteCondominiumRequest request)
@@ -131,6 +154,9 @@ public class CondominiumHandler : ICondominiumHandler
     /// <summary>
     /// Obtém um condomínio específico pelo ID.
     /// </summary>
+    /// <remarks>
+    /// Este método busca um condomínio no banco de dados com base no ID fornecido.    
+    /// </remarks>
     /// <param name="request">Requisição que contém o ID do condomínio desejado.</param>
     /// <returns>Retorna o objeto do condomínio ou um erro caso não seja encontrado.</returns>
     public async Task<Response<Condominium?>> GetByIdAsync(GetCondominiumByIdRequest request)
@@ -155,8 +181,15 @@ public class CondominiumHandler : ICondominiumHandler
     /// <summary>
     /// Retorna uma lista paginada de todos os condomínios ativos, com opção de filtro por busca.
     /// </summary>
+    /// <remarks>
+    /// <para> Este método busca todos os condomínios ativos no banco de dados e aplica
+    /// filtros de busca, se fornecidos.  </para>
+    /// <para> A resposta é paginada com base nos parâmetros
+    /// de paginação fornecidos na requisição e retorna uma lista de condomínios.</para>
+    /// <para>Caso o filtro não seja fornecido, retorna todos os condomínios ativos.</para>    
+    /// </remarks>
     /// <param name="request">Requisição que contém parâmetros de paginação e filtro.</param>
-    /// <returns>Retorna uma resposta paginada com os condomínios ativos ou um erro em caso de falha.</returns>
+    /// <returns>Retorna uma resposta paginada com os condomínios ativos com base no filtro ou um erro em caso de falha.</returns>
     public async Task<PagedResponse<List<Condominium>?>> GetAllAsync(GetAllCondominiumsRequest request)
     {
         try

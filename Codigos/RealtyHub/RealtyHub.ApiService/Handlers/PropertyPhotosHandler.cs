@@ -10,13 +10,27 @@ namespace RealtyHub.ApiService.Handlers;
 /// <summary>
 /// Responsável pelas operações relacionadas às fotos de imóveis.
 /// </summary>
+/// <remarks>
+/// Esta classe implementa a interface <see cref="IPropertyPhotosHandler"/> e fornece
+/// métodos para criar, atualizar, deletar e buscar fotos de imóveis no banco de dados.
+/// </remarks>
 public class PropertyPhotosHandler : IPropertyPhotosHandler
 {
+    /// <summary>
+    /// Contexto do banco de dados para interação com fotos dos imóveis.
+    /// </summary>
+    /// <remarks>
+    /// Este campo é utilizado para realizar operações CRUD nas fotos dos imóveis.
+    /// </remarks>
     private readonly AppDbContext _context;
 
     /// <summary>
     /// Inicializa uma nova instância de <see cref="PropertyPhotosHandler"/>.
     /// </summary>
+    /// <remarks>
+    /// Este construtor é utilizado para injetar o contexto do banco de dados
+    /// necessário para realizar operações CRUD nas fotos dos imóveis.
+    /// </remarks>
     /// <param name="context">Contexto do banco de dados para interação com as fotos de imóveis.</param>
     public PropertyPhotosHandler(AppDbContext context)
     {
@@ -26,6 +40,9 @@ public class PropertyPhotosHandler : IPropertyPhotosHandler
     /// <summary>
     /// Cria novas fotos para um imóvel.
     /// </summary>
+    /// <remarks>
+    /// Este método adiciona novas fotos à base de dados e salva as alterações.
+    /// </remarks>
     /// <param name="request">Requisição contendo as informações e os arquivos para criação das fotos.</param>
     /// <returns>Retorna uma resposta indicando o sucesso ou falha da operação.</returns>
     public async Task<Response<PropertyPhoto?>> CreateAsync(CreatePropertyPhotosRequest request)
@@ -119,6 +136,9 @@ public class PropertyPhotosHandler : IPropertyPhotosHandler
     /// <summary>
     /// Atualiza as informações de fotos de um imóvel.
     /// </summary>
+    /// <remarks>
+    /// Este método atualiza as informações de fotos existentes no banco de dados.
+    /// </remarks>
     /// <param name="request">Requisição contendo as informações das fotos a serem atualizadas.</param>
     /// <returns>Retorna uma resposta indicando o sucesso ou falha da operação.</returns>
     public async Task<Response<List<PropertyPhoto>?>> UpdateAsync(UpdatePorpertyPhotosRequest request)
@@ -172,6 +192,9 @@ public class PropertyPhotosHandler : IPropertyPhotosHandler
     /// <summary>
     /// Exclui uma foto de um imóvel.
     /// </summary>
+    /// <remarks>
+    /// Este método marca uma foto como inativa no banco de dados.
+    /// </remarks>
     /// <param name="request">Requisição contendo o ID da foto a ser excluída.</param>
     /// <returns>Retorna uma resposta indicando o sucesso ou falha da operação.</returns>
     public async Task<Response<PropertyPhoto?>> DeleteAsync(DeletePropertyPhotoRequest request)
@@ -207,6 +230,9 @@ public class PropertyPhotosHandler : IPropertyPhotosHandler
     /// <summary>
     /// Obtém todas as fotos de um imóvel específico.
     /// </summary>
+    /// <remarks>
+    /// Este método busca todas as fotos de um imóvel no banco de dados com base no ID do imóvel.
+    /// </remarks>
     /// <param name="request">Requisição contendo o ID do imóvel.</param>
     /// <returns>Retorna uma lista de fotos do imóvel ou um erro em caso de falha.</returns>
     public async Task<Response<List<PropertyPhoto>?>> GetAllByPropertyAsync(
