@@ -1,5 +1,10 @@
 \doxysection{Referência da Classe Realty\+Hub.\+Api\+Service.\+Endpoints.\+Contracts.\+Create\+Contract\+Endpoint}
 \hypertarget{class_realty_hub_1_1_api_service_1_1_endpoints_1_1_contracts_1_1_create_contract_endpoint}{}\label{class_realty_hub_1_1_api_service_1_1_endpoints_1_1_contracts_1_1_create_contract_endpoint}\index{RealtyHub.ApiService.Endpoints.Contracts.CreateContractEndpoint@{RealtyHub.ApiService.Endpoints.Contracts.CreateContractEndpoint}}
+
+
+Endpoint responsável por criar novos contratos.  
+
+
 Diagrama de hierarquia da classe Realty\+Hub.\+Api\+Service.\+Endpoints.\+Contracts.\+Create\+Contract\+Endpoint\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -10,8 +15,13 @@ Diagrama de hierarquia da classe Realty\+Hub.\+Api\+Service.\+Endpoints.\+Contra
 \begin{DoxyCompactItemize}
 \item 
 static void \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_endpoints_1_1_contracts_1_1_create_contract_endpoint_a4dfe01ce8f20325b82d159f4fb757472}{Map}} (IEndpoint\+Route\+Builder \mbox{\hyperlink{_realty_hub_8_api_service_2_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}})
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Mapeia o endpoint para criar um contrato. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
+
+\doxysubsection{Descrição detalhada}
+Endpoint responsável por criar novos contratos. 
+
+Implementa a interface \doxylink{interface_realty_hub_1_1_api_service_1_1_common_1_1_api_1_1_i_endpoint}{IEndpoint} para mapear a rota de criação de contratos. Este endpoint recebe o objeto do contrato e cria um novo registro no banco de dados, associando o usuário autenticado como criador do contrato. 
 
 \doxysubsection{Documentação das funções}
 \Hypertarget{class_realty_hub_1_1_api_service_1_1_endpoints_1_1_contracts_1_1_create_contract_endpoint_a4dfe01ce8f20325b82d159f4fb757472}\index{RealtyHub.ApiService.Endpoints.Contracts.CreateContractEndpoint@{RealtyHub.ApiService.Endpoints.Contracts.CreateContractEndpoint}!Map@{Map}}
@@ -20,6 +30,17 @@ static void \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_endpoints_1_1_
 {\footnotesize\ttfamily \label{class_realty_hub_1_1_api_service_1_1_endpoints_1_1_contracts_1_1_create_contract_endpoint_a4dfe01ce8f20325b82d159f4fb757472} 
 static void Realty\+Hub.\+Api\+Service.\+Endpoints.\+Contracts.\+Create\+Contract\+Endpoint.\+Map (\begin{DoxyParamCaption}\item[{IEndpoint\+Route\+Builder}]{app}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
+
+
+Mapeia o endpoint para criar um contrato. 
+
+Registra a rota POST que recebe o objeto \doxylink{class_realty_hub_1_1_core_1_1_models_1_1_contract}{Contract} e invoca o manipulador para criar o contrato. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em app} & O construtor de rotas do aplicativo.\\
+\hline
+\end{DoxyParams}
 
 
 Implementa \mbox{\hyperlink{interface_realty_hub_1_1_api_service_1_1_common_1_1_api_1_1_i_endpoint_acaf6ed58b2814a0905a306b78ae7e0af}{Realty\+Hub.\+Api\+Service.\+Common.\+Api.\+IEndpoint}}.

@@ -109,6 +109,9 @@ $(function(){initNavTree('class_realty_hub_1_1_core_1_1_responses_1_1_response-1
   <div class="headertitle"><div class="title">Referência do Template da Classe RealtyHub.Core.Responses.Response&lt; TData &gt;</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Classe genérica para encapsular a resposta de uma operação, incluindo dados, mensagem e código de status.  
+ <a href="#details">Mais...</a></p>
 <div class="dynheader">
 Diagrama de hierarquia da classe RealtyHub.Core.Responses.Response&lt; TData &gt;:</div>
 <div class="dyncontent">
@@ -122,20 +125,35 @@ Diagrama de hierarquia da classe RealtyHub.Core.Responses.Response&lt; TData &gt
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Membros Públicos</h2></td></tr>
 <tr class="memitem:a64a757528169d33cc84b39a057eaf0a1" id="r_a64a757528169d33cc84b39a057eaf0a1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a64a757528169d33cc84b39a057eaf0a1">Response</a> ()</td></tr>
+<tr class="memdesc:a64a757528169d33cc84b39a057eaf0a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construtor padrão da classe <a class="el" href="class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g.html" title="Classe genérica para encapsular a resposta de uma operação, incluindo dados, mensagem e código de sta...">Response&lt;TData&gt;</a>.  <br /></td></tr>
 <tr class="separator:a64a757528169d33cc84b39a057eaf0a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a82bd2410bab12247ba050a0636ff02a4" id="r_a82bd2410bab12247ba050a0636ff02a4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a82bd2410bab12247ba050a0636ff02a4">Response</a> (TData? data, int code=<a class="el" href="class_realty_hub_1_1_core_1_1_configuration.html#a31cd6c2aab606e7ff2711340fe5508e1">Configuration.DefaultStatusCode</a>, string? message=null)</td></tr>
+<tr class="memdesc:a82bd2410bab12247ba050a0636ff02a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construtor da classe <a class="el" href="class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g.html" title="Classe genérica para encapsular a resposta de uma operação, incluindo dados, mensagem e código de sta...">Response&lt;TData&gt;</a> com dados, código de status e mensagem.  <br /></td></tr>
 <tr class="separator:a82bd2410bab12247ba050a0636ff02a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="properties" name="properties"></a>
 Propriedades</h2></td></tr>
 <tr class="memitem:abc8ffe254d9e310e3b7e12904e38590a" id="r_abc8ffe254d9e310e3b7e12904e38590a"><td class="memItemLeft" align="right" valign="top">TData?&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abc8ffe254d9e310e3b7e12904e38590a">Data</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:abc8ffe254d9e310e3b7e12904e38590a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dados a serem retornados na resposta.  <br /></td></tr>
 <tr class="separator:abc8ffe254d9e310e3b7e12904e38590a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a92cd305d19646a0a468980a18d26b933" id="r_a92cd305d19646a0a468980a18d26b933"><td class="memItemLeft" align="right" valign="top">string?&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a92cd305d19646a0a468980a18d26b933">Message</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a92cd305d19646a0a468980a18d26b933"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mensagem adicional sobre o resultado da operação.  <br /></td></tr>
 <tr class="separator:a92cd305d19646a0a468980a18d26b933"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af59bae6f408410c41915ce0c674ee249" id="r_af59bae6f408410c41915ce0c674ee249"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af59bae6f408410c41915ce0c674ee249">IsSuccess</a><code> [get]</code></td></tr>
+<tr class="memdesc:af59bae6f408410c41915ce0c674ee249"><td class="mdescLeft">&#160;</td><td class="mdescRight">Campo que indica se a operação foi bem-sucedida.  <br /></td></tr>
 <tr class="separator:af59bae6f408410c41915ce0c674ee249"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Documentação das funções</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Descrição detalhada</h2>
+<div class="textblock"><p>Classe genérica para encapsular a resposta de uma operação, incluindo dados, mensagem e código de status. </p>
+<p>Esta classe é utilizada em conjunto com os manipuladores de operações para retornar informações sobre o resultado da operação realizada, seja ela uma criação, atualização, recuperação ou exclusão de dados.</p>
+<p>O código de status HTTP é utilizado para indicar o sucesso ou falha da operação, e a mensagem pode conter informações adicionais sobre o resultado.</p>
+<dl class="tparams"><dt>Parâmetros do template</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">TData</td><td>Tipo de dados a serem retornados na resposta.</td></tr>
+  </table>
+  </dd>
+</dl>
+</div><h2 class="groupheader">Documentação das funções</h2>
 <a id="a64a757528169d33cc84b39a057eaf0a1" name="a64a757528169d33cc84b39a057eaf0a1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a64a757528169d33cc84b39a057eaf0a1">&#9670;&#160;</a></span>Response() <span class="overload">[1/2]</span></h2>
 
@@ -150,6 +168,9 @@ Propriedades</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Construtor padrão da classe <a class="el" href="class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g.html" title="Classe genérica para encapsular a resposta de uma operação, incluindo dados, mensagem e código de sta...">Response&lt;TData&gt;</a>. </p>
+<p>Este construtor inicializa o código de status com o valor padrão definido na configuração. </p>
 
 </div>
 </div>
@@ -185,6 +206,17 @@ Propriedades</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Construtor da classe <a class="el" href="class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g.html" title="Classe genérica para encapsular a resposta de uma operação, incluindo dados, mensagem e código de sta...">Response&lt;TData&gt;</a> com dados, código de status e mensagem. </p>
+<p>Este construtor permite inicializar a resposta com dados específicos, um código de status e uma mensagem personalizada. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>Dados a serem retornados na resposta.</td></tr>
+    <tr><td class="paramname">code</td><td>Código de status HTTP da resposta.</td></tr>
+    <tr><td class="paramname">message</td><td>Mensagem adicional sobre o resultado da operação.</td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <h2 class="groupheader">Propriedades</h2>
@@ -208,6 +240,9 @@ Propriedades</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Dados a serem retornados na resposta. </p>
+<p>Este campo pode conter qualquer tipo de dado, dependendo do contexto da operação. </p>
+
 </div>
 </div>
 <a id="af59bae6f408410c41915ce0c674ee249" name="af59bae6f408410c41915ce0c674ee249"></a>
@@ -230,6 +265,9 @@ Propriedades</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Campo que indica se a operação foi bem-sucedida. </p>
+<p>Este campo é calculado com base no código de status HTTP. </p>
+
 </div>
 </div>
 <a id="a92cd305d19646a0a468980a18d26b933" name="a92cd305d19646a0a468980a18d26b933"></a>
@@ -251,6 +289,9 @@ Propriedades</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Mensagem adicional sobre o resultado da operação. </p>
+<p>Esta mensagem pode conter informações sobre erros, avisos ou sucesso da operação. </p>
 
 </div>
 </div>

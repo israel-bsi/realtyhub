@@ -31,6 +31,8 @@ async Task$<$ Paged\+Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_c
 \doxysubsection{Descrição detalhada}
 Responsável pelas operações relacionadas a condomínios. 
 
+Esta classe implementa a interface \doxylink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_condominium_handler}{ICondominium\+Handler} e fornece métodos para criar, atualizar, deletar e buscar condomínios no banco de dados. 
+
 \doxysubsection{Construtores e Destrutores}
 \Hypertarget{class_realty_hub_1_1_api_service_1_1_handlers_1_1_condominium_handler_a0a2220e10c626f2c734e6d93f3ce3d04}\index{RealtyHub.ApiService.Handlers.CondominiumHandler@{RealtyHub.ApiService.Handlers.CondominiumHandler}!CondominiumHandler@{CondominiumHandler}}
 \index{CondominiumHandler@{CondominiumHandler}!RealtyHub.ApiService.Handlers.CondominiumHandler@{RealtyHub.ApiService.Handlers.CondominiumHandler}}
@@ -41,6 +43,8 @@ Realty\+Hub.\+Api\+Service.\+Handlers.\+Condominium\+Handler.\+Condominium\+Hand
 
 
 Inicializa uma nova instância de \doxylink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_condominium_handler}{Condominium\+Handler}. 
+
+Este construtor é utilizado para injetar o contexto do banco de dados necessário para realizar operações CRUD nos condomínios. 
 
 
 \begin{DoxyParams}{Parâmetros}
@@ -59,6 +63,8 @@ async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_
 
 
 Cria um novo condomínio no banco de dados. 
+
+Este método adiciona um novo condomínio à base de dados e salva as alterações. 
 
 
 \begin{DoxyParams}{Parâmetros}
@@ -82,6 +88,9 @@ async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_
 
 Realiza a exclusão lógica de um condomínio, marcando-\/o como inativo. 
 
+Este método altera o status de um condomínio para inativo no banco de dados. ~\newline
+ 
+
 
 \begin{DoxyParams}{Parâmetros}
 {\em request} & Requisição que contém o ID do condomínio a ser excluído.\\
@@ -104,13 +113,22 @@ async Task$<$ Paged\+Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_c
 
 Retorna uma lista paginada de todos os condomínios ativos, com opção de filtro por busca. 
 
+Este método busca todos os condomínios ativos no banco de dados e aplica filtros de busca, se fornecidos. 
+
+A resposta é paginada com base nos parâmetros de paginação fornecidos na requisição e retorna uma lista de condomínios.
+
+Caso o filtro não seja fornecido, retorna todos os condomínios ativos.
+
+~\newline
+ 
+
 
 \begin{DoxyParams}{Parâmetros}
 {\em request} & Requisição que contém parâmetros de paginação e filtro.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Retorna}
-Retorna uma resposta paginada com os condomínios ativos ou um erro em caso de falha.
+Retorna uma resposta paginada com os condomínios ativos com base no filtro ou um erro em caso de falha.
 \end{DoxyReturn}
 
 
@@ -125,6 +143,9 @@ async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_
 
 
 Obtém um condomínio específico pelo ID. 
+
+Este método busca um condomínio no banco de dados com base no ID fornecido. ~\newline
+ 
 
 
 \begin{DoxyParams}{Parâmetros}
@@ -147,6 +168,8 @@ async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_
 
 
 Atualiza um condomínio existente. 
+
+Este método atualiza as informações de um condomínio existente no banco de dados. 
 
 
 \begin{DoxyParams}{Parâmetros}

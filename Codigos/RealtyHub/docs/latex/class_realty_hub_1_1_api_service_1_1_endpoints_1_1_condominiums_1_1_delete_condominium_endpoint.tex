@@ -1,5 +1,10 @@
 \doxysection{Referência da Classe Realty\+Hub.\+Api\+Service.\+Endpoints.\+Condominiums.\+Delete\+Condominium\+Endpoint}
 \hypertarget{class_realty_hub_1_1_api_service_1_1_endpoints_1_1_condominiums_1_1_delete_condominium_endpoint}{}\label{class_realty_hub_1_1_api_service_1_1_endpoints_1_1_condominiums_1_1_delete_condominium_endpoint}\index{RealtyHub.ApiService.Endpoints.Condominiums.DeleteCondominiumEndpoint@{RealtyHub.ApiService.Endpoints.Condominiums.DeleteCondominiumEndpoint}}
+
+
+Endpoint responsável por deletar um condomínio.  
+
+
 Diagrama de hierarquia da classe Realty\+Hub.\+Api\+Service.\+Endpoints.\+Condominiums.\+Delete\+Condominium\+Endpoint\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -10,8 +15,13 @@ Diagrama de hierarquia da classe Realty\+Hub.\+Api\+Service.\+Endpoints.\+Condom
 \begin{DoxyCompactItemize}
 \item 
 static void \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_endpoints_1_1_condominiums_1_1_delete_condominium_endpoint_a650f58307c5b4779abbdd746eb3c18bb}{Map}} (IEndpoint\+Route\+Builder \mbox{\hyperlink{_realty_hub_8_api_service_2_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}})
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Mapeia o endpoint para deletar um condomínio. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
+
+\doxysubsection{Descrição detalhada}
+Endpoint responsável por deletar um condomínio. 
+
+Implementa \doxylink{interface_realty_hub_1_1_api_service_1_1_common_1_1_api_1_1_i_endpoint}{IEndpoint} para mapear a rota de exclusão lógica de condomínios. 
 
 \doxysubsection{Documentação das funções}
 \Hypertarget{class_realty_hub_1_1_api_service_1_1_endpoints_1_1_condominiums_1_1_delete_condominium_endpoint_a650f58307c5b4779abbdd746eb3c18bb}\index{RealtyHub.ApiService.Endpoints.Condominiums.DeleteCondominiumEndpoint@{RealtyHub.ApiService.Endpoints.Condominiums.DeleteCondominiumEndpoint}!Map@{Map}}
@@ -20,6 +30,17 @@ static void \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_endpoints_1_1_
 {\footnotesize\ttfamily \label{class_realty_hub_1_1_api_service_1_1_endpoints_1_1_condominiums_1_1_delete_condominium_endpoint_a650f58307c5b4779abbdd746eb3c18bb} 
 static void Realty\+Hub.\+Api\+Service.\+Endpoints.\+Condominiums.\+Delete\+Condominium\+Endpoint.\+Map (\begin{DoxyParamCaption}\item[{IEndpoint\+Route\+Builder}]{app}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
+
+
+Mapeia o endpoint para deletar um condomínio. 
+
+Registra a rota para receber um ID que identifica o condomínio a ser excluído. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em app} & O construtor de rotas do aplicativo.\\
+\hline
+\end{DoxyParams}
 
 
 Implementa \mbox{\hyperlink{interface_realty_hub_1_1_api_service_1_1_common_1_1_api_1_1_i_endpoint_acaf6ed58b2814a0905a306b78ae7e0af}{Realty\+Hub.\+Api\+Service.\+Common.\+Api.\+IEndpoint}}.

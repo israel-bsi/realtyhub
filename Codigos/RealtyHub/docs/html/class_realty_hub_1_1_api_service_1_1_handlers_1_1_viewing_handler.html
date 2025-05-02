@@ -147,6 +147,7 @@ Membros Públicos</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Descrição detalhada</h2>
 <div class="textblock"><p>Responsável pelas operações relacionadas às visitas de imóveis. </p>
+<p>Esta classe implementa a interface <a class="el" href="interface_realty_hub_1_1_core_1_1_handlers_1_1_i_viewing_handler.html">IViewingHandler</a> e fornece métodos para agendar, reagendar, finalizar e cancelar visitas, além de buscar visitas específicas ou todas as visitas. </p>
 </div><h2 class="groupheader">Construtores e Destrutores</h2>
 <a id="abd4683d7b414e960962ff69109550cc7" name="abd4683d7b414e960962ff69109550cc7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abd4683d7b414e960962ff69109550cc7">&#9670;&#160;</a></span>ViewingHandler()</h2>
@@ -172,6 +173,7 @@ Membros Públicos</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Inicializa uma nova instância de <a class="el" href="class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler.html" title="Responsável pelas operações relacionadas às visitas de imóveis.">ViewingHandler</a>. </p>
+<p>Este construtor é utilizado para injetar o contexto do banco de dados necessário para realizar operações CRUD nas visitas. </p>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">context</td><td>Contexto do banco de dados para interação com as visitas.</td></tr>
@@ -206,6 +208,9 @@ Membros Públicos</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Cancela uma visita existente. </p>
+<p>Este método atualiza o status de uma visita para "Cancelada".</p>
+<p>Ele verifica se a visita existe e se não está finalizada.</p>
+<p>Se a visita não existir ou já estiver finalizada, retorna um erro.</p>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">request</td><td>Requisição contendo o ID da visita a ser cancelada.</td></tr>
@@ -242,6 +247,9 @@ Membros Públicos</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Finaliza uma visita existente. </p>
+<p>Este método atualiza o status de uma visita para "Finalizada".</p>
+<p>Ele verifica se a visita existe e se não está cancelada ou já finalizada.</p>
+<p>Se a visita não existir ou já estiver cancelada ou finalizada, retorna um erro.</p>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">request</td><td>Requisição contendo o ID da visita a ser finalizada.</td></tr>
@@ -278,6 +286,8 @@ Membros Públicos</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Retorna uma lista paginada de todas as visitas. </p>
+<p>Este método busca todas as visitas no banco de dados e aplica filtros de data e paginação.</p>
+<p>Caso o filtro de data não seja fornecido, retorna todas as visitas.</p>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">request</td><td>Requisição contendo parâmetros de paginação e filtro.</td></tr>
@@ -314,6 +324,9 @@ Membros Públicos</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Obtém uma visita específica pelo ID. </p>
+<p>Este método busca uma visita no banco de dados com base no ID fornecido.</p>
+<p>Ele verifica se a visita existe e se não está cancelada ou finalizada.</p>
+<p>Se a visita não existir ou já estiver cancelada ou finalizada, retorna um erro.</p>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">request</td><td>Requisição contendo o ID da visita desejada.</td></tr>
@@ -350,6 +363,9 @@ Membros Públicos</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Reagenda uma visita existente. </p>
+<p>Este método atualiza a data e o status de uma visita existente.</p>
+<p>Ele verifica se a visita existe e se não está cancelada ou finalizada.</p>
+<p>Se a visita não existir ou já estiver cancelada ou finalizada, retorna um erro.</p>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">request</td><td>Objeto contendo as informações para reagendamento da visita.</td></tr>
@@ -386,6 +402,10 @@ Membros Públicos</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Agenda uma nova visita para um imóvel. </p>
+<p>Este método adiciona uma nova visita à base de dados e salva as alterações. </p>
+<p>Ele verifica se o cliente e o imóvel existem e estão ativos antes de agendar a visita.</p>
+<p>Se a visita já estiver agendada para a mesma data, retorna um erro.</p>
+<p>O status da visita é definido como "Pendente" por padrão.</p>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">request</td><td>Objeto contendo as informações para agendamento da visita.</td></tr>

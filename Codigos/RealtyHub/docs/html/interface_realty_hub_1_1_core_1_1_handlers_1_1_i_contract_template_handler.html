@@ -108,6 +108,9 @@ $(function(){initNavTree('interface_realty_hub_1_1_core_1_1_handlers_1_1_i_contr
   <div class="headertitle"><div class="title">Referência da Interface RealtyHub.Core.Handlers.IContractTemplateHandler</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Interface que define os métodos para manipulação de modelos de contrato.  
+ <a href="#details">Mais...</a></p>
 <div class="dynheader">
 Diagrama de hierarquia da classe RealtyHub.Core.Handlers.IContractTemplateHandler:</div>
 <div class="dyncontent">
@@ -122,9 +125,13 @@ Diagrama de hierarquia da classe RealtyHub.Core.Handlers.IContractTemplateHandle
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Membros Públicos</h2></td></tr>
 <tr class="memitem:aeb3f2ed1f6315ad9a23491878116e434" id="r_aeb3f2ed1f6315ad9a23491878116e434"><td class="memItemLeft" align="right" valign="top">Task&lt; Response&lt; List&lt; <a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_contract_template.html">ContractTemplate</a> &gt;?&gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeb3f2ed1f6315ad9a23491878116e434">GetAllAsync</a> ()</td></tr>
+<tr class="memdesc:aeb3f2ed1f6315ad9a23491878116e434"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recupera todos os modelos de contrato disponíveis.  <br /></td></tr>
 <tr class="separator:aeb3f2ed1f6315ad9a23491878116e434"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Documentação das funções</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Descrição detalhada</h2>
+<div class="textblock"><p>Interface que define os métodos para manipulação de modelos de contrato. </p>
+<p>Esta interface é responsável por definir as operações que podem ser realizadas com os modelos de contrato, como a recuperação de todos os modelos disponíveis. </p>
+</div><h2 class="groupheader">Documentação das funções</h2>
 <a id="aeb3f2ed1f6315ad9a23491878116e434" name="aeb3f2ed1f6315ad9a23491878116e434"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aeb3f2ed1f6315ad9a23491878116e434">&#9670;&#160;</a></span>GetAllAsync()</h2>
 
@@ -139,6 +146,10 @@ Membros Públicos</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Recupera todos os modelos de contrato disponíveis. </p>
+<p>Este método é responsável por buscar todos os modelos de contrato armazenados no sistema e retornar uma lista com os resultados. </p>
+<dl class="section return"><dt>Retorna</dt><dd>Retorna um objeto <a class="el" href="class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g.html" title="Classe genérica para encapsular a resposta de uma operação, incluindo dados, mensagem e código de sta...">Response&lt;TData&gt;</a> contendo uma lista de modelos de contrato. </dd></dl>
 
 <p>Implementado por <a class="el" href="class_realty_hub_1_1_api_service_1_1_handlers_1_1_contract_templates_handler.html#a5383a9a214b2bf0745239875392e9db9">RealtyHub.ApiService.Handlers.ContractTemplatesHandler</a> e <a class="el" href="class_realty_hub_1_1_web_1_1_handlers_1_1_contract_template_handler.html#afb71446b206779add3f609e911f9ce52">RealtyHub.Web.Handlers.ContractTemplateHandler</a>.</p>
 

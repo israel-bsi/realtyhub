@@ -1,5 +1,10 @@
 \doxysection{Referência da Interface Realty\+Hub.\+Core.\+Handlers.\+ICondominium\+Handler}
 \hypertarget{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_condominium_handler}{}\label{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_condominium_handler}\index{RealtyHub.Core.Handlers.ICondominiumHandler@{RealtyHub.Core.Handlers.ICondominiumHandler}}
+
+
+Interface que define os métodos para manipulação de condomínios.  
+
+
 Diagrama de hierarquia da classe Realty\+Hub.\+Core.\+Handlers.\+ICondominium\+Handler\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -10,16 +15,21 @@ Diagrama de hierarquia da classe Realty\+Hub.\+Core.\+Handlers.\+ICondominium\+H
 \begin{DoxyCompactItemize}
 \item 
 Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_condominium}{Condominium}}?$>$ $>$ \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_condominium_handler_a82b76cff1de004e2b2e9b0bec6cb0fd4}{Create\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_condominium}{Condominium}} request)
-\item 
+\begin{DoxyCompactList}\small\item\em Cria um novo condomínio. \end{DoxyCompactList}\item 
 Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_condominium}{Condominium}}?$>$ $>$ \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_condominium_handler_a8fd77e62b9e9b202125e65109fb81357}{Update\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_condominium}{Condominium}} request)
-\item 
+\begin{DoxyCompactList}\small\item\em Atualiza as informações de um condomínio existente. \end{DoxyCompactList}\item 
 Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_condominium}{Condominium}}?$>$ $>$ \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_condominium_handler_a7bd7247d44e3fafd37d1a510010606c0}{Delete\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_condominiums_1_1_delete_condominium_request}{Delete\+Condominium\+Request}} request)
-\item 
+\begin{DoxyCompactList}\small\item\em Exclui um condomínio existente. \end{DoxyCompactList}\item 
 Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_condominium}{Condominium}}?$>$ $>$ \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_condominium_handler_a33cc6d62ed2fe7ecdf9c3ca787ea4716}{Get\+By\+Id\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_condominiums_1_1_get_condominium_by_id_request}{Get\+Condominium\+By\+Id\+Request}} request)
-\item 
+\begin{DoxyCompactList}\small\item\em Recupera as informações de um condomínio existente. \end{DoxyCompactList}\item 
 Task$<$ Paged\+Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_condominium}{Condominium}} $>$?$>$ $>$ \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_condominium_handler_a518498e73c07f67d4cfe0534d8c43b54}{Get\+All\+Async}} (Get\+All\+Condominiums\+Request request)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Recupera todos os condomínios existentes. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
+
+\doxysubsection{Descrição detalhada}
+Interface que define os métodos para manipulação de condomínios. 
+
+Esta interface é responsável por definir as operações que podem ser realizadas com os condomínios, como criação, atualização, exclusão e recuperação de informações. 
 
 \doxysubsection{Documentação das funções}
 \Hypertarget{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_condominium_handler_a82b76cff1de004e2b2e9b0bec6cb0fd4}\index{RealtyHub.Core.Handlers.ICondominiumHandler@{RealtyHub.Core.Handlers.ICondominiumHandler}!CreateAsync@{CreateAsync}}
@@ -28,6 +38,20 @@ Task$<$ Paged\+Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_
 {\footnotesize\ttfamily \label{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_condominium_handler_a82b76cff1de004e2b2e9b0bec6cb0fd4} 
 Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_condominium}{Condominium}}?$>$ $>$ Realty\+Hub.\+Core.\+Handlers.\+ICondominium\+Handler.\+Create\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_condominium}{Condominium}}}]{request}{}\end{DoxyParamCaption})}
 
+
+
+Cria um novo condomínio. 
+
+Este método é responsável por criar um novo condomínio com base nas informações fornecidas. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & Instância de \doxylink{class_realty_hub_1_1_core_1_1_models_1_1_condominium}{Condominium} contendo as informações do novo condomínio.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna um objeto \doxylink{class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g}{Response$<$\+TData$>$} indicando o resultado da operação. O objeto TData é do tipo \doxylink{class_realty_hub_1_1_core_1_1_models_1_1_condominium}{Condominium} e pode ser nulo se a operação falhar. 
+\end{DoxyReturn}
 
 
 Implementado por \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_condominium_handler_a5f37ad4b550437f76f81256d58aa1dc6}{Realty\+Hub.\+Api\+Service.\+Handlers.\+Condominium\+Handler}} e \mbox{\hyperlink{class_realty_hub_1_1_web_1_1_handlers_1_1_condominium_handler_a3f36f86f013b6710724d1e2ae091032a}{Realty\+Hub.\+Web.\+Handlers.\+Condominium\+Handler}}.
@@ -40,6 +64,20 @@ Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_co
 
 
 
+Exclui um condomínio existente. 
+
+Este método é responsável por excluir um condomínio existente com base no Id fornecido. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & Instância de \doxylink{class_realty_hub_1_1_core_1_1_requests_1_1_condominiums_1_1_delete_condominium_request}{Delete\+Condominium\+Request} contendo o Id do condomínio a ser excluído.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna um objeto \doxylink{class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g}{Response$<$\+TData$>$} indicando o resultado da operação. O objeto TData é do tipo \doxylink{class_realty_hub_1_1_core_1_1_models_1_1_condominium}{Condominium} e pode ser nulo se a operação falhar. 
+\end{DoxyReturn}
+
+
 Implementado por \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_condominium_handler_a29758c197880bb8f34a224ee52711ef3}{Realty\+Hub.\+Api\+Service.\+Handlers.\+Condominium\+Handler}} e \mbox{\hyperlink{class_realty_hub_1_1_web_1_1_handlers_1_1_condominium_handler_a99b6c9ad62ca3d23e80d8d67c9348613}{Realty\+Hub.\+Web.\+Handlers.\+Condominium\+Handler}}.
 
 \Hypertarget{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_condominium_handler_a518498e73c07f67d4cfe0534d8c43b54}\index{RealtyHub.Core.Handlers.ICondominiumHandler@{RealtyHub.Core.Handlers.ICondominiumHandler}!GetAllAsync@{GetAllAsync}}
@@ -48,6 +86,20 @@ Implementado por \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_handlers_
 {\footnotesize\ttfamily \label{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_condominium_handler_a518498e73c07f67d4cfe0534d8c43b54} 
 Task$<$ Paged\+Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_condominium}{Condominium}} $>$?$>$ $>$ Realty\+Hub.\+Core.\+Handlers.\+ICondominium\+Handler.\+Get\+All\+Async (\begin{DoxyParamCaption}\item[{Get\+All\+Condominiums\+Request}]{request}{}\end{DoxyParamCaption})}
 
+
+
+Recupera todos os condomínios existentes. 
+
+Este método é responsável por recuperar todos os condomínios existentes com base nos parâmetros de paginação fornecidos. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & Instância de Get\+All\+Condominiums\+Request contendo os parâmetros de paginação.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna um objeto \doxylink{class_realty_hub_1_1_core_1_1_responses_1_1_paged_response-1-g}{Paged\+Response$<$\+TData$>$} indicando o resultado da operação. O objeto TData é uma lista de \doxylink{class_realty_hub_1_1_core_1_1_models_1_1_condominium}{Condominium} e pode ser nulo se a operação falhar. 
+\end{DoxyReturn}
 
 
 Implementado por \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_condominium_handler_a1ec22144b16ae5d51675de753d14090a}{Realty\+Hub.\+Api\+Service.\+Handlers.\+Condominium\+Handler}} e \mbox{\hyperlink{class_realty_hub_1_1_web_1_1_handlers_1_1_condominium_handler_a3f30cc5482c4342c8c2058a47dcf3e75}{Realty\+Hub.\+Web.\+Handlers.\+Condominium\+Handler}}.
@@ -60,6 +112,20 @@ Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_co
 
 
 
+Recupera as informações de um condomínio existente. 
+
+Este método é responsável por recuperar as informações de um condomínio existente com base no Id fornecido. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & Instância de \doxylink{class_realty_hub_1_1_core_1_1_requests_1_1_condominiums_1_1_get_condominium_by_id_request}{Get\+Condominium\+By\+Id\+Request} contendo o Id do condomínio a ser recuperado.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna um objeto \doxylink{class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g}{Response$<$\+TData$>$} indicando o resultado da operação. O objeto TData é do tipo \doxylink{class_realty_hub_1_1_core_1_1_models_1_1_condominium}{Condominium} e pode ser nulo se a operação falhar. 
+\end{DoxyReturn}
+
+
 Implementado por \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_condominium_handler_aba0f8aa37288166264f1fa1bd91202a8}{Realty\+Hub.\+Api\+Service.\+Handlers.\+Condominium\+Handler}} e \mbox{\hyperlink{class_realty_hub_1_1_web_1_1_handlers_1_1_condominium_handler_aa4c49f0c4167b2e8b2dc6059d2ad399a}{Realty\+Hub.\+Web.\+Handlers.\+Condominium\+Handler}}.
 
 \Hypertarget{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_condominium_handler_a8fd77e62b9e9b202125e65109fb81357}\index{RealtyHub.Core.Handlers.ICondominiumHandler@{RealtyHub.Core.Handlers.ICondominiumHandler}!UpdateAsync@{UpdateAsync}}
@@ -68,6 +134,20 @@ Implementado por \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_handlers_
 {\footnotesize\ttfamily \label{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_condominium_handler_a8fd77e62b9e9b202125e65109fb81357} 
 Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_condominium}{Condominium}}?$>$ $>$ Realty\+Hub.\+Core.\+Handlers.\+ICondominium\+Handler.\+Update\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_condominium}{Condominium}}}]{request}{}\end{DoxyParamCaption})}
 
+
+
+Atualiza as informações de um condomínio existente. 
+
+Este método é responsável por atualizar as informações de um condomínio existente com base nas informações fornecidas. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & Instância de \doxylink{class_realty_hub_1_1_core_1_1_models_1_1_condominium}{Condominium} contendo as informações atualizadas do condomínio.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna um objeto \doxylink{class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g}{Response$<$\+TData$>$} indicando o resultado da operação. O objeto TData é do tipo \doxylink{class_realty_hub_1_1_core_1_1_models_1_1_condominium}{Condominium} e pode ser nulo se a operação falhar. 
+\end{DoxyReturn}
 
 
 Implementado por \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_condominium_handler_a04eb9d9c600beb079218e48175b042eb}{Realty\+Hub.\+Api\+Service.\+Handlers.\+Condominium\+Handler}} e \mbox{\hyperlink{class_realty_hub_1_1_web_1_1_handlers_1_1_condominium_handler_af419a6b63a146fc94160b3d1f6c6c61f}{Realty\+Hub.\+Web.\+Handlers.\+Condominium\+Handler}}.

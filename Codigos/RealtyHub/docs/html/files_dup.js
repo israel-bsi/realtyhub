@@ -1,6 +1,5 @@
 var files_dup =
 [
-    [ "docfx", "dir_3414e6e66d7304d18feaf4972f61a12b.html", "dir_3414e6e66d7304d18feaf4972f61a12b" ],
     [ "RealtyHub.ApiService", "dir_3c93738b51cb8100051df88e955ed398.html", "dir_3c93738b51cb8100051df88e955ed398" ],
     [ "RealtyHub.AppHost", "dir_4b09c9831ca00bdcee999cb14bbb943a.html", "dir_4b09c9831ca00bdcee999cb14bbb943a" ],
     [ "RealtyHub.Core", "dir_aa9add30de8a03f969e0ee82137ecad8.html", "dir_aa9add30de8a03f969e0ee82137ecad8" ],

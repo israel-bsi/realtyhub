@@ -33,6 +33,8 @@ async Task$<$ Paged\+Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_c
 \doxysubsection{Descrição detalhada}
 Responsável pelas operações relacionadas a imóveis. 
 
+Esta classe implementa a interface \doxylink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_property_handler}{IProperty\+Handler} e fornece métodos para criar, atualizar, deletar e buscar imóveis no banco de dados. 
+
 \doxysubsection{Construtores e Destrutores}
 \Hypertarget{class_realty_hub_1_1_api_service_1_1_handlers_1_1_property_handler_af523d0081c0305a0b10f24eef336ac51}\index{RealtyHub.ApiService.Handlers.PropertyHandler@{RealtyHub.ApiService.Handlers.PropertyHandler}!PropertyHandler@{PropertyHandler}}
 \index{PropertyHandler@{PropertyHandler}!RealtyHub.ApiService.Handlers.PropertyHandler@{RealtyHub.ApiService.Handlers.PropertyHandler}}
@@ -43,6 +45,8 @@ Realty\+Hub.\+Api\+Service.\+Handlers.\+Property\+Handler.\+Property\+Handler (\
 
 
 Inicializa uma nova instância de \doxylink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_property_handler}{Property\+Handler}. 
+
+Este construtor é utilizado para injetar o contexto do banco de dados necessário para realizar operações CRUD nos imóveis. 
 
 
 \begin{DoxyParams}{Parâmetros}
@@ -61,6 +65,8 @@ async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_
 
 
 Cria um novo imóvel no banco de dados. 
+
+Este método adiciona um novo imóvel à base de dados e salva as alterações. 
 
 
 \begin{DoxyParams}{Parâmetros}
@@ -84,6 +90,8 @@ async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_
 
 Realiza a exclusão lógica de um imóvel, marcando-\/o como inativo. 
 
+Este método altera o status de um imóvel para inativo no banco de dados. 
+
 
 \begin{DoxyParams}{Parâmetros}
 {\em request} & Requisição que contém o ID do imóvel a ser excluído.\\
@@ -105,6 +113,13 @@ async Task$<$ Paged\+Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_c
 
 
 Retorna uma lista paginada de todos os imóveis ativos, com opção de filtro por busca. 
+
+Este método busca todos os imóveis ativos no banco de dados e aplica filtros de paginação e busca, se fornecidos.
+
+~\newline
+ 
+
+Caso o filtro não seja fornecido, retorna todos os imóveis ativos.
 
 
 \begin{DoxyParams}{Parâmetros}
@@ -128,6 +143,10 @@ async Task$<$ Paged\+Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_c
 
 Retorna uma lista paginada de todas as visitas de um imóvel específico. 
 
+Este método busca todas as visitas de um imóvel específico no banco de dados e aplica filtros de paginação e busca, se fornecidos.
+
+Caso o filtro não seja fornecido, retorna todas as visitas do imóvel.
+
 
 \begin{DoxyParams}{Parâmetros}
 {\em request} & Requisição que contém parâmetros de paginação e filtro por data.\\
@@ -150,6 +169,8 @@ async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_
 
 Obtém um imóvel específico pelo ID. 
 
+Este método busca um imóvel no banco de dados com base no ID fornecido. 
+
 
 \begin{DoxyParams}{Parâmetros}
 {\em request} & Requisição que contém o ID do imóvel desejado.\\
@@ -171,6 +192,8 @@ async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_
 
 
 Atualiza um imóvel existente no banco de dados. 
+
+Este método atualiza as informações de um imóvel existente e salva as alterações. 
 
 
 \begin{DoxyParams}{Parâmetros}

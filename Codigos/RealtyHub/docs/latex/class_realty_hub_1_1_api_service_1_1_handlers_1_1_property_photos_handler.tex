@@ -29,6 +29,8 @@ async Task$<$ Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1
 \doxysubsection{Descrição detalhada}
 Responsável pelas operações relacionadas às fotos de imóveis. 
 
+Esta classe implementa a interface \doxylink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_property_photos_handler}{IProperty\+Photos\+Handler} e fornece métodos para criar, atualizar, deletar e buscar fotos de imóveis no banco de dados. 
+
 \doxysubsection{Construtores e Destrutores}
 \Hypertarget{class_realty_hub_1_1_api_service_1_1_handlers_1_1_property_photos_handler_a0cd3479789728a67a47e48c42b544dcc}\index{RealtyHub.ApiService.Handlers.PropertyPhotosHandler@{RealtyHub.ApiService.Handlers.PropertyPhotosHandler}!PropertyPhotosHandler@{PropertyPhotosHandler}}
 \index{PropertyPhotosHandler@{PropertyPhotosHandler}!RealtyHub.ApiService.Handlers.PropertyPhotosHandler@{RealtyHub.ApiService.Handlers.PropertyPhotosHandler}}
@@ -39,6 +41,8 @@ Realty\+Hub.\+Api\+Service.\+Handlers.\+Property\+Photos\+Handler.\+Property\+Ph
 
 
 Inicializa uma nova instância de \doxylink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_property_photos_handler}{Property\+Photos\+Handler}. 
+
+Este construtor é utilizado para injetar o contexto do banco de dados necessário para realizar operações CRUD nas fotos dos imóveis. 
 
 
 \begin{DoxyParams}{Parâmetros}
@@ -57,6 +61,8 @@ async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_
 
 
 Cria novas fotos para um imóvel. 
+
+Este método adiciona novas fotos à base de dados e salva as alterações. 
 
 
 \begin{DoxyParams}{Parâmetros}
@@ -80,6 +86,8 @@ async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_
 
 Exclui uma foto de um imóvel. 
 
+Este método marca uma foto como inativa no banco de dados. 
+
 
 \begin{DoxyParams}{Parâmetros}
 {\em request} & Requisição contendo o ID da foto a ser excluída.\\
@@ -102,6 +110,8 @@ async Task$<$ Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1
 
 Obtém todas as fotos de um imóvel específico. 
 
+Este método busca todas as fotos de um imóvel no banco de dados com base no ID do imóvel. 
+
 
 \begin{DoxyParams}{Parâmetros}
 {\em request} & Requisição contendo o ID do imóvel.\\
@@ -123,6 +133,8 @@ async Task$<$ Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1
 
 
 Atualiza as informações de fotos de um imóvel. 
+
+Este método atualiza as informações de fotos existentes no banco de dados. 
 
 
 \begin{DoxyParams}{Parâmetros}

@@ -1,5 +1,10 @@
 \doxysection{Referência da Classe Realty\+Hub.\+Api\+Service.\+Endpoints.\+Condominiums.\+Get\+Condominium\+By\+Id\+Endpoint}
 \hypertarget{class_realty_hub_1_1_api_service_1_1_endpoints_1_1_condominiums_1_1_get_condominium_by_id_endpoint}{}\label{class_realty_hub_1_1_api_service_1_1_endpoints_1_1_condominiums_1_1_get_condominium_by_id_endpoint}\index{RealtyHub.ApiService.Endpoints.Condominiums.GetCondominiumByIdEndpoint@{RealtyHub.ApiService.Endpoints.Condominiums.GetCondominiumByIdEndpoint}}
+
+
+Endpoint responsável por recuperar um condomínio específico pelo seu ID.  
+
+
 Diagrama de hierarquia da classe Realty\+Hub.\+Api\+Service.\+Endpoints.\+Condominiums.\+Get\+Condominium\+By\+Id\+Endpoint\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -10,8 +15,13 @@ Diagrama de hierarquia da classe Realty\+Hub.\+Api\+Service.\+Endpoints.\+Condom
 \begin{DoxyCompactItemize}
 \item 
 static void \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_endpoints_1_1_condominiums_1_1_get_condominium_by_id_endpoint_a20c9a0cda3add505c8e80156acc2fa38}{Map}} (IEndpoint\+Route\+Builder \mbox{\hyperlink{_realty_hub_8_api_service_2_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}})
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Mapeia o endpoint para recuperar um condomínio pelo seu ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
+
+\doxysubsection{Descrição detalhada}
+Endpoint responsável por recuperar um condomínio específico pelo seu ID. 
+
+Implementa a interface \doxylink{interface_realty_hub_1_1_api_service_1_1_common_1_1_api_1_1_i_endpoint}{IEndpoint} e mapeia a rota para obter um condomínio baseado no ID fornecido. Caso o condomínio seja encontrado, retorna os detalhes do mesmo; caso contrário, retorna uma resposta de não encontrado. 
 
 \doxysubsection{Documentação das funções}
 \Hypertarget{class_realty_hub_1_1_api_service_1_1_endpoints_1_1_condominiums_1_1_get_condominium_by_id_endpoint_a20c9a0cda3add505c8e80156acc2fa38}\index{RealtyHub.ApiService.Endpoints.Condominiums.GetCondominiumByIdEndpoint@{RealtyHub.ApiService.Endpoints.Condominiums.GetCondominiumByIdEndpoint}!Map@{Map}}
@@ -20,6 +30,17 @@ static void \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_endpoints_1_1_
 {\footnotesize\ttfamily \label{class_realty_hub_1_1_api_service_1_1_endpoints_1_1_condominiums_1_1_get_condominium_by_id_endpoint_a20c9a0cda3add505c8e80156acc2fa38} 
 static void Realty\+Hub.\+Api\+Service.\+Endpoints.\+Condominiums.\+Get\+Condominium\+By\+Id\+Endpoint.\+Map (\begin{DoxyParamCaption}\item[{IEndpoint\+Route\+Builder}]{app}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
+
+
+Mapeia o endpoint para recuperar um condomínio pelo seu ID. 
+
+Registra a rota GET que espera um parâmetro numérico (ID) e chama o manipulador para retornar o condomínio correspondente. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em app} & O construtor de rotas do aplicativo.\\
+\hline
+\end{DoxyParams}
 
 
 Implementa \mbox{\hyperlink{interface_realty_hub_1_1_api_service_1_1_common_1_1_api_1_1_i_endpoint_acaf6ed58b2814a0905a306b78ae7e0af}{Realty\+Hub.\+Api\+Service.\+Common.\+Api.\+IEndpoint}}.

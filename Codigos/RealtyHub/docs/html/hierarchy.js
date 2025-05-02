@@ -169,6 +169,8 @@ var hierarchy =
     ] ],
     [ "global.AspireHosting.IProjectMetadata", null, [
       [ "Projects.RealtyHub_ApiService", "class_projects_1_1_realty_hub___api_service.html", null ],
+      [ "Projects.RealtyHub_ApiService", "class_projects_1_1_realty_hub___api_service.html", null ],
+      [ "Projects.RealtyHub_Web", "class_projects_1_1_realty_hub___web.html", null ],
       [ "Projects.RealtyHub_Web", "class_projects_1_1_realty_hub___web.html", null ]
     ] ],
     [ "RealtyHub.Core.Handlers.IPropertyHandler", "interface_realty_hub_1_1_core_1_1_handlers_1_1_i_property_handler.html", [

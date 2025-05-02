@@ -23,6 +23,8 @@ async Task$<$ Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1
 \doxysubsection{Descrição detalhada}
 Responsável pelas operações relacionadas aos modelos de contrato. 
 
+Esta classe implementa a interface \doxylink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_contract_template_handler}{IContract\+Template\+Handler} e fornece métodos para buscar modelos de contrato no banco de dados. /// 
+
 \doxysubsection{Construtores e Destrutores}
 \Hypertarget{class_realty_hub_1_1_api_service_1_1_handlers_1_1_contract_templates_handler_a0e59457000abda8a69506832b3f0c96a}\index{RealtyHub.ApiService.Handlers.ContractTemplatesHandler@{RealtyHub.ApiService.Handlers.ContractTemplatesHandler}!ContractTemplatesHandler@{ContractTemplatesHandler}}
 \index{ContractTemplatesHandler@{ContractTemplatesHandler}!RealtyHub.ApiService.Handlers.ContractTemplatesHandler@{RealtyHub.ApiService.Handlers.ContractTemplatesHandler}}
@@ -33,6 +35,8 @@ Realty\+Hub.\+Api\+Service.\+Handlers.\+Contract\+Templates\+Handler.\+Contract\
 
 
 Inicializa uma nova instância de \doxylink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_contract_templates_handler}{Contract\+Templates\+Handler}. 
+
+Este construtor é utilizado para injetar o contexto do banco de dados necessário para realizar operações CRUD nos modelos de contrato. 
 
 
 \begin{DoxyParams}{Parâmetros}
@@ -51,6 +55,8 @@ async Task$<$ Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1
 
 
 Obtém todos os modelos de contrato disponíveis no banco de dados. 
+
+Este método busca todos os modelos de contrato e retorna uma lista com os resultados. 
 
 \begin{DoxyReturn}{Retorna}
 Retorna uma lista de modelos de contrato ou um erro em caso de falha.

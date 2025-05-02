@@ -156,6 +156,7 @@ Membros Públicos</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Descrição detalhada</h2>
 <div class="textblock"><p>Responsável pelas operações relacionadas a propostas. </p>
+<p>Esta classe implementa a interface <a class="el" href="interface_realty_hub_1_1_core_1_1_handlers_1_1_i_offer_handler.html">IOfferHandler</a> e fornece métodos para criar, atualizar, rejeitar, aceitar e buscar propostas no banco de dados. </p>
 </div><h2 class="groupheader">Construtores e Destrutores</h2>
 <a id="a2ac81c757f2f12777e0af925593a22d1" name="a2ac81c757f2f12777e0af925593a22d1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2ac81c757f2f12777e0af925593a22d1">&#9670;&#160;</a></span>OfferHandler()</h2>
@@ -181,6 +182,7 @@ Membros Públicos</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Inicializa uma nova instância de <a class="el" href="class_realty_hub_1_1_api_service_1_1_handlers_1_1_offer_handler.html" title="Responsável pelas operações relacionadas a propostas.">OfferHandler</a>. </p>
+<p>Este construtor é utilizado para injetar o contexto do banco de dados necessário para realizar operações CRUD nas propostas. </p>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">context</td><td>Contexto do banco de dados para interação com propostas.</td></tr>
@@ -215,6 +217,7 @@ Membros Públicos</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Aceita uma proposta existente. </p>
+<p>Este método aceita uma proposta existente no banco de dados. </p>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">request</td><td>Requisição contendo o ID da proposta a ser aceita.</td></tr>
@@ -251,13 +254,14 @@ Membros Públicos</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Cria uma nova proposta no banco de dados. </p>
+<p>Este método adiciona uma nova proposta à base de dados e salva as alterações. </p>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">request</td><td>Objeto contendo as informações para criação da proposta.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Retorna</dt><dd>Retorna uma resposta com a proposta criada e o código de status.</dd></dl>
+<dl class="section return"><dt>Retorna</dt><dd>Retorna uma resposta com a proposta criada ou um erro.</dd></dl>
 
 <p>Implementa <a class="el" href="interface_realty_hub_1_1_core_1_1_handlers_1_1_i_offer_handler.html#a14e9b2432cf879d1cb119c28eefc3d9a">RealtyHub.Core.Handlers.IOfferHandler</a>.</p>
 
@@ -287,6 +291,7 @@ Membros Públicos</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Obtém a proposta aceita para um imóvel específico. </p>
+<p>Este método busca a proposta aceita para um imóvel específico no banco de dados. </p>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">request</td><td>Requisição contendo o ID do imóvel.</td></tr>
@@ -323,6 +328,8 @@ Membros Públicos</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Retorna uma lista paginada de todas as propostas no sistema. </p>
+<p>Este método busca todas as propostas no banco de dados.</p>
+<p>Ele aplica filtros de data e paginação, retornando uma lista de propostas.</p>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">request</td><td>Requisição contendo parâmetros de paginação e filtro.</td></tr>
@@ -359,6 +366,8 @@ Membros Públicos</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Retorna uma lista paginada de todas as propostas de um cliente específico. </p>
+<p>Este método busca todas as propostas de um cliente específico no banco de dados.</p>
+<p>Ele aplica filtros de data e paginação, retornando uma lista de propostas.</p>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">request</td><td>Requisição contendo parâmetros de paginação e filtro por cliente.</td></tr>
@@ -395,6 +404,8 @@ Membros Públicos</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Retorna uma lista paginada de todas as propostas de um imóvel específico. </p>
+<p>Este método busca todas as propostas de um imóvel específico no banco de dados.</p>
+<p>Ele aplica filtros de data e paginação, retornando uma lista de propostas.</p>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">request</td><td>Requisição contendo parâmetros de paginação e filtro por imóvel.</td></tr>
@@ -431,6 +442,7 @@ Membros Públicos</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Obtém uma proposta específica pelo ID. </p>
+<p>Este método busca uma proposta no banco de dados com base no ID fornecido. </p>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">request</td><td>Requisição contendo o ID da proposta desejada.</td></tr>
@@ -467,6 +479,7 @@ Membros Públicos</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Rejeita uma proposta existente. </p>
+<p>Este método rejeita uma proposta existente no banco de dados. </p>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">request</td><td>Requisição contendo o ID da proposta a ser rejeitada.</td></tr>
@@ -503,6 +516,10 @@ Membros Públicos</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Atualiza uma proposta existente no banco de dados. </p>
+<p>Este método atualiza as informações de uma proposta existente no banco de dados.</p>
+<p>O método verifica se a proposta existe e se o status da proposta permite a atualização.</p>
+<p>Além disso, ele valida se o valor total dos pagamentos corresponde ao valor da proposta.</p>
+<p>Se a proposta for encontrada e o status permitir, as informações da proposta são atualizadas.</p>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">request</td><td>Objeto contendo as novas informações da proposta.</td></tr>

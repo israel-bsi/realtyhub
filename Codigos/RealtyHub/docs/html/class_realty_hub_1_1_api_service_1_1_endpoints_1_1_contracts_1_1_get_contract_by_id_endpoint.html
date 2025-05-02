@@ -108,22 +108,29 @@ $(function(){initNavTree('class_realty_hub_1_1_api_service_1_1_endpoints_1_1_con
   <div class="headertitle"><div class="title">Referência da Classe RealtyHub.ApiService.Endpoints.Contracts.GetContractByIdEndpoint</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Endpoint responsável por recuperar um contrato específico pelo seu ID.  
+ <a href="#details">Mais...</a></p>
 <div class="dynheader">
 Diagrama de hierarquia da classe RealtyHub.ApiService.Endpoints.Contracts.GetContractByIdEndpoint:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_realty_hub_1_1_api_service_1_1_endpoints_1_1_contracts_1_1_get_contract_by_id_endpoint.png" usemap="#RealtyHub.ApiService.Endpoints.Contracts.GetContractByIdEndpoint_map" alt=""/>
   <map id="RealtyHub.ApiService.Endpoints.Contracts.GetContractByIdEndpoint_map" name="RealtyHub.ApiService.Endpoints.Contracts.GetContractByIdEndpoint_map">
-<area href="interface_realty_hub_1_1_api_service_1_1_common_1_1_api_1_1_i_endpoint.html" alt="RealtyHub.ApiService.Common.Api.IEndpoint" shape="rect" coords="0,0,399,24"/>
+<area href="interface_realty_hub_1_1_api_service_1_1_common_1_1_api_1_1_i_endpoint.html" title="Interface que define um endpoint para o aplicativo ASP.NET Core." alt="RealtyHub.ApiService.Common.Api.IEndpoint" shape="rect" coords="0,0,399,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Membros públicos estáticos</h2></td></tr>
 <tr class="memitem:a4809bf2a7e4e53a5032eadfab0140a26" id="r_a4809bf2a7e4e53a5032eadfab0140a26"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4809bf2a7e4e53a5032eadfab0140a26">Map</a> (IEndpointRouteBuilder <a class="el" href="_realty_hub_8_api_service_2_program_8cs.html#a7b225fcb720e4d5ed2bbf60e28a25e6d">app</a>)</td></tr>
+<tr class="memdesc:a4809bf2a7e4e53a5032eadfab0140a26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapeia o endpoint para recuperar um contrato pelo seu ID.  <br /></td></tr>
 <tr class="separator:a4809bf2a7e4e53a5032eadfab0140a26"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Documentação das funções</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Descrição detalhada</h2>
+<div class="textblock"><p>Endpoint responsável por recuperar um contrato específico pelo seu ID. </p>
+<p>Este endpoint implementa a interface <a class="el" href="interface_realty_hub_1_1_api_service_1_1_common_1_1_api_1_1_i_endpoint.html" title="Interface que define um endpoint para o aplicativo ASP.NET Core.">IEndpoint</a> para mapear a rota que retorna um contrato baseado no ID fornecido. Caso o contrato seja encontrado, retorna seus detalhes; caso contrário, retorna uma resposta de erro (BadRequest). </p>
+</div><h2 class="groupheader">Documentação das funções</h2>
 <a id="a4809bf2a7e4e53a5032eadfab0140a26" name="a4809bf2a7e4e53a5032eadfab0140a26"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4809bf2a7e4e53a5032eadfab0140a26">&#9670;&#160;</a></span>Map()</h2>
 
@@ -146,6 +153,15 @@ Membros públicos estáticos</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Mapeia o endpoint para recuperar um contrato pelo seu ID. </p>
+<p>Registra a rota GET que espera um parâmetro numérico (ID) e chama o manipulador para retornar o contrato correspondente. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">app</td><td>O construtor de rotas do aplicativo.</td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p>Implementa <a class="el" href="interface_realty_hub_1_1_api_service_1_1_common_1_1_api_1_1_i_endpoint.html#acaf6ed58b2814a0905a306b78ae7e0af">RealtyHub.ApiService.Common.Api.IEndpoint</a>.</p>
 

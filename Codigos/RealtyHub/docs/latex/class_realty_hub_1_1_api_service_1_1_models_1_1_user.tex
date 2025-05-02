@@ -1,5 +1,10 @@
 \doxysection{Referência da Classe Realty\+Hub.\+Api\+Service.\+Models.\+User}
 \hypertarget{class_realty_hub_1_1_api_service_1_1_models_1_1_user}{}\label{class_realty_hub_1_1_api_service_1_1_models_1_1_user}\index{RealtyHub.ApiService.Models.User@{RealtyHub.ApiService.Models.User}}
+
+
+Representa um usuário do sistema.  
+
+
 Diagrama de hierarquia da classe Realty\+Hub.\+Api\+Service.\+Models.\+User\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -10,12 +15,17 @@ Diagrama de hierarquia da classe Realty\+Hub.\+Api\+Service.\+Models.\+User\+:\b
 \begin{DoxyCompactItemize}
 \item 
 string \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_models_1_1_user_a3abb2a92a52ecfd5b70d98025db8097a}{Given\+Name}} = string.\+Empty\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
-\item 
+\begin{DoxyCompactList}\small\item\em Nome completo do usuário. \end{DoxyCompactList}\item 
 string \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_models_1_1_user_a75d9c0d50a275b0751705dddb400d06e}{Creci}} = string.\+Empty\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
-\item 
+\begin{DoxyCompactList}\small\item\em Identificador do Conselho Regional de Corretores de Imóveis (CRECI). \end{DoxyCompactList}\item 
 List$<$ Identity\+Role$<$ long $>$ $>$? \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_models_1_1_user_a9dccea82404f67f913d38cbfbcca27df}{Roles}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Cargos do usuário no sistema. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
+
+\doxysubsection{Descrição detalhada}
+Representa um usuário do sistema. 
+
+Esta classe herda de Identity\+User e adiciona propriedades específicas do domínio. 
 
 \doxysubsection{Propriedades}
 \Hypertarget{class_realty_hub_1_1_api_service_1_1_models_1_1_user_a75d9c0d50a275b0751705dddb400d06e}\index{RealtyHub.ApiService.Models.User@{RealtyHub.ApiService.Models.User}!Creci@{Creci}}
@@ -24,19 +34,31 @@ List$<$ Identity\+Role$<$ long $>$ $>$? \mbox{\hyperlink{class_realty_hub_1_1_ap
 {\footnotesize\ttfamily \label{class_realty_hub_1_1_api_service_1_1_models_1_1_user_a75d9c0d50a275b0751705dddb400d06e} 
 string Realty\+Hub.\+Api\+Service.\+Models.\+User.\+Creci = string.\+Empty\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
 
-\Hypertarget{class_realty_hub_1_1_api_service_1_1_models_1_1_user_a3abb2a92a52ecfd5b70d98025db8097a}\index{RealtyHub.ApiService.Models.User@{RealtyHub.ApiService.Models.User}!GivenName@{GivenName}}
+
+
+Identificador do Conselho Regional de Corretores de Imóveis (CRECI). 
+
+Identificador do Conselho Regional de Corretores de Imóveis.\Hypertarget{class_realty_hub_1_1_api_service_1_1_models_1_1_user_a3abb2a92a52ecfd5b70d98025db8097a}\index{RealtyHub.ApiService.Models.User@{RealtyHub.ApiService.Models.User}!GivenName@{GivenName}}
 \index{GivenName@{GivenName}!RealtyHub.ApiService.Models.User@{RealtyHub.ApiService.Models.User}}
 \doxysubsubsection{\texorpdfstring{GivenName}{GivenName}}
 {\footnotesize\ttfamily \label{class_realty_hub_1_1_api_service_1_1_models_1_1_user_a3abb2a92a52ecfd5b70d98025db8097a} 
 string Realty\+Hub.\+Api\+Service.\+Models.\+User.\+Given\+Name = string.\+Empty\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
 
-\Hypertarget{class_realty_hub_1_1_api_service_1_1_models_1_1_user_a9dccea82404f67f913d38cbfbcca27df}\index{RealtyHub.ApiService.Models.User@{RealtyHub.ApiService.Models.User}!Roles@{Roles}}
+
+
+Nome completo do usuário. 
+
+Nome completo do usuário.\Hypertarget{class_realty_hub_1_1_api_service_1_1_models_1_1_user_a9dccea82404f67f913d38cbfbcca27df}\index{RealtyHub.ApiService.Models.User@{RealtyHub.ApiService.Models.User}!Roles@{Roles}}
 \index{Roles@{Roles}!RealtyHub.ApiService.Models.User@{RealtyHub.ApiService.Models.User}}
 \doxysubsubsection{\texorpdfstring{Roles}{Roles}}
 {\footnotesize\ttfamily \label{class_realty_hub_1_1_api_service_1_1_models_1_1_user_a9dccea82404f67f913d38cbfbcca27df} 
 List$<$Identity\+Role$<$long$>$ $>$? Realty\+Hub.\+Api\+Service.\+Models.\+User.\+Roles\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
 
 
+
+Cargos do usuário no sistema. 
+
+Cargos do usuário no sistema.
 
 A documentação para essa classe foi gerada a partir do seguinte arquivo\+:\begin{DoxyCompactItemize}
 \item 

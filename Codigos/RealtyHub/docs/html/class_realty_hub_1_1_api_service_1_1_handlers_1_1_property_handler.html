@@ -147,6 +147,7 @@ Membros Públicos</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Descrição detalhada</h2>
 <div class="textblock"><p>Responsável pelas operações relacionadas a imóveis. </p>
+<p>Esta classe implementa a interface <a class="el" href="interface_realty_hub_1_1_core_1_1_handlers_1_1_i_property_handler.html">IPropertyHandler</a> e fornece métodos para criar, atualizar, deletar e buscar imóveis no banco de dados. </p>
 </div><h2 class="groupheader">Construtores e Destrutores</h2>
 <a id="af523d0081c0305a0b10f24eef336ac51" name="af523d0081c0305a0b10f24eef336ac51"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af523d0081c0305a0b10f24eef336ac51">&#9670;&#160;</a></span>PropertyHandler()</h2>
@@ -172,6 +173,7 @@ Membros Públicos</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Inicializa uma nova instância de <a class="el" href="class_realty_hub_1_1_api_service_1_1_handlers_1_1_property_handler.html" title="Responsável pelas operações relacionadas a imóveis.">PropertyHandler</a>. </p>
+<p>Este construtor é utilizado para injetar o contexto do banco de dados necessário para realizar operações CRUD nos imóveis. </p>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">context</td><td>Contexto do banco de dados para interação com imóveis.</td></tr>
@@ -206,6 +208,7 @@ Membros Públicos</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Cria um novo imóvel no banco de dados. </p>
+<p>Este método adiciona um novo imóvel à base de dados e salva as alterações. </p>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">request</td><td>Objeto contendo as informações para criação do imóvel.</td></tr>
@@ -242,6 +245,7 @@ Membros Públicos</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Realiza a exclusão lógica de um imóvel, marcando-o como inativo. </p>
+<p>Este método altera o status de um imóvel para inativo no banco de dados. </p>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">request</td><td>Requisição que contém o ID do imóvel a ser excluído.</td></tr>
@@ -278,6 +282,10 @@ Membros Públicos</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Retorna uma lista paginada de todos os imóveis ativos, com opção de filtro por busca. </p>
+<p>Este método busca todos os imóveis ativos no banco de dados e aplica filtros de paginação e busca, se fornecidos.</p>
+<p><br  />
+ </p>
+<p>Caso o filtro não seja fornecido, retorna todos os imóveis ativos.</p>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">request</td><td>Requisição que contém parâmetros de paginação e filtro.</td></tr>
@@ -314,6 +322,8 @@ Membros Públicos</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Retorna uma lista paginada de todas as visitas de um imóvel específico. </p>
+<p>Este método busca todas as visitas de um imóvel específico no banco de dados e aplica filtros de paginação e busca, se fornecidos.</p>
+<p>Caso o filtro não seja fornecido, retorna todas as visitas do imóvel.</p>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">request</td><td>Requisição que contém parâmetros de paginação e filtro por data.</td></tr>
@@ -350,6 +360,7 @@ Membros Públicos</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Obtém um imóvel específico pelo ID. </p>
+<p>Este método busca um imóvel no banco de dados com base no ID fornecido. </p>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">request</td><td>Requisição que contém o ID do imóvel desejado.</td></tr>
@@ -386,6 +397,7 @@ Membros Públicos</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Atualiza um imóvel existente no banco de dados. </p>
+<p>Este método atualiza as informações de um imóvel existente e salva as alterações. </p>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">request</td><td>Objeto contendo as novas informações do imóvel.</td></tr>

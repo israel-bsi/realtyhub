@@ -117,7 +117,7 @@ Diagrama de hierarquia da classe RealtyHub.ApiService.Handlers.CondominiumHandle
  <div class="center">
   <img src="class_realty_hub_1_1_api_service_1_1_handlers_1_1_condominium_handler.png" usemap="#RealtyHub.ApiService.Handlers.CondominiumHandler_map" alt=""/>
   <map id="RealtyHub.ApiService.Handlers.CondominiumHandler_map" name="RealtyHub.ApiService.Handlers.CondominiumHandler_map">
-<area href="interface_realty_hub_1_1_core_1_1_handlers_1_1_i_condominium_handler.html" alt="RealtyHub.Core.Handlers.ICondominiumHandler" shape="rect" coords="0,0,316,24"/>
+<area href="interface_realty_hub_1_1_core_1_1_handlers_1_1_i_condominium_handler.html" title="Interface que define os métodos para manipulação de condomínios." alt="RealtyHub.Core.Handlers.ICondominiumHandler" shape="rect" coords="0,0,316,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -144,6 +144,7 @@ Membros Públicos</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Descrição detalhada</h2>
 <div class="textblock"><p>Responsável pelas operações relacionadas a condomínios. </p>
+<p>Esta classe implementa a interface <a class="el" href="interface_realty_hub_1_1_core_1_1_handlers_1_1_i_condominium_handler.html" title="Interface que define os métodos para manipulação de condomínios.">ICondominiumHandler</a> e fornece métodos para criar, atualizar, deletar e buscar condomínios no banco de dados. </p>
 </div><h2 class="groupheader">Construtores e Destrutores</h2>
 <a id="a0a2220e10c626f2c734e6d93f3ce3d04" name="a0a2220e10c626f2c734e6d93f3ce3d04"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0a2220e10c626f2c734e6d93f3ce3d04">&#9670;&#160;</a></span>CondominiumHandler()</h2>
@@ -169,6 +170,7 @@ Membros Públicos</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Inicializa uma nova instância de <a class="el" href="class_realty_hub_1_1_api_service_1_1_handlers_1_1_condominium_handler.html" title="Responsável pelas operações relacionadas a condomínios.">CondominiumHandler</a>. </p>
+<p>Este construtor é utilizado para injetar o contexto do banco de dados necessário para realizar operações CRUD nos condomínios. </p>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">context</td><td>Contexto do banco de dados para interação com condomínios.</td></tr>
@@ -203,6 +205,7 @@ Membros Públicos</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Cria um novo condomínio no banco de dados. </p>
+<p>Este método adiciona um novo condomínio à base de dados e salva as alterações. </p>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">request</td><td>Objeto contendo as informações para criação do condomínio.</td></tr>
@@ -239,6 +242,8 @@ Membros Públicos</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Realiza a exclusão lógica de um condomínio, marcando-o como inativo. </p>
+<p>Este método altera o status de um condomínio para inativo no banco de dados. <br  />
+ </p>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">request</td><td>Requisição que contém o ID do condomínio a ser excluído.</td></tr>
@@ -275,13 +280,18 @@ Membros Públicos</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Retorna uma lista paginada de todos os condomínios ativos, com opção de filtro por busca. </p>
+<p>Este método busca todos os condomínios ativos no banco de dados e aplica filtros de busca, se fornecidos. </p>
+<p>A resposta é paginada com base nos parâmetros de paginação fornecidos na requisição e retorna uma lista de condomínios.</p>
+<p>Caso o filtro não seja fornecido, retorna todos os condomínios ativos.</p>
+<p><br  />
+ </p>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">request</td><td>Requisição que contém parâmetros de paginação e filtro.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Retorna</dt><dd>Retorna uma resposta paginada com os condomínios ativos ou um erro em caso de falha.</dd></dl>
+<dl class="section return"><dt>Retorna</dt><dd>Retorna uma resposta paginada com os condomínios ativos com base no filtro ou um erro em caso de falha.</dd></dl>
 
 <p>Implementa <a class="el" href="interface_realty_hub_1_1_core_1_1_handlers_1_1_i_condominium_handler.html#a518498e73c07f67d4cfe0534d8c43b54">RealtyHub.Core.Handlers.ICondominiumHandler</a>.</p>
 
@@ -311,6 +321,8 @@ Membros Públicos</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Obtém um condomínio específico pelo ID. </p>
+<p>Este método busca um condomínio no banco de dados com base no ID fornecido. <br  />
+ </p>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">request</td><td>Requisição que contém o ID do condomínio desejado.</td></tr>
@@ -347,6 +359,7 @@ Membros Públicos</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Atualiza um condomínio existente. </p>
+<p>Este método atualiza as informações de um condomínio existente no banco de dados. </p>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">request</td><td>Objeto contendo as novas informações do condomínio.</td></tr>

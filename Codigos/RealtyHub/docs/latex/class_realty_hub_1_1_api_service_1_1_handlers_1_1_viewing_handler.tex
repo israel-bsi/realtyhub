@@ -33,6 +33,8 @@ async Task$<$ Paged\+Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_c
 \doxysubsection{Descrição detalhada}
 Responsável pelas operações relacionadas às visitas de imóveis. 
 
+Esta classe implementa a interface \doxylink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_viewing_handler}{IViewing\+Handler} e fornece métodos para agendar, reagendar, finalizar e cancelar visitas, além de buscar visitas específicas ou todas as visitas. 
+
 \doxysubsection{Construtores e Destrutores}
 \Hypertarget{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler_abd4683d7b414e960962ff69109550cc7}\index{RealtyHub.ApiService.Handlers.ViewingHandler@{RealtyHub.ApiService.Handlers.ViewingHandler}!ViewingHandler@{ViewingHandler}}
 \index{ViewingHandler@{ViewingHandler}!RealtyHub.ApiService.Handlers.ViewingHandler@{RealtyHub.ApiService.Handlers.ViewingHandler}}
@@ -43,6 +45,8 @@ Realty\+Hub.\+Api\+Service.\+Handlers.\+Viewing\+Handler.\+Viewing\+Handler (\be
 
 
 Inicializa uma nova instância de \doxylink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler}{Viewing\+Handler}. 
+
+Este construtor é utilizado para injetar o contexto do banco de dados necessário para realizar operações CRUD nas visitas. 
 
 
 \begin{DoxyParams}{Parâmetros}
@@ -61,6 +65,12 @@ async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_
 
 
 Cancela uma visita existente. 
+
+Este método atualiza o status de uma visita para "{}\+Cancelada"{}.
+
+Ele verifica se a visita existe e se não está finalizada.
+
+Se a visita não existir ou já estiver finalizada, retorna um erro.
 
 
 \begin{DoxyParams}{Parâmetros}
@@ -84,6 +94,12 @@ async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_
 
 Finaliza uma visita existente. 
 
+Este método atualiza o status de uma visita para "{}\+Finalizada"{}.
+
+Ele verifica se a visita existe e se não está cancelada ou já finalizada.
+
+Se a visita não existir ou já estiver cancelada ou finalizada, retorna um erro.
+
 
 \begin{DoxyParams}{Parâmetros}
 {\em request} & Requisição contendo o ID da visita a ser finalizada.\\
@@ -105,6 +121,10 @@ async Task$<$ Paged\+Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_c
 
 
 Retorna uma lista paginada de todas as visitas. 
+
+Este método busca todas as visitas no banco de dados e aplica filtros de data e paginação.
+
+Caso o filtro de data não seja fornecido, retorna todas as visitas.
 
 
 \begin{DoxyParams}{Parâmetros}
@@ -128,6 +148,12 @@ async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_
 
 Obtém uma visita específica pelo ID. 
 
+Este método busca uma visita no banco de dados com base no ID fornecido.
+
+Ele verifica se a visita existe e se não está cancelada ou finalizada.
+
+Se a visita não existir ou já estiver cancelada ou finalizada, retorna um erro.
+
 
 \begin{DoxyParams}{Parâmetros}
 {\em request} & Requisição contendo o ID da visita desejada.\\
@@ -150,6 +176,12 @@ async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_
 
 Reagenda uma visita existente. 
 
+Este método atualiza a data e o status de uma visita existente.
+
+Ele verifica se a visita existe e se não está cancelada ou finalizada.
+
+Se a visita não existir ou já estiver cancelada ou finalizada, retorna um erro.
+
 
 \begin{DoxyParams}{Parâmetros}
 {\em request} & Objeto contendo as informações para reagendamento da visita.\\
@@ -171,6 +203,14 @@ async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_
 
 
 Agenda uma nova visita para um imóvel. 
+
+Este método adiciona uma nova visita à base de dados e salva as alterações. 
+
+Ele verifica se o cliente e o imóvel existem e estão ativos antes de agendar a visita.
+
+Se a visita já estiver agendada para a mesma data, retorna um erro.
+
+O status da visita é definido como "{}\+Pendente"{} por padrão.
 
 
 \begin{DoxyParams}{Parâmetros}

@@ -108,6 +108,9 @@ $(function(){initNavTree('interface_realty_hub_1_1_core_1_1_handlers_1_1_i_accou
   <div class="headertitle"><div class="title">Referência da Interface RealtyHub.Core.Handlers.IAccountHandler</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Interface que define os métodos para manipulação de contas de usuário.  
+ <a href="#details">Mais...</a></p>
 <div class="dynheader">
 Diagrama de hierarquia da classe RealtyHub.Core.Handlers.IAccountHandler:</div>
 <div class="dyncontent">
@@ -121,19 +124,28 @@ Diagrama de hierarquia da classe RealtyHub.Core.Handlers.IAccountHandler:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Membros Públicos</h2></td></tr>
 <tr class="memitem:a332255b01c065f7cfc88fcf45139f5ac" id="r_a332255b01c065f7cfc88fcf45139f5ac"><td class="memItemLeft" align="right" valign="top">Task&lt; Response&lt; string &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a332255b01c065f7cfc88fcf45139f5ac">LoginAsync</a> (<a class="el" href="class_realty_hub_1_1_core_1_1_requests_1_1_account_1_1_login_request.html">LoginRequest</a> request)</td></tr>
+<tr class="memdesc:a332255b01c065f7cfc88fcf45139f5ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Realiza o login de um usuário no sistema.  <br /></td></tr>
 <tr class="separator:a332255b01c065f7cfc88fcf45139f5ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a495be2ccdac8b3cb84a5c094974b162b" id="r_a495be2ccdac8b3cb84a5c094974b162b"><td class="memItemLeft" align="right" valign="top">Task&lt; Response&lt; string &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a495be2ccdac8b3cb84a5c094974b162b">RegisterAsync</a> (<a class="el" href="class_realty_hub_1_1_core_1_1_requests_1_1_account_1_1_register_request.html">RegisterRequest</a> request)</td></tr>
+<tr class="memdesc:a495be2ccdac8b3cb84a5c094974b162b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Realiza o registro de um novo usuário no sistema.  <br /></td></tr>
 <tr class="separator:a495be2ccdac8b3cb84a5c094974b162b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1477176b7c6bdc4f5e2b10e1884fef5b" id="r_a1477176b7c6bdc4f5e2b10e1884fef5b"><td class="memItemLeft" align="right" valign="top">Task&lt; Response&lt; string &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1477176b7c6bdc4f5e2b10e1884fef5b">ConfirmEmailAsync</a> (<a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_account_1_1_confirm_email_request.html">ConfirmEmailRequest</a> request)</td></tr>
+<tr class="memdesc:a1477176b7c6bdc4f5e2b10e1884fef5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Confirma o e-mail de um usuário após o registro.  <br /></td></tr>
 <tr class="separator:a1477176b7c6bdc4f5e2b10e1884fef5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0cf44d14ea9505bc7ce0cf048c627aed" id="r_a0cf44d14ea9505bc7ce0cf048c627aed"><td class="memItemLeft" align="right" valign="top">Task&lt; Response&lt; string &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0cf44d14ea9505bc7ce0cf048c627aed">ForgotPasswordAsync</a> (<a class="el" href="class_realty_hub_1_1_core_1_1_requests_1_1_account_1_1_forgot_password_request.html">ForgotPasswordRequest</a> request)</td></tr>
+<tr class="memdesc:a0cf44d14ea9505bc7ce0cf048c627aed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recupera a senha de um usuário.  <br /></td></tr>
 <tr class="separator:a0cf44d14ea9505bc7ce0cf048c627aed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada7bcdf0ffd0951bb100205c931ae93b" id="r_ada7bcdf0ffd0951bb100205c931ae93b"><td class="memItemLeft" align="right" valign="top">Task&lt; Response&lt; string &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ada7bcdf0ffd0951bb100205c931ae93b">ResetPasswordAsync</a> (<a class="el" href="class_realty_hub_1_1_core_1_1_requests_1_1_account_1_1_reset_password_request.html">ResetPasswordRequest</a> request)</td></tr>
+<tr class="memdesc:ada7bcdf0ffd0951bb100205c931ae93b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Redefine a senha de um usuário. /summary&gt;  <br /></td></tr>
 <tr class="separator:ada7bcdf0ffd0951bb100205c931ae93b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaea04b5297a3823006cef84fa1d3e318" id="r_aaea04b5297a3823006cef84fa1d3e318"><td class="memItemLeft" align="right" valign="top">Task&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaea04b5297a3823006cef84fa1d3e318">LogoutAsync</a> ()</td></tr>
+<tr class="memdesc:aaea04b5297a3823006cef84fa1d3e318"><td class="mdescLeft">&#160;</td><td class="mdescRight">Realiza o logout de um usuário do sistema.  <br /></td></tr>
 <tr class="separator:aaea04b5297a3823006cef84fa1d3e318"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Documentação das funções</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Descrição detalhada</h2>
+<div class="textblock"><p>Interface que define os métodos para manipulação de contas de usuário. </p>
+<p>Esta interface é responsável por definir as operações que podem ser realizadas com as contas de usuário, como login, registro, confirmação de e-mail, recuperação de senha, etc. </p>
+</div><h2 class="groupheader">Documentação das funções</h2>
 <a id="a1477176b7c6bdc4f5e2b10e1884fef5b" name="a1477176b7c6bdc4f5e2b10e1884fef5b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1477176b7c6bdc4f5e2b10e1884fef5b">&#9670;&#160;</a></span>ConfirmEmailAsync()</h2>
 
@@ -148,6 +160,16 @@ Membros Públicos</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Confirma o e-mail de um usuário após o registro. </p>
+<p>Este método é responsável por validar o e-mail do usuário com base no token fornecido. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>Instância de <a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_account_1_1_confirm_email_request.html">ConfirmEmailRequest</a> contendo o token de confirmação e Id do usuário.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>Retorna um objeto <a class="el" href="class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g.html" title="Classe genérica para encapsular a resposta de uma operação, incluindo dados, mensagem e código de sta...">Response&lt;TData&gt;</a> indicando o resultado da operação. O objeto TData é do tipo string e pode ser nulo se a operação falhar. </dd></dl>
 
 <p>Implementado por <a class="el" href="class_realty_hub_1_1_web_1_1_handlers_1_1_account_handler.html#a5a2b64eee9e9df52ae59f214af5e7aad">RealtyHub.Web.Handlers.AccountHandler</a>.</p>
 
@@ -168,6 +190,16 @@ Membros Públicos</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Recupera a senha de um usuário. </p>
+<p>Este método é responsável por enviar um e-mail de recuperação de senha para o usuário. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>&gt;Instância de <a class="el" href="class_realty_hub_1_1_core_1_1_requests_1_1_account_1_1_forgot_password_request.html">ForgotPasswordRequest</a> contendo o e-mail do usuário.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>Retorna um objeto <a class="el" href="class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g.html" title="Classe genérica para encapsular a resposta de uma operação, incluindo dados, mensagem e código de sta...">Response&lt;TData&gt;</a> indicando o resultado da operação. O objeto TData é do tipo string e pode ser nulo se a operação falhar. </dd></dl>
+
 <p>Implementado por <a class="el" href="class_realty_hub_1_1_web_1_1_handlers_1_1_account_handler.html#aec34ed8c4f4cd0993b1165a8eac278bc">RealtyHub.Web.Handlers.AccountHandler</a>.</p>
 
 </div>
@@ -186,6 +218,16 @@ Membros Públicos</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Realiza o login de um usuário no sistema. </p>
+<p>Este método é responsável por autenticar um usuário com base nas credenciais fornecidas. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>Instância de <a class="el" href="class_realty_hub_1_1_core_1_1_requests_1_1_account_1_1_login_request.html">LoginRequest</a> contendo as credenciais do usuário.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>Retorna um objeto <a class="el" href="class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g.html" title="Classe genérica para encapsular a resposta de uma operação, incluindo dados, mensagem e código de sta...">Response&lt;TData&gt;</a> indicando o resultado da operação. O objeto TData é do tipo string e pode ser nulo se a operação falhar. </dd></dl>
 
 <p>Implementado por <a class="el" href="class_realty_hub_1_1_web_1_1_handlers_1_1_account_handler.html#ac82b9fa9d798177a3155c02083e91f71">RealtyHub.Web.Handlers.AccountHandler</a>.</p>
 
@@ -206,6 +248,9 @@ Membros Públicos</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Realiza o logout de um usuário do sistema. </p>
+<p>Este método é responsável por encerrar a sessão do usuário no sistema. </p>
+
 <p>Implementado por <a class="el" href="class_realty_hub_1_1_web_1_1_handlers_1_1_account_handler.html#af5534b0e33dc543c012daa18ef8c5f12">RealtyHub.Web.Handlers.AccountHandler</a>.</p>
 
 </div>
@@ -225,6 +270,16 @@ Membros Públicos</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Realiza o registro de um novo usuário no sistema. </p>
+<p>Este método é responsável por criar uma nova conta de usuário com base nas informações fornecidas. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>Instância de <a class="el" href="class_realty_hub_1_1_core_1_1_requests_1_1_account_1_1_register_request.html">RegisterRequest</a> contendo as informações do novo usuário.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>Retorna um objeto <a class="el" href="class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g.html" title="Classe genérica para encapsular a resposta de uma operação, incluindo dados, mensagem e código de sta...">Response&lt;TData&gt;</a> indicando o resultado da operação. O objeto TData é do tipo string e pode ser nulo se a operação falhar. </dd></dl>
+
 <p>Implementado por <a class="el" href="class_realty_hub_1_1_web_1_1_handlers_1_1_account_handler.html#afe99742a41c8eefbcd371076224a7f01">RealtyHub.Web.Handlers.AccountHandler</a>.</p>
 
 </div>
@@ -243,6 +298,16 @@ Membros Públicos</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Redefine a senha de um usuário. /summary&gt; </p>
+<p>Este método é responsável por atualizar a senha do usuário com base no token fornecido. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>&gt;Instância de <a class="el" href="class_realty_hub_1_1_core_1_1_requests_1_1_account_1_1_reset_password_request.html">ResetPasswordRequest</a> contendo o token e a nova senha do usuário.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>Retorna um objeto <a class="el" href="class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g.html" title="Classe genérica para encapsular a resposta de uma operação, incluindo dados, mensagem e código de sta...">Response&lt;TData&gt;</a> indicando o resultado da operação. O objeto TData é do tipo string e pode ser nulo se a operação falhar. </dd></dl>
 
 <p>Implementado por <a class="el" href="class_realty_hub_1_1_web_1_1_handlers_1_1_account_handler.html#a1169c179a2cf96d594b48584708eb85c">RealtyHub.Web.Handlers.AccountHandler</a>.</p>
 

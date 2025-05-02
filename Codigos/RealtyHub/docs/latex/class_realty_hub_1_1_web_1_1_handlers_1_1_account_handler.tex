@@ -12,17 +12,17 @@ Diagrama de hierarquia da classe Realty\+Hub.\+Web.\+Handlers.\+Account\+Handler
 \mbox{\hyperlink{class_realty_hub_1_1_web_1_1_handlers_1_1_account_handler_a4b1bcca62e3edd90a0385f9452152a7f}{Account\+Handler}} (IHttp\+Client\+Factory http\+Client\+Factory)
 \item 
 async Task$<$ Response$<$ string $>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_web_1_1_handlers_1_1_account_handler_ac82b9fa9d798177a3155c02083e91f71}{Login\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_account_1_1_login_request}{Login\+Request}} request)
-\item 
+\begin{DoxyCompactList}\small\item\em Realiza o login de um usuário no sistema. \end{DoxyCompactList}\item 
 async Task$<$ Response$<$ string $>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_web_1_1_handlers_1_1_account_handler_afe99742a41c8eefbcd371076224a7f01}{Register\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_account_1_1_register_request}{Register\+Request}} request)
-\item 
+\begin{DoxyCompactList}\small\item\em Realiza o registro de um novo usuário no sistema. \end{DoxyCompactList}\item 
 async Task$<$ Response$<$ string $>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_web_1_1_handlers_1_1_account_handler_a5a2b64eee9e9df52ae59f214af5e7aad}{Confirm\+Email\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_account_1_1_confirm_email_request}{Confirm\+Email\+Request}} request)
-\item 
+\begin{DoxyCompactList}\small\item\em Confirma o e-\/mail de um usuário após o registro. \end{DoxyCompactList}\item 
 async Task$<$ Response$<$ string $>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_web_1_1_handlers_1_1_account_handler_aec34ed8c4f4cd0993b1165a8eac278bc}{Forgot\+Password\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_account_1_1_forgot_password_request}{Forgot\+Password\+Request}} request)
-\item 
+\begin{DoxyCompactList}\small\item\em Recupera a senha de um usuário. \end{DoxyCompactList}\item 
 async Task$<$ Response$<$ string $>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_web_1_1_handlers_1_1_account_handler_a1169c179a2cf96d594b48584708eb85c}{Reset\+Password\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_account_1_1_reset_password_request}{Reset\+Password\+Request}} request)
-\item 
+\begin{DoxyCompactList}\small\item\em Redefine a senha de um usuário. /summary\texorpdfstring{$>$}{>} \end{DoxyCompactList}\item 
 async Task \mbox{\hyperlink{class_realty_hub_1_1_web_1_1_handlers_1_1_account_handler_af5534b0e33dc543c012daa18ef8c5f12}{Logout\+Async}} ()
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Realiza o logout de um usuário do sistema. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Construtores e Destrutores}
@@ -43,6 +43,20 @@ async Task$<$ Response$<$ string $>$ $>$ Realty\+Hub.\+Web.\+Handlers.\+Account\
 
 
 
+Confirma o e-\/mail de um usuário após o registro. 
+
+Este método é responsável por validar o e-\/mail do usuário com base no token fornecido. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & Instância de \doxylink{class_realty_hub_1_1_core_1_1_models_1_1_account_1_1_confirm_email_request}{Confirm\+Email\+Request} contendo o token de confirmação e Id do usuário.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna um objeto \doxylink{class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g}{Response$<$\+TData$>$} indicando o resultado da operação. O objeto TData é do tipo string e pode ser nulo se a operação falhar. 
+\end{DoxyReturn}
+
+
 Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_account_handler_a1477176b7c6bdc4f5e2b10e1884fef5b}{Realty\+Hub.\+Core.\+Handlers.\+IAccount\+Handler}}.
 
 \Hypertarget{class_realty_hub_1_1_web_1_1_handlers_1_1_account_handler_aec34ed8c4f4cd0993b1165a8eac278bc}\index{RealtyHub.Web.Handlers.AccountHandler@{RealtyHub.Web.Handlers.AccountHandler}!ForgotPasswordAsync@{ForgotPasswordAsync}}
@@ -51,6 +65,20 @@ Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_acc
 {\footnotesize\ttfamily \label{class_realty_hub_1_1_web_1_1_handlers_1_1_account_handler_aec34ed8c4f4cd0993b1165a8eac278bc} 
 async Task$<$ Response$<$ string $>$ $>$ Realty\+Hub.\+Web.\+Handlers.\+Account\+Handler.\+Forgot\+Password\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_account_1_1_forgot_password_request}{Forgot\+Password\+Request}}}]{request}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+
+
+Recupera a senha de um usuário. 
+
+Este método é responsável por enviar um e-\/mail de recuperação de senha para o usuário. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & \texorpdfstring{$>$}{>}Instância de \doxylink{class_realty_hub_1_1_core_1_1_requests_1_1_account_1_1_forgot_password_request}{Forgot\+Password\+Request} contendo o e-\/mail do usuário.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna um objeto \doxylink{class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g}{Response$<$\+TData$>$} indicando o resultado da operação. O objeto TData é do tipo string e pode ser nulo se a operação falhar. 
+\end{DoxyReturn}
 
 
 Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_account_handler_a0cf44d14ea9505bc7ce0cf048c627aed}{Realty\+Hub.\+Core.\+Handlers.\+IAccount\+Handler}}.
@@ -63,6 +91,20 @@ async Task$<$ Response$<$ string $>$ $>$ Realty\+Hub.\+Web.\+Handlers.\+Account\
 
 
 
+Realiza o login de um usuário no sistema. 
+
+Este método é responsável por autenticar um usuário com base nas credenciais fornecidas. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & Instância de \doxylink{class_realty_hub_1_1_core_1_1_requests_1_1_account_1_1_login_request}{Login\+Request} contendo as credenciais do usuário.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna um objeto \doxylink{class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g}{Response$<$\+TData$>$} indicando o resultado da operação. O objeto TData é do tipo string e pode ser nulo se a operação falhar. 
+\end{DoxyReturn}
+
+
 Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_account_handler_a332255b01c065f7cfc88fcf45139f5ac}{Realty\+Hub.\+Core.\+Handlers.\+IAccount\+Handler}}.
 
 \Hypertarget{class_realty_hub_1_1_web_1_1_handlers_1_1_account_handler_af5534b0e33dc543c012daa18ef8c5f12}\index{RealtyHub.Web.Handlers.AccountHandler@{RealtyHub.Web.Handlers.AccountHandler}!LogoutAsync@{LogoutAsync}}
@@ -72,6 +114,10 @@ Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_acc
 async Task Realty\+Hub.\+Web.\+Handlers.\+Account\+Handler.\+Logout\+Async (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
+
+Realiza o logout de um usuário do sistema. 
+
+Este método é responsável por encerrar a sessão do usuário no sistema. 
 
 Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_account_handler_aaea04b5297a3823006cef84fa1d3e318}{Realty\+Hub.\+Core.\+Handlers.\+IAccount\+Handler}}.
 
@@ -83,6 +129,20 @@ async Task$<$ Response$<$ string $>$ $>$ Realty\+Hub.\+Web.\+Handlers.\+Account\
 
 
 
+Realiza o registro de um novo usuário no sistema. 
+
+Este método é responsável por criar uma nova conta de usuário com base nas informações fornecidas. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & Instância de \doxylink{class_realty_hub_1_1_core_1_1_requests_1_1_account_1_1_register_request}{Register\+Request} contendo as informações do novo usuário.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna um objeto \doxylink{class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g}{Response$<$\+TData$>$} indicando o resultado da operação. O objeto TData é do tipo string e pode ser nulo se a operação falhar. 
+\end{DoxyReturn}
+
+
 Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_account_handler_a495be2ccdac8b3cb84a5c094974b162b}{Realty\+Hub.\+Core.\+Handlers.\+IAccount\+Handler}}.
 
 \Hypertarget{class_realty_hub_1_1_web_1_1_handlers_1_1_account_handler_a1169c179a2cf96d594b48584708eb85c}\index{RealtyHub.Web.Handlers.AccountHandler@{RealtyHub.Web.Handlers.AccountHandler}!ResetPasswordAsync@{ResetPasswordAsync}}
@@ -91,6 +151,20 @@ Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_acc
 {\footnotesize\ttfamily \label{class_realty_hub_1_1_web_1_1_handlers_1_1_account_handler_a1169c179a2cf96d594b48584708eb85c} 
 async Task$<$ Response$<$ string $>$ $>$ Realty\+Hub.\+Web.\+Handlers.\+Account\+Handler.\+Reset\+Password\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_account_1_1_reset_password_request}{Reset\+Password\+Request}}}]{request}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+
+
+Redefine a senha de um usuário. /summary\texorpdfstring{$>$}{>} 
+
+Este método é responsável por atualizar a senha do usuário com base no token fornecido. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & \texorpdfstring{$>$}{>}Instância de \doxylink{class_realty_hub_1_1_core_1_1_requests_1_1_account_1_1_reset_password_request}{Reset\+Password\+Request} contendo o token e a nova senha do usuário.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna um objeto \doxylink{class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g}{Response$<$\+TData$>$} indicando o resultado da operação. O objeto TData é do tipo string e pode ser nulo se a operação falhar. 
+\end{DoxyReturn}
 
 
 Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_account_handler_ada7bcdf0ffd0951bb100205c931ae93b}{Realty\+Hub.\+Core.\+Handlers.\+IAccount\+Handler}}.

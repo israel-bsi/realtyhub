@@ -108,22 +108,68 @@ $(function(){initNavTree('class_realty_hub_1_1_api_service_1_1_endpoints_1_1_con
   <div class="headertitle"><div class="title">Referência da Classe RealtyHub.ApiService.Endpoints.ContractsTemplates.GetAllContractTemplatesEndpoint</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Endpoint responsável por recuperar todos os modelos de contrato.  
+ <a href="#details">Mais...</a></p>
 <div class="dynheader">
 Diagrama de hierarquia da classe RealtyHub.ApiService.Endpoints.ContractsTemplates.GetAllContractTemplatesEndpoint:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_realty_hub_1_1_api_service_1_1_endpoints_1_1_contracts_templates_1_1_get_all_contract_templates_endpoint.png" usemap="#RealtyHub.ApiService.Endpoints.ContractsTemplates.GetAllContractTemplatesEndpoint_map" alt=""/>
   <map id="RealtyHub.ApiService.Endpoints.ContractsTemplates.GetAllContractTemplatesEndpoint_map" name="RealtyHub.ApiService.Endpoints.ContractsTemplates.GetAllContractTemplatesEndpoint_map">
-<area href="interface_realty_hub_1_1_api_service_1_1_common_1_1_api_1_1_i_endpoint.html" alt="RealtyHub.ApiService.Common.Api.IEndpoint" shape="rect" coords="0,0,501,24"/>
+<area href="interface_realty_hub_1_1_api_service_1_1_common_1_1_api_1_1_i_endpoint.html" title="Interface que define um endpoint para o aplicativo ASP.NET Core." alt="RealtyHub.ApiService.Common.Api.IEndpoint" shape="rect" coords="0,0,501,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Membros públicos estáticos</h2></td></tr>
 <tr class="memitem:ae37878884a01bcf515a6ff1c3b6a21c6" id="r_ae37878884a01bcf515a6ff1c3b6a21c6"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae37878884a01bcf515a6ff1c3b6a21c6">Map</a> (IEndpointRouteBuilder <a class="el" href="_realty_hub_8_api_service_2_program_8cs.html#a7b225fcb720e4d5ed2bbf60e28a25e6d">app</a>)</td></tr>
+<tr class="memdesc:ae37878884a01bcf515a6ff1c3b6a21c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapeia o endpoint GET para recuperar todos os modelos de contrato.  <br /></td></tr>
 <tr class="separator:ae37878884a01bcf515a6ff1c3b6a21c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa490c1c7fa9ae88569242b245a6b9679" id="r_aa490c1c7fa9ae88569242b245a6b9679"><td class="memItemLeft" align="right" valign="top">static async Task&lt; IResult &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa490c1c7fa9ae88569242b245a6b9679">HandlerAsync</a> (<a class="el" href="interface_realty_hub_1_1_core_1_1_handlers_1_1_i_contract_template_handler.html">IContractTemplateHandler</a> handler)</td></tr>
+<tr class="memdesc:aa490c1c7fa9ae88569242b245a6b9679"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manipulador da rota que obtém todos os modelos de contrato.  <br /></td></tr>
+<tr class="separator:aa490c1c7fa9ae88569242b245a6b9679"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Documentação das funções</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Descrição detalhada</h2>
+<div class="textblock"><p>Endpoint responsável por recuperar todos os modelos de contrato. </p>
+<p>Implementa a interface <a class="el" href="interface_realty_hub_1_1_api_service_1_1_common_1_1_api_1_1_i_endpoint.html" title="Interface que define um endpoint para o aplicativo ASP.NET Core.">IEndpoint</a> para mapear a rota de recuperação dos modelos de contrato.</p>
+<p>Este endpoint recebe a requisição e chama o handler para buscar os modelos de contrato existentes.</p>
+</div><h2 class="groupheader">Documentação das funções</h2>
+<a id="aa490c1c7fa9ae88569242b245a6b9679" name="aa490c1c7fa9ae88569242b245a6b9679"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa490c1c7fa9ae88569242b245a6b9679">&#9670;&#160;</a></span>HandlerAsync()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static async Task&lt; IResult &gt; RealtyHub.ApiService.Endpoints.ContractsTemplates.GetAllContractTemplatesEndpoint.HandlerAsync </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="interface_realty_hub_1_1_core_1_1_handlers_1_1_i_contract_template_handler.html">IContractTemplateHandler</a></td>          <td class="paramname"><span class="paramname"><em>handler</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Manipulador da rota que obtém todos os modelos de contrato. </p>
+<p>Chama o handler <a class="el" href="interface_realty_hub_1_1_core_1_1_handlers_1_1_i_contract_template_handler.html" title="Interface que define os métodos para manipulação de modelos de contrato.">IContractTemplateHandler</a> para recuperar os modelos de contrato. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">handler</td><td>Handler responsável pelas operações dos modelos de contrato.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>Retorna um objeto do tipo IResult representando a resposta HTTP, com status 200 OK em caso de sucesso ou 400 BadRequest em caso de falha. </dd></dl>
+
+</div>
+</div>
 <a id="ae37878884a01bcf515a6ff1c3b6a21c6" name="ae37878884a01bcf515a6ff1c3b6a21c6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae37878884a01bcf515a6ff1c3b6a21c6">&#9670;&#160;</a></span>Map()</h2>
 
@@ -146,6 +192,16 @@ Membros públicos estáticos</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Mapeia o endpoint GET para recuperar todos os modelos de contrato. </p>
+<p>Registra a rota GET que invoca o manipulador <a class="el" href="#aa490c1c7fa9ae88569242b245a6b9679" title="Manipulador da rota que obtém todos os modelos de contrato.">HandlerAsync</a> para obter os modelos de contrato.</p>
+<p>Retorna a lista de modelos de contrato em caso de sucesso ou uma resposta de erro em caso de falha.</p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">app</td><td>O construtor de rotas do aplicativo.</td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p>Implementa <a class="el" href="interface_realty_hub_1_1_api_service_1_1_common_1_1_api_1_1_i_endpoint.html#acaf6ed58b2814a0905a306b78ae7e0af">RealtyHub.ApiService.Common.Api.IEndpoint</a>.</p>
 
