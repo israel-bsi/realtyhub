@@ -1,5 +1,10 @@
 \doxysection{Referência da Classe Realty\+Hub.\+Core.\+Requests.\+Request}
 \hypertarget{class_realty_hub_1_1_core_1_1_requests_1_1_request}{}\label{class_realty_hub_1_1_core_1_1_requests_1_1_request}\index{RealtyHub.Core.Requests.Request@{RealtyHub.Core.Requests.Request}}
+
+
+Classe base para todas as solicitações.  
+
+
 Diagrama de hierarquia da classe Realty\+Hub.\+Core.\+Requests.\+Request\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -10,8 +15,13 @@ Diagrama de hierarquia da classe Realty\+Hub.\+Core.\+Requests.\+Request\+:\begi
 \begin{DoxyCompactItemize}
 \item 
 string \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_request_a08ee2fe13b2b91321aa623df79f431ab}{User\+Id}} = string.\+Empty\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Identificador do usuário que está fazendo a solicitação. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
+
+\doxysubsection{Descrição detalhada}
+Classe base para todas as solicitações. 
+
+Esta classe é responsável por encapsular os parâmetros comuns necessários para realizar solicitações, incluindo informações de autenticação e identificação do usuário. 
 
 \doxysubsection{Propriedades}
 \Hypertarget{class_realty_hub_1_1_core_1_1_requests_1_1_request_a08ee2fe13b2b91321aa623df79f431ab}\index{RealtyHub.Core.Requests.Request@{RealtyHub.Core.Requests.Request}!UserId@{UserId}}
@@ -21,6 +31,12 @@ string \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_request_a08ee
 string Realty\+Hub.\+Core.\+Requests.\+Request.\+User\+Id = string.\+Empty\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
 
 
+
+Identificador do usuário que está fazendo a solicitação. 
+
+Este campo é utilizado para identificar o usuário que está realizando a solicitação, permitindo rastrear e auditar as ações realizadas. 
+
+O ID do usuário que está fazendo a solicitação.
 
 A documentação para essa classe foi gerada a partir do seguinte arquivo\+:\begin{DoxyCompactItemize}
 \item 

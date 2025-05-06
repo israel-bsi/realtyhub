@@ -3,6 +3,7 @@ using RealtyHub.Core.Requests.Account;
 using RealtyHub.Core.Responses;
 
 namespace RealtyHub.Core.Handlers;
+
 /// <summary>
 /// Interface que define os métodos para manipulação de contas de usuário.
 /// </summary>
@@ -67,7 +68,7 @@ public interface IAccountHandler
 
     /// <summary>
     /// Redefine a senha de um usuário.
-    /// /summary>
+    /// </summary>
     /// <remarks>
     /// Este método é responsável por atualizar a senha do usuário com base no token fornecido.
     /// </remarks>

@@ -19,7 +19,7 @@ async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_
 \begin{DoxyCompactList}\small\item\em Exclui um cliente existente. \end{DoxyCompactList}\item 
 async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_customer}{Customer}}?$>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_web_1_1_handlers_1_1_customer_handler_a70877c0445c28667417c85ebc2d7c692}{Get\+By\+Id\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_customers_1_1_get_customer_by_id_request}{Get\+Customer\+By\+Id\+Request}} request)
 \begin{DoxyCompactList}\small\item\em Obtém um cliente pelo ID. \end{DoxyCompactList}\item 
-async Task$<$ Paged\+Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_customer}{Customer}} $>$?$>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_web_1_1_handlers_1_1_customer_handler_af2d5dfac55abfcbb082ba6c11f21ea32}{Get\+All\+Async}} (Get\+All\+Customers\+Request request)
+async Task$<$ Paged\+Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_customer}{Customer}} $>$?$>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_web_1_1_handlers_1_1_customer_handler_af2d5dfac55abfcbb082ba6c11f21ea32}{Get\+All\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_customers_1_1_get_all_customers_request}{Get\+All\+Customers\+Request}} request)
 \begin{DoxyCompactList}\small\item\em Obtém todos os clientes com paginação e filtro. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -43,13 +43,15 @@ async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_
 
 Cria um novo cliente. 
 
+Este método é responsável por criar um novo cliente com base nas informações fornecidas. 
+
 
 \begin{DoxyParams}{Parâmetros}
-{\em request} & O objeto cliente que irá ser criado\\
+{\em request} & Instância de \doxylink{class_realty_hub_1_1_core_1_1_models_1_1_customer}{Customer} contendo as informações do novo cliente.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Retorna}
-
+Retorna um objeto \doxylink{class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g}{Response$<$\+TData$>$} indicando o resultado da operação. O objeto TData é do tipo \doxylink{class_realty_hub_1_1_core_1_1_models_1_1_customer}{Customer} e pode ser nulo se a operação falhar. 
 \end{DoxyReturn}
 
 
@@ -65,13 +67,15 @@ async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_
 
 Exclui um cliente existente. 
 
+Este método é responsável por excluir um cliente existente com base no Id fornecido. 
+
 
 \begin{DoxyParams}{Parâmetros}
-{\em request} & O objeto request que irá ser deletado\\
+{\em request} & Instância de \doxylink{class_realty_hub_1_1_core_1_1_requests_1_1_customers_1_1_delete_customer_request}{Delete\+Customer\+Request} contendo o Id do cliente a ser excluído.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Retorna}
-
+Retorna um objeto \doxylink{class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g}{Response$<$\+TData$>$} indicando o resultado da operação. O objeto TData é do tipo \doxylink{class_realty_hub_1_1_core_1_1_models_1_1_customer}{Customer} e pode ser nulo se a operação falhar. 
 \end{DoxyReturn}
 
 
@@ -81,19 +85,21 @@ Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_cus
 \index{GetAllAsync@{GetAllAsync}!RealtyHub.Web.Handlers.CustomerHandler@{RealtyHub.Web.Handlers.CustomerHandler}}
 \doxysubsubsection{\texorpdfstring{GetAllAsync()}{GetAllAsync()}}
 {\footnotesize\ttfamily \label{class_realty_hub_1_1_web_1_1_handlers_1_1_customer_handler_af2d5dfac55abfcbb082ba6c11f21ea32} 
-async Task$<$ Paged\+Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_customer}{Customer}} $>$?$>$ $>$ Realty\+Hub.\+Web.\+Handlers.\+Customer\+Handler.\+Get\+All\+Async (\begin{DoxyParamCaption}\item[{Get\+All\+Customers\+Request}]{request}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+async Task$<$ Paged\+Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_customer}{Customer}} $>$?$>$ $>$ Realty\+Hub.\+Web.\+Handlers.\+Customer\+Handler.\+Get\+All\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_customers_1_1_get_all_customers_request}{Get\+All\+Customers\+Request}}}]{request}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
 Obtém todos os clientes com paginação e filtro. 
 
+Este método é responsável por recuperar todos os clientes existentes com base nos filtros fornecidos. 
+
 
 \begin{DoxyParams}{Parâmetros}
-{\em request} & O objeto request com os filtros a serem usados na pesquisa\\
+{\em request} & Instância de \doxylink{class_realty_hub_1_1_core_1_1_requests_1_1_customers_1_1_get_all_customers_request}{Get\+All\+Customers\+Request} contendo os filtros e paginação.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Retorna}
-
+Retorna um objeto \doxylink{class_realty_hub_1_1_core_1_1_responses_1_1_paged_response-1-g}{Paged\+Response$<$\+TData$>$} indicando o resultado da operação. O objeto TData é uma lista de \doxylink{class_realty_hub_1_1_core_1_1_models_1_1_customer}{Customer} e pode ser nulo se a operação falhar. 
 \end{DoxyReturn}
 
 
@@ -109,13 +115,15 @@ async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_
 
 Obtém um cliente pelo ID. 
 
+Este método é responsável por recuperar as informações de um cliente existente com base no Id fornecido. 
+
 
 \begin{DoxyParams}{Parâmetros}
-{\em request} & O objeto request que irá ser pesquisado\\
+{\em request} & Instância de \doxylink{class_realty_hub_1_1_core_1_1_requests_1_1_customers_1_1_get_customer_by_id_request}{Get\+Customer\+By\+Id\+Request} contendo o Id do cliente a ser recuperado.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Retorna}
-
+Retorna um objeto \doxylink{class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g}{Response$<$\+TData$>$} indicando o resultado da operação. O objeto TData é do tipo \doxylink{class_realty_hub_1_1_core_1_1_models_1_1_customer}{Customer} e pode ser nulo se a operação falhar. 
 \end{DoxyReturn}
 
 
@@ -131,13 +139,15 @@ async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_
 
 Atualiza um cliente existente. 
 
+Este método é responsável por atualizar as informações de um cliente existente com base nas informações fornecidas. 
+
 
 \begin{DoxyParams}{Parâmetros}
-{\em request} & O objeto cliente que irá ser atualizado\\
+{\em request} & Instância de \doxylink{class_realty_hub_1_1_core_1_1_models_1_1_customer}{Customer} contendo as informações atualizadas do cliente.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Retorna}
-
+Retorna um objeto \doxylink{class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g}{Response$<$\+TData$>$} indicando o resultado da operação. O objeto TData é do tipo \doxylink{class_realty_hub_1_1_core_1_1_models_1_1_customer}{Customer} e pode ser nulo se a operação falhar. 
 \end{DoxyReturn}
 
 

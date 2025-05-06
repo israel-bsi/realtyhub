@@ -1,5 +1,10 @@
 \doxysection{Referência da Interface Realty\+Hub.\+Core.\+Handlers.\+IProperty\+Photos\+Handler}
 \hypertarget{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_property_photos_handler}{}\label{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_property_photos_handler}\index{RealtyHub.Core.Handlers.IPropertyPhotosHandler@{RealtyHub.Core.Handlers.IPropertyPhotosHandler}}
+
+
+Interface que define os métodos para manipulação de fotos de imóveis.  
+
+
 Diagrama de hierarquia da classe Realty\+Hub.\+Core.\+Handlers.\+IProperty\+Photos\+Handler\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -10,14 +15,19 @@ Diagrama de hierarquia da classe Realty\+Hub.\+Core.\+Handlers.\+IProperty\+Phot
 \begin{DoxyCompactItemize}
 \item 
 Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_property_photo}{Property\+Photo}}?$>$ $>$ \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_property_photos_handler_a0b17731a9f152c7bdca3b427e1c89c61}{Create\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_properties_photos_1_1_create_property_photos_request}{Create\+Property\+Photos\+Request}} request)
-\item 
+\begin{DoxyCompactList}\small\item\em Cria uma nova foto de imóvel. \end{DoxyCompactList}\item 
 Task$<$ Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_property_photo}{Property\+Photo}} $>$?$>$ $>$ \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_property_photos_handler_a8c27ea1f0ef81dd3deeda01800cb4410}{Update\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_properties_photos_1_1_update_porperty_photos_request}{Update\+Porperty\+Photos\+Request}} request)
-\item 
+\begin{DoxyCompactList}\small\item\em Atualiza as informações de uma foto de imóvel existente. \end{DoxyCompactList}\item 
 Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_property_photo}{Property\+Photo}}?$>$ $>$ \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_property_photos_handler_ad45179fdab57ba18775079ebe5007ed4}{Delete\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_properties_photos_1_1_delete_property_photo_request}{Delete\+Property\+Photo\+Request}} request)
-\item 
+\begin{DoxyCompactList}\small\item\em Exclui uma foto de imóvel existente. \end{DoxyCompactList}\item 
 Task$<$ Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_property_photo}{Property\+Photo}} $>$?$>$ $>$ \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_property_photos_handler_abee91cfbd9a0343f40c01c258b053887}{Get\+All\+By\+Property\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_properties_photos_1_1_get_all_property_photos_by_property_request}{Get\+All\+Property\+Photos\+By\+Property\+Request}} request)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Recupera uma foto de imóvel existente. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
+
+\doxysubsection{Descrição detalhada}
+Interface que define os métodos para manipulação de fotos de imóveis. 
+
+Esta interface é responsável por definir as operações que podem ser realizadas com as fotos de imóveis, como criação, atualização, exclusão e recuperação de informações. 
 
 \doxysubsection{Documentação das funções}
 \Hypertarget{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_property_photos_handler_a0b17731a9f152c7bdca3b427e1c89c61}\index{RealtyHub.Core.Handlers.IPropertyPhotosHandler@{RealtyHub.Core.Handlers.IPropertyPhotosHandler}!CreateAsync@{CreateAsync}}
@@ -26,6 +36,20 @@ Task$<$ Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_model
 {\footnotesize\ttfamily \label{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_property_photos_handler_a0b17731a9f152c7bdca3b427e1c89c61} 
 Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_property_photo}{Property\+Photo}}?$>$ $>$ Realty\+Hub.\+Core.\+Handlers.\+IProperty\+Photos\+Handler.\+Create\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_properties_photos_1_1_create_property_photos_request}{Create\+Property\+Photos\+Request}}}]{request}{}\end{DoxyParamCaption})}
 
+
+
+Cria uma nova foto de imóvel. 
+
+Este método é responsável por criar uma nova foto de imóvel com base nas informações fornecidas. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & Instância de \doxylink{class_realty_hub_1_1_core_1_1_requests_1_1_properties_photos_1_1_create_property_photos_request}{Create\+Property\+Photos\+Request} contendo as informações da nova foto.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna um objeto \doxylink{class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g}{Response$<$\+TData$>$} indicando o resultado da operação. O objeto TData é do tipo \doxylink{class_realty_hub_1_1_core_1_1_models_1_1_property_photo}{Property\+Photo} e pode ser nulo se a operação falhar. 
+\end{DoxyReturn}
 
 
 Implementado por \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_property_photos_handler_a7f36a83670a6926b9a553faeb4aecf88}{Realty\+Hub.\+Api\+Service.\+Handlers.\+Property\+Photos\+Handler}} e \mbox{\hyperlink{class_realty_hub_1_1_web_1_1_handlers_1_1_property_photos_handler_a13667e31862819637d11913c70cf867f}{Realty\+Hub.\+Web.\+Handlers.\+Property\+Photos\+Handler}}.
@@ -38,6 +62,20 @@ Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_pr
 
 
 
+Exclui uma foto de imóvel existente. 
+
+Este método é responsável por excluir uma foto de imóvel existente com base no Id fornecido. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & Instância de \doxylink{class_realty_hub_1_1_core_1_1_requests_1_1_properties_photos_1_1_delete_property_photo_request}{Delete\+Property\+Photo\+Request} contendo o Id da foto a ser excluída.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna um objeto \doxylink{class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g}{Response$<$\+TData$>$} indicando o resultado da operação. O objeto TData é do tipo \doxylink{class_realty_hub_1_1_core_1_1_models_1_1_property_photo}{Property\+Photo} e pode ser nulo se a operação falhar. 
+\end{DoxyReturn}
+
+
 Implementado por \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_property_photos_handler_ad7fe3dfc4d8f084d869ef6321ba7d7d5}{Realty\+Hub.\+Api\+Service.\+Handlers.\+Property\+Photos\+Handler}} e \mbox{\hyperlink{class_realty_hub_1_1_web_1_1_handlers_1_1_property_photos_handler_ad18d510bde2d0c906e94b2a514e3455d}{Realty\+Hub.\+Web.\+Handlers.\+Property\+Photos\+Handler}}.
 
 \Hypertarget{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_property_photos_handler_abee91cfbd9a0343f40c01c258b053887}\index{RealtyHub.Core.Handlers.IPropertyPhotosHandler@{RealtyHub.Core.Handlers.IPropertyPhotosHandler}!GetAllByPropertyAsync@{GetAllByPropertyAsync}}
@@ -48,6 +86,21 @@ Task$<$ Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_model
 
 
 
+Recupera uma foto de imóvel existente. 
+
+Este método é responsável por recuperar uma foto de imóvel existente com base no Id fornecido. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & Instância de \doxylink{class_realty_hub_1_1_core_1_1_requests_1_1_properties_photos_1_1_get_all_property_photos_by_property_request}{Get\+All\+Property\+Photos\+By\+Property\+Request} contendo o Id da foto a ser recuperada.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna um objeto \doxylink{class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g}{Response$<$\+TData$>$} indicando o resultado da operação. ~\newline
+ O objeto TData é uma lista do tipo \doxylink{class_realty_hub_1_1_core_1_1_models_1_1_property_photo}{Property\+Photo} e pode ser nulo se a operação falhar. 
+\end{DoxyReturn}
+
+
 Implementado por \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_property_photos_handler_af1d7d9c0dbfd41d1168e37159517ed7e}{Realty\+Hub.\+Api\+Service.\+Handlers.\+Property\+Photos\+Handler}} e \mbox{\hyperlink{class_realty_hub_1_1_web_1_1_handlers_1_1_property_photos_handler_a5bb9517706613b86f94cf47aae52081c}{Realty\+Hub.\+Web.\+Handlers.\+Property\+Photos\+Handler}}.
 
 \Hypertarget{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_property_photos_handler_a8c27ea1f0ef81dd3deeda01800cb4410}\index{RealtyHub.Core.Handlers.IPropertyPhotosHandler@{RealtyHub.Core.Handlers.IPropertyPhotosHandler}!UpdateAsync@{UpdateAsync}}
@@ -56,6 +109,20 @@ Implementado por \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_handlers_
 {\footnotesize\ttfamily \label{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_property_photos_handler_a8c27ea1f0ef81dd3deeda01800cb4410} 
 Task$<$ Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_property_photo}{Property\+Photo}} $>$?$>$ $>$ Realty\+Hub.\+Core.\+Handlers.\+IProperty\+Photos\+Handler.\+Update\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_properties_photos_1_1_update_porperty_photos_request}{Update\+Porperty\+Photos\+Request}}}]{request}{}\end{DoxyParamCaption})}
 
+
+
+Atualiza as informações de uma foto de imóvel existente. 
+
+Este método é responsável por atualizar as informações de uma foto de imóvel existente com base nas informações fornecidas. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & Instância de \doxylink{class_realty_hub_1_1_core_1_1_requests_1_1_properties_photos_1_1_update_porperty_photos_request}{Update\+Porperty\+Photos\+Request} contendo as informações atualizadas da foto.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna um objeto \doxylink{class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g}{Response$<$\+TData$>$} indicando o resultado da operação. O objeto TData é do tipo \doxylink{class_realty_hub_1_1_core_1_1_models_1_1_property_photo}{Property\+Photo} e pode ser nulo se a operação falhar. 
+\end{DoxyReturn}
 
 
 Implementado por \mbox{\hyperlink{class_realty_hub_1_1_api_service_1_1_handlers_1_1_property_photos_handler_ad34c86c6ec9de312ebe39f3ed445b9de}{Realty\+Hub.\+Api\+Service.\+Handlers.\+Property\+Photos\+Handler}} e \mbox{\hyperlink{class_realty_hub_1_1_web_1_1_handlers_1_1_property_photos_handler_ad1ec42a871be891d6b222df6f35d1363}{Realty\+Hub.\+Web.\+Handlers.\+Property\+Photos\+Handler}}.

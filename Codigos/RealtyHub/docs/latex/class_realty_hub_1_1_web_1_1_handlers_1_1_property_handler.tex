@@ -12,17 +12,17 @@ Diagrama de hierarquia da classe Realty\+Hub.\+Web.\+Handlers.\+Property\+Handle
 \mbox{\hyperlink{class_realty_hub_1_1_web_1_1_handlers_1_1_property_handler_ae0aa4b73feb98db1af3015c46a4bd905}{Property\+Handler}} (IHttp\+Client\+Factory http\+Client\+Factory)
 \item 
 async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_property}{Property}}?$>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_web_1_1_handlers_1_1_property_handler_ad0ed7f148c1760b811b03b98ebcd8646}{Create\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_property}{Property}} request)
-\item 
+\begin{DoxyCompactList}\small\item\em Cria um novo imóvel. \end{DoxyCompactList}\item 
 async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_property}{Property}}?$>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_web_1_1_handlers_1_1_property_handler_adf244c1606fd93e64c5d68942ded0ab2}{Update\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_property}{Property}} request)
-\item 
+\begin{DoxyCompactList}\small\item\em Atualiza as informações de um imóvel existente. \end{DoxyCompactList}\item 
 async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_property}{Property}}?$>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_web_1_1_handlers_1_1_property_handler_a29209773851fbc2fac59bf835a18a28d}{Delete\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_properties_1_1_delete_property_request}{Delete\+Property\+Request}} request)
-\item 
+\begin{DoxyCompactList}\small\item\em Exclui um imóvel existente. \end{DoxyCompactList}\item 
 async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_property}{Property}}?$>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_web_1_1_handlers_1_1_property_handler_a9ea9e409073c8571253f9e7bb800d66c}{Get\+By\+Id\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_properties_1_1_get_property_by_id_request}{Get\+Property\+By\+Id\+Request}} request)
-\item 
+\begin{DoxyCompactList}\small\item\em Recupera um imóvel existente com base no Id fornecido. \end{DoxyCompactList}\item 
 async Task$<$ Paged\+Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_property}{Property}} $>$?$>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_web_1_1_handlers_1_1_property_handler_ac37faf23af296995ed778992a381fdcd}{Get\+All\+Async}} (Get\+All\+Properties\+Request request)
-\item 
+\begin{DoxyCompactList}\small\item\em Recupera todos os imóveis disponíveis. \end{DoxyCompactList}\item 
 async Task$<$ Paged\+Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}} $>$?$>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_web_1_1_handlers_1_1_property_handler_af17a1e81b7156a7db9b2d12605b2882e}{Get\+All\+Viewings\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_properties_1_1_get_all_viewings_by_property_request}{Get\+All\+Viewings\+By\+Property\+Request}} request)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Recupera todos os imóveis disponíveis com base no Id do usuário. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Construtores e Destrutores}
@@ -43,6 +43,20 @@ async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_
 
 
 
+Cria um novo imóvel. 
+
+Este método é responsável por criar um novo imóvel com base nas informações fornecidas. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & Instância de \doxylink{class_realty_hub_1_1_core_1_1_models_1_1_property}{Property} contendo as informações do novo imóvel.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna um objeto \doxylink{class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g}{Response$<$\+TData$>$} indicando o resultado da operação. O objeto TData é do tipo \doxylink{class_realty_hub_1_1_core_1_1_models_1_1_property}{Property} e pode ser nulo se a operação falhar. 
+\end{DoxyReturn}
+
+
 Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_property_handler_a37a716d7160a10c1870b2bf53ced2724}{Realty\+Hub.\+Core.\+Handlers.\+IProperty\+Handler}}.
 
 \Hypertarget{class_realty_hub_1_1_web_1_1_handlers_1_1_property_handler_a29209773851fbc2fac59bf835a18a28d}\index{RealtyHub.Web.Handlers.PropertyHandler@{RealtyHub.Web.Handlers.PropertyHandler}!DeleteAsync@{DeleteAsync}}
@@ -51,6 +65,20 @@ Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_pro
 {\footnotesize\ttfamily \label{class_realty_hub_1_1_web_1_1_handlers_1_1_property_handler_a29209773851fbc2fac59bf835a18a28d} 
 async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_property}{Property}}?$>$ $>$ Realty\+Hub.\+Web.\+Handlers.\+Property\+Handler.\+Delete\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_properties_1_1_delete_property_request}{Delete\+Property\+Request}}}]{request}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+
+
+Exclui um imóvel existente. 
+
+Este método é responsável por excluir um imóvel existente com base no Id fornecido. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & Instância de \doxylink{class_realty_hub_1_1_core_1_1_requests_1_1_properties_1_1_delete_property_request}{Delete\+Property\+Request} contendo o Id do imóvel a ser excluído.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna um objeto \doxylink{class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g}{Response$<$\+TData$>$} indicando o resultado da operação. O objeto TData é do tipo \doxylink{class_realty_hub_1_1_core_1_1_models_1_1_property}{Property} e pode ser nulo se a operação falhar. 
+\end{DoxyReturn}
 
 
 Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_property_handler_aa3793b23b845db7327b02cb0f2eb3976}{Realty\+Hub.\+Core.\+Handlers.\+IProperty\+Handler}}.
@@ -63,6 +91,20 @@ async Task$<$ Paged\+Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_c
 
 
 
+Recupera todos os imóveis disponíveis. 
+
+Este método é responsável por buscar todos os imóveis armazenados no sistema e retornar uma lista com os resultados. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & Instância de Get\+All\+Properties\+Request contendo os parâmetros de filtragem.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna um objeto \doxylink{class_realty_hub_1_1_core_1_1_responses_1_1_paged_response-1-g}{Paged\+Response$<$\+TData$>$} contendo uma lista de imóveis. O objeto TData é uma lista do tipo \doxylink{class_realty_hub_1_1_core_1_1_models_1_1_property}{Property} e pode ser nulo se a operação falhar. 
+\end{DoxyReturn}
+
+
 Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_property_handler_a72706e58fbe98201134597d6050f678f}{Realty\+Hub.\+Core.\+Handlers.\+IProperty\+Handler}}.
 
 \Hypertarget{class_realty_hub_1_1_web_1_1_handlers_1_1_property_handler_af17a1e81b7156a7db9b2d12605b2882e}\index{RealtyHub.Web.Handlers.PropertyHandler@{RealtyHub.Web.Handlers.PropertyHandler}!GetAllViewingsAsync@{GetAllViewingsAsync}}
@@ -71,6 +113,20 @@ Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_pro
 {\footnotesize\ttfamily \label{class_realty_hub_1_1_web_1_1_handlers_1_1_property_handler_af17a1e81b7156a7db9b2d12605b2882e} 
 async Task$<$ Paged\+Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}} $>$?$>$ $>$ Realty\+Hub.\+Web.\+Handlers.\+Property\+Handler.\+Get\+All\+Viewings\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_properties_1_1_get_all_viewings_by_property_request}{Get\+All\+Viewings\+By\+Property\+Request}}}]{request}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+
+
+Recupera todos os imóveis disponíveis com base no Id do usuário. 
+
+Este método é responsável por buscar todos os imóveis armazenados no sistema e retornar uma lista com os resultados. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & Instância de \doxylink{class_realty_hub_1_1_core_1_1_requests_1_1_properties_1_1_get_all_viewings_by_property_request}{Get\+All\+Viewings\+By\+Property\+Request} contendo os parâmetros de filtragem.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna um objeto \doxylink{class_realty_hub_1_1_core_1_1_responses_1_1_paged_response-1-g}{Paged\+Response$<$\+TData$>$} contendo uma lista de imóveis. O objeto TData é uma lista do tipo \doxylink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing} e pode ser nulo se a operação falhar. 
+\end{DoxyReturn}
 
 
 Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_property_handler_aef2887ad7a2010a4825786eb1ab67348}{Realty\+Hub.\+Core.\+Handlers.\+IProperty\+Handler}}.
@@ -83,6 +139,20 @@ async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_
 
 
 
+Recupera um imóvel existente com base no Id fornecido. 
+
+Este método é responsável por buscar um imóvel existente com base no Id fornecido. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & Instância de \doxylink{class_realty_hub_1_1_core_1_1_requests_1_1_properties_1_1_get_property_by_id_request}{Get\+Property\+By\+Id\+Request} contendo o Id do imóvel a ser recuperado.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna um objeto \doxylink{class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g}{Response$<$\+TData$>$} contendo as informações do imóvel. O objeto TData é do tipo \doxylink{class_realty_hub_1_1_core_1_1_models_1_1_property}{Property} e pode ser nulo se a operação falhar. 
+\end{DoxyReturn}
+
+
 Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_property_handler_a515d209b4aca96d951bacc8e41abb81a}{Realty\+Hub.\+Core.\+Handlers.\+IProperty\+Handler}}.
 
 \Hypertarget{class_realty_hub_1_1_web_1_1_handlers_1_1_property_handler_adf244c1606fd93e64c5d68942ded0ab2}\index{RealtyHub.Web.Handlers.PropertyHandler@{RealtyHub.Web.Handlers.PropertyHandler}!UpdateAsync@{UpdateAsync}}
@@ -91,6 +161,20 @@ Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_pro
 {\footnotesize\ttfamily \label{class_realty_hub_1_1_web_1_1_handlers_1_1_property_handler_adf244c1606fd93e64c5d68942ded0ab2} 
 async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_property}{Property}}?$>$ $>$ Realty\+Hub.\+Web.\+Handlers.\+Property\+Handler.\+Update\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_property}{Property}}}]{request}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+
+
+Atualiza as informações de um imóvel existente. 
+
+Este método é responsável por atualizar as informações de um imóvel existente com base nas informações fornecidas. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & Instância de \doxylink{class_realty_hub_1_1_core_1_1_models_1_1_property}{Property} contendo as informações atualizadas do imóvel.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna um objeto \doxylink{class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g}{Response$<$\+TData$>$} indicando o resultado da operação. O objeto TData é do tipo \doxylink{class_realty_hub_1_1_core_1_1_models_1_1_property}{Property} e pode ser nulo se a operação falhar. 
+\end{DoxyReturn}
 
 
 Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_property_handler_aefe34fa516200431f773005291c3c9a7}{Realty\+Hub.\+Core.\+Handlers.\+IProperty\+Handler}}.

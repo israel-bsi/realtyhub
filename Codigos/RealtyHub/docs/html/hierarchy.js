@@ -220,9 +220,12 @@ var hierarchy =
       [ "RealtyHub.Core.Requests.Offers.GetOfferByIdRequest", "class_realty_hub_1_1_core_1_1_requests_1_1_offers_1_1_get_offer_by_id_request.html", null ],
       [ "RealtyHub.Core.Requests.Offers.RejectOfferRequest", "class_realty_hub_1_1_core_1_1_requests_1_1_offers_1_1_reject_offer_request.html", null ],
       [ "RealtyHub.Core.Requests.PagedRequest", "class_realty_hub_1_1_core_1_1_requests_1_1_paged_request.html", [
+        [ "RealtyHub.Core.Requests.Customers.GetAllCustomersRequest", "class_realty_hub_1_1_core_1_1_requests_1_1_customers_1_1_get_all_customers_request.html", null ],
         [ "RealtyHub.Core.Requests.Offers.GetAllOffersByCustomerRequest", "class_realty_hub_1_1_core_1_1_requests_1_1_offers_1_1_get_all_offers_by_customer_request.html", null ],
         [ "RealtyHub.Core.Requests.Offers.GetAllOffersByPropertyRequest", "class_realty_hub_1_1_core_1_1_requests_1_1_offers_1_1_get_all_offers_by_property_request.html", null ],
-        [ "RealtyHub.Core.Requests.Properties.GetAllViewingsByPropertyRequest", "class_realty_hub_1_1_core_1_1_requests_1_1_properties_1_1_get_all_viewings_by_property_request.html", null ]
+        [ "RealtyHub.Core.Requests.Offers.GetAllOffersRequest", "class_realty_hub_1_1_core_1_1_requests_1_1_offers_1_1_get_all_offers_request.html", null ],
+        [ "RealtyHub.Core.Requests.Properties.GetAllViewingsByPropertyRequest", "class_realty_hub_1_1_core_1_1_requests_1_1_properties_1_1_get_all_viewings_by_property_request.html", null ],
+        [ "RealtyHub.Core.Requests.Viewings.GetAllViewingsRequest", "class_realty_hub_1_1_core_1_1_requests_1_1_viewings_1_1_get_all_viewings_request.html", null ]
       ] ],
       [ "RealtyHub.Core.Requests.Properties.DeletePropertyRequest", "class_realty_hub_1_1_core_1_1_requests_1_1_properties_1_1_delete_property_request.html", null ],
       [ "RealtyHub.Core.Requests.Properties.GetPropertyByIdRequest", "class_realty_hub_1_1_core_1_1_requests_1_1_properties_1_1_get_property_by_id_request.html", null ],

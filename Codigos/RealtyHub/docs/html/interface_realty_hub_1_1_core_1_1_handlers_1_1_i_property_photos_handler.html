@@ -108,6 +108,9 @@ $(function(){initNavTree('interface_realty_hub_1_1_core_1_1_handlers_1_1_i_prope
   <div class="headertitle"><div class="title">Referência da Interface RealtyHub.Core.Handlers.IPropertyPhotosHandler</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Interface que define os métodos para manipulação de fotos de imóveis.  
+ <a href="#details">Mais...</a></p>
 <div class="dynheader">
 Diagrama de hierarquia da classe RealtyHub.Core.Handlers.IPropertyPhotosHandler:</div>
 <div class="dyncontent">
@@ -122,15 +125,22 @@ Diagrama de hierarquia da classe RealtyHub.Core.Handlers.IPropertyPhotosHandler:
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Membros Públicos</h2></td></tr>
 <tr class="memitem:a0b17731a9f152c7bdca3b427e1c89c61" id="r_a0b17731a9f152c7bdca3b427e1c89c61"><td class="memItemLeft" align="right" valign="top">Task&lt; Response&lt; <a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_property_photo.html">PropertyPhoto</a>?&gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0b17731a9f152c7bdca3b427e1c89c61">CreateAsync</a> (<a class="el" href="class_realty_hub_1_1_core_1_1_requests_1_1_properties_photos_1_1_create_property_photos_request.html">CreatePropertyPhotosRequest</a> request)</td></tr>
+<tr class="memdesc:a0b17731a9f152c7bdca3b427e1c89c61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cria uma nova foto de imóvel.  <br /></td></tr>
 <tr class="separator:a0b17731a9f152c7bdca3b427e1c89c61"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c27ea1f0ef81dd3deeda01800cb4410" id="r_a8c27ea1f0ef81dd3deeda01800cb4410"><td class="memItemLeft" align="right" valign="top">Task&lt; Response&lt; List&lt; <a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_property_photo.html">PropertyPhoto</a> &gt;?&gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8c27ea1f0ef81dd3deeda01800cb4410">UpdateAsync</a> (<a class="el" href="class_realty_hub_1_1_core_1_1_requests_1_1_properties_photos_1_1_update_porperty_photos_request.html">UpdatePorpertyPhotosRequest</a> request)</td></tr>
+<tr class="memdesc:a8c27ea1f0ef81dd3deeda01800cb4410"><td class="mdescLeft">&#160;</td><td class="mdescRight">Atualiza as informações de uma foto de imóvel existente.  <br /></td></tr>
 <tr class="separator:a8c27ea1f0ef81dd3deeda01800cb4410"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad45179fdab57ba18775079ebe5007ed4" id="r_ad45179fdab57ba18775079ebe5007ed4"><td class="memItemLeft" align="right" valign="top">Task&lt; Response&lt; <a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_property_photo.html">PropertyPhoto</a>?&gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad45179fdab57ba18775079ebe5007ed4">DeleteAsync</a> (<a class="el" href="class_realty_hub_1_1_core_1_1_requests_1_1_properties_photos_1_1_delete_property_photo_request.html">DeletePropertyPhotoRequest</a> request)</td></tr>
+<tr class="memdesc:ad45179fdab57ba18775079ebe5007ed4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exclui uma foto de imóvel existente.  <br /></td></tr>
 <tr class="separator:ad45179fdab57ba18775079ebe5007ed4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abee91cfbd9a0343f40c01c258b053887" id="r_abee91cfbd9a0343f40c01c258b053887"><td class="memItemLeft" align="right" valign="top">Task&lt; Response&lt; List&lt; <a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_property_photo.html">PropertyPhoto</a> &gt;?&gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abee91cfbd9a0343f40c01c258b053887">GetAllByPropertyAsync</a> (<a class="el" href="class_realty_hub_1_1_core_1_1_requests_1_1_properties_photos_1_1_get_all_property_photos_by_property_request.html">GetAllPropertyPhotosByPropertyRequest</a> request)</td></tr>
+<tr class="memdesc:abee91cfbd9a0343f40c01c258b053887"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recupera uma foto de imóvel existente.  <br /></td></tr>
 <tr class="separator:abee91cfbd9a0343f40c01c258b053887"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Documentação das funções</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Descrição detalhada</h2>
+<div class="textblock"><p>Interface que define os métodos para manipulação de fotos de imóveis. </p>
+<p>Esta interface é responsável por definir as operações que podem ser realizadas com as fotos de imóveis, como criação, atualização, exclusão e recuperação de informações. </p>
+</div><h2 class="groupheader">Documentação das funções</h2>
 <a id="a0b17731a9f152c7bdca3b427e1c89c61" name="a0b17731a9f152c7bdca3b427e1c89c61"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0b17731a9f152c7bdca3b427e1c89c61">&#9670;&#160;</a></span>CreateAsync()</h2>
 
@@ -145,6 +155,16 @@ Membros Públicos</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Cria uma nova foto de imóvel. </p>
+<p>Este método é responsável por criar uma nova foto de imóvel com base nas informações fornecidas. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>Instância de <a class="el" href="class_realty_hub_1_1_core_1_1_requests_1_1_properties_photos_1_1_create_property_photos_request.html">CreatePropertyPhotosRequest</a> contendo as informações da nova foto.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>Retorna um objeto <a class="el" href="class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g.html" title="Classe genérica para encapsular a resposta de uma operação, incluindo dados, mensagem e código de sta...">Response&lt;TData&gt;</a> indicando o resultado da operação. O objeto TData é do tipo <a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_property_photo.html">PropertyPhoto</a> e pode ser nulo se a operação falhar. </dd></dl>
 
 <p>Implementado por <a class="el" href="class_realty_hub_1_1_api_service_1_1_handlers_1_1_property_photos_handler.html#a7f36a83670a6926b9a553faeb4aecf88">RealtyHub.ApiService.Handlers.PropertyPhotosHandler</a> e <a class="el" href="class_realty_hub_1_1_web_1_1_handlers_1_1_property_photos_handler.html#a13667e31862819637d11913c70cf867f">RealtyHub.Web.Handlers.PropertyPhotosHandler</a>.</p>
 
@@ -165,6 +185,16 @@ Membros Públicos</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Exclui uma foto de imóvel existente. </p>
+<p>Este método é responsável por excluir uma foto de imóvel existente com base no Id fornecido. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>Instância de <a class="el" href="class_realty_hub_1_1_core_1_1_requests_1_1_properties_photos_1_1_delete_property_photo_request.html">DeletePropertyPhotoRequest</a> contendo o Id da foto a ser excluída.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>Retorna um objeto <a class="el" href="class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g.html" title="Classe genérica para encapsular a resposta de uma operação, incluindo dados, mensagem e código de sta...">Response&lt;TData&gt;</a> indicando o resultado da operação. O objeto TData é do tipo <a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_property_photo.html">PropertyPhoto</a> e pode ser nulo se a operação falhar. </dd></dl>
+
 <p>Implementado por <a class="el" href="class_realty_hub_1_1_api_service_1_1_handlers_1_1_property_photos_handler.html#ad7fe3dfc4d8f084d869ef6321ba7d7d5">RealtyHub.ApiService.Handlers.PropertyPhotosHandler</a> e <a class="el" href="class_realty_hub_1_1_web_1_1_handlers_1_1_property_photos_handler.html#ad18d510bde2d0c906e94b2a514e3455d">RealtyHub.Web.Handlers.PropertyPhotosHandler</a>.</p>
 
 </div>
@@ -184,6 +214,17 @@ Membros Públicos</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Recupera uma foto de imóvel existente. </p>
+<p>Este método é responsável por recuperar uma foto de imóvel existente com base no Id fornecido. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>Instância de <a class="el" href="class_realty_hub_1_1_core_1_1_requests_1_1_properties_photos_1_1_get_all_property_photos_by_property_request.html">GetAllPropertyPhotosByPropertyRequest</a> contendo o Id da foto a ser recuperada.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>Retorna um objeto <a class="el" href="class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g.html" title="Classe genérica para encapsular a resposta de uma operação, incluindo dados, mensagem e código de sta...">Response&lt;TData&gt;</a> indicando o resultado da operação. <br  />
+ O objeto TData é uma lista do tipo <a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_property_photo.html">PropertyPhoto</a> e pode ser nulo se a operação falhar. </dd></dl>
+
 <p>Implementado por <a class="el" href="class_realty_hub_1_1_api_service_1_1_handlers_1_1_property_photos_handler.html#af1d7d9c0dbfd41d1168e37159517ed7e">RealtyHub.ApiService.Handlers.PropertyPhotosHandler</a> e <a class="el" href="class_realty_hub_1_1_web_1_1_handlers_1_1_property_photos_handler.html#a5bb9517706613b86f94cf47aae52081c">RealtyHub.Web.Handlers.PropertyPhotosHandler</a>.</p>
 
 </div>
@@ -202,6 +243,16 @@ Membros Públicos</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Atualiza as informações de uma foto de imóvel existente. </p>
+<p>Este método é responsável por atualizar as informações de uma foto de imóvel existente com base nas informações fornecidas. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>Instância de <a class="el" href="class_realty_hub_1_1_core_1_1_requests_1_1_properties_photos_1_1_update_porperty_photos_request.html">UpdatePorpertyPhotosRequest</a> contendo as informações atualizadas da foto.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>Retorna um objeto <a class="el" href="class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g.html" title="Classe genérica para encapsular a resposta de uma operação, incluindo dados, mensagem e código de sta...">Response&lt;TData&gt;</a> indicando o resultado da operação. O objeto TData é do tipo <a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_property_photo.html">PropertyPhoto</a> e pode ser nulo se a operação falhar. </dd></dl>
 
 <p>Implementado por <a class="el" href="class_realty_hub_1_1_api_service_1_1_handlers_1_1_property_photos_handler.html#ad34c86c6ec9de312ebe39f3ed445b9de">RealtyHub.ApiService.Handlers.PropertyPhotosHandler</a> e <a class="el" href="class_realty_hub_1_1_web_1_1_handlers_1_1_property_photos_handler.html#ad1ec42a871be891d6b222df6f35d1363">RealtyHub.Web.Handlers.PropertyPhotosHandler</a>.</p>
 

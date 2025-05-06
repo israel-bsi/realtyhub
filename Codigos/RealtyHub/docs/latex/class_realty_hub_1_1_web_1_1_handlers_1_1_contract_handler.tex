@@ -12,15 +12,15 @@ Diagrama de hierarquia da classe Realty\+Hub.\+Web.\+Handlers.\+Contract\+Handle
 \mbox{\hyperlink{class_realty_hub_1_1_web_1_1_handlers_1_1_contract_handler_a298f430ebeb8ae920471ab085edb64a0}{Contract\+Handler}} (IHttp\+Client\+Factory http\+Client\+Factory)
 \item 
 async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_contract}{Contract}}?$>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_web_1_1_handlers_1_1_contract_handler_a20cafce00aac5e7329edece58bfe9aec}{Create\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_contract}{Contract}} request)
-\item 
+\begin{DoxyCompactList}\small\item\em Cria um novo contrato. \end{DoxyCompactList}\item 
 async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_contract}{Contract}}?$>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_web_1_1_handlers_1_1_contract_handler_ac3346a41222295b030d277379ee0f6db}{Update\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_contract}{Contract}} request)
-\item 
+\begin{DoxyCompactList}\small\item\em Atualiza as informações de um contrato existente. \end{DoxyCompactList}\item 
 async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_contract}{Contract}}?$>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_web_1_1_handlers_1_1_contract_handler_a0c36befd4bfa3169ecf7ea17cb2f8dcf}{Delete\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_contracts_1_1_delete_contract_request}{Delete\+Contract\+Request}} request)
-\item 
+\begin{DoxyCompactList}\small\item\em Exclui um contrato existente. \end{DoxyCompactList}\item 
 async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_contract}{Contract}}?$>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_web_1_1_handlers_1_1_contract_handler_a82132c9a948ff739c9d4838a4c71ad57}{Get\+By\+Id\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_contracts_1_1_get_contract_by_id_request}{Get\+Contract\+By\+Id\+Request}} request)
-\item 
+\begin{DoxyCompactList}\small\item\em Recupera as informações de um contrato existente. \end{DoxyCompactList}\item 
 async Task$<$ Paged\+Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_contract}{Contract}} $>$?$>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_web_1_1_handlers_1_1_contract_handler_a19eedcbbf0c0848e3a1122f83d5d14bf}{Get\+All\+Async}} (Get\+All\+Contracts\+Request request)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Recupera uma lista de contratos com base nos critérios de pesquisa fornecidos. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Construtores e Destrutores}
@@ -41,6 +41,20 @@ async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_
 
 
 
+Cria um novo contrato. 
+
+Este método é responsável por criar um novo contrato com base nas informações fornecidas. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & Instância de \doxylink{class_realty_hub_1_1_core_1_1_models_1_1_contract}{Contract} contendo as informações do novo contrato.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna um objeto \doxylink{class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g}{Response$<$\+TData$>$} indicando o resultado da operação. O objeto TData é do tipo \doxylink{class_realty_hub_1_1_core_1_1_models_1_1_contract}{Contract} e pode ser nulo se a operação falhar. 
+\end{DoxyReturn}
+
+
 Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_contract_handler_ac1bc8419ec92834bcfe63d908fd8452a}{Realty\+Hub.\+Core.\+Handlers.\+IContract\+Handler}}.
 
 \Hypertarget{class_realty_hub_1_1_web_1_1_handlers_1_1_contract_handler_a0c36befd4bfa3169ecf7ea17cb2f8dcf}\index{RealtyHub.Web.Handlers.ContractHandler@{RealtyHub.Web.Handlers.ContractHandler}!DeleteAsync@{DeleteAsync}}
@@ -49,6 +63,20 @@ Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_con
 {\footnotesize\ttfamily \label{class_realty_hub_1_1_web_1_1_handlers_1_1_contract_handler_a0c36befd4bfa3169ecf7ea17cb2f8dcf} 
 async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_contract}{Contract}}?$>$ $>$ Realty\+Hub.\+Web.\+Handlers.\+Contract\+Handler.\+Delete\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_contracts_1_1_delete_contract_request}{Delete\+Contract\+Request}}}]{request}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+
+
+Exclui um contrato existente. 
+
+Este método é responsável por excluir um contrato existente com base no Id fornecido. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & Instância de \doxylink{class_realty_hub_1_1_core_1_1_requests_1_1_contracts_1_1_delete_contract_request}{Delete\+Contract\+Request} contendo o Id do contrato a ser excluído.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna um objeto \doxylink{class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g}{Response$<$\+TData$>$} indicando o resultado da operação. O objeto TData é do tipo \doxylink{class_realty_hub_1_1_core_1_1_models_1_1_contract}{Contract} e pode ser nulo se a operação falhar. 
+\end{DoxyReturn}
 
 
 Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_contract_handler_a0188c9b5e379e99b9ff30909652776db}{Realty\+Hub.\+Core.\+Handlers.\+IContract\+Handler}}.
@@ -61,6 +89,20 @@ async Task$<$ Paged\+Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_c
 
 
 
+Recupera uma lista de contratos com base nos critérios de pesquisa fornecidos. 
+
+Este método é responsável por recuperar uma lista de contratos com base nos critérios de pesquisa fornecidos. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & Instância de Get\+All\+Contracts\+Request contendo os critérios de pesquisa.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna um objeto \doxylink{class_realty_hub_1_1_core_1_1_responses_1_1_paged_response-1-g}{Paged\+Response$<$\+TData$>$} indicando o resultado da operação. O objeto TData é uma lista de \doxylink{class_realty_hub_1_1_core_1_1_models_1_1_contract}{Contract} e pode ser nulo se a operação falhar. 
+\end{DoxyReturn}
+
+
 Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_contract_handler_a1cc39776be0ebde433205680034001d1}{Realty\+Hub.\+Core.\+Handlers.\+IContract\+Handler}}.
 
 \Hypertarget{class_realty_hub_1_1_web_1_1_handlers_1_1_contract_handler_a82132c9a948ff739c9d4838a4c71ad57}\index{RealtyHub.Web.Handlers.ContractHandler@{RealtyHub.Web.Handlers.ContractHandler}!GetByIdAsync@{GetByIdAsync}}
@@ -71,6 +113,20 @@ async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_
 
 
 
+Recupera as informações de um contrato existente. 
+
+Este método é responsável por recuperar as informações de um contrato existente com base no Id fornecido. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & Instância de \doxylink{class_realty_hub_1_1_core_1_1_requests_1_1_contracts_1_1_get_contract_by_id_request}{Get\+Contract\+By\+Id\+Request} contendo o Id do contrato a ser recuperado.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna um objeto \doxylink{class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g}{Response$<$\+TData$>$} indicando o resultado da operação. O objeto TData é do tipo \doxylink{class_realty_hub_1_1_core_1_1_models_1_1_contract}{Contract} e pode ser nulo se a operação falhar. 
+\end{DoxyReturn}
+
+
 Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_contract_handler_a136a2ff5c28d60df2813dc18232b8557}{Realty\+Hub.\+Core.\+Handlers.\+IContract\+Handler}}.
 
 \Hypertarget{class_realty_hub_1_1_web_1_1_handlers_1_1_contract_handler_ac3346a41222295b030d277379ee0f6db}\index{RealtyHub.Web.Handlers.ContractHandler@{RealtyHub.Web.Handlers.ContractHandler}!UpdateAsync@{UpdateAsync}}
@@ -79,6 +135,20 @@ Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_con
 {\footnotesize\ttfamily \label{class_realty_hub_1_1_web_1_1_handlers_1_1_contract_handler_ac3346a41222295b030d277379ee0f6db} 
 async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_contract}{Contract}}?$>$ $>$ Realty\+Hub.\+Web.\+Handlers.\+Contract\+Handler.\+Update\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_contract}{Contract}}}]{request}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+
+
+Atualiza as informações de um contrato existente. 
+
+Este método é responsável por atualizar as informações de um contrato existente com base nas informações fornecidas. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & Instância de \doxylink{class_realty_hub_1_1_core_1_1_models_1_1_contract}{Contract} contendo as informações atualizadas do contrato.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna um objeto \doxylink{class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g}{Response$<$\+TData$>$} indicando o resultado da operação. O objeto TData é do tipo \doxylink{class_realty_hub_1_1_core_1_1_models_1_1_contract}{Contract} e pode ser nulo se a operação falhar. 
+\end{DoxyReturn}
 
 
 Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_contract_handler_a9ec5662c010ab95afd7f3e1549271603}{Realty\+Hub.\+Core.\+Handlers.\+IContract\+Handler}}.

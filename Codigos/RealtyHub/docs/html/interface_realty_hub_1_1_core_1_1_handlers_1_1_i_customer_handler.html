@@ -109,7 +109,7 @@ $(function(){initNavTree('interface_realty_hub_1_1_core_1_1_handlers_1_1_i_custo
 </div><!--header-->
 <div class="contents">
 
-<p>Interface responsável por gerenciar os clientes.  
+<p>Interface que define os métodos para manipulação de clientes.  
  <a href="#details">Mais...</a></p>
 <div class="dynheader">
 Diagrama de hierarquia da classe RealtyHub.Core.Handlers.ICustomerHandler:</div>
@@ -136,12 +136,13 @@ Membros Públicos</h2></td></tr>
 <tr class="memitem:ae7fa538e4d9591c2153419424a56243a" id="r_ae7fa538e4d9591c2153419424a56243a"><td class="memItemLeft" align="right" valign="top">Task&lt; Response&lt; <a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_customer.html">Customer</a>?&gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae7fa538e4d9591c2153419424a56243a">GetByIdAsync</a> (<a class="el" href="class_realty_hub_1_1_core_1_1_requests_1_1_customers_1_1_get_customer_by_id_request.html">GetCustomerByIdRequest</a> request)</td></tr>
 <tr class="memdesc:ae7fa538e4d9591c2153419424a56243a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtém um cliente pelo ID.  <br /></td></tr>
 <tr class="separator:ae7fa538e4d9591c2153419424a56243a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5102819a0242e9da6bb000fc2bbd79c7" id="r_a5102819a0242e9da6bb000fc2bbd79c7"><td class="memItemLeft" align="right" valign="top">Task&lt; PagedResponse&lt; List&lt; <a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_customer.html">Customer</a> &gt;?&gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5102819a0242e9da6bb000fc2bbd79c7">GetAllAsync</a> (GetAllCustomersRequest request)</td></tr>
+<tr class="memitem:a5102819a0242e9da6bb000fc2bbd79c7" id="r_a5102819a0242e9da6bb000fc2bbd79c7"><td class="memItemLeft" align="right" valign="top">Task&lt; PagedResponse&lt; List&lt; <a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_customer.html">Customer</a> &gt;?&gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5102819a0242e9da6bb000fc2bbd79c7">GetAllAsync</a> (<a class="el" href="class_realty_hub_1_1_core_1_1_requests_1_1_customers_1_1_get_all_customers_request.html">GetAllCustomersRequest</a> request)</td></tr>
 <tr class="memdesc:a5102819a0242e9da6bb000fc2bbd79c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtém todos os clientes com paginação e filtro.  <br /></td></tr>
 <tr class="separator:a5102819a0242e9da6bb000fc2bbd79c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Descrição detalhada</h2>
-<div class="textblock"><p>Interface responsável por gerenciar os clientes. </p>
+<div class="textblock"><p>Interface que define os métodos para manipulação de clientes. </p>
+<p>Esta interface é responsável por definir as operações que podem ser realizadas com os clientes, como criação, atualização, exclusão e recuperação de informações. </p>
 </div><h2 class="groupheader">Documentação das funções</h2>
 <a id="a55c31e2b554628168141e97b07c34169" name="a55c31e2b554628168141e97b07c34169"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a55c31e2b554628168141e97b07c34169">&#9670;&#160;</a></span>CreateAsync()</h2>
@@ -159,13 +160,14 @@ Membros Públicos</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Cria um novo cliente. </p>
+<p>Este método é responsável por criar um novo cliente com base nas informações fornecidas. </p>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
-    <tr><td class="paramname">request</td><td>O objeto cliente que irá ser criado</td></tr>
+    <tr><td class="paramname">request</td><td>Instância de <a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_customer.html">Customer</a> contendo as informações do novo cliente.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Retorna</dt><dd></dd></dl>
+<dl class="section return"><dt>Retorna</dt><dd>Retorna um objeto <a class="el" href="class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g.html" title="Classe genérica para encapsular a resposta de uma operação, incluindo dados, mensagem e código de sta...">Response&lt;TData&gt;</a> indicando o resultado da operação. O objeto TData é do tipo <a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_customer.html">Customer</a> e pode ser nulo se a operação falhar. </dd></dl>
 
 <p>Implementado por <a class="el" href="class_realty_hub_1_1_api_service_1_1_handlers_1_1_customer_handler.html#a6df05a56097887a520790461cb9c8437">RealtyHub.ApiService.Handlers.CustomerHandler</a> e <a class="el" href="class_realty_hub_1_1_web_1_1_handlers_1_1_customer_handler.html#aa91d04d7e0a1c2c4981d5192a2f99a29">RealtyHub.Web.Handlers.CustomerHandler</a>.</p>
 
@@ -187,13 +189,14 @@ Membros Públicos</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Exclui um cliente existente. </p>
+<p>Este método é responsável por excluir um cliente existente com base no Id fornecido. </p>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
-    <tr><td class="paramname">request</td><td>O objeto request que irá ser deletado</td></tr>
+    <tr><td class="paramname">request</td><td>Instância de <a class="el" href="class_realty_hub_1_1_core_1_1_requests_1_1_customers_1_1_delete_customer_request.html">DeleteCustomerRequest</a> contendo o Id do cliente a ser excluído.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Retorna</dt><dd></dd></dl>
+<dl class="section return"><dt>Retorna</dt><dd>Retorna um objeto <a class="el" href="class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g.html" title="Classe genérica para encapsular a resposta de uma operação, incluindo dados, mensagem e código de sta...">Response&lt;TData&gt;</a> indicando o resultado da operação. O objeto TData é do tipo <a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_customer.html">Customer</a> e pode ser nulo se a operação falhar. </dd></dl>
 
 <p>Implementado por <a class="el" href="class_realty_hub_1_1_api_service_1_1_handlers_1_1_customer_handler.html#adc656ce14492b5f9e26c9349434c25b2">RealtyHub.ApiService.Handlers.CustomerHandler</a> e <a class="el" href="class_realty_hub_1_1_web_1_1_handlers_1_1_customer_handler.html#a083fc551a41dac8f8c7fe977b252b2e4">RealtyHub.Web.Handlers.CustomerHandler</a>.</p>
 
@@ -208,20 +211,21 @@ Membros Públicos</h2></td></tr>
         <tr>
           <td class="memname">Task&lt; PagedResponse&lt; List&lt; <a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_customer.html">Customer</a> &gt;?&gt; &gt; RealtyHub.Core.Handlers.ICustomerHandler.GetAllAsync </td>
           <td>(</td>
-          <td class="paramtype">GetAllCustomersRequest</td>          <td class="paramname"><span class="paramname"><em>request</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_realty_hub_1_1_core_1_1_requests_1_1_customers_1_1_get_all_customers_request.html">GetAllCustomersRequest</a></td>          <td class="paramname"><span class="paramname"><em>request</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Obtém todos os clientes com paginação e filtro. </p>
+<p>Este método é responsável por recuperar todos os clientes existentes com base nos filtros fornecidos. </p>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
-    <tr><td class="paramname">request</td><td>O objeto request com os filtros a serem usados na pesquisa</td></tr>
+    <tr><td class="paramname">request</td><td>Instância de <a class="el" href="class_realty_hub_1_1_core_1_1_requests_1_1_customers_1_1_get_all_customers_request.html" title="Classe que representa uma solicitação para obter todos os clientes com paginação.">GetAllCustomersRequest</a> contendo os filtros e paginação.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Retorna</dt><dd></dd></dl>
+<dl class="section return"><dt>Retorna</dt><dd>Retorna um objeto <a class="el" href="class_realty_hub_1_1_core_1_1_responses_1_1_paged_response-1-g.html">PagedResponse&lt;TData&gt;</a> indicando o resultado da operação. O objeto TData é uma lista de <a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_customer.html">Customer</a> e pode ser nulo se a operação falhar. </dd></dl>
 
 <p>Implementado por <a class="el" href="class_realty_hub_1_1_api_service_1_1_handlers_1_1_customer_handler.html#a4ed723ca49e17e90ba004d9c8548fcd6">RealtyHub.ApiService.Handlers.CustomerHandler</a> e <a class="el" href="class_realty_hub_1_1_web_1_1_handlers_1_1_customer_handler.html#af2d5dfac55abfcbb082ba6c11f21ea32">RealtyHub.Web.Handlers.CustomerHandler</a>.</p>
 
@@ -243,13 +247,14 @@ Membros Públicos</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Obtém um cliente pelo ID. </p>
+<p>Este método é responsável por recuperar as informações de um cliente existente com base no Id fornecido. </p>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
-    <tr><td class="paramname">request</td><td>O objeto request que irá ser pesquisado</td></tr>
+    <tr><td class="paramname">request</td><td>Instância de <a class="el" href="class_realty_hub_1_1_core_1_1_requests_1_1_customers_1_1_get_customer_by_id_request.html">GetCustomerByIdRequest</a> contendo o Id do cliente a ser recuperado.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Retorna</dt><dd></dd></dl>
+<dl class="section return"><dt>Retorna</dt><dd>Retorna um objeto <a class="el" href="class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g.html" title="Classe genérica para encapsular a resposta de uma operação, incluindo dados, mensagem e código de sta...">Response&lt;TData&gt;</a> indicando o resultado da operação. O objeto TData é do tipo <a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_customer.html">Customer</a> e pode ser nulo se a operação falhar. </dd></dl>
 
 <p>Implementado por <a class="el" href="class_realty_hub_1_1_api_service_1_1_handlers_1_1_customer_handler.html#a2e7c49e5f533b510fa484bd6586be786">RealtyHub.ApiService.Handlers.CustomerHandler</a> e <a class="el" href="class_realty_hub_1_1_web_1_1_handlers_1_1_customer_handler.html#a70877c0445c28667417c85ebc2d7c692">RealtyHub.Web.Handlers.CustomerHandler</a>.</p>
 
@@ -271,13 +276,14 @@ Membros Públicos</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Atualiza um cliente existente. </p>
+<p>Este método é responsável por atualizar as informações de um cliente existente com base nas informações fornecidas. </p>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
-    <tr><td class="paramname">request</td><td>O objeto cliente que irá ser atualizado</td></tr>
+    <tr><td class="paramname">request</td><td>Instância de <a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_customer.html">Customer</a> contendo as informações atualizadas do cliente.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Retorna</dt><dd></dd></dl>
+<dl class="section return"><dt>Retorna</dt><dd>Retorna um objeto <a class="el" href="class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g.html" title="Classe genérica para encapsular a resposta de uma operação, incluindo dados, mensagem e código de sta...">Response&lt;TData&gt;</a> indicando o resultado da operação. O objeto TData é do tipo <a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_customer.html">Customer</a> e pode ser nulo se a operação falhar. </dd></dl>
 
 <p>Implementado por <a class="el" href="class_realty_hub_1_1_api_service_1_1_handlers_1_1_customer_handler.html#a871330bbfc1c0508a515b7d7cca928e4">RealtyHub.ApiService.Handlers.CustomerHandler</a> e <a class="el" href="class_realty_hub_1_1_web_1_1_handlers_1_1_customer_handler.html#a78b5f11123bb8d99119e90126d2bc233">RealtyHub.Web.Handlers.CustomerHandler</a>.</p>
 

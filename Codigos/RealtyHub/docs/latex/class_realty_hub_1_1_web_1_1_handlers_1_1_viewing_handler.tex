@@ -12,17 +12,17 @@ Diagrama de hierarquia da classe Realty\+Hub.\+Web.\+Handlers.\+Viewing\+Handler
 \mbox{\hyperlink{class_realty_hub_1_1_web_1_1_handlers_1_1_viewing_handler_a3aba87fe77d2d1b3ab06e2d36794c32f}{Viewing\+Handler}} (IHttp\+Client\+Factory http\+Client\+Factory)
 \item 
 async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}}?$>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_web_1_1_handlers_1_1_viewing_handler_ad8edc83a04c92fca0cecfef3923510c8}{Schedule\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}} request)
-\item 
+\begin{DoxyCompactList}\small\item\em Agenda uma nova visita. \end{DoxyCompactList}\item 
 async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}}?$>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_web_1_1_handlers_1_1_viewing_handler_a9d11d1f5122eeb3f5c61afdf1266c7ab}{Reschedule\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}} request)
-\item 
+\begin{DoxyCompactList}\small\item\em Reagenda uma visita existente. \end{DoxyCompactList}\item 
 async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}}?$>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_web_1_1_handlers_1_1_viewing_handler_ab4daa6dbc88d7576c893a4e739bd31ab}{Done\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_viewings_1_1_done_viewing_request}{Done\+Viewing\+Request}} request)
-\item 
+\begin{DoxyCompactList}\small\item\em Conclui uma visita existente. \end{DoxyCompactList}\item 
 async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}}?$>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_web_1_1_handlers_1_1_viewing_handler_a28cc6798c841a374a957826232644c62}{Cancel\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_viewings_1_1_cancel_viewing_request}{Cancel\+Viewing\+Request}} request)
-\item 
+\begin{DoxyCompactList}\small\item\em Cancela uma visita existente. \end{DoxyCompactList}\item 
 async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}}?$>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_web_1_1_handlers_1_1_viewing_handler_ae6b2085fd5b287bf3d81232c0e6f1d40}{Get\+By\+Id\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_viewings_1_1_get_viewing_by_id_request}{Get\+Viewing\+By\+Id\+Request}} request)
-\item 
-async Task$<$ Paged\+Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}} $>$?$>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_web_1_1_handlers_1_1_viewing_handler_a540f81c41c9588069432492ca543a84c}{Get\+All\+Async}} (Get\+All\+Viewings\+Request request)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Recupera uma visita existente. \end{DoxyCompactList}\item 
+async Task$<$ Paged\+Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}} $>$?$>$ $>$ \mbox{\hyperlink{class_realty_hub_1_1_web_1_1_handlers_1_1_viewing_handler_a540f81c41c9588069432492ca543a84c}{Get\+All\+Async}} (\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_viewings_1_1_get_all_viewings_request}{Get\+All\+Viewings\+Request}} request)
+\begin{DoxyCompactList}\small\item\em Recupera todas as visitas existentes. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Construtores e Destrutores}
@@ -43,6 +43,20 @@ async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_
 
 
 
+Cancela uma visita existente. 
+
+Este método é responsável por cancelar uma visita existente com base nas informações fornecidas. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & Instância de \doxylink{class_realty_hub_1_1_core_1_1_requests_1_1_viewings_1_1_cancel_viewing_request}{Cancel\+Viewing\+Request} contendo as informações da visita a ser cancelada.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna um objeto \doxylink{class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g}{Response$<$\+TData$>$} indicando o resultado da operação. O objeto TData é do tipo \doxylink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing} e pode ser nulo se a operação falhar. 
+\end{DoxyReturn}
+
+
 Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_viewing_handler_a1738455b39d517c5bf6e5387e7e0d25e}{Realty\+Hub.\+Core.\+Handlers.\+IViewing\+Handler}}.
 
 \Hypertarget{class_realty_hub_1_1_web_1_1_handlers_1_1_viewing_handler_ab4daa6dbc88d7576c893a4e739bd31ab}\index{RealtyHub.Web.Handlers.ViewingHandler@{RealtyHub.Web.Handlers.ViewingHandler}!DoneAsync@{DoneAsync}}
@@ -53,14 +67,46 @@ async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_
 
 
 
+Conclui uma visita existente. 
+
+Este método é responsável por concluir uma visita existente com base nas informações fornecidas. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & Instância de \doxylink{class_realty_hub_1_1_core_1_1_requests_1_1_viewings_1_1_done_viewing_request}{Done\+Viewing\+Request} contendo as informações da visita a ser concluída.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna um objeto \doxylink{class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g}{Response$<$\+TData$>$} indicando o resultado da operação. O objeto TData é do tipo \doxylink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing} e pode ser nulo se a operação falhar. 
+\end{DoxyReturn}
+
+
 Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_viewing_handler_ae0a41018d3dbcda4927538dec8e7561d}{Realty\+Hub.\+Core.\+Handlers.\+IViewing\+Handler}}.
 
 \Hypertarget{class_realty_hub_1_1_web_1_1_handlers_1_1_viewing_handler_a540f81c41c9588069432492ca543a84c}\index{RealtyHub.Web.Handlers.ViewingHandler@{RealtyHub.Web.Handlers.ViewingHandler}!GetAllAsync@{GetAllAsync}}
 \index{GetAllAsync@{GetAllAsync}!RealtyHub.Web.Handlers.ViewingHandler@{RealtyHub.Web.Handlers.ViewingHandler}}
 \doxysubsubsection{\texorpdfstring{GetAllAsync()}{GetAllAsync()}}
 {\footnotesize\ttfamily \label{class_realty_hub_1_1_web_1_1_handlers_1_1_viewing_handler_a540f81c41c9588069432492ca543a84c} 
-async Task$<$ Paged\+Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}} $>$?$>$ $>$ Realty\+Hub.\+Web.\+Handlers.\+Viewing\+Handler.\+Get\+All\+Async (\begin{DoxyParamCaption}\item[{Get\+All\+Viewings\+Request}]{request}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+async Task$<$ Paged\+Response$<$ List$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}} $>$?$>$ $>$ Realty\+Hub.\+Web.\+Handlers.\+Viewing\+Handler.\+Get\+All\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_requests_1_1_viewings_1_1_get_all_viewings_request}{Get\+All\+Viewings\+Request}}}]{request}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+
+
+Recupera todas as visitas existentes. 
+
+~\newline
+ 
+
+Este método é responsável por recuperar todas as visitas existentes com base nas informações fornecidas. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & Instância de \doxylink{class_realty_hub_1_1_core_1_1_requests_1_1_viewings_1_1_get_all_viewings_request}{Get\+All\+Viewings\+Request} contendo as informações para recuperação das visitas.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna um objeto \doxylink{class_realty_hub_1_1_core_1_1_responses_1_1_paged_response-1-g}{Paged\+Response$<$\+TData$>$} indicando o resultado da operação. O objeto TData é uma lista do tipo \doxylink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing} e pode ser nulo se a operação falhar. ~\newline
+ 
+\end{DoxyReturn}
 
 
 Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_viewing_handler_ac8c2f31cb236cbc97b7e9c1c5c02940c}{Realty\+Hub.\+Core.\+Handlers.\+IViewing\+Handler}}.
@@ -73,6 +119,20 @@ async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_
 
 
 
+Recupera uma visita existente. 
+
+Este método é responsável por recuperar uma visita existente com base no Id fornecido. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & Instância de \doxylink{class_realty_hub_1_1_core_1_1_requests_1_1_viewings_1_1_get_viewing_by_id_request}{Get\+Viewing\+By\+Id\+Request} contendo o Id da visita a ser recuperada.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna um objeto \doxylink{class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g}{Response$<$\+TData$>$} indicando o resultado da operação. O objeto TData é do tipo \doxylink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing} e pode ser nulo se a operação falhar. 
+\end{DoxyReturn}
+
+
 Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_viewing_handler_a887181041c7cff0c90f6148f6387ca35}{Realty\+Hub.\+Core.\+Handlers.\+IViewing\+Handler}}.
 
 \Hypertarget{class_realty_hub_1_1_web_1_1_handlers_1_1_viewing_handler_a9d11d1f5122eeb3f5c61afdf1266c7ab}\index{RealtyHub.Web.Handlers.ViewingHandler@{RealtyHub.Web.Handlers.ViewingHandler}!RescheduleAsync@{RescheduleAsync}}
@@ -81,6 +141,20 @@ Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_vie
 {\footnotesize\ttfamily \label{class_realty_hub_1_1_web_1_1_handlers_1_1_viewing_handler_a9d11d1f5122eeb3f5c61afdf1266c7ab} 
 async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}}?$>$ $>$ Realty\+Hub.\+Web.\+Handlers.\+Viewing\+Handler.\+Reschedule\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}}}]{request}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+
+
+Reagenda uma visita existente. 
+
+Este método é responsável por reagendar uma visita existente com base nas informações fornecidas. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em request} & Instância de \doxylink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing} contendo as informações da visita a ser reagendada.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna um objeto \doxylink{class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g}{Response$<$\+TData$>$} indicando o resultado da operação. O objeto TData é do tipo \doxylink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing} e pode ser nulo se a operação falhar. 
+\end{DoxyReturn}
 
 
 Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_viewing_handler_af1ecf5a8f2d331cdbe977d55022afe3d}{Realty\+Hub.\+Core.\+Handlers.\+IViewing\+Handler}}.
@@ -92,6 +166,10 @@ Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_vie
 async Task$<$ Response$<$ \mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}}?$>$ $>$ Realty\+Hub.\+Web.\+Handlers.\+Viewing\+Handler.\+Schedule\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_realty_hub_1_1_core_1_1_models_1_1_viewing}{Viewing}}}]{request}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
+
+Agenda uma nova visita. 
+
+Este método é responsável por agendar uma nova visita a um imóvel com base nas informações fornecidas. 
 
 Implementa \mbox{\hyperlink{interface_realty_hub_1_1_core_1_1_handlers_1_1_i_viewing_handler_a4e50a7195a53173af75b6aff501db64e}{Realty\+Hub.\+Core.\+Handlers.\+IViewing\+Handler}}.
 

@@ -21,6 +21,7 @@ public interface IContractTemplateHandler
     /// </remarks>
     /// <returns>
     /// Retorna um objeto <see cref="Response{TData}"/> contendo uma lista de modelos de contrato.
+    /// O objeto TData é uma lista do tipo <see cref="ContractTemplate"/> e pode ser nulo se a operação falhar.
     /// </returns>
     Task<Response<List<ContractTemplate>?>> GetAllAsync();
 }

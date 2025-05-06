@@ -108,6 +108,9 @@ $(function(){initNavTree('interface_realty_hub_1_1_core_1_1_handlers_1_1_i_viewi
   <div class="headertitle"><div class="title">Referência da Interface RealtyHub.Core.Handlers.IViewingHandler</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Interface que define os métodos para manipulação de visitas a imóveis.  
+ <a href="#details">Mais...</a></p>
 <div class="dynheader">
 Diagrama de hierarquia da classe RealtyHub.Core.Handlers.IViewingHandler:</div>
 <div class="dyncontent">
@@ -122,19 +125,28 @@ Diagrama de hierarquia da classe RealtyHub.Core.Handlers.IViewingHandler:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Membros Públicos</h2></td></tr>
 <tr class="memitem:a4e50a7195a53173af75b6aff501db64e" id="r_a4e50a7195a53173af75b6aff501db64e"><td class="memItemLeft" align="right" valign="top">Task&lt; Response&lt; <a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_viewing.html">Viewing</a>?&gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4e50a7195a53173af75b6aff501db64e">ScheduleAsync</a> (<a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_viewing.html">Viewing</a> request)</td></tr>
+<tr class="memdesc:a4e50a7195a53173af75b6aff501db64e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Agenda uma nova visita.  <br /></td></tr>
 <tr class="separator:a4e50a7195a53173af75b6aff501db64e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af1ecf5a8f2d331cdbe977d55022afe3d" id="r_af1ecf5a8f2d331cdbe977d55022afe3d"><td class="memItemLeft" align="right" valign="top">Task&lt; Response&lt; <a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_viewing.html">Viewing</a>?&gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af1ecf5a8f2d331cdbe977d55022afe3d">RescheduleAsync</a> (<a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_viewing.html">Viewing</a> request)</td></tr>
+<tr class="memdesc:af1ecf5a8f2d331cdbe977d55022afe3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reagenda uma visita existente.  <br /></td></tr>
 <tr class="separator:af1ecf5a8f2d331cdbe977d55022afe3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0a41018d3dbcda4927538dec8e7561d" id="r_ae0a41018d3dbcda4927538dec8e7561d"><td class="memItemLeft" align="right" valign="top">Task&lt; Response&lt; <a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_viewing.html">Viewing</a>?&gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae0a41018d3dbcda4927538dec8e7561d">DoneAsync</a> (<a class="el" href="class_realty_hub_1_1_core_1_1_requests_1_1_viewings_1_1_done_viewing_request.html">DoneViewingRequest</a> request)</td></tr>
+<tr class="memdesc:ae0a41018d3dbcda4927538dec8e7561d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Conclui uma visita existente.  <br /></td></tr>
 <tr class="separator:ae0a41018d3dbcda4927538dec8e7561d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1738455b39d517c5bf6e5387e7e0d25e" id="r_a1738455b39d517c5bf6e5387e7e0d25e"><td class="memItemLeft" align="right" valign="top">Task&lt; Response&lt; <a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_viewing.html">Viewing</a>?&gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1738455b39d517c5bf6e5387e7e0d25e">CancelAsync</a> (<a class="el" href="class_realty_hub_1_1_core_1_1_requests_1_1_viewings_1_1_cancel_viewing_request.html">CancelViewingRequest</a> request)</td></tr>
+<tr class="memdesc:a1738455b39d517c5bf6e5387e7e0d25e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cancela uma visita existente.  <br /></td></tr>
 <tr class="separator:a1738455b39d517c5bf6e5387e7e0d25e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a887181041c7cff0c90f6148f6387ca35" id="r_a887181041c7cff0c90f6148f6387ca35"><td class="memItemLeft" align="right" valign="top">Task&lt; Response&lt; <a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_viewing.html">Viewing</a>?&gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a887181041c7cff0c90f6148f6387ca35">GetByIdAsync</a> (<a class="el" href="class_realty_hub_1_1_core_1_1_requests_1_1_viewings_1_1_get_viewing_by_id_request.html">GetViewingByIdRequest</a> request)</td></tr>
+<tr class="memdesc:a887181041c7cff0c90f6148f6387ca35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recupera uma visita existente.  <br /></td></tr>
 <tr class="separator:a887181041c7cff0c90f6148f6387ca35"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8c2f31cb236cbc97b7e9c1c5c02940c" id="r_ac8c2f31cb236cbc97b7e9c1c5c02940c"><td class="memItemLeft" align="right" valign="top">Task&lt; PagedResponse&lt; List&lt; <a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_viewing.html">Viewing</a> &gt;?&gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac8c2f31cb236cbc97b7e9c1c5c02940c">GetAllAsync</a> (GetAllViewingsRequest request)</td></tr>
+<tr class="memitem:ac8c2f31cb236cbc97b7e9c1c5c02940c" id="r_ac8c2f31cb236cbc97b7e9c1c5c02940c"><td class="memItemLeft" align="right" valign="top">Task&lt; PagedResponse&lt; List&lt; <a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_viewing.html">Viewing</a> &gt;?&gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac8c2f31cb236cbc97b7e9c1c5c02940c">GetAllAsync</a> (<a class="el" href="class_realty_hub_1_1_core_1_1_requests_1_1_viewings_1_1_get_all_viewings_request.html">GetAllViewingsRequest</a> request)</td></tr>
+<tr class="memdesc:ac8c2f31cb236cbc97b7e9c1c5c02940c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recupera todas as visitas existentes.  <br /></td></tr>
 <tr class="separator:ac8c2f31cb236cbc97b7e9c1c5c02940c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Documentação das funções</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Descrição detalhada</h2>
+<div class="textblock"><p>Interface que define os métodos para manipulação de visitas a imóveis. </p>
+<p>Esta interface é responsável por definir as operações que podem ser realizadas com as visitas de imóveis, como agendamento, reagendamento, conclusão e cancelamento. </p>
+</div><h2 class="groupheader">Documentação das funções</h2>
 <a id="a1738455b39d517c5bf6e5387e7e0d25e" name="a1738455b39d517c5bf6e5387e7e0d25e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1738455b39d517c5bf6e5387e7e0d25e">&#9670;&#160;</a></span>CancelAsync()</h2>
 
@@ -149,6 +161,16 @@ Membros Públicos</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Cancela uma visita existente. </p>
+<p>Este método é responsável por cancelar uma visita existente com base nas informações fornecidas. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>Instância de <a class="el" href="class_realty_hub_1_1_core_1_1_requests_1_1_viewings_1_1_cancel_viewing_request.html">CancelViewingRequest</a> contendo as informações da visita a ser cancelada.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>Retorna um objeto <a class="el" href="class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g.html" title="Classe genérica para encapsular a resposta de uma operação, incluindo dados, mensagem e código de sta...">Response&lt;TData&gt;</a> indicando o resultado da operação. O objeto TData é do tipo <a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_viewing.html">Viewing</a> e pode ser nulo se a operação falhar. </dd></dl>
 
 <p>Implementado por <a class="el" href="class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler.html#a4503633fe35bfa9d9f22b3feb829ec84">RealtyHub.ApiService.Handlers.ViewingHandler</a> e <a class="el" href="class_realty_hub_1_1_web_1_1_handlers_1_1_viewing_handler.html#a28cc6798c841a374a957826232644c62">RealtyHub.Web.Handlers.ViewingHandler</a>.</p>
 
@@ -169,6 +191,16 @@ Membros Públicos</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Conclui uma visita existente. </p>
+<p>Este método é responsável por concluir uma visita existente com base nas informações fornecidas. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>Instância de <a class="el" href="class_realty_hub_1_1_core_1_1_requests_1_1_viewings_1_1_done_viewing_request.html">DoneViewingRequest</a> contendo as informações da visita a ser concluída.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>Retorna um objeto <a class="el" href="class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g.html" title="Classe genérica para encapsular a resposta de uma operação, incluindo dados, mensagem e código de sta...">Response&lt;TData&gt;</a> indicando o resultado da operação. O objeto TData é do tipo <a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_viewing.html">Viewing</a> e pode ser nulo se a operação falhar. </dd></dl>
+
 <p>Implementado por <a class="el" href="class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler.html#af4118954503ed7bfd7897dfb53a3a719">RealtyHub.ApiService.Handlers.ViewingHandler</a> e <a class="el" href="class_realty_hub_1_1_web_1_1_handlers_1_1_viewing_handler.html#ab4daa6dbc88d7576c893a4e739bd31ab">RealtyHub.Web.Handlers.ViewingHandler</a>.</p>
 
 </div>
@@ -182,11 +214,24 @@ Membros Públicos</h2></td></tr>
         <tr>
           <td class="memname">Task&lt; PagedResponse&lt; List&lt; <a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_viewing.html">Viewing</a> &gt;?&gt; &gt; RealtyHub.Core.Handlers.IViewingHandler.GetAllAsync </td>
           <td>(</td>
-          <td class="paramtype">GetAllViewingsRequest</td>          <td class="paramname"><span class="paramname"><em>request</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_realty_hub_1_1_core_1_1_requests_1_1_viewings_1_1_get_all_viewings_request.html">GetAllViewingsRequest</a></td>          <td class="paramname"><span class="paramname"><em>request</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Recupera todas as visitas existentes. </p>
+<p><br  />
+ </p>
+<p>Este método é responsável por recuperar todas as visitas existentes com base nas informações fornecidas. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>Instância de <a class="el" href="class_realty_hub_1_1_core_1_1_requests_1_1_viewings_1_1_get_all_viewings_request.html">GetAllViewingsRequest</a> contendo as informações para recuperação das visitas.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>Retorna um objeto <a class="el" href="class_realty_hub_1_1_core_1_1_responses_1_1_paged_response-1-g.html">PagedResponse&lt;TData&gt;</a> indicando o resultado da operação. O objeto TData é uma lista do tipo <a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_viewing.html">Viewing</a> e pode ser nulo se a operação falhar. <br  />
+ </dd></dl>
 
 <p>Implementado por <a class="el" href="class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler.html#a4868d3ff694bd4a9b126bd95534cc95e">RealtyHub.ApiService.Handlers.ViewingHandler</a> e <a class="el" href="class_realty_hub_1_1_web_1_1_handlers_1_1_viewing_handler.html#a540f81c41c9588069432492ca543a84c">RealtyHub.Web.Handlers.ViewingHandler</a>.</p>
 
@@ -207,6 +252,16 @@ Membros Públicos</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Recupera uma visita existente. </p>
+<p>Este método é responsável por recuperar uma visita existente com base no Id fornecido. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>Instância de <a class="el" href="class_realty_hub_1_1_core_1_1_requests_1_1_viewings_1_1_get_viewing_by_id_request.html">GetViewingByIdRequest</a> contendo o Id da visita a ser recuperada.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>Retorna um objeto <a class="el" href="class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g.html" title="Classe genérica para encapsular a resposta de uma operação, incluindo dados, mensagem e código de sta...">Response&lt;TData&gt;</a> indicando o resultado da operação. O objeto TData é do tipo <a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_viewing.html">Viewing</a> e pode ser nulo se a operação falhar. </dd></dl>
+
 <p>Implementado por <a class="el" href="class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler.html#a8c223c42175f525db2486118ef105fe4">RealtyHub.ApiService.Handlers.ViewingHandler</a> e <a class="el" href="class_realty_hub_1_1_web_1_1_handlers_1_1_viewing_handler.html#ae6b2085fd5b287bf3d81232c0e6f1d40">RealtyHub.Web.Handlers.ViewingHandler</a>.</p>
 
 </div>
@@ -226,6 +281,16 @@ Membros Públicos</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Reagenda uma visita existente. </p>
+<p>Este método é responsável por reagendar uma visita existente com base nas informações fornecidas. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>Instância de <a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_viewing.html">Viewing</a> contendo as informações da visita a ser reagendada.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>Retorna um objeto <a class="el" href="class_realty_hub_1_1_core_1_1_responses_1_1_response-1-g.html" title="Classe genérica para encapsular a resposta de uma operação, incluindo dados, mensagem e código de sta...">Response&lt;TData&gt;</a> indicando o resultado da operação. O objeto TData é do tipo <a class="el" href="class_realty_hub_1_1_core_1_1_models_1_1_viewing.html">Viewing</a> e pode ser nulo se a operação falhar. </dd></dl>
+
 <p>Implementado por <a class="el" href="class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler.html#af91f1849698e02da90eecaabd6780ea9">RealtyHub.ApiService.Handlers.ViewingHandler</a> e <a class="el" href="class_realty_hub_1_1_web_1_1_handlers_1_1_viewing_handler.html#a9d11d1f5122eeb3f5c61afdf1266c7ab">RealtyHub.Web.Handlers.ViewingHandler</a>.</p>
 
 </div>
@@ -244,6 +309,9 @@ Membros Públicos</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Agenda uma nova visita. </p>
+<p>Este método é responsável por agendar uma nova visita a um imóvel com base nas informações fornecidas. </p>
 
 <p>Implementado por <a class="el" href="class_realty_hub_1_1_api_service_1_1_handlers_1_1_viewing_handler.html#a5b5a468ecdbae1960224f6dff50cf2c9">RealtyHub.ApiService.Handlers.ViewingHandler</a> e <a class="el" href="class_realty_hub_1_1_web_1_1_handlers_1_1_viewing_handler.html#ad8edc83a04c92fca0cecfef3923510c8">RealtyHub.Web.Handlers.ViewingHandler</a>.</p>
 

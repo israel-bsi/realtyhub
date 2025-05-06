@@ -189,6 +189,7 @@ var annotated_dup =
           ] ],
           [ "Customers", "namespace_realty_hub_1_1_core_1_1_requests_1_1_customers.html", [
             [ "DeleteCustomerRequest", "class_realty_hub_1_1_core_1_1_requests_1_1_customers_1_1_delete_customer_request.html", "class_realty_hub_1_1_core_1_1_requests_1_1_customers_1_1_delete_customer_request" ],
+            [ "GetAllCustomersRequest", "class_realty_hub_1_1_core_1_1_requests_1_1_customers_1_1_get_all_customers_request.html", null ],
             [ "GetCustomerByIdRequest", "class_realty_hub_1_1_core_1_1_requests_1_1_customers_1_1_get_customer_by_id_request.html", "class_realty_hub_1_1_core_1_1_requests_1_1_customers_1_1_get_customer_by_id_request" ]
           ] ],
           [ "Emails", "namespace_realty_hub_1_1_core_1_1_requests_1_1_emails.html", [
@@ -201,6 +202,7 @@ var annotated_dup =
             [ "AcceptOfferRequest", "class_realty_hub_1_1_core_1_1_requests_1_1_offers_1_1_accept_offer_request.html", "class_realty_hub_1_1_core_1_1_requests_1_1_offers_1_1_accept_offer_request" ],
             [ "GetAllOffersByCustomerRequest", "class_realty_hub_1_1_core_1_1_requests_1_1_offers_1_1_get_all_offers_by_customer_request.html", "class_realty_hub_1_1_core_1_1_requests_1_1_offers_1_1_get_all_offers_by_customer_request" ],
             [ "GetAllOffersByPropertyRequest", "class_realty_hub_1_1_core_1_1_requests_1_1_offers_1_1_get_all_offers_by_property_request.html", "class_realty_hub_1_1_core_1_1_requests_1_1_offers_1_1_get_all_offers_by_property_request" ],
+            [ "GetAllOffersRequest", "class_realty_hub_1_1_core_1_1_requests_1_1_offers_1_1_get_all_offers_request.html", null ],
             [ "GetOfferAcceptedByProperty", "class_realty_hub_1_1_core_1_1_requests_1_1_offers_1_1_get_offer_accepted_by_property.html", "class_realty_hub_1_1_core_1_1_requests_1_1_offers_1_1_get_offer_accepted_by_property" ],
             [ "GetOfferByIdRequest", "class_realty_hub_1_1_core_1_1_requests_1_1_offers_1_1_get_offer_by_id_request.html", "class_realty_hub_1_1_core_1_1_requests_1_1_offers_1_1_get_offer_by_id_request" ],
             [ "RejectOfferRequest", "class_realty_hub_1_1_core_1_1_requests_1_1_offers_1_1_reject_offer_request.html", "class_realty_hub_1_1_core_1_1_requests_1_1_offers_1_1_reject_offer_request" ]
@@ -219,6 +221,7 @@ var annotated_dup =
           [ "Viewings", "namespace_realty_hub_1_1_core_1_1_requests_1_1_viewings.html", [
             [ "CancelViewingRequest", "class_realty_hub_1_1_core_1_1_requests_1_1_viewings_1_1_cancel_viewing_request.html", "class_realty_hub_1_1_core_1_1_requests_1_1_viewings_1_1_cancel_viewing_request" ],
             [ "DoneViewingRequest", "class_realty_hub_1_1_core_1_1_requests_1_1_viewings_1_1_done_viewing_request.html", "class_realty_hub_1_1_core_1_1_requests_1_1_viewings_1_1_done_viewing_request" ],
+            [ "GetAllViewingsRequest", "class_realty_hub_1_1_core_1_1_requests_1_1_viewings_1_1_get_all_viewings_request.html", null ],
             [ "GetViewingByIdRequest", "class_realty_hub_1_1_core_1_1_requests_1_1_viewings_1_1_get_viewing_by_id_request.html", "class_realty_hub_1_1_core_1_1_requests_1_1_viewings_1_1_get_viewing_by_id_request" ]
           ] ],
           [ "PagedRequest", "class_realty_hub_1_1_core_1_1_requests_1_1_paged_request.html", "class_realty_hub_1_1_core_1_1_requests_1_1_paged_request" ],

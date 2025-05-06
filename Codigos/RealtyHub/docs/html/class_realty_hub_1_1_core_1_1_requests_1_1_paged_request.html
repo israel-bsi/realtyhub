@@ -108,38 +108,55 @@ $(function(){initNavTree('class_realty_hub_1_1_core_1_1_requests_1_1_paged_reque
   <div class="headertitle"><div class="title">Referência da Classe RealtyHub.Core.Requests.PagedRequest<span class="mlabels"><span class="mlabel abstract">abstract</span></span></div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Classe base para solicitações paginadas.  
+ <a href="#details">Mais...</a></p>
 <div class="dynheader">
 Diagrama de hierarquia da classe RealtyHub.Core.Requests.PagedRequest:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_realty_hub_1_1_core_1_1_requests_1_1_paged_request.png" usemap="#RealtyHub.Core.Requests.PagedRequest_map" alt=""/>
   <map id="RealtyHub.Core.Requests.PagedRequest_map" name="RealtyHub.Core.Requests.PagedRequest_map">
-<area href="class_realty_hub_1_1_core_1_1_requests_1_1_request.html" alt="RealtyHub.Core.Requests.Request" shape="rect" coords="425,0,840,24"/>
-<area href="class_realty_hub_1_1_core_1_1_requests_1_1_offers_1_1_get_all_offers_by_customer_request.html" alt="RealtyHub.Core.Requests.Offers.GetAllOffersByCustomerRequest" shape="rect" coords="0,112,415,136"/>
-<area href="class_realty_hub_1_1_core_1_1_requests_1_1_offers_1_1_get_all_offers_by_property_request.html" alt="RealtyHub.Core.Requests.Offers.GetAllOffersByPropertyRequest" shape="rect" coords="425,112,840,136"/>
-<area href="class_realty_hub_1_1_core_1_1_requests_1_1_properties_1_1_get_all_viewings_by_property_request.html" alt="RealtyHub.Core.Requests.Properties.GetAllViewingsByPropertyRequest" shape="rect" coords="850,112,1265,136"/>
+<area href="class_realty_hub_1_1_core_1_1_requests_1_1_request.html" title="Classe base para todas as solicitações." alt="RealtyHub.Core.Requests.Request" shape="rect" coords="1062,0,1477,24"/>
+<area href="class_realty_hub_1_1_core_1_1_requests_1_1_customers_1_1_get_all_customers_request.html" title="Classe que representa uma solicitação para obter todos os clientes com paginação." alt="RealtyHub.Core.Requests.Customers.GetAllCustomersRequest" shape="rect" coords="0,112,415,136"/>
+<area href="class_realty_hub_1_1_core_1_1_requests_1_1_offers_1_1_get_all_offers_by_customer_request.html" alt="RealtyHub.Core.Requests.Offers.GetAllOffersByCustomerRequest" shape="rect" coords="425,112,840,136"/>
+<area href="class_realty_hub_1_1_core_1_1_requests_1_1_offers_1_1_get_all_offers_by_property_request.html" alt="RealtyHub.Core.Requests.Offers.GetAllOffersByPropertyRequest" shape="rect" coords="850,112,1265,136"/>
+<area href="class_realty_hub_1_1_core_1_1_requests_1_1_offers_1_1_get_all_offers_request.html" alt="RealtyHub.Core.Requests.Offers.GetAllOffersRequest" shape="rect" coords="1275,112,1690,136"/>
+<area href="class_realty_hub_1_1_core_1_1_requests_1_1_properties_1_1_get_all_viewings_by_property_request.html" alt="RealtyHub.Core.Requests.Properties.GetAllViewingsByPropertyRequest" shape="rect" coords="1700,112,2115,136"/>
+<area href="class_realty_hub_1_1_core_1_1_requests_1_1_viewings_1_1_get_all_viewings_request.html" alt="RealtyHub.Core.Requests.Viewings.GetAllViewingsRequest" shape="rect" coords="2125,112,2540,136"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="properties" name="properties"></a>
 Propriedades</h2></td></tr>
 <tr class="memitem:a86d00e01f1ffe10edb1b63f421a88b55" id="r_a86d00e01f1ffe10edb1b63f421a88b55"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a86d00e01f1ffe10edb1b63f421a88b55">PageNumber</a> = <a class="el" href="class_realty_hub_1_1_core_1_1_configuration.html#ab35f7ff14eaf1263c04071dc4c3b35f5">Configuration.DefaultPageNumber</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a86d00e01f1ffe10edb1b63f421a88b55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Número da página atual.  <br /></td></tr>
 <tr class="separator:a86d00e01f1ffe10edb1b63f421a88b55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5baa44e38149c5ab7d006b79b8c97d1b" id="r_a5baa44e38149c5ab7d006b79b8c97d1b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5baa44e38149c5ab7d006b79b8c97d1b">PageSize</a> = <a class="el" href="class_realty_hub_1_1_core_1_1_configuration.html#a0b4827d3a93fc942d3ac8da162ebf0c3">Configuration.DefaultPageSize</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a5baa44e38149c5ab7d006b79b8c97d1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tamanho da página.  <br /></td></tr>
 <tr class="separator:a5baa44e38149c5ab7d006b79b8c97d1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a64f65e4d8e7a5bd17ada7f06a7a887d4" id="r_a64f65e4d8e7a5bd17ada7f06a7a887d4"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a64f65e4d8e7a5bd17ada7f06a7a887d4">SearchTerm</a> = string.Empty<code> [get, set]</code></td></tr>
+<tr class="memdesc:a64f65e4d8e7a5bd17ada7f06a7a887d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Termo de pesquisa.  <br /></td></tr>
 <tr class="separator:a64f65e4d8e7a5bd17ada7f06a7a887d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a324d65abc489344bef01edba168c2333" id="r_a324d65abc489344bef01edba168c2333"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a324d65abc489344bef01edba168c2333">FilterBy</a> = string.Empty<code> [get, set]</code></td></tr>
+<tr class="memdesc:a324d65abc489344bef01edba168c2333"><td class="mdescLeft">&#160;</td><td class="mdescRight">Campo de filtro.  <br /></td></tr>
 <tr class="separator:a324d65abc489344bef01edba168c2333"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a739b372d155238e55a039c276c6c6c18" id="r_a739b372d155238e55a039c276c6c6c18"><td class="memItemLeft" align="right" valign="top">string?&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a739b372d155238e55a039c276c6c6c18">StartDate</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a739b372d155238e55a039c276c6c6c18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data de início do filtro.  <br /></td></tr>
 <tr class="separator:a739b372d155238e55a039c276c6c6c18"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a745bcd4abb3061eede3aa4fc996d16db" id="r_a745bcd4abb3061eede3aa4fc996d16db"><td class="memItemLeft" align="right" valign="top">string?&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a745bcd4abb3061eede3aa4fc996d16db">EndDate</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a745bcd4abb3061eede3aa4fc996d16db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data de término do filtro.  <br /></td></tr>
 <tr class="separator:a745bcd4abb3061eede3aa4fc996d16db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header properties_class_realty_hub_1_1_core_1_1_requests_1_1_request"><td colspan="2" onclick="javascript:dynsection.toggleInherit('properties_class_realty_hub_1_1_core_1_1_requests_1_1_request')"><img src="closed.png" alt="-"/>&#160;Propriedades herdados de <a class="el" href="class_realty_hub_1_1_core_1_1_requests_1_1_request.html">RealtyHub.Core.Requests.Request</a></td></tr>
 <tr class="memitem:a08ee2fe13b2b91321aa623df79f431ab inherit properties_class_realty_hub_1_1_core_1_1_requests_1_1_request" id="r_a08ee2fe13b2b91321aa623df79f431ab"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_realty_hub_1_1_core_1_1_requests_1_1_request.html#a08ee2fe13b2b91321aa623df79f431ab">UserId</a> = string.Empty<code> [get, set]</code></td></tr>
+<tr class="memdesc:a08ee2fe13b2b91321aa623df79f431ab inherit properties_class_realty_hub_1_1_core_1_1_requests_1_1_request"><td class="mdescLeft">&#160;</td><td class="mdescRight">Identificador do usuário que está fazendo a solicitação.  <br /></td></tr>
 <tr class="separator:a08ee2fe13b2b91321aa623df79f431ab inherit properties_class_realty_hub_1_1_core_1_1_requests_1_1_request"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Propriedades</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Descrição detalhada</h2>
+<div class="textblock"><p>Classe base para solicitações paginadas. </p>
+<p>Esta classe é responsável por encapsular os parâmetros comuns necessários para realizar solicitações paginadas, incluindo informações de paginação, termos de pesquisa e filtros. </p>
+<dl class="section see"><dt>Veja também</dt><dd><a class="el" href="class_realty_hub_1_1_core_1_1_requests_1_1_request.html" title="Classe base para todas as solicitações.">Request</a></dd></dl>
+</div><h2 class="groupheader">Propriedades</h2>
 <a id="a745bcd4abb3061eede3aa4fc996d16db" name="a745bcd4abb3061eede3aa4fc996d16db"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a745bcd4abb3061eede3aa4fc996d16db">&#9670;&#160;</a></span>EndDate</h2>
 
@@ -159,6 +176,10 @@ Propriedades</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Data de término do filtro. </p>
+<p>Este campo é utilizado para especificar uma data de término que pode ser utilizada para filtrar os resultados. </p>
+<p>A data de término do filtro.</p>
 
 </div>
 </div>
@@ -182,6 +203,10 @@ Propriedades</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Campo de filtro. </p>
+<p>Este campo é utilizado para especificar um campo específico que pode ser utilizado para filtrar os resultados. </p>
+<p>O campo de filtro.</p>
+
 </div>
 </div>
 <a id="a86d00e01f1ffe10edb1b63f421a88b55" name="a86d00e01f1ffe10edb1b63f421a88b55"></a>
@@ -203,6 +228,9 @@ Propriedades</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Número da página atual. </p>
+<p>Este campo é utilizado para especificar o número da página atual na solicitação de dados paginados. O valor padrão é definido na configuração. </p>
 
 </div>
 </div>
@@ -226,6 +254,10 @@ Propriedades</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Tamanho da página. </p>
+<p>Este campo é utilizado para especificar o número de itens por página na solicitação de dados paginados. O valor padrão é definido na configuração. </p>
+<p>O tamanho da página.</p>
+
 </div>
 </div>
 <a id="a64f65e4d8e7a5bd17ada7f06a7a887d4" name="a64f65e4d8e7a5bd17ada7f06a7a887d4"></a>
@@ -248,6 +280,10 @@ Propriedades</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Termo de pesquisa. </p>
+<p>Este campo é utilizado para especificar um termo de pesquisa que pode ser utilizado para filtrar os resultados. </p>
+<p>O termo de pesquisa.</p>
+
 </div>
 </div>
 <a id="a739b372d155238e55a039c276c6c6c18" name="a739b372d155238e55a039c276c6c6c18"></a>
@@ -269,6 +305,10 @@ Propriedades</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Data de início do filtro. </p>
+<p>Este campo é utilizado para especificar uma data de início que pode ser utilizada para filtrar os resultados. </p>
+<p>A data de início do filtro.</p>
 
 </div>
 </div>
