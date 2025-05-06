@@ -3,11 +3,11 @@
 namespace RealtyHub.Core.Requests.Account;
 
 /// <summary>
-/// Classe que representa uma solicitação de recuperação de senha.
+/// Classe que representa uma requisição de recuperação de senha.
 /// </summary>
 /// <remarks>
-/// Esta classe é usada para enviar uma solicitação de recuperação de senha para o sistema.
-/// Ela contém as informações necessárias para identificar o usuário que está solicitando a recuperação de senha.
+/// <para>Esta classe é usada para enviar uma requisição de recuperação de senha para o sistema.</para>
+/// <para>Ela contém as informações necessárias para identificar o usuário que está solicitando a recuperação de senha.</para>
 /// </remarks>
 public class ForgotPasswordRequest : Request
 {
@@ -15,12 +15,10 @@ public class ForgotPasswordRequest : Request
     /// Email do usuário que está solicitando a recuperação de senha.
     /// </summary>
     /// <remarks>
-    /// Este campo é obrigatório e deve conter um endereço de email válido.
-    /// O email será usado para enviar as instruções de recuperação de senha.
+    /// <para>Este campo é obrigatório e deve conter um endereço de email válido.</para>
+    /// <para>O email será usado para enviar as instruções de recuperação de senha.</para>
     /// </remarks>
-    /// <value>
-    /// O endereço de email do usuário.
-    /// </value>
+    /// <value>O endereço de email do usuário.</value>
     [Required(ErrorMessage = "Email é obrigatório")]
     public string Email { get; set; } = string.Empty;
 }
