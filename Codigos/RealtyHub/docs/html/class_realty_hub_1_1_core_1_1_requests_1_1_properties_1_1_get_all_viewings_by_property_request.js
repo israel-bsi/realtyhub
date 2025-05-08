@@ -1,4 +1,0 @@
-var class_realty_hub_1_1_core_1_1_requests_1_1_properties_1_1_get_all_viewings_by_property_request =
-[
-    [ "PropertyId", "class_realty_hub_1_1_core_1_1_requests_1_1_properties_1_1_get_all_viewings_by_property_request.html#a80a82ce4e3c4676d12caf763bcc0b783", null ]
-];

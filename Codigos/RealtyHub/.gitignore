@@ -3,6 +3,9 @@
 ##
 ## Get latest from `dotnet new gitignore`
 
+# Ignorar pasta de docs
+docs/
+
 # dotenv files
 .env
 

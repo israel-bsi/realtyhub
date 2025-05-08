@@ -1,5 +1,0 @@
-var namespace_realty_hub_1_1_api_service_1_1_services_1_1_reports =
-[
-    [ "OfferReportService", "class_realty_hub_1_1_api_service_1_1_services_1_1_reports_1_1_offer_report_service.html", "class_realty_hub_1_1_api_service_1_1_services_1_1_reports_1_1_offer_report_service" ],
-    [ "PropertyReportService", "class_realty_hub_1_1_api_service_1_1_services_1_1_reports_1_1_property_report_service.html", "class_realty_hub_1_1_api_service_1_1_services_1_1_reports_1_1_property_report_service" ]
-];
