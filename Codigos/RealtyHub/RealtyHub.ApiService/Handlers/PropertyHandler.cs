@@ -24,7 +24,7 @@ public class PropertyHandler : IPropertyHandler
     /// Este campo é utilizado para realizar operações CRUD nos imóveis.
     /// </remarks>
     private readonly AppDbContext _context;
-
+    
     /// <summary>
     /// Inicializa uma nova instância de <see cref="PropertyHandler"/>.
     /// </summary>
