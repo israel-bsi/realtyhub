@@ -41,7 +41,7 @@ public class PropertyPhotosHandler : IPropertyPhotosHandler
                ?? new Response<PropertyPhoto?>(null, 400, "Falha ao adicionar as fotos");
     }
 
-    public async Task<Response<List<PropertyPhoto>?>> UpdateAsync(UpdatePorpertyPhotosRequest request)
+    public async Task<Response<List<PropertyPhoto>?>> UpdateAsync(UpdatePropertyPhotosRequest request)
     {
         var url = $"/v1/properties/{request.PropertyId}/photos";
         var result = await _httpClient.PutAsJsonAsync(url, request);
@@ -56,7 +56,7 @@ public class PropertyPhotosHandler : IPropertyPhotosHandler
 
         var response = await _httpClient.DeleteAsync(url);
 
-        return response.IsSuccessStatusCode 
+        return response.IsSuccessStatusCode
             ? new Response<PropertyPhoto?>(null, 204)
             : new Response<PropertyPhoto?>(null, 400, "Falha ao deletar a foto");
     }

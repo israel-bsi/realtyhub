@@ -207,7 +207,7 @@ public partial class PropertyFormComponent : ComponentBase
         IsBusy = true;
         try
         {
-            var request = new UpdatePorpertyPhotosRequest
+            var request = new UpdatePropertyPhotosRequest
             {
                 PropertyId = InputModel.Id,
                 Photos =

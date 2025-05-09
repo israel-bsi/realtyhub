@@ -32,12 +32,12 @@ public interface IPropertyPhotosHandler
     /// <remarks>
     /// Este método é responsável por atualizar as informações de uma foto de imóvel existente com base nas informações fornecidas.
     /// </remarks>
-    /// <param name="request">Instância de <see cref="UpdatePorpertyPhotosRequest"/> contendo as informações atualizadas da foto.</param>
+    /// <param name="request">Instância de <see cref="UpdatePropertyPhotosRequest"/> contendo as informações atualizadas da foto.</param>
     /// <returns>
     /// Retorna um objeto <see cref="Response{TData}"/> indicando o resultado da operação.
     /// O objeto TData é do tipo <see cref="PropertyPhoto"/> e pode ser nulo se a operação falhar.
     /// </returns>
-    Task<Response<List<PropertyPhoto>?>> UpdateAsync(UpdatePorpertyPhotosRequest request);
+    Task<Response<List<PropertyPhoto>?>> UpdateAsync(UpdatePropertyPhotosRequest request);
 
     /// <summary>
     /// Exclui uma foto de imóvel existente.

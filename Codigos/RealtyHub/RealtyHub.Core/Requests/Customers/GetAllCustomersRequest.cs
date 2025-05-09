@@ -4,11 +4,6 @@
 /// Classe que representa uma solicitação para obter todos os clientes com paginação.
 /// </summary>
 /// <remarks>
-/// Esta classe é responsável por encapsular os parâmetros necessários para
-/// realizar uma solicitação de recuperação de todos os clientes,
-/// incluindo informações de paginação.
+/// A classe herda de <c><see cref="PagedRequest"/></c>, que contém propriedades comuns para solicitações paginadas.
 /// </remarks>
-public class GetAllCustomersRequest : PagedRequest
-{
-
-}
+public class GetAllCustomersRequest : PagedRequest { }

@@ -141,7 +141,7 @@ public class PropertyPhotosHandler : IPropertyPhotosHandler
     /// </remarks>
     /// <param name="request">Requisição contendo as informações das fotos a serem atualizadas.</param>
     /// <returns>Retorna uma resposta indicando o sucesso ou falha da operação.</returns>
-    public async Task<Response<List<PropertyPhoto>?>> UpdateAsync(UpdatePorpertyPhotosRequest request)
+    public async Task<Response<List<PropertyPhoto>?>> UpdateAsync(UpdatePropertyPhotosRequest request)
     {
         try
         {

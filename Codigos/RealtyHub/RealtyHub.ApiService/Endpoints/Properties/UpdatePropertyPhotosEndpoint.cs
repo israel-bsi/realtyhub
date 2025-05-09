@@ -19,11 +19,11 @@ public class UpdatePropertyPhotosEndpoint : IEndpoint
             .Produces<Response<List<PropertyPhoto>?>>()
             .Produces<Response<List<PropertyPhoto>?>>(StatusCodes.Status400BadRequest);
     }
-    
+
     private static async Task<IResult> HandlerAsync(
         long id,
         IPropertyPhotosHandler handler,
-        UpdatePorpertyPhotosRequest request,
+        UpdatePropertyPhotosRequest request,
         ClaimsPrincipal user)
     {
         request.PropertyId = id;
@@ -31,8 +31,8 @@ public class UpdatePropertyPhotosEndpoint : IEndpoint
 
         var result = await handler.UpdateAsync(request);
 
-        return result.IsSuccess 
-            ? Results.Ok(result) 
+        return result.IsSuccess
+            ? Results.Ok(result)
             : Results.BadRequest(result);
     }
 }
