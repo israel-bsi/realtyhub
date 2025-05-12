@@ -3,15 +3,8 @@
 namespace RealtyHub.Core.Responses;
 
 /// <summary>
-/// Classe genérica para encapsular a resposta de uma operação, incluindo dados, mensagem e código de status.
+/// Classe genérica para encapsular a resposta de uma operação.
 /// </summary>
-/// <remarks>
-/// <para>Esta classe é utilizada em conjunto com os manipuladores de operações para retornar
-/// informações sobre o resultado da operação realizada, seja ela uma criação, atualização,
-/// recuperação ou exclusão de dados.</para>
-/// <para>O código de status HTTP é utilizado para indicar o sucesso ou falha da operação,
-/// e a mensagem pode conter informações adicionais sobre o resultado.</para>
-/// </remarks>
 /// <typeparam name="TData">Tipo de dados a serem retornados na resposta.</typeparam>
 public class Response<TData>
 {
@@ -19,6 +12,7 @@ public class Response<TData>
     /// Código de status HTTP da resposta.
     /// </summary>
     private readonly int _code;
+
     /// <summary>
     /// Construtor padrão da classe <see cref="Response{TData}"/>.
     /// </summary>
@@ -27,6 +21,7 @@ public class Response<TData>
     /// </remarks>
     [JsonConstructor]
     public Response() => _code = Configuration.DefaultStatusCode;
+
     /// <summary>
     /// Construtor da classe <see cref="Response{TData}"/> com dados, código de status e mensagem.
     /// </summary>
@@ -37,6 +32,7 @@ public class Response<TData>
     /// <param name="data">Dados a serem retornados na resposta.</param>
     /// <param name="code">Código de status HTTP da resposta.</param>
     /// <param name="message">Mensagem adicional sobre o resultado da operação.</param>
+
     public Response(TData? data, int code = Configuration.DefaultStatusCode, string? message = null)
     {
         Data = data;
@@ -49,20 +45,25 @@ public class Response<TData>
     /// <remarks>
     /// Este campo pode conter qualquer tipo de dado, dependendo do contexto da operação.
     /// </remarks>
+    /// <value>Um objeto do tipo <typeparamref name="TData"/> representando os dados da resposta.</value>
     public TData? Data { get; set; }
+
     /// <summary>
     /// Mensagem adicional sobre o resultado da operação.
     /// </summary>
     /// <remarks>
     /// Esta mensagem pode conter informações sobre erros, avisos ou sucesso da operação.
     /// </remarks>
+    /// <value>Uma string contendo a mensagem.</value>
     public string? Message { get; set; }
+
     /// <summary>
     /// Campo que indica se a operação foi bem-sucedida.
     /// </summary>
     /// <remarks>
     /// Este campo é calculado com base no código de status HTTP.
     /// </remarks>
+    /// <value> <c>true</c> se o código de status estiver entre 200 e 299; caso contrário, <c>false</c>.</value>
     [JsonIgnore]
     public bool IsSuccess => _code is >= 200 and <= 299;
 }

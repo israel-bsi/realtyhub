@@ -3,8 +3,15 @@ using RealtyHub.Core.Models;
 
 namespace RealtyHub.Core.Utilities.FakeEntities;
 
+/// <summary>
+/// Fornece métodos para gerar dados falsos para a entidade <c><see cref="Address"/></c>.
+/// </summary>
 public class AddressFake
 {
+    /// <summary>
+    /// Gera um endereço falso para a entidade <c><see cref="Address"/></c> utilizando a biblioteca Bogus.
+    /// </summary>
+    /// <returns>Um objeto <c><see cref="Address"/></c> com dados gerados aleatoriamente.</returns>
     public static Address GetFakeAddress()
     {
         return new Faker<Address>(Configuration.Locale)
