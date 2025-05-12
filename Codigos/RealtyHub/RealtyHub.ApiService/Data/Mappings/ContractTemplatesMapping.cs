@@ -5,8 +5,15 @@ using RealtyHub.Core.Models;
 
 namespace RealtyHub.ApiService.Data.Mappings;
 
+/// <summary>
+/// Configura o mapeamento da entidade <c><see cref="ContractTemplate"/></c> para o modelo de dados.
+/// </summary>
 public class ContractTemplatesMapping : IEntityTypeConfiguration<ContractTemplate>
 {
+    /// <summary>
+    /// Configura as propriedades e relacionamentos da entidade <c><see cref="ContractTemplate"/></c>.
+    /// </summary>
+    /// <param name="builder">O construtor utilizado para configurar a entidade <c><see cref="ContractTemplate"/></c>.</param>
     public void Configure(EntityTypeBuilder<ContractTemplate> builder)
     {
         builder.ToTable("ContractTemplate");
@@ -19,7 +26,7 @@ public class ContractTemplatesMapping : IEntityTypeConfiguration<ContractTemplat
         builder.Property(cc => cc.Name)
             .IsRequired();
 
-        builder.Property(cc=>cc.Type)
+        builder.Property(cc => cc.Type)
             .IsRequired();
 
         builder.Property(cc => cc.ShowInPage)

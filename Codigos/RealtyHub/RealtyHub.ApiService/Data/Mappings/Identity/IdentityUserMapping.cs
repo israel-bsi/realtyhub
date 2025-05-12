@@ -5,8 +5,17 @@ using RealtyHub.ApiService.Models;
 
 namespace RealtyHub.ApiService.Data.Mappings.Identity;
 
+/// <summary>
+/// Configura o mapeamento da entidade <c><see cref="User"/></c> para o modelo de dados.
+/// </summary>
 public class IdentityUserMapping : IEntityTypeConfiguration<User>
 {
+    /// <summary>
+    /// Configura as propriedades da entidade <c><see cref="User"/></c>.
+    /// </summary>
+    /// <param name="builder">
+    /// O construtor utilizado para configurar a entidade <c><see cref="User"/></c>.
+    /// </param>
     public void Configure(EntityTypeBuilder<User> builder)
     {
         builder.ToTable("IdentityUser");

@@ -4,8 +4,15 @@ using RealtyHub.Core.Models;
 
 namespace RealtyHub.ApiService.Data.Mappings;
 
+/// <summary>
+/// Configura o mapeamento da entidade <c><see cref="PropertyPhoto"/></c> para o modelo de dados.
+/// </summary>
 public class PropertyPhotosMapping : IEntityTypeConfiguration<PropertyPhoto>
 {
+    /// <summary>
+    /// Configura as propriedades e relacionamentos da entidade <c><see cref="PropertyPhoto"/></c>.
+    /// </summary>
+    /// <param name="builder">O construtor utilizado para configurar a entidade <c><see cref="PropertyPhoto"/></c>.</param>
     public void Configure(EntityTypeBuilder<PropertyPhoto> builder)
     {
         builder.ToTable("PropertyPhotos");

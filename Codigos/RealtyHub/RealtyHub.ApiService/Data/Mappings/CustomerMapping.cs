@@ -4,8 +4,15 @@ using RealtyHub.Core.Models;
 
 namespace RealtyHub.ApiService.Data.Mappings;
 
+/// <summary>
+/// Configura o mapeamento da entidade <c><see cref="Customer"/></c> para o modelo de dados.
+/// </summary>
 public class CustomerMapping : IEntityTypeConfiguration<Customer>
 {
+    /// <summary>
+    /// Configura as propriedades e relacionamentos da entidade <c><see cref="Customer"/></c>.
+    /// </summary>
+    /// <param name="builder">O construtor utilizado para configurar a entidade <c><see cref="Customer"/></c>.</param>
     public void Configure(EntityTypeBuilder<Customer> builder)
     {
         builder.ToTable("Customer");

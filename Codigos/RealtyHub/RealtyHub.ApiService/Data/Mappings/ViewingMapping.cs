@@ -4,8 +4,15 @@ using RealtyHub.Core.Models;
 
 namespace RealtyHub.ApiService.Data.Mappings;
 
+/// <summary>
+/// Configura o mapeamento da entidade <c><see cref="Viewing"/></c> para o modelo de dados.
+/// </summary>
 public class ViewingMapping : IEntityTypeConfiguration<Viewing>
 {
+    /// <summary>
+    /// Configura as propriedades e relacionamentos da entidade <c><see cref="Viewing"/></c>.
+    /// </summary>
+    /// <param name="builder">O construtor utilizado para configurar a entidade <c><see cref="Viewing"/></c>.</param>
     public void Configure(EntityTypeBuilder<Viewing> builder)
     {
         builder.ToTable("Viewing");

@@ -4,8 +4,15 @@ using RealtyHub.Core.Models;
 
 namespace RealtyHub.ApiService.Data.Mappings;
 
+/// <summary>
+/// Configura o mapeamento da entidade <c><see cref="Property"/></c> para o modelo de dados.
+/// </summary>
 public class PropertyMapping : IEntityTypeConfiguration<Property>
 {
+    /// <summary>
+    /// Configura as propriedades e relacionamentos da entidade <c><see cref="Property"/></c>.
+    /// </summary>
+    /// <param name="builder">O construtor utilizado para configurar a entidade <c><see cref="Property"/></c>.</param>
     public void Configure(EntityTypeBuilder<Property> builder)
     {
         builder.ToTable("Property");
@@ -54,7 +61,7 @@ public class PropertyMapping : IEntityTypeConfiguration<Property>
         builder.Property(p => p.IsActive)
             .IsRequired();
 
-        builder.Property(p=>p.ShowInHome)
+        builder.Property(p => p.ShowInHome)
             .IsRequired();
 
         builder.HasOne(p => p.Seller)

@@ -3,11 +3,6 @@
 /// <summary>
 /// Interface que define um endpoint para o aplicativo ASP.NET Core.
 /// </summary>
-/// <remarks>
-/// Esta interface deve ser implementada por classes que definem
-/// endpoints específicos do aplicativo, permitindo o mapeamento
-/// de rotas e a configuração de serviços.
-/// </remarks>
 public interface IEndpoint
 {
     /// <summary>

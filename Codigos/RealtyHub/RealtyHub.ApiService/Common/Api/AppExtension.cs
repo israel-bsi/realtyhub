@@ -10,10 +10,6 @@ namespace RealtyHub.ApiService.Common.Api;
 /// Classe estática que agrupa métodos de extensão para configurar
 /// e inicializar o ambiente da aplicação.
 /// </summary>
-/// remarks>
-/// Esta classe contém métodos para configurar rotas, autenticação,
-/// autorização, arquivos estáticos e migrações do banco de dados.
-/// </remarks>
 public static class AppExtension
 {
     /// <summary>

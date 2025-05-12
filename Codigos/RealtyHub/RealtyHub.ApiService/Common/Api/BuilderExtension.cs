@@ -14,11 +14,6 @@ namespace RealtyHub.ApiService.Common.Api;
 /// documentações, diretórios, autenticação, autorização e serviços
 /// da aplicação.
 /// </summary>
-/// remarks>
-/// Esta classe contém métodos para configurar o ambiente
-/// da aplicação, incluindo diretórios, segurança,
-/// documentação e serviços.
-/// </remarks>
 public static class BuilderExtension
 {
     /// <summary>
@@ -181,11 +176,9 @@ public static class BuilderExtension
     /// Registra serviços adicionais necessários para a aplicação.
     /// </summary>
     /// <remarks>
-    /// Este método adiciona serviços como manipuladores de
-    /// propriedades, condomínios, visualizações, ofertas e contratos,
-    /// além de serviços de email e templates de contratos.
+    /// Este método adiciona serviços como manipuladores, serviços de email e templates de contratos.
     /// </remarks>
-    /// /// <param name="builder">Instância do construtor da aplicação.</param>
+    /// <param name="builder">Instância do construtor da aplicação.</param>
     public static void AddServices(this WebApplicationBuilder builder)
     {
         builder.Services.AddProblemDetails();

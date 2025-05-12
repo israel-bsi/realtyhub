@@ -4,8 +4,15 @@ using RealtyHub.Core.Models;
 
 namespace RealtyHub.ApiService.Data.Mappings;
 
+/// <summary>
+/// Configura o mapeamento da entidade <c><see cref="Offer"/></c> para o modelo de dados.
+/// </summary>
 public class OfferMapping : IEntityTypeConfiguration<Offer>
 {
+    /// <summary>
+    /// Configura as propriedades e relacionamentos da entidade <c><see cref="Offer"/></c>.
+    /// </summary>
+    /// <param name="builder">O construtor utilizado para configurar a entidade <c><see cref="Offer"/></c>.</param>
     public void Configure(EntityTypeBuilder<Offer> builder)
     {
         builder.ToTable("Offer");
