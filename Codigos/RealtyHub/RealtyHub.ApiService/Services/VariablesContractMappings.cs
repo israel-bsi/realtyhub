@@ -4,8 +4,28 @@ using RealtyHub.Core.Models;
 
 namespace RealtyHub.ApiService.Services;
 
+/// <summary>
+/// Classe responsável por mapear as variáveis de contrato para substituição em templates.
+/// </summary>
+/// <remarks>
+/// <para>A classe <c><see cref="VariablesContractMappings"/></c> 
+/// gera um dicionário de campos que serão utilizados para substituir 
+/// as variáveis em um template de contrato.</para>
+/// <para>Ela concatena campos padrão, de pessoa jurídica e pessoa física, 
+/// além dos dados dos pagamentos.</para>
+/// </remarks>
 public class VariablesContractMappings
 {
+    /// <summary>
+    /// Retorna um dicionário com todas as variáveis mapeadas para o contrato.
+    /// </summary>
+    /// <remarks>
+    /// Este método concatena o dicionário de campos padrão, os campos de pessoa jurídica, os campos de pessoa física 
+    /// e os textos referentes aos pagamentos, retornando um dicionário que mapeia cada variável ao seu valor correspondente.
+    /// </remarks>
+    /// <returns>
+    /// Um objeto <c><see cref="Dictionary{TKey, TValue}"/></c> contendo as chaves e os respectivos valores para substituição.
+    /// </returns>
     public Dictionary<string, string> GetFields()
     {
         var paymentsFields = GetPaymentsText(_contract.Offer!.Payments);
@@ -16,14 +36,35 @@ public class VariablesContractMappings
             .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
     }
 
+    /// <summary>
+    /// Dicionário contendo os campos padrão mapeados para o contrato.
+    /// </summary>
+    /// <remarks>
     private readonly Dictionary<string, string> _defaultFields;
 
+    /// <summary>
+    /// Dicionário contendo os campos de pessoa jurídica mapeados para o contrato.
+    /// </summary>
     private readonly Dictionary<string, string> _fieldsPj;
 
+    /// <summary>
+    /// Dicionário contendo os campos de pessoa física mapeados para o contrato.
+    /// </summary>
     private readonly Dictionary<string, string> _fieldsPf;
 
+    /// <summary>
+    /// Objeto do tipo <c><see cref="Contract"/></c> que contém os dados do contrato.
+    /// </summary>
     private readonly Contract _contract;
 
+    /// <summary>
+    /// Inicializa uma nova instância de <c><see cref="VariablesContractMappings"/></c> com o contrato especificado.
+    /// </summary>
+    /// <remarks>
+    /// O construtor recebe um objeto do tipo <c><see cref="Contract"/></c> e inicializa os dicionários de campos padrão,
+    /// de pessoa jurídica e de pessoa física, mapeando os dados pertinentes do contrato.
+    /// </remarks>
+    /// <param name="contract">Um objeto do tipo <c><see cref="Contract"/></c> contendo os dados do contrato.</param>
     public VariablesContractMappings(Contract contract)
     {
         _contract = contract;
@@ -51,7 +92,7 @@ public class VariablesContractMappings
                 $"País: {contract.Buyer.Address.Country}, " +
                 $"CEP: {contract.Buyer.Address.ZipCode} "
             },
-            { "tipo_imovel", contract.Offer!.Property!.PropertyType.GetDisplayName()},
+            { "tipo_imovel", contract.Offer!.Property!.PropertyType.GetDisplayName() },
             { "enderecoCompleto_imovel",
                 $"Rua: {contract.Offer.Property!.Address.Street}, " +
                 (string.IsNullOrEmpty(contract.Offer.Property!.Address.Complement) ? ""
@@ -99,6 +140,18 @@ public class VariablesContractMappings
         };
     }
 
+    /// <summary>
+    /// Gera uma representação textual dos pagamentos do contrato.
+    /// </summary>
+    /// <remarks>
+    /// Este método percorre a lista de pagamentos do contrato, criando um mapeamento de forma 
+    /// que cada pagamento seja representado por uma chave no formato "formaPagamentoX", onde X é um índice.
+    /// Caso haja menos de 5 pagamentos, as chaves restantes são preenchidas com uma string vazia.
+    /// </remarks>
+    /// <param name="payments">A lista de pagamentos do contrato.</param>
+    /// <returns>
+    /// Um objeto <c><see cref="Dictionary{TKey, TValue}"/></c> representando os pagamentos mapeados para substituição.
+    /// </returns>
     private Dictionary<string, string> GetPaymentsText(List<Payment> payments)
     {
         var dictPayments = new Dictionary<string, string>();
