@@ -8,8 +8,21 @@ using System.Security.Claims;
 
 namespace RealtyHub.ApiService.Endpoints.Viewings;
 
+/// <summary>
+/// Endpoint responsável por recuperar todas as visitas.
+/// </summary>
+/// <remarks>
+/// Implementa a interface <see cref="IEndpoint"/> para mapear a rota de listagem de todas as visitas.
+/// </remarks>
 public class GetAllViewingsEndpoint : IEndpoint
 {
+    /// <summary>
+    /// Mapeia o endpoint para recuperar todas as visitas.
+    /// </summary>
+    /// <remarks>
+    /// Registra a rota GET que retorna uma lista paginada de todas as visitas, com suporte a filtros de data.
+    /// </remarks>
+    /// <param name="app">O construtor de rotas do aplicativo <see cref="IEndpointRouteBuilder"/>.</param>
     public static void Map(IEndpointRouteBuilder app)
         => app.MapGet("/", HandlerAsync)
             .WithName("Viewings: Get All")
@@ -19,6 +32,24 @@ public class GetAllViewingsEndpoint : IEndpoint
             .Produces<PagedResponse<List<Viewing>?>>()
             .Produces<PagedResponse<List<Viewing?>>>(StatusCodes.Status400BadRequest);
 
+    /// <summary>
+    /// Manipulador da rota que retorna todas as visitas.
+    /// </summary>
+    /// <remarks>
+    /// Este método cria uma requisição para buscar todas as visitas, aplicando filtros de data e paginação,
+    /// e chama o handler para processar a requisição.
+    /// </remarks>
+    /// <param name="user">Objeto <see cref="ClaimsPrincipal"/> contendo os dados do usuário autenticado.</param>
+    /// <param name="handler">Instância de <see cref="IViewingHandler"/> responsável pelas operações relacionadas a visitas.</param>
+    /// <param name="startDate">Data inicial para filtrar as visitas <see cref="string"/> (opcional).</param>
+    /// <param name="endDate">Data final para filtrar as visitas <see cref="string"/> (opcional).</param>
+    /// <param name="pageNumber">Número da página solicitada <see cref="int"/> (padrão: <see cref="Core.Configuration.DefaultPageNumber"/>).</param>
+    /// <param name="pageSize">Quantidade de itens por página <see cref="int"/> (padrão: <see cref="Core.Configuration.DefaultPageSize"/>).</param>
+    /// <returns>
+    /// Um objeto <see cref="IResult"/> representando a resposta HTTP:
+    /// <para>- HTTP 200 OK com a lista paginada de visitas, se a operação for bem-sucedida;</para>
+    /// <para>- HTTP 400 Bad Request, se houver erros na requisição.</para>
+    /// </returns>
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
         IViewingHandler handler,

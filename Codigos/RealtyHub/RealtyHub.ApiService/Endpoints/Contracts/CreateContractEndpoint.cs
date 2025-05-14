@@ -11,8 +11,6 @@ namespace RealtyHub.ApiService.Endpoints.Contracts;
 /// </summary>
 /// <remarks>
 /// Implementa a interface <see cref="IEndpoint"/> para mapear a rota de criação de contratos.
-/// Este endpoint recebe o objeto do contrato e cria um novo registro no banco de dados, associando
-/// o usuário autenticado como criador do contrato.
 /// </remarks>
 public class CreateContractEndpoint : IEndpoint
 {
@@ -39,12 +37,13 @@ public class CreateContractEndpoint : IEndpoint
     /// Este método extrai as informações do contrato do corpo da requisição, associa o ID do usuário autenticado,
     /// e chama o handler para criar o novo contrato. Retorna Created com os dados do contrato criado ou BadRequest em caso de falha.
     /// </remarks>
-    /// <param name="user">Informações do usuário autenticado.</param>
-    /// <param name="handler">Handler responsável pelas operações relacionadas a contratos.</param>
-    /// <param name="request">Objeto contendo os dados para criação do contrato.</param>
+    /// <param name="user">Objeto <see cref="ClaimsPrincipal"/> contendo os dados do usuário autenticado.</param>
+    /// <param name="handler">Instância de <see cref="IContractHandler"/> responsável pelas operações relacionadas a contratos.</param>
+    /// <param name="request">Objeto <see cref="Contract"/> contendo os dados para criação do contrato.</param>
     /// <returns>
-    /// Retorna um objeto do tipo IResult representando a resposta HTTP, com status 201 Created se o contrato for criado com sucesso,
-    /// ou 400 BadRequest em caso de erro.
+    /// Um objeto <see cref="IResult"/> representando a resposta HTTP:
+    /// <para>- HTTP 201 Created com os dados do contrato criado, se a operação for bem-sucedida;</para>
+    /// <para>- HTTP 400 Bad Request, se houver erros na requisição.</para>
     /// </returns>
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,

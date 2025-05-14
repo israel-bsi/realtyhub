@@ -10,8 +10,21 @@ using RealtyHub.Core.Services;
 
 namespace RealtyHub.ApiService.Endpoints.Identity;
 
+/// <summary>
+/// Endpoint responsável por iniciar o processo de recuperação de senha de um usuário.
+/// </summary>
+/// <remarks>
+/// Implementa a interface <see cref="IEndpoint"/> para mapear a rota de solicitação de recuperação de senha.
+/// </remarks>
 public class ForgotPasswordEndpoint : IEndpoint
 {
+    /// <summary>
+    /// Mapeia o endpoint para solicitar a recuperação de senha.
+    /// </summary>
+    /// <remarks>
+    /// Registra a rota POST que recebe o email do usuário e envia um link de redefinição de senha.
+    /// </remarks>
+    /// <param name="app">O construtor de rotas do aplicativo <see cref="IEndpointRouteBuilder"/>.</param>
     public static void Map(IEndpointRouteBuilder app)
     {
         app.MapPost("/forgot-password", HandlerAsync)
@@ -19,6 +32,21 @@ public class ForgotPasswordEndpoint : IEndpoint
             .Produces<Response<string>>(StatusCodes.Status400BadRequest);
     }
 
+    /// <summary>
+    /// Manipulador da rota que recebe a requisição para recuperação de senha.
+    /// </summary>
+    /// <remarks>
+    /// Este método busca o usuário pelo email fornecido, gera um token de redefinição de senha,
+    /// cria um link de redefinição e envia o link por email.
+    /// </remarks>
+    /// <param name="userManager">Gerenciador de usuários <see cref="UserManager{User}"/> para realizar operações relacionadas ao usuário.</param>
+    /// <param name="emailService">Serviço de email <see cref="IEmailService"/> responsável por enviar o link de redefinição de senha.</param>
+    /// <param name="request">Objeto <see cref="ForgotPasswordRequest"/> contendo o email do usuário.</param>
+    /// <returns>
+    /// Um objeto <see cref="IResult"/> representando a resposta HTTP:
+    /// <para>- HTTP 200 OK, se o link de redefinição de senha for enviado com sucesso;</para>
+    /// <para>- HTTP 400 Bad Request, se o usuário não for encontrado.</para>
+    /// </returns>
     private static async Task<IResult> HandlerAsync(
         UserManager<User> userManager,
         IEmailService emailService,
@@ -41,6 +69,6 @@ public class ForgotPasswordEndpoint : IEndpoint
             ResetPasswordLink = resetLink
         };
         await emailService.SendResetPasswordLinkAsync(message);
-        return Results.Ok(new Response<string>(null, message: "Verifique seu emaiL!"));
+        return Results.Ok(new Response<string>(null, message: "Verifique seu email!"));
     }
 }

@@ -13,17 +13,29 @@ using RealtyHub.ApiService.Models;
 
 namespace RealtyHub.ApiService.Endpoints;
 
+/// <summary>
+/// Classe responsável por mapear todos os endpoints da aplicação.
+/// </summary>
+/// <remarks>
+/// Esta classe organiza e registra os endpoints agrupados por suas respectivas áreas funcionais,
+/// como clientes, imóveis, condomínios, contratos, entre outros.
+/// </remarks>
 public static class Endpoint
 {
+    /// <summary>
+    /// Mapeia todos os endpoints da aplicação.
+    /// </summary>
+    /// <param name="app">A instância do aplicativo <see cref="WebApplication"/>.</param>
     public static void MapEndpoints(this WebApplication app)
     {
-        var endpoints = app
-            .MapGroup("");
+        var endpoints = app.MapGroup("");
 
+        // Health Check
         endpoints.MapGroup("/")
             .WithTags("Health Check")
             .MapGet("/", () => new { message = "Ok" });
 
+        // Identity Endpoints
         endpoints.MapGroup("v1/identity")
             .WithTags("Identity")
             .MapIdentityApi<User>();
@@ -37,6 +49,7 @@ public static class Endpoint
             .MapEndpoint<ForgotPasswordEndpoint>()
             .MapEndpoint<ResetPasswordEndpoint>();
 
+        // Customer Endpoints
         endpoints.MapGroup("v1/customers")
             .WithTags("Customers")
             .RequireAuthorization()
@@ -46,6 +59,7 @@ public static class Endpoint
             .MapEndpoint<GetCustomerByIdEndpoint>()
             .MapEndpoint<GetAllCustomersEndpoint>();
 
+        // Property Endpoints
         endpoints.MapGroup("v1/properties")
             .WithTags("Properties")
             .RequireAuthorization()
@@ -57,6 +71,13 @@ public static class Endpoint
             .MapEndpoint<GetAllViewingsByPropertyEndpoint>()
             .MapEndpoint<UpdatePropertyPhotosEndpoint>();
 
+        endpoints.MapGroup("v1/properties")
+            .WithTags("Properties")
+            .MapEndpoint<GetPropertyByIdEndpoint>()
+            .MapEndpoint<GetAllPropertyPhotosByPropertyEndpoint>()
+            .MapEndpoint<GetAllPropertiesEndpoint>();
+
+        // Condominium Endpoints
         endpoints.MapGroup("v1/condominiums")
             .WithTags("Condominiums")
             .RequireAuthorization()
@@ -66,12 +87,7 @@ public static class Endpoint
             .MapEndpoint<GetCondominiumByIdEndpoint>()
             .MapEndpoint<GetAllCondominiumsEndpoint>();
 
-        endpoints.MapGroup("v1/properties")
-            .WithTags("Properties")
-            .MapEndpoint<GetPropertyByIdEndpoint>()
-            .MapEndpoint<GetAllPropertyPhotosByPropertyEndpoint>()
-            .MapEndpoint<GetAllPropertiesEndpoint>();
-
+        // Viewing Endpoints
         endpoints.MapGroup("v1/viewings")
             .WithTags("Viewings")
             .RequireAuthorization()
@@ -82,6 +98,7 @@ public static class Endpoint
             .MapEndpoint<GetAllViewingsEndpoint>()
             .MapEndpoint<DoneViewingEndpoint>();
 
+        // Offer Endpoints
         endpoints.MapGroup("v1/offers")
             .WithTags("Offers")
             .RequireAuthorization()
@@ -98,6 +115,7 @@ public static class Endpoint
             .WithTags("Offers")
             .MapEndpoint<CreateOfferEndpoint>();
 
+        // Contract Endpoints
         endpoints.MapGroup("v1/contracts")
             .WithTags("Contracts")
             .RequireAuthorization()
@@ -107,23 +125,32 @@ public static class Endpoint
             .MapEndpoint<GetContractByIdEndpoint>()
             .MapEndpoint<GetAllContractsEndpoint>();
 
+        // Contract Templates Endpoints
         endpoints.MapGroup("v1/contracts-templates")
             .WithTags("Contract Templates")
             .RequireAuthorization()
             .MapEndpoint<GetAllContractTemplatesEndpoint>();
 
+        // Report Endpoints
         endpoints.MapGroup("v1/reports")
             .WithTags("Reports")
             .RequireAuthorization()
             .MapEndpoint<OfferReportEndpoint>()
             .MapEndpoint<PropertyReportEndpoint>();
 
+        // Email Endpoints
         endpoints.MapGroup("v1/emails")
             .WithTags("Emails")
             .RequireAuthorization()
             .MapEndpoint<SendContractEmailEndpoint>();
     }
 
+    /// <summary>
+    /// Método auxiliar para mapear um endpoint genérico.
+    /// </summary>
+    /// <typeparam name="TEndpoint">O tipo do endpoint que implementa <see cref="IEndpoint"/>.</typeparam>
+    /// <param name="app">O construtor de rotas do aplicativo.</param>
+    /// <returns>O construtor de rotas atualizado.</returns>
     private static IEndpointRouteBuilder MapEndpoint<TEndpoint>(this IEndpointRouteBuilder app)
         where TEndpoint : IEndpoint
     {

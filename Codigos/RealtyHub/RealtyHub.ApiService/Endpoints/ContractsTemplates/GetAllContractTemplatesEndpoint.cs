@@ -1,5 +1,4 @@
-﻿using System.Security.Claims;
-using RealtyHub.ApiService.Common.Api;
+﻿using RealtyHub.ApiService.Common.Api;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Responses;
@@ -10,17 +9,15 @@ namespace RealtyHub.ApiService.Endpoints.ContractsTemplates;
 /// Endpoint responsável por recuperar todos os modelos de contrato.
 /// </summary>
 /// <remarks>
-/// <para>Implementa a interface <see cref="IEndpoint"/> para mapear a rota de recuperação dos modelos de contrato.</para>
-/// <para>Este endpoint recebe a requisição e chama o handler para buscar os modelos de contrato existentes.</para>
+/// Implementa a interface <see cref="IEndpoint"/> para mapear a rota de listagem de modelos de contrato.
 /// </remarks>
 public class GetAllContractTemplatesEndpoint : IEndpoint
 {
     /// <summary>
-    /// Mapeia o endpoint GET para recuperar todos os modelos de contrato.
+    /// Mapeia o endpoint para recuperar todos os modelos de contrato.
     /// </summary>
     /// <remarks>
-    /// <para>Registra a rota GET que invoca o manipulador <see cref="HandlerAsync"/> para obter os modelos de contrato.</para>
-    /// <para>Retorna a lista de modelos de contrato em caso de sucesso ou uma resposta de erro em caso de falha.</para>
+    /// Registra a rota GET que retorna uma lista de todos os modelos de contrato disponíveis.
     /// </remarks>
     /// <param name="app">O construtor de rotas do aplicativo.</param>
     public static void Map(IEndpointRouteBuilder app)
@@ -35,15 +32,16 @@ public class GetAllContractTemplatesEndpoint : IEndpoint
     }
 
     /// <summary>
-    /// Manipulador da rota que obtém todos os modelos de contrato.
+    /// Manipulador da rota que recebe a requisição para recuperar todos os modelos de contrato.
     /// </summary>
     /// <remarks>
-    /// Chama o handler <see cref="IContractTemplateHandler"/> para recuperar os modelos de contrato.
+    /// Este método chama o handler para buscar todos os modelos de contrato disponíveis e retorna o resultado.
     /// </remarks>
-    /// <param name="handler">Handler responsável pelas operações dos modelos de contrato.</param>
+    /// <param name="handler">Instância de <see cref="IContractTemplateHandler"/> responsável pelas operações relacionadas a modelos de contrato.</param>
     /// <returns>
-    /// Retorna um objeto do tipo <see cref="IResult"/> representando a resposta HTTP,
-    /// com status 200 OK em caso de sucesso ou 400 BadRequest em caso de falha.
+    /// Um objeto <see cref="IResult"/> representando a resposta HTTP:
+    /// <para>- HTTP 200 OK com a lista de modelos de contrato, se a operação for bem-sucedida;</para>
+    /// <para>- HTTP 400 Bad Request, se houver erros na requisição.</para>
     /// </returns>
     public static async Task<IResult> HandlerAsync(
         IContractTemplateHandler handler)

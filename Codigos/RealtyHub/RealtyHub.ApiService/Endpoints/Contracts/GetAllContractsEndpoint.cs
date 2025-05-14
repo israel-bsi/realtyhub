@@ -6,66 +6,64 @@ using RealtyHub.Core.Requests.Contracts;
 using RealtyHub.Core.Responses;
 using System.Security.Claims;
 
-namespace RealtyHub.ApiService.Endpoints.Contracts
+namespace RealtyHub.ApiService.Endpoints.Contracts;
+
+/// <summary>
+/// Endpoint responsável por recuperar todos os contratos.
+/// </summary>
+/// <remarks>
+/// Implementa a interface <see cref="IEndpoint"/> e mapeia a rota de listagem de contratos.
+/// </remarks>
+public class GetAllContractsEndpoint : IEndpoint
 {
     /// <summary>
-    /// Endpoint responsável por recuperar todos os contratos.
+    /// Mapeia o endpoint para recuperar todos os contratos.
     /// </summary>
     /// <remarks>
-    /// Implementa a interface <see cref="IEndpoint"/> para mapear a rota que retorna uma lista paginada de contratos.
-    /// Este endpoint utiliza parâmetros de consulta para paginação e espera o usuário autenticado para personalizar a requisição.
+    /// Registra a rota GET que retorna uma lista paginada de contratos associados ao usuário autenticado.
     /// </remarks>
-    public class GetAllContractsEndpoint : IEndpoint
+    /// <param name="app">O construtor de rotas do aplicativo.</param>
+    public static void Map(IEndpointRouteBuilder app)
+        => app.MapGet("/", HandlerAsync)
+            .WithName("Contracts: Get All")
+            .WithSummary("Recupera todos os contratos")
+            .WithDescription("Recupera todos os contratos")
+            .WithOrder(5)
+            .Produces<PagedResponse<List<Contract>?>>()
+            .Produces(StatusCodes.Status400BadRequest);
+
+    /// <summary>
+    /// Manipulador da rota que recebe a requisição para recuperar todos os contratos.
+    /// </summary>
+    /// <remarks>
+    /// Este método aplica paginação e retorna apenas os contratos associados ao usuário autenticado.
+    /// </remarks>
+    /// <param name="user">Objeto <see cref="ClaimsPrincipal"/> contendo os dados do usuário autenticado.</param>
+    /// <param name="handler">Instância de <see cref="IContractHandler"/> responsável pelas operações relacionadas a contratos.</param>
+    /// <param name="pageNumber">Número da página solicitada.</param>
+    /// <param name="pageSize">Quantidade de itens por página.</param>
+    /// <returns>
+    /// Um objeto <see cref="IResult"/> representando o resultado da operação:
+    /// <para>- HTTP 200 OK com a lista paginada de contratos, se a operação for bem-sucedida;</para>
+    /// <para>- HTTP 400 Bad Request, se houver erros na requisição.</para>
+    /// </returns>
+    private static async Task<IResult> HandlerAsync(
+        ClaimsPrincipal user,
+        IContractHandler handler,
+        [FromQuery] int pageNumber = Core.Configuration.DefaultPageNumber,
+        [FromQuery] int pageSize = Core.Configuration.DefaultPageSize)
     {
-        /// <summary>
-        /// Mapeia o endpoint para recuperar todos os contratos.
-        /// </summary>
-        /// <remarks>
-        /// Registra a rota GET para retornar uma lista paginada de contratos. Em caso de sucesso,
-        /// retorna um objeto do tipo <see cref="PagedResponse{List{Contract}?}"/>; caso contrário, retorna BadRequest.
-        /// </remarks>
-        /// <param name="app">O construtor de rotas do aplicativo.</param>
-        public static void Map(IEndpointRouteBuilder app)
-            => app.MapGet("/", HandlerAsync)
-                .WithName("Contracts: Get All")
-                .WithSummary("Recupera todos os contratos")
-                .WithDescription("Recupera todos os contratos")
-                .WithOrder(5)
-                .Produces<PagedResponse<List<Contract>?>>()
-                .Produces(StatusCodes.Status400BadRequest);
-
-        /// <summary>
-        /// Manipulador da rota que recebe a requisição para recuperar todos os contratos.
-        /// </summary>
-        /// <remarks>
-        /// Este método extrai os parâmetros de paginação da consulta, constrói uma requisição para o handler,
-        /// e retorna a resposta apropriada. Caso a operação seja bem-sucedida, retorna um status OK com os dados;
-        /// caso contrário, retorna BadRequest.
-        /// </remarks>
-        /// <param name="user">Informações do usuário autenticado.</param>
-        /// <param name="handler">Handler responsável pelas operações de contrato.</param>
-        /// <param name="pageNumber">Número da página a ser retornada.</param>
-        /// <param name="pageSize">Quantidade de itens por página.</param>
-        /// <returns>
-        /// Retorna um objeto do tipo <see cref="IResult"/> contendo a resposta HTTP com os dados paginados ou erro.
-        /// </returns>
-        private static async Task<IResult> HandlerAsync(
-            ClaimsPrincipal user,
-            IContractHandler handler,
-            [FromQuery] int pageNumber = Core.Configuration.DefaultPageNumber,
-            [FromQuery] int pageSize = Core.Configuration.DefaultPageSize)
+        var request = new GetAllContractsRequest
         {
-            var request = new GetAllContractsRequest
-            {
-                UserId = user.Identity?.Name ?? string.Empty,
-                PageNumber = pageNumber,
-                PageSize = pageSize
-            };
-            var result = await handler.GetAllAsync(request);
+            UserId = user.Identity?.Name ?? string.Empty,
+            PageNumber = pageNumber,
+            PageSize = pageSize
+        };
 
-            return result.IsSuccess
-                ? Results.Ok(result)
-                : Results.BadRequest(result);
-        }
+        var result = await handler.GetAllAsync(request);
+
+        return result.IsSuccess
+            ? Results.Ok(result)
+            : Results.BadRequest(result);
     }
 }

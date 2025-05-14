@@ -4,53 +4,54 @@ using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Responses;
 
-namespace RealtyHub.ApiService.Endpoints.Condominiums
+namespace RealtyHub.ApiService.Endpoints.Condominiums;
+
+/// <summary>
+/// Endpoint responsável por criar novos condomínios.
+/// </summary>
+/// <remarks>
+/// Implementa <see cref="IEndpoint"/> para mapear a rota de criação de condomínios.
+/// </remarks>
+public class CreateCondominiumEndpoint : IEndpoint
 {
     /// <summary>
-    /// Endpoint responsável por criar novos condomínios.
+    /// Mapeia o endpoint para criar um condomínio.
+    /// </summary>
+    /// <param name="app">O construtor de rotas do aplicativo.</param>
+    public static void Map(IEndpointRouteBuilder app)
+        => app.MapPost("/", HandlerAsync)
+            .WithName("Condominiums: Create")
+            .WithSummary("Cria um novo condomínio")
+            .WithDescription("Cria um novo condomínio")
+            .WithOrder(1)
+            .Produces<Response<Condominium?>>(StatusCodes.Status201Created)
+            .Produces<Response<Condominium?>>(StatusCodes.Status400BadRequest);
+
+    /// <summary>
+    /// Manipulador da rota que recebe a requisição para criar um condomínio.
     /// </summary>
     /// <remarks>
-    /// Implementa <see cref="IEndpoint"/> para mapear a rota de criação de condomínios.
+    /// O método atribui o ID do usuário autenticado a requisição,
+    /// e invoca o handler para criar o condomínio.
     /// </remarks>
-    public class CreateCondominiumEndpoint : IEndpoint
+    /// <param name="user">Instância de <c><see cref="ClaimsPrincipal"/></c> contendo os dados do usuário autenticado.</param>
+    /// <param name="handler">Instância de <c><see cref="ICondominiumHandler"/></c> que executa a criação de condomínios.</param>
+    /// <param name="request">Objeto <c><see cref="Condominium"/></c> contendo os dados do novo condomínio.</param>
+    /// <returns>
+    /// Um <c><see cref="IResult"/></c> representando o resultado da operação:
+    /// <para>- HTTP 201 Created com o recurso criado, se a criação for bem-sucedida;</para>
+    /// <para>- HTTP 400 BadRequest com os detalhes, em caso de erro.</para>
+    /// </returns>
+    private static async Task<IResult> HandlerAsync(
+        ClaimsPrincipal user,
+        ICondominiumHandler handler,
+        Condominium request)
     {
-        /// <summary>
-        /// Mapeia o endpoint para criar um condomínio.
-        /// </summary>
-        /// <remarks>
-        /// Este método é chamado para registrar o endpoint no aplicativo.
-        /// </remarks>
-        /// <param name="app">O construtor de rotas do aplicativo.</param>
-        public static void Map(IEndpointRouteBuilder app)
-            => app.MapPost("/", HandlerAsync)
-                .WithName("Condominiums: Create")
-                .WithSummary("Cria um novo condomínio")
-                .WithDescription("Cria um novo condomínio")
-                .WithOrder(1)
-                .Produces<Response<Condominium?>>(StatusCodes.Status201Created)
-                .Produces<Response<Condominium?>>(StatusCodes.Status400BadRequest);
+        request.UserId = user.Identity?.Name ?? string.Empty;
+        Response<Condominium?> result = await handler.CreateAsync(request);
 
-        /// <summary>
-        /// Manipulador da rota que recebe a requisição para criar um condomínio.
-        /// </summary>
-        /// <remarks>
-        /// Este método é responsável por processar a requisição e retornar o resultado.
-        /// </remarks>
-        /// <param name="user">Informações do usuário autenticado, se houver.</param>
-        /// <param name="handler">Handler responsável pelas operações de condomínio.</param>
-        /// <param name="request">Objeto que contém as informações para criar o condomínio.</param>
-        /// <returns>Retorna o resultado da criação do condomínio ou um erro.</returns>
-        private static async Task<IResult> HandlerAsync(
-            ClaimsPrincipal user,
-            ICondominiumHandler handler,
-            Condominium request)
-        {
-            request.UserId = user.Identity?.Name ?? string.Empty;
-            var result = await handler.CreateAsync(request);
-
-            return result.IsSuccess
-                ? Results.Created($"/{result.Data?.Id}", result)
-                : Results.BadRequest(result);
-        }
+        return result.IsSuccess
+            ? Results.Created($"/{result.Data?.Id}", result)
+            : Results.BadRequest(result);
     }
 }

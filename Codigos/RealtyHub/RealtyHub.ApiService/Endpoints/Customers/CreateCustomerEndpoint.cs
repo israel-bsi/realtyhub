@@ -6,8 +6,21 @@ using System.Security.Claims;
 
 namespace RealtyHub.ApiService.Endpoints.Customers;
 
+/// <summary>
+/// Endpoint responsável por criar novos clientes.
+/// </summary>
+/// <remarks>
+/// Implementa a interface <see cref="IEndpoint"/> para mapear a rota de criação de clientes.
+/// </remarks>
 public class CreateCustomerEndpoint : IEndpoint
 {
+    /// <summary>
+    /// Mapeia o endpoint para criar um cliente.
+    /// </summary>
+    /// <remarks>
+    /// Registra a rota POST que recebe os dados do cliente e chama o manipulador para criar o cliente.
+    /// </remarks>
+    /// <param name="app">O construtor de rotas do aplicativo.</param>
     public static void Map(IEndpointRouteBuilder app)
         => app.MapPost("/", HandlerAsync)
             .WithName("Customers: Create")
@@ -17,6 +30,21 @@ public class CreateCustomerEndpoint : IEndpoint
             .Produces<Response<Customer?>>(StatusCodes.Status201Created)
             .Produces(StatusCodes.Status400BadRequest);
 
+    /// <summary>
+    /// Manipulador da rota que recebe a requisição para criar um cliente.
+    /// </summary>
+    /// <remarks>
+    /// Este método extrai as informações do cliente do corpo da requisição, associa o ID do usuário autenticado,
+    /// e chama o handler para criar o novo cliente. Retorna Created com os dados do cliente criado ou BadRequest em caso de falha.
+    /// </remarks>
+    /// <param name="user">Objeto <see cref="ClaimsPrincipal"/> contendo os dados do usuário autenticado.</param>
+    /// <param name="handler">Instância de <see cref="ICustomerHandler"/> responsável pelas operações relacionadas a clientes.</param>
+    /// <param name="request">Objeto <see cref="Customer"/> contendo os dados para criação do cliente.</param>
+    /// <returns>
+    /// Um objeto <see cref="IResult"/> representando a resposta HTTP:
+    /// <para>- HTTP 201 Created com os dados do cliente criado, se a operação for bem-sucedida;</para>
+    /// <para>- HTTP 400 Bad Request, se houver erros na requisição.</para>
+    /// </returns>
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
         ICustomerHandler handler,

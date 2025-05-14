@@ -7,8 +7,21 @@ using System.Security.Claims;
 
 namespace RealtyHub.ApiService.Endpoints.Properties;
 
+/// <summary>
+/// Endpoint responsável por recuperar um imóvel específico pelo seu ID.
+/// </summary>
+/// <remarks>
+/// Implementa a interface <see cref="IEndpoint"/> para mapear a rota de obtenção de um imóvel pelo ID.
+/// </remarks>
 public class GetPropertyByIdEndpoint : IEndpoint
 {
+    /// <summary>
+    /// Mapeia o endpoint para recuperar um imóvel pelo seu ID.
+    /// </summary>
+    /// <remarks>
+    /// Registra a rota GET que retorna os detalhes de um imóvel específico com base no ID fornecido.
+    /// </remarks>
+    /// <param name="app">O construtor de rotas do aplicativo <see cref="IEndpointRouteBuilder"/>.</param>
     public static void Map(IEndpointRouteBuilder app)
         => app.MapGet("/{id:long}", HandlerAsync)
             .WithName("Properties: Get by Id")
@@ -18,6 +31,21 @@ public class GetPropertyByIdEndpoint : IEndpoint
             .Produces<Response<Property?>>()
             .Produces<Response<Property?>>(StatusCodes.Status400BadRequest);
 
+    /// <summary>
+    /// Manipulador da rota que retorna os detalhes de um imóvel pelo seu ID.
+    /// </summary>
+    /// <remarks>
+    /// Este método cria uma requisição para buscar um imóvel específico com base no ID fornecido
+    /// e chama o handler para processar a requisição.
+    /// </remarks>
+    /// <param name="user">Objeto <see cref="ClaimsPrincipal"/> contendo os dados do usuário autenticado.</param>
+    /// <param name="handler">Instância de <see cref="IPropertyHandler"/> responsável pelas operações relacionadas a imóveis.</param>
+    /// <param name="id">ID do imóvel a ser recuperado.</param>
+    /// <returns>
+    /// Um objeto <see cref="IResult"/> representando a resposta HTTP:
+    /// <para>- HTTP 200 OK com os detalhes do imóvel, se a operação for bem-sucedida;</para>
+    /// <para>- HTTP 400 Bad Request, se houver erros na requisição.</para>
+    /// </returns>
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
         IPropertyHandler handler,
