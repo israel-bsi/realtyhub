@@ -14,41 +14,95 @@ using RealtyHub.Web.Components.Customers;
 
 namespace RealtyHub.Web.Components.Properties;
 
+/// <summary>
+/// Componente responsável pelo formulário de cadastro e edição de imóveis, incluindo upload, remoção e definição de fotos.
+/// </summary>
 public partial class PropertyFormComponent : ComponentBase
 {
     #region Parameters
 
+    /// <summary>
+    /// Identificador do imóvel. Se diferente de zero, o formulário entra em modo de edição.
+    /// </summary>
     [Parameter]
     public long Id { get; set; }
 
     #endregion
 
     #region Properties
+
+    /// <summary>
+    /// Indica a operação atual do formulário ("Editar" ou "Cadastrar").
+    /// </summary>
     public string Operation => Id != 0
         ? "Editar" : "Cadastrar";
+
+    /// <summary>
+    /// Indica se o formulário está em estado de carregamento ou processamento.
+    /// </summary>
     public bool IsBusy { get; set; }
+
+    /// <summary>
+    /// Modelo de entrada utilizado para o binding dos campos do formulário.
+    /// </summary>
     public Property InputModel { get; set; } = new();
+
+    /// <summary>
+    /// Lista de fotos do imóvel carregadas do servidor.
+    /// </summary>
     public List<PropertyPhoto> PropertyPhotos { get; set; } = [];
+
+    /// <summary>
+    /// Lista de todas as fotos (novas e existentes) exibidas no formulário.
+    /// </summary>
     public List<PhotoItem> AllPhotos { get; set; } = [];
+
+    /// <summary>
+    /// Índice da foto atualmente selecionada no carrossel.
+    /// </summary>
     public int SelectedIndex { get; set; }
+
+    /// <summary>
+    /// Chave para forçar atualização do carrossel de fotos.
+    /// </summary>
     public int CarouselKey { get; set; }
+
+    /// <summary>
+    /// Chave para forçar atualização do botão de fotos no DataGrid.
+    /// </summary>
     public int DataGridBtnPhotosKey { get; set; }
+
     #endregion
 
     #region Services
 
+    /// <summary>
+    /// Serviço para exibição de mensagens e notificações.
+    /// </summary>
     [Inject]
     public ISnackbar Snackbar { get; set; } = null!;
 
+    /// <summary>
+    /// Handler responsável pelas operações de fotos de imóveis.
+    /// </summary>
     [Inject]
     public IPropertyPhotosHandler PropertyPhotosHandler { get; set; } = null!;
 
+    /// <summary>
+    /// Handler responsável pelas operações de imóveis.
+    /// </summary>
     [Inject]
     public IPropertyHandler PropertyHandler { get; set; } = null!;
 
+    /// <summary>
+    /// Serviço de navegação para redirecionamento de páginas.
+    /// </summary>
     [Inject]
     public NavigationManager NavigationManager { get; set; } = null!;
 
+    /// <summary>
+    /// Serviço de diálogo para exibição de modais.
+    /// </summary>
     [Inject]
     public IDialogService DialogService { get; set; } = null!;
 
@@ -56,6 +110,13 @@ public partial class PropertyFormComponent : ComponentBase
 
     #region Methods
 
+    /// <summary>
+    /// Manipula o envio válido do formulário, realizando a criação ou atualização do imóvel e o gerenciamento das fotos.
+    /// </summary>
+    /// <remarks>
+    /// Cria ou atualiza o imóvel via handler, gerencia o upload, atualização e remoção de fotos no servidor,
+    /// exibe mensagens de sucesso ou erro via Snackbar e redireciona para a listagem de imóveis em caso de sucesso.
+    /// </remarks>
     public async Task OnValidSubmitAsync()
     {
         IsBusy = true;
@@ -91,6 +152,13 @@ public partial class PropertyFormComponent : ComponentBase
             IsBusy = false;
         }
     }
+
+    /// <summary>
+    /// Remove todas as fotos do imóvel após confirmação do usuário.
+    /// </summary>
+    /// <remarks>
+    /// Exibe um diálogo de confirmação antes de limpar a lista de fotos exibidas no formulário.
+    /// </remarks>
     public async Task RemoveAllPhotos()
     {
         var parameters = new DialogParameters
@@ -107,6 +175,13 @@ public partial class PropertyFormComponent : ComponentBase
         AllPhotos.Clear();
         StateHasChanged();
     }
+
+    /// <summary>
+    /// Remove a foto atualmente selecionada do imóvel após confirmação do usuário.
+    /// </summary>
+    /// <remarks>
+    /// Exibe um diálogo de confirmação antes de remover a foto selecionada da lista.
+    /// </remarks>
     public async Task RemovePhoto()
     {
         var parameters = new DialogParameters
@@ -131,6 +206,11 @@ public partial class PropertyFormComponent : ComponentBase
         CarouselKey++;
         StateHasChanged();
     }
+
+    /// <summary>
+    /// Abre um diálogo para exibir a imagem em tamanho ampliado.
+    /// </summary>
+    /// <param name="photoUrl">URL da foto a ser exibida.</param>
     public async Task OpenImageDialog(string photoUrl)
     {
         var parameters = new DialogParameters { ["ImageUrl"] = photoUrl };
@@ -142,6 +222,11 @@ public partial class PropertyFormComponent : ComponentBase
         };
         await DialogService.ShowAsync<ImageDialog>(null, parameters, options);
     }
+
+    /// <summary>
+    /// Manipula o upload de arquivos de imagem, convertendo-os para base64 e adicionando à lista de fotos.
+    /// </summary>
+    /// <param name="files">Lista de arquivos selecionados pelo usuário.</param>
     public async Task OnFilesChange(IReadOnlyList<IBrowserFile>? files)
     {
         if (files is null) return;
@@ -167,6 +252,10 @@ public partial class PropertyFormComponent : ComponentBase
         DataGridBtnPhotosKey++;
         StateHasChanged();
     }
+
+    /// <summary>
+    /// Carrega as fotos do imóvel a partir do servidor e popula a lista de fotos exibidas.
+    /// </summary>
     public async Task LoadPhotosFromServerAsync()
     {
         try
@@ -194,6 +283,11 @@ public partial class PropertyFormComponent : ComponentBase
             Snackbar.Add(e.Message, Severity.Error);
         }
     }
+
+    /// <summary>
+    /// Atualiza a foto principal (thumbnail) do imóvel no servidor e na interface.
+    /// </summary>
+    /// <param name="item">Foto a ser definida como principal.</param>
     public async Task UpdateThumbnailsAsync(PhotoItem item)
     {
         if (string.IsNullOrEmpty(item.Id))
@@ -247,6 +341,10 @@ public partial class PropertyFormComponent : ComponentBase
             IsBusy = false;
         }
     }
+
+    /// <summary>
+    /// Envia as novas fotos adicionadas no formulário para o servidor.
+    /// </summary>
     private async Task UpdateServerPhotos()
     {
         var newPhotos = AllPhotos.Where(p => string.IsNullOrEmpty(p.Id)).ToList();
@@ -270,6 +368,10 @@ public partial class PropertyFormComponent : ComponentBase
                 Snackbar.Add(resultPhotos.Message ?? string.Empty, Severity.Error);
         }
     }
+
+    /// <summary>
+    /// Remove do servidor as fotos que foram excluídas no formulário.
+    /// </summary>
     private async Task DeleteRemovedServerPhotos()
     {
         var oldServerPhotosIds = PropertyPhotos
@@ -293,6 +395,14 @@ public partial class PropertyFormComponent : ComponentBase
             }
         }
     }
+
+    /// <summary>
+    /// Carrega os dados do imóvel para edição a partir do ID informado.
+    /// </summary>
+    /// <remarks>
+    /// Busca os dados do imóvel via handler, preenche o modelo de entrada e carrega as fotos do servidor.
+    /// Em caso de erro, exibe mensagem e redireciona para a listagem de imóveis.
+    /// </remarks>
     private async Task LoadPropertyAsync()
     {
         GetPropertyByIdRequest? request = null;
@@ -320,11 +430,19 @@ public partial class PropertyFormComponent : ComponentBase
             NavigationManager.NavigateTo("/imoveis");
         }
     }
+
+    /// <summary>
+    /// Redireciona para a tela de cadastro de novo imóvel, preenchendo valores padrão.
+    /// </summary>
     private void RedirectToCreateProperty()
     {
         InputModel.PropertyType = EPropertyType.House;
         NavigationManager.NavigateTo("/imoveis/adicionar");
     }
+
+    /// <summary>
+    /// Abre o diálogo para seleção do vendedor do imóvel.
+    /// </summary>
     public async Task OpenSellerDialog()
     {
         var parameters = new DialogParameters
@@ -345,6 +463,11 @@ public partial class PropertyFormComponent : ComponentBase
         if (result is { Canceled: false, Data: Customer selectedCustomer })
             SelectedSeller(selectedCustomer);
     }
+
+    /// <summary>
+    /// Manipula a seleção do vendedor no diálogo, atualizando o modelo do imóvel.
+    /// </summary>
+    /// <param name="seller">Vendedor selecionado.</param>
     private void SelectedSeller(Customer seller)
     {
         InputModel.Seller = seller;
@@ -352,6 +475,9 @@ public partial class PropertyFormComponent : ComponentBase
         StateHasChanged();
     }
 
+    /// <summary>
+    /// Abre o diálogo para seleção do condomínio do imóvel.
+    /// </summary>
     public async Task OpenCondominiumDialog()
     {
         var parameters = new DialogParameters
@@ -373,6 +499,10 @@ public partial class PropertyFormComponent : ComponentBase
             SelectedCondominium(selectedCondominium);
     }
 
+    /// <summary>
+    /// Manipula a seleção do condomínio no diálogo, atualizando o modelo do imóvel.
+    /// </summary>
+    /// <param name="condominium">Condomínio selecionado.</param>
     private void SelectedCondominium(Condominium condominium)
     {
         InputModel.Condominium = condominium;
@@ -384,6 +514,9 @@ public partial class PropertyFormComponent : ComponentBase
 
     #region Overrides
 
+    /// <summary>
+    /// Inicializa o componente, carregando os dados do imóvel para edição ou preparando para cadastro.
+    /// </summary>
     protected override async Task OnInitializedAsync()
     {
         IsBusy = true;

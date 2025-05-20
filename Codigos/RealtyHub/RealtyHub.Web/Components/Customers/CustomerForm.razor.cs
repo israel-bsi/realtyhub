@@ -11,43 +11,103 @@ using System.Text.RegularExpressions;
 
 namespace RealtyHub.Web.Components.Customers;
 
+/// <summary>
+/// Componente responsável pelo formulário de cadastro e edição de clientes.
+/// </summary>
 public partial class CustomerFormComponent : ComponentBase
 {
     #region Parameters
 
+    /// <summary>
+    /// Parâmetro que representa o ID do cliente a ser editado.
+    /// </summary>
     [Parameter]
     public long Id { get; set; }
 
     #endregion
 
     #region Properties
-    
+
+    /// <summary>
+    /// Contexto de edição do formulário.
+    /// </summary>
     public EditContext EditContext = null!;
+
+    /// <summary>
+    /// Armazena mensagens de validação do formulário.
+    /// </summary>
     private ValidationMessageStore? MessageStore;
+
+    /// <summary>
+    /// Texto do botão de ação do formulário.
+    /// </summary>
     public string Operation => Id != 0
         ? "Editar" : "Cadastrar";
+
+    /// <summary>
+    /// Indica se o formulário está em estado de carregamento ou processamento.
+    /// </summary>
     public bool IsBusy { get; set; }
+
+    /// <summary>
+    /// Instancia de <c><see cref="Customer"/></c> que representa o modelo de entrada do formulário.
+    /// </summary>
     public Customer InputModel { get; set; } = new();
+
+    /// <summary>
+    /// Máscara de entrada para o campo de documento do cliente.
+    /// </summary>
+    /// <remarks>
+    /// A máscara é definida com base no tipo de pessoa (física ou jurídica).
+    /// </remarks>
     public PatternMask DocumentCustomerMask { get; set; } = null!;
+
+    /// <summary>
+    /// Tipo de documento do cliente, que pode ser CPF ou CNPJ.
+    /// </summary>
     public string DocumentType =>
         InputModel.PersonType == EPersonType.Individual ? "CPF" : "CNPJ";
+
+    /// <summary>
+    /// Expressão regular utilizada para validar campos de texto.
+    /// </summary>
     public string Pattern = @"\D";
+
+    /// <summary>
+    /// Texto de erro a ser exibido quando o documento do cliente é inválido.
+    /// </summary>
     public string? ErrorText { get; set; }
+
+    /// <summary>
+    /// Indica se há erro de validação no campo de documento.
+    /// </summary>
     public bool Error => !string.IsNullOrEmpty(ErrorText);
 
     #endregion
 
     #region Services
 
+    /// <summary>
+    /// Handler responsável por gerenciar operações relacionadas a clientes.
+    /// </summary>
     [Inject]
     public ICustomerHandler Handler { get; set; } = null!;
 
+    /// <summary>
+    /// Serviço de navegação para redirecionamento de páginas.
+    /// </summary>
     [Inject]
     public NavigationManager NavigationManager { get; set; } = null!;
 
+    /// <summary>
+    /// Serviço para exibição de mensagens e notificações.
+    /// </summary>
     [Inject]
     public ISnackbar Snackbar { get; set; } = null!;
 
+    /// <summary>
+    /// Serviço para validação de documentos (CPF/CNPJ).
+    /// </summary>
     [Inject]
     public DocumentValidator DocumentValidator { get; set; } = null!;
 
@@ -55,9 +115,18 @@ public partial class CustomerFormComponent : ComponentBase
 
     #region Methods
 
+    /// <summary>
+    /// Método chamado quando o formulário é enviado e os dados são válidos.
+    /// </summary>
+    /// <remarks>
+    /// Esse método valida os campos do formulário, formata os dados de entrada e chama o handler para criar ou atualizar o cliente.
+    /// Em caso de sucesso, redireciona para a lista de clientes.
+    /// Caso contrário, exibe uma mensagem de erro.
+    /// </remarks>
+    /// <returns>Uma tarefa assíncrona.</returns>
     public async Task OnValidSubmitAsync()
     {
-        if(IsIndividualPersonFieldsInvalid()) return;
+        if (IsIndividualPersonFieldsInvalid()) return;
         IsBusy = true;
         try
         {
@@ -90,8 +159,22 @@ public partial class CustomerFormComponent : ComponentBase
             IsBusy = false;
         }
     }
+
+    /// <summary>
+    /// Método chamado quando o campo de documento perde o foco.
+    /// </summary>
+    /// <remarks>
+    /// Esse método valida o documento do cliente e exibe mensagens de erro, se necessário.
+    /// </remarks>
     public void OnBlurDocumentTextField()
         => ValidateDocument();
+
+    /// <summary>
+    /// Método chamado quando o campo de documento é alterado.
+    /// </summary>
+    /// <remarks>
+    /// Esse método valida o documento do cliente e exibe mensagens de erro, se necessário.
+    /// </remarks>
     public void ValidateDocument()
     {
         if (string.IsNullOrEmpty(InputModel.DocumentNumber)) return;
@@ -114,6 +197,13 @@ public partial class CustomerFormComponent : ComponentBase
         MessageStore?.Add(() => InputModel.DocumentNumber, ErrorText);
         EditContext.NotifyValidationStateChanged();
     }
+
+    /// <summary>
+    /// Método chamado quando o tipo de pessoa é alterado.
+    /// </summary>
+    /// <remarks>
+    /// Esse método altera a máscara do documento e valida o documento do cliente.
+    /// </remarks>
     public void OnPersonTypeChanged(EPersonType newPersonType)
     {
         InputModel.PersonType = newPersonType;
@@ -121,6 +211,13 @@ public partial class CustomerFormComponent : ComponentBase
         ValidateDocument();
     }
 
+    /// <summary>
+    /// Valida os campos obrigatórios para pessoas físicas.
+    /// </summary>
+    /// <remarks>
+    /// Esse método verifica se os campos obrigatórios estão preenchidos e exibe mensagens de erro, se necessário.
+    /// </remarks>
+    /// <returns><c>true</c> caso os campos sejam inválidos, caso contrario retorna <c>false</c> .</returns>
     private bool IsIndividualPersonFieldsInvalid()
     {
         if (InputModel.PersonType is not EPersonType.Individual) return false;
@@ -162,6 +259,11 @@ public partial class CustomerFormComponent : ComponentBase
 
         return isInvalid;
     }
+
+    /// <summary>
+    /// Altera a máscara do documento com base no tipo de pessoa.
+    /// </summary>
+    /// <param name="personType"> Enumerador <see cref="EPersonType"/> que representa o tipo de pessoa.</param>
     private void ChangeDocumentMask(EPersonType personType)
     {
         DocumentCustomerMask = personType switch
@@ -172,6 +274,14 @@ public partial class CustomerFormComponent : ComponentBase
         };
         StateHasChanged();
     }
+
+    /// <summary>
+    /// Carrega os dados do cliente a partir do ID fornecido.
+    /// </summary>
+    /// <remarks>
+    /// Esse método faz uma requisição para obter os dados do cliente e preenche o modelo de entrada.
+    /// Caso ocorra algum erro, exibe uma mensagem de erro e redireciona para a lista de clientes.
+    /// </remarks>
     private async Task LoadCustomerAsync()
     {
         GetCustomerByIdRequest? request = null;
@@ -222,12 +332,20 @@ public partial class CustomerFormComponent : ComponentBase
         }
         ValidateDocument();
     }
+
+    /// <summary>
+    /// Redireciona para a página de criação de cliente.
+    /// </summary>
     private void RedirectToCreateCustomer()
     {
         InputModel.PersonType = EPersonType.Individual;
         InputModel.MaritalStatus = EMaritalStatus.Single;
         NavigationManager.NavigateTo("/clientes/adicionar");
     }
+
+    /// <summary>
+    /// Executa as validações iniciais do formulário.
+    /// </summary>
     private void ExecuteValidations()
     {
         EditContext = new EditContext(InputModel);
@@ -239,6 +357,14 @@ public partial class CustomerFormComponent : ComponentBase
 
     #region Overrides
 
+    /// <summary>
+    /// Método chamado quando o componente é inicializado.
+    /// </summary>
+    /// <remarks>
+    /// Esse método inicializa o contexto de edição, executa as validações iniciais e carrega os dados do cliente, se necessário.
+    /// Caso ocorra algum erro, exibe uma mensagem de erro.
+    /// </remarks>
+    /// <returns>Uma tarefa assíncrona.</returns>
     protected override async Task OnInitializedAsync()
     {
         IsBusy = true;

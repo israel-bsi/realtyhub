@@ -12,28 +12,52 @@ using RealtyHub.Web.Components.Properties;
 
 namespace RealtyHub.Web.Components.Contracts;
 
+/// <summary>
+/// Componente responsável pelo formulário de emissão e edição de contratos.
+/// </summary>
 public partial class ContractFormComponent : ComponentBase
 {
     #region Parameters
 
+    /// <summary>
+    /// Identificador do contrato. Se diferente de zero, o formulário entra em modo de edição.
+    /// </summary>
     [Parameter]
     public long ContractId { get; set; }
 
+    /// <summary>
+    /// Identificador da proposta associada ao contrato.
+    /// </summary>
     [Parameter]
     public long OfferId { get; set; }
 
+    /// <summary>
+    /// Identificador do imóvel associado ao contrato.
+    /// </summary>
     [Parameter]
     public long PropertyId { get; set; }
 
+    /// <summary>
+    /// Indica se o formulário está em modo somente leitura.
+    /// </summary>
     [Parameter]
     public bool ReadOnly { get; set; }
 
+    /// <summary>
+    /// Indica se a busca de imóveis está bloqueada.
+    /// </summary>
     [Parameter]
     public bool LockPropertySearch { get; set; }
 
+    /// <summary>
+    /// Indica se a busca de clientes está bloqueada.
+    /// </summary>
     [Parameter]
     public bool LockCustomerSearch { get; set; }
 
+    /// <summary>
+    /// Evento disparado ao clicar no botão de submissão do formulário.
+    /// </summary>
     [Parameter]
     public EventCallback OnSubmitButtonClicked { get; set; }
 
@@ -41,27 +65,57 @@ public partial class ContractFormComponent : ComponentBase
 
     #region Properties
 
+    /// <summary>
+    /// Indica se o formulário está em estado de carregamento ou processamento.
+    /// </summary>
     public bool IsBusy { get; set; }
+
+    /// <summary>
+    /// Chave para forçar a atualização do formulário.
+    /// </summary>
     public int EditFormKey { get; set; }
+
+    /// <summary>
+    /// Modelo de entrada utilizado para o binding dos campos do formulário.
+    /// </summary>
     public Contract InputModel { get; set; } = new();
+
+    /// <summary>
+    /// Indica a operação atual do formulário ("Emitir" ou "Editar").
+    /// </summary>
     public string Operation => ContractId == 0 ? "Emitir" : "Editar";
 
     #endregion
 
     #region Services
 
+    /// <summary>
+    /// Handler responsável pelas operações de propostas.
+    /// </summary>
     [Inject]
     public IOfferHandler OfferHandler { get; set; } = null!;
 
+    /// <summary>
+    /// Handler responsável pelas operações de contratos.
+    /// </summary>
     [Inject]
     public IContractHandler ContractHandler { get; set; } = null!;
 
+    /// <summary>
+    /// Serviço de navegação para redirecionamento de páginas.
+    /// </summary>
     [Inject]
     public NavigationManager NavigationManager { get; set; } = null!;
 
+    /// <summary>
+    /// Serviço para exibição de mensagens e notificações.
+    /// </summary>
     [Inject]
     public ISnackbar Snackbar { get; set; } = null!;
 
+    /// <summary>
+    /// Serviço de diálogos para exibição de modais.
+    /// </summary>
     [Inject]
     public IDialogService DialogService { get; set; } = null!;
 
@@ -69,6 +123,13 @@ public partial class ContractFormComponent : ComponentBase
 
     #region Methods
 
+    /// <summary>
+    /// Manipula o envio válido do formulário, realizando a criação ou atualização do contrato.
+    /// </summary>
+    /// <remarks>
+    /// Este método verifica se o formulário está em modo de emissão ou edição, chama o handler apropriado para criar ou atualizar o contrato,
+    /// exibe mensagens de sucesso ou erro via Snackbar, dispara o evento de submissão e, em caso de sucesso, abre o diálogo para envio do contrato por e-mail.
+    /// </remarks>
     public async Task OnValidSubmitAsync()
     {
         IsBusy = true;
@@ -114,6 +175,13 @@ public partial class ContractFormComponent : ComponentBase
         }
     }
 
+    /// <summary>
+    /// Abre o diálogo para confirmação e envio do contrato por e-mail.
+    /// </summary>
+    /// <remarks>
+    /// Exibe um diálogo de confirmação para o envio do contrato por e-mail. Caso o usuário confirme, abre um segundo diálogo para informar os e-mails do comprador e vendedor.
+    /// Utiliza o serviço de diálogos (<see cref="IDialogService"/>) para exibir os modais.
+    /// </remarks>
     private async Task OpenEmailDialog()
     {
         var parametersConfirm = new DialogParameters
@@ -149,16 +217,28 @@ public partial class ContractFormComponent : ComponentBase
         };
         var dialog = await DialogService
             .ShowAsync<EmailDialog>("Enviar contrato por e-mail", parameters, options);
-        
-
     }
 
+    /// <summary>
+    /// Dispara o evento de clique no botão de submissão, se houver delegate.
+    /// </summary>
+    /// <remarks>
+    /// Verifica se existe um delegate associado ao evento <see cref="OnSubmitButtonClicked"/> e o executa de forma assíncrona.
+    /// Permite que componentes pais sejam notificados após a submissão do formulário.
+    /// </remarks>
     private async Task OnSubmitButtonClickedAsync()
     {
         if (OnSubmitButtonClicked.HasDelegate)
             await OnSubmitButtonClicked.InvokeAsync();
     }
 
+    /// <summary>
+    /// Abre o diálogo para seleção de imóvel.
+    /// </summary>
+    /// <remarks>
+    /// Exibe um diálogo modal para seleção de um imóvel. Ao selecionar, atualiza o modelo do contrato com o imóvel escolhido.
+    /// O diálogo só é aberto se <see cref="LockPropertySearch"/> for falso.
+    /// </remarks>
     public async Task OpenPropertyDialog()
     {
         if (LockPropertySearch) return;
@@ -181,6 +261,13 @@ public partial class ContractFormComponent : ComponentBase
         if (result is { Canceled: false, Data: Property selectedProperty })
             SelectedProperty(selectedProperty);
     }
+
+    /// <summary>
+    /// Manipula a seleção de um imóvel no diálogo.
+    /// </summary>
+    /// <remarks>
+    /// Atualiza o modelo do contrato com o imóvel selecionado e força a atualização do formulário.
+    /// </remarks>
     private void SelectedProperty(Property property)
     {
         InputModel.Offer!.Property = property;
@@ -188,6 +275,13 @@ public partial class ContractFormComponent : ComponentBase
         EditFormKey++;
         StateHasChanged();
     }
+
+    /// <summary>
+    /// Limpa os dados do imóvel selecionado.
+    /// </summary>
+    /// <remarks>
+    /// Remove o imóvel do modelo do contrato e reseta os campos relacionados.
+    /// </remarks>
     public void ClearPropertyObjects()
     {
         InputModel.Offer!.Property = new Property();
@@ -196,6 +290,13 @@ public partial class ContractFormComponent : ComponentBase
         StateHasChanged();
     }
 
+    /// <summary>
+    /// Abre o diálogo para seleção de proposta.
+    /// </summary>
+    /// <remarks>
+    /// Exibe um diálogo modal para seleção de uma proposta aceita. Ao selecionar, atualiza o modelo do contrato com a proposta escolhida.
+    /// O diálogo só é aberto se <see cref="LockPropertySearch"/> for falso.
+    /// </remarks>
     public async Task OpenOfferDialog()
     {
         if (LockPropertySearch) return;
@@ -217,6 +318,13 @@ public partial class ContractFormComponent : ComponentBase
         if (result is { Canceled: false, Data: Offer offer })
             SelectedOffer(offer);
     }
+
+    /// <summary>
+    /// Manipula a seleção de uma proposta no diálogo.
+    /// </summary>
+    /// <remarks>
+    /// Atualiza o modelo do contrato com a proposta selecionada, preenchendo também os dados do comprador e vendedor.
+    /// </remarks>
     private void SelectedOffer(Offer offer)
     {
         InputModel.OfferId = offer.Id;
@@ -228,6 +336,13 @@ public partial class ContractFormComponent : ComponentBase
         EditFormKey++;
         StateHasChanged();
     }
+
+    /// <summary>
+    /// Limpa os dados da proposta selecionada.
+    /// </summary>
+    /// <remarks>
+    /// Remove a proposta do modelo do contrato e reseta os campos de comprador e vendedor.
+    /// </remarks>
     public void ClearOfferObjets()
     {
         InputModel.Offer = new Offer();
@@ -240,6 +355,12 @@ public partial class ContractFormComponent : ComponentBase
         StateHasChanged();
     }
 
+    /// <summary>
+    /// Abre o diálogo para seleção do comprador.
+    /// </summary>
+    /// <remarks>
+    /// Exibe um diálogo modal para seleção de um cliente como comprador. O diálogo só é aberto se <see cref="LockCustomerSearch"/> for falso.
+    /// </remarks>
     public async Task OpenBuyerDialog()
     {
         if (LockCustomerSearch) return;
@@ -261,6 +382,13 @@ public partial class ContractFormComponent : ComponentBase
         if (result is { Canceled: false, Data: Customer buyer })
             SelectedBuyer(buyer);
     }
+
+    /// <summary>
+    /// Manipula a seleção do comprador no diálogo.
+    /// </summary>
+    /// <remarks>
+    /// Atualiza o modelo do contrato com o comprador selecionado.
+    /// </remarks>
     private void SelectedBuyer(Customer buyer)
     {
         InputModel.Buyer = buyer;
@@ -268,6 +396,13 @@ public partial class ContractFormComponent : ComponentBase
         EditFormKey++;
         StateHasChanged();
     }
+
+    /// <summary>
+    /// Limpa os dados do comprador selecionado.
+    /// </summary>
+    /// <remarks>
+    /// Remove o comprador do modelo do contrato e reseta os campos relacionados.
+    /// </remarks>
     public void ClearBuyerObjects()
     {
         InputModel.Buyer = new Customer();
@@ -276,6 +411,12 @@ public partial class ContractFormComponent : ComponentBase
         StateHasChanged();
     }
 
+    /// <summary>
+    /// Abre o diálogo para seleção do vendedor.
+    /// </summary>
+    /// <remarks>
+    /// Exibe um diálogo modal para seleção de um cliente como vendedor. O diálogo só é aberto se <see cref="LockCustomerSearch"/> for falso.
+    /// </remarks>
     public async Task OpenSellerDialog()
     {
         if (LockCustomerSearch) return;
@@ -297,6 +438,13 @@ public partial class ContractFormComponent : ComponentBase
         if (result is { Canceled: false, Data: Customer seller })
             SelectedSeller(seller);
     }
+
+    /// <summary>
+    /// Manipula a seleção do vendedor no diálogo.
+    /// </summary>
+    /// <remarks>
+    /// Atualiza o modelo do contrato com o vendedor selecionado.
+    /// </remarks>
     private void SelectedSeller(Customer seller)
     {
         InputModel.Seller = seller;
@@ -304,6 +452,13 @@ public partial class ContractFormComponent : ComponentBase
         EditFormKey++;
         StateHasChanged();
     }
+
+    /// <summary>
+    /// Limpa os dados do vendedor selecionado.
+    /// </summary>
+    /// <remarks>
+    /// Remove o vendedor do modelo do contrato e reseta os campos relacionados.
+    /// </remarks>
     public void ClearSellerObjects()
     {
         InputModel.Seller = new Customer();
@@ -311,11 +466,14 @@ public partial class ContractFormComponent : ComponentBase
         EditFormKey++;
         StateHasChanged();
     }
-    
+
     #endregion
 
     #region Overrides
 
+    /// <summary>
+    /// Inicializa o componente, buscando os dados do contrato, proposta ou imóvel conforme os parâmetros informados.
+    /// </summary>
     protected override async Task OnInitializedAsync()
     {
         IsBusy = true;
