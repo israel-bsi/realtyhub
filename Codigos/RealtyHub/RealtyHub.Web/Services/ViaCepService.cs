@@ -5,15 +5,29 @@ using System.Text.Json;
 
 namespace RealtyHub.Web.Services;
 
+/// <summary>
+/// Serviço responsável por buscar informações de endereço a partir do serviço ViaCep.
+/// </summary>
 public class ViaCepService : IViaCepService
 {
     private readonly HttpClient _httpClient;
 
+    /// <summary>
+    /// Inicializa uma nova instância de <see cref="ViaCepService"/> utilizando a fábrica de <see cref="HttpClient"/>.
+    /// </summary>
+    /// <param name="httpClientFactory">Fábrica para criar instâncias do HttpClient.</param>
     public ViaCepService(IHttpClientFactory httpClientFactory)
     {
         _httpClient = httpClientFactory.CreateClient();
     }
 
+    /// <summary>
+    /// Busca as informações de endereço utilizando o CEP informado através da API ViaCep.
+    /// </summary>
+    /// <param name="cep">CEP a ser pesquisado.</param>
+    /// <returns>
+    /// Task contendo um <see cref="Response{ViaCepResponse?}"/> com as informações retornadas pela API ou mensagem de erro.
+    /// </returns>
     public async Task<Response<ViaCepResponse?>> SearchAddressAsync(string cep)
     {
         try
@@ -39,6 +53,13 @@ public class ViaCepService : IViaCepService
         }
     }
 
+    /// <summary>
+    /// Retorna um objeto <see cref="Address"/> com base no CEP informado, realizando a busca através do serviço ViaCep.
+    /// </summary>
+    /// <param name="cep">CEP a ser pesquisado.</param>
+    /// <returns>
+    /// Task contendo um <see cref="Response{Address?}"/> com as informações de endereço ou mensagem de erro.
+    /// </returns>
     public async Task<Response<Address?>> GetAddressAsync(string cep)
     {
         try

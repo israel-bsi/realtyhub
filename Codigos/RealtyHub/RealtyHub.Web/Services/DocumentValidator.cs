@@ -2,6 +2,11 @@
 
 public class DocumentValidator
 {
+    /// <summary>
+    /// Verifica se o CPF informado é válido.
+    /// </summary>
+    /// <param name="cpf">O CPF a ser validado.</param>
+    /// <returns>True se o CPF for válido; caso contrário, false.</returns>
     public bool IsValidCpf(string cpf)
     {
         if (string.IsNullOrWhiteSpace(cpf))
@@ -32,6 +37,11 @@ public class DocumentValidator
         return cpf[9] == digitoVerificador1 + '0' && cpf[10] == digitoVerificador2 + '0';
     }
 
+    /// <summary>
+    /// Verifica se o CNPJ informado é válido.
+    /// </summary>
+    /// <param name="cnpj">O CNPJ a ser validado.</param>
+    /// <returns>True se o CNPJ for válido; caso contrário, false.</returns>
     public bool IsValidCnpj(string cnpj)
     {
         if (string.IsNullOrWhiteSpace(cnpj))
