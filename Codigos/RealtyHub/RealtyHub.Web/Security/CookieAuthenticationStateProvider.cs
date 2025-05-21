@@ -5,24 +5,51 @@ using System.Security.Claims;
 
 namespace RealtyHub.Web.Security;
 
+/// <summary>
+/// Provedor de estado de autenticação baseado em cookies. Este provedor obtém
+/// informações do usuário e seus respectivos claims a partir de uma API backend,
+/// atualizando o estado de autenticação da aplicação.
+/// </summary>
 public class CookieAuthenticationStateProvider :
-    AuthenticationStateProvider, ICookieAuthenticationStateProvider
+AuthenticationStateProvider,
+ICookieAuthenticationStateProvider
 {
     private readonly HttpClient _httpClient;
     private bool _isAuthenticated;
 
+    /// <summary>
+    /// Inicializa uma nova instância de <see cref="CookieAuthenticationStateProvider"/>
+    /// utilizando a fábrica de <see cref="HttpClient"/>.
+    /// </summary>
+    /// <param name="clientFactory">Fábrica para criar instâncias do HttpClient configuradas para o backend.</param>
     public CookieAuthenticationStateProvider(IHttpClientFactory clientFactory)
     {
         _httpClient = clientFactory.CreateClient(Configuration.HttpClientName);
     }
 
+    /// <summary>
+    /// Verifica se o usuário está autenticado, atualizando o estado de autenticação.
+    /// </summary>
+    /// <returns>Task contendo um booleano indicando se o usuário está autenticado.</returns>
     public async Task<bool> CheckAuthenticatedAsync()
     {
         await GetAuthenticationStateAsync();
         return _isAuthenticated;
     }
+
+    /// <summary>
+    /// Notifica a aplicação que o estado de autenticação foi alterado.
+    /// </summary>
     public void NotifyAuthenticationStateChanged() =>
         NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
+
+    /// <summary>
+    /// Obtém o estado atual de autenticação do usuário. Este método busca as informações do usuário
+    /// a partir da API backend e, se bem-sucedido, constrói uma lista de claims para definir o estado autenticado.
+    /// </summary>
+    /// <returns>
+    /// Task contendo um objeto <see cref="AuthenticationState"/> representando o estado do usuário.
+    /// </returns>
     public override async Task<AuthenticationState> GetAuthenticationStateAsync()
     {
         _isAuthenticated = false;
@@ -42,6 +69,12 @@ public class CookieAuthenticationStateProvider :
         return new AuthenticationState(user);
     }
 
+    /// <summary>
+    /// Tenta obter as informações do usuário a partir da API backend.
+    /// </summary>
+    /// <returns>
+    /// Task contendo o objeto <see cref="User"/> se obtido com sucesso; caso contrário, null.
+    /// </returns>
     private async Task<User?> GetUser()
     {
         try
@@ -54,6 +87,13 @@ public class CookieAuthenticationStateProvider :
         }
     }
 
+    /// <summary>
+    /// Constrói uma lista de claims para o usuário com base nas informações obtidas e nos roles retornados pela API.
+    /// </summary>
+    /// <param name="user">Objeto <see cref="User"/> contendo as informações do usuário.</param>
+    /// <returns>
+    /// Task contendo uma lista de <see cref="Claim"/> representando as autorizações do usuário.
+    /// </returns>
     private async Task<List<Claim>> GetClaims(User user)
     {
         var claims = new List<Claim>
