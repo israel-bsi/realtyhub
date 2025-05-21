@@ -7,22 +7,45 @@ using RealtyHub.Web.Components.Common;
 
 namespace RealtyHub.Web.Pages.Customers;
 
+/// <summary>
+/// Página responsável por exibir e gerenciar a listagem de clientes na aplicação.
+/// </summary>
 public partial class ListCustomersPage : ComponentBase
 {
     #region Parameters
 
+    /// <summary>
+    /// Evento chamado quando um cliente é selecionado.
+    /// </summary>
     [Parameter]
     public EventCallback<Customer> OnCustomerSelected { get; set; }
 
+    /// <summary>
+    /// Estilo CSS aplicado às linhas da tabela.
+    /// </summary>
     [Parameter]
     public string RowStyle { get; set; } = string.Empty;
+
     #endregion
 
     #region Properties
 
+    /// <summary>
+    /// Componente de grid do MudBlazor utilizado para exibir a lista de clientes.
+    /// </summary>
     public MudDataGrid<Customer> DataGrid { get; set; } = null!;
+
+    /// <summary>
+    /// Lista de clientes a serem exibidos no grid.
+    /// </summary>
     public List<Customer> Customers { get; set; } = [];
+
     private string _searchTerm = string.Empty;
+
+    /// <summary>
+    /// Termo de busca utilizado para filtrar os clientes.
+    /// Ao alterar o valor, o grid é recarregado.
+    /// </summary>
     public string SearchTerm
     {
         get => _searchTerm;
@@ -38,12 +61,21 @@ public partial class ListCustomersPage : ComponentBase
 
     #region Services
 
+    /// <summary>
+    /// Serviço para exibição de notificações na tela.
+    /// </summary>
     [Inject]
     public ISnackbar Snackbar { get; set; } = null!;
 
+    /// <summary>
+    /// Handler responsável por gerenciar as operações relacionadas aos clientes.
+    /// </summary>
     [Inject]
     public ICustomerHandler Handler { get; set; } = null!;
 
+    /// <summary>
+    /// Serviço utilizado para exibir diálogos modais.
+    /// </summary>
     [Inject]
     public IDialogService DialogService { get; set; } = null!;
 
@@ -51,6 +83,11 @@ public partial class ListCustomersPage : ComponentBase
 
     #region Methods
 
+    /// <summary>
+    /// Exibe um diálogo de confirmação e, se confirmado, executa a exclusão do cliente.
+    /// </summary>
+    /// <param name="id">Identificador do cliente a ser excluído.</param>
+    /// <param name="name">Nome do cliente, para exibição na mensagem de confirmação.</param>
     public async Task OnDeleteButtonClickedAsync(long id, string name)
     {
         var parameters = new DialogParameters
@@ -75,6 +112,12 @@ public partial class ListCustomersPage : ComponentBase
         await OnDeleteAsync(id, name);
         StateHasChanged();
     }
+
+    /// <summary>
+    /// Executa a exclusão efetiva do cliente.
+    /// </summary>
+    /// <param name="id">Identificador do cliente a ser excluído.</param>
+    /// <param name="name">Nome do cliente, utilizado para exibir a notificação de sucesso.</param>
     private async Task OnDeleteAsync(long id, string name)
     {
         try
@@ -86,9 +129,18 @@ public partial class ListCustomersPage : ComponentBase
         }
         catch (Exception e)
         {
-            Snackbar.Add(e.Message, Severity.Success);
+            Snackbar.Add(e.Message, Severity.Error);
         }
     }
+
+    /// <summary>
+    /// Carrega os dados dos clientes do servidor de forma paginada para exibição no grid.
+    /// </summary>
+    /// <param name="state">Estado atual do grid, contendo informações de paginação.</param>
+    /// <returns>
+    /// Um objeto <see cref="GridData{Customer}"/> contendo a lista de clientes e a contagem total.
+    /// Em caso de falha, retorna um grid vazio e exibe uma mensagem de erro.
+    /// </returns>
     public async Task<GridData<Customer>> LoadServerData(GridState<Customer> state)
     {
         try
@@ -102,11 +154,13 @@ public partial class ListCustomersPage : ComponentBase
 
             var response = await Handler.GetAllAsync(request);
             if (response.IsSuccess)
+            {
                 return new GridData<Customer>
                 {
                     Items = response.Data ?? [],
                     TotalItems = response.TotalCount
                 };
+            }
 
             Snackbar.Add(response.Message ?? string.Empty, Severity.Error);
             return new GridData<Customer>
@@ -125,6 +179,11 @@ public partial class ListCustomersPage : ComponentBase
             };
         }
     }
+
+    /// <summary>
+    /// Notifica o componente pai que um cliente foi selecionado.
+    /// </summary>
+    /// <param name="customer">Cliente selecionado.</param>
     public async Task SelectCustomer(Customer customer)
     {
         if (OnCustomerSelected.HasDelegate)

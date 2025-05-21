@@ -7,13 +7,22 @@ using RealtyHub.Web.Components.Common;
 
 namespace RealtyHub.Web.Pages.Condominiums;
 
+/// <summary>
+/// Página responsável pela listagem e gerenciamento de condomínios na aplicação.
+/// </summary>
 public class ListCondominiumsPage : ComponentBase
 {
     #region Parameters
 
+    /// <summary>
+    /// Delegate para notificar a seleção de um condomínio.
+    /// </summary>
     [Parameter]
     public EventCallback<Condominium> OnCondominiumSelected { get; set; }
 
+    /// <summary>
+    /// Estilo CSS aplicado às linhas da tabela.
+    /// </summary>
     [Parameter]
     public string RowStyle { get; set; } = string.Empty;
 
@@ -21,12 +30,21 @@ public class ListCondominiumsPage : ComponentBase
 
     #region Services
 
+    /// <summary>
+    /// Serviço para exibição de mensagens de notificação.
+    /// </summary>
     [Inject]
     public ISnackbar Snackbar { get; set; } = null!;
 
+    /// <summary>
+    /// Serviço para exibição de diálogos modais.
+    /// </summary>
     [Inject]
     public IDialogService DialogService { get; set; } = null!;
 
+    /// <summary>
+    /// Handler para operações relacionadas aos condomínios.
+    /// </summary>
     [Inject]
     public ICondominiumHandler Handler { get; set; } = null!;
 
@@ -34,11 +52,29 @@ public class ListCondominiumsPage : ComponentBase
 
     #region Properties
 
+    /// <summary>
+    /// Componente de grid para exibir a lista de condomínios.
+    /// </summary>
     public MudDataGrid<Condominium> DataGrid { get; set; } = null!;
+
+    /// <summary>
+    /// Lista de condomínios carregados do servidor.
+    /// </summary>
     public List<Condominium> Condominiums { get; set; } = [];
+
+    /// <summary>
+    /// Termo de busca utilizado para filtrar a lista de condomínios.
+    /// </summary>
     public string SearchTerm { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Filtro selecionado para a busca.
+    /// </summary>
     public string SelectedFilter { get; set; } = string.Empty;
 
+    /// <summary>
+    /// Lista de opções de filtro disponíveis para a busca.
+    /// </summary>
     public readonly List<FilterOption> FilterOptions =
     [
         new() { DisplayName = "Nome", PropertyName = "Name" },
@@ -61,6 +97,12 @@ public class ListCondominiumsPage : ComponentBase
 
     #region Methods
 
+    /// <summary>
+    /// Método chamado quando o botão de exclusão é clicado.
+    /// </summary>
+    /// <param name="id">Identificador do condomínio a ser excluído.</param>
+    /// <param name="name">Nome do condomínio (para exibição na mensagem de confirmação).</param>
+    /// <returns>Task representando a operação assíncrona.</returns>
     public async Task OnDeleteButtonClickedAsync(long id, string name)
     {
         var parameters = new DialogParameters
@@ -86,6 +128,12 @@ public class ListCondominiumsPage : ComponentBase
         StateHasChanged();
     }
 
+    /// <summary>
+    /// Executa a operação de exclusão efetiva de um condomínio.
+    /// </summary>
+    /// <param name="id">Identificador do condomínio a ser excluído.</param>
+    /// <param name="name">Nome do condomínio (utilizado para exibir a mensagem de sucesso).</param>
+    /// <returns>Task representando a operação assíncrona.</returns>
     private async Task OnDeleteAsync(long id, string name)
     {
         try
@@ -97,10 +145,15 @@ public class ListCondominiumsPage : ComponentBase
         }
         catch (Exception e)
         {
-            Snackbar.Add(e.Message, Severity.Success);
+            Snackbar.Add(e.Message, Severity.Error);
         }
     }
 
+    /// <summary>
+    /// Carrega os dados do servidor de forma paginada para exibição no grid.
+    /// </summary>
+    /// <param name="state">Estado atual do grid contendo paginação e filtros.</param>
+    /// <returns>Um objeto <see cref="GridData{Condominium}"/> contendo a lista de condomínios e a contagem total.</returns>
     public async Task<GridData<Condominium>> LoadServerData(GridState<Condominium> state)
     {
         try
@@ -131,8 +184,14 @@ public class ListCondominiumsPage : ComponentBase
         }
     }
 
+    /// <summary>
+    /// Aciona a recarga dos dados do grid quando o botão de busca é clicado.
+    /// </summary>
     public void OnButtonSearchClick() => DataGrid.ReloadServerData();
 
+    /// <summary>
+    /// Limpa o termo de busca e o filtro, e recarrega os dados do grid.
+    /// </summary>
     public void OnClearSearchClick()
     {
         SearchTerm = string.Empty;
@@ -140,12 +199,21 @@ public class ListCondominiumsPage : ComponentBase
         DataGrid.ReloadServerData();
     }
 
+    /// <summary>
+    /// Manipula a alteração do valor do filtro selecionado.
+    /// </summary>
+    /// <param name="newValue">Novo valor do filtro.</param>
     public void OnValueFilterChanged(string newValue)
     {
         SelectedFilter = newValue;
         StateHasChanged();
     }
 
+    /// <summary>
+    /// Notifica ao componente pai que um condomínio foi selecionado.
+    /// </summary>
+    /// <param name="condominium">O condomínio selecionado.</param>
+    /// <returns>Task representando a operação assíncrona.</returns>
     public async Task SelectCondominium(Condominium condominium)
     {
         if (OnCondominiumSelected.HasDelegate)

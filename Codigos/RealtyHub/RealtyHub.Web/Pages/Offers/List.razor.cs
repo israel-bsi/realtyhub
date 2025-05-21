@@ -12,50 +12,94 @@ using RealtyHub.Web.Services;
 
 namespace RealtyHub.Web.Pages.Offers;
 
+/// <summary>
+/// Página responsável por exibir e gerenciar a listagem de propostas de compra de imóvel na aplicação.
+/// </summary>
 public partial class ListOffersPage : ComponentBase
 {
     #region Parameters
 
+    /// <summary>
+    /// Evento chamado quando uma proposta é selecionada.
+    /// </summary>
     [Parameter]
     public EventCallback<Offer> OnOfferSelected { get; set; }
 
+    /// <summary>
+    /// Estilo CSS aplicado às linhas da tabela.
+    /// </summary>
     [Parameter]
     public string RowStyle { get; set; } = string.Empty;
 
-    [Parameter] 
+    /// <summary>
+    /// Indica se somente as propostas aceitas devem ser exibidas.
+    /// </summary>
+    [Parameter]
     public bool OnlyAccepted { get; set; }
 
     #endregion
 
     #region Properties
 
+    /// <summary>
+    /// Componente de grid do MudBlazor utilizado para exibir a lista de propostas.
+    /// </summary>
     public MudDataGrid<Offer> DataGrid { get; set; } = null!;
+
+    /// <summary>
+    /// Intervalo de datas utilizado para filtrar as propostas.
+    /// Inicia no primeiro dia do mês atual e termina no último dia do mês atual.
+    /// </summary>
     public DateRange DateRange { get; set; } = new(DateTime.Now.GetFirstDay(), DateTime.Now.GetLastDay());
+
+    /// <summary>
+    /// Lista de propostas a serem exibidas no grid.
+    /// </summary>
     public List<Offer> Items { get; set; } = [];
 
     #endregion
 
     #region Services
 
+    /// <summary>
+    /// Serviço para exibição de diálogos modais.
+    /// </summary>
     [Inject]
     public IDialogService DialogService { get; set; } = null!;
 
+    /// <summary>
+    /// Serviço para exibição de notificações na tela.
+    /// </summary>
     [Inject]
     public ISnackbar Snackbar { get; set; } = null!;
 
+    /// <summary>
+    /// Handler responsável pelas operações relacionadas a propostas.
+    /// </summary>
     [Inject]
     public IOfferHandler Handler { get; set; } = null!;
 
+    /// <summary>
+    /// Serviço responsável por gerar relatórios de propostas.
+    /// </summary>
     [Inject]
     public OfferReport OfferReport { get; set; } = null!;
 
-    [Inject] 
+    /// <summary>
+    /// Serviço JavaScript para interações com o navegador, como abrir um PDF em nova aba.
+    /// </summary>
+    [Inject]
     public IJSRuntime JsRuntime { get; set; } = null!;
 
     #endregion
 
     #region Methods
 
+    /// <summary>
+    /// Manipula o clique do botão de gerar relatório da proposta.
+    /// Caso o relatório seja gerado com sucesso, abre o PDF em uma nova aba.
+    /// </summary>
+    /// <returns>Task representando a operação assíncrona.</returns>
     public async Task OnReportClickedAsync()
     {
         var result = await OfferReport.GetOfferAsync();
@@ -67,6 +111,14 @@ public partial class ListOffersPage : ComponentBase
         Snackbar.Add(result.Message ?? string.Empty, Severity.Error);
     }
 
+    /// <summary>
+    /// Carrega os dados das propostas do servidor de forma paginada para exibição no grid.
+    /// </summary>
+    /// <param name="state">Estado atual do grid contendo informações de paginação.</param>
+    /// <returns>
+    /// Um objeto <see cref="GridData{Offer}"/> contendo a lista de propostas e a contagem total.
+    /// Caso ocorra uma falha, retorna um grid vazio e exibe uma mensagem de erro.
+    /// </returns>
     public async Task<GridData<Offer>> LoadServerData(GridState<Offer> state)
     {
         try
@@ -107,12 +159,22 @@ public partial class ListOffersPage : ComponentBase
         }
     }
 
+    /// <summary>
+    /// Atualiza o intervalo de datas utilizado para filtrar as propostas e recarrega os dados do grid.
+    /// </summary>
+    /// <param name="newDateRange">Novo intervalo de datas selecionado.</param>
     public void OnDateRangeChanged(DateRange newDateRange)
     {
         DateRange = newDateRange;
         DataGrid.ReloadServerData();
     }
 
+    /// <summary>
+    /// Manipula o clique para aceitar uma proposta.
+    /// Exibe um diálogo de confirmação e, se confirmado, envia a solicitação para aceitar a proposta.
+    /// Após a operação, exibe uma notificação e recarrega o grid.
+    /// </summary>
+    /// <param name="offer">Proposta a ser aceita.</param>
     public async Task OnAcceptClickedAsync(Offer offer)
     {
         if (IsOfferStatusInvalid(offer)) return;
@@ -133,9 +195,17 @@ public partial class ListOffersPage : ComponentBase
             await DataGrid.ReloadServerData();
         }
         else
+        {
             Snackbar.Add(result.Message ?? string.Empty, Severity.Error);
+        }
     }
 
+    /// <summary>
+    /// Manipula o clique para rejeitar uma proposta.
+    /// Exibe um diálogo de confirmação e, se confirmado, envia a solicitação para rejeitar a proposta.
+    /// Após a operação, exibe uma notificação e recarrega o grid.
+    /// </summary>
+    /// <param name="offer">Proposta a ser rejeitada.</param>
     public async Task OnRejectClickedAsync(Offer offer)
     {
         if (IsOfferStatusInvalid(offer)) return;
@@ -156,9 +226,15 @@ public partial class ListOffersPage : ComponentBase
             await DataGrid.ReloadServerData();
         }
         else
+        {
             Snackbar.Add(result.Message ?? string.Empty, Severity.Error);
+        }
     }
 
+    /// <summary>
+    /// Abre uma caixa de diálogo para visualizar os detalhes completos de uma proposta.
+    /// </summary>
+    /// <param name="offer">Proposta a ser visualizada.</param>
     public async Task OpenOfferDialog(Offer offer)
     {
         var options = new DialogOptions
@@ -179,15 +255,27 @@ public partial class ListOffersPage : ComponentBase
         await DialogService.ShowAsync<OfferDialog>("Visualizar proposta", parameters, options);
     }
 
+    /// <summary>
+    /// Notifica o componente pai que uma proposta foi selecionada.
+    /// </summary>
+    /// <param name="offer">Proposta selecionada.</param>
     public async Task SelectOffer(Offer offer)
     {
         if (OnOfferSelected.HasDelegate)
             await OnOfferSelected.InvokeAsync(offer);
     }
 
-    private bool IsOfferStatusInvalid(Offer viewing)
+    /// <summary>
+    /// Verifica se o status da proposta é inválido para alteração.
+    /// Se a proposta estiver em status "Accepted" ou "Rejected", exibe uma mensagem de alerta.
+    /// </summary>
+    /// <param name="offer">Proposta a ser verificada.</param>
+    /// <returns>
+    /// True se o status da proposta for inválido para alteração; caso contrário, false.
+    /// </returns>
+    private bool IsOfferStatusInvalid(Offer offer)
     {
-        switch (viewing.OfferStatus)
+        switch (offer.OfferStatus)
         {
             case EOfferStatus.Accepted:
                 Snackbar.Add("Proposta está aceita", Severity.Warning);
@@ -195,8 +283,10 @@ public partial class ListOffersPage : ComponentBase
             case EOfferStatus.Rejected:
                 Snackbar.Add("Proposta está cancelada", Severity.Warning);
                 return true;
+            default:
+                return false;
         }
-        return false;
     }
+
     #endregion
 }

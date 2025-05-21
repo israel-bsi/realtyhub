@@ -7,16 +7,41 @@ using RealtyHub.Web.Components.Offers;
 
 namespace RealtyHub.Web.Pages;
 
+/// <summary>
+/// Página responsável por exibir e gerenciar a listagem de imóveis na página inicial da aplicação.
+/// </summary>
 public partial class PropertyListHomePage : ComponentBase
 {
     #region Properties
 
+    /// <summary>
+    /// Indica se a página está ocupada realizando alguma operação (ex.: carregamento de dados).
+    /// </summary>
     public bool IsBusy { get; set; }
+
+    /// <summary>
+    /// Componente de grid do MudBlazor utilizado para exibir a lista de imóveis.
+    /// </summary>
     public MudDataGrid<Property> DataGrid { get; set; } = null!;
+
+    /// <summary>
+    /// Lista de imóveis a serem exibidos no grid.
+    /// </summary>
     public List<Property> Properties { get; set; } = [];
+
+    /// <summary>
+    /// Termo de busca para filtrar os imóveis.
+    /// </summary>
     public string SearchTerm { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Filtro selecionado para refinar a busca.
+    /// </summary>
     public string SelectedFilter { get; set; } = string.Empty;
 
+    /// <summary>
+    /// Lista de opções de filtro disponíveis para a busca de imóveis.
+    /// </summary>
     public readonly List<FilterOption> FilterOptions = new()
     {
         new FilterOption { DisplayName = "Descrição", PropertyName = "Description" },
@@ -32,12 +57,21 @@ public partial class PropertyListHomePage : ComponentBase
 
     #region Services
 
+    /// <summary>
+    /// Serviço para exibição de notificações (snackbars) na tela.
+    /// </summary>
     [Inject]
     public ISnackbar Snackbar { get; set; } = null!;
 
+    /// <summary>
+    /// Handler responsável pelas operações relacionadas a imóveis, como listar propriedades.
+    /// </summary>
     [Inject]
     public IPropertyHandler Handler { get; set; } = null!;
 
+    /// <summary>
+    /// Serviço para exibição de diálogos modais.
+    /// </summary>
     [Inject]
     public IDialogService DialogService { get; set; } = null!;
 
@@ -45,7 +79,14 @@ public partial class PropertyListHomePage : ComponentBase
 
     #region Methods
 
-
+    /// <summary>
+    /// Carrega os dados dos imóveis do servidor de forma paginada para exibição no grid.
+    /// </summary>
+    /// <param name="state">Estado atual do grid, contendo informações de paginação.</param>
+    /// <returns>
+    /// Um objeto <see cref="GridData{Property}"/> contendo a lista de imóveis e a contagem total.
+    /// Em caso de falha, retorna um grid vazio e exibe uma mensagem de erro.
+    /// </returns>
     public async Task<GridData<Property>> LoadServerData(GridState<Property> state)
     {
         try
@@ -60,11 +101,13 @@ public partial class PropertyListHomePage : ComponentBase
 
             var response = await Handler.GetAllAsync(request);
             if (response.IsSuccess)
+            {
                 return new GridData<Property>
                 {
                     Items = response.Data ?? [],
                     TotalItems = response.TotalCount
                 };
+            }
 
             Snackbar.Add(response.Message ?? string.Empty, Severity.Error);
             return new GridData<Property>();
@@ -76,20 +119,36 @@ public partial class PropertyListHomePage : ComponentBase
         }
     }
 
+    /// <summary>
+    /// Aciona a recarga dos dados do grid com base no termo de busca e nos filtros atuais.
+    /// </summary>
     public void OnButtonSearchClick() => DataGrid.ReloadServerData();
 
+    /// <summary>
+    /// Limpa o termo de busca e recarrega os dados do grid.
+    /// </summary>
     public void OnClearSearchClick()
     {
         SearchTerm = string.Empty;
         DataGrid.ReloadServerData();
     }
 
+    /// <summary>
+    /// Atualiza o filtro selecionado e solicita a atualização da interface.
+    /// </summary>
+    /// <param name="newValue">Novo valor do filtro.</param>
     public void OnValueFilterChanged(string newValue)
     {
         SelectedFilter = newValue;
         StateHasChanged();
     }
 
+    /// <summary>
+    /// Obtém a URL da foto thumbnail do imóvel.
+    /// Se houver uma foto marcada como thumbnail, essa URL é utilizada; caso contrário, utiliza a primeira foto disponível.
+    /// </summary>
+    /// <param name="property">Imóvel cujo thumbnail será obtido.</param>
+    /// <returns>String com a URL da foto.</returns>
     public string GetSrcThumbnailPhoto(Property property)
     {
         var photo = property
@@ -100,6 +159,11 @@ public partial class PropertyListHomePage : ComponentBase
         return $"{Configuration.BackendUrl}/photos/{photo?.Id}{photo?.Extension}";
     }
 
+    /// <summary>
+    /// Abre um diálogo modal para o envio de uma proposta de compra para o imóvel selecionado.
+    /// </summary>
+    /// <param name="property">Imóvel para o qual a proposta será enviada.</param>
+    /// <returns>Task representando a operação assíncrona.</returns>
     public async Task OnSendOfferClickedAsync(Property property)
     {
         var options = new DialogOptions
