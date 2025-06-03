@@ -21,7 +21,7 @@ public static class BuilderExtension
     /// </summary>
     /// <remarks>
     /// Este método cria diretórios para armazenar contratos,
-    /// fotos, templates de contratos, relatórios e logos.
+    /// fotos, modelos de contratos, relatórios e logos.
     /// </remarks>
     /// <param name="builder">Instância do construtor da aplicação.</param>
     public static void AddDirectories(this WebApplicationBuilder builder)
@@ -155,7 +155,7 @@ public static class BuilderExtension
     /// Este método adiciona uma política de CORS que permite
     /// chamadas de origens específicas, como o frontend e o backend.
     /// </remarks>
-    /// /// <param name="builder">Instância do construtor da aplicação.</param>
+    /// <param name="builder">Instância do construtor da aplicação.</param>
     public static void AddCrossOrigin(this WebApplicationBuilder builder)
     {
         builder.Services.AddCors(

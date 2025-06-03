@@ -46,5 +46,8 @@ app.Run();
 
 namespace RealtyHub.ApiService
 {
+    /// <summary>
+    /// Representa o ponto de entrada principal para a aplicação.
+    /// </summary>
     public partial class Program;
 }

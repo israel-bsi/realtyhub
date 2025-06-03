@@ -5,12 +5,12 @@ using RealtyHub.Core.Models;
 namespace RealtyHub.ApiService.Services;
 
 /// <summary>
-/// Classe responsável por mapear as variáveis de contrato para substituição em templates.
+/// Classe responsável por mapear as variáveis de contrato para substituição em modelos.
 /// </summary>
 /// <remarks>
 /// <para>A classe <c><see cref="VariablesContractMappings"/></c> 
 /// gera um dicionário de campos que serão utilizados para substituir 
-/// as variáveis em um template de contrato.</para>
+/// as variáveis em um modelo de contrato.</para>
 /// <para>Ela concatena campos padrão, de pessoa jurídica e pessoa física, 
 /// além dos dados dos pagamentos.</para>
 /// </remarks>
@@ -39,7 +39,6 @@ public class VariablesContractMappings
     /// <summary>
     /// Dicionário contendo os campos padrão mapeados para o contrato.
     /// </summary>
-    /// <remarks>
     private readonly Dictionary<string, string> _defaultFields;
 
     /// <summary>
@@ -134,9 +133,9 @@ public class VariablesContractMappings
             { "rg_cliente_proprietario", contract.Seller.Rg },
             { "rg_cliente_comprador", contract.Buyer.Rg },
             { "orgaoExpeditorRg_cliente_proprietario", contract.Seller.IssuingAuthority },
-            { "orgaoExpeditorRg_cliente_comprador", contract.Seller.IssuingAuthority },
+            { "orgaoExpeditorRg_cliente_comprador", contract.Buyer.IssuingAuthority },
             { "dataemissaorg_cliente_proprietario", contract.Seller.RgIssueDate?.ToString("dd/MM/yyyy")! },
-            { "dataemissaorg_cliente_comprador", contract.Seller.RgIssueDate?.ToString("dd/MM/yyyy")! }
+            { "dataemissaorg_cliente_comprador", contract.Buyer.RgIssueDate?.ToString("dd/MM/yyyy")! }
         };
     }
 

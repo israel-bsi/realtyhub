@@ -113,7 +113,7 @@ public class Property : Entity
     /// Obtém ou define o número de matrícula no cartório.
     /// </summary>
     /// <value>Uma string representando o número de matrícula.</value>
-    [Required(ErrorMessage = "Matriculá no Cartório é um campo obrigatório")]
+    [Required(ErrorMessage = "Matricula no Cartório é um campo obrigatório")]
     public string RegistryNumber { get; set; } = string.Empty;
 
     /// <summary>

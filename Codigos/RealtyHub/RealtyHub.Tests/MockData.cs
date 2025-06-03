@@ -9,8 +9,8 @@ public class MockData
     public static async Task CreateCustomers(RealtyHubApiTests application,
         bool create, int quantityBusiness, int quantityIndividual)
     {
-        using var scoce = application.Services.CreateScope();
-        var provider = scoce.ServiceProvider;
+        using var scope = application.Services.CreateScope();
+        var provider = scope.ServiceProvider;
         await using var dbContext = provider.GetRequiredService<AppDbContext>();
         await dbContext.Database.EnsureCreatedAsync();
 

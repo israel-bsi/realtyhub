@@ -74,7 +74,7 @@ public class ResetPasswordPage : ComponentBase
         IsBusy = true;
         try
         {
-            ResetPasswordModel.UserId = UserId;
+            ResetPasswordModel.UserId = UserId.ToString();
             ResetPasswordModel.Token = Token;
             var result = await AccountHandler.ResetPasswordAsync(ResetPasswordModel);
             if (result.IsSuccess)
