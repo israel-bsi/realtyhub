@@ -15,7 +15,7 @@ public static class Configuration
     /// <summary>
     /// URL do backend da aplicação.
     /// </summary>
-    public static string BackendUrl { get; set; } = "http://localhost:5538";
+    public static readonly string BackendUrl = "http://localhost:5538";
 
     /// <summary>
     /// Caminho da logo atualmente utilizada na aplicação.
@@ -48,7 +48,7 @@ public static class Configuration
     };
 
     /// <summary>
-    /// Define os caminhos para as logos disponíveis na aplicação.
+    /// Define os caminhos para os logos disponíveis na aplicação.
     /// </summary>
     public static class SrcLogos
     {

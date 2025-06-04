@@ -40,7 +40,7 @@ public class ResetPasswordEndpoint : IEndpoint
     /// e redefine a senha do usuário com base nos dados fornecidos.
     /// </remarks>
     /// <param name="userManager">Gerenciador de usuários <see cref="UserManager{User}"/> para realizar operações relacionadas ao usuário.</param>
-    /// <param name="emailService">Serviço de email <see cref="IEmailService"/> para envio de notificações, se necessário.</param>
+    /// <param name="emailService">Serviço de e-mail <see cref="IEmailService"/> para envio de notificações, se necessário.</param>
     /// <param name="request">Objeto <see cref="ResetPasswordRequest"/> contendo os dados da nova senha.</param>
     /// <param name="userId">ID do usuário <see cref="string"/> cujo senha será redefinida.</param>
     /// <param name="token">Token de redefinição de senha codificado <see cref="string"/>.</param>

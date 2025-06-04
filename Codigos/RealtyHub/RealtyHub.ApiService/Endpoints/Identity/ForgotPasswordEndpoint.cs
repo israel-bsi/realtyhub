@@ -22,7 +22,7 @@ public class ForgotPasswordEndpoint : IEndpoint
     /// Mapeia o endpoint para solicitar a recuperação de senha.
     /// </summary>
     /// <remarks>
-    /// Registra a rota POST que recebe o email do usuário e envia um link de redefinição de senha.
+    /// Registra a rota POST que recebe o e-mail do usuário e envia um link de redefinição de senha.
     /// </remarks>
     /// <param name="app">O construtor de rotas do aplicativo <see cref="IEndpointRouteBuilder"/>.</param>
     public static void Map(IEndpointRouteBuilder app)
@@ -36,11 +36,11 @@ public class ForgotPasswordEndpoint : IEndpoint
     /// Manipulador da rota que recebe a requisição para recuperação de senha.
     /// </summary>
     /// <remarks>
-    /// Este método busca o usuário pelo email fornecido, gera um token de redefinição de senha,
-    /// cria um link de redefinição e envia o link por email.
+    /// Este método busca o usuário pelo e-mail fornecido, gera um token de redefinição de senha,
+    /// cria um link de redefinição e envia o link por e-mail.
     /// </remarks>
     /// <param name="userManager">Gerenciador de usuários <see cref="UserManager{User}"/> para realizar operações relacionadas ao usuário.</param>
-    /// <param name="emailService">Serviço de email <see cref="IEmailService"/> responsável por enviar o link de redefinição de senha.</param>
+    /// <param name="emailService">Serviço de e-mail <see cref="IEmailService"/> responsável por enviar o link de redefinição de senha.</param>
     /// <param name="request">Objeto <see cref="ForgotPasswordRequest"/> contendo o email do usuário.</param>
     /// <returns>
     /// Um objeto <see cref="IResult"/> representando a resposta HTTP:

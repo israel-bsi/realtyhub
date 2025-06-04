@@ -28,7 +28,7 @@ public class RegisterUserEndpoint : IEndpoint
     /// <param name="app">O construtor de rotas do aplicativo <see cref="IEndpointRouteBuilder"/>.</param>
     public static void Map(IEndpointRouteBuilder app)
     {
-        app.MapPost("/registeruser", HandlerAsync)
+        app.MapPost("/register-user", HandlerAsync)
             .Produces<Response<string>>()
             .Produces<Response<string>>(StatusCodes.Status400BadRequest);
     }
@@ -38,15 +38,15 @@ public class RegisterUserEndpoint : IEndpoint
     /// </summary>
     /// <remarks>
     /// Este método cria um novo usuário com base nos dados fornecidos, adiciona claims ao usuário,
-    /// gera um token de confirmação de email e envia o link de confirmação para o email do usuário.
+    /// gera um token de confirmação de e-mail e envia o link de confirmação para o e-mail do usuário.
     /// </remarks>
     /// <param name="request">Objeto <see cref="RegisterRequest"/> contendo os dados do usuário a ser registrado.</param>
     /// <param name="userManager">Gerenciador de usuários <see cref="UserManager{User}"/> para realizar operações relacionadas ao usuário.</param>
-    /// <param name="emailService">Serviço de email <see cref="IEmailService"/> responsável por enviar o link de confirmação de email.</param>
+    /// <param name="emailService">Serviço de e-mail <see cref="IEmailService"/> responsável por enviar o link de confirmação de e-mail.</param>
     /// <returns>
     /// Um objeto <see cref="IResult"/> representando a resposta HTTP:
-    /// <para>- HTTP 200 OK, se o usuário for registrado com sucesso e o email de confirmação enviado;</para>
-    /// <para>- HTTP 400 Bad Request, se houver erros na criação do usuário ou no envio do email.</para>
+    /// <para>- HTTP 200 OK, se o usuário for registrado com sucesso e o e-mail de confirmação enviado;</para>
+    /// <para>- HTTP 400 Bad Request, se houver erros na criação do usuário ou no envio do e-mail.</para>
     /// </returns>
     private static async Task<IResult> HandlerAsync(
         RegisterRequest request,

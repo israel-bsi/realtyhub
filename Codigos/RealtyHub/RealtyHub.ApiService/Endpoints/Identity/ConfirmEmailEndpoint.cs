@@ -10,19 +10,19 @@ using System.Text;
 namespace RealtyHub.ApiService.Endpoints.Identity;
 
 /// <summary>
-/// Endpoint responsável por confirmar o email de um usuário.
+/// Endpoint responsável por confirmar o e-mail de um usuário.
 /// </summary>
 /// <remarks>
-/// Implementa a interface <see cref="IEndpoint"/> para mapear a rota de confirmação de email.
+/// Implementa a interface <see cref="IEndpoint"/> para mapear a rota de confirmação de e-mail.
 /// </remarks>
 public class ConfirmEmailEndpoint : IEndpoint
 {
     /// <summary>
-    /// Mapeia o endpoint para confirmar o email de um usuário.
+    /// Mapeia o endpoint para confirmar o e-mail de um usuário.
     /// </summary>
     /// <remarks>
     /// Registra a rota GET que recebe o ID do usuário e o token de confirmação como parâmetros de consulta
-    /// e chama o manipulador para confirmar o email.
+    /// e chama o manipulador para confirmar o e-mail.
     /// </remarks>
     /// <param name="app">O construtor de rotas do aplicativo <see cref="IEndpointRouteBuilder"/>.</param>
     public static void Map(IEndpointRouteBuilder app)
@@ -34,11 +34,11 @@ public class ConfirmEmailEndpoint : IEndpoint
     }
 
     /// <summary>
-    /// Manipulador da rota que recebe a requisição para confirmar o email de um usuário.
+    /// Manipulador da rota que recebe a requisição para confirmar o e-mail de um usuário.
     /// </summary>
     /// <remarks>
-    /// Este método busca o usuário pelo ID, verifica se o email já foi confirmado e, caso contrário,
-    /// decodifica o token de confirmação e chama o serviço de confirmação de email.
+    /// Este método busca o usuário pelo ID, verifica se o e-mail já foi confirmado e, caso contrário,
+    /// decodifica o token de confirmação e chama o serviço de confirmação de e-mail.
     /// </remarks>
     /// <param name="userManager">Gerenciador de usuários <see cref="UserManager{User}"/> para realizar operações relacionadas ao usuário.</param>
     /// <param name="claimsPrincipal">Objeto <see cref="ClaimsPrincipal"/> contendo os dados do usuário autenticado.</param>
@@ -46,8 +46,8 @@ public class ConfirmEmailEndpoint : IEndpoint
     /// <param name="token">Token de confirmação codificado <see cref="string"/>.</param>
     /// <returns>
     /// Um objeto <see cref="IResult"/> representando a resposta HTTP:
-    /// <para>- HTTP 200 OK, se o email for confirmado com sucesso;</para>
-    /// <para>- HTTP 400 Bad Request, se o email já estiver confirmado ou o token for inválido;</para>
+    /// <para>- HTTP 200 OK, se o e-mail for confirmado com sucesso;</para>
+    /// <para>- HTTP 400 Bad Request, se o e-mail já estiver confirmado ou o token for inválido;</para>
     /// <para>- HTTP 404 Not Found, se o usuário não for encontrado.</para>
     /// </returns>
     private static async Task<IResult> Handler(

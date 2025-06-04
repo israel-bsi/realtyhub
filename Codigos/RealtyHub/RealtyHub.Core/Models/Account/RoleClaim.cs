@@ -1,7 +1,7 @@
 ﻿namespace RealtyHub.Core.Models.Account;
 
 /// <summary>
-/// Representa uma declaração (claim) associada a uma role no ASP .NET Core Identity.
+/// Representa uma declaração (claim) associada a uma role no ASP.NET Core Identity.
 /// </summary>
 /// <remarks>
 /// Cada instância desta classe corresponde a um registro na tabela <c>AspNetRoleClaims</c>

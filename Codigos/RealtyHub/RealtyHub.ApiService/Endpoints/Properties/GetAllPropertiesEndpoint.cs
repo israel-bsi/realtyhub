@@ -36,7 +36,7 @@ public class GetAllPropertiesEndpoint : IEndpoint
     /// Manipulador da rota que retorna todos os imóveis.
     /// </summary>
     /// <remarks>
-    /// Este método cria uma requisição para buscar todos os imóveis, aplicando filtros, paginação e termos de pesquisa,
+    /// Este método cria uma requisição para buscar todos os imóveis, aplicando filtro, paginação e termos de pesquisa,
     /// e chama o handler para processar a requisição.
     /// </remarks>
     /// <param name="user">Objeto <see cref="ClaimsPrincipal"/> contendo os dados do usuário autenticado.</param>

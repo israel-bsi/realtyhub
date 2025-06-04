@@ -29,7 +29,7 @@ public partial class OfferFormComponent : ComponentBase
     public long OfferId { get; set; }
 
     /// <summary>
-    /// Indica se o formulário está em modo somente leitura.
+    /// Indica se o formulário está em modo somente Leitura.
     /// </summary>
     [Parameter]
     public bool ReadOnly { get; set; }
@@ -73,7 +73,7 @@ public partial class OfferFormComponent : ComponentBase
     /// <summary>
     /// Expressão regular utilizada para remover caracteres não numéricos dos campos relevantes.
     /// </summary>
-    public string Pattern = @"\D";
+    public readonly string Pattern = @"\D";
 
     #endregion
 

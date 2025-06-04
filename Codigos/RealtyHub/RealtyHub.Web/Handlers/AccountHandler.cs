@@ -52,7 +52,7 @@ public class AccountHandler : IAccountHandler
     /// </remarks>
     public async Task<Response<string>> RegisterAsync(RegisterRequest request)
     {
-        var result = await _httpClient.PostAsJsonAsync("v1/identity/registeruser", request);
+        var result = await _httpClient.PostAsJsonAsync("v1/identity/register-user", request);
 
         var content = await result.Content.ReadAsStringAsync();
 

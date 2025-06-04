@@ -61,7 +61,7 @@ public partial class ListViewingsPage : ComponentBase
     #region Services
 
     /// <summary>
-    /// Serviço para exibição de notificações (snackbars) na tela.
+    /// Serviço para exibição de notificações na tela.
     /// </summary>
     [Inject]
     public ISnackbar Snackbar { get; set; } = null!;
