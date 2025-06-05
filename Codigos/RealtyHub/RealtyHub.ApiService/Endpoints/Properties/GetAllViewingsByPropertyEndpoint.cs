@@ -37,7 +37,7 @@ public class GetAllViewingsByPropertyEndpoint : IEndpoint
     /// </summary>
     /// <remarks>
     /// Este método cria uma requisição para buscar todas as visitas associadas a um imóvel específico,
-    /// aplicando filtros de data e paginação, e chama o handler para processar a requisição.
+    /// aplicando filtro de data e paginação, e chama o handler para processar a requisição.
     /// </remarks>
     /// <param name="user">Objeto <see cref="ClaimsPrincipal"/> contendo os dados do usuário autenticado.</param>
     /// <param name="handler">Instância de <see cref="IPropertyHandler"/> responsável pelas operações relacionadas a imóveis.</param>

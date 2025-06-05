@@ -11,9 +11,9 @@ namespace RealtyHub.Core.Requests.Account;
 public class ForgotPasswordRequest : Request
 {
     /// <summary>
-    /// Email do usuário que está solicitando a recuperação de senha.
+    /// E-mail do usuário que está solicitando a recuperação de senha.
     /// </summary>    
-    /// <value>O endereço de email do usuário.</value>
+    /// <value>O endereço de e-mail do usuário.</value>
     [Required(ErrorMessage = "Email é obrigatório")]
     public string Email { get; set; } = string.Empty;
 }

@@ -23,8 +23,8 @@ public class ContractGenerator
     /// <remarks>
     /// Este método realiza as seguintes etapas:
     /// <para>1. Carrega o template DOCX do contrato.</para>
-    /// <para>2. Substitui as variáveis no documento de acordo com 
-    /// os mapeamentos gerados a partir do objeto <c><see cref="Contract"/></c>.</para>
+    /// <para>2. Substitui as variáveis no documento conforme os
+    ///  mapeamentos gerados a partir do objeto <c><see cref="Contract"/></c>.</para>
     /// <para>3. Salva o documento modificado como DOCX.</para>
     /// <para>4. Converte o arquivo DOCX para PDF utilizando a biblioteca GrapeCity.</para>
     /// <para>5. Exclui o arquivo DOCX temporário.</para>
@@ -40,9 +40,9 @@ public class ContractGenerator
         using var doc = DocX.Load(pathTemplateDocx);
 
         var mappings = new VariablesContractMappings(contract);
-        var fiels = mappings.GetFields();
+        var fields = mappings.GetFields();
 
-        foreach (var kvp in fiels)
+        foreach (var kvp in fields)
         {
             doc.ReplaceText(new StringReplaceTextOptions
             {
@@ -56,15 +56,15 @@ public class ContractGenerator
         var wordDoc = new GcWordDocument();
         wordDoc.Load(pathOutputDocx);
 
-        using (var layoyt = new GcWordLayout(wordDoc))
+        using (var layout = new GcWordLayout(wordDoc))
         {
-            var pdfOutpuSettings = new PdfOutputSettings
+            var pdfOutputSettings = new PdfOutputSettings
             {
                 CompressionLevel = CompressionLevel.Fastest,
                 ConformanceLevel = GrapeCity.Documents.Pdf.PdfAConformanceLevel.PdfA1a
             };
 
-            layoyt.SaveAsPdf(Path.Combine(Configuration.ContractsPath, $"{contract.FileId}.pdf"), null, pdfOutpuSettings);
+            layout.SaveAsPdf(Path.Combine(Configuration.ContractsPath, $"{contract.FileId}.pdf"), null, pdfOutputSettings);
         }
         File.Delete(pathOutputDocx);
     }

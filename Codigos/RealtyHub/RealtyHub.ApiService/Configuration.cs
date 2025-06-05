@@ -7,7 +7,7 @@
 /// Esta classe contém configurações importantes, como a política de CORS, 
 /// caminhos para diretórios e configurações de e-mail utilizados pelo serviço.
 /// </remarks>
-public class Configuration
+public static class Configuration
 {
     /// <summary>
     /// Nome da política de CORS utilizada pela aplicação.
@@ -42,7 +42,7 @@ public class Configuration
     /// <summary>
     /// Configurações de e-mail utilizadas pela aplicação.
     /// </summary>
-    public static EmailConfiguration EmailSettings { get; set; } = new();
+    public static EmailConfiguration EmailSettings { get; } = new();
 
     /// <summary>
     /// Representa as configurações de e-mail.
@@ -50,15 +50,15 @@ public class Configuration
     public class EmailConfiguration
     {
         /// <summary>
-        /// Email de origem utilizado para envio das mensagens.
+        /// E-mail de origem utilizado para envio das mensagens.
         /// </summary>
-        /// <value>O email de origem utilizado para envio das mensagens.</value>
-        public string EmailFrom { get; set; } = "realtyhub.br@gmail.com";
+        /// <value>O e-mail de origem utilizado para envio das mensagens.</value>
+        public const string EmailFrom = "realtyhub.br@gmail.com";
 
         /// <summary>
-        /// Senha do email de origem.
+        /// Senha do e-mail de origem.
         /// </summary>
-        /// <value>A senha do email de origem.</value>
+        /// <value>A senha do e-mail de origem.</value>
         public string EmailPassword { get; set; } = string.Empty;
     }
 }

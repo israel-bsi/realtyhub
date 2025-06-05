@@ -11,9 +11,9 @@ namespace RealtyHub.Core.Requests.Account;
 public class LoginRequest : Request
 {
     /// <summary>
-    /// Email do usuário que está tentando fazer login.
+    /// E-mail do usuário que está tentando fazer login.
     /// </summary>    
-    /// <value>O endereço de email do usuário.</value>    
+    /// <value>O endereço de e-mail do usuário.</value>    
     [Required(ErrorMessage = "E-mail é obrigatório")]
     [EmailAddress(ErrorMessage = "E-mail inválido")]
     public string Email { get; set; } = string.Empty;

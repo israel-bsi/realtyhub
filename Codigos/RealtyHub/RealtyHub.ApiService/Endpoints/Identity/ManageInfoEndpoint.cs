@@ -18,12 +18,12 @@ public class ManageInfoEndpoint : IEndpoint
     /// Mapeia o endpoint para obter as informações do usuário autenticado.
     /// </summary>
     /// <remarks>
-    /// Registra a rota GET que retorna as informações do usuário autenticado, como nome, email, CRECI e claims.
+    /// Registra a rota GET que retorna as informações do usuário autenticado, como nome, e-mail, CRECI e claims.
     /// </remarks>
     /// <param name="app">O construtor de rotas do aplicativo <see cref="IEndpointRouteBuilder"/>.</param>
     public static void Map(IEndpointRouteBuilder app)
     {
-        app.MapGet("/manageinfo", HandlerAsync)
+        app.MapGet("/manage-info", HandlerAsync)
             .Produces<UserResponse>()
             .Produces<Response<string>>(StatusCodes.Status401Unauthorized)
             .RequireAuthorization();

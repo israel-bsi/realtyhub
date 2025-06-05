@@ -36,7 +36,7 @@ public class GetAllOffersEndpoint : IEndpoint
     /// Manipulador da rota que retorna todas as propostas.
     /// </summary>
     /// <remarks>
-    /// Este método cria uma requisição para buscar todas as propostas, aplicando filtros de data e paginação,
+    /// Este método cria uma requisição para buscar todas as propostas, aplicando filtro de data e paginação,
     /// e chama o handler para processar a requisição.
     /// </remarks>
     /// <param name="user">Objeto <see cref="ClaimsPrincipal"/> contendo os dados do usuário autenticado.</param>

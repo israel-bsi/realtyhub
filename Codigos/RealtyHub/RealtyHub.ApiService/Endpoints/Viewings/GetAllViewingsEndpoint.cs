@@ -36,7 +36,7 @@ public class GetAllViewingsEndpoint : IEndpoint
     /// Manipulador da rota que retorna todas as visitas.
     /// </summary>
     /// <remarks>
-    /// Este método cria uma requisição para buscar todas as visitas, aplicando filtros de data e paginação,
+    /// Este método cria uma requisição para buscar todas as visitas, aplicando filtro de data e paginação,
     /// e chama o handler para processar a requisição.
     /// </remarks>
     /// <param name="user">Objeto <see cref="ClaimsPrincipal"/> contendo os dados do usuário autenticado.</param>

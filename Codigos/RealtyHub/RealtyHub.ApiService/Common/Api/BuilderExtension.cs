@@ -162,10 +162,7 @@ public static class BuilderExtension
             options => options.AddPolicy(
                 Configuration.CorsPolicyName,
                 policy => policy
-                    .WithOrigins([
-                        Core.Configuration.BackendUrl,
-                        Core.Configuration.FrontendUrl
-                    ])
+                    .WithOrigins(Core.Configuration.BackendUrl, Core.Configuration.FrontendUrl)
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials()
@@ -176,7 +173,7 @@ public static class BuilderExtension
     /// Registra serviços adicionais necessários para a aplicação.
     /// </summary>
     /// <remarks>
-    /// Este método adiciona serviços como manipuladores, serviços de email e templates de contratos.
+    /// Este método adiciona serviços como manipuladores, serviços de e-mail e templates de contratos.
     /// </remarks>
     /// <param name="builder">Instância do construtor da aplicação.</param>
     public static void AddServices(this WebApplicationBuilder builder)

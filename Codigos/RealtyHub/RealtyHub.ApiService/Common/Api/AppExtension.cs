@@ -23,10 +23,10 @@ public static class AppExtension
     /// <param name="app">Instância do aplicativo.</param>
     public static void ConfigureDevEnvironment(this WebApplication app)
     {
-        app.MapPost("v1/customers/createmany", async (
+        app.MapPost("v1/customers/create-many", async (
                 AppDbContext context,
                 [FromQuery] int individualQuantity = 0,
-                [FromQuery] int bussinessQuantity = 0) =>
+                [FromQuery] int businessQuantity = 0) =>
         {
             if (individualQuantity > 0)
             {
@@ -35,10 +35,10 @@ public static class AppExtension
                 await context.Customers.AddRangeAsync(individualCustomers);
             }
 
-            if (bussinessQuantity > 0)
+            if (businessQuantity > 0)
             {
                 var businessCustomers = CustomerFake
-                    .GetFakeBusinessCustomers(bussinessQuantity);
+                    .GetFakeBusinessCustomers(businessQuantity);
                 await context.Customers.AddRangeAsync(businessCustomers);
 
             }

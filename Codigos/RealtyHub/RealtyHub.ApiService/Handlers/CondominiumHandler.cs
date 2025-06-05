@@ -88,29 +88,29 @@ public class CondominiumHandler : ICondominiumHandler
     {
         try
         {
-            var condominuim = await _context
+            var condominium = await _context
                 .Condominiums
                 .FirstOrDefaultAsync(c => c.Id == request.Id && c.IsActive);
 
-            if (condominuim is null)
+            if (condominium is null)
                 return new Response<Condominium?>(null, 404, "Condomínio não encontrado");
 
-            condominuim.Name = request.Name;
-            condominuim.Address = request.Address;
-            condominuim.Units = request.Units;
-            condominuim.Floors = request.Floors;
-            condominuim.HasElevator = request.HasElevator;
-            condominuim.HasSwimmingPool = request.HasSwimmingPool;
-            condominuim.HasPartyRoom = request.HasPartyRoom;
-            condominuim.HasPlayground = request.HasPlayground;
-            condominuim.HasFitnessRoom = request.HasFitnessRoom;
-            condominuim.CondominiumValue = request.CondominiumValue;
-            condominuim.UpdatedAt = DateTime.UtcNow;
+            condominium.Name = request.Name;
+            condominium.Address = request.Address;
+            condominium.Units = request.Units;
+            condominium.Floors = request.Floors;
+            condominium.HasElevator = request.HasElevator;
+            condominium.HasSwimmingPool = request.HasSwimmingPool;
+            condominium.HasPartyRoom = request.HasPartyRoom;
+            condominium.HasPlayground = request.HasPlayground;
+            condominium.HasFitnessRoom = request.HasFitnessRoom;
+            condominium.CondominiumValue = request.CondominiumValue;
+            condominium.UpdatedAt = DateTime.UtcNow;
 
-            _context.Condominiums.Update(condominuim);
+            _context.Condominiums.Update(condominium);
             await _context.SaveChangesAsync();
 
-            return new Response<Condominium?>(condominuim);
+            return new Response<Condominium?>(condominium);
         }
         catch
         {
@@ -130,20 +130,20 @@ public class CondominiumHandler : ICondominiumHandler
     {
         try
         {
-            var condominuim = await _context
+            var condominium = await _context
                 .Condominiums
                 .FirstOrDefaultAsync(c => c.Id == request.Id && c.IsActive);
 
-            if (condominuim is null)
+            if (condominium is null)
                 return new Response<Condominium?>(null, 404, "Condomínio não encontrado");
 
-            condominuim.IsActive = false;
-            condominuim.UpdatedAt = DateTime.UtcNow;
+            condominium.IsActive = false;
+            condominium.UpdatedAt = DateTime.UtcNow;
 
-            _context.Condominiums.Update(condominuim);
+            _context.Condominiums.Update(condominium);
             await _context.SaveChangesAsync();
 
-            return new Response<Condominium?>(condominuim);
+            return new Response<Condominium?>(condominium);
         }
         catch
         {
@@ -163,14 +163,14 @@ public class CondominiumHandler : ICondominiumHandler
     {
         try
         {
-            var condominuim = await _context
+            var condominium = await _context
                 .Condominiums
                 .AsNoTracking()
                 .FirstOrDefaultAsync(c => c.Id == request.Id && c.IsActive);
 
-            return condominuim is null
+            return condominium is null
                 ? new Response<Condominium?>(null, 404, "Condomínio não encontrado")
-                : new Response<Condominium?>(condominuim);
+                : new Response<Condominium?>(condominium);
         }
         catch
         {

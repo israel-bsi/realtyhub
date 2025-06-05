@@ -145,7 +145,7 @@ public class EmailService : IEmailService
             Port = 587,
             UseDefaultCredentials = false,
             Credentials = new NetworkCredential(
-                Configuration.EmailSettings.EmailFrom,
+                Configuration.EmailConfiguration.EmailFrom,
                 Configuration.EmailSettings.EmailPassword)
         };
     }
@@ -164,7 +164,7 @@ public class EmailService : IEmailService
     {
         return new MailMessage
         {
-            From = new MailAddress(Configuration.EmailSettings.EmailFrom, "Realty Hub")
+            From = new MailAddress(Configuration.EmailConfiguration.EmailFrom, "Realty Hub")
         };
     }
 }

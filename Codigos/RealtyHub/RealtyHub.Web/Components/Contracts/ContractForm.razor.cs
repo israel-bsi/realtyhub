@@ -38,7 +38,7 @@ public partial class ContractFormComponent : ComponentBase
     public long PropertyId { get; set; }
 
     /// <summary>
-    /// Indica se o formulário está em modo somente leitura.
+    /// Indica se o formulário está em modo somente Leitura.
     /// </summary>
     [Parameter]
     public bool ReadOnly { get; set; }

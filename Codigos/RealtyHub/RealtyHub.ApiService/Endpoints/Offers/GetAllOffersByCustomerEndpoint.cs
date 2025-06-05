@@ -39,7 +39,7 @@ public class GetAllOffersByCustomerEndpoint : IEndpoint
     /// </summary>
     /// <remarks>
     /// Este método cria uma requisição para buscar as propostas feitas por um cliente específico,
-    /// aplicando filtros de data e paginação, e chama o handler para processar a requisição.
+    /// aplicando filtro de data e paginação, e chama o handler para processar a requisição.
     /// </remarks>
     /// <param name="user">Objeto <see cref="ClaimsPrincipal"/> contendo os dados do usuário autenticado.</param>
     /// <param name="handler">Instância de <see cref="IOfferHandler"/> responsável pelas operações relacionadas a propostas.</param>
