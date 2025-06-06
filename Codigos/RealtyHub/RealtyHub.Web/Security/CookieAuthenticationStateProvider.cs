@@ -79,7 +79,7 @@ ICookieAuthenticationStateProvider
     {
         try
         {
-            return await _httpClient.GetFromJsonAsync<User?>("v1/identity/manageinfo");
+            return await _httpClient.GetFromJsonAsync<User?>("v1/identity/manage-info");
         }
         catch
         {
