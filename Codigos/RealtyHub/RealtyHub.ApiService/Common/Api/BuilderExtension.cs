@@ -92,7 +92,7 @@ public static class BuilderExtension
             options.CustomSchemaIds(n => n.FullName);
         });
     }
-
+    
     /// <summary>
     /// Adiciona e configura a autenticação e autorização da aplicação.
     /// </summary>
@@ -106,6 +106,13 @@ public static class BuilderExtension
         builder.Services
             .AddAuthentication(IdentityConstants.ApplicationScheme)
             .AddIdentityCookies();
+
+        builder.Services.ConfigureApplicationCookie(opt =>
+        {
+            opt.Cookie.HttpOnly = true;
+            opt.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+            opt.Cookie.SameSite = SameSiteMode.Lax;
+        });
 
         builder.Services.AddAuthorization();
     }
