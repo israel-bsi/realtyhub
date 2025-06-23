@@ -1,5 +1,8 @@
 ﻿namespace RealtyHub.Web.Services;
 
+/// <summary>
+/// Serviço responsável por validar documentos como CPF e CNPJ.
+/// </summary>
 public class DocumentValidator
 {
     /// <summary>

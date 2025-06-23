@@ -26,7 +26,7 @@ public class ViaCepService : IViaCepService
     /// </summary>
     /// <param name="cep">CEP a ser pesquisado.</param>
     /// <returns>
-    /// Task contendo um <see cref="Response{ViaCepResponse?}"/> com as informações retornadas pela API ou mensagem de erro.
+    /// Task contendo um <see cref="Response{ViaCepResponse}"/> com as informações retornadas pela API ou mensagem de erro.
     /// </returns>
     public async Task<Response<ViaCepResponse?>> SearchAddressAsync(string cep)
     {
@@ -58,7 +58,7 @@ public class ViaCepService : IViaCepService
     /// </summary>
     /// <param name="cep">CEP a ser pesquisado.</param>
     /// <returns>
-    /// Task contendo um <see cref="Response{Address?}"/> com as informações de endereço ou mensagem de erro.
+    /// Task contendo um <see cref="Response{Address}"/> com as informações de endereço ou mensagem de erro.
     /// </returns>
     public async Task<Response<Address?>> GetAddressAsync(string cep)
     {

@@ -41,7 +41,7 @@ public class ForgotPasswordEndpoint : IEndpoint
     /// </remarks>
     /// <param name="userManager">Gerenciador de usuários <see cref="UserManager{User}"/> para realizar operações relacionadas ao usuário.</param>
     /// <param name="emailService">Serviço de e-mail <see cref="IEmailService"/> responsável por enviar o link de redefinição de senha.</param>
-    /// <param name="request">Objeto <see cref="ForgotPasswordRequest"/> contendo o email do usuário.</param>
+    /// <param name="request">Objeto <see cref="ForgotPasswordRequest"/> contendo o e-mail do usuário.</param>
     /// <returns>
     /// Um objeto <see cref="IResult"/> representando a resposta HTTP:
     /// <para>- HTTP 200 OK, se o link de redefinição de senha for enviado com sucesso;</para>
