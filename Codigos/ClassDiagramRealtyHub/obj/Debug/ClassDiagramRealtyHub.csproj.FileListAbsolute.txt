@@ -1,0 +1,8 @@
+C:\Users\maste\source\repos\ClassDiagramRealtyHub\bin\Debug\ClassDiagramRealtyHub.exe.config
+C:\Users\maste\source\repos\ClassDiagramRealtyHub\bin\Debug\ClassDiagramRealtyHub.exe
+C:\Users\maste\source\repos\ClassDiagramRealtyHub\bin\Debug\ClassDiagramRealtyHub.pdb
+C:\Users\maste\source\repos\ClassDiagramRealtyHub\obj\Debug\ClassDiagramRealtyHub.csproj.AssemblyReference.cache
+C:\Users\maste\source\repos\ClassDiagramRealtyHub\obj\Debug\ClassDiagramRealtyHub.csproj.CoreCompileInputs.cache
+C:\Users\maste\source\repos\ClassDiagramRealtyHub\obj\Debug\ClassDiagramRealtyHub.exe
+C:\Users\maste\source\repos\ClassDiagramRealtyHub\obj\Debug\ClassDiagramRealtyHub.pdb
+C:\Users\maste\source\repos\ClassDiagramRealtyHub\obj\Debug\ClassDiagramRealtyHub.exe.config
