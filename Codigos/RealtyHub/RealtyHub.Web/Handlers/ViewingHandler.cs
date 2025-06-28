@@ -30,11 +30,11 @@ public class ViewingHandler : IViewingHandler
     /// Envia uma requisição POST para a API para criar uma nova visita com os dados informados.
     /// Retorna a resposta contendo os detalhes da visita ou uma mensagem de erro em caso de falha.
     /// </remarks>
-    public async Task<Response<Viewing?>> ScheduleAsync(Viewing request)
+    public async Task<Response<Visita?>> ScheduleAsync(Visita request)
     {
         var result = await _httpClient.PostAsJsonAsync("v1/viewings", request);
-        return await result.Content.ReadFromJsonAsync<Response<Viewing?>>()
-               ?? new Response<Viewing?>(null, 400, "Falha ao agendar a visita");
+        return await result.Content.ReadFromJsonAsync<Response<Visita?>>()
+               ?? new Response<Visita?>(null, 400, "Falha ao agendar a visita");
     }
 
     /// <summary>
@@ -44,11 +44,11 @@ public class ViewingHandler : IViewingHandler
     /// Envia uma requisição PUT para a API para atualizar os dados da visita e reagendar.
     /// Retorna os detalhes da visita reagendada ou uma mensagem de erro em caso de falha.
     /// </remarks>
-    public async Task<Response<Viewing?>> RescheduleAsync(Viewing request)
+    public async Task<Response<Visita?>> RescheduleAsync(Visita request)
     {
         var result = await _httpClient.PutAsJsonAsync($"v1/viewings/{request.Id}/reschedule", request);
-        return await result.Content.ReadFromJsonAsync<Response<Viewing?>>()
-               ?? new Response<Viewing?>(null, 400, "Falha ao reagendar a visita");
+        return await result.Content.ReadFromJsonAsync<Response<Visita?>>()
+               ?? new Response<Visita?>(null, 400, "Falha ao reagendar a visita");
     }
 
     /// <summary>
@@ -58,11 +58,11 @@ public class ViewingHandler : IViewingHandler
     /// Envia uma requisição PUT para a API para atualizar o status da visita como finalizada.
     /// Retorna os detalhes da visita finalizada ou uma mensagem de erro em caso de falha.
     /// </remarks>
-    public async Task<Response<Viewing?>> DoneAsync(DoneViewingRequest request)
+    public async Task<Response<Visita?>> DoneAsync(DoneViewingRequest request)
     {
         var result = await _httpClient.PutAsJsonAsync($"v1/viewings/{request.Id}/done", request);
-        return await result.Content.ReadFromJsonAsync<Response<Viewing?>>()
-               ?? new Response<Viewing?>(null, 400, "Falha ao finalizar a visita");
+        return await result.Content.ReadFromJsonAsync<Response<Visita?>>()
+               ?? new Response<Visita?>(null, 400, "Falha ao finalizar a visita");
     }
 
     /// <summary>
@@ -72,11 +72,11 @@ public class ViewingHandler : IViewingHandler
     /// Envia uma requisição PUT para a API para atualizar o status da visita como cancelada.
     /// Retorna os detalhes da visita cancelada ou uma mensagem de erro em caso de falha.
     /// </remarks>
-    public async Task<Response<Viewing?>> CancelAsync(CancelViewingRequest request)
+    public async Task<Response<Visita?>> CancelAsync(CancelViewingRequest request)
     {
         var result = await _httpClient.PutAsJsonAsync($"v1/viewings/{request.Id}/cancel", request);
-        return await result.Content.ReadFromJsonAsync<Response<Viewing?>>()
-               ?? new Response<Viewing?>(null, 400, "Falha ao cancelar a visita");
+        return await result.Content.ReadFromJsonAsync<Response<Visita?>>()
+               ?? new Response<Visita?>(null, 400, "Falha ao cancelar a visita");
     }
 
     /// <summary>
@@ -86,11 +86,11 @@ public class ViewingHandler : IViewingHandler
     /// Realiza uma requisição GET para a API utilizando o ID da visita e retorna os detalhes correspondentes.
     /// Se a operação falhar, retorna uma resposta de erro.
     /// </remarks>
-    public async Task<Response<Viewing?>> GetByIdAsync(GetViewingByIdRequest request)
+    public async Task<Response<Visita?>> GetByIdAsync(GetViewingByIdRequest request)
     {
         var response = await _httpClient.GetAsync($"v1/viewings/{request.Id}");
-        return await response.Content.ReadFromJsonAsync<Response<Viewing?>>()
-            ?? new Response<Viewing?>(null, 400, "Falha ao obter a visita");
+        return await response.Content.ReadFromJsonAsync<Response<Visita?>>()
+            ?? new Response<Visita?>(null, 400, "Falha ao obter a visita");
     }
 
     /// <summary>
@@ -100,7 +100,7 @@ public class ViewingHandler : IViewingHandler
     /// Constrói a URL com parâmetros de paginação, termo de busca e, opcionalmente, intervalo de datas.
     /// Realiza uma requisição GET para a API e retorna a lista de visitas ou uma mensagem de erro em caso de falha.
     /// </remarks>
-    public async Task<PagedResponse<List<Viewing>?>> GetAllAsync(GetAllViewingsRequest request)
+    public async Task<PagedResponse<List<Visita>?>> GetAllAsync(GetAllViewingsRequest request)
     {
         var url = $"v1/viewings?pageNumber={request.PageNumber}&pageSize={request.PageSize}";
 
@@ -111,7 +111,7 @@ public class ViewingHandler : IViewingHandler
             url = $"{url}&startDate={request.StartDate}&endDate={request.EndDate}";
 
         var response = await _httpClient.GetAsync(url);
-        return await response.Content.ReadFromJsonAsync<PagedResponse<List<Viewing>?>>()
-               ?? new PagedResponse<List<Viewing>?>(null, 400, "Não foi possível obter as visitas");
+        return await response.Content.ReadFromJsonAsync<PagedResponse<List<Visita>?>>()
+               ?? new PagedResponse<List<Visita>?>(null, 400, "Não foi possível obter as visitas");
     }
 }

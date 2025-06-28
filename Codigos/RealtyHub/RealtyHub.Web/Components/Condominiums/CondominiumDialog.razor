@@ -16,15 +16,15 @@
     MudDialogInstance MudDialog { get; set; } = null!;
 
     [Parameter]
-    public EventCallback<Condominium> OnCondominiumSelected { get; set; }
+    public EventCallback<Condominio> OnCondominiumSelected { get; set; }
 
     void CloseDialog() => MudDialog.Close();
 
-    public async Task SelectCondominium(Condominium condominium)
+    public async Task SelectCondominium(Condominio condominio)
     {
         if (OnCondominiumSelected.HasDelegate)
-            await OnCondominiumSelected.InvokeAsync(condominium);
+            await OnCondominiumSelected.InvokeAsync(condominio);
 
-        MudDialog.Close(DialogResult.Ok(condominium));
+        MudDialog.Close(DialogResult.Ok(condominio));
     }
 }

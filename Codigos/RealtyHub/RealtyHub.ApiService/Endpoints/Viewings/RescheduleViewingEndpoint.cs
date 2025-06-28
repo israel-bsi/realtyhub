@@ -27,8 +27,8 @@ public class RescheduleViewingEndpoint : IEndpoint
             .WithSummary("Reagenda uma visita")
             .WithDescription("Reagenda uma visita")
             .WithOrder(2)
-            .Produces<Response<Viewing?>>()
-            .Produces<Response<Viewing?>>(StatusCodes.Status400BadRequest);
+            .Produces<Response<Visita?>>()
+            .Produces<Response<Visita?>>(StatusCodes.Status400BadRequest);
 
     /// <summary>
     /// Manipulador da rota que reagenda uma visita.
@@ -39,7 +39,7 @@ public class RescheduleViewingEndpoint : IEndpoint
     /// </remarks>
     /// <param name="user">Objeto <see cref="ClaimsPrincipal"/> contendo os dados do usuário autenticado.</param>
     /// <param name="handler">Instância de <see cref="IViewingHandler"/> responsável pelas operações relacionadas a visitas.</param>
-    /// <param name="request">Objeto <see cref="Viewing"/> contendo os dados atualizados da visita.</param>
+    /// <param name="request">Objeto <see cref="Visita"/> contendo os dados atualizados da visita.</param>
     /// <param name="id">ID da visita a ser reagendada.</param>
     /// <returns>
     /// Um objeto <see cref="IResult"/> representando a resposta HTTP:
@@ -49,11 +49,11 @@ public class RescheduleViewingEndpoint : IEndpoint
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
         IViewingHandler handler,
-        Viewing request,
+        Visita request,
         long id)
     {
         request.Id = id;
-        request.UserId = user.Identity?.Name ?? string.Empty;
+        request.UsuarioId = user.Identity?.Name ?? string.Empty;
         var result = await handler.RescheduleAsync(request);
 
         return result.IsSuccess

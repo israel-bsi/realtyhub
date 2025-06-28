@@ -6,7 +6,7 @@
 
 <PageTitle>Contratos</PageTitle>
 
-<MudDataGrid T="Contract" 
+<MudDataGrid T="Contrato" 
              Class="mt-4" 
              ServerData="LoadServerData"
              @ref="DataGrid"
@@ -23,14 +23,14 @@
     </ToolBarContent>
     <Columns>
         <PropertyColumn Property="c => c.Id" Title="Id"></PropertyColumn>
-        <PropertyColumn Property="c => c.IssueDate" Title="Data de emissão"></PropertyColumn>
-        <PropertyColumn Property="c => c.OfferId" Title="Identificador da proposta"></PropertyColumn>
-        <PropertyColumn Property="c => c.Buyer!.Name" Title="Comprador"></PropertyColumn>
-        <PropertyColumn Property="c => c.Seller!.Name" Title="Vendedor"></PropertyColumn>
-        <PropertyColumn Property="c => c.Offer!.Property!.Title" Title="Imóvel"></PropertyColumn>
+        <PropertyColumn Property="c => c.DataEmissao" Title="Data de emissão"></PropertyColumn>
+        <PropertyColumn Property="c => c.PropostaId" Title="Identificador da proposta"></PropertyColumn>
+        <PropertyColumn Property="c => c.Comprador!.Nome" Title="Comprador"></PropertyColumn>
+        <PropertyColumn Property="c => c.Vendedor!.Nome" Title="Vendedor"></PropertyColumn>
+        <PropertyColumn Property="c => c.Proposta!.Imovel!.Titulo" Title="Imóvel"></PropertyColumn>
         <TemplateColumn Title="Valor">
             <CellTemplate>
-                @context.Item.Offer!.Amount.ToString("C")
+                @context.Item.Proposta!.Valor.ToString("C")
             </CellTemplate>
         </TemplateColumn>
         <TemplateColumn Class="justify-end" Title="Ações">
@@ -54,6 +54,6 @@
         </TemplateColumn>
     </Columns>
     <PagerContent>
-        <MudDataGridPager T="Contract"/>
+        <MudDataGridPager T="Contrato"/>
     </PagerContent>
 </MudDataGrid>

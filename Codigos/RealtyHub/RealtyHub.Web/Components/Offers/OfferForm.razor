@@ -21,8 +21,8 @@ else
                                   Variant="Variant.Text"
                                   HelperText="Informe quando deseja pagar no imóvel"
                                   Format="C"
-                                  @bind-Value="InputModel.Amount"
-                                  For="@(() => InputModel.Amount)"
+                                  @bind-Value="InputModel.Valor"
+                                  For="@(() => InputModel.Valor)"
                                   ReadOnly="ReadOnly" />
                 </MudItem>
             </MudGrid>
@@ -33,11 +33,11 @@ else
                     <MudItem xs="12">
                         <MudText Class="mb-2" Typo="Typo.h6">Informações de pagamento</MudText>
                     </MudItem>
-                    @foreach (var payment in InputModel.Payments)
+                    @foreach (var payment in InputModel.Pagamentos)
                     {
                         <MudItem lg="12" xs="16" sm="10">
                             <PaymentForm InputModel="payment" 
-                                         @bind-Payments="InputModel.Payments"
+                                         @bind-Payments="InputModel.Pagamentos"
                                          ReadOnly="ReadOnly" />
                         </MudItem>
                     }
@@ -67,8 +67,8 @@ else
                                   T="string"
                                   Variant="Variant.Text"
                                   HelperText="Informe seu nome"
-                                  @bind-Value="InputModel.Buyer!.Name"
-                                  For="@(() => InputModel.Buyer!.Name)"
+                                  @bind-Value="InputModel.Comprador!.Nome"
+                                  For="@(() => InputModel.Comprador!.Nome)"
                                   ReadOnly="ReadOnly" />
                 </MudItem>
                 <MudItem xs="12" sm="6">
@@ -76,8 +76,8 @@ else
                                   T="string"
                                   Variant="Variant.Text"
                                   HelperText="Informe seu e-mail para contato"
-                                  @bind-Value="InputModel.Buyer!.Email"
-                                  For="@(() => InputModel.Buyer!.Email)"
+                                  @bind-Value="InputModel.Comprador!.Email"
+                                  For="@(() => InputModel.Comprador!.Email)"
                                   ReadOnly="ReadOnly" />
                 </MudItem>
 
@@ -86,8 +86,8 @@ else
                                   T="string"
                                   Variant="Variant.Text"
                                   HelperText="Informe seu telefone para contato"
-                                  @bind-Value="InputModel.Buyer!.Phone"
-                                  For="@(() => InputModel.Buyer!.Phone)"
+                                  @bind-Value="InputModel.Comprador!.Telefone"
+                                  For="@(() => InputModel.Comprador!.Telefone)"
                                   Mask="@Utility.Masks.Phone"
                                   ReadOnly="ReadOnly" />
                 </MudItem>

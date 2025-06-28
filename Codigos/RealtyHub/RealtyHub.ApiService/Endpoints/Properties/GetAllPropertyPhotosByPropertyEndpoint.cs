@@ -29,8 +29,8 @@ public class GetAllPropertyPhotosByPropertyEndpoint : IEndpoint
             .WithSummary("Recupera todas as fotos de um imóvel")
             .WithDescription("Recupera todas as fotos de um imóvel")
             .WithOrder(8)
-            .Produces<Response<List<PropertyPhoto>?>>()
-            .Produces<Response<Property?>>(StatusCodes.Status400BadRequest);
+            .Produces<Response<List<FotoImovel>?>>()
+            .Produces<Response<Imovel?>>(StatusCodes.Status400BadRequest);
     }
 
     /// <summary>

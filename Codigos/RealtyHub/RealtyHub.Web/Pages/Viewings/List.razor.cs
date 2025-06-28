@@ -32,7 +32,7 @@ public partial class ListViewingsPage : ComponentBase
     /// <summary>
     /// Componente de grid do MudBlazor utilizado para exibir as visitas.
     /// </summary>
-    public MudDataGrid<Viewing> DataGrid { get; set; } = null!;
+    public MudDataGrid<Visita> DataGrid { get; set; } = null!;
 
     /// <summary>
     /// Intervalo de datas utilizado para filtrar as visitas.
@@ -43,18 +43,18 @@ public partial class ListViewingsPage : ComponentBase
     /// <summary>
     /// Lista de visitas a serem exibidas no grid.
     /// </summary>
-    public List<Viewing> Items { get; set; } = [];
+    public List<Visita> Items { get; set; } = [];
 
     /// <summary>
     /// Imóvel associado às visitas. Pode ser nulo se <see cref="PropertyId"/> for 0.
     /// </summary>
-    public Property? Property { get; set; }
+    public Imovel? Property { get; set; }
 
     /// <summary>
     /// Título do cabeçalho da página.
     /// Exibe "Visitas do imóvel {Property.Title}" se um imóvel estiver definido; caso contrário, exibe "Todas as visitas".
     /// </summary>
-    public string HeaderTitle => Property is null ? "Todas as visitas" : $"Visitas do imóvel {Property.Title}";
+    public string HeaderTitle => Property is null ? "Todas as visitas" : $"Visitas do imóvel {Property.Titulo}";
 
     #endregion
 
@@ -97,7 +97,7 @@ public partial class ListViewingsPage : ComponentBase
     /// Um objeto <see cref="GridData{Viewing}"/> contendo a lista de visitas e a contagem total.
     /// Caso ocorra erro, emite uma notificação e retorna um grid vazio.
     /// </returns>
-    public async Task<GridData<Viewing>> LoadServerData(GridState<Viewing> state)
+    public async Task<GridData<Visita>> LoadServerData(GridState<Visita> state)
     {
         try
         {
@@ -118,7 +118,7 @@ public partial class ListViewingsPage : ComponentBase
 
                 var response = await PropertyHandler.GetAllViewingsAsync(request);
                 if (response.IsSuccess)
-                    return new GridData<Viewing>
+                    return new GridData<Visita>
                     {
                         Items = response.Data ?? [],
                         TotalItems = response.TotalCount
@@ -138,7 +138,7 @@ public partial class ListViewingsPage : ComponentBase
 
                 var response = await ViewingHandler.GetAllAsync(request);
                 if (response.IsSuccess)
-                    return new GridData<Viewing>
+                    return new GridData<Visita>
                     {
                         Items = response.Data ?? [],
                         TotalItems = response.TotalCount
@@ -147,12 +147,12 @@ public partial class ListViewingsPage : ComponentBase
             }
 
             Snackbar.Add(message, Severity.Error);
-            return new GridData<Viewing>();
+            return new GridData<Visita>();
         }
         catch (Exception e)
         {
             Snackbar.Add(e.Message, Severity.Error);
-            return new GridData<Viewing>();
+            return new GridData<Visita>();
         }
     }
 
@@ -187,10 +187,10 @@ public partial class ListViewingsPage : ComponentBase
     /// <summary>
     /// Abre o diálogo para reagendamento de uma visita.
     /// </summary>
-    /// <param name="viewing">A visita a ser reagendada.</param>
-    public async Task OnRescheduleButtonClickedAsync(Viewing viewing)
+    /// <param name="visita">A visita a ser reagendada.</param>
+    public async Task OnRescheduleButtonClickedAsync(Visita visita)
     {
-        if (IsViewingStatusInValid(viewing)) return;
+        if (IsViewingStatusInValid(visita)) return;
 
         var options = new DialogOptions
         {
@@ -203,7 +203,7 @@ public partial class ListViewingsPage : ComponentBase
             { "Property", Property },
             { "LockPropertySearch", true },
             { "RedirectToPageList", false },
-            { "Id", viewing.Id }
+            { "Id", visita.Id }
         };
         await DialogService.ShowAsync<ViewingDialog>("Reagendar visita", parameters, options);
         await DataGrid.ReloadServerData();
@@ -212,10 +212,10 @@ public partial class ListViewingsPage : ComponentBase
     /// <summary>
     /// Finaliza a visita, marcando-a como concluída.
     /// </summary>
-    /// <param name="viewing">A visita a ser finalizada.</param>
-    public async Task OnDoneButtonClickedAsync(Viewing viewing)
+    /// <param name="visita">A visita a ser finalizada.</param>
+    public async Task OnDoneButtonClickedAsync(Visita visita)
     {
-        if (IsViewingStatusInValid(viewing)) return;
+        if (IsViewingStatusInValid(visita)) return;
 
         var parameters = new DialogParameters
         {
@@ -226,13 +226,13 @@ public partial class ListViewingsPage : ComponentBase
         var dialog = await DialogService.ShowAsync<DialogConfirm>("Confirmação", parameters);
         if (await dialog.Result is { Canceled: true }) return;
 
-        var request = new DoneViewingRequest { Id = viewing.Id };
+        var request = new DoneViewingRequest { Id = visita.Id };
         var result = await ViewingHandler.DoneAsync(request);
         if (result is { IsSuccess: true, Data: not null })
         {
-            var viewingExisting = Items.FirstOrDefault(x => x.Id == viewing.Id);
+            var viewingExisting = Items.FirstOrDefault(x => x.Id == visita.Id);
             if (viewingExisting is not null)
-                viewingExisting.ViewingStatus = result.Data.ViewingStatus;
+                viewingExisting.StatusVisita = result.Data.StatusVisita;
         }
         Snackbar.Add(result.Message ?? string.Empty, Severity.Info);
         await DataGrid.ReloadServerData();
@@ -241,10 +241,10 @@ public partial class ListViewingsPage : ComponentBase
     /// <summary>
     /// Cancela a visita.
     /// </summary>
-    /// <param name="viewing">A visita a ser cancelada.</param>
-    public async Task OnCancelButtonClickedAsync(Viewing viewing)
+    /// <param name="visita">A visita a ser cancelada.</param>
+    public async Task OnCancelButtonClickedAsync(Visita visita)
     {
-        if (IsViewingStatusInValid(viewing)) return;
+        if (IsViewingStatusInValid(visita)) return;
         var parameters = new DialogParameters
         {
             { "ContentText", "Deseja cancelar a visita?" },
@@ -253,13 +253,13 @@ public partial class ListViewingsPage : ComponentBase
         var dialog = await DialogService.ShowAsync<DialogConfirm>("Confirmação", parameters);
         if (await dialog.Result is { Canceled: true }) return;
 
-        var request = new CancelViewingRequest { Id = viewing.Id };
+        var request = new CancelViewingRequest { Id = visita.Id };
         var result = await ViewingHandler.CancelAsync(request);
         if (result is { IsSuccess: true, Data: not null })
         {
-            var viewingExisting = Items.FirstOrDefault(x => x.Id == viewing.Id);
+            var viewingExisting = Items.FirstOrDefault(x => x.Id == visita.Id);
             if (viewingExisting is not null)
-                viewingExisting.ViewingStatus = result.Data.ViewingStatus;
+                viewingExisting.StatusVisita = result.Data.StatusVisita;
         }
         Snackbar.Add(result.Message ?? string.Empty, Severity.Info);
         await DataGrid.ReloadServerData();
@@ -269,16 +269,16 @@ public partial class ListViewingsPage : ComponentBase
     /// Verifica se o status da visita é inválido para alterações (finalização ou cancelamento).
     /// Exibe uma notificação de alerta caso o status seja "Done" ou "Canceled".
     /// </summary>
-    /// <param name="viewing">A visita a ser verificada.</param>
+    /// <param name="visita">A visita a ser verificada.</param>
     /// <returns>True se a visita não puder ser alterada; caso contrário, false.</returns>
-    private bool IsViewingStatusInValid(Viewing viewing)
+    private bool IsViewingStatusInValid(Visita visita)
     {
-        switch (viewing.ViewingStatus)
+        switch (visita.StatusVisita)
         {
-            case EViewingStatus.Done:
+            case EStatusVisita.Finalizada:
                 Snackbar.Add("Visita está finalizada", Severity.Warning);
                 return true;
-            case EViewingStatus.Canceled:
+            case EStatusVisita.Cancelada:
                 Snackbar.Add("Visita está cancelada", Severity.Warning);
                 return true;
             default:

@@ -39,7 +39,7 @@ public class CondominiumFormComponent : ComponentBase
     /// <summary>
     /// Modelo de entrada utilizado para o binding dos campos do formulário.
     /// </summary>
-    public Condominium InputModel { get; set; } = new();
+    public Condominio InputModel { get; set; } = new();
 
     /// <summary>
     /// Expressão regular utilizada para remover caracteres não numéricos do CEP.
@@ -82,9 +82,9 @@ public class CondominiumFormComponent : ComponentBase
         try
         {
             // Remove caracteres não numéricos do CEP
-            InputModel.Address.ZipCode = Regex.Replace(InputModel.Address.ZipCode, Pattern, "");
+            InputModel.Endereco.Cep = Regex.Replace(InputModel.Endereco.Cep, Pattern, "");
 
-            Response<Condominium?> result;
+            Response<Condominio?> result;
             if (InputModel.Id > 0)
                 result = await Handler.UpdateAsync(InputModel);
             else

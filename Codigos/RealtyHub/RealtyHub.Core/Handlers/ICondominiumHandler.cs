@@ -19,12 +19,12 @@ public interface ICondominiumHandler
     /// <remarks>
     /// Este método é responsável por criar um novo condomínio com base nas informações fornecidas.
     /// </remarks>
-    /// <param name="request">Instância de <see cref="Condominium"/> contendo as informações do novo condomínio.</param>
+    /// <param name="request">Instância de <see cref="Condominio"/> contendo as informações do novo condomínio.</param>
     /// <returns>
     /// Retorna um objeto <see cref="Response{TData}"/> indicando o resultado da operação.
-    /// O objeto TData é do tipo <see cref="Condominium"/> e pode ser nulo se a operação falhar.
+    /// O objeto TData é do tipo <see cref="Condominio"/> e pode ser nulo se a operação falhar.
     /// </returns>
-    Task<Response<Condominium?>> CreateAsync(Condominium request);
+    Task<Response<Condominio?>> CreateAsync(Condominio request);
 
     /// <summary>
     /// Atualiza as informações de um condomínio existente.
@@ -32,12 +32,12 @@ public interface ICondominiumHandler
     /// <remarks>
     /// Este método é responsável por atualizar as informações de um condomínio existente com base nas informações fornecidas.
     /// </remarks>
-    /// <param name="request">Instância de <see cref="Condominium"/> contendo as informações atualizadas do condomínio.</param>
+    /// <param name="request">Instância de <see cref="Condominio"/> contendo as informações atualizadas do condomínio.</param>
     /// <returns>
     /// Retorna um objeto <see cref="Response{TData}"/> indicando o resultado da operação.
-    /// O objeto TData é do tipo <see cref="Condominium"/> e pode ser nulo se a operação falhar.
+    /// O objeto TData é do tipo <see cref="Condominio"/> e pode ser nulo se a operação falhar.
     /// </returns>
-    Task<Response<Condominium?>> UpdateAsync(Condominium request);
+    Task<Response<Condominio?>> UpdateAsync(Condominio request);
 
     /// <summary>
     /// Exclui um condomínio existente.
@@ -48,9 +48,9 @@ public interface ICondominiumHandler
     /// <param name="request">Instância de <see cref="DeleteCondominiumRequest"/> contendo o Id do condomínio a ser excluído.</param>
     /// <returns>
     /// Retorna um objeto <see cref="Response{TData}"/> indicando o resultado da operação.
-    /// O objeto TData é do tipo <see cref="Condominium"/> e pode ser nulo se a operação falhar.
+    /// O objeto TData é do tipo <see cref="Condominio"/> e pode ser nulo se a operação falhar.
     /// </returns>
-    Task<Response<Condominium?>> DeleteAsync(DeleteCondominiumRequest request);
+    Task<Response<Condominio?>> DeleteAsync(DeleteCondominiumRequest request);
 
     /// <summary>
     /// Recupera as informações de um condomínio existente.
@@ -61,9 +61,9 @@ public interface ICondominiumHandler
     /// <param name="request">Instância de <see cref="GetCondominiumByIdRequest"/> contendo o Id do condomínio a ser recuperado.</param>
     /// <returns>
     /// Retorna um objeto <see cref="Response{TData}"/> indicando o resultado da operação.
-    /// O objeto TData é do tipo <see cref="Condominium"/> e pode ser nulo se a operação falhar.
+    /// O objeto TData é do tipo <see cref="Condominio"/> e pode ser nulo se a operação falhar.
     /// </returns>    
-    Task<Response<Condominium?>> GetByIdAsync(GetCondominiumByIdRequest request);
+    Task<Response<Condominio?>> GetByIdAsync(GetCondominiumByIdRequest request);
 
     /// <summary>
     /// Recupera todos os condomínios existentes.
@@ -74,7 +74,7 @@ public interface ICondominiumHandler
     /// <param name="request">Instância de <see cref="GetAllCondominiumsRequest"/> contendo os parâmetros de paginação.</param>
     /// <returns>
     /// Retorna um objeto <see cref="PagedResponse{TData}"/> indicando o resultado da operação.
-    /// O objeto TData é uma lista de <see cref="Condominium"/> e pode ser nulo se a operação falhar.
+    /// O objeto TData é uma lista de <see cref="Condominio"/> e pode ser nulo se a operação falhar.
     /// </returns>
-    Task<PagedResponse<List<Condominium>?>> GetAllAsync(GetAllCondominiumsRequest request);
+    Task<PagedResponse<List<Condominio>?>> GetAllAsync(GetAllCondominiumsRequest request);
 }

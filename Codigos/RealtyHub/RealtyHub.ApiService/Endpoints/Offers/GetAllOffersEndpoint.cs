@@ -29,8 +29,8 @@ public class GetAllOffersEndpoint : IEndpoint
             .WithSummary("Recupera todas as propostas")
             .WithDescription("Recupera todas as propostas")
             .WithOrder(5)
-            .Produces<PagedResponse<Offer?>>()
-            .Produces<PagedResponse<Offer?>>(StatusCodes.Status400BadRequest);
+            .Produces<PagedResponse<Proposta?>>()
+            .Produces<PagedResponse<Proposta?>>(StatusCodes.Status400BadRequest);
 
     /// <summary>
     /// Manipulador da rota que retorna todas as propostas.

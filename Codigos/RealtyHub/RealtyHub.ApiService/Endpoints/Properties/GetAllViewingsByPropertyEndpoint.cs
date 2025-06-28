@@ -29,8 +29,8 @@ public class GetAllViewingsByPropertyEndpoint : IEndpoint
             .WithSummary("Lista todas as visitas de um imóvel")
             .WithDescription("Lista todas as visitas de um imóvel")
             .WithOrder(6)
-            .Produces<PagedResponse<List<Viewing>?>>()
-            .Produces<PagedResponse<Property?>>(StatusCodes.Status400BadRequest);
+            .Produces<PagedResponse<List<Visita>?>>()
+            .Produces<PagedResponse<Imovel?>>(StatusCodes.Status400BadRequest);
 
     /// <summary>
     /// Manipulador da rota que retorna todas as visitas de um imóvel.

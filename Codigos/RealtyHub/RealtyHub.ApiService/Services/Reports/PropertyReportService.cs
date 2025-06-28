@@ -12,7 +12,7 @@ public class PropertyReportService : IDocument
     /// <summary>
     /// Lista de imóveis a serem incluídos no relatório.
     /// </summary>
-    private readonly List<Property> _properties;
+    private readonly List<Imovel> _properties;
 
     /// <summary>
     /// Inicializa uma nova instância de <c><see cref="PropertyReportService"/></c> com a lista de imóveis especificada.
@@ -21,7 +21,7 @@ public class PropertyReportService : IDocument
     /// Este construtor recebe a lista de imóveis que será utilizada para gerar o relatório.
     /// </remarks>
     /// <param name="properties">A lista de imóveis para inclusão no relatório.</param>
-    public PropertyReportService(List<Property> properties)
+    public PropertyReportService(List<Imovel> properties)
     {
         _properties = properties;
     }
@@ -141,15 +141,15 @@ public class PropertyReportService : IDocument
             foreach (var property in _properties)
             {
                 table.Cell().Text($"{property.Id}");
-                table.Cell().Text($"{property.CreatedAt:dd/MM/yyyy}");
-                table.Cell().Text($"{property.UpdatedAt:dd/MM/yyyy}");
-                table.Cell().Text($"{property.Price:C}");
-                table.Cell().Text($"{property.Bedroom}");
-                table.Cell().Text($"{property.Bathroom}");
-                table.Cell().Text($"{property.Garage}");
+                table.Cell().Text($"{property.CriadoEm:dd/MM/yyyy}");
+                table.Cell().Text($"{property.AtualizadoEm:dd/MM/yyyy}");
+                table.Cell().Text($"{property.Preco:C}");
+                table.Cell().Text($"{property.Quarto}");
+                table.Cell().Text($"{property.Banheiro}");
+                table.Cell().Text($"{property.Garagem}");
                 table.Cell().Text($"{property.Area}");
-                table.Cell().Text(property.IsNew ? "Sim" : "Não");
-                table.Cell().Text(property.IsActive ? "Sim" : "Não");
+                table.Cell().Text(property.Novo ? "Sim" : "Não");
+                table.Cell().Text(property.Ativo ? "Sim" : "Não");
             }
         });
     }

@@ -29,11 +29,11 @@ public class ContractTemplateHandler : IContractTemplateHandler
     /// Realiza uma requisição para a API para buscar a lista de modelos de contratos.
     /// Retorna a lista ou uma mensagem de erro em caso de falha.
     /// </remarks>
-    public async Task<Response<List<ContractTemplate>?>> GetAllAsync()
+    public async Task<Response<List<ModeloContrato>?>> GetAllAsync()
     {
         var response = await _httpClient.GetAsync("v1/contracts-templates");
 
-        return await response.Content.ReadFromJsonAsync<Response<List<ContractTemplate>?>>()
-            ?? new Response<List<ContractTemplate>?>(null, 400, "Falha ao buscar os contratos");
+        return await response.Content.ReadFromJsonAsync<Response<List<ModeloContrato>?>>()
+            ?? new Response<List<ModeloContrato>?>(null, 400, "Falha ao buscar os contratos");
     }
 }

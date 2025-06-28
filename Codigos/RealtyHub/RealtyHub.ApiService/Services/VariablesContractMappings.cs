@@ -28,7 +28,7 @@ public class VariablesContractMappings
     /// </returns>
     public Dictionary<string, string> GetFields()
     {
-        var paymentsFields = GetPaymentsText(_contract.Offer!.Payments);
+        var paymentsFields = GetPaymentsText(_contrato.Proposta!.Pagamentos);
         return _defaultFields
             .Concat(_fieldsPj)
             .Concat(_fieldsPf)
@@ -52,90 +52,90 @@ public class VariablesContractMappings
     private readonly Dictionary<string, string> _fieldsPf;
 
     /// <summary>
-    /// Objeto do tipo <c><see cref="Contract"/></c> que contém os dados do contrato.
+    /// Objeto do tipo <c><see cref="Contrato"/></c> que contém os dados do contrato.
     /// </summary>
-    private readonly Contract _contract;
+    private readonly Contrato _contrato;
 
     /// <summary>
     /// Inicializa uma nova instância de <c><see cref="VariablesContractMappings"/></c> com o contrato especificado.
     /// </summary>
     /// <remarks>
-    /// O construtor recebe um objeto do tipo <c><see cref="Contract"/></c> e inicializa os dicionários de campos padrão,
+    /// O construtor recebe um objeto do tipo <c><see cref="Contrato"/></c> e inicializa os dicionários de campos padrão,
     /// de pessoa jurídica e de pessoa física, mapeando os dados pertinentes do contrato.
     /// </remarks>
-    /// <param name="contract">Um objeto do tipo <c><see cref="Contract"/></c> contendo os dados do contrato.</param>
-    public VariablesContractMappings(Contract contract)
+    /// <param name="contrato">Um objeto do tipo <c><see cref="Contrato"/></c> contendo os dados do contrato.</param>
+    public VariablesContractMappings(Contrato contrato)
     {
-        _contract = contract;
+        _contrato = contrato;
         _defaultFields = new Dictionary<string, string>
         {
             { "enderecoCompleto_cliente_proprietario",
-                $"Rua: {contract.Seller!.Address.Street}, " +
-                (string.IsNullOrEmpty(contract.Seller.Address.Complement) ? ""
-                    : $"Complemento: {contract.Seller.Address.Complement}, ") +
-                $"Número: {contract.Seller.Address.Number}, " +
-                $"Bairro: {contract.Seller.Address.Neighborhood}, " +
-                $"Cidade: {contract.Seller.Address.City}, " +
-                $"Estado: {contract.Seller.Address.State}, " +
-                $"País: {contract.Seller.Address.Country}, " +
-                $"CEP: {contract.Seller.Address.ZipCode} "
+                $"Rua: {contrato.Vendedor!.Endereco.Logradouro}, " +
+                (string.IsNullOrEmpty(contrato.Vendedor.Endereco.Complemento) ? ""
+                    : $"Complemento: {contrato.Vendedor.Endereco.Complemento}, ") +
+                $"Número: {contrato.Vendedor.Endereco.Numero}, " +
+                $"Bairro: {contrato.Vendedor.Endereco.Bairro}, " +
+                $"Cidade: {contrato.Vendedor.Endereco.Cidade}, " +
+                $"Estado: {contrato.Vendedor.Endereco.Estado}, " +
+                $"País: {contrato.Vendedor.Endereco.Pais}, " +
+                $"CEP: {contrato.Vendedor.Endereco.Cep} "
             },
             { "enderecoCompleto_cliente_comprador",
-                $"Rua: {contract.Buyer!.Address.Street}, " +
-                (string.IsNullOrEmpty(contract.Buyer.Address.Complement) ? ""
-                    : $"Complemento: {contract.Buyer.Address.Complement}, ") +
-                $"Número: {contract.Buyer.Address.Number}, " +
-                $"Bairro: {contract.Buyer.Address.Neighborhood}, " +
-                $"Cidade: {contract.Buyer.Address.City}, " +
-                $"Estado: {contract.Buyer.Address.State}, " +
-                $"País: {contract.Buyer.Address.Country}, " +
-                $"CEP: {contract.Buyer.Address.ZipCode} "
+                $"Rua: {contrato.Comprador!.Endereco.Logradouro}, " +
+                (string.IsNullOrEmpty(contrato.Comprador.Endereco.Complemento) ? ""
+                    : $"Complemento: {contrato.Comprador.Endereco.Complemento}, ") +
+                $"Número: {contrato.Comprador.Endereco.Numero}, " +
+                $"Bairro: {contrato.Comprador.Endereco.Bairro}, " +
+                $"Cidade: {contrato.Comprador.Endereco.Cidade}, " +
+                $"Estado: {contrato.Comprador.Endereco.Estado}, " +
+                $"País: {contrato.Comprador.Endereco.Pais}, " +
+                $"CEP: {contrato.Comprador.Endereco.Cep} "
             },
-            { "tipo_imovel", contract.Offer!.Property!.PropertyType.GetDisplayName() },
+            { "tipo_imovel", contrato.Proposta!.Imovel!.TipoImovel.GetDisplayName() },
             { "enderecoCompleto_imovel",
-                $"Rua: {contract.Offer.Property!.Address.Street}, " +
-                (string.IsNullOrEmpty(contract.Offer.Property!.Address.Complement) ? ""
-                    : $"Complemento: {contract.Offer.Property!.Address.Complement}, ") +
-                $"Número: {contract.Offer.Property!.Address.Number}, " +
-                $"Bairro: {contract.Offer.Property!.Address.Neighborhood}, " +
-                $"Cidade: {contract.Offer.Property!.Address.City}, " +
-                $"Estado: {contract.Offer.Property!.Address.State}, " +
-                $"País: {contract.Offer.Property!.Address.Country}, " +
-                $"CEP: {contract.Offer.Property!.Address.ZipCode} "
+                $"Rua: {contrato.Proposta.Imovel!.Endereco.Logradouro}, " +
+                (string.IsNullOrEmpty(contrato.Proposta.Imovel!.Endereco.Complemento) ? ""
+                    : $"Complemento: {contrato.Proposta.Imovel!.Endereco.Complemento}, ") +
+                $"Número: {contrato.Proposta.Imovel!.Endereco.Numero}, " +
+                $"Bairro: {contrato.Proposta.Imovel!.Endereco.Bairro}, " +
+                $"Cidade: {contrato.Proposta.Imovel!.Endereco.Cidade}, " +
+                $"Estado: {contrato.Proposta.Imovel!.Endereco.Estado}, " +
+                $"País: {contrato.Proposta.Imovel!.Endereco.Pais}, " +
+                $"CEP: {contrato.Proposta.Imovel!.Endereco.Cep} "
             },
-            { "area_imovel", contract.Offer!.Property!.Area.ToString(CultureInfo.CurrentCulture) },
-            { "numeroMatriculaCartorio_imovel", contract.Offer!.Property!.RegistryNumber },
-            { "cartorioRegistro_imovel", contract.Offer!.Property!.RegistryRecord },
-            { "valorOferecido_proposta", contract.Offer!.Amount.ToString(CultureInfo.CurrentCulture) },
-            { "cidade_imovel", contract.Offer!.Property!.Address.City },
-            { "estado_imovel", contract.Offer!.Property!.Address.State },
-            { "data_assinatura_contrato", contract.SignatureDate?.ToString("dd/MM/yyyy")! },
+            { "area_imovel", contrato.Proposta!.Imovel!.Area.ToString(CultureInfo.CurrentCulture) },
+            { "numeroMatriculaCartorio_imovel", contrato.Proposta!.Imovel!.NumeroRegistro },
+            { "cartorioRegistro_imovel", contrato.Proposta!.Imovel!.RegistroCartorio },
+            { "valorOferecido_proposta", contrato.Proposta!.Valor.ToString(CultureInfo.CurrentCulture) },
+            { "cidade_imovel", contrato.Proposta!.Imovel!.Endereco.Cidade },
+            { "estado_imovel", contrato.Proposta!.Imovel!.Endereco.Estado },
+            { "data_assinatura_contrato", contrato.DataAssinatura?.ToString("dd/MM/yyyy")! },
         };
         _fieldsPj = new Dictionary<string, string>
         {
-            { "razaoSocial_cliente_proprietario", contract.Seller!.BusinessName },
-            { "cnpj_cliente_proprietario", contract.Seller.DocumentNumber },
-            { "razaoSocial_cliente_comprador", contract.Buyer!.BusinessName },
-            { "cnpj_cliente_comprador", contract.Buyer!.DocumentNumber }
+            { "razaoSocial_cliente_proprietario", contrato.Vendedor!.NomeFantasia },
+            { "cnpj_cliente_proprietario", contrato.Vendedor.NumeroDocumento },
+            { "razaoSocial_cliente_comprador", contrato.Comprador!.NomeFantasia },
+            { "cnpj_cliente_comprador", contrato.Comprador!.NumeroDocumento }
         };
         _fieldsPf = new Dictionary<string, string>
         {
-            { "nome_cliente_proprietario", contract.Seller.Name },
-            { "nome_cliente_comprador", contract.Buyer.Name },
-            { "nacionalidade_cliente_proprietario", contract.Seller.Nationality },
-            { "nacionalidade_cliente_comprador", contract.Buyer.Nationality },
-            { "estadoCivil_cliente_proprietario", contract.Seller.MaritalStatus.GetDisplayName() },
-            { "estadoCivil_cliente_comprador", contract.Buyer.MaritalStatus.GetDisplayName() },
-            { "profissao_cliente_proprietario", contract.Seller.Occupation },
-            { "profissao_cliente_comprador", contract.Buyer.Occupation },
-            { "cpf_cliente_proprietario", contract.Seller.DocumentNumber },
-            { "cpf_cliente_comprador", contract.Buyer.DocumentNumber },
-            { "rg_cliente_proprietario", contract.Seller.Rg },
-            { "rg_cliente_comprador", contract.Buyer.Rg },
-            { "orgaoExpeditorRg_cliente_proprietario", contract.Seller.IssuingAuthority },
-            { "orgaoExpeditorRg_cliente_comprador", contract.Buyer.IssuingAuthority },
-            { "dataemissaorg_cliente_proprietario", contract.Seller.RgIssueDate?.ToString("dd/MM/yyyy")! },
-            { "dataemissaorg_cliente_comprador", contract.Buyer.RgIssueDate?.ToString("dd/MM/yyyy")! }
+            { "nome_cliente_proprietario", contrato.Vendedor.Nome },
+            { "nome_cliente_comprador", contrato.Comprador.Nome },
+            { "nacionalidade_cliente_proprietario", contrato.Vendedor.Nacionalidade },
+            { "nacionalidade_cliente_comprador", contrato.Comprador.Nacionalidade },
+            { "estadoCivil_cliente_proprietario", contrato.Vendedor.TipoStatusCivil.GetDisplayName() },
+            { "estadoCivil_cliente_comprador", contrato.Comprador.TipoStatusCivil.GetDisplayName() },
+            { "profissao_cliente_proprietario", contrato.Vendedor.Ocupacao },
+            { "profissao_cliente_comprador", contrato.Comprador.Ocupacao },
+            { "cpf_cliente_proprietario", contrato.Vendedor.NumeroDocumento },
+            { "cpf_cliente_comprador", contrato.Comprador.NumeroDocumento },
+            { "rg_cliente_proprietario", contrato.Vendedor.Rg },
+            { "rg_cliente_comprador", contrato.Comprador.Rg },
+            { "orgaoExpeditorRg_cliente_proprietario", contrato.Vendedor.AutoridadeEmissora },
+            { "orgaoExpeditorRg_cliente_comprador", contrato.Comprador.AutoridadeEmissora },
+            { "dataemissaorg_cliente_proprietario", contrato.Vendedor.DataEmissaoRg?.ToString("dd/MM/yyyy")! },
+            { "dataemissaorg_cliente_comprador", contrato.Comprador.DataEmissaoRg?.ToString("dd/MM/yyyy")! }
         };
     }
 
@@ -151,7 +151,7 @@ public class VariablesContractMappings
     /// <returns>
     /// Um objeto <c><see cref="Dictionary{TKey, TValue}"/></c> representando os pagamentos mapeados para substituição.
     /// </returns>
-    private Dictionary<string, string> GetPaymentsText(List<Payment> payments)
+    private Dictionary<string, string> GetPaymentsText(List<Pagamento> payments)
     {
         var dictPayments = new Dictionary<string, string>();
         var index = 1;

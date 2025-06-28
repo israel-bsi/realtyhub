@@ -60,9 +60,9 @@ public class OfferReportEndpoint : IEndpoint
         HttpContext httpContext)
     {
         var offersData = await dbContext.Offers
-            .Include(o => o.Property)
-            .ThenInclude(p => p!.Seller)
-            .Include(o => o.Buyer)
+            .Include(o => o.Imovel)
+            .ThenInclude(p => p!.Vendedor)
+            .Include(o => o.Comprador)
             .ToListAsync();
 
         var report = new OfferReportService(offersData);

@@ -28,8 +28,8 @@ public class GetOfferAcceptedEndpoint : IEndpoint
             .WithSummary("Recupera a proposta aceita")
             .WithDescription("Recupera a proposta aceita")
             .WithOrder(4)
-            .Produces<Response<Offer?>>()
-            .Produces<Response<Offer?>>(StatusCodes.Status400BadRequest);
+            .Produces<Response<Proposta?>>()
+            .Produces<Response<Proposta?>>(StatusCodes.Status400BadRequest);
 
     /// <summary>
     /// Manipulador da rota que retorna a proposta aceita de um imóvel.

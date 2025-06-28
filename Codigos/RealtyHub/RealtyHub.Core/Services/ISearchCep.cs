@@ -19,12 +19,12 @@ public interface IViaCepService
     Task<Response<ViaCepResponse?>> SearchAddressAsync(string cep);
 
     /// <summary>
-    /// Obtém o endereço a partir do CEP especificado, retornando um objeto do tipo <c><see cref="Address"/></c>.
+    /// Obtém o endereço a partir do CEP especificado, retornando um objeto do tipo <c><see cref="Endereco"/></c>.
     /// </summary>
     /// <param name="cep">O CEP a ser pesquisado.</param>
     /// <returns>
-    /// Um objeto <c><see cref="Response{T}"/></c> contendo um <c><see cref="Address"/></c> com 
+    /// Um objeto <c><see cref="Response{T}"/></c> contendo um <c><see cref="Endereco"/></c> com 
     /// as informações do endereço, se encontrado.
     /// </returns>
-    Task<Response<Address?>> GetAddressAsync(string cep);
+    Task<Response<Endereco?>> GetAddressAsync(string cep);
 }

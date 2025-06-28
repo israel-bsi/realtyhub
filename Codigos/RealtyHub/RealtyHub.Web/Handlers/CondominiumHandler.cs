@@ -32,12 +32,12 @@ public class CondominiumHandler : ICondominiumHandler
     /// <remarks>
     /// Envia os dados do condomínio para a API e retorna o resultado da operação.
     /// </remarks>
-    public async Task<Response<Condominium?>> CreateAsync(Condominium request)
+    public async Task<Response<Condominio?>> CreateAsync(Condominio request)
     {
         var result = await _httpClient.PostAsJsonAsync("v1/condominiums", request);
 
-        return await result.Content.ReadFromJsonAsync<Response<Condominium?>>()
-               ?? new Response<Condominium?>(null, 400, "Falha ao criar o condomínio");
+        return await result.Content.ReadFromJsonAsync<Response<Condominio?>>()
+               ?? new Response<Condominio?>(null, 400, "Falha ao criar o condomínio");
     }
 
     /// <summary>
@@ -46,12 +46,12 @@ public class CondominiumHandler : ICondominiumHandler
     /// <remarks>
     /// Envia os dados atualizados do condomínio para a API e retorna o resultado da operação.
     /// </remarks>
-    public async Task<Response<Condominium?>> UpdateAsync(Condominium request)
+    public async Task<Response<Condominio?>> UpdateAsync(Condominio request)
     {
         var result = await _httpClient.PutAsJsonAsync($"v1/condominiums/{request.Id}", request);
 
-        return await result.Content.ReadFromJsonAsync<Response<Condominium?>>()
-            ?? new Response<Condominium?>(null, 400, "Falha ao atualizar o condomínio");
+        return await result.Content.ReadFromJsonAsync<Response<Condominio?>>()
+            ?? new Response<Condominio?>(null, 400, "Falha ao atualizar o condomínio");
     }
 
     /// <summary>
@@ -60,13 +60,13 @@ public class CondominiumHandler : ICondominiumHandler
     /// <remarks>
     /// Envia uma requisição para a API para remover o condomínio especificado.
     /// </remarks>
-    public async Task<Response<Condominium?>> DeleteAsync(DeleteCondominiumRequest request)
+    public async Task<Response<Condominio?>> DeleteAsync(DeleteCondominiumRequest request)
     {
         var result = await _httpClient.DeleteAsync($"v1/condominiums/{request.Id}");
 
         return result.IsSuccessStatusCode
-            ? new Response<Condominium?>(null, 200, "Condomínio excluído com sucesso")
-            : new Response<Condominium?>(null, 400, "Falha ao excluir o condomínio");
+            ? new Response<Condominio?>(null, 200, "Condomínio excluído com sucesso")
+            : new Response<Condominio?>(null, 400, "Falha ao excluir o condomínio");
     }
 
     /// <summary>
@@ -75,12 +75,12 @@ public class CondominiumHandler : ICondominiumHandler
     /// <remarks>
     /// Realiza uma requisição para a API para buscar os dados do condomínio especificado.
     /// </remarks>
-    public async Task<Response<Condominium?>> GetByIdAsync(GetCondominiumByIdRequest request)
+    public async Task<Response<Condominio?>> GetByIdAsync(GetCondominiumByIdRequest request)
     {
         var response = await _httpClient.GetAsync($"v1/condominiums/{request.Id}");
 
-        return await response.Content.ReadFromJsonAsync<Response<Condominium?>>()
-            ?? new Response<Condominium?>(null, 400, "Falha ao obter o condomínio");
+        return await response.Content.ReadFromJsonAsync<Response<Condominio?>>()
+            ?? new Response<Condominio?>(null, 400, "Falha ao obter o condomínio");
     }
 
     /// <summary>
@@ -89,7 +89,7 @@ public class CondominiumHandler : ICondominiumHandler
     /// <remarks>
     /// Realiza uma requisição para a API para buscar todos os condomínios, podendo filtrar por termo de busca e outros critérios.
     /// </remarks>
-    public async Task<PagedResponse<List<Condominium>?>> GetAllAsync(GetAllCondominiumsRequest request)
+    public async Task<PagedResponse<List<Condominio>?>> GetAllAsync(GetAllCondominiumsRequest request)
     {
         var url = $"v1/condominiums?pageNumber={request.PageNumber}&pageSize={request.PageSize}";
 
@@ -99,7 +99,7 @@ public class CondominiumHandler : ICondominiumHandler
         if (!string.IsNullOrEmpty(request.SearchTerm))
             url = $"{url}&searchTerm={request.SearchTerm}";
 
-        return await _httpClient.GetFromJsonAsync<PagedResponse<List<Condominium>?>>(url)
-               ?? new PagedResponse<List<Condominium>?>(null, 400, "Falha ao obter os condomínios");
+        return await _httpClient.GetFromJsonAsync<PagedResponse<List<Condominio>?>>(url)
+               ?? new PagedResponse<List<Condominio>?>(null, 400, "Falha ao obter os condomínios");
     }
 }

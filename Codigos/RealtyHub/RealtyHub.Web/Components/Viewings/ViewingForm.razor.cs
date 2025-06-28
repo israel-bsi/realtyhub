@@ -27,13 +27,13 @@ public partial class ViewingFormComponent : ComponentBase
     /// Cliente associado à visita (opcional).
     /// </summary>
     [Parameter]
-    public Customer? Customer { get; set; }
+    public Cliente? Customer { get; set; }
 
     /// <summary>
     /// Imóvel associado à visita (opcional).
     /// </summary>
     [Parameter]
-    public Property? Property { get; set; }
+    public Imovel? Property { get; set; }
 
     /// <summary>
     /// Indica se a busca de imóveis está bloqueada.
@@ -72,7 +72,7 @@ public partial class ViewingFormComponent : ComponentBase
     /// <summary>
     /// Modelo de entrada utilizado para o binding dos campos do formulário.
     /// </summary>
-    public Viewing InputModel { get; set; } = new();
+    public Visita InputModel { get; set; } = new();
 
     /// <summary>
     /// Horário selecionado para a visita.
@@ -135,14 +135,14 @@ public partial class ViewingFormComponent : ComponentBase
         IsBusy = true;
         try
         {
-            if (InputModel.ViewingDate.HasValue && ViewingTime.HasValue)
+            if (InputModel.DataVisita.HasValue && ViewingTime.HasValue)
             {
-                InputModel.ViewingDate = InputModel
-                    .ViewingDate.Value.Date.Add(ViewingTime.Value)
+                InputModel.DataVisita = InputModel
+                    .DataVisita.Value.Date.Add(ViewingTime.Value)
                     .ToUniversalTime();
             }
 
-            Response<Viewing?> result;
+            Response<Visita?> result;
             if (Id == 0)
                 result = await ViewingHandler.ScheduleAsync(InputModel);
             else
@@ -179,17 +179,17 @@ public partial class ViewingFormComponent : ComponentBase
     /// <returns>True se o formulário for inválido, caso contrário false.</returns>
     private bool IsFormInvalid()
     {
-        if (InputModel.Buyer is null && InputModel.Property is null)
+        if (InputModel.Comprador is null && InputModel.Imovel is null)
         {
             Snackbar.Add("Informe o cliente e o imóvel", Severity.Error);
             return true;
         }
-        if (InputModel.Buyer is null)
+        if (InputModel.Comprador is null)
         {
             Snackbar.Add("Informe o cliente", Severity.Error);
             return true;
         }
-        if (InputModel.Property is null)
+        if (InputModel.Imovel is null)
         {
             Snackbar.Add("Informe o imóvel", Severity.Error);
             return true;
@@ -223,14 +223,14 @@ public partial class ViewingFormComponent : ComponentBase
         if (response is { IsSuccess: true, Data: not null })
         {
             InputModel.Id = response.Data.Id;
-            InputModel.ViewingDate = response.Data.ViewingDate;
-            InputModel.ViewingStatus = response.Data.ViewingStatus;
-            InputModel.Buyer = response.Data.Buyer;
-            InputModel.BuyerId = response.Data.BuyerId;
-            InputModel.Property = response.Data.Property;
-            InputModel.PropertyId = response.Data.PropertyId;
-            InputModel.UserId = response.Data.UserId;
-            ViewingTime = InputModel.ViewingDate!.Value.TimeOfDay;
+            InputModel.DataVisita = response.Data.DataVisita;
+            InputModel.StatusVisita = response.Data.StatusVisita;
+            InputModel.Comprador = response.Data.Comprador;
+            InputModel.CompradorId = response.Data.CompradorId;
+            InputModel.Imovel = response.Data.Imovel;
+            InputModel.ImovelId = response.Data.ImovelId;
+            InputModel.UsuarioId = response.Data.UsuarioId;
+            ViewingTime = InputModel.DataVisita!.Value.TimeOfDay;
         }
         else
         {
@@ -252,7 +252,7 @@ public partial class ViewingFormComponent : ComponentBase
         var result = await ViewingHandler.DoneAsync(request);
         var resultMessage = result.Message ?? string.Empty;
         if (result is { IsSuccess: true, Data: not null })
-            InputModel.ViewingStatus = result.Data.ViewingStatus;
+            InputModel.StatusVisita = result.Data.StatusVisita;
 
         Snackbar.Add(resultMessage, Severity.Info);
         StateHasChanged();
@@ -271,7 +271,7 @@ public partial class ViewingFormComponent : ComponentBase
         var result = await ViewingHandler.CancelAsync(request);
         var resultMessage = result.Message ?? string.Empty;
         if (result is { IsSuccess: true, Data: not null })
-            InputModel.ViewingStatus = result.Data.ViewingStatus;
+            InputModel.StatusVisita = result.Data.StatusVisita;
 
         Snackbar.Add(resultMessage, Severity.Info);
         StateHasChanged();
@@ -289,7 +289,7 @@ public partial class ViewingFormComponent : ComponentBase
         var parameters = new DialogParameters
         {
             { "OnCustomerSelected", EventCallback.Factory
-                .Create<Customer>(this, SelectedCustomer) }
+                .Create<Cliente>(this, SelectedCustomer) }
         };
         var options = new DialogOptions
         {
@@ -301,18 +301,18 @@ public partial class ViewingFormComponent : ComponentBase
             .ShowAsync<CustomerDialog>("Informe o Cliente", parameters, options);
         var result = await dialog.Result;
 
-        if (result is { Canceled: false, Data: Customer selectedCustomer })
+        if (result is { Canceled: false, Data: Cliente selectedCustomer })
             SelectedCustomer(selectedCustomer);
     }
 
     /// <summary>
     /// Manipula a seleção do cliente no diálogo, atualizando o modelo da visita.
     /// </summary>
-    /// <param name="customer">Cliente selecionado.</param>
-    private void SelectedCustomer(Customer customer)
+    /// <param name="cliente">Cliente selecionado.</param>
+    private void SelectedCustomer(Cliente cliente)
     {
-        InputModel.Buyer = customer;
-        InputModel.BuyerId = customer.Id;
+        InputModel.Comprador = cliente;
+        InputModel.CompradorId = cliente.Id;
         EditFormKey++;
         StateHasChanged();
     }
@@ -329,7 +329,7 @@ public partial class ViewingFormComponent : ComponentBase
         var parameters = new DialogParameters
         {
             { "OnPropertySelected", EventCallback.Factory
-                .Create<Property>(this, SelectedProperty) }
+                .Create<Imovel>(this, SelectedProperty) }
         };
         var options = new DialogOptions
         {
@@ -342,18 +342,18 @@ public partial class ViewingFormComponent : ComponentBase
 
         var result = await dialog.Result;
 
-        if (result is { Canceled: false, Data: Property selectedProperty })
+        if (result is { Canceled: false, Data: Imovel selectedProperty })
             SelectedProperty(selectedProperty);
     }
 
     /// <summary>
     /// Manipula a seleção do imóvel no diálogo, atualizando o modelo da visita.
     /// </summary>
-    /// <param name="property">Imóvel selecionado.</param>
-    private void SelectedProperty(Property property)
+    /// <param name="imovel">Imóvel selecionado.</param>
+    private void SelectedProperty(Imovel imovel)
     {
-        InputModel.Property = property;
-        InputModel.PropertyId = property.Id;
+        InputModel.Imovel = imovel;
+        InputModel.ImovelId = imovel.Id;
         EditFormKey++;
         StateHasChanged();
     }
@@ -392,10 +392,10 @@ public partial class ViewingFormComponent : ComponentBase
                 await LoadViewingAsync();
             else
             {
-                InputModel.Buyer = Customer;
-                InputModel.BuyerId = Customer?.Id ?? 0;
-                InputModel.Property = Property;
-                InputModel.PropertyId = Property?.Id ?? 0;
+                InputModel.Comprador = Customer;
+                InputModel.CompradorId = Customer?.Id ?? 0;
+                InputModel.Imovel = Property;
+                InputModel.ImovelId = Property?.Id ?? 0;
             }
         }
         catch (Exception e)

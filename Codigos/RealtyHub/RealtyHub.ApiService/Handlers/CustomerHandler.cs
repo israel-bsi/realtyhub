@@ -45,46 +45,46 @@ public class CustomerHandler : ICustomerHandler
     /// </remarks>
     /// <param name="request">Objeto contendo as informações para criação do cliente.</param>
     /// <returns>Retorna uma resposta com o cliente criado ou um erro se o cliente já existir.</returns>
-    public async Task<Response<Customer?>> CreateAsync(Customer request)
+    public async Task<Response<Cliente?>> CreateAsync(Cliente request)
     {
         try
         {
             var isCustomerExists = await _context
                 .Customers
-                .AnyAsync(c => (c.DocumentNumber == request.DocumentNumber
+                .AnyAsync(c => (c.NumeroDocumento == request.NumeroDocumento
                                || c.Email == request.Email)
-                               && c.UserId == request.UserId);
+                               && c.UsuarioId == request.UsuarioId);
 
             if (isCustomerExists)
-                return new Response<Customer?>(null, 400, "Cliente já cadastrado");
+                return new Response<Cliente?>(null, 400, "Cliente já cadastrado");
 
-            var customer = new Customer
+            var customer = new Cliente
             {
-                Name = request.Name,
+                Nome = request.Nome,
                 Email = request.Email,
-                Phone = request.Phone,
-                DocumentNumber = request.DocumentNumber,
-                Nationality = request.Nationality,
-                MaritalStatus = request.MaritalStatus,
-                Occupation = request.Occupation,
-                PersonType = request.PersonType,
-                CustomerType = request.CustomerType,
-                Address = request.Address,
+                Telefone = request.Telefone,
+                NumeroDocumento = request.NumeroDocumento,
+                Nacionalidade = request.Nacionalidade,
+                TipoStatusCivil = request.TipoStatusCivil,
+                Ocupacao = request.Ocupacao,
+                TipoPessoa = request.TipoPessoa,
+                TipoCliente = request.TipoCliente,
+                Endereco = request.Endereco,
                 Rg = request.Rg,
-                IssuingAuthority = request.IssuingAuthority,
-                RgIssueDate = request.RgIssueDate,
-                BusinessName = request.BusinessName,
-                UserId = request.UserId,
-                IsActive = true
+                AutoridadeEmissora = request.AutoridadeEmissora,
+                DataEmissaoRg = request.DataEmissaoRg,
+                NomeFantasia = request.NomeFantasia,
+                UsuarioId = request.UsuarioId,
+                Ativo = true
             };
             await _context.Customers.AddAsync(customer);
             await _context.SaveChangesAsync();
 
-            return new Response<Customer?>(customer, 201, "Cliente criado com sucesso");
+            return new Response<Cliente?>(customer, 201, "Cliente criado com sucesso");
         }
         catch
         {
-            return new Response<Customer?>(null, 500, "Não foi possível criar o cliente");
+            return new Response<Cliente?>(null, 500, "Não foi possível criar o cliente");
         }
     }
 
@@ -96,44 +96,44 @@ public class CustomerHandler : ICustomerHandler
     /// </remarks>
     /// <param name="request">Objeto contendo as novas informações do cliente.</param>
     /// <returns>Retorna a resposta com o cliente atualizado ou um erro se não for encontrado.</returns>
-    public async Task<Response<Customer?>> UpdateAsync(Customer request)
+    public async Task<Response<Cliente?>> UpdateAsync(Cliente request)
     {
         try
         {
             var customer = await _context
                 .Customers
                 .FirstOrDefaultAsync(c => c.Id == request.Id
-                                          && (string.IsNullOrEmpty(c.UserId) || c.UserId == request.UserId)
-                                          && c.IsActive);
+                                          && (string.IsNullOrEmpty(c.UsuarioId) || c.UsuarioId == request.UsuarioId)
+                                          && c.Ativo);
 
             if (customer is null)
-                return new Response<Customer?>(null, 404, "Cliente não encontrado");
+                return new Response<Cliente?>(null, 404, "Cliente não encontrado");
 
-            customer.Name = request.Name;
+            customer.Nome = request.Nome;
             customer.Email = request.Email;
-            customer.Phone = request.Phone;
-            customer.DocumentNumber = request.DocumentNumber;
-            customer.Nationality = request.Nationality;
-            customer.MaritalStatus = request.MaritalStatus;
-            customer.Occupation = request.Occupation;
-            customer.IssuingAuthority = request.IssuingAuthority;
-            customer.RgIssueDate = request.RgIssueDate;
-            customer.PersonType = request.PersonType;
-            customer.CustomerType = request.CustomerType;
-            customer.Address = request.Address;
+            customer.Telefone = request.Telefone;
+            customer.NumeroDocumento = request.NumeroDocumento;
+            customer.Nacionalidade = request.Nacionalidade;
+            customer.TipoStatusCivil = request.TipoStatusCivil;
+            customer.Ocupacao = request.Ocupacao;
+            customer.AutoridadeEmissora = request.AutoridadeEmissora;
+            customer.DataEmissaoRg = request.DataEmissaoRg;
+            customer.TipoPessoa = request.TipoPessoa;
+            customer.TipoCliente = request.TipoCliente;
+            customer.Endereco = request.Endereco;
             customer.Rg = request.Rg;
-            customer.BusinessName = request.BusinessName;
-            customer.UserId = request.UserId;
-            customer.UpdatedAt = DateTime.UtcNow;
+            customer.NomeFantasia = request.NomeFantasia;
+            customer.UsuarioId = request.UsuarioId;
+            customer.AtualizadoEm = DateTime.UtcNow;
 
             _context.Customers.Update(customer);
             await _context.SaveChangesAsync();
 
-            return new Response<Customer?>(customer);
+            return new Response<Cliente?>(customer);
         }
         catch
         {
-            return new Response<Customer?>(null, 500, "Não foi possível atualizar o cliente");
+            return new Response<Cliente?>(null, 500, "Não foi possível atualizar o cliente");
         }
     }
 
@@ -145,29 +145,29 @@ public class CustomerHandler : ICustomerHandler
     /// </remarks>
     /// <param name="request">Requisição que contém o ID do cliente a ser excluído.</param>
     /// <returns>Retorna a resposta com o status da exclusão ou um erro se não for encontrado.</returns>
-    public async Task<Response<Customer?>> DeleteAsync(DeleteCustomerRequest request)
+    public async Task<Response<Cliente?>> DeleteAsync(DeleteCustomerRequest request)
     {
         try
         {
             var customer = await _context
                 .Customers
                 .FirstOrDefaultAsync(c => c.Id == request.Id
-                                          && (string.IsNullOrEmpty(c.UserId) || c.UserId == request.UserId)
-                                          && c.IsActive);
+                                          && (string.IsNullOrEmpty(c.UsuarioId) || c.UsuarioId == request.UserId)
+                                          && c.Ativo);
 
             if (customer is null)
-                return new Response<Customer?>(null, 404, "Cliente não encontrado");
+                return new Response<Cliente?>(null, 404, "Cliente não encontrado");
 
-            customer.IsActive = false;
-            customer.UpdatedAt = DateTime.UtcNow;
+            customer.Ativo = false;
+            customer.AtualizadoEm = DateTime.UtcNow;
 
             await _context.SaveChangesAsync();
 
-            return new Response<Customer?>(null, 204, "Cliente excluído com sucesso");
+            return new Response<Cliente?>(null, 204, "Cliente excluído com sucesso");
         }
         catch
         {
-            return new Response<Customer?>(null, 500, "Não foi possível excluir o cliente");
+            return new Response<Cliente?>(null, 500, "Não foi possível excluir o cliente");
         }
     }
 
@@ -179,25 +179,25 @@ public class CustomerHandler : ICustomerHandler
     /// </remarks>
     /// <param name="request">Requisição que contém o ID do cliente desejado.</param>
     /// <returns>Retorna o objeto do cliente ou um erro caso não seja encontrado.</returns>
-    public async Task<Response<Customer?>> GetByIdAsync(GetCustomerByIdRequest request)
+    public async Task<Response<Cliente?>> GetByIdAsync(GetCustomerByIdRequest request)
     {
         try
         {
             var customer = await _context
                 .Customers
-                .Include(c => c.Properties)
+                .Include(c => c.Imoveis)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(c => c.Id == request.Id
-                                          && (c.UserId == request.UserId || string.IsNullOrEmpty(c.UserId))
-                                          && c.IsActive);
+                                          && (c.UsuarioId == request.UserId || string.IsNullOrEmpty(c.UsuarioId))
+                                          && c.Ativo);
 
             return customer is null
-                ? new Response<Customer?>(null, 404, "Cliente não encontrado")
-                : new Response<Customer?>(customer);
+                ? new Response<Cliente?>(null, 404, "Cliente não encontrado")
+                : new Response<Cliente?>(customer);
         }
         catch
         {
-            return new Response<Customer?>(null, 500, "Não foi possível retornar o cliente");
+            return new Response<Cliente?>(null, 500, "Não foi possível retornar o cliente");
         }
     }
 
@@ -211,26 +211,26 @@ public class CustomerHandler : ICustomerHandler
     /// </remarks>
     /// <param name="request">Requisição que contém parâmetros de paginação e filtro.</param>
     /// <returns>Retorna uma resposta paginada com os clientes ativos ou um erro em caso de falha.</returns>
-    public async Task<PagedResponse<List<Customer>?>> GetAllAsync(GetAllCustomersRequest request)
+    public async Task<PagedResponse<List<Cliente>?>> GetAllAsync(GetAllCustomersRequest request)
     {
         try
         {
             var query = _context
                 .Customers
-                .Include(c => c.Properties)
+                .Include(c => c.Imoveis)
                 .AsNoTracking()
-                .Where(c => (c.UserId == request.UserId || string.IsNullOrEmpty(c.UserId))
-                            && c.IsActive);
+                .Where(c => (c.UsuarioId == request.UserId || string.IsNullOrEmpty(c.UsuarioId))
+                            && c.Ativo);
 
             if (!string.IsNullOrEmpty(request.SearchTerm))
             {
                 var lowerSearchTerm = request.SearchTerm.ToLower();
-                query = query.Where(c => c.Name.ToLower().Contains(lowerSearchTerm) ||
+                query = query.Where(c => c.Nome.ToLower().Contains(lowerSearchTerm) ||
                                          c.Email.ToLower().Contains(lowerSearchTerm) ||
-                                         c.DocumentNumber.ToLower().Contains(lowerSearchTerm));
+                                         c.NumeroDocumento.ToLower().Contains(lowerSearchTerm));
             }
 
-            query = query.OrderBy(c => c.Name);
+            query = query.OrderBy(c => c.Nome);
 
             var customers = await query
                 .Skip((request.PageNumber - 1) * request.PageSize)
@@ -239,11 +239,11 @@ public class CustomerHandler : ICustomerHandler
 
             var count = await query.CountAsync();
 
-            return new PagedResponse<List<Customer>?>(customers, count, request.PageNumber, request.PageSize);
+            return new PagedResponse<List<Cliente>?>(customers, count, request.PageNumber, request.PageSize);
         }
         catch
         {
-            return new PagedResponse<List<Customer>?>(null, 500, "Não foi possível consultar os clientes");
+            return new PagedResponse<List<Cliente>?>(null, 500, "Não foi possível consultar os clientes");
         }
     }
 }

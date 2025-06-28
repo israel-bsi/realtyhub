@@ -50,9 +50,9 @@ public partial class CustomerFormComponent : ComponentBase
     public bool IsBusy { get; set; }
 
     /// <summary>
-    /// Instancia de <c><see cref="Customer"/></c> que representa o modelo de entrada do formulário.
+    /// Instancia de <c><see cref="Cliente"/></c> que representa o modelo de entrada do formulário.
     /// </summary>
-    public Customer InputModel { get; set; } = new();
+    public Cliente InputModel { get; set; } = new();
 
     /// <summary>
     /// Máscara de entrada para o campo de documento do cliente.
@@ -66,7 +66,7 @@ public partial class CustomerFormComponent : ComponentBase
     /// Tipo de documento do cliente, que pode ser CPF ou CNPJ.
     /// </summary>
     public string DocumentType =>
-        InputModel.PersonType == EPersonType.Individual ? "CPF" : "CNPJ";
+        InputModel.TipoPessoa == ETipoPessoa.Fisica ? "CPF" : "CNPJ";
 
     /// <summary>
     /// Expressão regular utilizada para validar campos de texto.
@@ -130,12 +130,12 @@ public partial class CustomerFormComponent : ComponentBase
         IsBusy = true;
         try
         {
-            InputModel.Phone = Regex.Replace(InputModel.Phone, Pattern, "");
-            InputModel.DocumentNumber = Regex.Replace(InputModel.DocumentNumber, Pattern, "");
-            InputModel.Address.ZipCode = Regex.Replace(InputModel.Address.ZipCode, Pattern, "");
-            InputModel.RgIssueDate = InputModel.RgIssueDate?.ToUniversalTime();
+            InputModel.Telefone = Regex.Replace(InputModel.Telefone, Pattern, "");
+            InputModel.NumeroDocumento = Regex.Replace(InputModel.NumeroDocumento, Pattern, "");
+            InputModel.Endereco.Cep = Regex.Replace(InputModel.Endereco.Cep, Pattern, "");
+            InputModel.DataEmissaoRg = InputModel.DataEmissaoRg?.ToUniversalTime();
 
-            Response<Customer?> result;
+            Response<Cliente?> result;
             if (InputModel.Id > 0)
                 result = await Handler.UpdateAsync(InputModel);
             else
@@ -177,24 +177,24 @@ public partial class CustomerFormComponent : ComponentBase
     /// </remarks>
     public void ValidateDocument()
     {
-        if (string.IsNullOrEmpty(InputModel.DocumentNumber)) return;
+        if (string.IsNullOrEmpty(InputModel.NumeroDocumento)) return;
         MessageStore?.Clear();
-        if (InputModel.PersonType is EPersonType.Individual)
+        if (InputModel.TipoPessoa is ETipoPessoa.Fisica)
         {
             ErrorText =
-                !DocumentValidator.IsValidCpf(InputModel.DocumentNumber)
+                !DocumentValidator.IsValidCpf(InputModel.NumeroDocumento)
                     ? "CPF inválido" : null;
         }
         else
         {
             ErrorText =
-                !DocumentValidator.IsValidCnpj(InputModel.DocumentNumber)
+                !DocumentValidator.IsValidCnpj(InputModel.NumeroDocumento)
                     ? "CNPJ inválido" : null;
         }
 
         if (string.IsNullOrEmpty(ErrorText)) return;
 
-        MessageStore?.Add(() => InputModel.DocumentNumber, ErrorText);
+        MessageStore?.Add(() => InputModel.NumeroDocumento, ErrorText);
         EditContext.NotifyValidationStateChanged();
     }
 
@@ -204,10 +204,10 @@ public partial class CustomerFormComponent : ComponentBase
     /// <remarks>
     /// Esse método altera a máscara do documento e valida o documento do cliente.
     /// </remarks>
-    public void OnPersonTypeChanged(EPersonType newPersonType)
+    public void OnPersonTypeChanged(ETipoPessoa newTipoPessoa)
     {
-        InputModel.PersonType = newPersonType;
-        ChangeDocumentMask(newPersonType);
+        InputModel.TipoPessoa = newTipoPessoa;
+        ChangeDocumentMask(newTipoPessoa);
         ValidateDocument();
     }
 
@@ -220,19 +220,19 @@ public partial class CustomerFormComponent : ComponentBase
     /// <returns><c>true</c> caso os campos sejam inválidos, caso contrario retorna <c>false</c> .</returns>
     private bool IsIndividualPersonFieldsInvalid()
     {
-        if (InputModel.PersonType is not EPersonType.Individual) return false;
+        if (InputModel.TipoPessoa is not ETipoPessoa.Fisica) return false;
         MessageStore?.Clear();
         var isInvalid = false;
 
-        if (string.IsNullOrEmpty(InputModel.Nationality))
+        if (string.IsNullOrEmpty(InputModel.Nacionalidade))
         {
-            MessageStore?.Add(() => InputModel.Nationality, "Campo obrigatório");
+            MessageStore?.Add(() => InputModel.Nacionalidade, "Campo obrigatório");
             isInvalid = true;
         }
 
-        if (string.IsNullOrEmpty(InputModel.Occupation))
+        if (string.IsNullOrEmpty(InputModel.Ocupacao))
         {
-            MessageStore?.Add(() => InputModel.Occupation, "Campo obrigatório");
+            MessageStore?.Add(() => InputModel.Ocupacao, "Campo obrigatório");
             isInvalid = true;
         }
 
@@ -242,15 +242,15 @@ public partial class CustomerFormComponent : ComponentBase
             isInvalid = true;
         }
 
-        if (string.IsNullOrEmpty(InputModel.IssuingAuthority))
+        if (string.IsNullOrEmpty(InputModel.AutoridadeEmissora))
         {
-            MessageStore?.Add(() => InputModel.IssuingAuthority, "Campo obrigatório");
+            MessageStore?.Add(() => InputModel.AutoridadeEmissora, "Campo obrigatório");
             isInvalid = true;
         }
 
-        if (InputModel.RgIssueDate is null)
+        if (InputModel.DataEmissaoRg is null)
         {
-            MessageStore?.Add(() => InputModel.RgIssueDate!, "Campo obrigatório");
+            MessageStore?.Add(() => InputModel.DataEmissaoRg!, "Campo obrigatório");
             isInvalid = true;
         }
 
@@ -263,13 +263,13 @@ public partial class CustomerFormComponent : ComponentBase
     /// <summary>
     /// Altera a máscara do documento com base no tipo de pessoa.
     /// </summary>
-    /// <param name="personType"> Enumerador <see cref="EPersonType"/> que representa o tipo de pessoa.</param>
-    private void ChangeDocumentMask(EPersonType personType)
+    /// <param name="tipoPessoa"> Enumerador <see cref="ETipoPessoa"/> que representa o tipo de pessoa.</param>
+    private void ChangeDocumentMask(ETipoPessoa tipoPessoa)
     {
-        DocumentCustomerMask = personType switch
+        DocumentCustomerMask = tipoPessoa switch
         {
-            EPersonType.Individual => Utility.Masks.Cpf,
-            EPersonType.Business => Utility.Masks.Cnpj,
+            ETipoPessoa.Fisica => Utility.Masks.Cpf,
+            ETipoPessoa.Juridica => Utility.Masks.Cnpj,
             _ => DocumentCustomerMask
         };
         StateHasChanged();
@@ -301,29 +301,29 @@ public partial class CustomerFormComponent : ComponentBase
         if (response is { IsSuccess: true, Data: not null })
         {
             InputModel.Id = response.Data.Id;
-            InputModel.Name = response.Data.Name;
+            InputModel.Nome = response.Data.Nome;
             InputModel.Email = response.Data.Email;
-            InputModel.Phone = response.Data.Phone;
-            InputModel.DocumentNumber = response.Data.DocumentNumber;
-            InputModel.PersonType = response.Data.PersonType;
-            InputModel.CustomerType = response.Data.CustomerType;
-            InputModel.Occupation = response.Data.Occupation;
-            InputModel.Nationality = response.Data.Nationality;
-            InputModel.MaritalStatus = response.Data.MaritalStatus;
-            InputModel.Address.ZipCode = response.Data.Address.ZipCode;
-            InputModel.Address.Street = response.Data.Address.Street;
-            InputModel.Address.Number = response.Data.Address.Number;
-            InputModel.Address.Complement = response.Data.Address.Complement;
-            InputModel.Address.Neighborhood = response.Data.Address.Neighborhood;
-            InputModel.Address.City = response.Data.Address.City;
-            InputModel.Address.State = response.Data.Address.State;
-            InputModel.Address.Country = response.Data.Address.Country;
+            InputModel.Telefone = response.Data.Telefone;
+            InputModel.NumeroDocumento = response.Data.NumeroDocumento;
+            InputModel.TipoPessoa = response.Data.TipoPessoa;
+            InputModel.TipoCliente = response.Data.TipoCliente;
+            InputModel.Ocupacao = response.Data.Ocupacao;
+            InputModel.Nacionalidade = response.Data.Nacionalidade;
+            InputModel.TipoStatusCivil = response.Data.TipoStatusCivil;
+            InputModel.Endereco.Cep = response.Data.Endereco.Cep;
+            InputModel.Endereco.Logradouro = response.Data.Endereco.Logradouro;
+            InputModel.Endereco.Numero = response.Data.Endereco.Numero;
+            InputModel.Endereco.Complemento = response.Data.Endereco.Complemento;
+            InputModel.Endereco.Bairro = response.Data.Endereco.Bairro;
+            InputModel.Endereco.Cidade = response.Data.Endereco.Cidade;
+            InputModel.Endereco.Estado = response.Data.Endereco.Estado;
+            InputModel.Endereco.Pais = response.Data.Endereco.Pais;
             InputModel.Rg = response.Data.Rg;
-            InputModel.IssuingAuthority = response.Data.IssuingAuthority;
-            InputModel.RgIssueDate = response.Data.RgIssueDate;
-            InputModel.BusinessName = response.Data.BusinessName;
-            InputModel.IsActive = response.Data.IsActive;
-            InputModel.UserId = response.Data.UserId;
+            InputModel.AutoridadeEmissora = response.Data.AutoridadeEmissora;
+            InputModel.DataEmissaoRg = response.Data.DataEmissaoRg;
+            InputModel.NomeFantasia = response.Data.NomeFantasia;
+            InputModel.Ativo = response.Data.Ativo;
+            InputModel.UsuarioId = response.Data.UsuarioId;
         }
         else
         {
@@ -338,8 +338,8 @@ public partial class CustomerFormComponent : ComponentBase
     /// </summary>
     private void RedirectToCreateCustomer()
     {
-        InputModel.PersonType = EPersonType.Individual;
-        InputModel.MaritalStatus = EMaritalStatus.Single;
+        InputModel.TipoPessoa = ETipoPessoa.Fisica;
+        InputModel.TipoStatusCivil = ETipoStatusCivil.Solteiro;
         NavigationManager.NavigateTo("/clientes/adicionar");
     }
 
@@ -350,7 +350,7 @@ public partial class CustomerFormComponent : ComponentBase
     {
         EditContext = new EditContext(InputModel);
         MessageStore = new ValidationMessageStore(EditContext);
-        ChangeDocumentMask(InputModel.PersonType);
+        ChangeDocumentMask(InputModel.TipoPessoa);
     }
 
     #endregion

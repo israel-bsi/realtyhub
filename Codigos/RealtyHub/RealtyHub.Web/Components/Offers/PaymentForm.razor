@@ -4,9 +4,9 @@
     <ObjectGraphDataAnnotationsValidator />
 
     <MudStack Row="true">
-        <EnumSelect TEnum="EPaymentType"
+        <EnumSelect TEnum="ETipoPagamento"
                     Label="Tipo do pagamento"
-                    @bind-SelectedValue="InputModel.PaymentType"
+                    @bind-SelectedValue="InputModel.TipoPagamento"
                     HelperText="Informe o tipo de pagamento"
                     ReadOnly="ReadOnly" />
 
@@ -14,18 +14,18 @@
                       T="decimal"
                       Variant="Variant.Text"
                       Format="C"
-                      @bind-Value="InputModel.Amount"
-                      For="@(() => InputModel.Amount)"
+                      @bind-Value="InputModel.Valor"
+                      For="@(() => InputModel.Valor)"
                       HelperText="Valor deste pagamento"
                       ReadOnly="ReadOnly" />
         
-        @if (InputModel.Installments)
+        @if (InputModel.Parcelado)
         {
             <MudSelect T="int" 
                        Label="Parcelas"
                        ReadOnly="ReadOnly" 
-                       @bind-Value="InputModel.InstallmentsCount" 
-                       For="@(() => InputModel.InstallmentsCount)">
+                       @bind-Value="InputModel.QuantidadeParcelas" 
+                       For="@(() => InputModel.QuantidadeParcelas)">
                 @for (int i = 1; i <= 24; i++)
                 {
                     var i1 = i;
@@ -34,12 +34,12 @@
             </MudSelect>
         }
         
-        @if (InputModel.PaymentType != EPaymentType.Check
-             && InputModel.PaymentType != EPaymentType.Fgts)
+        @if (InputModel.TipoPagamento != ETipoPagamento.Cheque
+             && InputModel.TipoPagamento != ETipoPagamento.Fgts)
         {
             <MudCheckBox Label="Parcelado"
-                         @bind-Value="InputModel.Installments"
-                         For="@(() => InputModel.Installments)"
+                         @bind-Value="InputModel.Parcelado"
+                         For="@(() => InputModel.Parcelado)"
                          ReadOnly="ReadOnly">
             </MudCheckBox>
         }
@@ -52,16 +52,16 @@
     public EditContext CurrentEditContext { get; set; } = null!;
 
     [Parameter]
-    public EventCallback<List<Payment>> PaymentsChanged { get; set; }
+    public EventCallback<List<Pagamento>> PaymentsChanged { get; set; }
 
     [Parameter]
     public long OfferId { get; set; }
 
     [Parameter]
-    public Payment InputModel { get; set; } = null!;
+    public Pagamento InputModel { get; set; } = null!;
 
     [Parameter]
-    public List<Payment> Payments { get; set; } = null!;
+    public List<Pagamento> Payments { get; set; } = null!;
 
     [Parameter]
     public bool ReadOnly { get; set; }

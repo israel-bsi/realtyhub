@@ -28,8 +28,8 @@ public class RejectOfferEndpoint : IEndpoint
             .WithSummary("Rejeita uma proposta")
             .WithDescription("Rejeita uma proposta")
             .WithOrder(3)
-            .Produces<Response<Offer?>>()
-            .Produces<Response<Offer?>>(StatusCodes.Status400BadRequest);
+            .Produces<Response<Proposta?>>()
+            .Produces<Response<Proposta?>>(StatusCodes.Status400BadRequest);
 
     /// <summary>
     /// Manipulador da rota que rejeita uma proposta.

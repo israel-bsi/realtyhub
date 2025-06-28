@@ -28,8 +28,8 @@ public class GetPropertyByIdEndpoint : IEndpoint
             .WithSummary("Recupera um imóvel")
             .WithDescription("Recupera um imóvel")
             .WithOrder(4)
-            .Produces<Response<Property?>>()
-            .Produces<Response<Property?>>(StatusCodes.Status400BadRequest);
+            .Produces<Response<Imovel?>>()
+            .Produces<Response<Imovel?>>(StatusCodes.Status400BadRequest);
 
     /// <summary>
     /// Manipulador da rota que retorna os detalhes de um imóvel pelo seu ID.

@@ -18,18 +18,18 @@
     MudDialogInstance MudDialog { get; set; } = null!;
 
     [Parameter]
-    public EventCallback<Offer> OnOfferSelected { get; set; }
+    public EventCallback<Proposta> OnOfferSelected { get; set; }
 
     [Parameter] 
     public bool OnlyAccepted { get; set; }
 
     void CloseDialog() => MudDialog.Close();
 
-    public async Task SelectOffer(Offer offer)
+    public async Task SelectOffer(Proposta proposta)
     {
         if (OnOfferSelected.HasDelegate)
-            await OnOfferSelected.InvokeAsync(offer);
+            await OnOfferSelected.InvokeAsync(proposta);
 
-        MudDialog.Close(DialogResult.Ok(offer));
+        MudDialog.Close(DialogResult.Ok(proposta));
     }
 }

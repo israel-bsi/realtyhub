@@ -60,7 +60,7 @@ public class SendContractEmailEndpoint : IEndpoint
         if (contract is null)
             return Results.BadRequest(new Response<string>(null, 404, "Contrato não encontrado"));
 
-        var attachmentPath = Path.Combine(Configuration.ContractsPath, $"{contract.FileId}.pdf");
+        var attachmentPath = Path.Combine(Configuration.ContractsPath, $"{contract.ArquivoId}.pdf");
 
         request.AttachmentPath = attachmentPath;
 

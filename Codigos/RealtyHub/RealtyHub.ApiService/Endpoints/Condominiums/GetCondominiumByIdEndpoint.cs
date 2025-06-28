@@ -29,8 +29,8 @@ public class GetCondominiumByIdEndpoint : IEndpoint
             .WithSummary("Recupera um condomínio")
             .WithDescription("Recupera um condomínio baseado no seu ID")
             .WithOrder(3)
-            .Produces<Response<Condominium?>>()
-            .Produces<Response<Condominium?>>(StatusCodes.Status404NotFound);
+            .Produces<Response<Condominio?>>()
+            .Produces<Response<Condominio?>>(StatusCodes.Status404NotFound);
 
     /// <summary>
     /// Manipulador da rota para a obtenção de um condomínio.

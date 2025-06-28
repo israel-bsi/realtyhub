@@ -23,7 +23,7 @@
     </MudButton>
 </div>
 
-<MudDataGrid T="Property"
+<MudDataGrid T="Imovel"
              Class="mt-4"
              ServerData="LoadServerData"
              @ref="DataGrid"
@@ -70,19 +70,19 @@
                           ObjectFit="ObjectFit.Cover" />
             </CellTemplate>
         </TemplateColumn>
-        <PropertyColumn Property="x => x.Title" Title="Título" />
-        <PropertyColumn Property="x => x.Bedroom" Title="Quartos" />
-        <PropertyColumn Property="x => x.Bathroom" Title="Banheiros" />
-        <PropertyColumn Property="x => x.Garage" Title="Garagens" />
+        <PropertyColumn Property="x => x.Titulo" Title="Título" />
+        <PropertyColumn Property="x => x.Quarto" Title="Quartos" />
+        <PropertyColumn Property="x => x.Banheiro" Title="Banheiros" />
+        <PropertyColumn Property="x => x.Garagem" Title="Garagens" />
         <PropertyColumn Property="x => x.Area" Title="Área" />
         <TemplateColumn Title="Preço">
             <CellTemplate>
-                @context.Item.Price.ToString("C")
+                @context.Item.Preco.ToString("C")
             </CellTemplate>
         </TemplateColumn>
         <TemplateColumn Title="Tipo">
             <CellTemplate>
-                @context.Item.PropertyType.GetDisplayName()
+                @context.Item.TipoImovel.GetDisplayName()
             </CellTemplate>
         </TemplateColumn>
         <TemplateColumn Class="justify-end" Title="Ações">
@@ -98,7 +98,7 @@
                         <MudIconButton Icon="@Icons.Material.Filled.Delete"
                                        Color="Color.Error"
                                        aria-label="Excluir"
-                                       OnClick="() => OnDeleteButtonClickedAsync(context.Item.Id, context.Item.Title)">
+                                       OnClick="() => OnDeleteButtonClickedAsync(context.Item.Id, context.Item.Titulo)">
                         </MudIconButton>
                     </MudTooltip>
                 </MudStack>
@@ -106,6 +106,6 @@
         </TemplateColumn>
     </Columns>
     <PagerContent>
-        <MudDataGridPager T="Property" />
+        <MudDataGridPager T="Imovel" />
     </PagerContent>
 </MudDataGrid>

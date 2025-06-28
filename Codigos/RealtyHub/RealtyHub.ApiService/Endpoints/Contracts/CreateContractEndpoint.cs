@@ -18,7 +18,7 @@ public class CreateContractEndpoint : IEndpoint
     /// Mapeia o endpoint para criar um contrato.
     /// </summary>
     /// <remarks>
-    /// Registra a rota POST que recebe o objeto <see cref="Contract"/> e invoca o manipulador para criar o contrato.
+    /// Registra a rota POST que recebe o objeto <see cref="Contrato"/> e invoca o manipulador para criar o contrato.
     /// </remarks>
     /// <param name="app">O construtor de rotas do aplicativo.</param>
     public static void Map(IEndpointRouteBuilder app)
@@ -27,7 +27,7 @@ public class CreateContractEndpoint : IEndpoint
             .WithSummary("Cria um novo contrato")
             .WithDescription("Cria um novo contrato")
             .WithOrder(1)
-            .Produces<Response<Contract?>>(StatusCodes.Status201Created)
+            .Produces<Response<Contrato?>>(StatusCodes.Status201Created)
             .Produces(StatusCodes.Status400BadRequest);
 
     /// <summary>
@@ -39,7 +39,7 @@ public class CreateContractEndpoint : IEndpoint
     /// </remarks>
     /// <param name="user">Objeto <see cref="ClaimsPrincipal"/> contendo os dados do usuário autenticado.</param>
     /// <param name="handler">Instância de <see cref="IContractHandler"/> responsável pelas operações relacionadas a contratos.</param>
-    /// <param name="request">Objeto <see cref="Contract"/> contendo os dados para criação do contrato.</param>
+    /// <param name="request">Objeto <see cref="Contrato"/> contendo os dados para criação do contrato.</param>
     /// <returns>
     /// Um objeto <see cref="IResult"/> representando a resposta HTTP:
     /// <para>- HTTP 201 Created com os dados do contrato criado, se a operação for bem-sucedida;</para>
@@ -48,9 +48,9 @@ public class CreateContractEndpoint : IEndpoint
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
         IContractHandler handler,
-        Contract request)
+        Contrato request)
     {
-        request.UserId = user.Identity?.Name ?? string.Empty;
+        request.UsuarioId = user.Identity?.Name ?? string.Empty;
         var result = await handler.CreateAsync(request);
 
         return result.IsSuccess

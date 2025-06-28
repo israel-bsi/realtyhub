@@ -29,8 +29,8 @@ public class GetAllCondominiumsEndpoint : IEndpoint
             .WithSummary("Obtém todos os condomínios")
             .WithDescription("Obtém todos os condomínios")
             .WithOrder(5)
-            .Produces<PagedResponse<List<Condominium>>>()
-            .Produces<PagedResponse<List<Condominium>>>(StatusCodes.Status400BadRequest);
+            .Produces<PagedResponse<List<Condominio>>>()
+            .Produces<PagedResponse<List<Condominio>>>(StatusCodes.Status400BadRequest);
 
     /// <summary>
     /// Manipulador da rota que recebe a requisição para obter todos os condomínios.

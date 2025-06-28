@@ -14,7 +14,7 @@
 else
 {
     <MudPaper Class="mb-4">
-        <MudDataGrid T="Property"
+        <MudDataGrid T="Imovel"
                      Class="mt-4"
                      ServerData="LoadServerData"
                      @ref="DataGrid"
@@ -61,14 +61,14 @@ else
                 </TemplateColumn>
                 <TemplateColumn Title="">
                     <CellTemplate>
-                        <MudText Typo="Typo.body2">@context.Item.Description</MudText> <br />
-                        <MudText Typo="Typo.body2">@context.Item.Bedroom @(context.Item.Bedroom > 1 ? "Quartos" : "Quarto")</MudText> <br />
-                        <MudText Typo="Typo.body2">@context.Item.Bathroom @(context.Item.Bathroom > 1 ? "Banheiros" : "Banheiro")</MudText> <br />
-                        <MudText Typo="Typo.body2">@context.Item.Garage @(context.Item.Garage > 1 ? "Garagens" : "Garagem")</MudText> <br />
-                        <MudText Typo="Typo.body2">Localização: @context.Item.Address.Neighborhood</MudText> <br />
+                        <MudText Typo="Typo.body2">@context.Item.Descricao</MudText> <br />
+                        <MudText Typo="Typo.body2">@context.Item.Quarto @(context.Item.Quarto > 1 ? "Quartos" : "Quarto")</MudText> <br />
+                        <MudText Typo="Typo.body2">@context.Item.Banheiro @(context.Item.Banheiro > 1 ? "Banheiros" : "Banheiro")</MudText> <br />
+                        <MudText Typo="Typo.body2">@context.Item.Garagem @(context.Item.Garagem > 1 ? "Garagens" : "Garagem")</MudText> <br />
+                        <MudText Typo="Typo.body2">Localização: @context.Item.Endereco.Bairro</MudText> <br />
                         <MudText Typo="Typo.body2">@context.Item.Area M²: </MudText> <br />
-                        <MudText Typo="Typo.body2">@context.Item.Price.ToString("C")</MudText> <br />
-                        <MudText Typo="Typo.body2">@context.Item.TransactionsDetails</MudText> <br />
+                        <MudText Typo="Typo.body2">@context.Item.Preco.ToString("C")</MudText> <br />
+                        <MudText Typo="Typo.body2">@context.Item.DetalhesTransacao</MudText> <br />
                     </CellTemplate>
                 </TemplateColumn>
                 <TemplateColumn Class="justify-end" Title="">
@@ -91,7 +91,7 @@ else
                 </TemplateColumn>
             </Columns>
             <PagerContent>
-                <MudDataGridPager T="Property" />
+                <MudDataGridPager T="Imovel" />
             </PagerContent>
         </MudDataGrid>
     </MudPaper>

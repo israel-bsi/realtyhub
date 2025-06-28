@@ -27,8 +27,8 @@ public class ScheduleViewingEndpoint : IEndpoint
             .WithSummary("Agenda uma nova visita")
             .WithDescription("Agenda uma nova visita")
             .WithOrder(1)
-            .Produces<Response<Viewing?>>(StatusCodes.Status201Created)
-            .Produces<Response<Viewing?>>(StatusCodes.Status400BadRequest);
+            .Produces<Response<Visita?>>(StatusCodes.Status201Created)
+            .Produces<Response<Visita?>>(StatusCodes.Status400BadRequest);
 
     /// <summary>
     /// Manipulador da rota que agenda uma nova visita.
@@ -39,7 +39,7 @@ public class ScheduleViewingEndpoint : IEndpoint
     /// </remarks>
     /// <param name="user">Objeto <see cref="ClaimsPrincipal"/> contendo os dados do usuário autenticado.</param>
     /// <param name="handler">Instância de <see cref="IViewingHandler"/> responsável pelas operações relacionadas a visitas.</param>
-    /// <param name="request">Objeto <see cref="Viewing"/> contendo os dados da visita a ser agendada.</param>
+    /// <param name="request">Objeto <see cref="Visita"/> contendo os dados da visita a ser agendada.</param>
     /// <returns>
     /// Um objeto <see cref="IResult"/> representando a resposta HTTP:
     /// <para>- HTTP 201 Created com os detalhes da visita agendada, se a operação for bem-sucedida;</para>
@@ -48,9 +48,9 @@ public class ScheduleViewingEndpoint : IEndpoint
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
         IViewingHandler handler,
-        Viewing request)
+        Visita request)
     {
-        request.UserId = user.Identity?.Name ?? string.Empty;
+        request.UsuarioId = user.Identity?.Name ?? string.Empty;
         var result = await handler.ScheduleAsync(request);
 
         return result.IsSuccess

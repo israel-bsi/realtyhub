@@ -19,12 +19,12 @@ public interface IPropertyHandler
     /// <remarks>
     /// Este método é responsável por criar um novo imóvel com base nas informações fornecidas.
     /// </remarks>
-    /// <param name="request">Instância de <see cref="Property"/> contendo as informações do novo imóvel.</param>
+    /// <param name="request">Instância de <see cref="Imovel"/> contendo as informações do novo imóvel.</param>
     /// <returns>
     /// Retorna um objeto <see cref="Response{TData}"/> indicando o resultado da operação.
-    /// O objeto TData é do tipo <see cref="Property"/> e pode ser nulo se a operação falhar.
+    /// O objeto TData é do tipo <see cref="Imovel"/> e pode ser nulo se a operação falhar.
     /// </returns>
-    Task<Response<Property?>> CreateAsync(Property request);
+    Task<Response<Imovel?>> CreateAsync(Imovel request);
 
     /// <summary>
     /// Atualiza as informações de um imóvel existente.
@@ -32,12 +32,12 @@ public interface IPropertyHandler
     /// <remarks>
     /// Este método é responsável por atualizar as informações de um imóvel existente com base nas informações fornecidas.
     /// </remarks>
-    /// <param name="request">Instância de <see cref="Property"/> contendo as informações atualizadas do imóvel.</param>
+    /// <param name="request">Instância de <see cref="Imovel"/> contendo as informações atualizadas do imóvel.</param>
     /// <returns>
     /// Retorna um objeto <see cref="Response{TData}"/> indicando o resultado da operação.
-    /// O objeto TData é do tipo <see cref="Property"/> e pode ser nulo se a operação falhar.
+    /// O objeto TData é do tipo <see cref="Imovel"/> e pode ser nulo se a operação falhar.
     /// </returns>
-    Task<Response<Property?>> UpdateAsync(Property request);
+    Task<Response<Imovel?>> UpdateAsync(Imovel request);
 
     /// <summary>
     /// Exclui um imóvel existente.
@@ -48,9 +48,9 @@ public interface IPropertyHandler
     /// <param name="request">Instância de <see cref="DeletePropertyRequest"/> contendo o Id do imóvel a ser excluído.</param>
     /// <returns>
     /// Retorna um objeto <see cref="Response{TData}"/> indicando o resultado da operação.
-    /// O objeto TData é do tipo <see cref="Property"/> e pode ser nulo se a operação falhar.
+    /// O objeto TData é do tipo <see cref="Imovel"/> e pode ser nulo se a operação falhar.
     /// </returns>
-    Task<Response<Property?>> DeleteAsync(DeletePropertyRequest request);
+    Task<Response<Imovel?>> DeleteAsync(DeletePropertyRequest request);
 
     /// <summary>
     /// Recupera um imóvel existente com base no Id fornecido.
@@ -61,9 +61,9 @@ public interface IPropertyHandler
     /// <param name="request">Instância de <see cref="GetPropertyByIdRequest"/> contendo o Id do imóvel a ser recuperado.</param>
     /// <returns>
     /// Retorna um objeto <see cref="Response{TData}"/> contendo as informações do imóvel.
-    /// O objeto TData é do tipo <see cref="Property"/> e pode ser nulo se a operação falhar.
+    /// O objeto TData é do tipo <see cref="Imovel"/> e pode ser nulo se a operação falhar.
     /// </returns>
-    Task<Response<Property?>> GetByIdAsync(GetPropertyByIdRequest request);
+    Task<Response<Imovel?>> GetByIdAsync(GetPropertyByIdRequest request);
 
     /// <summary>
     /// Recupera todos os imóveis disponíveis.
@@ -74,9 +74,9 @@ public interface IPropertyHandler
     /// <param name="request">Instância de <see cref="GetAllPropertiesRequest"/> contendo os parâmetros de filtragem.</param>
     /// <returns>
     /// Retorna um objeto <see cref="PagedResponse{TData}"/> contendo uma lista de imóveis.
-    /// O objeto TData é uma lista do tipo <see cref="Property"/> e pode ser nulo se a operação falhar.
+    /// O objeto TData é uma lista do tipo <see cref="Imovel"/> e pode ser nulo se a operação falhar.
     /// </returns>
-    Task<PagedResponse<List<Property>?>> GetAllAsync(GetAllPropertiesRequest request);
+    Task<PagedResponse<List<Imovel>?>> GetAllAsync(GetAllPropertiesRequest request);
 
     /// <summary>
     /// Recupera todos os imóveis disponíveis com base no Id do usuário.
@@ -87,7 +87,7 @@ public interface IPropertyHandler
     /// <param name="request">Instância de <see cref="GetAllViewingsByPropertyRequest"/> contendo os parâmetros de filtragem.</param>
     /// <returns>
     /// Retorna um objeto <see cref="PagedResponse{TData}"/> contendo uma lista de imóveis.
-    /// O objeto TData é uma lista do tipo <see cref="Viewing"/> e pode ser nulo se a operação falhar.
+    /// O objeto TData é uma lista do tipo <see cref="Visita"/> e pode ser nulo se a operação falhar.
     /// </returns>    
-    Task<PagedResponse<List<Viewing>?>> GetAllViewingsAsync(GetAllViewingsByPropertyRequest request);
+    Task<PagedResponse<List<Visita>?>> GetAllViewingsAsync(GetAllViewingsByPropertyRequest request);
 }

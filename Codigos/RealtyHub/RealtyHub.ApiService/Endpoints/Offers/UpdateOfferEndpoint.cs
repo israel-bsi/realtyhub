@@ -27,8 +27,8 @@ public class UpdateOfferEndpoint : IEndpoint
             .WithSummary("Atualiza uma proposta")
             .WithDescription("Atualiza uma proposta")
             .WithOrder(2)
-            .Produces<Response<Offer?>>()
-            .Produces<Response<Offer?>>(StatusCodes.Status400BadRequest);
+            .Produces<Response<Proposta?>>()
+            .Produces<Response<Proposta?>>(StatusCodes.Status400BadRequest);
 
     /// <summary>
     /// Manipulador da rota que atualiza uma proposta existente.
@@ -39,7 +39,7 @@ public class UpdateOfferEndpoint : IEndpoint
     /// </remarks>
     /// <param name="user">Objeto <see cref="ClaimsPrincipal"/> contendo os dados do usuário autenticado.</param>
     /// <param name="handler">Instância de <see cref="IOfferHandler"/> responsável pelas operações relacionadas a propostas.</param>
-    /// <param name="request">Objeto <see cref="Offer"/> contendo os dados atualizados da proposta.</param>
+    /// <param name="request">Objeto <see cref="Proposta"/> contendo os dados atualizados da proposta.</param>
     /// <param name="id">ID da proposta a ser atualizada.</param>
     /// <returns>
     /// Um objeto <see cref="IResult"/> representando a resposta HTTP:
@@ -49,11 +49,11 @@ public class UpdateOfferEndpoint : IEndpoint
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
         IOfferHandler handler,
-        Offer request,
+        Proposta request,
         long id)
     {
         request.Id = id;
-        request.UserId = user.Identity?.Name ?? string.Empty;
+        request.UsuarioId = user.Identity?.Name ?? string.Empty;
 
         var result = await handler.UpdateAsync(request);
 

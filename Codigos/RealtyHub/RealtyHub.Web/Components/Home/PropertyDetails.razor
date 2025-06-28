@@ -3,21 +3,21 @@
 @inherits PropertyDetailsPage
 @layout PublicLayout
 
-<PageTitle>Detalhes - @InputModel.Title</PageTitle>
+<PageTitle>Detalhes - @InputModel.Titulo</PageTitle>
 
 <MudPaper Elevation="2">
     <MudGrid @key="GridKey">
         <MudItem xs="24" sm="12">
-            <MudCarousel ItemsSource="@InputModel.PropertyPhotos"
+            <MudCarousel ItemsSource="@InputModel.FotosImovel"
                          ShowArrows="true"
                          ShowBullets="true"
                          AutoCycle="false"
                          Style="height: 70vh; width: 100%;"
-                         TData="PropertyPhoto">
+                         TData="FotoImovel">
 
                 <ItemTemplate>
                     <div class="d-flex justify-center align-center" style="height: 100%;">
-                        <MudImage Src="@($"{Configuration.BackendUrl}/photos/{context.Id}{context.Extension}")"
+                        <MudImage Src="@($"{Configuration.BackendUrl}/photos/{context.Id}{context.Extensao}")"
                                   Style="max-width: 95%; max-height: 100%;"
                                   ObjectFit="ObjectFit.Contain" />
                     </div>
@@ -26,7 +26,7 @@
         </MudItem>
     </MudGrid>
     
-    <MudText Class="ml-5 mb-10 mt-10" Typo="Typo.h6">@InputModel.Title</MudText>
+    <MudText Class="ml-5 mb-10 mt-10" Typo="Typo.h6">@InputModel.Titulo</MudText>
     
     <MudCard Elevation="3" Class="mb-10 mt-10">
         <MudCardHeader>
@@ -35,12 +35,12 @@
             </CardHeaderContent>
         </MudCardHeader>
         <MudCardContent>
-            <MudText Class="mb-2" Typo="Typo.body1">@InputModel.Description</MudText>
-            <MudText Class="mb-2">@InputModel.Bedroom Quartos</MudText>
-            <MudText Class="mb-2">@InputModel.Bathroom Banheiros</MudText>
-            <MudText Class="mb-2">@InputModel.Garage Garagem</MudText>
+            <MudText Class="mb-2" Typo="Typo.body1">@InputModel.Descricao</MudText>
+            <MudText Class="mb-2">@InputModel.Quarto Quartos</MudText>
+            <MudText Class="mb-2">@InputModel.Banheiro Banheiros</MudText>
+            <MudText Class="mb-2">@InputModel.Garagem Garagem</MudText>
             <MudText Class="mb-2">@InputModel.Area M²</MudText>
-            <MudText Class="mb-2">@InputModel.TransactionsDetails</MudText>
+            <MudText Class="mb-2">@InputModel.DetalhesTransacao</MudText>
         </MudCardContent>
     </MudCard>
     
@@ -51,7 +51,7 @@
             </CardHeaderContent>
         </MudCardHeader>
         <MudCardContent>
-            <MudText Typo="Typo.body1">@InputModel.Price.ToString("C")</MudText>
+            <MudText Typo="Typo.body1">@InputModel.Preco.ToString("C")</MudText>
         </MudCardContent>
     </MudCard>
     
@@ -62,7 +62,7 @@
             </CardHeaderContent>
         </MudCardHeader>
         <MudCardContent>
-            <MudText Typo="Typo.body1">@InputModel.Address.Neighborhood</MudText>
+            <MudText Typo="Typo.body1">@InputModel.Endereco.Bairro</MudText>
         </MudCardContent>
     </MudCard>
 </MudPaper>

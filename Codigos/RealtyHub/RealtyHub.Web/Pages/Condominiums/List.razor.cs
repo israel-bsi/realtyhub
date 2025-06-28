@@ -18,7 +18,7 @@ public class ListCondominiumsPage : ComponentBase
     /// Delegate para notificar a seleção de um condomínio.
     /// </summary>
     [Parameter]
-    public EventCallback<Condominium> OnCondominiumSelected { get; set; }
+    public EventCallback<Condominio> OnCondominiumSelected { get; set; }
 
     /// <summary>
     /// Estilo CSS aplicado às linhas da tabela.
@@ -55,12 +55,12 @@ public class ListCondominiumsPage : ComponentBase
     /// <summary>
     /// Componente de grid para exibir a lista de condomínios.
     /// </summary>
-    public MudDataGrid<Condominium> DataGrid { get; set; } = null!;
+    public MudDataGrid<Condominio> DataGrid { get; set; } = null!;
 
     /// <summary>
     /// Lista de condomínios carregados do servidor.
     /// </summary>
-    public List<Condominium> Condominiums { get; set; } = [];
+    public List<Condominio> Condominiums { get; set; } = [];
 
     /// <summary>
     /// Termo de busca utilizado para filtrar a lista de condomínios.
@@ -154,7 +154,7 @@ public class ListCondominiumsPage : ComponentBase
     /// </summary>
     /// <param name="state">Estado atual do grid contendo paginação e filtros.</param>
     /// <returns>Um objeto <see cref="GridData{Condominium}"/> contendo a lista de condomínios e a contagem total.</returns>
-    public async Task<GridData<Condominium>> LoadServerData(GridState<Condominium> state)
+    public async Task<GridData<Condominio>> LoadServerData(GridState<Condominio> state)
     {
         try
         {
@@ -168,19 +168,19 @@ public class ListCondominiumsPage : ComponentBase
 
             var response = await Handler.GetAllAsync(request);
             if (response.IsSuccess)
-                return new GridData<Condominium>
+                return new GridData<Condominio>
                 {
                     Items = response.Data ?? [],
                     TotalItems = response.TotalCount
                 };
 
             Snackbar.Add(response.Message ?? string.Empty, Severity.Error);
-            return new GridData<Condominium>();
+            return new GridData<Condominio>();
         }
         catch (Exception e)
         {
             Snackbar.Add(e.Message, Severity.Error);
-            return new GridData<Condominium>();
+            return new GridData<Condominio>();
         }
     }
 
@@ -212,12 +212,12 @@ public class ListCondominiumsPage : ComponentBase
     /// <summary>
     /// Notifica ao componente pai que um condomínio foi selecionado.
     /// </summary>
-    /// <param name="condominium">O condomínio selecionado.</param>
+    /// <param name="condominio">O condomínio selecionado.</param>
     /// <returns>Task representando a operação assíncrona.</returns>
-    public async Task SelectCondominium(Condominium condominium)
+    public async Task SelectCondominium(Condominio condominio)
     {
         if (OnCondominiumSelected.HasDelegate)
-            await OnCondominiumSelected.InvokeAsync(condominium);
+            await OnCondominiumSelected.InvokeAsync(condominio);
     }
 
     #endregion

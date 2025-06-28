@@ -28,8 +28,8 @@ public class UpdateCondominiumEndpoint : IEndpoint
             .WithSummary("Atualiza um condomínio")
             .WithDescription("Atualiza os dados de um condomínio existente")
             .WithOrder(2)
-            .Produces<Response<Condominium?>>()
-            .Produces<Response<Condominium?>>(StatusCodes.Status400BadRequest);
+            .Produces<Response<Condominio?>>()
+            .Produces<Response<Condominio?>>(StatusCodes.Status400BadRequest);
 
     /// <summary>
     /// Manipulador da rota para a atualização de um condomínio.
@@ -40,7 +40,7 @@ public class UpdateCondominiumEndpoint : IEndpoint
     /// </remarks>
     /// <param name="user">Objeto <c><see cref="ClaimsPrincipal"/></c> que contém os dados do usuário autenticado.</param>
     /// <param name="handler">Instância de <c><see cref="ICondominiumHandler"/></c> que executa a atualização do condomínio.</param>
-    /// <param name="request">Objeto <c><see cref="Condominium"/></c> contendo os dados atualizados do condomínio.</param>
+    /// <param name="request">Objeto <c><see cref="Condominio"/></c> contendo os dados atualizados do condomínio.</param>
     /// <param name="id">ID do condomínio a ser atualizado.</param>
     /// <returns>
     /// Um objeto <c><see cref="IResult"/></c> representando o resultado da operação:
@@ -50,11 +50,11 @@ public class UpdateCondominiumEndpoint : IEndpoint
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
         ICondominiumHandler handler,
-        Condominium request,
+        Condominio request,
         long id)
     {
         request.Id = id;
-        request.UserId = user.Identity?.Name ?? string.Empty;
+        request.UsuarioId = user.Identity?.Name ?? string.Empty;
 
         var result = await handler.UpdateAsync(request);
 

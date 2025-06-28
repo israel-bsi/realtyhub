@@ -19,12 +19,12 @@ public interface ICustomerHandler
     /// <remarks>
     /// Este método é responsável por criar um novo cliente com base nas informações fornecidas.
     /// </remarks>
-    /// <param name="request">Instância de <see cref="Customer"/> contendo as informações do novo cliente.</param>
+    /// <param name="request">Instância de <see cref="Cliente"/> contendo as informações do novo cliente.</param>
     /// <returns>
     /// Retorna um objeto <see cref="Response{TData}"/> indicando o resultado da operação.
-    /// O objeto TData é do tipo <see cref="Customer"/> e pode ser nulo se a operação falhar.
+    /// O objeto TData é do tipo <see cref="Cliente"/> e pode ser nulo se a operação falhar.
     /// </returns>
-    Task<Response<Customer?>> CreateAsync(Customer request);
+    Task<Response<Cliente?>> CreateAsync(Cliente request);
 
     /// <summary>
     /// Atualiza um cliente existente.
@@ -32,12 +32,12 @@ public interface ICustomerHandler
     /// <remarks>
     /// Este método é responsável por atualizar as informações de um cliente existente com base nas informações fornecidas.
     /// </remarks>
-    /// <param name="request">Instância de <see cref="Customer"/> contendo as informações atualizadas do cliente.</param>
+    /// <param name="request">Instância de <see cref="Cliente"/> contendo as informações atualizadas do cliente.</param>
     /// <returns>
     /// Retorna um objeto <see cref="Response{TData}"/> indicando o resultado da operação.
-    /// O objeto TData é do tipo <see cref="Customer"/> e pode ser nulo se a operação falhar.
+    /// O objeto TData é do tipo <see cref="Cliente"/> e pode ser nulo se a operação falhar.
     /// </returns>
-    Task<Response<Customer?>> UpdateAsync(Customer request);
+    Task<Response<Cliente?>> UpdateAsync(Cliente request);
 
     /// <summary>
     /// Exclui um cliente existente.
@@ -48,9 +48,9 @@ public interface ICustomerHandler
     /// <param name="request">Instância de <see cref="DeleteCustomerRequest"/> contendo o Id do cliente a ser excluído.</param>
     /// <returns>
     /// Retorna um objeto <see cref="Response{TData}"/> indicando o resultado da operação.
-    /// O objeto TData é do tipo <see cref="Customer"/> e pode ser nulo se a operação falhar.
+    /// O objeto TData é do tipo <see cref="Cliente"/> e pode ser nulo se a operação falhar.
     /// </returns>    
-    Task<Response<Customer?>> DeleteAsync(DeleteCustomerRequest request);
+    Task<Response<Cliente?>> DeleteAsync(DeleteCustomerRequest request);
 
     /// <summary>
     /// Obtém um cliente pelo ID.
@@ -61,9 +61,9 @@ public interface ICustomerHandler
     /// <param name="request">Instância de <see cref="GetCustomerByIdRequest"/> contendo o Id do cliente a ser recuperado.</param>
     /// <returns>
     /// Retorna um objeto <see cref="Response{TData}"/> indicando o resultado da operação.
-    /// O objeto TData é do tipo <see cref="Customer"/> e pode ser nulo se a operação falhar.
+    /// O objeto TData é do tipo <see cref="Cliente"/> e pode ser nulo se a operação falhar.
     /// </returns>
-    Task<Response<Customer?>> GetByIdAsync(GetCustomerByIdRequest request);
+    Task<Response<Cliente?>> GetByIdAsync(GetCustomerByIdRequest request);
 
     /// <summary>
     /// Obtém todos os clientes com paginação e filtro.
@@ -74,7 +74,7 @@ public interface ICustomerHandler
     /// <param name="request">Instância de <see cref="GetAllCustomersRequest"/> contendo os filtros e paginação.</param>
     /// <returns>
     /// Retorna um objeto <see cref="PagedResponse{TData}"/> indicando o resultado da operação.
-    /// O objeto TData é uma lista de <see cref="Customer"/> e pode ser nulo se a operação falhar.
+    /// O objeto TData é uma lista de <see cref="Cliente"/> e pode ser nulo se a operação falhar.
     /// </returns>
-    Task<PagedResponse<List<Customer>?>> GetAllAsync(GetAllCustomersRequest request);
+    Task<PagedResponse<List<Cliente>?>> GetAllAsync(GetAllCustomersRequest request);
 }

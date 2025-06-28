@@ -1,17 +1,17 @@
 ﻿@using RealtyHub.Core.Extensions
 
-@switch (Status)
+@switch (StatusVisita)
 {
-    case EViewingStatus.Scheduled:
-        <MudChip T="Enum" Color="Color.Primary">@Status.GetDisplayName()</MudChip>
+    case EStatusVisita.Agendada:
+        <MudChip T="Enum" Color="Color.Primary">@StatusVisita.GetDisplayName()</MudChip>
         break;
 
-    case EViewingStatus.Done:
-        <MudChip T="Enum" Color="Color.Success">@Status.GetDisplayName()</MudChip>
+    case EStatusVisita.Finalizada:
+        <MudChip T="Enum" Color="Color.Success">@StatusVisita.GetDisplayName()</MudChip>
         break;
 
-    case EViewingStatus.Canceled:
-        <MudChip T="Enum" Color="Color.Error">@Status.GetDisplayName()</MudChip>
+    case EStatusVisita.Cancelada:
+        <MudChip T="Enum" Color="Color.Error">@StatusVisita.GetDisplayName()</MudChip>
         break;
 
 }
@@ -19,5 +19,5 @@
 @code
 {
     [Parameter, EditorRequired]
-    public EViewingStatus Status { get; set; }
+    public EStatusVisita StatusVisita { get; set; }
 }

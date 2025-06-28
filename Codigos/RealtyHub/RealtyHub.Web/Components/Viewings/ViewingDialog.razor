@@ -21,10 +21,10 @@
     MudDialogInstance MudDialog { get; set; } = null!;
 
     [Parameter]
-    public Property? Property { get; set; }
+    public Imovel? Property { get; set; }
 
     [Parameter]
-    public Customer? Customer { get; set; }
+    public Cliente? Customer { get; set; }
 
     [Parameter]
     public long Id { get; set; }
@@ -39,17 +39,17 @@
     public bool RedirectToPageList { get; set; }
 
     [Parameter]
-    public EventCallback<Property> OnPropertySelected { get; set; }
+    public EventCallback<Imovel> OnPropertySelected { get; set; }
 
     [Parameter]
     public EventCallback OnSubmitButtonClicked { get; set; }
 
-    public async Task SelectProperty(Property property)
+    public async Task SelectProperty(Imovel imovel)
     {
         if (OnPropertySelected.HasDelegate)
-            await OnPropertySelected.InvokeAsync(property);
+            await OnPropertySelected.InvokeAsync(imovel);
 
-        MudDialog.Close(DialogResult.Ok(property));
+        MudDialog.Close(DialogResult.Ok(imovel));
     }
 
     public async Task OnSubmitButtonClickedAsync()

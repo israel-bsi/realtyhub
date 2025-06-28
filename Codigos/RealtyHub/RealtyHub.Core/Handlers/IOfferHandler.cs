@@ -19,12 +19,12 @@ public interface IOfferHandler
     /// <remarks>
     /// Este método é responsável por criar uma nova proposta com base nas informações fornecidas.
     /// </remarks>
-    /// <param name="request">Instância de <see cref="Offer"/> contendo as informações da nova proposta.</param>
+    /// <param name="request">Instância de <see cref="Proposta"/> contendo as informações da nova proposta.</param>
     /// <returns>
     /// Retorna um objeto <see cref="Response{TData}"/> indicando o resultado da operação.
-    /// O objeto TData é do tipo <see cref="Offer"/> e pode ser nulo se a operação falhar.
+    /// O objeto TData é do tipo <see cref="Proposta"/> e pode ser nulo se a operação falhar.
     /// </returns>
-    Task<Response<Offer?>> CreateAsync(Offer request);
+    Task<Response<Proposta?>> CreateAsync(Proposta request);
 
     /// <summary>
     /// Atualiza as informações de uma proposta existente.
@@ -32,12 +32,12 @@ public interface IOfferHandler
     /// <remarks>
     /// Este método é responsável por atualizar as informações de uma proposta existente com base nas informações fornecidas.
     /// </remarks>
-    /// <param name="request">Instância de <see cref="Offer"/> contendo as informações atualizadas da proposta.</param>
+    /// <param name="request">Instância de <see cref="Proposta"/> contendo as informações atualizadas da proposta.</param>
     /// <returns>
     /// Retorna um objeto <see cref="Response{TData}"/> indicando o resultado da operação.
-    /// O objeto TData é do tipo <see cref="Offer"/> e pode ser nulo se a operação falhar.
+    /// O objeto TData é do tipo <see cref="Proposta"/> e pode ser nulo se a operação falhar.
     /// </returns>
-    Task<Response<Offer?>> UpdateAsync(Offer request);
+    Task<Response<Proposta?>> UpdateAsync(Proposta request);
 
     /// <summary>
     /// Rejeita uma proposta existente.
@@ -48,9 +48,9 @@ public interface IOfferHandler
     /// <param name="request">Instância de <see cref="RejectOfferRequest"/> contendo o Id da proposta a ser rejeitada.</param>
     /// <returns>
     /// Retorna um objeto <see cref="Response{TData}"/> indicando o resultado da operação.
-    /// O objeto TData é do tipo <see cref="Offer"/> e pode ser nulo se a operação falhar.
+    /// O objeto TData é do tipo <see cref="Proposta"/> e pode ser nulo se a operação falhar.
     /// </returns>
-    Task<Response<Offer?>> RejectAsync(RejectOfferRequest request);
+    Task<Response<Proposta?>> RejectAsync(RejectOfferRequest request);
 
     /// <summary>
     /// Aceita uma proposta existente.
@@ -61,9 +61,9 @@ public interface IOfferHandler
     /// <param name="request">Instância de <see cref="AcceptOfferRequest"/> contendo o Id da proposta a ser aceita.</param>
     /// <returns>
     /// Retorna um objeto <see cref="Response{TData}"/> indicando o resultado da operação.
-    /// O objeto TData é do tipo <see cref="Offer"/> e pode ser nulo se a operação falhar.
+    /// O objeto TData é do tipo <see cref="Proposta"/> e pode ser nulo se a operação falhar.
     /// </returns>
-    Task<Response<Offer?>> AcceptAsync(AcceptOfferRequest request);
+    Task<Response<Proposta?>> AcceptAsync(AcceptOfferRequest request);
 
     /// <summary>
     /// Recupera as informações de uma proposta existente.
@@ -74,9 +74,9 @@ public interface IOfferHandler
     /// <param name="request">Instância de <see cref="GetOfferByIdRequest"/> contendo o Id da proposta a ser recuperada.</param>
     /// <returns>
     /// Retorna um objeto <see cref="Response{TData}"/> indicando o resultado da operação.
-    /// O objeto TData é do tipo <see cref="Offer"/> e pode ser nulo se a operação falhar.
+    /// O objeto TData é do tipo <see cref="Proposta"/> e pode ser nulo se a operação falhar.
     /// </returns>
-    Task<Response<Offer?>> GetByIdAsync(GetOfferByIdRequest request);
+    Task<Response<Proposta?>> GetByIdAsync(GetOfferByIdRequest request);
 
     /// <summary>
     /// Recupera as informações de uma proposta existente com base no Id do imóvel.
@@ -87,9 +87,9 @@ public interface IOfferHandler
     /// <param name="request">Instância de <see cref="GetOfferAcceptedByProperty"/> contendo o Id do imóvel.</param>
     /// <returns>
     /// Retorna um objeto <see cref="Response{TData}"/> indicando o resultado da operação.
-    /// O objeto TData é do tipo <see cref="Offer"/> e pode ser nulo se a operação falhar.
+    /// O objeto TData é do tipo <see cref="Proposta"/> e pode ser nulo se a operação falhar.
     /// </returns>
-    Task<Response<Offer?>> GetAcceptedByProperty(GetOfferAcceptedByProperty request);
+    Task<Response<Proposta?>> GetAcceptedByProperty(GetOfferAcceptedByProperty request);
 
     /// <summary>
     /// Recupera todas as propostas de um determinado imóvel.
@@ -100,9 +100,9 @@ public interface IOfferHandler
     /// <param name="request">Instância de <see cref="GetAllOffersByPropertyRequest"/> contendo os parâmetros de paginação.</param>
     /// <returns>
     /// Retorna um objeto <see cref="PagedResponse{TData}"/> indicando o resultado da operação.
-    /// O objeto TData é uma lista de <see cref="Offer"/> e pode ser nulo se a operação falhar.
+    /// O objeto TData é uma lista de <see cref="Proposta"/> e pode ser nulo se a operação falhar.
     /// </returns>
-    Task<PagedResponse<List<Offer>?>> GetAllOffersByPropertyAsync(GetAllOffersByPropertyRequest request);
+    Task<PagedResponse<List<Proposta>?>> GetAllOffersByPropertyAsync(GetAllOffersByPropertyRequest request);
 
     /// <summary>
     /// Recupera todas as propostas de um determinado cliente.
@@ -113,9 +113,9 @@ public interface IOfferHandler
     /// <param name="request">Instância de <see cref="GetAllOffersByCustomerRequest"/> contendo os parâmetros de paginação.</param>
     /// <returns>
     /// Retorna um objeto <see cref="PagedResponse{TData}"/> indicando o resultado da operação.
-    /// O objeto TData é uma lista de <see cref="Offer"/> e pode ser nulo se a operação falhar.
+    /// O objeto TData é uma lista de <see cref="Proposta"/> e pode ser nulo se a operação falhar.
     /// </returns>
-    Task<PagedResponse<List<Offer>?>> GetAllOffersByCustomerAsync(GetAllOffersByCustomerRequest request);
+    Task<PagedResponse<List<Proposta>?>> GetAllOffersByCustomerAsync(GetAllOffersByCustomerRequest request);
 
     /// <summary>
     /// Recupera todas as propostas existentes.
@@ -126,7 +126,7 @@ public interface IOfferHandler
     /// <param name="request">Instância de <see cref="GetAllOffersRequest"/> contendo os parâmetros de paginação.</param>
     /// <returns>
     /// Retorna um objeto <see cref="PagedResponse{TData}"/> indicando o resultado da operação.
-    /// O objeto TData é uma lista de <see cref="Offer"/> e pode ser nulo se a operação falhar.
+    /// O objeto TData é uma lista de <see cref="Proposta"/> e pode ser nulo se a operação falhar.
     /// </returns>
-    Task<PagedResponse<List<Offer>?>> GetAllAsync(GetAllOffersRequest request);
+    Task<PagedResponse<List<Proposta>?>> GetAllAsync(GetAllOffersRequest request);
 }

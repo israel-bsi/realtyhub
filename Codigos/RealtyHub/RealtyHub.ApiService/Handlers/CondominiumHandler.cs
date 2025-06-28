@@ -46,33 +46,33 @@ public class CondominiumHandler : ICondominiumHandler
     /// </remarks>
     /// <param name="request">Objeto contendo as informações para criação do condomínio.</param>
     /// <returns>Retorna uma resposta com o condomínio criado e o código de status.</returns>
-    public async Task<Response<Condominium?>> CreateAsync(Condominium request)
+    public async Task<Response<Condominio?>> CreateAsync(Condominio request)
     {
         try
         {
-            var condominium = new Condominium
+            var condominium = new Condominio
             {
-                Name = request.Name,
-                Address = request.Address,
-                Units = request.Units,
-                Floors = request.Floors,
-                HasElevator = request.HasElevator,
-                HasSwimmingPool = request.HasSwimmingPool,
-                HasPartyRoom = request.HasPartyRoom,
-                HasPlayground = request.HasPlayground,
-                HasFitnessRoom = request.HasFitnessRoom,
-                CondominiumValue = request.CondominiumValue,
-                IsActive = true
+                Nome = request.Nome,
+                Endereco = request.Endereco,
+                Unidades = request.Unidades,
+                Andares = request.Andares,
+                PossuiElevador = request.PossuiElevador,
+                PossuiPiscina = request.PossuiPiscina,
+                PossuiSalaoFesta = request.PossuiSalaoFesta,
+                PossuiPlayground = request.PossuiPlayground,
+                PossuiAcademia = request.PossuiAcademia,
+                TaxaCondominial = request.TaxaCondominial,
+                Ativo = true
             };
 
             await _context.Condominiums.AddAsync(condominium);
             await _context.SaveChangesAsync();
 
-            return new Response<Condominium?>(condominium, 201);
+            return new Response<Condominio?>(condominium, 201);
         }
         catch
         {
-            return new Response<Condominium?>(null, 500, "Não foi possível criar o condomínio");
+            return new Response<Condominio?>(null, 500, "Não foi possível criar o condomínio");
         }
     }
 
@@ -84,37 +84,37 @@ public class CondominiumHandler : ICondominiumHandler
     /// </remarks>
     /// <param name="request">Objeto contendo as novas informações do condomínio.</param>
     /// <returns>Retorna a resposta com o condomínio atualizado ou um erro se não for encontrado.</returns>
-    public async Task<Response<Condominium?>> UpdateAsync(Condominium request)
+    public async Task<Response<Condominio?>> UpdateAsync(Condominio request)
     {
         try
         {
             var condominium = await _context
                 .Condominiums
-                .FirstOrDefaultAsync(c => c.Id == request.Id && c.IsActive);
+                .FirstOrDefaultAsync(c => c.Id == request.Id && c.Ativo);
 
             if (condominium is null)
-                return new Response<Condominium?>(null, 404, "Condomínio não encontrado");
+                return new Response<Condominio?>(null, 404, "Condomínio não encontrado");
 
-            condominium.Name = request.Name;
-            condominium.Address = request.Address;
-            condominium.Units = request.Units;
-            condominium.Floors = request.Floors;
-            condominium.HasElevator = request.HasElevator;
-            condominium.HasSwimmingPool = request.HasSwimmingPool;
-            condominium.HasPartyRoom = request.HasPartyRoom;
-            condominium.HasPlayground = request.HasPlayground;
-            condominium.HasFitnessRoom = request.HasFitnessRoom;
-            condominium.CondominiumValue = request.CondominiumValue;
-            condominium.UpdatedAt = DateTime.UtcNow;
+            condominium.Nome = request.Nome;
+            condominium.Endereco = request.Endereco;
+            condominium.Unidades = request.Unidades;
+            condominium.Andares = request.Andares;
+            condominium.PossuiElevador = request.PossuiElevador;
+            condominium.PossuiPiscina = request.PossuiPiscina;
+            condominium.PossuiSalaoFesta = request.PossuiSalaoFesta;
+            condominium.PossuiPlayground = request.PossuiPlayground;
+            condominium.PossuiAcademia = request.PossuiAcademia;
+            condominium.TaxaCondominial = request.TaxaCondominial;
+            condominium.AtualizadoEm = DateTime.UtcNow;
 
             _context.Condominiums.Update(condominium);
             await _context.SaveChangesAsync();
 
-            return new Response<Condominium?>(condominium);
+            return new Response<Condominio?>(condominium);
         }
         catch
         {
-            return new Response<Condominium?>(null, 500, "Não foi possível atualizar o condomínio");
+            return new Response<Condominio?>(null, 500, "Não foi possível atualizar o condomínio");
         }
     }
 
@@ -126,28 +126,28 @@ public class CondominiumHandler : ICondominiumHandler
     /// </remarks>
     /// <param name="request">Requisição que contém o ID do condomínio a ser excluído.</param>
     /// <returns>Retorna a resposta com o condomínio atualizado ou um erro se não for encontrado.</returns>
-    public async Task<Response<Condominium?>> DeleteAsync(DeleteCondominiumRequest request)
+    public async Task<Response<Condominio?>> DeleteAsync(DeleteCondominiumRequest request)
     {
         try
         {
             var condominium = await _context
                 .Condominiums
-                .FirstOrDefaultAsync(c => c.Id == request.Id && c.IsActive);
+                .FirstOrDefaultAsync(c => c.Id == request.Id && c.Ativo);
 
             if (condominium is null)
-                return new Response<Condominium?>(null, 404, "Condomínio não encontrado");
+                return new Response<Condominio?>(null, 404, "Condomínio não encontrado");
 
-            condominium.IsActive = false;
-            condominium.UpdatedAt = DateTime.UtcNow;
+            condominium.Ativo = false;
+            condominium.AtualizadoEm = DateTime.UtcNow;
 
             _context.Condominiums.Update(condominium);
             await _context.SaveChangesAsync();
 
-            return new Response<Condominium?>(condominium);
+            return new Response<Condominio?>(condominium);
         }
         catch
         {
-            return new Response<Condominium?>(null, 500, "Não foi possível deletar o condomínio");
+            return new Response<Condominio?>(null, 500, "Não foi possível deletar o condomínio");
         }
     }
 
@@ -159,22 +159,22 @@ public class CondominiumHandler : ICondominiumHandler
     /// </remarks>
     /// <param name="request">Requisição que contém o ID do condomínio desejado.</param>
     /// <returns>Retorna o objeto do condomínio ou um erro caso não seja encontrado.</returns>
-    public async Task<Response<Condominium?>> GetByIdAsync(GetCondominiumByIdRequest request)
+    public async Task<Response<Condominio?>> GetByIdAsync(GetCondominiumByIdRequest request)
     {
         try
         {
             var condominium = await _context
                 .Condominiums
                 .AsNoTracking()
-                .FirstOrDefaultAsync(c => c.Id == request.Id && c.IsActive);
+                .FirstOrDefaultAsync(c => c.Id == request.Id && c.Ativo);
 
             return condominium is null
-                ? new Response<Condominium?>(null, 404, "Condomínio não encontrado")
-                : new Response<Condominium?>(condominium);
+                ? new Response<Condominio?>(null, 404, "Condomínio não encontrado")
+                : new Response<Condominio?>(condominium);
         }
         catch
         {
-            return new Response<Condominium?>(null, 500, "Não foi possível buscar o condomínio");
+            return new Response<Condominio?>(null, 500, "Não foi possível buscar o condomínio");
         }
     }
 
@@ -190,14 +190,14 @@ public class CondominiumHandler : ICondominiumHandler
     /// </remarks>
     /// <param name="request">Requisição que contém parâmetros de paginação e filtro.</param>
     /// <returns>Retorna uma resposta paginada com os condomínios ativos com base no filtro ou um erro em caso de falha.</returns>
-    public async Task<PagedResponse<List<Condominium>?>> GetAllAsync(GetAllCondominiumsRequest request)
+    public async Task<PagedResponse<List<Condominio>?>> GetAllAsync(GetAllCondominiumsRequest request)
     {
         try
         {
             var query = _context
                 .Condominiums
                 .AsNoTracking()
-                .Where(c => c.IsActive);
+                .Where(c => c.Ativo);
 
             if (!string.IsNullOrEmpty(request.FilterBy))
                 query = query.FilterByProperty(request.SearchTerm, request.FilterBy);
@@ -209,11 +209,11 @@ public class CondominiumHandler : ICondominiumHandler
                 .Take(request.PageSize)
                 .ToListAsync();
 
-            return new PagedResponse<List<Condominium>?>(condominiums, count, request.PageNumber, request.PageSize);
+            return new PagedResponse<List<Condominio>?>(condominiums, count, request.PageNumber, request.PageSize);
         }
         catch
         {
-            return new PagedResponse<List<Condominium>?>(null, 500, "Não foi possível buscar os condomínios");
+            return new PagedResponse<List<Condominio>?>(null, 500, "Não foi possível buscar os condomínios");
         }
     }
 }

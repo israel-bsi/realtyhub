@@ -29,7 +29,7 @@ public class DeletePropertyEndpoint : IEndpoint
             .WithDescription("Deleta um imóvel")
             .WithOrder(3)
             .Produces(StatusCodes.Status204NoContent)
-            .Produces<Response<Property?>>(StatusCodes.Status400BadRequest);
+            .Produces<Response<Imovel?>>(StatusCodes.Status400BadRequest);
 
     /// <summary>
     /// Manipulador da rota que deleta um imóvel.

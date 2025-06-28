@@ -15,15 +15,15 @@
     MudDialogInstance MudDialog { get; set; } = null!;
 
     [Parameter]
-    public EventCallback<Property> OnPropertySelected { get; set; }
+    public EventCallback<Imovel> OnPropertySelected { get; set; }
 
     void CloseDialog() => MudDialog.Close();
 
-    public async Task SelectProperty(Property property)
+    public async Task SelectProperty(Imovel imovel)
     {
         if (OnPropertySelected.HasDelegate)
-            await OnPropertySelected.InvokeAsync(property);
+            await OnPropertySelected.InvokeAsync(imovel);
 
-        MudDialog.Close(DialogResult.Ok(property));
+        MudDialog.Close(DialogResult.Ok(imovel));
     }
 }

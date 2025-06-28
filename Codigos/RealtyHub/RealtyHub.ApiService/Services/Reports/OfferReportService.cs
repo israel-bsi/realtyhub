@@ -13,13 +13,13 @@ public class OfferReportService : IDocument
     /// <summary>
     /// Lista de ofertas a serem incluídas no relatório.
     /// </summary>
-    private readonly List<Offer> _offers;
+    private readonly List<Proposta> _offers;
 
     /// <summary>
     /// Inicializa uma nova instância de <c><see cref="OfferReportService"/></c> com a lista de ofertas especificada.
     /// </summary>
     /// <param name="offers">A lista de ofertas para inclusão no relatório.</param>
-    public OfferReportService(List<Offer> offers)
+    public OfferReportService(List<Proposta> offers)
     {
         _offers = offers;
     }
@@ -129,12 +129,12 @@ public class OfferReportService : IDocument
 
             foreach (var offer in _offers)
             {
-                table.Cell().Text($"{offer.PropertyId}");
-                table.Cell().Text($"{offer.SubmissionDate:dd/MM/yyyy}");
-                table.Cell().Text($"{offer.OfferStatus.GetDisplayName()}");
-                table.Cell().Text(offer.Amount.ToString("C"));
-                table.Cell().Text(offer.Buyer!.Name);
-                table.Cell().Text(offer.Property!.Seller!.Name);
+                table.Cell().Text($"{offer.ImovelId}");
+                table.Cell().Text($"{offer.DataDeEnvio:dd/MM/yyyy}");
+                table.Cell().Text($"{offer.StatusProposta.GetDisplayName()}");
+                table.Cell().Text(offer.Valor.ToString("C"));
+                table.Cell().Text(offer.Comprador!.Nome);
+                table.Cell().Text(offer.Imovel!.Vendedor!.Nome);
             }
         });
     }

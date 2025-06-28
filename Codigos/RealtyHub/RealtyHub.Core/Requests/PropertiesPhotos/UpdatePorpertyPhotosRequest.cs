@@ -20,9 +20,9 @@ public class UpdatePropertyPhotosRequest : Request
     /// Obtém ou define a lista de fotos do imóvel.
     /// </summary>
     /// <value>
-    /// Uma lista de <c><see cref="PropertyPhoto"/></c> representando as fotos que serão atualizadas.
+    /// Uma lista de <c><see cref="FotoImovel"/></c> representando as fotos que serão atualizadas.
     /// </value>
-    public List<PropertyPhoto> Photos { get; set; } = [];
+    public List<FotoImovel> Photos { get; set; } = [];
 
     /// <summary>
     /// Retorna uma representação em string dos detalhes da requisição.

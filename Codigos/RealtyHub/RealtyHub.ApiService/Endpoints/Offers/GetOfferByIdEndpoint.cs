@@ -28,8 +28,8 @@ public class GetOfferByIdEndpoint : IEndpoint
             .WithSummary("Recupera uma proposta")
             .WithDescription("Recupera uma proposta")
             .WithOrder(4)
-            .Produces<Response<Offer?>>()
-            .Produces<Response<Offer?>>(StatusCodes.Status400BadRequest);
+            .Produces<Response<Proposta?>>()
+            .Produces<Response<Proposta?>>(StatusCodes.Status400BadRequest);
 
     /// <summary>
     /// Manipulador da rota que retorna os detalhes de uma proposta pelo seu ID.

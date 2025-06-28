@@ -58,7 +58,7 @@ public partial class OfferFormComponent : ComponentBase
     /// <summary>
     /// Modelo de entrada utilizado para o binding dos campos do formulário.
     /// </summary>
-    public Offer InputModel { get; set; } = new();
+    public Proposta InputModel { get; set; } = new();
 
     /// <summary>
     /// Indica a operação atual do formulário ("Enviar" ou "Editar").
@@ -68,7 +68,7 @@ public partial class OfferFormComponent : ComponentBase
     /// <summary>
     /// Indica se o botão de adicionar pagamento deve estar desabilitado (máximo de 5 pagamentos).
     /// </summary>
-    public bool DisableAddPayment => InputModel.Payments.Count >= 5;
+    public bool DisableAddPayment => InputModel.Pagamentos.Count >= 5;
 
     /// <summary>
     /// Expressão regular utilizada para remover caracteres não numéricos dos campos relevantes.
@@ -120,7 +120,7 @@ public partial class OfferFormComponent : ComponentBase
         try
         {
             string message;
-            InputModel.Buyer!.Phone = Regex.Replace(InputModel.Buyer.Phone, Pattern, "");
+            InputModel.Comprador!.Telefone = Regex.Replace(InputModel.Comprador.Telefone, Pattern, "");
             if (OfferId == 0)
             {
                 var response = await OfferHandler.CreateAsync(InputModel);
@@ -174,15 +174,15 @@ public partial class OfferFormComponent : ComponentBase
     /// Adiciona um novo pagamento à lista de pagamentos da proposta, limitado a 5 pagamentos.
     /// </summary>
     /// <remarks>
-    /// Cada novo pagamento é criado com o tipo padrão <see cref="EPaymentType.BankSlip"/>.
+    /// Cada novo pagamento é criado com o tipo padrão <see cref="ETipoPagamento.Boleto"/>.
     /// </remarks>
     public void AddPayment()
     {
-        if (InputModel.Payments.Count < 5)
+        if (InputModel.Pagamentos.Count < 5)
         {
-            InputModel.Payments.Add(new Payment
+            InputModel.Pagamentos.Add(new Pagamento
             {
-                PaymentType = EPaymentType.BankSlip
+                TipoPagamento = ETipoPagamento.Boleto
             });
         }
     }
@@ -221,10 +221,10 @@ public partial class OfferFormComponent : ComponentBase
                 var response = await PropertyHandler.GetByIdAsync(request);
                 if (response is { IsSuccess: true, Data: not null })
                 {
-                    InputModel.Property = response.Data;
-                    InputModel.PropertyId = response.Data.Id;
-                    InputModel.Buyer = new Customer();
-                    InputModel.BuyerId = 0;
+                    InputModel.Imovel = response.Data;
+                    InputModel.ImovelId = response.Data.Id;
+                    InputModel.Comprador = new Cliente();
+                    InputModel.CompradorId = 0;
                     return;
                 }
 

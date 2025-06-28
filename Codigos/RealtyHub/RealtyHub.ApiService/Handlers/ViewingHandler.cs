@@ -50,55 +50,55 @@ public class ViewingHandler : IViewingHandler
     /// </remarks>
     /// <param name="request">Objeto contendo as informações para agendamento da visita.</param>
     /// <returns>Retorna uma resposta com a visita agendada ou um erro em caso de falha.</returns>
-    public async Task<Response<Viewing?>> ScheduleAsync(Viewing request)
+    public async Task<Response<Visita?>> ScheduleAsync(Visita request)
     {
         try
         {
             var customer = await _context
                 .Customers
-                .FirstOrDefaultAsync(c => c.Id == request.BuyerId
-                                          && (string.IsNullOrEmpty(c.UserId) || c.UserId == request.UserId)
-                                          && c.IsActive);
+                .FirstOrDefaultAsync(c => c.Id == request.CompradorId
+                                          && (string.IsNullOrEmpty(c.UsuarioId) || c.UsuarioId == request.UsuarioId)
+                                          && c.Ativo);
 
             if (customer is null)
-                return new Response<Viewing?>(null, 404, "Cliente não encontrado");
+                return new Response<Visita?>(null, 404, "Cliente não encontrado");
 
             var property = await _context
                 .Properties
-                .FirstOrDefaultAsync(p => p.Id == request.PropertyId
-                                          && (string.IsNullOrEmpty(p.UserId) || p.UserId == request.UserId)
-                                          && p.IsActive);
+                .FirstOrDefaultAsync(p => p.Id == request.ImovelId
+                                          && (string.IsNullOrEmpty(p.UsuarioId) || p.UsuarioId == request.UsuarioId)
+                                          && p.Ativo);
 
             if (property is null)
-                return new Response<Viewing?>(null, 404, "Imóvel não encontrado");
+                return new Response<Visita?>(null, 404, "Imóvel não encontrado");
 
             var isViewingExist = await _context
                 .Viewing
-                .AnyAsync(v => v.PropertyId == request.PropertyId
-                               && v.ViewingDate == request.ViewingDate);
+                .AnyAsync(v => v.ImovelId == request.ImovelId
+                               && v.DataVisita == request.DataVisita);
 
             if (isViewingExist)
-                return new Response<Viewing?>(null, 400, "Visita já agendada para esta data");
+                return new Response<Visita?>(null, 400, "Visita já agendada para esta data");
 
-            var viewing = new Viewing
+            var viewing = new Visita
             {
-                ViewingDate = request.ViewingDate,
-                ViewingStatus = request.ViewingStatus,
-                BuyerId = request.BuyerId,
-                Buyer = customer,
-                PropertyId = request.PropertyId,
-                Property = property,
-                UserId = request.UserId
+                DataVisita = request.DataVisita,
+                StatusVisita = request.StatusVisita,
+                CompradorId = request.CompradorId,
+                Comprador = customer,
+                ImovelId = request.ImovelId,
+                Imovel = property,
+                UsuarioId = request.UsuarioId
             };
 
             _context.Viewing.Add(viewing);
             await _context.SaveChangesAsync();
 
-            return new Response<Viewing?>(viewing, 201, "Visita agendada com sucesso");
+            return new Response<Visita?>(viewing, 201, "Visita agendada com sucesso");
         }
         catch
         {
-            return new Response<Viewing?>(null, 500, "Não foi possível agendar a visita");
+            return new Response<Visita?>(null, 500, "Não foi possível agendar a visita");
         }
     }
 
@@ -112,39 +112,39 @@ public class ViewingHandler : IViewingHandler
     /// </remarks>
     /// <param name="request">Objeto contendo as informações para reagendamento da visita.</param>
     /// <returns>Retorna uma resposta com a visita reagendada ou um erro em caso de falha.</returns>
-    public async Task<Response<Viewing?>> RescheduleAsync(Viewing request)
+    public async Task<Response<Visita?>> RescheduleAsync(Visita request)
     {
         try
         {
             var viewing = await _context
                 .Viewing
-                .Include(v => v.Buyer)
-                .Include(v => v.Property)
+                .Include(v => v.Comprador)
+                .Include(v => v.Imovel)
                 .FirstOrDefaultAsync(v => v.Id == request.Id
-                                          && (string.IsNullOrEmpty(v.UserId) || v.UserId == request.UserId));
+                                          && (string.IsNullOrEmpty(v.UsuarioId) || v.UsuarioId == request.UsuarioId));
 
             if (viewing is null)
-                return new Response<Viewing?>(null, 404, "Visita não encontrada");
+                return new Response<Visita?>(null, 404, "Visita não encontrada");
 
-            switch (viewing.ViewingStatus)
+            switch (viewing.StatusVisita)
             {
-                case EViewingStatus.Canceled:
-                    return new Response<Viewing?>(null, 400, "Não é possível reagendar uma visita cancelada");
-                case EViewingStatus.Done:
-                    return new Response<Viewing?>(null, 400, "Não é possível reagendar uma visita finalizada");
+                case EStatusVisita.Cancelada:
+                    return new Response<Visita?>(null, 400, "Não é possível reagendar uma visita cancelada");
+                case EStatusVisita.Finalizada:
+                    return new Response<Visita?>(null, 400, "Não é possível reagendar uma visita finalizada");
             }
 
-            viewing.ViewingDate = request.ViewingDate;
-            viewing.UpdatedAt = DateTime.UtcNow;
+            viewing.DataVisita = request.DataVisita;
+            viewing.AtualizadoEm = DateTime.UtcNow;
 
             _context.Viewing.Update(viewing);
             await _context.SaveChangesAsync();
 
-            return new Response<Viewing?>(viewing, message: "Visita reagendada com sucesso");
+            return new Response<Visita?>(viewing, message: "Visita reagendada com sucesso");
         }
         catch
         {
-            return new Response<Viewing?>(null, 500, "Não foi possível reagendar a visita");
+            return new Response<Visita?>(null, 500, "Não foi possível reagendar a visita");
         }
     }
 
@@ -158,38 +158,38 @@ public class ViewingHandler : IViewingHandler
     /// </remarks>
     /// <param name="request">Requisição contendo o ID da visita a ser finalizada.</param>
     /// <returns>Retorna uma resposta com a visita finalizada ou um erro em caso de falha.</returns>
-    public async Task<Response<Viewing?>> DoneAsync(DoneViewingRequest request)
+    public async Task<Response<Visita?>> DoneAsync(DoneViewingRequest request)
     {
         try
         {
             var viewing = await _context
                 .Viewing
-                .Include(v => v.Buyer)
-                .Include(v => v.Property)
+                .Include(v => v.Comprador)
+                .Include(v => v.Imovel)
                 .FirstOrDefaultAsync(v => v.Id == request.Id
-                                          && (string.IsNullOrEmpty(v.UserId) || v.UserId == request.UserId));
+                                          && (string.IsNullOrEmpty(v.UsuarioId) || v.UsuarioId == request.UserId));
 
             if (viewing is null)
-                return new Response<Viewing?>(null, 404, "Visita não encontrada");
+                return new Response<Visita?>(null, 404, "Visita não encontrada");
 
-            switch (viewing.ViewingStatus)
+            switch (viewing.StatusVisita)
             {
-                case EViewingStatus.Canceled:
-                    return new Response<Viewing?>(null, 400, "Não é possível finalizar uma visita cancelada");
-                case EViewingStatus.Done:
-                    return new Response<Viewing?>(null, 400, "Visita já finalizada");
+                case EStatusVisita.Cancelada:
+                    return new Response<Visita?>(null, 400, "Não é possível finalizar uma visita cancelada");
+                case EStatusVisita.Finalizada:
+                    return new Response<Visita?>(null, 400, "Visita já finalizada");
             }
 
-            viewing.ViewingStatus = EViewingStatus.Done;
-            viewing.UpdatedAt = DateTime.UtcNow;
+            viewing.StatusVisita = EStatusVisita.Finalizada;
+            viewing.AtualizadoEm = DateTime.UtcNow;
 
             await _context.SaveChangesAsync();
 
-            return new Response<Viewing?>(viewing, message: "Visita finalizada com sucesso");
+            return new Response<Visita?>(viewing, message: "Visita finalizada com sucesso");
         }
         catch
         {
-            return new Response<Viewing?>(null, 500, "Não foi possível finalizar a visita");
+            return new Response<Visita?>(null, 500, "Não foi possível finalizar a visita");
         }
     }
 
@@ -203,38 +203,38 @@ public class ViewingHandler : IViewingHandler
     /// </remarks>
     /// <param name="request">Requisição contendo o ID da visita a ser cancelada.</param>
     /// <returns>Retorna uma resposta com a visita cancelada ou um erro em caso de falha.</returns>
-    public async Task<Response<Viewing?>> CancelAsync(CancelViewingRequest request)
+    public async Task<Response<Visita?>> CancelAsync(CancelViewingRequest request)
     {
         try
         {
             var viewing = await _context
                 .Viewing
-                .Include(v => v.Buyer)
-                .Include(v => v.Property)
+                .Include(v => v.Comprador)
+                .Include(v => v.Imovel)
                 .FirstOrDefaultAsync(v => v.Id == request.Id
-                                          && (string.IsNullOrEmpty(v.UserId) || v.UserId == request.UserId));
+                                          && (string.IsNullOrEmpty(v.UsuarioId) || v.UsuarioId == request.UserId));
 
             if (viewing is null)
-                return new Response<Viewing?>(null, 404, "Visita não encontrada");
+                return new Response<Visita?>(null, 404, "Visita não encontrada");
 
-            switch (viewing.ViewingStatus)
+            switch (viewing.StatusVisita)
             {
-                case EViewingStatus.Done:
-                    return new Response<Viewing?>(null, 400, "Não é possível cancelar uma visita finalizada");
-                case EViewingStatus.Canceled:
-                    return new Response<Viewing?>(null, 400, "Visita já cancelada");
+                case EStatusVisita.Finalizada:
+                    return new Response<Visita?>(null, 400, "Não é possível cancelar uma visita finalizada");
+                case EStatusVisita.Cancelada:
+                    return new Response<Visita?>(null, 400, "Visita já cancelada");
             }
 
-            viewing.ViewingStatus = EViewingStatus.Canceled;
-            viewing.UpdatedAt = DateTime.UtcNow;
+            viewing.StatusVisita = EStatusVisita.Cancelada;
+            viewing.AtualizadoEm = DateTime.UtcNow;
 
             await _context.SaveChangesAsync();
 
-            return new Response<Viewing?>(viewing, message: "Visita cancelada com sucesso");
+            return new Response<Visita?>(viewing, message: "Visita cancelada com sucesso");
         }
         catch
         {
-            return new Response<Viewing?>(null, 500, "Não foi possível cancelar a visita");
+            return new Response<Visita?>(null, 500, "Não foi possível cancelar a visita");
         }
     }
 
@@ -248,28 +248,28 @@ public class ViewingHandler : IViewingHandler
     /// </remarks>
     /// <param name="request">Requisição contendo o ID da visita desejada.</param>
     /// <returns>Retorna a visita ou um erro caso não seja encontrada.</returns>
-    public async Task<Response<Viewing?>> GetByIdAsync(GetViewingByIdRequest request)
+    public async Task<Response<Visita?>> GetByIdAsync(GetViewingByIdRequest request)
     {
         try
         {
             var viewing = await _context
                 .Viewing
                 .AsNoTracking()
-                .Include(v => v.Buyer)
-                .Include(v => v.Property)
-                .ThenInclude(p => p!.Seller)
+                .Include(v => v.Comprador)
+                .Include(v => v.Imovel)
+                .ThenInclude(p => p!.Vendedor)
                 .FirstOrDefaultAsync(v => v.Id == request.Id
-                                          && (string.IsNullOrEmpty(v.UserId) || v.UserId == request.UserId));
+                                          && (string.IsNullOrEmpty(v.UsuarioId) || v.UsuarioId == request.UserId));
 
             if (viewing is null)
-                return new Response<Viewing?>(null, 404, "Visita não encontrada");
+                return new Response<Visita?>(null, 404, "Visita não encontrada");
 
-            viewing.ViewingDate = viewing.ViewingDate?.ToLocalTime();
-            return new Response<Viewing?>(viewing);
+            viewing.DataVisita = viewing.DataVisita?.ToLocalTime();
+            return new Response<Visita?>(viewing);
         }
         catch
         {
-            return new Response<Viewing?>(null, 500, "Não foi possível retornar a visita");
+            return new Response<Visita?>(null, 500, "Não foi possível retornar a visita");
         }
     }
 
@@ -282,28 +282,28 @@ public class ViewingHandler : IViewingHandler
     /// </remarks>
     /// <param name="request">Requisição contendo parâmetros de paginação e filtro.</param>
     /// <returns>Retorna uma resposta paginada com as visitas ou um erro em caso de falha.</returns>
-    public async Task<PagedResponse<List<Viewing>?>> GetAllAsync(GetAllViewingsRequest request)
+    public async Task<PagedResponse<List<Visita>?>> GetAllAsync(GetAllViewingsRequest request)
     {
         try
         {
             var query = _context
                 .Viewing
                 .AsNoTracking()
-                .Include(v => v.Buyer)
-                .Include(v => v.Property)
-                .ThenInclude(p => p!.Seller)
-                .Where(v => string.IsNullOrEmpty(v.UserId) || v.UserId == request.UserId);
+                .Include(v => v.Comprador)
+                .Include(v => v.Imovel)
+                .ThenInclude(p => p!.Vendedor)
+                .Where(v => string.IsNullOrEmpty(v.UsuarioId) || v.UsuarioId == request.UserId);
 
             if (request.StartDate is not null && request.EndDate is not null)
             {
                 var startDate = DateTime.Parse(request.StartDate).ToUniversalTime();
                 var endDate = DateTime.Parse(request.EndDate).ToUniversalTime();
 
-                query = query.Where(v => v.ViewingDate >= startDate
-                                         && v.ViewingDate <= endDate);
+                query = query.Where(v => v.DataVisita >= startDate
+                                         && v.DataVisita <= endDate);
             }
 
-            query = query.OrderBy(v => v.ViewingDate);
+            query = query.OrderBy(v => v.DataVisita);
 
             var viewings = await query
                 .Skip((request.PageNumber - 1) * request.PageSize)
@@ -312,17 +312,17 @@ public class ViewingHandler : IViewingHandler
 
             foreach (var viewing in viewings)
             {
-                viewing.ViewingDate = viewing.ViewingDate?.ToLocalTime();
+                viewing.DataVisita = viewing.DataVisita?.ToLocalTime();
             }
 
             var count = await query.CountAsync();
 
-            return new PagedResponse<List<Viewing>?>(
+            return new PagedResponse<List<Visita>?>(
                 viewings, count, request.PageNumber, request.PageSize);
         }
         catch
         {
-            return new PagedResponse<List<Viewing>?>(null, 500, "Não foi possível retornar as visitas");
+            return new PagedResponse<List<Visita>?>(null, 500, "Não foi possível retornar as visitas");
         }
     }
 }

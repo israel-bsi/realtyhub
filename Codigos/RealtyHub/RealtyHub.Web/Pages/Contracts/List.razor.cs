@@ -19,12 +19,12 @@ public partial class ListContractsPage : ComponentBase
     /// <summary>
     /// Componente de grid para exibir a lista de contratos.
     /// </summary>
-    public MudDataGrid<Contract> DataGrid { get; set; } = null!;
+    public MudDataGrid<Contrato> DataGrid { get; set; } = null!;
 
     /// <summary>
     /// Lista de contratos a serem exibidos no grid.
     /// </summary>
-    public List<Contract> Contracts { get; set; } = [];
+    public List<Contrato> Contracts { get; set; } = [];
 
     /// <summary>
     /// Intervalo de datas utilizado para filtrar os contratos.
@@ -74,7 +74,7 @@ public partial class ListContractsPage : ComponentBase
     /// Um objeto <see cref="GridData{Contract}"/> contendo a lista de contratos e a contagem total.
     /// Em caso de falha, exibe uma mensagem de erro e retorna um grid vazio.
     /// </returns>
-    public async Task<GridData<Contract>> LoadServerData(GridState<Contract> state)
+    public async Task<GridData<Contrato>> LoadServerData(GridState<Contrato> state)
     {
         try
         {
@@ -91,20 +91,20 @@ public partial class ListContractsPage : ComponentBase
             if (response.IsSuccess)
             {
                 Contracts = response.Data ?? [];
-                return new GridData<Contract>
+                return new GridData<Contrato>
                 {
-                    Items = Contracts.OrderByDescending(c => c.UpdatedAt),
+                    Items = Contracts.OrderByDescending(c => c.AtualizadoEm),
                     TotalItems = response.TotalCount
                 };
             }
 
             Snackbar.Add(response.Message ?? string.Empty, Severity.Error);
-            return new GridData<Contract>();
+            return new GridData<Contrato>();
         }
         catch (Exception e)
         {
             Snackbar.Add(e.Message, Severity.Error);
-            return new GridData<Contract>();
+            return new GridData<Contrato>();
         }
     }
 
@@ -121,11 +121,11 @@ public partial class ListContractsPage : ComponentBase
     /// <summary>
     /// Abre o arquivo PDF do contrato em uma nova aba do navegador.
     /// </summary>
-    /// <param name="contract">Contrato cuja visualização em PDF será aberta.</param>
+    /// <param name="contrato">Contrato cuja visualização em PDF será aberta.</param>
     /// <returns>Task representando a operação assíncrona.</returns>
-    public async Task ShowInNewPage(Contract contract)
+    public async Task ShowInNewPage(Contrato contrato)
     {
-        await JsRuntime.InvokeVoidAsync("openContractPdfInNewTab", contract.FilePath);
+        await JsRuntime.InvokeVoidAsync("openContractPdfInNewTab", contrato.CaminhoArquivo);
     }
 
     /// <summary>

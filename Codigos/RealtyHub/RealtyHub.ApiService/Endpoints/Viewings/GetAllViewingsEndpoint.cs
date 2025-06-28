@@ -29,8 +29,8 @@ public class GetAllViewingsEndpoint : IEndpoint
             .WithSummary("Recupera todas as visitas")
             .WithDescription("Recupera todas as visitas")
             .WithOrder(5)
-            .Produces<PagedResponse<List<Viewing>?>>()
-            .Produces<PagedResponse<List<Viewing?>>>(StatusCodes.Status400BadRequest);
+            .Produces<PagedResponse<List<Visita>?>>()
+            .Produces<PagedResponse<List<Visita?>>>(StatusCodes.Status400BadRequest);
 
     /// <summary>
     /// Manipulador da rota que retorna todas as visitas.

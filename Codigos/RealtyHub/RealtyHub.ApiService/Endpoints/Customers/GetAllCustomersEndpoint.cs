@@ -29,7 +29,7 @@ public class GetAllCustomersEndpoint : IEndpoint
             .WithSummary("Recupera todos os clientes")
             .WithDescription("Recupera todos os clientes")
             .WithOrder(5)
-            .Produces<PagedResponse<List<Customer>?>>()
+            .Produces<PagedResponse<List<Cliente>?>>()
             .Produces(StatusCodes.Status400BadRequest);
 
     /// <summary>

@@ -23,7 +23,7 @@ public partial class ListOffersPage : ComponentBase
     /// Evento chamado quando uma proposta é selecionada.
     /// </summary>
     [Parameter]
-    public EventCallback<Offer> OnOfferSelected { get; set; }
+    public EventCallback<Proposta> OnOfferSelected { get; set; }
 
     /// <summary>
     /// Estilo CSS aplicado às linhas da tabela.
@@ -44,7 +44,7 @@ public partial class ListOffersPage : ComponentBase
     /// <summary>
     /// Componente de grid do MudBlazor utilizado para exibir a lista de propostas.
     /// </summary>
-    public MudDataGrid<Offer> DataGrid { get; set; } = null!;
+    public MudDataGrid<Proposta> DataGrid { get; set; } = null!;
 
     /// <summary>
     /// Intervalo de datas utilizado para filtrar as propostas.
@@ -55,7 +55,7 @@ public partial class ListOffersPage : ComponentBase
     /// <summary>
     /// Lista de propostas a serem exibidas no grid.
     /// </summary>
-    public List<Offer> Items { get; set; } = [];
+    public List<Proposta> Items { get; set; } = [];
 
     #endregion
 
@@ -119,7 +119,7 @@ public partial class ListOffersPage : ComponentBase
     /// Um objeto <see cref="GridData{Offer}"/> contendo a lista de propostas e a contagem total.
     /// Caso ocorra uma falha, retorna um grid vazio e exibe uma mensagem de erro.
     /// </returns>
-    public async Task<GridData<Offer>> LoadServerData(GridState<Offer> state)
+    public async Task<GridData<Proposta>> LoadServerData(GridState<Proposta> state)
     {
         try
         {
@@ -137,25 +137,25 @@ public partial class ListOffersPage : ComponentBase
             {
                 if (OnlyAccepted)
                     Items = response.Data?
-                        .Where(o => o.OfferStatus == EOfferStatus.Accepted)
-                        .ToList() ?? new List<Offer>();
+                        .Where(o => o.StatusProposta == EStatusProposta.Aceita)
+                        .ToList() ?? new List<Proposta>();
                 else
-                    Items = response.Data ?? new List<Offer>();
+                    Items = response.Data ?? new List<Proposta>();
 
-                return new GridData<Offer>
+                return new GridData<Proposta>
                 {
-                    Items = Items.OrderByDescending(o => o.UpdatedAt),
+                    Items = Items.OrderByDescending(o => o.AtualizadoEm),
                     TotalItems = response.TotalCount
                 };
             }
 
             Snackbar.Add(response.Message ?? string.Empty, Severity.Error);
-            return new GridData<Offer>();
+            return new GridData<Proposta>();
         }
         catch (Exception e)
         {
             Snackbar.Add(e.Message, Severity.Error);
-            return new GridData<Offer>();
+            return new GridData<Proposta>();
         }
     }
 
@@ -174,10 +174,10 @@ public partial class ListOffersPage : ComponentBase
     /// Exibe um diálogo de confirmação e, se confirmado, envia a solicitação para aceitar a proposta.
     /// Após a operação, exibe uma notificação e recarrega o grid.
     /// </summary>
-    /// <param name="offer">Proposta a ser aceita.</param>
-    public async Task OnAcceptClickedAsync(Offer offer)
+    /// <param name="proposta">Proposta a ser aceita.</param>
+    public async Task OnAcceptClickedAsync(Proposta proposta)
     {
-        if (IsOfferStatusInvalid(offer)) return;
+        if (IsOfferStatusInvalid(proposta)) return;
         var parameters = new DialogParameters
         {
             { "ContentText", "Deseja aceitar a proposta?<br>" +
@@ -187,7 +187,7 @@ public partial class ListOffersPage : ComponentBase
         var dialog = await DialogService.ShowAsync<DialogConfirm>("Confirmação", parameters);
         if (await dialog.Result is { Canceled: true }) return;
 
-        var request = new AcceptOfferRequest { Id = offer.Id };
+        var request = new AcceptOfferRequest { Id = proposta.Id };
         var result = await Handler.AcceptAsync(request);
         if (result is { IsSuccess: true, Data: not null })
         {
@@ -205,10 +205,10 @@ public partial class ListOffersPage : ComponentBase
     /// Exibe um diálogo de confirmação e, se confirmado, envia a solicitação para rejeitar a proposta.
     /// Após a operação, exibe uma notificação e recarrega o grid.
     /// </summary>
-    /// <param name="offer">Proposta a ser rejeitada.</param>
-    public async Task OnRejectClickedAsync(Offer offer)
+    /// <param name="proposta">Proposta a ser rejeitada.</param>
+    public async Task OnRejectClickedAsync(Proposta proposta)
     {
-        if (IsOfferStatusInvalid(offer)) return;
+        if (IsOfferStatusInvalid(proposta)) return;
         var parameters = new DialogParameters
         {
             { "ContentText", "Deseja recusar a proposta?<br>" +
@@ -218,7 +218,7 @@ public partial class ListOffersPage : ComponentBase
         var dialog = await DialogService.ShowAsync<DialogConfirm>("Confirmação", parameters);
         if (await dialog.Result is { Canceled: true }) return;
 
-        var request = new RejectOfferRequest { Id = offer.Id };
+        var request = new RejectOfferRequest { Id = proposta.Id };
         var result = await Handler.RejectAsync(request);
         if (result is { IsSuccess: true, Data: not null })
         {
@@ -234,8 +234,8 @@ public partial class ListOffersPage : ComponentBase
     /// <summary>
     /// Abre uma caixa de diálogo para visualizar os detalhes completos de uma proposta.
     /// </summary>
-    /// <param name="offer">Proposta a ser visualizada.</param>
-    public async Task OpenOfferDialog(Offer offer)
+    /// <param name="proposta">Proposta a ser visualizada.</param>
+    public async Task OpenOfferDialog(Proposta proposta)
     {
         var options = new DialogOptions
         {
@@ -247,8 +247,8 @@ public partial class ListOffersPage : ComponentBase
 
         var parameters = new DialogParameters
         {
-            { "OfferId", offer.Id },
-            { "ReadyOnly", offer.OfferStatus != EOfferStatus.Analysis },
+            { "OfferId", proposta.Id },
+            { "ReadyOnly", proposta.StatusProposta != EStatusProposta.EmAnalise },
             { "ShowPayments", true }
         };
 
@@ -258,29 +258,29 @@ public partial class ListOffersPage : ComponentBase
     /// <summary>
     /// Notifica o componente pai que uma proposta foi selecionada.
     /// </summary>
-    /// <param name="offer">Proposta selecionada.</param>
-    public async Task SelectOffer(Offer offer)
+    /// <param name="proposta">Proposta selecionada.</param>
+    public async Task SelectOffer(Proposta proposta)
     {
         if (OnOfferSelected.HasDelegate)
-            await OnOfferSelected.InvokeAsync(offer);
+            await OnOfferSelected.InvokeAsync(proposta);
     }
 
     /// <summary>
     /// Verifica se o status da proposta é inválido para alteração.
     /// Se a proposta estiver em status "Accepted" ou "Rejected", exibe uma mensagem de alerta.
     /// </summary>
-    /// <param name="offer">Proposta a ser verificada.</param>
+    /// <param name="proposta">Proposta a ser verificada.</param>
     /// <returns>
     /// True se o status da proposta for inválido para alteração; caso contrário, false.
     /// </returns>
-    private bool IsOfferStatusInvalid(Offer offer)
+    private bool IsOfferStatusInvalid(Proposta proposta)
     {
-        switch (offer.OfferStatus)
+        switch (proposta.StatusProposta)
         {
-            case EOfferStatus.Accepted:
+            case EStatusProposta.Aceita:
                 Snackbar.Add("Proposta está aceita", Severity.Warning);
                 return true;
-            case EOfferStatus.Rejected:
+            case EStatusProposta.Rejeitada:
                 Snackbar.Add("Proposta está cancelada", Severity.Warning);
                 return true;
             default:

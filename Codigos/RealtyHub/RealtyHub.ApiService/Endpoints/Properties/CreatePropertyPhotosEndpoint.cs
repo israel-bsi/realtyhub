@@ -29,8 +29,8 @@ public class CreatePropertyPhotosEndpoint : IEndpoint
             .WithSummary("Adiciona fotos a um imóvel")
             .WithDescription("Adiciona fotos a um imóvel")
             .WithOrder(6)
-            .Produces<Response<PropertyPhoto?>>(StatusCodes.Status201Created)
-            .Produces<Response<Property?>>(StatusCodes.Status400BadRequest);
+            .Produces<Response<FotoImovel?>>(StatusCodes.Status201Created)
+            .Produces<Response<Imovel?>>(StatusCodes.Status400BadRequest);
     }
 
     /// <summary>

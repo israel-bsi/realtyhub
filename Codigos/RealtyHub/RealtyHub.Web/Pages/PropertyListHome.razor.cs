@@ -22,12 +22,12 @@ public partial class PropertyListHomePage : ComponentBase
     /// <summary>
     /// Componente de grid do MudBlazor utilizado para exibir a lista de imóveis.
     /// </summary>
-    public MudDataGrid<Property> DataGrid { get; set; } = null!;
+    public MudDataGrid<Imovel> DataGrid { get; set; } = null!;
 
     /// <summary>
     /// Lista de imóveis a serem exibidos no grid.
     /// </summary>
-    public List<Property> Properties { get; set; } = [];
+    public List<Imovel> Properties { get; set; } = [];
 
     /// <summary>
     /// Termo de busca para filtrar os imóveis.
@@ -87,7 +87,7 @@ public partial class PropertyListHomePage : ComponentBase
     /// Um objeto <see cref="GridData{Property}"/> contendo a lista de imóveis e a contagem total.
     /// Em caso de falha, retorna um grid vazio e exibe uma mensagem de erro.
     /// </returns>
-    public async Task<GridData<Property>> LoadServerData(GridState<Property> state)
+    public async Task<GridData<Imovel>> LoadServerData(GridState<Imovel> state)
     {
         try
         {
@@ -102,7 +102,7 @@ public partial class PropertyListHomePage : ComponentBase
             var response = await Handler.GetAllAsync(request);
             if (response.IsSuccess)
             {
-                return new GridData<Property>
+                return new GridData<Imovel>
                 {
                     Items = response.Data ?? [],
                     TotalItems = response.TotalCount
@@ -110,12 +110,12 @@ public partial class PropertyListHomePage : ComponentBase
             }
 
             Snackbar.Add(response.Message ?? string.Empty, Severity.Error);
-            return new GridData<Property>();
+            return new GridData<Imovel>();
         }
         catch (Exception e)
         {
             Snackbar.Add(e.Message, Severity.Error);
-            return new GridData<Property>();
+            return new GridData<Imovel>();
         }
     }
 
@@ -147,24 +147,24 @@ public partial class PropertyListHomePage : ComponentBase
     /// Obtém a URL da foto thumbnail do imóvel.
     /// Se houver uma foto marcada como thumbnail, essa URL é utilizada; caso contrário, utiliza a primeira foto disponível.
     /// </summary>
-    /// <param name="property">Imóvel cujo thumbnail será obtido.</param>
+    /// <param name="imovel">Imóvel cujo thumbnail será obtido.</param>
     /// <returns>String com a URL da foto.</returns>
-    public string GetSrcThumbnailPhoto(Property property)
+    public string GetSrcThumbnailPhoto(Imovel imovel)
     {
-        var photo = property
-            .PropertyPhotos
-            .FirstOrDefault(p => p.IsThumbnail)
-            ?? property.PropertyPhotos.FirstOrDefault();
+        var photo = imovel
+            .FotosImovel
+            .FirstOrDefault(p => p.Miniatura)
+            ?? imovel.FotosImovel.FirstOrDefault();
 
-        return $"{Configuration.BackendUrl}/photos/{photo?.Id}{photo?.Extension}";
+        return $"{Configuration.BackendUrl}/photos/{photo?.Id}{photo?.Extensao}";
     }
 
     /// <summary>
     /// Abre um diálogo modal para o envio de uma proposta de compra para o imóvel selecionado.
     /// </summary>
-    /// <param name="property">Imóvel para o qual a proposta será enviada.</param>
+    /// <param name="imovel">Imóvel para o qual a proposta será enviada.</param>
     /// <returns>Task representando a operação assíncrona.</returns>
-    public async Task OnSendOfferClickedAsync(Property property)
+    public async Task OnSendOfferClickedAsync(Imovel imovel)
     {
         var options = new DialogOptions
         {
@@ -176,7 +176,7 @@ public partial class PropertyListHomePage : ComponentBase
 
         var parameters = new DialogParameters
         {
-            { "PropertyId", property.Id }
+            { "PropertyId", imovel.Id }
         };
 
         await DialogService.ShowAsync<OfferDialog>("Enviar proposta", parameters, options);

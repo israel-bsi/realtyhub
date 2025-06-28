@@ -27,7 +27,7 @@ public class CreateCustomerEndpoint : IEndpoint
             .WithSummary("Cria um novo cliente")
             .WithDescription("Cria um novo cliente")
             .WithOrder(1)
-            .Produces<Response<Customer?>>(StatusCodes.Status201Created)
+            .Produces<Response<Cliente?>>(StatusCodes.Status201Created)
             .Produces(StatusCodes.Status400BadRequest);
 
     /// <summary>
@@ -39,7 +39,7 @@ public class CreateCustomerEndpoint : IEndpoint
     /// </remarks>
     /// <param name="user">Objeto <see cref="ClaimsPrincipal"/> contendo os dados do usuário autenticado.</param>
     /// <param name="handler">Instância de <see cref="ICustomerHandler"/> responsável pelas operações relacionadas a clientes.</param>
-    /// <param name="request">Objeto <see cref="Customer"/> contendo os dados para criação do cliente.</param>
+    /// <param name="request">Objeto <see cref="Cliente"/> contendo os dados para criação do cliente.</param>
     /// <returns>
     /// Um objeto <see cref="IResult"/> representando a resposta HTTP:
     /// <para>- HTTP 201 Created com os dados do cliente criado, se a operação for bem-sucedida;</para>
@@ -48,9 +48,9 @@ public class CreateCustomerEndpoint : IEndpoint
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
         ICustomerHandler handler,
-        Customer request)
+        Cliente request)
     {
-        request.UserId = user.Identity?.Name ?? string.Empty;
+        request.UsuarioId = user.Identity?.Name ?? string.Empty;
         var result = await handler.CreateAsync(request);
 
         return result.IsSuccess

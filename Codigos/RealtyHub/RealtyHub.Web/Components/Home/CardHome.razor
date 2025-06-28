@@ -5,17 +5,17 @@
         <MudCard Class="@("mb-2 " + Class)">
             <MudCardHeader>
                 <CardHeaderContent>
-                    <MudText Typo="Typo.body1">@Property.Title</MudText>
+                    <MudText Typo="Typo.body1">@Imovel.Titulo</MudText>
                 </CardHeaderContent>
             </MudCardHeader>
             <MudCardMedia Image="@GetSrcPhoto()" Height="300" />
             <MudCardContent>
-                <MudText Typo="Typo.body2">@Property.Description</MudText> <br />
-                <MudText Typo="Typo.body2">@Property.Bedroom @(Property.Bedroom > 1 ? "Quartos" : "Quarto")</MudText> <br />
-                <MudText Typo="Typo.body2">@Property.Bathroom @(Property.Bathroom > 1 ? "Banheiros" : "Banheiro")</MudText> <br />
-                <MudText Typo="Typo.body2">@Property.Garage @(Property.Garage > 1 ? "Garagens" : "Garagem")</MudText> <br />
-                <MudText Typo="Typo.body2">@Property.Area M²: </MudText> <br />
-                <MudText Typo="Typo.body2">@Property.Price Preço</MudText> <br />
+                <MudText Typo="Typo.body2">@Imovel.Descricao</MudText> <br />
+                <MudText Typo="Typo.body2">@Imovel.Quarto @(Imovel.Quarto > 1 ? "Quartos" : "Quarto")</MudText> <br />
+                <MudText Typo="Typo.body2">@Imovel.Banheiro @(Imovel.Banheiro > 1 ? "Banheiros" : "Banheiro")</MudText> <br />
+                <MudText Typo="Typo.body2">@Imovel.Garagem @(Imovel.Garagem > 1 ? "Garagens" : "Garagem")</MudText> <br />
+                <MudText Typo="Typo.body2">@Imovel.Area M²: </MudText> <br />
+                <MudText Typo="Typo.body2">@Imovel.Preco Preço</MudText> <br />
             </MudCardContent>
             <MudCardActions>
                 <MudTooltip Text="Enviar proposta">
@@ -26,7 +26,7 @@
                 <MudTooltip Text="Mais informações">
                     <MudIconButton Icon="@Icons.Material.Filled.Info"
                                    Color="Color.Primary"
-                                   Href="@($"/imoveis/detalhes/{Property.Id}")" />
+                                   Href="@($"/imoveis/detalhes/{Imovel.Id}")" />
                 </MudTooltip>
             </MudCardActions>
         </MudCard>

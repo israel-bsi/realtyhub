@@ -22,9 +22,9 @@ public interface IPropertyPhotosHandler
     /// <param name="request">Instância de <see cref="CreatePropertyPhotosRequest"/> contendo as informações da nova foto.</param>
     /// <returns>
     /// Retorna um objeto <see cref="Response{TData}"/> indicando o resultado da operação.
-    /// O objeto TData é do tipo <see cref="PropertyPhoto"/> e pode ser nulo se a operação falhar.
+    /// O objeto TData é do tipo <see cref="FotoImovel"/> e pode ser nulo se a operação falhar.
     /// </returns>
-    Task<Response<PropertyPhoto?>> CreateAsync(CreatePropertyPhotosRequest request);
+    Task<Response<FotoImovel?>> CreateAsync(CreatePropertyPhotosRequest request);
 
     /// <summary>
     /// Atualiza as informações de uma foto de imóvel existente.
@@ -35,9 +35,9 @@ public interface IPropertyPhotosHandler
     /// <param name="request">Instância de <see cref="UpdatePropertyPhotosRequest"/> contendo as informações atualizadas da foto.</param>
     /// <returns>
     /// Retorna um objeto <see cref="Response{TData}"/> indicando o resultado da operação.
-    /// O objeto TData é do tipo <see cref="PropertyPhoto"/> e pode ser nulo se a operação falhar.
+    /// O objeto TData é do tipo <see cref="FotoImovel"/> e pode ser nulo se a operação falhar.
     /// </returns>
-    Task<Response<List<PropertyPhoto>?>> UpdateAsync(UpdatePropertyPhotosRequest request);
+    Task<Response<List<FotoImovel>?>> UpdateAsync(UpdatePropertyPhotosRequest request);
 
     /// <summary>
     /// Exclui uma foto de imóvel existente.
@@ -48,9 +48,9 @@ public interface IPropertyPhotosHandler
     /// <param name="request">Instância de <see cref="DeletePropertyPhotoRequest"/> contendo o Id da foto a ser excluída.</param>
     /// <returns>
     /// Retorna um objeto <see cref="Response{TData}"/> indicando o resultado da operação.
-    /// O objeto TData é do tipo <see cref="PropertyPhoto"/> e pode ser nulo se a operação falhar.
+    /// O objeto TData é do tipo <see cref="FotoImovel"/> e pode ser nulo se a operação falhar.
     /// </returns>
-    Task<Response<PropertyPhoto?>> DeleteAsync(DeletePropertyPhotoRequest request);
+    Task<Response<FotoImovel?>> DeleteAsync(DeletePropertyPhotoRequest request);
 
     /// <summary>
     /// Recupera uma foto de imóvel existente.
@@ -61,8 +61,8 @@ public interface IPropertyPhotosHandler
     /// <param name="request">Instância de <see cref="GetAllPropertyPhotosByPropertyRequest"/> contendo o Id da foto a ser recuperada.</param>
     /// <returns>
     /// Retorna um objeto <see cref="Response{TData}"/> indicando o resultado da operação.  
-    /// O objeto TData é uma lista do tipo <see cref="PropertyPhoto"/> e pode ser nulo se a operação falhar.
+    /// O objeto TData é uma lista do tipo <see cref="FotoImovel"/> e pode ser nulo se a operação falhar.
     /// </returns>
-    Task<Response<List<PropertyPhoto>?>> GetAllByPropertyAsync(
+    Task<Response<List<FotoImovel>?>> GetAllByPropertyAsync(
         GetAllPropertyPhotosByPropertyRequest request);
 }

@@ -28,8 +28,8 @@ public class AcceptOfferEndpoint : IEndpoint
             .WithSummary("Aceita uma proposta")
             .WithDescription("Aceita uma proposta")
             .WithOrder(7)
-            .Produces<Response<Offer?>>()
-            .Produces<Response<Offer?>>(StatusCodes.Status400BadRequest);
+            .Produces<Response<Proposta?>>()
+            .Produces<Response<Proposta?>>(StatusCodes.Status400BadRequest);
 
     /// <summary>
     /// Manipulador da rota que aceita uma proposta.

@@ -32,58 +32,58 @@ public class AppDbContext :
     }
 
     /// <summary>
-    /// Obtém ou define o conjunto de dados para a entidade <c><see cref="Customer"/></c>.
+    /// Obtém ou define o conjunto de dados para a entidade <c><see cref="Cliente"/></c>.
     /// </summary>
     /// <value>Uma instância de <c><see cref="DbSet{Customer}"/></c> representando os clientes.</value>
-    public DbSet<Customer> Customers { get; set; } = null!;
+    public DbSet<Cliente> Customers { get; set; } = null!;
 
     /// <summary>
-    /// Obtém ou define o conjunto de dados para a entidade <c><see cref="Property"/></c>.
+    /// Obtém ou define o conjunto de dados para a entidade <c><see cref="Imovel"/></c>.
     /// </summary>
     /// <value>Uma instância de <c><see cref="DbSet{Property}"/></c> representando os imóveis.</value>
-    public DbSet<Property> Properties { get; set; } = null!;
+    public DbSet<Imovel> Properties { get; set; } = null!;
 
     /// <summary>
     /// Obtém ou define o conjunto de dados para a entidade <c><see cref="Viewing"/></c>.
     /// </summary>
     /// <value>Uma instância de <c><see cref="DbSet{Viewing}"/></c> representando as visitas.</value>
-    public DbSet<Viewing> Viewing { get; set; } = null!;
+    public DbSet<Visita> Viewing { get; set; } = null!;
 
     /// <summary>
-    /// Obtém ou define o conjunto de dados para a entidade <c><see cref="Offer"/></c>.
+    /// Obtém ou define o conjunto de dados para a entidade <c><see cref="Proposta"/></c>.
     /// </summary>
     /// <value>Uma instância de <c><see cref="DbSet{Offer}"/></c> representando as propostas.</value>
-    public DbSet<Offer> Offers { get; set; } = null!;
+    public DbSet<Proposta> Offers { get; set; } = null!;
 
     /// <summary>
-    /// Obtém ou define o conjunto de dados para a entidade <c><see cref="Payment"/></c>.
+    /// Obtém ou define o conjunto de dados para a entidade <c><see cref="Pagamento"/></c>.
     /// </summary>
     /// <value>Uma instância de <c><see cref="DbSet{Payment}"/></c> representando os pagamentos.</value>
-    public DbSet<Payment> Payments { get; set; } = null!;
+    public DbSet<Pagamento> Payments { get; set; } = null!;
 
     /// <summary>
-    /// Obtém ou define o conjunto de dados para a entidade <c><see cref="Contract"/></c>.
+    /// Obtém ou define o conjunto de dados para a entidade <c><see cref="Contrato"/></c>.
     /// </summary>
     /// <value>Uma instância de <c><see cref="DbSet{Contract}"/></c> representando os contratos.</value>
-    public DbSet<Contract> Contracts { get; set; } = null!;
+    public DbSet<Contrato> Contracts { get; set; } = null!;
 
     /// <summary>
-    /// Obtém ou define o conjunto de dados para a entidade <c><see cref="PropertyPhoto"/></c>.
+    /// Obtém ou define o conjunto de dados para a entidade <c><see cref="FotoImovel"/></c>.
     /// </summary>
     /// <value>Uma instância de <c><see cref="DbSet{PropertyPhoto}"/></c> representando as fotos de propriedades.</value>
-    public DbSet<PropertyPhoto> PropertyPhotos { get; set; } = null!;
+    public DbSet<FotoImovel> PropertyPhotos { get; set; } = null!;
 
     /// <summary>
-    /// Obtém ou define o conjunto de dados para a entidade <c><see cref="ContractTemplate"/></c>.
+    /// Obtém ou define o conjunto de dados para a entidade <c><see cref="ModeloContrato"/></c>.
     /// </summary>
     /// <value>Uma instância de <c><see cref="DbSet{ContractTemplate}"/></c> representando os templates de contrato.</value>
-    public DbSet<ContractTemplate> ContractTemplates { get; set; } = null!;
+    public DbSet<ModeloContrato> ContractTemplates { get; set; } = null!;
 
     /// <summary>
-    /// Obtém ou define o conjunto de dados para a entidade <c><see cref="Condominium"/></c>.
+    /// Obtém ou define o conjunto de dados para a entidade <c><see cref="Condominio"/></c>.
     /// </summary>
     /// <value>Uma instância de <c><see cref="DbSet{Condominium}"/></c> representando os condomínios.</value>
-    public DbSet<Condominium> Condominiums { get; set; } = null!;
+    public DbSet<Condominio> Condominiums { get; set; } = null!;
 
     /// <summary>
     /// Configura o modelo para o contexto, aplicando as configurações de todas as entidades contidas no assembly.

@@ -24,8 +24,8 @@ public class CreateCondominiumEndpoint : IEndpoint
             .WithSummary("Cria um novo condomínio")
             .WithDescription("Cria um novo condomínio")
             .WithOrder(1)
-            .Produces<Response<Condominium?>>(StatusCodes.Status201Created)
-            .Produces<Response<Condominium?>>(StatusCodes.Status400BadRequest);
+            .Produces<Response<Condominio?>>(StatusCodes.Status201Created)
+            .Produces<Response<Condominio?>>(StatusCodes.Status400BadRequest);
 
     /// <summary>
     /// Manipulador da rota que recebe a requisição para criar um condomínio.
@@ -36,7 +36,7 @@ public class CreateCondominiumEndpoint : IEndpoint
     /// </remarks>
     /// <param name="user">Instância de <c><see cref="ClaimsPrincipal"/></c> contendo os dados do usuário autenticado.</param>
     /// <param name="handler">Instância de <c><see cref="ICondominiumHandler"/></c> que executa a criação de condomínios.</param>
-    /// <param name="request">Objeto <c><see cref="Condominium"/></c> contendo os dados do novo condomínio.</param>
+    /// <param name="request">Objeto <c><see cref="Condominio"/></c> contendo os dados do novo condomínio.</param>
     /// <returns>
     /// Um <c><see cref="IResult"/></c> representando o resultado da operação:
     /// <para>- HTTP 201 Created com o recurso criado, se a criação for bem-sucedida;</para>
@@ -45,10 +45,10 @@ public class CreateCondominiumEndpoint : IEndpoint
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
         ICondominiumHandler handler,
-        Condominium request)
+        Condominio request)
     {
-        request.UserId = user.Identity?.Name ?? string.Empty;
-        Response<Condominium?> result = await handler.CreateAsync(request);
+        request.UsuarioId = user.Identity?.Name ?? string.Empty;
+        Response<Condominio?> result = await handler.CreateAsync(request);
 
         return result.IsSuccess
             ? Results.Created($"/{result.Data?.Id}", result)

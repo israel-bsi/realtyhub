@@ -28,8 +28,8 @@ public class CancelViewingEndpoint : IEndpoint
             .WithSummary("Cancela uma visita")
             .WithDescription("Cancela uma visita")
             .WithOrder(3)
-            .Produces<Response<Viewing?>>()
-            .Produces<Response<Viewing?>>(StatusCodes.Status400BadRequest);
+            .Produces<Response<Visita?>>()
+            .Produces<Response<Visita?>>(StatusCodes.Status400BadRequest);
 
     /// <summary>
     /// Manipulador da rota que cancela uma visita.

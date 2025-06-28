@@ -27,8 +27,8 @@ public class CreatePropertyEndpoint : IEndpoint
             .WithSummary("Cria um novo imóvel")
             .WithDescription("Cria um novo imóvel")
             .WithOrder(1)
-            .Produces<Response<Property?>>(StatusCodes.Status201Created)
-            .Produces<Response<Property?>>(StatusCodes.Status400BadRequest);
+            .Produces<Response<Imovel?>>(StatusCodes.Status201Created)
+            .Produces<Response<Imovel?>>(StatusCodes.Status400BadRequest);
 
     /// <summary>
     /// Manipulador da rota que cria um novo imóvel.
@@ -39,7 +39,7 @@ public class CreatePropertyEndpoint : IEndpoint
     /// </remarks>
     /// <param name="user">Objeto <see cref="ClaimsPrincipal"/> contendo os dados do usuário autenticado.</param>
     /// <param name="handler">Instância de <see cref="IPropertyHandler"/> responsável pelas operações relacionadas a imóveis.</param>
-    /// <param name="request">Objeto <see cref="Property"/> contendo os dados do imóvel a ser criado.</param>
+    /// <param name="request">Objeto <see cref="Imovel"/> contendo os dados do imóvel a ser criado.</param>
     /// <returns>
     /// Um objeto <see cref="IResult"/> representando a resposta HTTP:
     /// <para>- HTTP 201 Created com os detalhes do imóvel criado, se a operação for bem-sucedida;</para>
@@ -48,9 +48,9 @@ public class CreatePropertyEndpoint : IEndpoint
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
         IPropertyHandler handler,
-        Property request)
+        Imovel request)
     {
-        request.UserId = user.Identity?.Name ?? string.Empty;
+        request.UsuarioId = user.Identity?.Name ?? string.Empty;
         var result = await handler.CreateAsync(request);
 
         return result.IsSuccess

@@ -19,22 +19,22 @@ else
 
             <MudGrid Class="mb-4">
                 <MudItem lg="2" xs="12" sm="6">
-                    <EnumSelect TEnum="EPropertyType"
+                    <EnumSelect TEnum="ETipoImovel"
                                 Label="Tipo do Imóvel"
-                                @bind-SelectedValue="InputModel.PropertyType">
+                                @bind-SelectedValue="InputModel.TipoImovel">
                     </EnumSelect>
                 </MudItem>
 
                 <MudItem xs="3" sm="2">
-                    <MudCheckBox @bind-Value="InputModel.IsNew"
-                                 For="@(() => InputModel.IsNew)"
+                    <MudCheckBox @bind-Value="InputModel.Novo"
+                                 For="@(() => InputModel.Novo)"
                                  Label="Imóvel Novo">
                     </MudCheckBox>
                 </MudItem>
 
                 <MudItem xs="6" sm="3">
-                    <MudCheckBox @bind-Value="InputModel.ShowInHome"
-                                 For="@(() => InputModel.ShowInHome)"
+                    <MudCheckBox @bind-Value="InputModel.ExibirNaHome"
+                                 For="@(() => InputModel.ExibirNaHome)"
                                  Label="Exibir na página principal">
                     </MudCheckBox>
                 </MudItem>
@@ -43,15 +43,15 @@ else
             <MudGrid Class="mb-4">
                 <MudItem lg="4" xs="12" sm="6">
                     <MudTextField Label="Título"
-                                  @bind-Value="InputModel.Title"
-                                  For="@(() => InputModel.Title)"
+                                  @bind-Value="InputModel.Titulo"
+                                  For="@(() => InputModel.Titulo)"
                                   InputType="InputType.Text" />
                 </MudItem>
 
                 <MudItem lg="8" xs="12" sm="6">
                     <MudTextField Label="Descrição"
-                                  @bind-Value="InputModel.Description"
-                                  For="@(() => InputModel.Description)"
+                                  @bind-Value="InputModel.Descricao"
+                                  For="@(() => InputModel.Descricao)"
                                   AutoGrow="true"
                                   InputType="InputType.Text"
                                   MaxLength="255" />
@@ -64,14 +64,14 @@ else
                                   T="decimal"
                                   Variant="Variant.Text"
                                   Format="C"
-                                  @bind-Value="InputModel.Price"
-                                  For="@(() => InputModel.Price)" />
+                                  @bind-Value="InputModel.Preco"
+                                  For="@(() => InputModel.Preco)" />
                 </MudItem>
 
                 <MudItem lg="8" xs="12" sm="6">
                     <MudTextField Label="Detalhes da transação"
-                                  @bind-Value="InputModel.TransactionsDetails"
-                                  For="@(() => InputModel.TransactionsDetails)"
+                                  @bind-Value="InputModel.DetalhesTransacao"
+                                  For="@(() => InputModel.DetalhesTransacao)"
                                   AutoGrow="true"
                                   MaxLength="255"
                                   InputType="InputType.Text" />
@@ -81,8 +81,8 @@ else
             <MudGrid Class="mt-1">
                 <MudItem lg="1" xs="12" sm="6">
                     <MudNumericField Label="Quartos"
-                                     @bind-Value="InputModel.Bedroom"
-                                     For="@(() => InputModel.Bedroom)"
+                                     @bind-Value="InputModel.Quarto"
+                                     For="@(() => InputModel.Quarto)"
                                      InputMode="InputMode.numeric"
                                      Max="999"
                                      Min="0" />
@@ -90,8 +90,8 @@ else
 
                 <MudItem lg="1" xs="12" sm="6">
                     <MudNumericField Label="Banheiros"
-                                     @bind-Value="InputModel.Bathroom"
-                                     For="@(() => InputModel.Bathroom)"
+                                     @bind-Value="InputModel.Banheiro"
+                                     For="@(() => InputModel.Banheiro)"
                                      InputMode="InputMode.numeric"
                                      Max="999"
                                      Min="0" />
@@ -99,8 +99,8 @@ else
 
                 <MudItem lg="1" xs="12" sm="6">
                     <MudNumericField Label="Garagens"
-                                     @bind-Value="InputModel.Garage"
-                                     For="@(() => InputModel.Garage)"
+                                     @bind-Value="InputModel.Garagem"
+                                     For="@(() => InputModel.Garagem)"
                                      InputMode="InputMode.numeric"
                                      Max="999"
                                      Min="0" />
@@ -119,8 +119,8 @@ else
                 <MudItem lg="3" xs="12" sm="6">
                     <MudTextField Label="Matrícula no Cartório"
                                   T="string"
-                                  @bind-Value="InputModel.RegistryNumber"
-                                  For="@(() => InputModel.RegistryNumber)"
+                                  @bind-Value="InputModel.NumeroRegistro"
+                                  For="@(() => InputModel.NumeroRegistro)"
                                   HelperText="Número de registro do imóvel"
                                   InputType="InputType.Text" />
                 </MudItem>
@@ -128,8 +128,8 @@ else
                 <MudItem lg="3" xs="12" sm="6">
                     <MudTextField Label="Registro do Cartório"
                                   T="string"
-                                  @bind-Value="InputModel.RegistryRecord"
-                                  For="@(() => InputModel.RegistryRecord)"
+                                  @bind-Value="InputModel.RegistroCartorio"
+                                  For="@(() => InputModel.RegistroCartorio)"
                                   HelperText="Número de registro do cartório"
                                   InputType="InputType.Text" />
                 </MudItem>
@@ -140,12 +140,12 @@ else
                 <MudItem lg="8" xs="12" sm="6">
                     <MudTextField Class="mb-2"
                                   ReadOnly="true"
-                                  Label="@(InputModel.Seller == null ? "Clique aqui para pesquisar o cliente" : "Cliente selecionado")"
+                                  Label="@(InputModel.Vendedor == null ? "Clique aqui para pesquisar o cliente" : "Cliente selecionado")"
                                   AdornmentIcon="@Icons.Material.Filled.PersonSearch"
                                   @onclick="@OpenSellerDialog"
                                   OnAdornmentClick="OpenSellerDialog"
                                   Adornment="Adornment.End"
-                                  Value="@InputModel.Seller?.Name" />
+                                  Value="@InputModel.Vendedor?.Nome" />
                 </MudItem>
             </MudGrid>
 
@@ -154,16 +154,16 @@ else
                 <MudItem lg="8" md="10" xs="12">
                     <MudTextField Class="mb-2"
                                   ReadOnly="true"
-                                  Label="@(InputModel.Condominium == null ? "Clique aqui para pesquisar o condomínio" : "Condomínio selecionado")"
+                                  Label="@(InputModel.Condominio == null ? "Clique aqui para pesquisar o condomínio" : "Condomínio selecionado")"
                                   AdornmentIcon="@Icons.Material.Filled.Search"
                                   @onclick="OpenCondominiumDialog"
                                   OnAdornmentClick="OpenCondominiumDialog"
                                   Adornment="Adornment.End"
-                                  Value="InputModel.Condominium?.Name"/>
+                                  Value="InputModel.Condominio?.Nome"/>
                 </MudItem>
             </MudGrid>
 
-            <AddressInput @bind-InputModel="InputModel.Address" />
+            <AddressInput @bind-InputModel="InputModel.Endereco" />
 
             <MudText Class="mb-4 mt-4" Typo="Typo.h6">Fotos do imóvel</MudText>
 

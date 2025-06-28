@@ -17,7 +17,7 @@
     </MudButton>
 </div>
 
-<MudDataGrid T="Viewing"
+<MudDataGrid T="Visita"
              Class="mt-4"
              ServerData="LoadServerData"
              @ref="DataGrid"
@@ -32,15 +32,15 @@
                             Clearable="true" />
     </ToolBarContent>
     <Columns>
-        <PropertyColumn Property="v=>v.ViewingDate" Title="Data"></PropertyColumn>
-        <PropertyColumn Property="v=>v.Buyer!.Name" Title="Cliente"></PropertyColumn>
+        <PropertyColumn Property="v=>v.DataVisita" Title="Data"></PropertyColumn>
+        <PropertyColumn Property="v=>v.Comprador!.Nome" Title="Cliente"></PropertyColumn>
         @if (Property is null)
         {
-            <PropertyColumn Property="v=>v.Property!.Title" Title="Imóvel"></PropertyColumn>
+            <PropertyColumn Property="v=>v.Imovel!.Title" Title="Imóvel"></PropertyColumn>
         }
         <TemplateColumn Title="Status">
             <CellTemplate>
-                <ViewingStatus Status="@context.Item.ViewingStatus" />
+                <ViewingStatus StatusVisita="@context.Item.StatusVisita" />
             </CellTemplate>
         </TemplateColumn>
         <TemplateColumn Class="justify-end" Title="Ações">
@@ -50,25 +50,25 @@
                         <MudIconButton Icon="@Icons.Material.Filled.Schedule"
                                        Color="Color.Primary"
                                        OnClick="() => OnRescheduleButtonClickedAsync(context.Item)"
-                                       Disabled="@(context.Item.ViewingStatus != EViewingStatus.Scheduled)" />
+                                       Disabled="@(context.Item.StatusVisita != EStatusVisita.Agendada)" />
                     </MudTooltip>
                     <MudTooltip Text="Finalizar">
                         <MudIconButton Icon="@Icons.Material.Filled.Done"
                                        Color="Color.Primary"
                                        OnClick="() => OnDoneButtonClickedAsync(context.Item)" 
-                                       Disabled="@(context.Item.ViewingStatus != EViewingStatus.Scheduled)" />
+                                       Disabled="@(context.Item.StatusVisita != EStatusVisita.Agendada)" />
                     </MudTooltip>
                     <MudTooltip Text="Cancelar">
                         <MudIconButton Icon="@Icons.Material.Filled.Cancel"
                                        Color="Color.Error"
                                        OnClick="() => OnCancelButtonClickedAsync(context.Item)" 
-                                       Disabled="@(context.Item.ViewingStatus != EViewingStatus.Scheduled)" />
+                                       Disabled="@(context.Item.StatusVisita != EStatusVisita.Agendada)" />
                     </MudTooltip>
                 </MudStack>
             </CellTemplate>
         </TemplateColumn>
     </Columns>
     <PagerContent>
-        <MudDataGridPager T="Viewing"/>
+        <MudDataGridPager T="Visita"/>
     </PagerContent>
 </MudDataGrid>

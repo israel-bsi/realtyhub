@@ -20,15 +20,15 @@ else
                 <MudItem lg="5" md="7" xs="12">
                     <MudTextField T="string"
                                   Label="Nome"
-                                  @bind-Value="InputModel.Name"
-                                  For="@(() => InputModel.Name)"
+                                  @bind-Value="InputModel.Nome"
+                                  For="@(() => InputModel.Nome)"
                                   InputType="InputType.Text" />
                 </MudItem>
 
                 <MudItem lg="2" md="5" xs="12">
                     <MudNumericField Label="Valor mensal"
-                                     @bind-Value="InputModel.CondominiumValue"
-                                     For="@(() => InputModel.CondominiumValue)"
+                                     @bind-Value="InputModel.TaxaCondominial"
+                                     For="@(() => InputModel.TaxaCondominial)"
                                      InputMode="InputMode.numeric" />
                 </MudItem>
             </MudGrid>
@@ -36,36 +36,36 @@ else
             <MudGrid Justify="Justify.FlexStart">
                 <MudItem lg="1" md="2" xs="12">
                     <MudCheckBox Label="Elevador"
-                                 @bind-Value="InputModel.HasElevator"
-                                 For="@(() => InputModel.HasElevator)" />
+                                 @bind-Value="InputModel.PossuiElevador"
+                                 For="@(() => InputModel.PossuiElevador)" />
                 </MudItem>
 
                 <MudItem lg="1" md="2" xs="12">
                     <MudCheckBox Label="Piscina"
-                                 @bind-Value="InputModel.HasSwimmingPool"
-                                 For="@(() => InputModel.HasSwimmingPool)" />
+                                 @bind-Value="InputModel.PossuiPiscina"
+                                 For="@(() => InputModel.PossuiPiscina)" />
                 </MudItem>
 
                 <MudItem lg="1" md="2" xs="12">
                     <MudCheckBox Label="Playground"
-                                 @bind-Value="InputModel.HasPlayground"
-                                 For="@(() => InputModel.HasPlayground)" />
+                                 @bind-Value="InputModel.PossuiPlayground"
+                                 For="@(() => InputModel.PossuiPlayground)" />
                 </MudItem>
 
                 <MudItem lg="1" md="2" xs="12">
                     <MudCheckBox Label="Academia"
-                                 @bind-Value="InputModel.HasFitnessRoom"
-                                 For="@(() => InputModel.HasFitnessRoom)" />
+                                 @bind-Value="InputModel.PossuiAcademia"
+                                 For="@(() => InputModel.PossuiAcademia)" />
                 </MudItem>
 
                 <MudItem lg="2" md="3" xs="12">
                     <MudCheckBox Label="Salão de Festas"
-                                 @bind-Value="InputModel.HasPartyRoom"
-                                 For="@(() => InputModel.HasPartyRoom)" />
+                                 @bind-Value="InputModel.PossuiSalaoFesta"
+                                 For="@(() => InputModel.PossuiSalaoFesta)" />
                 </MudItem>
             </MudGrid>
 
-            <AddressInput @bind-InputModel="InputModel.Address" />
+            <AddressInput @bind-InputModel="InputModel.Endereco" />
 
             <MudButton ButtonType="ButtonType.Submit"
                        Variant="Variant.Filled"

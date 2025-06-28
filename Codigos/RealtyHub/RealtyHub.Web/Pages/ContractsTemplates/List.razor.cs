@@ -16,7 +16,7 @@ public partial class ListContractTemplatesPage : ComponentBase
     /// <summary>
     /// Lista de modelos de contrato a serem exibidos na página.
     /// </summary>
-    public List<ContractTemplate> ContractTemplates { get; set; } = [];
+    public List<ModeloContrato> ContractTemplates { get; set; } = [];
 
     #endregion
 
@@ -52,7 +52,7 @@ public partial class ListContractTemplatesPage : ComponentBase
     /// Um objeto <see cref="GridData{ContractTemplate}"/> contendo os modelos de contrato filtrados e a contagem total.
     /// Caso a operação falhe, retorna um grid vazio e exibe uma mensagem de erro.
     /// </returns>
-    public async Task<GridData<ContractTemplate>> LoadServerData(GridState<ContractTemplate> state)
+    public async Task<GridData<ModeloContrato>> LoadServerData(GridState<ModeloContrato> state)
     {
         try
         {
@@ -60,20 +60,20 @@ public partial class ListContractTemplatesPage : ComponentBase
             if (response.IsSuccess)
             {
                 ContractTemplates = response.Data ?? [];
-                return new GridData<ContractTemplate>
+                return new GridData<ModeloContrato>
                 {
-                    Items = ContractTemplates.Where(c => c.ShowInPage),
+                    Items = ContractTemplates.Where(c => c.MostrarNaHome),
                     TotalItems = ContractTemplates.Count
                 };
             }
 
             Snackbar.Add(response.Message ?? string.Empty, Severity.Error);
-            return new GridData<ContractTemplate>();
+            return new GridData<ModeloContrato>();
         }
         catch (Exception e)
         {
             Snackbar.Add(e.Message, Severity.Error);
-            return new GridData<ContractTemplate>();
+            return new GridData<ModeloContrato>();
         }
     }
 
@@ -82,9 +82,9 @@ public partial class ListContractTemplatesPage : ComponentBase
     /// </summary>
     /// <param name="template">O modelo de contrato a ser visualizado.</param>
     /// <returns>Task representando a operação assíncrona.</returns>
-    public async Task ShowInNewPage(ContractTemplate template)
+    public async Task ShowInNewPage(ModeloContrato template)
     {
-        await JsRuntime.InvokeVoidAsync("openContractPdfInNewTab", template.Path);
+        await JsRuntime.InvokeVoidAsync("openContractPdfInNewTab", template.Caminho);
     }
 
     #endregion

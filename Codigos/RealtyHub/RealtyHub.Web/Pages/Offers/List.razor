@@ -16,7 +16,7 @@
     </MudButton>
 </div>
 
-<MudDataGrid T="Offer"
+<MudDataGrid T="Proposta"
              Class="mt-4"
              ServerData="LoadServerData"
              @ref="DataGrid"
@@ -35,18 +35,18 @@
     </ToolBarContent>
     <Columns>
         <PropertyColumn Property="v => v.Id" Title="Id"></PropertyColumn>
-        <PropertyColumn Property="v => v.SubmissionDate" Title="Data"></PropertyColumn>
-        <PropertyColumn Property="v => v.Buyer!.Name" Title="Comprador"></PropertyColumn>
-        <PropertyColumn Property="v => v.Property!.Seller!.Name" Title="Vendedor"></PropertyColumn>
-        <PropertyColumn Property="v => v.Property!.Title" Title="Imóvel"></PropertyColumn>
+        <PropertyColumn Property="v => v.DataDeEnvio" Title="Data"></PropertyColumn>
+        <PropertyColumn Property="v => v.Comprador!.Nome" Title="Comprador"></PropertyColumn>
+        <PropertyColumn Property="v => v.Imovel!.Vendedor!.Nome" Title="Vendedor"></PropertyColumn>
+        <PropertyColumn Property="v => v.Imovel!.Titulo" Title="Imóvel"></PropertyColumn>
         <TemplateColumn Title="Valor">
             <CellTemplate>
-                @context.Item.Amount.ToString("C")
+                @context.Item.Valor.ToString("C")
             </CellTemplate>
         </TemplateColumn>
         <TemplateColumn Title="Status">
             <CellTemplate>
-                <OfferStatus Status="@context.Item.OfferStatus" />
+                <OfferStatus StatusProposta="@context.Item.StatusProposta" />
             </CellTemplate>
         </TemplateColumn>
         <TemplateColumn Class="justify-end" Title="Ações">
@@ -60,19 +60,19 @@
                     <MudIconButton Icon="@Icons.Material.Filled.Done"
                                    Color="Color.Success"
                                    OnClick="() => OnAcceptClickedAsync(context.Item)"
-                                   Disabled="@(context.Item.OfferStatus != EOfferStatus.Analysis)"/>
+                                   Disabled="@(context.Item.StatusProposta != EStatusProposta.EmAnalise)"/>
                 </MudTooltip>
                 <MudTooltip Text="Rejeitar">
                     <MudIconButton Icon="@Icons.Material.Filled.Cancel"
                                    Color="Color.Error"
                                    OnClick="() => OnRejectClickedAsync(context.Item)"
-                                   Disabled="@(context.Item.OfferStatus != EOfferStatus.Analysis)"/>
+                                   Disabled="@(context.Item.StatusProposta != EStatusProposta.EmAnalise)"/>
                 </MudTooltip>
             </CellTemplate>
         </TemplateColumn>
     </Columns>
     <PagerContent>
-        <MudDataGridPager T="Offer" />
+        <MudDataGridPager T="Proposta" />
     </PagerContent>
 </MudDataGrid>
 

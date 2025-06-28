@@ -5,50 +5,50 @@ using RealtyHub.Core.Models;
 namespace RealtyHub.ApiService.Data.Mappings;
 
 /// <summary>
-/// Configura o mapeamento da entidade <c><see cref="Offer"/></c> para o modelo de dados.
+/// Configura o mapeamento da entidade <c><see cref="Proposta"/></c> para o modelo de dados.
 /// </summary>
-public class OfferMapping : IEntityTypeConfiguration<Offer>
+public class OfferMapping : IEntityTypeConfiguration<Proposta>
 {
     /// <summary>
-    /// Configura as propriedades e relacionamentos da entidade <c><see cref="Offer"/></c>.
+    /// Configura as propriedades e relacionamentos da entidade <c><see cref="Proposta"/></c>.
     /// </summary>
-    /// <param name="builder">O construtor utilizado para configurar a entidade <c><see cref="Offer"/></c>.</param>
-    public void Configure(EntityTypeBuilder<Offer> builder)
+    /// <param name="builder">O construtor utilizado para configurar a entidade <c><see cref="Proposta"/></c>.</param>
+    public void Configure(EntityTypeBuilder<Proposta> builder)
     {
-        builder.ToTable("Offer");
+        builder.ToTable("Proposta");
 
         builder.HasKey(x => x.Id);
 
-        builder.Property(x => x.SubmissionDate)
+        builder.Property(x => x.DataDeEnvio)
             .IsRequired();
 
-        builder.Property(x => x.Amount)
+        builder.Property(x => x.Valor)
             .IsRequired();
 
-        builder.Property(x => x.OfferStatus)
+        builder.Property(x => x.StatusProposta)
             .IsRequired();
 
-        builder.Property(c => c.UserId)
+        builder.Property(c => c.UsuarioId)
             .IsRequired();
 
-        builder.Property(x => x.CreatedAt)
+        builder.Property(x => x.CriadoEm)
             .IsRequired()
             .HasDefaultValueSql("NOW()");
 
-        builder.Property(x => x.UpdatedAt)
+        builder.Property(x => x.AtualizadoEm)
             .IsRequired()
             .HasDefaultValueSql("NOW()");
 
-        builder.HasOne(x => x.Property)
+        builder.HasOne(x => x.Imovel)
             .WithMany()
-            .HasForeignKey(x => x.PropertyId);
+            .HasForeignKey(x => x.ImovelId);
 
-        builder.HasOne(x => x.Buyer)
+        builder.HasOne(x => x.Comprador)
             .WithMany()
-            .HasForeignKey(x => x.BuyerId);
+            .HasForeignKey(x => x.CompradorId);
 
-        builder.HasOne(x => x.Contract)
-            .WithOne(x => x.Offer)
-            .HasForeignKey<Contract>(x => x.OfferId);
+        builder.HasOne(x => x.Contrato)
+            .WithOne(x => x.Proposta)
+            .HasForeignKey<Contrato>(x => x.PropostaId);
     }
 }

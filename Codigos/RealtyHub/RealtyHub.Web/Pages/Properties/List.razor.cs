@@ -20,7 +20,7 @@ public partial class ListPropertiesPage : ComponentBase
     /// Evento chamado quando um imóvel é selecionado.
     /// </summary>
     [Parameter]
-    public EventCallback<Property> OnPropertySelected { get; set; }
+    public EventCallback<Imovel> OnPropertySelected { get; set; }
 
     /// <summary>
     /// Estilo CSS aplicado às linhas da tabela.
@@ -35,12 +35,12 @@ public partial class ListPropertiesPage : ComponentBase
     /// <summary>
     /// Componente de grid do MudBlazor utilizado para exibir os imóveis.
     /// </summary>
-    public MudDataGrid<Property> DataGrid { get; set; } = null!;
+    public MudDataGrid<Imovel> DataGrid { get; set; } = null!;
 
     /// <summary>
     /// Lista de imóveis a serem exibidos no grid.
     /// </summary>
-    public List<Property> Properties { get; set; } = [];
+    public List<Imovel> Properties { get; set; } = [];
 
     /// <summary>
     /// Termo de busca para filtrar os imóveis.
@@ -189,7 +189,7 @@ public partial class ListPropertiesPage : ComponentBase
     /// Um objeto <see cref="GridData{Property}"/> contendo a lista de imóveis e a contagem total.
     /// Em caso de falha, retorna um grid vazio e exibe uma mensagem de erro.
     /// </returns>
-    public async Task<GridData<Property>> LoadServerData(GridState<Property> state)
+    public async Task<GridData<Imovel>> LoadServerData(GridState<Imovel> state)
     {
         try
         {
@@ -203,19 +203,19 @@ public partial class ListPropertiesPage : ComponentBase
 
             var response = await Handler.GetAllAsync(request);
             if (response.IsSuccess)
-                return new GridData<Property>
+                return new GridData<Imovel>
                 {
                     Items = response.Data ?? [],
                     TotalItems = response.TotalCount
                 };
 
             Snackbar.Add(response.Message ?? string.Empty, Severity.Error);
-            return new GridData<Property>();
+            return new GridData<Imovel>();
         }
         catch (Exception e)
         {
             Snackbar.Add(e.Message, Severity.Error);
-            return new GridData<Property>();
+            return new GridData<Imovel>();
         }
     }
 
@@ -246,28 +246,28 @@ public partial class ListPropertiesPage : ComponentBase
     /// <summary>
     /// Notifica o componente pai que um imóvel foi selecionado.
     /// </summary>
-    /// <param name="property">Imóvel selecionado.</param>
+    /// <param name="imovel">Imóvel selecionado.</param>
     /// <returns>Task representando a operação assíncrona.</returns>
-    public async Task SelectProperty(Property property)
+    public async Task SelectProperty(Imovel imovel)
     {
         if (OnPropertySelected.HasDelegate)
-            await OnPropertySelected.InvokeAsync(property);
+            await OnPropertySelected.InvokeAsync(imovel);
     }
 
     /// <summary>
     /// Obtém a URL da foto thumbnail do imóvel.
     /// Se uma foto marcada como thumbnail existir, utiliza-a; caso contrário, utiliza a primeira foto disponível.
     /// </summary>
-    /// <param name="property">Imóvel cujo thumbnail será obtido.</param>
+    /// <param name="imovel">Imóvel cujo thumbnail será obtido.</param>
     /// <returns>String com a URL da foto.</returns>
-    public string GetSrcThumbnailPhoto(Property property)
+    public string GetSrcThumbnailPhoto(Imovel imovel)
     {
-        var photo = property
-                        .PropertyPhotos
-                        .FirstOrDefault(p => p.IsThumbnail)
-                    ?? property.PropertyPhotos.FirstOrDefault();
+        var photo = imovel
+                        .FotosImovel
+                        .FirstOrDefault(p => p.Miniatura)
+                    ?? imovel.FotosImovel.FirstOrDefault();
 
-        return $"{Configuration.BackendUrl}/photos/{photo?.Id}{photo?.Extension}";
+        return $"{Configuration.BackendUrl}/photos/{photo?.Id}{photo?.Extensao}";
     }
 
     #endregion

@@ -28,7 +28,7 @@ public class UpdateCustomerEndpoint : IEndpoint
             .WithSummary("Atualiza um cliente")
             .WithDescription("Atualiza um cliente")
             .WithOrder(2)
-            .Produces<Response<Customer?>>()
+            .Produces<Response<Cliente?>>()
             .Produces(StatusCodes.Status400BadRequest);
 
     /// <summary>
@@ -40,7 +40,7 @@ public class UpdateCustomerEndpoint : IEndpoint
     /// </remarks>
     /// <param name="user">Objeto <see cref="ClaimsPrincipal"/> contendo os dados do usuário autenticado.</param>
     /// <param name="handler">Instância de <see cref="ICustomerHandler"/> responsável pelas operações relacionadas a clientes.</param>
-    /// <param name="request">Objeto <see cref="Customer"/> contendo os dados atualizados do cliente.</param>
+    /// <param name="request">Objeto <see cref="Cliente"/> contendo os dados atualizados do cliente.</param>
     /// <param name="id">ID do cliente a ser atualizado.</param>
     /// <returns>
     /// Um objeto <see cref="IResult"/> representando a resposta HTTP:
@@ -50,11 +50,11 @@ public class UpdateCustomerEndpoint : IEndpoint
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
         ICustomerHandler handler,
-        Customer request,
+        Cliente request,
         long id)
     {
         request.Id = id;
-        request.UserId = user.Identity?.Name ?? string.Empty;
+        request.UsuarioId = user.Identity?.Name ?? string.Empty;
         var result = await handler.UpdateAsync(request);
 
         return result.IsSuccess

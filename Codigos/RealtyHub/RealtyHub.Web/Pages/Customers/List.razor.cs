@@ -18,7 +18,7 @@ public partial class ListCustomersPage : ComponentBase
     /// Evento chamado quando um cliente é selecionado.
     /// </summary>
     [Parameter]
-    public EventCallback<Customer> OnCustomerSelected { get; set; }
+    public EventCallback<Cliente> OnCustomerSelected { get; set; }
 
     /// <summary>
     /// Estilo CSS aplicado às linhas da tabela.
@@ -33,12 +33,12 @@ public partial class ListCustomersPage : ComponentBase
     /// <summary>
     /// Componente de grid do MudBlazor utilizado para exibir a lista de clientes.
     /// </summary>
-    public MudDataGrid<Customer> DataGrid { get; set; } = null!;
+    public MudDataGrid<Cliente> DataGrid { get; set; } = null!;
 
     /// <summary>
     /// Lista de clientes a serem exibidos no grid.
     /// </summary>
-    public List<Customer> Customers { get; set; } = [];
+    public List<Cliente> Customers { get; set; } = [];
 
     private string _searchTerm = string.Empty;
 
@@ -141,7 +141,7 @@ public partial class ListCustomersPage : ComponentBase
     /// Um objeto <see cref="GridData{Customer}"/> contendo a lista de clientes e a contagem total.
     /// Em caso de falha, retorna um grid vazio e exibe uma mensagem de erro.
     /// </returns>
-    public async Task<GridData<Customer>> LoadServerData(GridState<Customer> state)
+    public async Task<GridData<Cliente>> LoadServerData(GridState<Cliente> state)
     {
         try
         {
@@ -155,7 +155,7 @@ public partial class ListCustomersPage : ComponentBase
             var response = await Handler.GetAllAsync(request);
             if (response.IsSuccess)
             {
-                return new GridData<Customer>
+                return new GridData<Cliente>
                 {
                     Items = response.Data ?? [],
                     TotalItems = response.TotalCount
@@ -163,7 +163,7 @@ public partial class ListCustomersPage : ComponentBase
             }
 
             Snackbar.Add(response.Message ?? string.Empty, Severity.Error);
-            return new GridData<Customer>
+            return new GridData<Cliente>
             {
                 Items = [],
                 TotalItems = 0
@@ -172,7 +172,7 @@ public partial class ListCustomersPage : ComponentBase
         catch (Exception e)
         {
             Snackbar.Add(e.Message, Severity.Error);
-            return new GridData<Customer>
+            return new GridData<Cliente>
             {
                 Items = [],
                 TotalItems = 0
@@ -183,11 +183,11 @@ public partial class ListCustomersPage : ComponentBase
     /// <summary>
     /// Notifica o componente pai que um cliente foi selecionado.
     /// </summary>
-    /// <param name="customer">Cliente selecionado.</param>
-    public async Task SelectCustomer(Customer customer)
+    /// <param name="cliente">Cliente selecionado.</param>
+    public async Task SelectCustomer(Cliente cliente)
     {
         if (OnCustomerSelected.HasDelegate)
-            await OnCustomerSelected.InvokeAsync(customer);
+            await OnCustomerSelected.InvokeAsync(cliente);
     }
 
     #endregion

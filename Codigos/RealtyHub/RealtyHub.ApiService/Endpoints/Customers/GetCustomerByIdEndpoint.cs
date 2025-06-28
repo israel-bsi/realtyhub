@@ -28,7 +28,7 @@ public class GetCustomerByIdEndpoint : IEndpoint
             .WithSummary("Recupera um cliente")
             .WithDescription("Recupera um cliente")
             .WithOrder(4)
-            .Produces<Response<Customer?>>()
+            .Produces<Response<Cliente?>>()
             .Produces(StatusCodes.Status400BadRequest);
 
     /// <summary>

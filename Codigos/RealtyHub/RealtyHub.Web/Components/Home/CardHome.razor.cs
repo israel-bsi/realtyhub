@@ -22,7 +22,7 @@ public partial class CardHomeComponent : ComponentBase
     /// Imóvel a ser exibido no card.
     /// </summary>
     [Parameter]
-    public Property Property { get; set; } = new();
+    public Imovel Imovel { get; set; } = new();
 
     #endregion
 
@@ -42,18 +42,18 @@ public partial class CardHomeComponent : ComponentBase
     /// Obtém a URL da foto principal (thumbnail) do imóvel, ou a primeira foto disponível.
     /// </summary>
     /// <remarks>
-    /// Busca a foto marcada como thumbnail em <see cref="Property.PropertyPhotos"/>. Se não houver, retorna a primeira foto.
+    /// Busca a foto marcada como thumbnail em <see cref="Core.Models.Imovel.FotosImovel"/>. Se não houver, retorna a primeira foto.
     /// Monta a URL completa para exibição da imagem no card.
     /// </remarks>
     /// <returns>URL da foto do imóvel.</returns>
     public string GetSrcPhoto()
     {
-        var photo = Property
-                        .PropertyPhotos
-                        .FirstOrDefault(p => p.IsThumbnail)
-                    ?? Property.PropertyPhotos.FirstOrDefault();
+        var photo = Imovel
+                        .FotosImovel
+                        .FirstOrDefault(p => p.Miniatura)
+                    ?? Imovel.FotosImovel.FirstOrDefault();
 
-        var fullName = $"{photo?.Id}{photo?.Extension}";
+        var fullName = $"{photo?.Id}{photo?.Extensao}";
 
         return $"{Configuration.BackendUrl}/photos/{fullName}";
     }
@@ -76,7 +76,7 @@ public partial class CardHomeComponent : ComponentBase
 
         var parameters = new DialogParameters
         {
-            { "PropertyId", Property.Id }
+            { "PropertyId", Imovel.Id }
         };
 
         await DialogService.ShowAsync<OfferDialog>("Enviar proposta", parameters, options);

@@ -15,7 +15,7 @@
     </MudButton>
 </div>
 
-<MudDataGrid T="Condominium"
+<MudDataGrid T="Condominio"
              Class="mt-4"
              ServerData="LoadServerData"
              @ref="DataGrid"
@@ -55,10 +55,10 @@
     </ToolBarContent>
     <Columns>
         <PropertyColumn Property="x=>x.Id" Title="Id" />
-        <PropertyColumn Property="x=>x.Name" Title="Nome" />
-        <PropertyColumn Property="x=>x.Address.State" Title="Estado" />
-        <PropertyColumn Property="x=>x.Address.City" Title="Cidade" />
-        <PropertyColumn Property="x=>x.Address.Neighborhood" Title="Bairro" />
+        <PropertyColumn Property="x=>x.Nome" Title="Nome" />
+        <PropertyColumn Property="x=>x.Endereco.Estado" Title="Estado" />
+        <PropertyColumn Property="x=>x.Endereco.Cidade" Title="Cidade" />
+        <PropertyColumn Property="x=>x.Endereco.Bairro" Title="Bairro" />
         <TemplateColumn Class="justify-end" Title="Ações">
             <CellTemplate>
                 <MudStack Row>
@@ -72,7 +72,7 @@
                         <MudIconButton Icon="@Icons.Material.Filled.Delete"
                                        Color="Color.Error"
                                        aria-label="Excluir"
-                                       OnClick="() => OnDeleteButtonClickedAsync(context.Item.Id, context.Item.Name)">
+                                       OnClick="() => OnDeleteButtonClickedAsync(context.Item.Id, context.Item.Nome)">
                         </MudIconButton>
                     </MudTooltip>
                 </MudStack>
@@ -80,6 +80,6 @@
         </TemplateColumn>
     </Columns>
     <PagerContent>
-        <MudDataGridPager T="Condominium" />
+        <MudDataGridPager T="Condominio" />
     </PagerContent>
 </MudDataGrid>

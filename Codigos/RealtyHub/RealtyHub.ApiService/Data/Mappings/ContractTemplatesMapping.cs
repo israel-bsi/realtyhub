@@ -6,77 +6,77 @@ using RealtyHub.Core.Models;
 namespace RealtyHub.ApiService.Data.Mappings;
 
 /// <summary>
-/// Configura o mapeamento da entidade <c><see cref="ContractTemplate"/></c> para o modelo de dados.
+/// Configura o mapeamento da entidade <c><see cref="ModeloContrato"/></c> para o modelo de dados.
 /// </summary>
-public class ContractTemplatesMapping : IEntityTypeConfiguration<ContractTemplate>
+public class ContractTemplatesMapping : IEntityTypeConfiguration<ModeloContrato>
 {
     /// <summary>
-    /// Configura as propriedades e relacionamentos da entidade <c><see cref="ContractTemplate"/></c>.
+    /// Configura as propriedades e relacionamentos da entidade <c><see cref="ModeloContrato"/></c>.
     /// </summary>
-    /// <param name="builder">O construtor utilizado para configurar a entidade <c><see cref="ContractTemplate"/></c>.</param>
-    public void Configure(EntityTypeBuilder<ContractTemplate> builder)
+    /// <param name="builder">O construtor utilizado para configurar a entidade <c><see cref="ModeloContrato"/></c>.</param>
+    public void Configure(EntityTypeBuilder<ModeloContrato> builder)
     {
-        builder.ToTable("ContractTemplate");
+        builder.ToTable("ModeloContrato");
 
         builder.HasKey(cc => cc.Id);
 
-        builder.Property(cc => cc.Extension)
+        builder.Property(cc => cc.Extensao)
             .IsRequired();
 
-        builder.Property(cc => cc.Name)
+        builder.Property(cc => cc.Nome)
             .IsRequired();
 
-        builder.Property(cc => cc.Type)
+        builder.Property(cc => cc.Tipo)
             .IsRequired();
 
-        builder.Property(cc => cc.ShowInPage)
+        builder.Property(cc => cc.MostrarNaHome)
             .IsRequired();
 
-        builder.Ignore(cc => cc.Path);
+        builder.Ignore(cc => cc.Caminho);
 
-        builder.HasData(new ContractTemplate
+        builder.HasData(new ModeloContrato
         {
             Id = "a2c16556-5098-4496-ae7a-1f9b6d0e8fcf",
-            Extension = ".docx",
-            Type = EContractModelType.PJPJ,
-            Name = "Modelo de Contrato - PJPJ",
-            ShowInPage = false
+            Extensao = ".docx",
+            Tipo = ETipoContrato.PJPJ,
+            Nome = "Modelo de Contrato - PJPJ",
+            MostrarNaHome = false
         });
 
-        builder.HasData(new ContractTemplate
+        builder.HasData(new ModeloContrato
         {
             Id = "f7581a63-f4f0-4881-b6ed-6a4100b4182e",
-            Extension = ".docx",
-            Type = EContractModelType.PFPF,
-            Name = "Modelo de Contrato - PFPF",
-            ShowInPage = false
+            Extensao = ".docx",
+            Tipo = ETipoContrato.PFPF,
+            Nome = "Modelo de Contrato - PFPF",
+            MostrarNaHome = false
         });
 
-        builder.HasData(new ContractTemplate
+        builder.HasData(new ModeloContrato
         {
             Id = "2f4c556d-6850-4b3d-afe9-d7c2bd282718",
-            Extension = ".docx",
-            Type = EContractModelType.PFPJ,
-            Name = "Modelo de Contrato - PFPJ",
-            ShowInPage = false
+            Extensao = ".docx",
+            Tipo = ETipoContrato.PFPJ,
+            Nome = "Modelo de Contrato - PFPJ",
+            MostrarNaHome = false
         });
 
-        builder.HasData(new ContractTemplate
+        builder.HasData(new ModeloContrato
         {
             Id = "fd7ed50d-8f42-4288-8877-3cb8095370e7",
-            Extension = ".docx",
-            Type = EContractModelType.PJPF,
-            Name = "Modelo de Contrato - PJPF",
-            ShowInPage = false
+            Extensao = ".docx",
+            Tipo = ETipoContrato.PJPF,
+            Nome = "Modelo de Contrato - PJPF",
+            MostrarNaHome = false
         });
 
-        builder.HasData(new ContractTemplate
+        builder.HasData(new ModeloContrato
         {
             Id = "2824aec3-3219-4d81-a97a-c3b80ca72844",
-            Extension = ".pdf",
-            Type = EContractModelType.None,
-            Name = "Modelo Padrão",
-            ShowInPage = true
+            Extensao = ".pdf",
+            Tipo = ETipoContrato.Nenhum,
+            Nome = "Modelo Padrão",
+            MostrarNaHome = true
         });
     }
 }

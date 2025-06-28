@@ -29,12 +29,12 @@ public class CustomerHandler : ICustomerHandler
     /// <remarks>
     /// Envia os dados do cliente para a API e retorna o resultado da operação.
     /// </remarks>
-    public async Task<Response<Customer?>> CreateAsync(Customer request)
+    public async Task<Response<Cliente?>> CreateAsync(Cliente request)
     {
         var result = await _httpClient.PostAsJsonAsync("v1/customers", request);
 
-        return await result.Content.ReadFromJsonAsync<Response<Customer?>>()
-               ?? new Response<Customer?>(null, 400, "Falha ao criar o cliente");
+        return await result.Content.ReadFromJsonAsync<Response<Cliente?>>()
+               ?? new Response<Cliente?>(null, 400, "Falha ao criar o cliente");
     }
 
     /// <summary>
@@ -43,12 +43,12 @@ public class CustomerHandler : ICustomerHandler
     /// <remarks>
     /// Envia os dados atualizados do cliente para a API e retorna o resultado da operação.
     /// </remarks>
-    public async Task<Response<Customer?>> UpdateAsync(Customer request)
+    public async Task<Response<Cliente?>> UpdateAsync(Cliente request)
     {
         var result = await _httpClient.PutAsJsonAsync($"v1/customers/{request.Id}", request);
 
-        return await result.Content.ReadFromJsonAsync<Response<Customer?>>()
-            ?? new Response<Customer?>(null, 400, "Falha ao atualizar o cliente");
+        return await result.Content.ReadFromJsonAsync<Response<Cliente?>>()
+            ?? new Response<Cliente?>(null, 400, "Falha ao atualizar o cliente");
     }
 
     /// <summary>
@@ -57,13 +57,13 @@ public class CustomerHandler : ICustomerHandler
     /// <remarks>
     /// Envia uma requisição para a API para remover o cliente especificado.
     /// </remarks>
-    public async Task<Response<Customer?>> DeleteAsync(DeleteCustomerRequest request)
+    public async Task<Response<Cliente?>> DeleteAsync(DeleteCustomerRequest request)
     {
         var result = await _httpClient.DeleteAsync($"v1/customers/{request.Id}");
 
         return result.IsSuccessStatusCode
-            ? new Response<Customer?>(null, 200, "Cliente excluído com sucesso")
-            : new Response<Customer?>(null, 400, "Falha ao excluir o cliente");
+            ? new Response<Cliente?>(null, 200, "Cliente excluído com sucesso")
+            : new Response<Cliente?>(null, 400, "Falha ao excluir o cliente");
     }
 
     /// <summary>
@@ -72,12 +72,12 @@ public class CustomerHandler : ICustomerHandler
     /// <remarks>
     /// Realiza uma requisição para a API para buscar os dados do cliente especificado.
     /// </remarks>
-    public async Task<Response<Customer?>> GetByIdAsync(GetCustomerByIdRequest request)
+    public async Task<Response<Cliente?>> GetByIdAsync(GetCustomerByIdRequest request)
     {
         var response = await _httpClient.GetAsync($"v1/customers/{request.Id}");
 
-        return await response.Content.ReadFromJsonAsync<Response<Customer?>>()
-               ?? new Response<Customer?>(null, 400, "Falha ao obter o cliente");
+        return await response.Content.ReadFromJsonAsync<Response<Cliente?>>()
+               ?? new Response<Cliente?>(null, 400, "Falha ao obter o cliente");
     }
 
     /// <summary>
@@ -86,14 +86,14 @@ public class CustomerHandler : ICustomerHandler
     /// <remarks>
     /// Realiza uma requisição para a API para buscar todos os clientes, podendo filtrar por termo de busca.
     /// </remarks>
-    public async Task<PagedResponse<List<Customer>?>> GetAllAsync(GetAllCustomersRequest request)
+    public async Task<PagedResponse<List<Cliente>?>> GetAllAsync(GetAllCustomersRequest request)
     {
         var url = $"v1/customers?pageNumber={request.PageNumber}&pageSize={request.PageSize}";
 
         if (!string.IsNullOrEmpty(request.SearchTerm))
             url = $"{url}&searchTerm={request.SearchTerm}";
 
-        return await _httpClient.GetFromJsonAsync<PagedResponse<List<Customer>?>>(url)
-               ?? new PagedResponse<List<Customer>?>(null, 400, "Falha ao obter os clientes");
+        return await _httpClient.GetFromJsonAsync<PagedResponse<List<Cliente>?>>(url)
+               ?? new PagedResponse<List<Cliente>?>(null, 400, "Falha ao obter os clientes");
     }
 }

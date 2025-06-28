@@ -26,7 +26,7 @@ public partial class PropertyDetailsPage : ComponentBase
     /// <summary>
     /// Modelo do imóvel exibido na página.
     /// </summary>
-    public Property InputModel { get; set; } = new();
+    public Imovel InputModel { get; set; } = new();
 
     /// <summary>
     /// Indica se a página está em estado de carregamento.

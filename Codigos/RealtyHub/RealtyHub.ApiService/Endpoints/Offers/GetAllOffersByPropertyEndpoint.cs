@@ -30,8 +30,8 @@ public class GetAllOffersByPropertyEndpoint : IEndpoint
             .WithSummary("Recupera todas as propostas de um imóvel")
             .WithDescription("Recupera todas as propostas de um imóvel")
             .WithOrder(6)
-            .Produces<PagedResponse<Offer?>>()
-            .Produces<PagedResponse<Offer?>>(StatusCodes.Status400BadRequest);
+            .Produces<PagedResponse<Proposta?>>()
+            .Produces<PagedResponse<Proposta?>>(StatusCodes.Status400BadRequest);
     }
 
     /// <summary>

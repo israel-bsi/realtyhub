@@ -29,17 +29,17 @@ public class ContractHandler : IContractHandler
     /// <remarks>
     /// Ajusta as datas do contrato para UTC, envia os dados para a API e retorna o resultado da operação.
     /// </remarks>
-    public async Task<Response<Contract?>> CreateAsync(Contract request)
+    public async Task<Response<Contrato?>> CreateAsync(Contrato request)
     {
-        request.IssueDate = request.IssueDate?.Date.ToUniversalTime();
-        request.EffectiveDate = request.EffectiveDate?.Date.ToUniversalTime();
-        request.TermEndDate = request.TermEndDate?.Date.ToUniversalTime();
-        request.SignatureDate = request.SignatureDate?.Date.ToUniversalTime();
+        request.DataEmissao = request.DataEmissao?.Date.ToUniversalTime();
+        request.DataVigencia = request.DataVigencia?.Date.ToUniversalTime();
+        request.DataTermino = request.DataTermino?.Date.ToUniversalTime();
+        request.DataAssinatura = request.DataAssinatura?.Date.ToUniversalTime();
 
         var result = await _httpClient.PostAsJsonAsync("v1/contracts", request);
 
-        return await result.Content.ReadFromJsonAsync<Response<Contract?>>()
-               ?? new Response<Contract?>(null, 400, "Falha ao criar o contrato");
+        return await result.Content.ReadFromJsonAsync<Response<Contrato?>>()
+               ?? new Response<Contrato?>(null, 400, "Falha ao criar o contrato");
     }
 
     /// <summary>
@@ -48,12 +48,12 @@ public class ContractHandler : IContractHandler
     /// <remarks>
     /// Envia os dados atualizados do contrato para a API e retorna o resultado da operação.
     /// </remarks>
-    public async Task<Response<Contract?>> UpdateAsync(Contract request)
+    public async Task<Response<Contrato?>> UpdateAsync(Contrato request)
     {
         var result = await _httpClient.PutAsJsonAsync($"v1/contracts/{request.Id}", request);
 
-        return await result.Content.ReadFromJsonAsync<Response<Contract?>>()
-            ?? new Response<Contract?>(null, 400, "Falha ao atualizar o contrato");
+        return await result.Content.ReadFromJsonAsync<Response<Contrato?>>()
+            ?? new Response<Contrato?>(null, 400, "Falha ao atualizar o contrato");
     }
 
     /// <summary>
@@ -62,13 +62,13 @@ public class ContractHandler : IContractHandler
     /// <remarks>
     /// Envia uma requisição para a API para remover o contrato especificado.
     /// </remarks>
-    public async Task<Response<Contract?>> DeleteAsync(DeleteContractRequest request)
+    public async Task<Response<Contrato?>> DeleteAsync(DeleteContractRequest request)
     {
         var result = await _httpClient.DeleteAsync($"v1/contracts/{request.Id}");
 
         return result.IsSuccessStatusCode
-            ? new Response<Contract?>(null, 200, "Contrato excluído com sucesso")
-            : new Response<Contract?>(null, 400, "Falha ao excluir o contrato");
+            ? new Response<Contrato?>(null, 200, "Contrato excluído com sucesso")
+            : new Response<Contrato?>(null, 400, "Falha ao excluir o contrato");
     }
 
     /// <summary>
@@ -77,12 +77,12 @@ public class ContractHandler : IContractHandler
     /// <remarks>
     /// Realiza uma requisição para a API para buscar os dados do contrato especificado.
     /// </remarks>
-    public async Task<Response<Contract?>> GetByIdAsync(GetContractByIdRequest request)
+    public async Task<Response<Contrato?>> GetByIdAsync(GetContractByIdRequest request)
     {
         var result = await _httpClient.GetAsync($"v1/contracts/{request.Id}");
 
-        return await result.Content.ReadFromJsonAsync<Response<Contract?>>()
-               ?? new Response<Contract?>(null, 400, "Não foi possível obter o contrato");
+        return await result.Content.ReadFromJsonAsync<Response<Contrato?>>()
+               ?? new Response<Contrato?>(null, 400, "Não foi possível obter o contrato");
     }
 
     /// <summary>
@@ -91,12 +91,12 @@ public class ContractHandler : IContractHandler
     /// <remarks>
     /// Realiza uma requisição para a API para buscar todos os contratos, com suporte a paginação.
     /// </remarks>
-    public async Task<PagedResponse<List<Contract>?>> GetAllAsync(GetAllContractsRequest request)
+    public async Task<PagedResponse<List<Contrato>?>> GetAllAsync(GetAllContractsRequest request)
     {
         var url = $"v1/contracts?pageNumber={request.PageNumber}&pageSize={request.PageSize}";
 
-        return await _httpClient.GetFromJsonAsync<PagedResponse<List<Contract>?>>(url)
-               ?? new PagedResponse<List<Contract>?>(null, 400,
+        return await _httpClient.GetFromJsonAsync<PagedResponse<List<Contrato>?>>(url)
+               ?? new PagedResponse<List<Contrato>?>(null, 400,
                    "Não foi possível obter os contratos");
     }
 }

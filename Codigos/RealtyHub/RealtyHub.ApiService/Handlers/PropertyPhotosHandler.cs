@@ -45,37 +45,37 @@ public class PropertyPhotosHandler : IPropertyPhotosHandler
     /// </remarks>
     /// <param name="request">Requisição contendo as informações e os arquivos para criação das fotos.</param>
     /// <returns>Retorna uma resposta indicando o sucesso ou falha da operação.</returns>
-    public async Task<Response<PropertyPhoto?>> CreateAsync(CreatePropertyPhotosRequest request)
+    public async Task<Response<FotoImovel?>> CreateAsync(CreatePropertyPhotosRequest request)
     {
         try
         {
             if (request.HttpRequest is null)
-                return new Response<PropertyPhoto?>(null, 400, "Requisição inválida");
+                return new Response<FotoImovel?>(null, 400, "Requisição inválida");
 
             var property = await _context
                 .Properties
                 .AsNoTracking()
                 .FirstOrDefaultAsync(p =>
                     p.Id == request.PropertyId
-                    && p.UserId == request.UserId
-                    && p.IsActive);
+                    && p.UsuarioId == request.UserId
+                    && p.Ativo);
 
             if (property is null)
-                return new Response<PropertyPhoto?>(null, 404, "Imóvel não encontrado");
+                return new Response<FotoImovel?>(null, 404, "Imóvel não encontrado");
 
             _context.Attach(property);
 
             if (!request.HttpRequest.HasFormContentType)
-                return new Response<PropertyPhoto?>(null, 400, "Conteúdo do tipo multipart/form-data esperado");
+                return new Response<FotoImovel?>(null, 400, "Conteúdo do tipo multipart/form-data esperado");
 
             var form = await request.HttpRequest.ReadFormAsync();
             var files = form.Files;
 
             if (files.Count == 0)
-                return new Response<PropertyPhoto?>(null, 400, "Nenhum arquivo encontrado");
+                return new Response<FotoImovel?>(null, 400, "Nenhum arquivo encontrado");
 
-            var photosToCreate = new List<PropertyPhoto>();
-            var photosToUpdate = new List<PropertyPhoto>();
+            var photosToCreate = new List<FotoImovel>();
+            var photosToUpdate = new List<FotoImovel>();
 
             foreach (var file in files)
             {
@@ -89,15 +89,15 @@ public class PropertyPhotosHandler : IPropertyPhotosHandler
                 await using var stream = new FileStream(fullFileName, FileMode.Create);
                 await file.CopyToAsync(stream);
 
-                var propertyPhoto = new PropertyPhoto
+                var propertyPhoto = new FotoImovel
                 {
                     Id = idPhoto,
-                    Extension = extension,
-                    IsThumbnail = isThumbnail,
-                    PropertyId = request.PropertyId,
-                    Property = property,
-                    IsActive = true,
-                    UserId = request.UserId
+                    Extensao = extension,
+                    Miniatura = isThumbnail,
+                    ImovelId = request.PropertyId,
+                    Imovel = property,
+                    Ativo = true,
+                    UsuarioId = request.UserId
                 };
                 if (string.IsNullOrEmpty(id))
                     photosToCreate.Add(propertyPhoto);
@@ -105,19 +105,19 @@ public class PropertyPhotosHandler : IPropertyPhotosHandler
                     photosToUpdate.Add(propertyPhoto);
             }
 
-            if (photosToCreate.Any(p => p.IsThumbnail))
+            if (photosToCreate.Any(p => p.Miniatura))
             {
                 await _context.PropertyPhotos
                     .Where(pi =>
-                        pi.PropertyId == request.PropertyId
-                        && pi.UserId == request.UserId
-                        && pi.IsActive
-                        && pi.IsThumbnail)
+                        pi.ImovelId == request.PropertyId
+                        && pi.UsuarioId == request.UserId
+                        && pi.Ativo
+                        && pi.Miniatura)
                     .ForEachAsync(pi =>
                     {
                         _context.Attach(pi);
-                        pi.IsThumbnail = false;
-                        pi.UpdatedAt = DateTime.UtcNow;
+                        pi.Miniatura = false;
+                        pi.AtualizadoEm = DateTime.UtcNow;
                     });
             }
 
@@ -125,11 +125,11 @@ public class PropertyPhotosHandler : IPropertyPhotosHandler
             _context.PropertyPhotos.UpdateRange(photosToUpdate);
             await _context.SaveChangesAsync();
 
-            return new Response<PropertyPhoto?>(null, 201);
+            return new Response<FotoImovel?>(null, 201);
         }
         catch
         {
-            return new Response<PropertyPhoto?>(null, 500, "Não foi possível criar as fotos");
+            return new Response<FotoImovel?>(null, 500, "Não foi possível criar as fotos");
         }
     }
 
@@ -141,23 +141,23 @@ public class PropertyPhotosHandler : IPropertyPhotosHandler
     /// </remarks>
     /// <param name="request">Requisição contendo as informações das fotos a serem atualizadas.</param>
     /// <returns>Retorna uma resposta indicando o sucesso ou falha da operação.</returns>
-    public async Task<Response<List<PropertyPhoto>?>> UpdateAsync(UpdatePropertyPhotosRequest request)
+    public async Task<Response<List<FotoImovel>?>> UpdateAsync(UpdatePropertyPhotosRequest request)
     {
         try
         {
-            if (request.Photos.Any(p => p.IsThumbnail))
+            if (request.Photos.Any(p => p.Miniatura))
             {
                 await _context.PropertyPhotos
                     .Where(pi =>
-                        pi.PropertyId == request.PropertyId
-                        && pi.UserId == request.UserId
-                        && pi.IsActive
-                        && pi.IsThumbnail)
+                        pi.ImovelId == request.PropertyId
+                        && pi.UsuarioId == request.UserId
+                        && pi.Ativo
+                        && pi.Miniatura)
                     .ForEachAsync(pi =>
                     {
                         _context.Attach(pi);
-                        pi.IsThumbnail = false;
-                        pi.UpdatedAt = DateTime.UtcNow;
+                        pi.Miniatura = false;
+                        pi.AtualizadoEm = DateTime.UtcNow;
                     });
             }
 
@@ -167,25 +167,25 @@ public class PropertyPhotosHandler : IPropertyPhotosHandler
                     .PropertyPhotos
                     .FirstOrDefaultAsync(pi =>
                         pi.Id == photo.Id
-                        && pi.UserId == request.UserId
-                        && pi.IsActive);
+                        && pi.UsuarioId == request.UserId
+                        && pi.Ativo);
 
                 if (existingEntity is null)
                     continue;
 
                 _context.Attach(existingEntity);
 
-                existingEntity.IsThumbnail = photo.IsThumbnail;
-                existingEntity.UpdatedAt = DateTime.UtcNow;
+                existingEntity.Miniatura = photo.Miniatura;
+                existingEntity.AtualizadoEm = DateTime.UtcNow;
             }
 
             await _context.SaveChangesAsync();
 
-            return new Response<List<PropertyPhoto>?>();
+            return new Response<List<FotoImovel>?>();
         }
         catch
         {
-            return new Response<List<PropertyPhoto>?>(null, 500, "Não foi possível atualizar as fotos");
+            return new Response<List<FotoImovel>?>(null, 500, "Não foi possível atualizar as fotos");
         }
     }
 
@@ -197,7 +197,7 @@ public class PropertyPhotosHandler : IPropertyPhotosHandler
     /// </remarks>
     /// <param name="request">Requisição contendo o ID da foto a ser excluída.</param>
     /// <returns>Retorna uma resposta indicando o sucesso ou falha da operação.</returns>
-    public async Task<Response<PropertyPhoto?>> DeleteAsync(DeletePropertyPhotoRequest request)
+    public async Task<Response<FotoImovel?>> DeleteAsync(DeletePropertyPhotoRequest request)
     {
         try
         {
@@ -205,25 +205,25 @@ public class PropertyPhotosHandler : IPropertyPhotosHandler
                 .PropertyPhotos
                 .FirstOrDefaultAsync(pi =>
                     pi.Id == request.Id
-                    && pi.UserId == request.UserId
-                    && pi.IsActive);
+                    && pi.UsuarioId == request.UserId
+                    && pi.Ativo);
 
             if (propertyPhoto is null)
-                return new Response<PropertyPhoto?>(null, 404, "Foto não encontrada");
+                return new Response<FotoImovel?>(null, 404, "Foto não encontrada");
 
             _context.Attach(propertyPhoto);
 
-            propertyPhoto.IsActive = false;
-            propertyPhoto.IsThumbnail = false;
-            propertyPhoto.UpdatedAt = DateTime.UtcNow;
+            propertyPhoto.Ativo = false;
+            propertyPhoto.Miniatura = false;
+            propertyPhoto.AtualizadoEm = DateTime.UtcNow;
 
             await _context.SaveChangesAsync();
 
-            return new Response<PropertyPhoto?>(null, 204, "Foto excluída com sucesso");
+            return new Response<FotoImovel?>(null, 204, "Foto excluída com sucesso");
         }
         catch
         {
-            return new Response<PropertyPhoto?>(null, 500, "Não foi possível deletar a foto");
+            return new Response<FotoImovel?>(null, 500, "Não foi possível deletar a foto");
         }
     }
 
@@ -235,7 +235,7 @@ public class PropertyPhotosHandler : IPropertyPhotosHandler
     /// </remarks>
     /// <param name="request">Requisição contendo o ID do imóvel.</param>
     /// <returns>Retorna uma lista de fotos do imóvel ou um erro em caso de falha.</returns>
-    public async Task<Response<List<PropertyPhoto>?>> GetAllByPropertyAsync(
+    public async Task<Response<List<FotoImovel>?>> GetAllByPropertyAsync(
        GetAllPropertyPhotosByPropertyRequest request)
     {
         try
@@ -244,17 +244,17 @@ public class PropertyPhotosHandler : IPropertyPhotosHandler
                 .PropertyPhotos
                 .AsNoTracking()
                 .Where(p =>
-                    p.PropertyId == request.PropertyId
-                    && p.UserId == request.UserId
-                    && p.IsActive)
-                .OrderBy(p => p.IsThumbnail)
+                    p.ImovelId == request.PropertyId
+                    && p.UsuarioId == request.UserId
+                    && p.Ativo)
+                .OrderBy(p => p.Miniatura)
                 .ToListAsync();
 
-            return new Response<List<PropertyPhoto>?>(propertyPhotos);
+            return new Response<List<FotoImovel>?>(propertyPhotos);
         }
         catch
         {
-            return new Response<List<PropertyPhoto>?>(null, 500, "Não foi possível buscar a foto");
+            return new Response<List<FotoImovel>?>(null, 500, "Não foi possível buscar a foto");
         }
     }
 }

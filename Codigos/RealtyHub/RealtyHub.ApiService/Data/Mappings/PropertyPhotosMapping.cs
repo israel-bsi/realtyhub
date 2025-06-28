@@ -5,40 +5,40 @@ using RealtyHub.Core.Models;
 namespace RealtyHub.ApiService.Data.Mappings;
 
 /// <summary>
-/// Configura o mapeamento da entidade <c><see cref="PropertyPhoto"/></c> para o modelo de dados.
+/// Configura o mapeamento da entidade <c><see cref="FotoImovel"/></c> para o modelo de dados.
 /// </summary>
-public class PropertyPhotosMapping : IEntityTypeConfiguration<PropertyPhoto>
+public class PropertyPhotosMapping : IEntityTypeConfiguration<FotoImovel>
 {
     /// <summary>
-    /// Configura as propriedades e relacionamentos da entidade <c><see cref="PropertyPhoto"/></c>.
+    /// Configura as propriedades e relacionamentos da entidade <c><see cref="FotoImovel"/></c>.
     /// </summary>
-    /// <param name="builder">O construtor utilizado para configurar a entidade <c><see cref="PropertyPhoto"/></c>.</param>
-    public void Configure(EntityTypeBuilder<PropertyPhoto> builder)
+    /// <param name="builder">O construtor utilizado para configurar a entidade <c><see cref="FotoImovel"/></c>.</param>
+    public void Configure(EntityTypeBuilder<FotoImovel> builder)
     {
-        builder.ToTable("PropertyPhotos");
+        builder.ToTable("FotoImovel");
 
         builder.HasKey(pi => pi.Id);
 
-        builder.Property(pi => pi.Extension)
+        builder.Property(pi => pi.Extensao)
             .IsRequired();
 
-        builder.Property(pi => pi.IsThumbnail)
+        builder.Property(pi => pi.Miniatura)
             .IsRequired();
 
-        builder.Property(c => c.UserId)
+        builder.Property(c => c.UsuarioId)
             .IsRequired();
 
-        builder.Property(pi => pi.IsActive)
+        builder.Property(pi => pi.Ativo)
             .IsRequired();
 
-        builder.Property(pi => pi.PropertyId)
+        builder.Property(pi => pi.ImovelId)
             .IsRequired();
 
-        builder.Property(pi => pi.CreatedAt)
+        builder.Property(pi => pi.CriadoEm)
             .IsRequired()
             .HasDefaultValueSql("NOW()");
 
-        builder.Property(pi => pi.UpdatedAt)
+        builder.Property(pi => pi.AtualizadoEm)
             .IsRequired()
             .HasDefaultValueSql("NOW()");
     }

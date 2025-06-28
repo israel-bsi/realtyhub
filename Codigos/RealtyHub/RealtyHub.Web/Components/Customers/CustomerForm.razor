@@ -19,42 +19,42 @@ else
 
             <MudGrid>
                 <MudItem lg="4" md="5" xs="12">
-                    <MudRadioGroup T="EPersonType"
-                                   Value="InputModel.PersonType"
+                    <MudRadioGroup T="ETipoPessoa"
+                                   Value="InputModel.TipoPessoa"
                                    ValueChanged="OnPersonTypeChanged"
                                    Class="flex-center">
                         <MudStack Row="true" Spacing="1">
                             <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="1">
                                 <MudIcon Icon="@Icons.Material.Filled.Person"></MudIcon>
-                                <MudRadio Value="EPersonType.Individual">
-                                    @(EPersonType.Individual.GetDisplayName())
+                                <MudRadio Value="ETipoPessoa.Fisica">
+                                    @(ETipoPessoa.Fisica.GetDisplayName())
                                 </MudRadio>
                             </MudStack>
                             <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="1">
                                 <MudIcon Icon="@Icons.Material.Filled.Business"></MudIcon>
-                                <MudRadio Value="EPersonType.Business">
-                                    @(EPersonType.Business.GetDisplayName())
+                                <MudRadio Value="ETipoPessoa.Juridica">
+                                    @(ETipoPessoa.Juridica.GetDisplayName())
                                 </MudRadio>
                             </MudStack>
                         </MudStack>
                     </MudRadioGroup>
                 </MudItem>
 
-                @if (InputModel.PersonType == EPersonType.Individual)
+                @if (InputModel.TipoPessoa == ETipoPessoa.Fisica)
                 {
                     <MudItem lg="3" md="4" xs="12">
-                        <EnumSelect TEnum="EMaritalStatus"
+                        <EnumSelect TEnum="ETipoStatusCivil"
                                     Label="Estado Civil"
-                                    @bind-SelectedValue="InputModel.MaritalStatus"
+                                    @bind-SelectedValue="InputModel.TipoStatusCivil"
                                     Class="ml-4">
                         </EnumSelect>
                     </MudItem>
                 }
 
                 <MudItem lg="3" md="5" xs="12">
-                    <EnumSelect TEnum="ECustomerType"
+                    <EnumSelect TEnum="ETipoCliente"
                                 Label="Tipo do cliente"
-                                @bind-SelectedValue="InputModel.CustomerType"
+                                @bind-SelectedValue="InputModel.TipoCliente"
                                 Class="ml-4">
                     </EnumSelect>
                 </MudItem>
@@ -64,8 +64,8 @@ else
                 <MudItem lg="2" md="3" xs="12">
                     <MudTextField T="string"
                                   Label="@DocumentType"
-                                  @bind-Value="InputModel.DocumentNumber"
-                                  For="@(() => InputModel.DocumentNumber)"
+                                  @bind-Value="InputModel.NumeroDocumento"
+                                  For="@(() => InputModel.NumeroDocumento)"
                                   Mask="DocumentCustomerMask"
                                   OnBlur="OnBlurDocumentTextField"
                                   ErrorText="@ErrorText"
@@ -77,14 +77,14 @@ else
 
                 <MudItem lg="5" md="6" xs="12">
                     <MudTextField T="string"
-                                  Label="@(InputModel.PersonType ==
-                                           EPersonType.Individual ? "Nome" : "Razão Social")"
-                                  @bind-Value="InputModel.Name"
-                                  For="@(() => InputModel.Name)"
+                                  Label="@(InputModel.TipoPessoa ==
+                                           ETipoPessoa.Fisica ? "Nome" : "Razão Social")"
+                                  @bind-Value="InputModel.Nome"
+                                  For="@(() => InputModel.Nome)"
                                   InputType="InputType.Text" />
                 </MudItem>
 
-                @if (InputModel.PersonType == EPersonType.Individual)
+                @if (InputModel.TipoPessoa == ETipoPessoa.Fisica)
                 {
                     <MudItem lg="3" md="5" xs="12">
                         <MudTextField T="string"
@@ -98,22 +98,22 @@ else
                     <MudItem lg="3" md="4" xs="12">
                         <MudTextField T="string"
                                       Label="Orgão expedidor"
-                                      @bind-Value="InputModel.IssuingAuthority"
-                                      For="@(() => InputModel.IssuingAuthority)"
+                                      @bind-Value="InputModel.AutoridadeEmissora"
+                                      For="@(() => InputModel.AutoridadeEmissora)"
                                       InputType="InputType.Text" />
                     </MudItem>
 
                     <MudItem lg="3" md="4" xs="12">
                         <MudDatePicker Label="Data da expedição do RG"
-                                       @bind-Date="InputModel.RgIssueDate"
-                                       For="@(() => InputModel.RgIssueDate)"/>
+                                       @bind-Date="InputModel.DataEmissaoRg"
+                                       For="@(() => InputModel.DataEmissaoRg)"/>
                     </MudItem>
 
                     <MudItem lg="3" md="4" xs="12">
                         <MudTextField T="string"
                                       Label="Nacionalidade"
-                                      @bind-Value="InputModel.Nationality"
-                                      For="@(() => InputModel.Nationality)"
+                                      @bind-Value="InputModel.Nacionalidade"
+                                      For="@(() => InputModel.Nacionalidade)"
                                       MaxLength="80"
                                       InputType="InputType.Text" />
                     </MudItem>
@@ -121,8 +121,8 @@ else
                     <MudItem lg="3" md="4" xs="12">
                         <MudTextField T="string"
                                       Label="Ocupação"
-                                      @bind-Value="InputModel.Occupation"
-                                      For="@(() => InputModel.Occupation)"
+                                      @bind-Value="InputModel.Ocupacao"
+                                      For="@(() => InputModel.Ocupacao)"
                                       MaxLength="80"
                                       InputType="InputType.Text" />
                     </MudItem>
@@ -132,8 +132,8 @@ else
                     <MudItem lg="5" md="6" xs="12">
                         <MudTextField T="string"
                                       Label="Nome Fantasia"
-                                      @bind-Value="InputModel.BusinessName"
-                                      For="@(() => InputModel.BusinessName)"
+                                      @bind-Value="InputModel.NomeFantasia"
+                                      For="@(() => InputModel.NomeFantasia)"
                                       InputType="InputType.Text" />
                     </MudItem>
                 }
@@ -141,8 +141,8 @@ else
                 <MudItem lg="3" md="4" xs="12">
                     <MudTextField T="string"
                                   Label="Telefone"
-                                  @bind-Value="InputModel.Phone"
-                                  For="@(() => InputModel.Phone)"
+                                  @bind-Value="InputModel.Telefone"
+                                  For="@(() => InputModel.Telefone)"
                                   Mask="@Utility.Masks.Phone"
                                   InputType="InputType.Text" />
                 </MudItem>
@@ -156,7 +156,7 @@ else
                 </MudItem>
             </MudGrid>
 
-            <AddressInput @bind-InputModel="InputModel.Address" />
+            <AddressInput @bind-InputModel="InputModel.Endereco" />
 
             <MudButton ButtonType="ButtonType.Submit"
                        Variant="Variant.Filled"

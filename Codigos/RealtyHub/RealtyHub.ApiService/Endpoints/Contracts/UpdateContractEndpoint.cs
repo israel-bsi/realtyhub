@@ -28,7 +28,7 @@ public class UpdateContractEndpoint : IEndpoint
             .WithSummary("Atualiza um contrato")
             .WithDescription("Atualiza um contrato")
             .WithOrder(2)
-            .Produces<Response<Contract?>>()
+            .Produces<Response<Contrato?>>()
             .Produces(StatusCodes.Status400BadRequest);
 
     /// <summary>
@@ -40,7 +40,7 @@ public class UpdateContractEndpoint : IEndpoint
     /// </remarks>
     /// <param name="user">Objeto <see cref="ClaimsPrincipal"/> contendo os dados do usuário autenticado.</param>
     /// <param name="handler">Instância de <see cref="IContractHandler"/> responsável pelas operações relacionadas a contratos.</param>
-    /// <param name="request">Objeto <see cref="Contract"/> contendo os dados atualizados do contrato.</param>
+    /// <param name="request">Objeto <see cref="Contrato"/> contendo os dados atualizados do contrato.</param>
     /// <param name="id">ID do contrato a ser atualizado.</param>
     /// <returns>
     /// Um objeto <see cref="IResult"/> representando a resposta HTTP:
@@ -50,11 +50,11 @@ public class UpdateContractEndpoint : IEndpoint
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
         IContractHandler handler,
-        Contract request,
+        Contrato request,
         long id)
     {
         request.Id = id;
-        request.UserId = user.Identity?.Name ?? string.Empty;
+        request.UsuarioId = user.Identity?.Name ?? string.Empty;
         var result = await handler.UpdateAsync(request);
 
         return result.IsSuccess

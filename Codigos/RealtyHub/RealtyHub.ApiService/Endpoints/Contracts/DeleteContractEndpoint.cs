@@ -28,7 +28,7 @@ public class DeleteContractEndpoint : IEndpoint
             .WithSummary("Deleta um contrato")
             .WithDescription("Deleta um contrato")
             .WithOrder(3)
-            .Produces<Response<Contract?>>(StatusCodes.Status204NoContent)
+            .Produces<Response<Contrato?>>(StatusCodes.Status204NoContent)
             .Produces(StatusCodes.Status400BadRequest);
 
     /// <summary>

@@ -4,7 +4,7 @@
 
 <MudText Typo="Typo.h3">Modelos de Contratos</MudText>
 
-<MudDataGrid T="ContractTemplate"
+<MudDataGrid T="ModeloContrato"
              Class="mt-4"
              ServerData="LoadServerData"
              RowsPerPage="@Core.Configuration.DefaultPageSize">
@@ -15,7 +15,7 @@
     </ToolBarContent>
     <Columns>
         <PropertyColumn Property="c => c.Id" Title="Id"></PropertyColumn>
-        <PropertyColumn Property="c => c.Name" Title="Nome"></PropertyColumn>
+        <PropertyColumn Property="c => c.Nome" Title="Nome"></PropertyColumn>
         <TemplateColumn Class="justify-end" Title="Exibir">
             <CellTemplate>
                 <MudTooltip Text="Exibir em nova página">

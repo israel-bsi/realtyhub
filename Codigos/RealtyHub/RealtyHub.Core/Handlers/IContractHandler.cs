@@ -19,12 +19,12 @@ public interface IContractHandler
     /// <remarks>
     /// Este método é responsável por criar um novo contrato com base nas informações fornecidas.
     /// </remarks>
-    /// <param name="request">Instância de <see cref="Contract"/> contendo as informações do novo contrato.</param>
+    /// <param name="request">Instância de <see cref="Contrato"/> contendo as informações do novo contrato.</param>
     /// <returns>
     /// Retorna um objeto <see cref="Response{TData}"/> indicando o resultado da operação.
-    /// O objeto TData é do tipo <see cref="Contract"/> e pode ser nulo se a operação falhar.
+    /// O objeto TData é do tipo <see cref="Contrato"/> e pode ser nulo se a operação falhar.
     /// </returns>
-    Task<Response<Contract?>> CreateAsync(Contract request);
+    Task<Response<Contrato?>> CreateAsync(Contrato request);
 
     /// <summary>
     /// Atualiza as informações de um contrato existente.
@@ -32,12 +32,12 @@ public interface IContractHandler
     /// <remarks>
     /// Este método é responsável por atualizar as informações de um contrato existente com base nas informações fornecidas.
     /// </remarks>
-    /// <param name="request">Instância de <see cref="Contract"/> contendo as informações atualizadas do contrato.</param>
+    /// <param name="request">Instância de <see cref="Contrato"/> contendo as informações atualizadas do contrato.</param>
     /// <returns>
     /// Retorna um objeto <see cref="Response{TData}"/> indicando o resultado da operação.
-    /// O objeto TData é do tipo <see cref="Contract"/> e pode ser nulo se a operação falhar.
+    /// O objeto TData é do tipo <see cref="Contrato"/> e pode ser nulo se a operação falhar.
     /// </returns>
-    Task<Response<Contract?>> UpdateAsync(Contract request);
+    Task<Response<Contrato?>> UpdateAsync(Contrato request);
 
     /// <summary>
     /// Exclui um contrato existente.
@@ -48,9 +48,9 @@ public interface IContractHandler
     /// <param name="request">Instância de <see cref="DeleteContractRequest"/> contendo o Id do contrato a ser excluído.</param>
     /// <returns>
     /// Retorna um objeto <see cref="Response{TData}"/> indicando o resultado da operação.
-    /// O objeto TData é do tipo <see cref="Contract"/> e pode ser nulo se a operação falhar.
+    /// O objeto TData é do tipo <see cref="Contrato"/> e pode ser nulo se a operação falhar.
     /// </returns>
-    Task<Response<Contract?>> DeleteAsync(DeleteContractRequest request);
+    Task<Response<Contrato?>> DeleteAsync(DeleteContractRequest request);
 
     /// <summary>
     /// Recupera as informações de um contrato existente.
@@ -61,9 +61,9 @@ public interface IContractHandler
     /// <param name="request">Instância de <see cref="GetContractByIdRequest"/> contendo o Id do contrato a ser recuperado.</param>
     /// <returns>
     /// Retorna um objeto <see cref="Response{TData}"/> indicando o resultado da operação.
-    /// O objeto TData é do tipo <see cref="Contract"/> e pode ser nulo se a operação falhar.
+    /// O objeto TData é do tipo <see cref="Contrato"/> e pode ser nulo se a operação falhar.
     /// </returns>
-    Task<Response<Contract?>> GetByIdAsync(GetContractByIdRequest request);
+    Task<Response<Contrato?>> GetByIdAsync(GetContractByIdRequest request);
 
     /// <summary>
     /// Recupera uma lista de contratos com base nos critérios de pesquisa fornecidos.
@@ -74,7 +74,7 @@ public interface IContractHandler
     /// <param name="request">Instância de <see cref="GetAllContractsRequest"/> contendo os critérios de pesquisa.</param>
     /// <returns>
     /// Retorna um objeto <see cref="PagedResponse{TData}"/> indicando o resultado da operação.
-    /// O objeto TData é uma lista de <see cref="Contract"/> e pode ser nulo se a operação falhar.
+    /// O objeto TData é uma lista de <see cref="Contrato"/> e pode ser nulo se a operação falhar.
     /// </returns>
-    Task<PagedResponse<List<Contract>?>> GetAllAsync(GetAllContractsRequest request);
+    Task<PagedResponse<List<Contrato>?>> GetAllAsync(GetAllContractsRequest request);
 }

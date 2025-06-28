@@ -30,8 +30,8 @@ public class GetAllOffersByCustomerEndpoint : IEndpoint
             .WithSummary("Recupera todas as propostas feitas por um cliente")
             .WithDescription("Recupera todas as propostas feitas por um cliente")
             .WithOrder(8)
-            .Produces<PagedResponse<Offer?>>()
-            .Produces<PagedResponse<Offer?>>(StatusCodes.Status400BadRequest);
+            .Produces<PagedResponse<Proposta?>>()
+            .Produces<PagedResponse<Proposta?>>(StatusCodes.Status400BadRequest);
     }
 
     /// <summary>

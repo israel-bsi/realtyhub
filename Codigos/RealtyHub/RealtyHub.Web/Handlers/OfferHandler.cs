@@ -29,13 +29,13 @@ public class OfferHandler : IOfferHandler
     /// <remarks>
     /// Envia os dados da proposta para a API e retorna o resultado da operação.
     /// </remarks>
-    public async Task<Response<Offer?>> CreateAsync(Offer request)
+    public async Task<Response<Proposta?>> CreateAsync(Proposta request)
     {
         var result = await _httpClient
             .PostAsJsonAsync("v1/offers", request);
 
-        return await result.Content.ReadFromJsonAsync<Response<Offer?>>()
-               ?? new Response<Offer?>(null, 400, "Falha ao criar a proposta");
+        return await result.Content.ReadFromJsonAsync<Response<Proposta?>>()
+               ?? new Response<Proposta?>(null, 400, "Falha ao criar a proposta");
     }
 
     /// <summary>
@@ -44,13 +44,13 @@ public class OfferHandler : IOfferHandler
     /// <remarks>
     /// Envia os dados atualizados da proposta para a API e retorna o resultado da operação.
     /// </remarks>
-    public async Task<Response<Offer?>> UpdateAsync(Offer request)
+    public async Task<Response<Proposta?>> UpdateAsync(Proposta request)
     {
         var result = await _httpClient
             .PutAsJsonAsync($"v1/offers/{request.Id}", request);
 
-        return await result.Content.ReadFromJsonAsync<Response<Offer?>>()
-               ?? new Response<Offer?>(null, 400, "Falha ao atualizar a proposta");
+        return await result.Content.ReadFromJsonAsync<Response<Proposta?>>()
+               ?? new Response<Proposta?>(null, 400, "Falha ao atualizar a proposta");
     }
 
     /// <summary>
@@ -59,13 +59,13 @@ public class OfferHandler : IOfferHandler
     /// <remarks>
     /// Envia a requisição para rejeitar a proposta à API e retorna o resultado da operação.
     /// </remarks>
-    public async Task<Response<Offer?>> RejectAsync(RejectOfferRequest request)
+    public async Task<Response<Proposta?>> RejectAsync(RejectOfferRequest request)
     {
         var result = await _httpClient
             .PutAsJsonAsync($"v1/offers/{request.Id}/reject", request);
 
-        return await result.Content.ReadFromJsonAsync<Response<Offer?>>()
-               ?? new Response<Offer?>(null, 400, "Falha ao rejeitar a proposta");
+        return await result.Content.ReadFromJsonAsync<Response<Proposta?>>()
+               ?? new Response<Proposta?>(null, 400, "Falha ao rejeitar a proposta");
     }
 
     /// <summary>
@@ -74,13 +74,13 @@ public class OfferHandler : IOfferHandler
     /// <remarks>
     /// Envia a requisição para aceitar a proposta à API e retorna o resultado da operação.
     /// </remarks>
-    public async Task<Response<Offer?>> AcceptAsync(AcceptOfferRequest request)
+    public async Task<Response<Proposta?>> AcceptAsync(AcceptOfferRequest request)
     {
         var result = await _httpClient
             .PutAsJsonAsync($"v1/offers/{request.Id}/accept", request);
 
-        return await result.Content.ReadFromJsonAsync<Response<Offer?>>()
-               ?? new Response<Offer?>(null, 400, "Falha ao aceitar a proposta");
+        return await result.Content.ReadFromJsonAsync<Response<Proposta?>>()
+               ?? new Response<Proposta?>(null, 400, "Falha ao aceitar a proposta");
     }
 
     /// <summary>
@@ -89,12 +89,12 @@ public class OfferHandler : IOfferHandler
     /// <remarks>
     /// Realiza uma requisição GET à API para buscar os dados da proposta especificada.
     /// </remarks>
-    public async Task<Response<Offer?>> GetByIdAsync(GetOfferByIdRequest request)
+    public async Task<Response<Proposta?>> GetByIdAsync(GetOfferByIdRequest request)
     {
         var response = await _httpClient.GetAsync($"v1/offers/{request.Id}");
 
-        return await response.Content.ReadFromJsonAsync<Response<Offer?>>()
-               ?? new Response<Offer?>(null, 400, "Falha ao obter a proposta");
+        return await response.Content.ReadFromJsonAsync<Response<Proposta?>>()
+               ?? new Response<Proposta?>(null, 400, "Falha ao obter a proposta");
     }
 
     /// <summary>
@@ -103,13 +103,13 @@ public class OfferHandler : IOfferHandler
     /// <remarks>
     /// Realiza uma requisição GET à API para buscar a proposta aceita associada a um imóvel.
     /// </remarks>
-    public async Task<Response<Offer?>> GetAcceptedByProperty(GetOfferAcceptedByProperty request)
+    public async Task<Response<Proposta?>> GetAcceptedByProperty(GetOfferAcceptedByProperty request)
     {
         var url = $"v1/offers/property/{request.PropertyId}/accepted";
         var response = await _httpClient.GetAsync(url);
 
-        return await response.Content.ReadFromJsonAsync<Response<Offer?>>()
-               ?? new Response<Offer?>(null, 400, "Falha ao obter a proposta aceita");
+        return await response.Content.ReadFromJsonAsync<Response<Proposta?>>()
+               ?? new Response<Proposta?>(null, 400, "Falha ao obter a proposta aceita");
     }
 
     /// <summary>
@@ -118,7 +118,7 @@ public class OfferHandler : IOfferHandler
     /// <remarks>
     /// Envia uma requisição GET à API com parâmetros de paginação e, opcionalmente, intervalo de datas para filtrar as propostas.
     /// </remarks>
-    public async Task<PagedResponse<List<Offer>?>> GetAllOffersByPropertyAsync(
+    public async Task<PagedResponse<List<Proposta>?>> GetAllOffersByPropertyAsync(
         GetAllOffersByPropertyRequest request)
     {
         var url = $"v1/offers/property/{request.PropertyId}" +
@@ -129,8 +129,8 @@ public class OfferHandler : IOfferHandler
 
         var response = await _httpClient.GetAsync(url);
 
-        return await response.Content.ReadFromJsonAsync<PagedResponse<List<Offer>?>>()
-               ?? new PagedResponse<List<Offer>?>(null, 400, "Falha ao obter as propostas");
+        return await response.Content.ReadFromJsonAsync<PagedResponse<List<Proposta>?>>()
+               ?? new PagedResponse<List<Proposta>?>(null, 400, "Falha ao obter as propostas");
     }
 
     /// <summary>
@@ -139,7 +139,7 @@ public class OfferHandler : IOfferHandler
     /// <remarks>
     /// Envia uma requisição GET à API com parâmetros de paginação e, opcionalmente, intervalo de datas para filtrar as propostas do cliente.
     /// </remarks>
-    public async Task<PagedResponse<List<Offer>?>> GetAllOffersByCustomerAsync(
+    public async Task<PagedResponse<List<Proposta>?>> GetAllOffersByCustomerAsync(
         GetAllOffersByCustomerRequest request)
     {
         var url = $"v1/offers/customer/{request.CustomerId}?" +
@@ -150,8 +150,8 @@ public class OfferHandler : IOfferHandler
 
         var response = await _httpClient.GetAsync(url);
 
-        return await response.Content.ReadFromJsonAsync<PagedResponse<List<Offer>?>>()
-               ?? new PagedResponse<List<Offer>?>(null, 400, "Falha ao obter as propostas");
+        return await response.Content.ReadFromJsonAsync<PagedResponse<List<Proposta>?>>()
+               ?? new PagedResponse<List<Proposta>?>(null, 400, "Falha ao obter as propostas");
     }
 
     /// <summary>
@@ -160,7 +160,7 @@ public class OfferHandler : IOfferHandler
     /// <remarks>
     /// Envia uma requisição GET à API para buscar todas as propostas com suporte a paginação e, opcionalmente, filtro por intervalo de datas.
     /// </remarks>
-    public async Task<PagedResponse<List<Offer>?>> GetAllAsync(GetAllOffersRequest request)
+    public async Task<PagedResponse<List<Proposta>?>> GetAllAsync(GetAllOffersRequest request)
     {
         var url = $"v1/offers?pageNumber={request.PageNumber}&pageSize={request.PageSize}";
 
@@ -169,7 +169,7 @@ public class OfferHandler : IOfferHandler
 
         var response = await _httpClient.GetAsync(url);
 
-        return await response.Content.ReadFromJsonAsync<PagedResponse<List<Offer>?>>()
-               ?? new PagedResponse<List<Offer>?>(null, 400, "Falha ao obter as propostas");
+        return await response.Content.ReadFromJsonAsync<PagedResponse<List<Proposta>?>>()
+               ?? new PagedResponse<List<Proposta>?>(null, 400, "Falha ao obter as propostas");
     }
 }

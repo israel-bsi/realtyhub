@@ -32,10 +32,10 @@ public class PropertyPhotosHandler : IPropertyPhotosHandler
     /// incluindo cabeçalhos indicando se a foto é thumbnail e o seu identificador.
     /// Envia os dados para a API e retorna o resultado da operação.
     /// </remarks>
-    public async Task<Response<PropertyPhoto?>> CreateAsync(CreatePropertyPhotosRequest request)
+    public async Task<Response<FotoImovel?>> CreateAsync(CreatePropertyPhotosRequest request)
     {
         if (request.FileBytes is null || request.FileBytes.Count == 0)
-            return new Response<PropertyPhoto?>(null, 400, "Nenhum arquivo encontrado");
+            return new Response<FotoImovel?>(null, 400, "Nenhum arquivo encontrado");
 
         using var content = new MultipartFormDataContent();
         foreach (var fileData in request.FileBytes)
@@ -50,8 +50,8 @@ public class PropertyPhotosHandler : IPropertyPhotosHandler
         var url = $"/v1/properties/{request.PropertyId}/photos";
         var response = await _httpClient.PostAsync(url, content);
 
-        return await response.Content.ReadFromJsonAsync<Response<PropertyPhoto?>>()
-               ?? new Response<PropertyPhoto?>(null, 400, "Falha ao adicionar as fotos");
+        return await response.Content.ReadFromJsonAsync<Response<FotoImovel?>>()
+               ?? new Response<FotoImovel?>(null, 400, "Falha ao adicionar as fotos");
     }
 
     /// <summary>
@@ -61,13 +61,13 @@ public class PropertyPhotosHandler : IPropertyPhotosHandler
     /// Envia uma requisição PUT para a API com as informações das fotos a serem atualizadas.
     /// Retorna a lista atualizada de fotos ou uma resposta de erro em caso de falha.
     /// </remarks>
-    public async Task<Response<List<PropertyPhoto>?>> UpdateAsync(UpdatePropertyPhotosRequest request)
+    public async Task<Response<List<FotoImovel>?>> UpdateAsync(UpdatePropertyPhotosRequest request)
     {
         var url = $"/v1/properties/{request.PropertyId}/photos";
         var result = await _httpClient.PutAsJsonAsync(url, request);
 
-        return await result.Content.ReadFromJsonAsync<Response<List<PropertyPhoto>?>>()
-               ?? new Response<List<PropertyPhoto>?>(null, 400, "Falha ao atualizar as fotos");
+        return await result.Content.ReadFromJsonAsync<Response<List<FotoImovel>?>>()
+               ?? new Response<List<FotoImovel>?>(null, 400, "Falha ao atualizar as fotos");
     }
 
     /// <summary>
@@ -77,14 +77,14 @@ public class PropertyPhotosHandler : IPropertyPhotosHandler
     /// Envia uma requisição DELETE para a API utilizando o ID da propriedade e o ID da foto.
     /// Retorna uma resposta indicando sucesso ou falha na exclusão.
     /// </remarks>
-    public async Task<Response<PropertyPhoto?>> DeleteAsync(DeletePropertyPhotoRequest request)
+    public async Task<Response<FotoImovel?>> DeleteAsync(DeletePropertyPhotoRequest request)
     {
         var url = $"/v1/properties/{request.PropertyId}/photos/{request.Id}";
         var response = await _httpClient.DeleteAsync(url);
 
         return response.IsSuccessStatusCode
-            ? new Response<PropertyPhoto?>(null, 204)
-            : new Response<PropertyPhoto?>(null, 400, "Falha ao deletar a foto");
+            ? new Response<FotoImovel?>(null, 204)
+            : new Response<FotoImovel?>(null, 400, "Falha ao deletar a foto");
     }
 
     /// <summary>
@@ -94,13 +94,13 @@ public class PropertyPhotosHandler : IPropertyPhotosHandler
     /// Realiza uma requisição GET para a API utilizando o ID da propriedade e retorna a lista de fotos.
     /// Em caso de falha, retorna uma resposta de erro.
     /// </remarks>
-    public async Task<Response<List<PropertyPhoto>?>> GetAllByPropertyAsync(
+    public async Task<Response<List<FotoImovel>?>> GetAllByPropertyAsync(
         GetAllPropertyPhotosByPropertyRequest request)
     {
         var url = $"/v1/properties/{request.PropertyId}/photos";
         var response = await _httpClient.GetAsync(url);
 
-        return await response.Content.ReadFromJsonAsync<Response<List<PropertyPhoto>?>>()
-               ?? new Response<List<PropertyPhoto>?>(null, 400, "Falha ao buscar as fotos");
+        return await response.Content.ReadFromJsonAsync<Response<List<FotoImovel>?>>()
+               ?? new Response<List<FotoImovel>?>(null, 400, "Falha ao buscar as fotos");
     }
 }

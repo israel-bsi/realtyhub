@@ -5,40 +5,40 @@ using RealtyHub.Core.Models;
 namespace RealtyHub.ApiService.Data.Mappings;
 
 /// <summary>
-/// Configura o mapeamento da entidade <c><see cref="Payment"/></c> para o modelo de dados.
+/// Configura o mapeamento da entidade <c><see cref="Pagamento"/></c> para o modelo de dados.
 /// </summary>
-public class PaymentMapping : IEntityTypeConfiguration<Payment>
+public class PaymentMapping : IEntityTypeConfiguration<Pagamento>
 {
     /// <summary>
-    /// Configura as propriedades e relacionamentos da entidade <c><see cref="Payment"/></c>.
+    /// Configura as propriedades e relacionamentos da entidade <c><see cref="Pagamento"/></c>.
     /// </summary>
-    /// <param name="builder">O construtor utilizado para configurar a entidade <c><see cref="Payment"/></c>.</param>
-    public void Configure(EntityTypeBuilder<Payment> builder)
+    /// <param name="builder">O construtor utilizado para configurar a entidade <c><see cref="Pagamento"/></c>.</param>
+    public void Configure(EntityTypeBuilder<Pagamento> builder)
     {
-        builder.ToTable("Payment");
+        builder.ToTable("Pagamento");
 
         builder.HasKey(x => x.Id);
 
-        builder.Property(x => x.Amount)
+        builder.Property(x => x.Valor)
             .IsRequired();
 
-        builder.Property(x => x.PaymentType)
+        builder.Property(x => x.TipoPagamento)
             .IsRequired();
 
-        builder.Property(c => c.UserId)
+        builder.Property(c => c.UsuarioId)
             .IsRequired();
 
-        builder.Property(x => x.IsActive)
+        builder.Property(x => x.Ativo)
             .HasDefaultValue(true);
 
-        builder.Property(x => x.CreatedAt)
+        builder.Property(x => x.CriadoEm)
             .HasDefaultValueSql("NOW()");
 
-        builder.Property(x => x.UpdatedAt)
+        builder.Property(x => x.AtualizadoEm)
             .HasDefaultValueSql("NOW()");
 
-        builder.HasOne(p => p.Offer)
-            .WithMany(o => o.Payments)
-            .HasForeignKey(p => p.OfferId);
+        builder.HasOne(p => p.Proposta)
+            .WithMany(o => o.Pagamentos)
+            .HasForeignKey(p => p.PropostaId);
     }
 }

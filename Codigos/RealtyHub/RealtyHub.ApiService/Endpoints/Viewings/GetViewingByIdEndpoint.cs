@@ -28,8 +28,8 @@ public class GetViewingByIdEndpoint : IEndpoint
             .WithSummary("Recupera uma visita")
             .WithDescription("Recupera uma visita")
             .WithOrder(4)
-            .Produces<Response<Viewing?>>()
-            .Produces<Response<Viewing?>>(StatusCodes.Status400BadRequest);
+            .Produces<Response<Visita?>>()
+            .Produces<Response<Visita?>>(StatusCodes.Status400BadRequest);
 
     /// <summary>
     /// Manipulador da rota que retorna os detalhes de uma visita pelo seu ID.

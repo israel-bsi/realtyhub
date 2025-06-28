@@ -19,7 +19,7 @@ public interface IViewingHandler
     /// <remarks>
     /// Este método é responsável por agendar uma nova visita a um imóvel com base nas informações fornecidas.
     /// </remarks>
-    Task<Response<Viewing?>> ScheduleAsync(Viewing request);
+    Task<Response<Visita?>> ScheduleAsync(Visita request);
 
     /// <summary>
     /// Reagenda uma visita existente.
@@ -27,12 +27,12 @@ public interface IViewingHandler
     /// <remarks>
     /// Este método é responsável por reagendar uma visita existente com base nas informações fornecidas.
     /// </remarks>
-    /// <param name="request">Instância de <see cref="Viewing"/> contendo as informações da visita a ser reagendada.</param>
+    /// <param name="request">Instância de <see cref="Visita"/> contendo as informações da visita a ser reagendada.</param>
     /// <returns>
     /// Retorna um objeto <see cref="Response{TData}"/> indicando o resultado da operação.
-    /// O objeto TData é do tipo <see cref="Viewing"/> e pode ser nulo se a operação falhar.
+    /// O objeto TData é do tipo <see cref="Visita"/> e pode ser nulo se a operação falhar.
     /// </returns> 
-    Task<Response<Viewing?>> RescheduleAsync(Viewing request);
+    Task<Response<Visita?>> RescheduleAsync(Visita request);
 
     /// <summary>
     /// Conclui uma visita existente.
@@ -43,9 +43,9 @@ public interface IViewingHandler
     /// <param name="request">Instância de <see cref="DoneViewingRequest"/> contendo as informações da visita a ser concluída.</param>
     /// <returns>
     /// Retorna um objeto <see cref="Response{TData}"/> indicando o resultado da operação.
-    /// O objeto TData é do tipo <see cref="Viewing"/> e pode ser nulo se a operação falhar.
+    /// O objeto TData é do tipo <see cref="Visita"/> e pode ser nulo se a operação falhar.
     /// </returns>
-    Task<Response<Viewing?>> DoneAsync(DoneViewingRequest request);
+    Task<Response<Visita?>> DoneAsync(DoneViewingRequest request);
 
     /// <summary>
     /// Cancela uma visita existente.
@@ -56,9 +56,9 @@ public interface IViewingHandler
     /// <param name="request">Instância de <see cref="CancelViewingRequest"/> contendo as informações da visita a ser cancelada.</param>
     /// <returns>
     /// Retorna um objeto <see cref="Response{TData}"/> indicando o resultado da operação.
-    /// O objeto TData é do tipo <see cref="Viewing"/> e pode ser nulo se a operação falhar.
+    /// O objeto TData é do tipo <see cref="Visita"/> e pode ser nulo se a operação falhar.
     /// </returns>
-    Task<Response<Viewing?>> CancelAsync(CancelViewingRequest request);
+    Task<Response<Visita?>> CancelAsync(CancelViewingRequest request);
 
     /// <summary>
     /// Recupera uma visita existente.
@@ -69,9 +69,9 @@ public interface IViewingHandler
     /// <param name="request">Instância de <see cref="GetViewingByIdRequest"/> contendo o Id da visita a ser recuperada.</param>
     /// <returns>
     /// Retorna um objeto <see cref="Response{TData}"/> indicando o resultado da operação.
-    /// O objeto TData é do tipo <see cref="Viewing"/> e pode ser nulo se a operação falhar.
+    /// O objeto TData é do tipo <see cref="Visita"/> e pode ser nulo se a operação falhar.
     /// </returns>
-    Task<Response<Viewing?>> GetByIdAsync(GetViewingByIdRequest request);
+    Task<Response<Visita?>> GetByIdAsync(GetViewingByIdRequest request);
 
     /// <summary>
     /// Recupera todas as visitas existentes.
@@ -82,7 +82,7 @@ public interface IViewingHandler
     /// <param name="request">Instância de <see cref="GetAllViewingsRequest"/> contendo as informações para recuperação das visitas.</param>
     /// <returns>
     /// Retorna um objeto <see cref="PagedResponse{TData}"/> indicando o resultado da operação.
-    /// O objeto TData é uma lista do tipo <see cref="Viewing"/> e pode ser nulo se a operação falhar.  
+    /// O objeto TData é uma lista do tipo <see cref="Visita"/> e pode ser nulo se a operação falhar.  
     /// </returns>
-    Task<PagedResponse<List<Viewing>?>> GetAllAsync(GetAllViewingsRequest request);
+    Task<PagedResponse<List<Visita>?>> GetAllAsync(GetAllViewingsRequest request);
 }

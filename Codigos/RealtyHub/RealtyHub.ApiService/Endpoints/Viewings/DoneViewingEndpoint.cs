@@ -28,8 +28,8 @@ public class DoneViewingEndpoint : IEndpoint
             .WithSummary("Finaliza uma visita")
             .WithDescription("Finaliza uma visita")
             .WithOrder(6)
-            .Produces<Response<Viewing?>>()
-            .Produces<Response<Viewing?>>(StatusCodes.Status400BadRequest);
+            .Produces<Response<Visita?>>()
+            .Produces<Response<Visita?>>(StatusCodes.Status400BadRequest);
 
     /// <summary>
     /// Manipulador da rota que finaliza uma visita.

@@ -46,40 +46,40 @@ public class PropertyHandler : IPropertyHandler
     /// </remarks>
     /// <param name="request">Objeto contendo as informações para criação do imóvel.</param>
     /// <returns>Retorna uma resposta com o imóvel criado e o código de status.</returns>
-    public async Task<Response<Property?>> CreateAsync(Property request)
+    public async Task<Response<Imovel?>> CreateAsync(Imovel request)
     {
         try
         {
-            var property = new Property
+            var property = new Imovel
             {
-                Title = request.Title,
-                Description = request.Description,
-                Price = request.Price,
-                Address = request.Address,
-                PropertyType = request.PropertyType,
-                Bedroom = request.Bedroom,
-                Bathroom = request.Bathroom,
+                Titulo = request.Titulo,
+                Descricao = request.Descricao,
+                Preco = request.Preco,
+                Endereco = request.Endereco,
+                TipoImovel = request.TipoImovel,
+                Quarto = request.Quarto,
+                Banheiro = request.Banheiro,
                 Area = request.Area,
-                Garage = request.Garage,
-                IsNew = request.IsNew,
-                RegistryNumber = request.RegistryNumber,
-                RegistryRecord = request.RegistryRecord,
-                TransactionsDetails = request.TransactionsDetails,
-                UserId = request.UserId,
-                CondominiumId = request.CondominiumId,
-                ShowInHome = request.ShowInHome,
-                SellerId = request.SellerId,
-                IsActive = true
+                Garagem = request.Garagem,
+                Novo = request.Novo,
+                NumeroRegistro = request.NumeroRegistro,
+                RegistroCartorio = request.RegistroCartorio,
+                DetalhesTransacao = request.DetalhesTransacao,
+                UsuarioId = request.UsuarioId,
+                CondominioId = request.CondominioId,
+                ExibirNaHome = request.ExibirNaHome,
+                VendedorId = request.VendedorId,
+                Ativo = true
             };
 
             await _context.Properties.AddAsync(property);
             await _context.SaveChangesAsync();
 
-            return new Response<Property?>(property, 201, "Imóvel criado com sucesso");
+            return new Response<Imovel?>(property, 201, "Imóvel criado com sucesso");
         }
         catch
         {
-            return new Response<Property?>(null, 500, "Não foi possível criar o imóvel");
+            return new Response<Imovel?>(null, 500, "Não foi possível criar o imóvel");
         }
     }
 
@@ -91,44 +91,44 @@ public class PropertyHandler : IPropertyHandler
     /// </remarks>
     /// <param name="request">Objeto contendo as novas informações do imóvel.</param>
     /// <returns>Retorna a resposta com o imóvel atualizado ou um erro se não for encontrado.</returns>
-    public async Task<Response<Property?>> UpdateAsync(Property request)
+    public async Task<Response<Imovel?>> UpdateAsync(Imovel request)
     {
         try
         {
             var property = await _context
                 .Properties
-                .FirstOrDefaultAsync(p => p.Id == request.Id && p.IsActive);
+                .FirstOrDefaultAsync(p => p.Id == request.Id && p.Ativo);
 
             if (property is null)
-                return new Response<Property?>(null, 404, "Imóvel não encontrado");
+                return new Response<Imovel?>(null, 404, "Imóvel não encontrado");
 
-            property.Title = request.Title;
-            property.Description = request.Description;
-            property.Price = request.Price;
-            property.Address = request.Address;
-            property.PropertyType = request.PropertyType;
-            property.Bedroom = request.Bedroom;
-            property.Bathroom = request.Bathroom;
+            property.Titulo = request.Titulo;
+            property.Descricao = request.Descricao;
+            property.Preco = request.Preco;
+            property.Endereco = request.Endereco;
+            property.TipoImovel = request.TipoImovel;
+            property.Quarto = request.Quarto;
+            property.Banheiro = request.Banheiro;
             property.Area = request.Area;
-            property.Garage = request.Garage;
-            property.IsNew = request.IsNew;
-            property.RegistryNumber = request.RegistryNumber;
-            property.RegistryRecord = request.RegistryRecord;
-            property.TransactionsDetails = request.TransactionsDetails;
-            property.UserId = request.UserId;
-            property.ShowInHome = request.ShowInHome;
-            property.SellerId = request.SellerId;
-            property.CondominiumId = request.CondominiumId;
-            property.UpdatedAt = DateTime.UtcNow;
+            property.Garagem = request.Garagem;
+            property.Novo = request.Novo;
+            property.NumeroRegistro = request.NumeroRegistro;
+            property.RegistroCartorio = request.RegistroCartorio;
+            property.DetalhesTransacao = request.DetalhesTransacao;
+            property.UsuarioId = request.UsuarioId;
+            property.ExibirNaHome = request.ExibirNaHome;
+            property.VendedorId = request.VendedorId;
+            property.CondominioId = request.CondominioId;
+            property.AtualizadoEm = DateTime.UtcNow;
 
             _context.Properties.Update(property);
             await _context.SaveChangesAsync();
 
-            return new Response<Property?>(property, 200, "Imóvel atualizado com sucesso");
+            return new Response<Imovel?>(property, 200, "Imóvel atualizado com sucesso");
         }
         catch
         {
-            return new Response<Property?>(null, 500, "Não foi possível atualizar o imóvel");
+            return new Response<Imovel?>(null, 500, "Não foi possível atualizar o imóvel");
         }
     }
 
@@ -140,29 +140,29 @@ public class PropertyHandler : IPropertyHandler
     /// </remarks>
     /// <param name="request">Requisição que contém o ID do imóvel a ser excluído.</param>
     /// <returns>Retorna a resposta com o status da exclusão ou um erro se não for encontrado.</returns>
-    public async Task<Response<Property?>> DeleteAsync(DeletePropertyRequest request)
+    public async Task<Response<Imovel?>> DeleteAsync(DeletePropertyRequest request)
     {
         try
         {
             var property = await _context
                 .Properties
                 .FirstOrDefaultAsync(p => p.Id == request.Id
-                                          && p.UserId == request.UserId
-                                          && p.IsActive);
+                                          && p.UsuarioId == request.UserId
+                                          && p.Ativo);
 
             if (property is null)
-                return new Response<Property?>(null, 404, "Imóvel não encontrado");
+                return new Response<Imovel?>(null, 404, "Imóvel não encontrado");
 
-            property.IsActive = false;
-            property.UpdatedAt = DateTime.UtcNow;
+            property.Ativo = false;
+            property.AtualizadoEm = DateTime.UtcNow;
 
             await _context.SaveChangesAsync();
 
-            return new Response<Property?>(null, 204, "Imóvel deletado com sucesso");
+            return new Response<Imovel?>(null, 204, "Imóvel deletado com sucesso");
         }
         catch
         {
-            return new Response<Property?>(null, 500, "Não foi possível deletar o imóvel");
+            return new Response<Imovel?>(null, 500, "Não foi possível deletar o imóvel");
         }
     }
 
@@ -174,27 +174,27 @@ public class PropertyHandler : IPropertyHandler
     /// </remarks>
     /// <param name="request">Requisição que contém o ID do imóvel desejado.</param>
     /// <returns>Retorna o objeto do imóvel ou um erro caso não seja encontrado.</returns>
-    public async Task<Response<Property?>> GetByIdAsync(GetPropertyByIdRequest request)
+    public async Task<Response<Imovel?>> GetByIdAsync(GetPropertyByIdRequest request)
     {
         try
         {
             var query = _context
                 .Properties
                 .AsNoTracking()
-                .Include(p => p.Condominium)
-                .Include(p => p.Seller)
-                .Include(p => p.PropertyPhotos.Where(photo => photo.IsActive))
-                .Where(p => p.Id == request.Id && p.IsActive);
+                .Include(p => p.Condominio)
+                .Include(p => p.Vendedor)
+                .Include(p => p.FotosImovel.Where(photo => photo.Ativo))
+                .Where(p => p.Id == request.Id && p.Ativo);
 
             var property = await query.FirstOrDefaultAsync();
 
             return property is null
-                ? new Response<Property?>(null, 404, "Imóvel não encontrado")
-                : new Response<Property?>(property);
+                ? new Response<Imovel?>(null, 404, "Imóvel não encontrado")
+                : new Response<Imovel?>(property);
         }
         catch
         {
-            return new Response<Property?>(null, 500, "Não foi possível retornar o imóvel");
+            return new Response<Imovel?>(null, 500, "Não foi possível retornar o imóvel");
         }
     }
 
@@ -208,25 +208,25 @@ public class PropertyHandler : IPropertyHandler
     /// </remarks>
     /// <param name="request">Requisição que contém parâmetros de paginação e filtro.</param>
     /// <returns>Retorna uma resposta paginada com os imóveis ativos ou um erro em caso de falha.</returns>
-    public async Task<PagedResponse<List<Property>?>> GetAllAsync(GetAllPropertiesRequest request)
+    public async Task<PagedResponse<List<Imovel>?>> GetAllAsync(GetAllPropertiesRequest request)
     {
         try
         {
             var query = _context
                 .Properties
                 .AsNoTracking()
-                .Include(p => p.Condominium)
-                .Include(p => p.Seller)
-                .Include(p => p.PropertyPhotos.Where(photos => photos.IsActive))
-                .Where(p => p.IsActive);
+                .Include(p => p.Condominio)
+                .Include(p => p.Vendedor)
+                .Include(p => p.FotosImovel.Where(photos => photos.Ativo))
+                .Where(p => p.Ativo);
 
             if (!string.IsNullOrEmpty(request.UserId))
-                query = query.Where(v => v.UserId == request.UserId);
+                query = query.Where(v => v.UsuarioId == request.UserId);
 
             if (!string.IsNullOrEmpty(request.FilterBy))
                 query = query.FilterByProperty(request.SearchTerm, request.FilterBy);
 
-            query = query.OrderBy(p => p.Title);
+            query = query.OrderBy(p => p.Titulo);
 
             var properties = await query
                 .Skip((request.PageNumber - 1) * request.PageSize)
@@ -235,11 +235,11 @@ public class PropertyHandler : IPropertyHandler
 
             var count = await query.CountAsync();
 
-            return new PagedResponse<List<Property>?>(properties, count, request.PageNumber, request.PageSize);
+            return new PagedResponse<List<Imovel>?>(properties, count, request.PageNumber, request.PageSize);
         }
         catch
         {
-            return new PagedResponse<List<Property>?>(null, 500, "Não foi possível retornar os imóveis");
+            return new PagedResponse<List<Imovel>?>(null, 500, "Não foi possível retornar os imóveis");
         }
     }
 
@@ -253,27 +253,27 @@ public class PropertyHandler : IPropertyHandler
     /// </remarks>
     /// <param name="request">Requisição que contém parâmetros de paginação e filtro por data.</param>
     /// <returns>Retorna uma resposta paginada com as visitas ou um erro em caso de falha.</returns>
-    public async Task<PagedResponse<List<Viewing>?>> GetAllViewingsAsync(GetAllViewingsByPropertyRequest request)
+    public async Task<PagedResponse<List<Visita>?>> GetAllViewingsAsync(GetAllViewingsByPropertyRequest request)
     {
         try
         {
             var query = _context
                 .Viewing
                 .AsNoTracking()
-                .Include(v => v.Buyer)
-                .Include(v => v.Property)
-                .Where(v => v.PropertyId == request.PropertyId);
+                .Include(v => v.Comprador)
+                .Include(v => v.Imovel)
+                .Where(v => v.ImovelId == request.PropertyId);
 
             if (request.StartDate is not null && request.EndDate is not null)
             {
                 var startDate = DateTime.Parse(request.StartDate).ToUniversalTime();
                 var endDate = DateTime.Parse(request.EndDate).ToUniversalTime();
 
-                query = query.Where(v => v.ViewingDate >= startDate
-                                         && v.ViewingDate <= endDate);
+                query = query.Where(v => v.DataVisita >= startDate
+                                         && v.DataVisita <= endDate);
             }
 
-            query = query.OrderBy(v => v.ViewingDate);
+            query = query.OrderBy(v => v.DataVisita);
 
             var viewings = await query
                 .Skip((request.PageNumber - 1) * request.PageSize)
@@ -282,11 +282,11 @@ public class PropertyHandler : IPropertyHandler
 
             var count = await query.CountAsync();
 
-            return new PagedResponse<List<Viewing>?>(viewings, count, request.PageNumber, request.PageSize);
+            return new PagedResponse<List<Visita>?>(viewings, count, request.PageNumber, request.PageSize);
         }
         catch
         {
-            return new PagedResponse<List<Viewing>?>(null, 500, "Não foi possível retornar as visitas");
+            return new PagedResponse<List<Visita>?>(null, 500, "Não foi possível retornar as visitas");
         }
     }
 }

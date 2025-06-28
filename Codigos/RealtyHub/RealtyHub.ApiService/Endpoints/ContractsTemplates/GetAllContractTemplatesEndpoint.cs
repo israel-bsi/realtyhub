@@ -27,8 +27,8 @@ public class GetAllContractTemplatesEndpoint : IEndpoint
             .WithSummary("Recupera todos os modelos de contrato")
             .WithDescription("Recupera todos os modelos de contrato")
             .WithOrder(4)
-            .Produces<Response<ContractTemplate?>>()
-            .Produces<Response<ContractTemplate?>>(StatusCodes.Status400BadRequest);
+            .Produces<Response<ModeloContrato?>>()
+            .Produces<Response<ModeloContrato?>>(StatusCodes.Status400BadRequest);
     }
 
     /// <summary>

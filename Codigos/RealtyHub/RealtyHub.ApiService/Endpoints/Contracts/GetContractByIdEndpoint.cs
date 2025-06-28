@@ -28,7 +28,7 @@ public class GetContractByIdEndpoint : IEndpoint
             .WithSummary("Recupera um contrato")
             .WithDescription("Recupera um contrato baseado no seu ID")
             .WithOrder(4)
-            .Produces<Response<Contract?>>()
+            .Produces<Response<Contrato?>>()
             .Produces(StatusCodes.Status400BadRequest);
 
     /// <summary>

@@ -43,7 +43,7 @@ public class ContractTemplatesHandler : IContractTemplateHandler
     /// Este método busca todos os modelos de contrato e retorna uma lista com os resultados.
     /// </remarks>
     /// <returns>Retorna uma lista de modelos de contrato ou um erro em caso de falha.</returns>
-    public async Task<Response<List<ContractTemplate>?>> GetAllAsync()
+    public async Task<Response<List<ModeloContrato>?>> GetAllAsync()
     {
         try
         {
@@ -52,11 +52,11 @@ public class ContractTemplatesHandler : IContractTemplateHandler
                 .AsNoTracking()
                 .ToListAsync();
 
-            return new Response<List<ContractTemplate>?>(contracts);
+            return new Response<List<ModeloContrato>?>(contracts);
         }
         catch
         {
-            return new Response<List<ContractTemplate>?>(null, 500, "Não foi possível buscar os modelos de contrato");
+            return new Response<List<ModeloContrato>?>(null, 500, "Não foi possível buscar os modelos de contrato");
         }
     }
 }

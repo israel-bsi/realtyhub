@@ -30,7 +30,7 @@ public class DeleteCondominiumEndpoint : IEndpoint
             .WithDescription("Deleta um condomínio")
             .WithOrder(4)
             .Produces(StatusCodes.Status204NoContent)
-            .Produces<Response<Condominium?>>(StatusCodes.Status404NotFound);
+            .Produces<Response<Condominio?>>(StatusCodes.Status404NotFound);
 
     /// <summary>
     /// Manipulador da rota para a deleção de um condomínio.

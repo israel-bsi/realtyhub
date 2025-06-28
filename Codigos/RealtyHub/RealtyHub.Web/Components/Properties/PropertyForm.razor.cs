@@ -44,12 +44,12 @@ public partial class PropertyFormComponent : ComponentBase
     /// <summary>
     /// Modelo de entrada utilizado para o binding dos campos do formulário.
     /// </summary>
-    public Property InputModel { get; set; } = new();
+    public Imovel InputModel { get; set; } = new();
 
     /// <summary>
     /// Lista de fotos do imóvel carregadas do servidor.
     /// </summary>
-    public List<PropertyPhoto> PropertyPhotos { get; set; } = [];
+    public List<FotoImovel> PropertyPhotos { get; set; } = [];
 
     /// <summary>
     /// Lista de todas as fotos (novas e existentes) exibidas no formulário.
@@ -121,7 +121,7 @@ public partial class PropertyFormComponent : ComponentBase
         IsBusy = true;
         try
         {
-            Response<Property?> result;
+            Response<Imovel?> result;
 
             if (InputModel.Id > 0)
                 result = await PropertyHandler.UpdateAsync(InputModel);
@@ -269,8 +269,8 @@ public partial class PropertyFormComponent : ComponentBase
                     AllPhotos.Add(new PhotoItem
                     {
                         Id = photo.Id,
-                        IsThumbnail = photo.IsThumbnail,
-                        DisplayUrl = $"{Configuration.BackendUrl}/photos/{photo.Id}{photo.Extension}",
+                        IsThumbnail = photo.Miniatura,
+                        DisplayUrl = $"{Configuration.BackendUrl}/photos/{photo.Id}{photo.Extensao}",
                     });
                 }
             }
@@ -308,8 +308,8 @@ public partial class PropertyFormComponent : ComponentBase
                     new()
                     {
                         Id = item.Id,
-                        IsThumbnail = true,
-                        PropertyId = InputModel.Id,
+                        Miniatura = true,
+                        ImovelId = InputModel.Id,
                     }
                 ]
             };
@@ -435,7 +435,7 @@ public partial class PropertyFormComponent : ComponentBase
     /// </summary>
     private void RedirectToCreateProperty()
     {
-        InputModel.PropertyType = EPropertyType.House;
+        InputModel.TipoImovel = ETipoImovel.Casa;
         NavigationManager.NavigateTo("/imoveis/adicionar");
     }
 
@@ -447,7 +447,7 @@ public partial class PropertyFormComponent : ComponentBase
         var parameters = new DialogParameters
         {
             { "OnCustomerSelected", EventCallback.Factory
-                .Create<Customer>(this, SelectedSeller) }
+                .Create<Cliente>(this, SelectedSeller) }
         };
         var options = new DialogOptions
         {
@@ -459,7 +459,7 @@ public partial class PropertyFormComponent : ComponentBase
             .ShowAsync<CustomerDialog>("Informe o vendedor", parameters, options);
         var result = await dialog.Result;
 
-        if (result is { Canceled: false, Data: Customer selectedCustomer })
+        if (result is { Canceled: false, Data: Cliente selectedCustomer })
             SelectedSeller(selectedCustomer);
     }
 
@@ -467,10 +467,10 @@ public partial class PropertyFormComponent : ComponentBase
     /// Manipula a seleção do vendedor no diálogo, atualizando o modelo do imóvel.
     /// </summary>
     /// <param name="seller">Vendedor selecionado.</param>
-    private void SelectedSeller(Customer seller)
+    private void SelectedSeller(Cliente seller)
     {
-        InputModel.Seller = seller;
-        InputModel.SellerId = seller.Id;
+        InputModel.Vendedor = seller;
+        InputModel.VendedorId = seller.Id;
         StateHasChanged();
     }
 
@@ -482,7 +482,7 @@ public partial class PropertyFormComponent : ComponentBase
         var parameters = new DialogParameters
         {
             { "OnCondominiumSelected", EventCallback.Factory
-                .Create<Condominium>(this, SelectedCondominium) }
+                .Create<Condominio>(this, SelectedCondominium) }
         };
         var options = new DialogOptions
         {
@@ -494,18 +494,18 @@ public partial class PropertyFormComponent : ComponentBase
             .ShowAsync<CondominiumDialog>("Informe o condomínio", parameters, options);
         var result = await dialog.Result;
 
-        if (result is { Canceled: false, Data: Condominium selectedCondominium })
+        if (result is { Canceled: false, Data: Condominio selectedCondominium })
             SelectedCondominium(selectedCondominium);
     }
 
     /// <summary>
     /// Manipula a seleção do condomínio no diálogo, atualizando o modelo do imóvel.
     /// </summary>
-    /// <param name="condominium">Condomínio selecionado.</param>
-    private void SelectedCondominium(Condominium condominium)
+    /// <param name="condominio">Condomínio selecionado.</param>
+    private void SelectedCondominium(Condominio condominio)
     {
-        InputModel.Condominium = condominium;
-        InputModel.CondominiumId = condominium.Id;
+        InputModel.Condominio = condominio;
+        InputModel.CondominioId = condominio.Id;
         StateHasChanged();
     }
 

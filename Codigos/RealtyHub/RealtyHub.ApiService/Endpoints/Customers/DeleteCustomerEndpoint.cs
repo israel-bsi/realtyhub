@@ -28,7 +28,7 @@ public class DeleteCustomerEndpoint : IEndpoint
             .WithSummary("Deleta um cliente")
             .WithDescription("Deleta um cliente")
             .WithOrder(3)
-            .Produces<Response<Customer?>>(StatusCodes.Status204NoContent)
+            .Produces<Response<Cliente?>>(StatusCodes.Status204NoContent)
             .Produces(StatusCodes.Status400BadRequest);
 
     /// <summary>

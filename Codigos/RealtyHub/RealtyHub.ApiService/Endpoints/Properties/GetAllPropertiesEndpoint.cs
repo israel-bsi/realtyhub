@@ -29,8 +29,8 @@ public class GetAllPropertiesEndpoint : IEndpoint
             .WithSummary("Recupera todos os imóveis")
             .WithDescription("Recupera todos os imóveis")
             .WithOrder(5)
-            .Produces<PagedResponse<List<Property>?>>()
-            .Produces<PagedResponse<Property?>>(StatusCodes.Status400BadRequest);
+            .Produces<PagedResponse<List<Imovel>?>>()
+            .Produces<PagedResponse<Imovel?>>(StatusCodes.Status400BadRequest);
 
     /// <summary>
     /// Manipulador da rota que retorna todos os imóveis.

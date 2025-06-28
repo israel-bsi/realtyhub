@@ -16,8 +16,8 @@ else
 
             <MudDatePicker Class="mb-2"
                            Label="Data da Visita"
-                           @bind-Date="@InputModel.ViewingDate"
-                           For="@(() => InputModel.ViewingDate)" />
+                           @bind-Date="@InputModel.DataVisita"
+                           For="@(() => InputModel.DataVisita)" />
 
             <MudTimePicker Class="mb-2"
                            Label="Hora da Visita"
@@ -26,21 +26,21 @@ else
 
             <MudTextField Class="mb-2"
                           ReadOnly="true"
-                          Label="@(InputModel.Buyer == null ? "Clique aqui para pesquisar o cliente" : "Cliente Selecionado")"
+                          Label="@(InputModel.Comprador == null ? "Clique aqui para pesquisar o cliente" : "Cliente Selecionado")"
                           AdornmentIcon="@Icons.Material.Filled.PersonSearch"
                           @onclick="@OpenCustomerDialog"
                           OnAdornmentClick="OpenCustomerDialog"
                           Adornment="Adornment.End"
-                          Value="@InputModel.Buyer?.Name" />
+                          Value="@InputModel.Comprador?.Nome" />
 
             <MudTextField Class="mb-2"
                           ReadOnly="true"
-                          Label="@(InputModel.Property == null ? "Clique aqui para pesquisar o imóvel" : "Imóvel Selecionado")"
+                          Label="@(InputModel.Imovel == null ? "Clique aqui para pesquisar o imóvel" : "Imóvel Selecionado")"
                           AdornmentIcon="@Icons.Material.Filled.Search"
                           @onclick="@OpenPropertyDialog"
                           OnAdornmentClick="OpenPropertyDialog"
                           Adornment="Adornment.End"
-                          Value="@InputModel.Property?.Title" />
+                          Value="@InputModel.Imovel?.Titulo" />
 
             <div>
                 <MudButton ButtonType="ButtonType.Submit"

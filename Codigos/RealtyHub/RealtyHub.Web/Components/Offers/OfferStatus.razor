@@ -1,22 +1,22 @@
 ﻿@using RealtyHub.Core.Extensions
 
-@switch (Status)
+@switch (StatusProposta)
 {
-    case EOfferStatus.Accepted:
-        <MudChip T="Enum" Color="Color.Success">@Status.GetDisplayName()</MudChip>
+    case EStatusProposta.Aceita:
+        <MudChip T="Enum" Color="Color.Success">@StatusProposta.GetDisplayName()</MudChip>
         break;
 
-    case EOfferStatus.Rejected:
-        <MudChip T="Enum" Color="Color.Error">@Status.GetDisplayName()</MudChip>
+    case EStatusProposta.Rejeitada:
+        <MudChip T="Enum" Color="Color.Error">@StatusProposta.GetDisplayName()</MudChip>
         break;
 
-    case EOfferStatus.Analysis:
-        <MudChip T="Enum" Color="Color.Primary">@Status.GetDisplayName()</MudChip>
+    case EStatusProposta.EmAnalise:
+        <MudChip T="Enum" Color="Color.Primary">@StatusProposta.GetDisplayName()</MudChip>
         break;
 }
 
 @code
 {
     [Parameter, EditorRequired] 
-    public EOfferStatus Status { get; set; }
+    public EStatusProposta StatusProposta { get; set; }
 }

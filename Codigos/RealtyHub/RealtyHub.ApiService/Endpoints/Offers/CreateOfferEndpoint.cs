@@ -27,8 +27,8 @@ public class CreateOfferEndpoint : IEndpoint
             .WithSummary("Cria uma proposta")
             .WithDescription("Cria uma proposta")
             .WithOrder(1)
-            .Produces<Response<Offer?>>(StatusCodes.Status201Created)
-            .Produces<Response<Offer?>>(StatusCodes.Status400BadRequest);
+            .Produces<Response<Proposta?>>(StatusCodes.Status201Created)
+            .Produces<Response<Proposta?>>(StatusCodes.Status400BadRequest);
 
     /// <summary>
     /// Manipulador da rota que cria uma nova proposta.
@@ -39,7 +39,7 @@ public class CreateOfferEndpoint : IEndpoint
     /// </remarks>
     /// <param name="user">Objeto <see cref="ClaimsPrincipal"/> contendo os dados do usuário autenticado.</param>
     /// <param name="handler">Instância de <see cref="IOfferHandler"/> responsável pelas operações relacionadas a propostas.</param>
-    /// <param name="request">Objeto <see cref="Offer"/> contendo os dados da proposta a ser criada.</param>
+    /// <param name="request">Objeto <see cref="Proposta"/> contendo os dados da proposta a ser criada.</param>
     /// <returns>
     /// Um objeto <see cref="IResult"/> representando a resposta HTTP:
     /// <para>- HTTP 201 Created com os detalhes da proposta criada, se a operação for bem-sucedida;</para>
@@ -48,9 +48,9 @@ public class CreateOfferEndpoint : IEndpoint
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
         IOfferHandler handler,
-        Offer request)
+        Proposta request)
     {
-        request.UserId = user.Identity?.Name ?? string.Empty;
+        request.UsuarioId = user.Identity?.Name ?? string.Empty;
 
         var result = await handler.CreateAsync(request);
 

@@ -15,7 +15,7 @@
     </MudButton>
 </div>
 
-<MudDataGrid T="Customer"
+<MudDataGrid T="Cliente"
              Class="mt-4"
              ServerData="LoadServerData"
              @ref="DataGrid"
@@ -37,12 +37,12 @@
         </MudTextField>
     </ToolBarContent>
     <Columns>
-        <PropertyColumn Property="x => x.Name" Title="Nome" />
-        <PropertyColumn Property="x => x.DocumentNumber" Title="Documento" />
+        <PropertyColumn Property="x => x.Nome" Title="Nome" />
+        <PropertyColumn Property="x => x.NumeroDocumento" Title="Documento" />
         <PropertyColumn Property="x => x.Email" Title="E-mail" />
         <TemplateColumn Title="Tipo">
             <CellTemplate>
-                @if (context.Item.PersonType == EPersonType.Individual)
+                @if (context.Item.TipoPessoa == ETipoPessoa.Fisica)
                 {
                     <span>Pessoa Física</span>
                 }
@@ -65,7 +65,7 @@
                         <MudIconButton Icon="@Icons.Material.Filled.Delete"
                                        Color="Color.Error"
                                        OnClick="() => OnDeleteButtonClickedAsync
-                                           (context.Item.Id, context.Item.Name)">
+                                           (context.Item.Id, context.Item.Nome)">
                         </MudIconButton>
                     </MudTooltip>
                 </MudStack>
@@ -73,6 +73,6 @@
         </TemplateColumn>
     </Columns>
     <PagerContent>
-        <MudDataGridPager T="Customer" />
+        <MudDataGridPager T="Cliente" />
     </PagerContent>
 </MudDataGrid>

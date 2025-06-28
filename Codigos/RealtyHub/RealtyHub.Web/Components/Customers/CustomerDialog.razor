@@ -15,15 +15,15 @@
     MudDialogInstance MudDialog { get; set; } = null!;
 
     [Parameter]
-    public EventCallback<Customer> OnCustomerSelected { get; set; }
+    public EventCallback<Cliente> OnCustomerSelected { get; set; }
 
     void CloseDialog() => MudDialog.Close();
 
-    public async Task SelectCustomer(Customer customer)
+    public async Task SelectCustomer(Cliente cliente)
     {
         if (OnCustomerSelected.HasDelegate)
-            await OnCustomerSelected.InvokeAsync(customer);
+            await OnCustomerSelected.InvokeAsync(cliente);
 
-        MudDialog.Close(DialogResult.Ok(customer));
+        MudDialog.Close(DialogResult.Ok(cliente));
     }
 }

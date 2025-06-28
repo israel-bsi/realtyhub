@@ -29,8 +29,8 @@ public class UpdatePropertyPhotosEndpoint : IEndpoint
             .WithSummary("Atualiza as fotos de um imóvel")
             .WithDescription("Atualiza as fotos de um imóvel")
             .WithOrder(7)
-            .Produces<Response<List<PropertyPhoto>?>>()
-            .Produces<Response<List<PropertyPhoto>?>>(StatusCodes.Status400BadRequest);
+            .Produces<Response<List<FotoImovel>?>>()
+            .Produces<Response<List<FotoImovel>?>>(StatusCodes.Status400BadRequest);
     }
 
     /// <summary>

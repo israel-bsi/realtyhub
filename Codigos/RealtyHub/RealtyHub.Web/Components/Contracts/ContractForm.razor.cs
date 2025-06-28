@@ -78,7 +78,7 @@ public partial class ContractFormComponent : ComponentBase
     /// <summary>
     /// Modelo de entrada utilizado para o binding dos campos do formulário.
     /// </summary>
-    public Contract InputModel { get; set; } = new();
+    public Contrato InputModel { get; set; } = new();
 
     /// <summary>
     /// Indica a operação atual do formulário ("Emitir" ou "Editar").
@@ -206,8 +206,8 @@ public partial class ContractFormComponent : ComponentBase
         var parameters = new DialogParameters
         {
             { "ContractId", InputModel.Id },
-            { "BuyerEmail", InputModel.Buyer?.Email },
-            { "SellerEmail", InputModel.Seller?.Email }
+            { "BuyerEmail", InputModel.Comprador?.Email },
+            { "SellerEmail", InputModel.Vendedor?.Email }
         };
         var options = new DialogOptions
         {
@@ -245,7 +245,7 @@ public partial class ContractFormComponent : ComponentBase
         var parameters = new DialogParameters
         {
             { "OnPropertySelected", EventCallback.Factory
-                .Create<Property>(this, SelectedProperty) }
+                .Create<Imovel>(this, SelectedProperty) }
         };
         var options = new DialogOptions
         {
@@ -258,7 +258,7 @@ public partial class ContractFormComponent : ComponentBase
 
         var result = await dialog.Result;
 
-        if (result is { Canceled: false, Data: Property selectedProperty })
+        if (result is { Canceled: false, Data: Imovel selectedProperty })
             SelectedProperty(selectedProperty);
     }
 
@@ -268,10 +268,10 @@ public partial class ContractFormComponent : ComponentBase
     /// <remarks>
     /// Atualiza o modelo do contrato com o imóvel selecionado e força a atualização do formulário.
     /// </remarks>
-    private void SelectedProperty(Property property)
+    private void SelectedProperty(Imovel imovel)
     {
-        InputModel.Offer!.Property = property;
-        InputModel.Offer.PropertyId = property.Id;
+        InputModel.Proposta!.Imovel = imovel;
+        InputModel.Proposta.ImovelId = imovel.Id;
         EditFormKey++;
         StateHasChanged();
     }
@@ -284,8 +284,8 @@ public partial class ContractFormComponent : ComponentBase
     /// </remarks>
     public void ClearPropertyObjects()
     {
-        InputModel.Offer!.Property = new Property();
-        InputModel.Offer.PropertyId = 0;
+        InputModel.Proposta!.Imovel = new Imovel();
+        InputModel.Proposta.ImovelId = 0;
         EditFormKey++;
         StateHasChanged();
     }
@@ -303,7 +303,7 @@ public partial class ContractFormComponent : ComponentBase
         var parameters = new DialogParameters
         {
             { "OnOfferSelected", EventCallback.Factory
-                .Create<Offer>(this, SelectedOffer) },
+                .Create<Proposta>(this, SelectedOffer) },
             { "OnlyAccepted", true }
         };
         var options = new DialogOptions
@@ -315,7 +315,7 @@ public partial class ContractFormComponent : ComponentBase
         var dialog = await DialogService
             .ShowAsync<OfferListDialog>("Selecione a proposta", parameters, options);
         var result = await dialog.Result;
-        if (result is { Canceled: false, Data: Offer offer })
+        if (result is { Canceled: false, Data: Proposta offer })
             SelectedOffer(offer);
     }
 
@@ -325,14 +325,14 @@ public partial class ContractFormComponent : ComponentBase
     /// <remarks>
     /// Atualiza o modelo do contrato com a proposta selecionada, preenchendo também os dados do comprador e vendedor.
     /// </remarks>
-    private void SelectedOffer(Offer offer)
+    private void SelectedOffer(Proposta proposta)
     {
-        InputModel.OfferId = offer.Id;
-        InputModel.Offer = offer;
-        InputModel.Seller = offer.Property!.Seller;
-        InputModel.SellerId = offer.Property.SellerId;
-        InputModel.Buyer = offer.Buyer;
-        InputModel.BuyerId = offer.BuyerId;
+        InputModel.PropostaId = proposta.Id;
+        InputModel.Proposta = proposta;
+        InputModel.Vendedor = proposta.Imovel!.Vendedor;
+        InputModel.VendedorId = proposta.Imovel.VendedorId;
+        InputModel.Comprador = proposta.Comprador;
+        InputModel.CompradorId = proposta.CompradorId;
         EditFormKey++;
         StateHasChanged();
     }
@@ -345,12 +345,12 @@ public partial class ContractFormComponent : ComponentBase
     /// </remarks>
     public void ClearOfferObjets()
     {
-        InputModel.Offer = new Offer();
-        InputModel.OfferId = 0;
-        InputModel.Seller = new Customer();
-        InputModel.SellerId = 0;
-        InputModel.Buyer = new Customer();
-        InputModel.BuyerId = 0;
+        InputModel.Proposta = new Proposta();
+        InputModel.PropostaId = 0;
+        InputModel.Vendedor = new Cliente();
+        InputModel.VendedorId = 0;
+        InputModel.Comprador = new Cliente();
+        InputModel.CompradorId = 0;
         EditFormKey++;
         StateHasChanged();
     }
@@ -367,7 +367,7 @@ public partial class ContractFormComponent : ComponentBase
         var parameters = new DialogParameters
         {
             { "OnCustomerSelected", EventCallback.Factory
-                .Create<Customer>(this, SelectedBuyer) }
+                .Create<Cliente>(this, SelectedBuyer) }
         };
         var options = new DialogOptions
         {
@@ -379,7 +379,7 @@ public partial class ContractFormComponent : ComponentBase
             .ShowAsync<CustomerDialog>("Informe o comprador", parameters, options);
         var result = await dialog.Result;
 
-        if (result is { Canceled: false, Data: Customer buyer })
+        if (result is { Canceled: false, Data: Cliente buyer })
             SelectedBuyer(buyer);
     }
 
@@ -389,10 +389,10 @@ public partial class ContractFormComponent : ComponentBase
     /// <remarks>
     /// Atualiza o modelo do contrato com o comprador selecionado.
     /// </remarks>
-    private void SelectedBuyer(Customer buyer)
+    private void SelectedBuyer(Cliente buyer)
     {
-        InputModel.Buyer = buyer;
-        InputModel.BuyerId = buyer.Id;
+        InputModel.Comprador = buyer;
+        InputModel.CompradorId = buyer.Id;
         EditFormKey++;
         StateHasChanged();
     }
@@ -405,8 +405,8 @@ public partial class ContractFormComponent : ComponentBase
     /// </remarks>
     public void ClearBuyerObjects()
     {
-        InputModel.Buyer = new Customer();
-        InputModel.BuyerId = 0;
+        InputModel.Comprador = new Cliente();
+        InputModel.CompradorId = 0;
         EditFormKey++;
         StateHasChanged();
     }
@@ -423,7 +423,7 @@ public partial class ContractFormComponent : ComponentBase
         var parameters = new DialogParameters
         {
             { "OnCustomerSelected", EventCallback.Factory
-                .Create<Customer>(this, SelectedSeller) }
+                .Create<Cliente>(this, SelectedSeller) }
         };
         var options = new DialogOptions
         {
@@ -435,7 +435,7 @@ public partial class ContractFormComponent : ComponentBase
             .ShowAsync<CustomerDialog>("Informe o vendedor", parameters, options);
         var result = await dialog.Result;
 
-        if (result is { Canceled: false, Data: Customer seller })
+        if (result is { Canceled: false, Data: Cliente seller })
             SelectedSeller(seller);
     }
 
@@ -445,10 +445,10 @@ public partial class ContractFormComponent : ComponentBase
     /// <remarks>
     /// Atualiza o modelo do contrato com o vendedor selecionado.
     /// </remarks>
-    private void SelectedSeller(Customer seller)
+    private void SelectedSeller(Cliente seller)
     {
-        InputModel.Seller = seller;
-        InputModel.SellerId = seller.Id;
+        InputModel.Vendedor = seller;
+        InputModel.VendedorId = seller.Id;
         EditFormKey++;
         StateHasChanged();
     }
@@ -461,8 +461,8 @@ public partial class ContractFormComponent : ComponentBase
     /// </remarks>
     public void ClearSellerObjects()
     {
-        InputModel.Seller = new Customer();
-        InputModel.SellerId = 0;
+        InputModel.Vendedor = new Cliente();
+        InputModel.VendedorId = 0;
         EditFormKey++;
         StateHasChanged();
     }
@@ -497,12 +497,12 @@ public partial class ContractFormComponent : ComponentBase
                 var response = await OfferHandler.GetByIdAsync(request);
                 if (response is { IsSuccess: true, Data: not null })
                 {
-                    InputModel.Offer = response.Data;
-                    InputModel.OfferId = OfferId;
-                    InputModel.Seller = response.Data.Property!.Seller;
-                    InputModel.SellerId = response.Data.Property.SellerId;
-                    InputModel.Buyer = response.Data.Buyer;
-                    InputModel.BuyerId = response.Data.BuyerId;
+                    InputModel.Proposta = response.Data;
+                    InputModel.PropostaId = OfferId;
+                    InputModel.Vendedor = response.Data.Imovel!.Vendedor;
+                    InputModel.VendedorId = response.Data.Imovel.VendedorId;
+                    InputModel.Comprador = response.Data.Comprador;
+                    InputModel.CompradorId = response.Data.CompradorId;
                     return;
                 }
                 Snackbar.Add(response.Message ?? string.Empty, Severity.Error);
@@ -514,12 +514,12 @@ public partial class ContractFormComponent : ComponentBase
                 var response = await OfferHandler.GetAcceptedByProperty(request);
                 if (response is { IsSuccess: true, Data: not null })
                 {
-                    InputModel.Offer = response.Data;
-                    InputModel.OfferId = response.Data.Id;
-                    InputModel.Seller = response.Data.Property!.Seller;
-                    InputModel.SellerId = response.Data.Property.SellerId;
-                    InputModel.Buyer = response.Data.Buyer;
-                    InputModel.BuyerId = response.Data.BuyerId;
+                    InputModel.Proposta = response.Data;
+                    InputModel.PropostaId = response.Data.Id;
+                    InputModel.Vendedor = response.Data.Imovel!.Vendedor;
+                    InputModel.VendedorId = response.Data.Imovel.VendedorId;
+                    InputModel.Comprador = response.Data.Comprador;
+                    InputModel.CompradorId = response.Data.CompradorId;
                     return;
                 }
                 Snackbar.Add(response.Message ?? string.Empty, Severity.Error);

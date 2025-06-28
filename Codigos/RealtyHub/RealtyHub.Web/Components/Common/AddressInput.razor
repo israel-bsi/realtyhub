@@ -7,8 +7,8 @@
     <MudItem lg="2" xs="12" sm="6">
         <MudTextField T="string"
                       Label="CEP"
-                      @bind-Value="InputModel.ZipCode"
-                      For="@(() => InputModel.ZipCode)"
+                      @bind-Value="InputModel.Cep"
+                      For="@(() => InputModel.Cep)"
                       Mask="@Utility.Masks.ZipCode"
                       OnBlur="SearchAddressAsync"
                       InputType="InputType.Text" />
@@ -17,16 +17,16 @@
     <MudItem lg="4" xs="12" sm="6">
         <MudTextField T="string"
                       Label="Logradouro"
-                      @bind-Value="InputModel.Street"
-                      For="@(() => InputModel.Street)"
+                      @bind-Value="InputModel.Logradouro"
+                      For="@(() => InputModel.Logradouro)"
                       InputType="InputType.Text" />
     </MudItem>
 
     <MudItem lg="2" xs="12" sm="6">
         <MudTextField T="string"
                       Label="Número"
-                      @bind-Value="InputModel.Number"
-                      For="@(() => InputModel.Number)"
+                      @bind-Value="InputModel.Numero"
+                      For="@(() => InputModel.Numero)"
                       InputType="InputType.Text"
                       MaxLength="10" />
     </MudItem>
@@ -34,40 +34,40 @@
     <MudItem lg="4" xs="12" sm="6">
         <MudTextField T="string"
                       Label="Complemento"
-                      @bind-Value="InputModel.Complement"
-                      For="@(() => InputModel.Complement)"
+                      @bind-Value="InputModel.Complemento"
+                      For="@(() => InputModel.Complemento)"
                       InputType="InputType.Text" />
     </MudItem>
 
     <MudItem lg="3" xs="12" sm="6">
         <MudTextField T="string"
                       Label="Bairro"
-                      @bind-Value="InputModel.Neighborhood"
-                      For="@(() => InputModel.Neighborhood)"
+                      @bind-Value="InputModel.Bairro"
+                      For="@(() => InputModel.Bairro)"
                       InputType="InputType.Text" />
     </MudItem>
 
     <MudItem lg="3" xs="12" sm="6">
         <MudTextField T="string"
                       Label="Cidade"
-                      @bind-Value="InputModel.City"
-                      For="@(() => InputModel.City)"
+                      @bind-Value="InputModel.Cidade"
+                      For="@(() => InputModel.Cidade)"
                       InputType="InputType.Text" />
     </MudItem>
 
     <MudItem lg="3" xs="12" sm="6">
         <MudTextField T="string"
                       Label="Estado"
-                      @bind-Value="InputModel.State"
-                      For="@(() => InputModel.State)"
+                      @bind-Value="InputModel.Estado"
+                      For="@(() => InputModel.Estado)"
                       InputType="InputType.Text" />
     </MudItem>
 
     <MudItem lg="3" xs="12" sm="6">
         <MudTextField T="string"
                       Label="País"
-                      @bind-Value="InputModel.Country"
-                      For="@(() => InputModel.Country)"
+                      @bind-Value="InputModel.Pais"
+                      For="@(() => InputModel.Pais)"
                       InputType="InputType.Text" />
     </MudItem>
 </MudGrid>
@@ -75,10 +75,10 @@
 @code
 {
     [Parameter, EditorRequired]
-    public Address InputModel { get; set; } = null!;
+    public Endereco InputModel { get; set; } = null!;
 
     [Parameter]
-    public EventCallback<Address> InputModelChanged { get; set; }
+    public EventCallback<Endereco> InputModelChanged { get; set; }
 
     [CascadingParameter]
     public EditContext CurrentEditContext { get; set; } = null!;
@@ -93,19 +93,19 @@
     {
         try
         {
-            if (string.IsNullOrWhiteSpace(InputModel.ZipCode))
+            if (string.IsNullOrWhiteSpace(InputModel.Cep))
                 return;
 
-            var result = await CepService.GetAddressAsync(InputModel.ZipCode);
+            var result = await CepService.GetAddressAsync(InputModel.Cep);
             if (result.Data is null || !result.IsSuccess) return;
 
-            InputModel.Street = result.Data.Street;
-            InputModel.Number = result.Data.Number;
-            InputModel.Complement = result.Data.Complement;
-            InputModel.Neighborhood = result.Data.Neighborhood;
-            InputModel.City = result.Data.City;
-            InputModel.State = result.Data.State;
-            InputModel.Country = result.Data.Country;
+            InputModel.Logradouro = result.Data.Logradouro;
+            InputModel.Numero = result.Data.Numero;
+            InputModel.Complemento = result.Data.Complemento;
+            InputModel.Bairro = result.Data.Bairro;
+            InputModel.Cidade = result.Data.Cidade;
+            InputModel.Estado = result.Data.Estado;
+            InputModel.Pais = result.Data.Pais;
             await InputModelChanged.InvokeAsync(InputModel);
             StateHasChanged();
         }

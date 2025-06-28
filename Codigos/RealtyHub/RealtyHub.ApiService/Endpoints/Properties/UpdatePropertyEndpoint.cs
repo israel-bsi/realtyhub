@@ -27,8 +27,8 @@ public class UpdatePropertyEndpoint : IEndpoint
             .WithSummary("Atualiza um imóvel")
             .WithDescription("Atualiza um imóvel")
             .WithOrder(2)
-            .Produces<Response<Property?>>()
-            .Produces<Response<Property?>>(StatusCodes.Status400BadRequest);
+            .Produces<Response<Imovel?>>()
+            .Produces<Response<Imovel?>>(StatusCodes.Status400BadRequest);
 
     /// <summary>
     /// Manipulador da rota que atualiza um imóvel existente.
@@ -39,7 +39,7 @@ public class UpdatePropertyEndpoint : IEndpoint
     /// </remarks>
     /// <param name="user">Objeto <see cref="ClaimsPrincipal"/> contendo os dados do usuário autenticado.</param>
     /// <param name="handler">Instância de <see cref="IPropertyHandler"/> responsável pelas operações relacionadas a imóveis.</param>
-    /// <param name="request">Objeto <see cref="Property"/> contendo os dados atualizados do imóvel.</param>
+    /// <param name="request">Objeto <see cref="Imovel"/> contendo os dados atualizados do imóvel.</param>
     /// <param name="id">ID do imóvel a ser atualizado.</param>
     /// <returns>
     /// Um objeto <see cref="IResult"/> representando a resposta HTTP:
@@ -49,11 +49,11 @@ public class UpdatePropertyEndpoint : IEndpoint
     private static async Task<IResult> HandlerAsync(
         ClaimsPrincipal user,
         IPropertyHandler handler,
-        Property request,
+        Imovel request,
         long id)
     {
         request.Id = id;
-        request.UserId = user.Identity?.Name ?? string.Empty;
+        request.UsuarioId = user.Identity?.Name ?? string.Empty;
 
         var result = await handler.UpdateAsync(request);
 

@@ -29,8 +29,8 @@ public class DeletePropertyPhotoEndpoint : IEndpoint
             .WithSummary("Exclui uma foto de um imóvel")
             .WithDescription("Exclui uma foto de um imóvel")
             .WithOrder(7)
-            .Produces<Response<PropertyPhoto?>>(StatusCodes.Status204NoContent)
-            .Produces<Response<Property?>>(StatusCodes.Status400BadRequest);
+            .Produces<Response<FotoImovel?>>(StatusCodes.Status204NoContent)
+            .Produces<Response<Imovel?>>(StatusCodes.Status400BadRequest);
     }
 
     /// <summary>

@@ -29,7 +29,7 @@ public class GetAllContractsEndpoint : IEndpoint
             .WithSummary("Recupera todos os contratos")
             .WithDescription("Recupera todos os contratos")
             .WithOrder(5)
-            .Produces<PagedResponse<List<Contract>?>>()
+            .Produces<PagedResponse<List<Contrato>?>>()
             .Produces(StatusCodes.Status400BadRequest);
 
     /// <summary>
