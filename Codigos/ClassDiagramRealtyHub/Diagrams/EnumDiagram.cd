@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Enum Name="ClassDiagramRealtyHub.Enums.EStatusProposta" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAAAAACAAgAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Enums\EStatusProposta.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ClassDiagramRealtyHub.Enums.EStatusVisita" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAACAAAAAAAAAAAAAAAAAAAAAQAAAA=</HashCode>
+      <FileName>Enums\EStatusVisita.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ClassDiagramRealtyHub.Enums.ETipoCliente" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAgAAAAAAg=</HashCode>
+      <FileName>Enums\ETipoCliente.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ClassDiagramRealtyHub.Enums.ETipoContrato" Collapsed="true">
+    <Position X="0.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABEAAAAAQAAAAAAAAAABAAAQAAAA=</HashCode>
+      <FileName>Enums\ETipoContrato.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ClassDiagramRealtyHub.Enums.ETipoImovel" Collapsed="true">
+    <Position X="2.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIDAAAAAAAAAAAAAAAAAAAAAAAAAgAIAAAAoAAAAA=</HashCode>
+      <FileName>Enums\ETipoImovel.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ClassDiagramRealtyHub.Enums.ETipoPagamento" Collapsed="true">
+    <Position X="4" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAABAAAAAAAAAAAAAAACAAAAAABAAQoEBAAAAAAAAAA=</HashCode>
+      <FileName>Enums\ETipoPagamento.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ClassDiagramRealtyHub.Enums.ETipoPessoa" Collapsed="true">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Enums\ETipoPessoa.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ClassDiagramRealtyHub.Enums.ETipoStatusCivil" Collapsed="true">
+    <Position X="2.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CBAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAEAQA=</HashCode>
+      <FileName>Enums\ETipoStatusCivil.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
