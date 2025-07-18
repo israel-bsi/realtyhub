@@ -125,12 +125,27 @@ public static class AppExtension
     /// <remarks>
     /// Este método garante que o banco de dados esteja atualizado
     /// com as últimas migrações antes de iniciar a aplicação.
+    /// Não executa migrações em ambiente de teste.
     /// </remarks>
     /// <param name="app">Instância do aplicativo.</param>
     public static void ApplyMigrations(this WebApplication app)
     {
+        // Não executar migrações em ambiente de teste
+        if (app.Environment.EnvironmentName == "Testing")
+            return;
+
         using var scope = app.Services.CreateScope();
         var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-        dbContext.Database.Migrate();
+        
+        // Verificar se é um banco de dados relacional antes de aplicar migrações
+        if (dbContext.Database.IsRelational())
+        {
+            dbContext.Database.Migrate();
+        }
+        else
+        {
+            // Para bancos em memória, garantir que seja criado
+            dbContext.Database.EnsureCreated();
+        }
     }
 }
