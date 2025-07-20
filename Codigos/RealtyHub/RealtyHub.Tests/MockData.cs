@@ -120,4 +120,35 @@ public class MockData
     {
         return await CreateAuthenticatedClient(application);
     }
+
+    /// <summary>
+    /// Cria propriedades de teste no banco de dados.
+    /// </summary>
+    /// <param name="application">A instância do teste da aplicação.</param>
+    /// <param name="create">Se deve criar as propriedades.</param>
+    /// <param name="quantity">A quantidade de propriedades a serem criadas.</param>
+    /// <param name="sellerId">O ID do vendedor para as propriedades.</param>
+    /// <param name="condominiumId">O ID do condomínio para as propriedades.</param>
+    public static async Task CreateProperties(RealtyHubApiTests application,
+        bool create, int quantity, long sellerId, long condominiumId)
+    {
+        using var scope = application.Services.CreateScope();
+        var provider = scope.ServiceProvider;
+        await using var dbContext = provider.GetRequiredService<AppDbContext>();
+        await dbContext.Database.EnsureCreatedAsync();
+
+        if (create)
+        {
+            var propertiesToCreate = PropertyFake.GetFakeProperties(quantity, (int)sellerId, (int)condominiumId);
+            
+            // Atribui o UserId correto para as propriedades fake
+            foreach (var property in propertiesToCreate)
+            {
+                property.UserId = RealtyHubApiTests.TestUserId;
+            }
+            
+            await dbContext.Properties.AddRangeAsync(propertiesToCreate);
+            await dbContext.SaveChangesAsync();
+        }
+    }
 }

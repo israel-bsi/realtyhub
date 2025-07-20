@@ -1,4 +1,5 @@
 ﻿using RealtyHub.ApiService.Common.Api;
+using RealtyHub.ApiService.Common.Validation;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Responses;
@@ -50,6 +51,14 @@ public class CreatePropertyEndpoint : IEndpoint
         IPropertyHandler handler,
         Property request)
     {
+        // Validação APENAS dos Data Annotations
+        var validationResult = DataAnnotationValidator.ValidateRecursively(request);
+        if (validationResult != null)
+        {
+            return validationResult; // Retorna BadRequest com erros dos Data Annotations
+        }
+
+        // Processamento normal
         request.UserId = user.Identity?.Name ?? string.Empty;
         var result = await handler.CreateAsync(request);
 
