@@ -1,8 +1,10 @@
-﻿using FluentAssertions;
+﻿using System.Net.Http.Json;
+using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
+using RealtyHub.ApiService.Data;
+using RealtyHub.Core.Enums;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Responses;
-using System.Net.Http.Json;
 
 namespace RealtyHub.Tests.Entities.Customers;
 
@@ -12,14 +14,6 @@ namespace RealtyHub.Tests.Entities.Customers;
 /// sem se preocupar com autenticação (que é bypassada).
 /// Cada teste é completamente isolado e limpa o banco antes da execução.
 /// </summary>
-/// <remarks>
-/// Esta classe testa todos os endpoints disponíveis na pasta RealtyHub.ApiService/Endpoints/Customers:
-/// - GET /v1/customers (GetAllCustomersEndpoint)
-/// - GET /v1/customers/{id} (GetCustomerByIdEndpoint)
-/// - POST /v1/customers (CreateCustomerEndpoint)
-/// - PUT /v1/customers/{id} (UpdateCustomerEndpoint)
-/// - DELETE /v1/customers/{id} (DeleteCustomerEndpoint)
-/// </remarks>
 public class CustomerTests : IClassFixture<RealtyHubApiTests>
 {
     private readonly RealtyHubApiTests _factory;
@@ -35,7 +29,7 @@ public class CustomerTests : IClassFixture<RealtyHubApiTests>
     private async Task<int> CleanupDatabaseAndGetPreviousCount()
     {
         using var scope = _factory.Services.CreateScope();
-        var dbContext = scope.ServiceProvider.GetRequiredService<ApiService.Data.AppDbContext>();
+        var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
         
         // Conta quantos clientes existiam antes da limpeza
         var existingCount = await dbContext.Customers.CountAsync();
@@ -51,7 +45,10 @@ public class CustomerTests : IClassFixture<RealtyHubApiTests>
     /// <summary>
     /// Cria um customer válido para uso nos testes.
     /// </summary>
-    private static Customer CreateValidCustomer(string name = "Cliente Teste", string email = "cliente@test.com")
+    private static Customer CreateValidCustomer(
+        string name = "Cliente Teste", 
+        string email = "cliente@test.com",
+        EPersonType ePersonType = EPersonType.Individual)
     {
         return new Customer
         {
@@ -59,11 +56,11 @@ public class CustomerTests : IClassFixture<RealtyHubApiTests>
             Email = email,
             Phone = "11999999999",
             DocumentNumber = "12345678901",
-            CustomerType = Core.Enums.ECustomerType.Buyer,
-            PersonType = Core.Enums.EPersonType.Individual,
+            CustomerType = ECustomerType.Buyer,
+            PersonType = ePersonType,
             Occupation = "Teste",
             Nationality = "Brasileira",
-            MaritalStatus = Core.Enums.EMaritalStatus.Single,
+            MaritalStatus = EMaritalStatus.Single,
             UserId = RealtyHubApiTests.TestUserId, // Usa o mesmo UserId que será usado nos endpoints
             Address = new Address
             {
@@ -85,9 +82,21 @@ public class CustomerTests : IClassFixture<RealtyHubApiTests>
     public async Task GetAllCustomers_ShouldReturnPagedResponse()
     {
         // Arrange
-        var previousCount = await CleanupDatabaseAndGetPreviousCount();
-        await MockData.CreateCustomers(_factory, true, 3, 2); // 5 customers total
-        var client = MockData.CreateSimpleClient(_factory);
+        await CleanupDatabaseAndGetPreviousCount();
+        using var scope = _factory.Services.CreateScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        var customers = new List<Customer>();
+
+        for (int i = 0; i < 5; i++)
+        {
+            var customer = CreateValidCustomer($"Cliente {i + 1}", $"cliente{i + 1}@test.com");
+            customers.Add(customer);
+        }
+
+        await dbContext.Customers.AddRangeAsync(customers);
+        await dbContext.SaveChangesAsync();
+
+        var client = _factory.CreateClient();
 
         // Act
         var response = await client.GetAsync("/v1/customers");
@@ -107,8 +116,19 @@ public class CustomerTests : IClassFixture<RealtyHubApiTests>
     {
         // Arrange
         await CleanupDatabaseAndGetPreviousCount();
-        await MockData.CreateCustomers(_factory, true, 10, 5); // 15 customers total
-        var client = MockData.CreateSimpleClient(_factory);
+        using var scope = _factory.Services.CreateScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        var customers = new List<Customer>();
+
+        for (int i = 0; i < 15; i++)
+        {
+            var customer = CreateValidCustomer($"Cliente {i + 1}", $"cliente{i + 1}@test.com");
+            customers.Add(customer);
+        }
+
+        await dbContext.Customers.AddRangeAsync(customers);
+        await dbContext.SaveChangesAsync();
+        var client = _factory.CreateClient();
 
         // Act
         var response = await client.GetAsync("/v1/customers?pageNumber=1&pageSize=10");
@@ -128,8 +148,19 @@ public class CustomerTests : IClassFixture<RealtyHubApiTests>
     {
         // Arrange
         await CleanupDatabaseAndGetPreviousCount();
-        await MockData.CreateCustomers(_factory, true, 2, 2);
-        var client = MockData.CreateSimpleClient(_factory);
+        using var scope = _factory.Services.CreateScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        var customers = new List<Customer>();
+
+        for (int i = 0; i < 5; i++)
+        {
+            var customer = CreateValidCustomer($"Cliente {i + 1}", $"cliente{i + 1}@test.com");
+            customers.Add(customer);
+        }
+
+        await dbContext.Customers.AddRangeAsync(customers);
+        await dbContext.SaveChangesAsync();
+        var client = _factory.CreateClient();
 
         // Act
         var response = await client.GetAsync("/v1/customers?searchTerm=empresa");
@@ -154,7 +185,7 @@ public class CustomerTests : IClassFixture<RealtyHubApiTests>
         
         // Cria um customer diretamente no banco
         using var scope = _factory.Services.CreateScope();
-        var dbContext = scope.ServiceProvider.GetRequiredService<ApiService.Data.AppDbContext>();
+        var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
         var customer = CreateValidCustomer("Cliente Busca", "busca@test.com");
         // UserId já está correto no CreateValidCustomer()
         await dbContext.Customers.AddAsync(customer);
@@ -163,7 +194,7 @@ public class CustomerTests : IClassFixture<RealtyHubApiTests>
         // Vamos verificar se o customer foi salvo com o UserId correto
         var savedCustomer = await dbContext.Customers.FirstOrDefaultAsync(c => c.Id == customer.Id);
         
-        var client = MockData.CreateSimpleClient(_factory);
+        var client = _factory.CreateClient();
 
         // Act
         var response = await client.GetAsync($"/v1/customers/{customer.Id}");
@@ -191,7 +222,7 @@ public class CustomerTests : IClassFixture<RealtyHubApiTests>
     {
         // Arrange
         await CleanupDatabaseAndGetPreviousCount();
-        var client = MockData.CreateSimpleClient(_factory);
+        var client = _factory.CreateClient();
 
         // Act
         var response = await client.GetAsync("/v1/customers/999");
@@ -209,18 +240,18 @@ public class CustomerTests : IClassFixture<RealtyHubApiTests>
     {
         // Arrange
         await CleanupDatabaseAndGetPreviousCount();
-        var client = MockData.CreateSimpleClient(_factory);
+        var client = _factory.CreateClient();
         var customer = new Customer
         {
             Name = "João Silva",
             Email = "joao.silva@test.com",
             Phone = "11999999999",
             DocumentNumber = "12345678901",
-            CustomerType = Core.Enums.ECustomerType.Buyer,
-            PersonType = Core.Enums.EPersonType.Individual,
+            CustomerType = ECustomerType.Buyer,
+            PersonType = EPersonType.Individual,
             Occupation = "Engenheiro",
             Nationality = "Brasileira",
-            MaritalStatus = Core.Enums.EMaritalStatus.Single,
+            MaritalStatus = EMaritalStatus.Single,
             Rg = "123456789",
             IssuingAuthority = "SSP/SP",
             RgIssueDate = DateTime.Now.AddYears(-5),
@@ -248,7 +279,7 @@ public class CustomerTests : IClassFixture<RealtyHubApiTests>
         result.Data.Should().NotBeNull();
         result.Data!.Name.Should().Be("João Silva");
         result.Data.Email.Should().Be("joao.silva@test.com");
-        result.Data.PersonType.Should().Be(Core.Enums.EPersonType.Individual);
+        result.Data.PersonType.Should().Be(EPersonType.Individual);
     }
 
     [Fact]
@@ -256,15 +287,15 @@ public class CustomerTests : IClassFixture<RealtyHubApiTests>
     {
         // Arrange
         await CleanupDatabaseAndGetPreviousCount();
-        var client = MockData.CreateSimpleClient(_factory);
+        var client = _factory.CreateClient();
         var customer = new Customer
         {
             Name = "Empresa ABC Ltda",
             Email = "contato@empresaabc.com",
             Phone = "1133334444",
             DocumentNumber = "12345678000199",
-            CustomerType = Core.Enums.ECustomerType.Seller,
-            PersonType = Core.Enums.EPersonType.Business,
+            CustomerType = ECustomerType.Seller,
+            PersonType = EPersonType.Business,
             BusinessName = "Empresa ABC Ltda",
             Address = new Address
             {
@@ -289,7 +320,7 @@ public class CustomerTests : IClassFixture<RealtyHubApiTests>
         result!.IsSuccess.Should().BeTrue();
         result.Data.Should().NotBeNull();
         result.Data!.Name.Should().Be("Empresa ABC Ltda");
-        result.Data.PersonType.Should().Be(Core.Enums.EPersonType.Business);
+        result.Data.PersonType.Should().Be(EPersonType.Business);
         result.Data.BusinessName.Should().Be("Empresa ABC Ltda");
     }
 
@@ -298,7 +329,7 @@ public class CustomerTests : IClassFixture<RealtyHubApiTests>
     {
         // Arrange
         await CleanupDatabaseAndGetPreviousCount();
-        var client = MockData.CreateSimpleClient(_factory);
+        var client = _factory.CreateClient();
         var customer = new Customer
         {
             // Name is missing - required field
@@ -318,15 +349,15 @@ public class CustomerTests : IClassFixture<RealtyHubApiTests>
     {
         // Arrange
         await CleanupDatabaseAndGetPreviousCount();
-        var client = MockData.CreateSimpleClient(_factory);
+        var client = _factory.CreateClient();
         var customer = new Customer
         {
             Name = "Test User",
             Email = "invalid-email", // Invalid email format
             Phone = "11999999999",
             DocumentNumber = "12345678901",
-            CustomerType = Core.Enums.ECustomerType.Buyer,
-            PersonType = Core.Enums.EPersonType.Individual
+            CustomerType = ECustomerType.Buyer,
+            PersonType = EPersonType.Individual
         };
 
         // Act
@@ -341,15 +372,15 @@ public class CustomerTests : IClassFixture<RealtyHubApiTests>
     {
         // Arrange
         await CleanupDatabaseAndGetPreviousCount();
-        var client = MockData.CreateSimpleClient(_factory);
+        var client = _factory.CreateClient();
         var customer = new Customer
         {
             Name = new string('A', 81), // Nome com mais de 80 caracteres (limite)
             Email = "test@test.com",
             Phone = "11999999999",
             DocumentNumber = "12345678901",
-            CustomerType = Core.Enums.ECustomerType.Buyer,
-            PersonType = Core.Enums.EPersonType.Individual
+            CustomerType = ECustomerType.Buyer,
+            PersonType = EPersonType.Individual
         };
 
         // Act
@@ -371,13 +402,13 @@ public class CustomerTests : IClassFixture<RealtyHubApiTests>
         
         // Cria um customer diretamente no banco para atualizar
         using var scope = _factory.Services.CreateScope();
-        var dbContext = scope.ServiceProvider.GetRequiredService<ApiService.Data.AppDbContext>();
+        var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
         var customer = CreateValidCustomer("Cliente Original", "original@test.com");
         // UserId já está correto no CreateValidCustomer()
         await dbContext.Customers.AddAsync(customer);
         await dbContext.SaveChangesAsync();
         
-        var client = MockData.CreateSimpleClient(_factory);
+        var client = _factory.CreateClient();
 
         var updatedCustomer = new Customer
         {
@@ -386,8 +417,8 @@ public class CustomerTests : IClassFixture<RealtyHubApiTests>
             Email = "joao.atualizado@test.com",
             Phone = "11888888888",
             DocumentNumber = "12345678901",
-            CustomerType = Core.Enums.ECustomerType.BuyerSeller,
-            PersonType = Core.Enums.EPersonType.Individual,
+            CustomerType = ECustomerType.BuyerSeller,
+            PersonType = EPersonType.Individual,
             Occupation = "Arquiteto",
             Nationality = "Brasileira",
             Address = new Address
@@ -428,7 +459,7 @@ public class CustomerTests : IClassFixture<RealtyHubApiTests>
     {
         // Arrange
         await CleanupDatabaseAndGetPreviousCount();
-        var client = MockData.CreateSimpleClient(_factory);
+        var client = _factory.CreateClient();
         var customer = new Customer
         {
             Id = 999,
@@ -436,8 +467,8 @@ public class CustomerTests : IClassFixture<RealtyHubApiTests>
             Email = "test@test.com",
             Phone = "11999999999",
             DocumentNumber = "12345678901",
-            CustomerType = Core.Enums.ECustomerType.Buyer,
-            PersonType = Core.Enums.EPersonType.Individual
+            CustomerType = ECustomerType.Buyer,
+            PersonType = EPersonType.Individual
         };
 
         // Act
@@ -459,13 +490,13 @@ public class CustomerTests : IClassFixture<RealtyHubApiTests>
         
         // Cria um customer diretamente no banco para deletar
         using var scope = _factory.Services.CreateScope();
-        var dbContext = scope.ServiceProvider.GetRequiredService<ApiService.Data.AppDbContext>();
+        var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
         var customer = CreateValidCustomer("Cliente Para Deletar", "deletar@test.com");
         // UserId já está correto no CreateValidCustomer()
         await dbContext.Customers.AddAsync(customer);
         await dbContext.SaveChangesAsync();
         
-        var client = MockData.CreateSimpleClient(_factory);
+        var client = _factory.CreateClient();
 
         // Act
         var response = await client.DeleteAsync($"/v1/customers/{customer.Id}");
@@ -490,7 +521,7 @@ public class CustomerTests : IClassFixture<RealtyHubApiTests>
     {
         // Arrange
         await CleanupDatabaseAndGetPreviousCount();
-        var client = MockData.CreateSimpleClient(_factory);
+        var client = _factory.CreateClient();
 
         // Act
         var response = await client.DeleteAsync("/v1/customers/999");
@@ -508,15 +539,15 @@ public class CustomerTests : IClassFixture<RealtyHubApiTests>
     {
         // Arrange
         await CleanupDatabaseAndGetPreviousCount();
-        var client = MockData.CreateSimpleClient(_factory);
+        var client = _factory.CreateClient();
         var customer = new Customer
         {
             Name = "Test User",
             Email = "test@test.com",
             Phone = "invalid-phone", // Invalid phone format
             DocumentNumber = "12345678901",
-            CustomerType = Core.Enums.ECustomerType.Buyer,
-            PersonType = Core.Enums.EPersonType.Individual
+            CustomerType = ECustomerType.Buyer,
+            PersonType = EPersonType.Individual
         };
 
         // Act
@@ -531,15 +562,15 @@ public class CustomerTests : IClassFixture<RealtyHubApiTests>
     {
         // Arrange
         await CleanupDatabaseAndGetPreviousCount();
-        var client = MockData.CreateSimpleClient(_factory);
+        var client = _factory.CreateClient();
         var customer = new Customer
         {
             Name = "Test User",
             Email = "test@test.com",
             Phone = "11999999999",
             DocumentNumber = "1234567891234567891234567", // Document with more than 20 characters
-            CustomerType = Core.Enums.ECustomerType.Buyer,
-            PersonType = Core.Enums.EPersonType.Individual
+            CustomerType = ECustomerType.Buyer,
+            PersonType = EPersonType.Individual
         };
 
         // Act
@@ -551,34 +582,4 @@ public class CustomerTests : IClassFixture<RealtyHubApiTests>
 
     #endregion
 
-    #region Infrastructure Tests
-
-    [Fact]
-    public async Task MockData_CreateCustomers_ShouldCreateCorrectQuantity()
-    {
-        // Arrange & Act
-        await CleanupDatabaseAndGetPreviousCount();
-        await MockData.CreateCustomers(_factory, true, 3, 2);
-
-        // Verify data was created in database
-        using var scope = _factory.Services.CreateScope();
-        var dbContext = scope.ServiceProvider.GetRequiredService<ApiService.Data.AppDbContext>();
-        
-        var customerCount = await dbContext.Customers.CountAsync();
-
-        // Assert
-        customerCount.Should().Be(5); // 3 business + 2 individual
-    }
-
-    [Fact]
-    public void MockData_CreateSimpleClient_ShouldReturnClient()
-    {
-        // Arrange & Act
-        var client = MockData.CreateSimpleClient(_factory);
-
-        // Assert
-        client.Should().NotBeNull();
-    }
-
-    #endregion
 }

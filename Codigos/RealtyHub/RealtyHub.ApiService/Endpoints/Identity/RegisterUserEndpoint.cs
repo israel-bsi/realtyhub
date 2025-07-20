@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
 using RealtyHub.ApiService.Common.Api;
+using RealtyHub.ApiService.Common.Validation;
 using RealtyHub.ApiService.Models;
 using RealtyHub.Core.Requests.Account;
 using RealtyHub.Core.Requests.Emails;
@@ -53,6 +54,10 @@ public class RegisterUserEndpoint : IEndpoint
         UserManager<User> userManager,
         IEmailService emailService)
     {
+        var validationResult = DataAnnotationValidator.ValidateDataAnnotations(request);
+        if (validationResult != null)
+            return validationResult;
+
         var user = new User
         {
             UserName = request.Email,

@@ -1,9 +1,11 @@
+using System.Net.Http.Json;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
+using RealtyHub.ApiService.Data;
+using RealtyHub.Core.Enums;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Responses;
 using RealtyHub.Core.Utilities.FakeEntities;
-using System.Net.Http.Json;
 
 namespace RealtyHub.Tests.Entities.Properties;
 
@@ -13,19 +15,6 @@ namespace RealtyHub.Tests.Entities.Properties;
 /// sem se preocupar com autenticação (que é bypassada).
 /// Cada teste é completamente isolado e limpa o banco antes da execução.
 /// </summary>
-/// <remarks>
-/// Esta classe testa todos os endpoints disponíveis na pasta RealtyHub.ApiService/Endpoints/Properties:
-/// - GET /v1/properties (GetAllPropertiesEndpoint)
-/// - GET /v1/properties/{id} (GetPropertyByIdEndpoint)
-/// - POST /v1/properties (CreatePropertyEndpoint)
-/// - PUT /v1/properties/{id} (UpdatePropertyEndpoint)
-/// - DELETE /v1/properties/{id} (DeletePropertyEndpoint)
-/// - GET /v1/properties/{id}/photos (GetAllPropertyPhotosByPropertyEndpoint)
-/// - POST /v1/properties/{id}/photos (CreatePropertyPhotosEndpoint)
-/// - PUT /v1/properties/{id}/photos (UpdatePropertyPhotosEndpoint)
-/// - DELETE /v1/properties/{id}/photos/{photoId} (DeletePropertyPhotoEndpoint)
-/// - GET /v1/properties/{id}/viewings (GetAllViewingsByPropertyEndpoint)
-/// </remarks>
 public class PropertyTests : IClassFixture<RealtyHubApiTests>
 {
     private readonly RealtyHubApiTests _factory;
@@ -41,7 +30,7 @@ public class PropertyTests : IClassFixture<RealtyHubApiTests>
     private async Task<int> CleanupDatabaseAndGetPreviousCount()
     {
         using var scope = _factory.Services.CreateScope();
-        var dbContext = scope.ServiceProvider.GetRequiredService<ApiService.Data.AppDbContext>();
+        var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
         
         // Conta quantas propriedades existiam antes da limpeza
         var existingCount = await dbContext.Properties.CountAsync();
@@ -60,7 +49,7 @@ public class PropertyTests : IClassFixture<RealtyHubApiTests>
     private async Task<Customer> CreateValidSeller()
     {
         using var scope = _factory.Services.CreateScope();
-        var dbContext = scope.ServiceProvider.GetRequiredService<ApiService.Data.AppDbContext>();
+        var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
         
         var seller = new Customer
         {
@@ -68,11 +57,11 @@ public class PropertyTests : IClassFixture<RealtyHubApiTests>
             Email = "vendedor@test.com",
             Phone = "11999999999",
             DocumentNumber = "12345678901",
-            CustomerType = Core.Enums.ECustomerType.Seller,
-            PersonType = Core.Enums.EPersonType.Individual,
+            CustomerType = ECustomerType.Seller,
+            PersonType = EPersonType.Individual,
             Occupation = "Vendedor",
             Nationality = "Brasileira",
-            MaritalStatus = Core.Enums.EMaritalStatus.Single,
+            MaritalStatus = EMaritalStatus.Single,
             UserId = RealtyHubApiTests.TestUserId,
             Address = new Address
             {
@@ -99,7 +88,7 @@ public class PropertyTests : IClassFixture<RealtyHubApiTests>
     private async Task<Condominium> CreateValidCondominium()
     {
         using var scope = _factory.Services.CreateScope();
-        var dbContext = scope.ServiceProvider.GetRequiredService<ApiService.Data.AppDbContext>();
+        var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
         
         var condominium = new Condominium
         {
@@ -134,7 +123,7 @@ public class PropertyTests : IClassFixture<RealtyHubApiTests>
             Title = title,
             Description = "Descrição do imóvel teste",
             Price = 500000.00m,
-            PropertyType = Core.Enums.EPropertyType.Apartment,
+            PropertyType = EPropertyType.Apartment,
             Bedroom = 3,
             Bathroom = 2,
             Garage = 1,
@@ -173,7 +162,7 @@ public class PropertyTests : IClassFixture<RealtyHubApiTests>
         
         // Cria 5 propriedades
         using var scope = _factory.Services.CreateScope();
-        var dbContext = scope.ServiceProvider.GetRequiredService<ApiService.Data.AppDbContext>();
+        var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
         var properties = new List<Property>();
         
         for (int i = 1; i <= 5; i++)
@@ -185,7 +174,7 @@ public class PropertyTests : IClassFixture<RealtyHubApiTests>
         await dbContext.Properties.AddRangeAsync(properties);
         await dbContext.SaveChangesAsync();
         
-        var client = MockData.CreateSimpleClient(_factory);
+        var client = _factory.CreateClient();
 
         // Act
         var response = await client.GetAsync("/v1/properties");
@@ -210,7 +199,7 @@ public class PropertyTests : IClassFixture<RealtyHubApiTests>
         
         // Cria 15 propriedades
         using var scope = _factory.Services.CreateScope();
-        var dbContext = scope.ServiceProvider.GetRequiredService<ApiService.Data.AppDbContext>();
+        var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
         var properties = new List<Property>();
         
         for (int i = 1; i <= 15; i++)
@@ -222,7 +211,7 @@ public class PropertyTests : IClassFixture<RealtyHubApiTests>
         await dbContext.Properties.AddRangeAsync(properties);
         await dbContext.SaveChangesAsync();
         
-        var client = MockData.CreateSimpleClient(_factory);
+        var client = _factory.CreateClient();
 
         // Act
         var response = await client.GetAsync("/v1/properties?pageNumber=1&pageSize=10");
@@ -247,7 +236,7 @@ public class PropertyTests : IClassFixture<RealtyHubApiTests>
         
         // Cria propriedades com títulos específicos
         using var scope = _factory.Services.CreateScope();
-        var dbContext = scope.ServiceProvider.GetRequiredService<ApiService.Data.AppDbContext>();
+        var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
         
         var property1 = CreateValidProperty(seller.Id, condominium.Id, "Apartamento Luxo");
         var property2 = CreateValidProperty(seller.Id, condominium.Id, "Casa Simples");
@@ -256,7 +245,7 @@ public class PropertyTests : IClassFixture<RealtyHubApiTests>
         await dbContext.Properties.AddRangeAsync(property1, property2, property3);
         await dbContext.SaveChangesAsync();
         
-        var client = MockData.CreateSimpleClient(_factory);
+        var client = _factory.CreateClient();
 
         // Act
         var response = await client.GetAsync("/v1/properties?searchTerm=apartamento");
@@ -285,12 +274,12 @@ public class PropertyTests : IClassFixture<RealtyHubApiTests>
         
         // Cria uma propriedade diretamente no banco
         using var scope = _factory.Services.CreateScope();
-        var dbContext = scope.ServiceProvider.GetRequiredService<ApiService.Data.AppDbContext>();
+        var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
         var property = CreateValidProperty(seller.Id, condominium.Id, "Imóvel Busca");
         await dbContext.Properties.AddAsync(property);
         await dbContext.SaveChangesAsync();
         
-        var client = MockData.CreateSimpleClient(_factory);
+        var client = _factory.CreateClient();
 
         // Act
         var response = await client.GetAsync($"/v1/properties/{property.Id}");
@@ -310,7 +299,7 @@ public class PropertyTests : IClassFixture<RealtyHubApiTests>
     {
         // Arrange
         await CleanupDatabaseAndGetPreviousCount();
-        var client = MockData.CreateSimpleClient(_factory);
+        var client = _factory.CreateClient();
 
         // Act
         var response = await client.GetAsync("/v1/properties/999");
@@ -331,13 +320,13 @@ public class PropertyTests : IClassFixture<RealtyHubApiTests>
         var seller = await CreateValidSeller();
         var condominium = await CreateValidCondominium();
         
-        var client = MockData.CreateSimpleClient(_factory);
+        var client = _factory.CreateClient();
         var property = new Property
         {
             Title = "Apartamento Novo",
             Description = "Apartamento recém-construído com acabamento de luxo",
             Price = 750000.00m,
-            PropertyType = Core.Enums.EPropertyType.Apartment,
+            PropertyType = EPropertyType.Apartment,
             Bedroom = 4,
             Bathroom = 3,
             Garage = 2,
@@ -373,7 +362,7 @@ public class PropertyTests : IClassFixture<RealtyHubApiTests>
         result.Data.Should().NotBeNull();
         result.Data!.Title.Should().Be("Apartamento Novo");
         result.Data.Price.Should().Be(750000.00m);
-        result.Data.PropertyType.Should().Be(Core.Enums.EPropertyType.Apartment);
+        result.Data.PropertyType.Should().Be(EPropertyType.Apartment);
     }
 
     [Fact]
@@ -381,7 +370,7 @@ public class PropertyTests : IClassFixture<RealtyHubApiTests>
     {
         // Arrange
         await CleanupDatabaseAndGetPreviousCount();
-        var client = MockData.CreateSimpleClient(_factory);
+        var client = _factory.CreateClient();
         var property = new Property
         {
             // Title is missing - required field
@@ -404,13 +393,13 @@ public class PropertyTests : IClassFixture<RealtyHubApiTests>
         var seller = await CreateValidSeller();
         var condominium = await CreateValidCondominium();
         
-        var client = MockData.CreateSimpleClient(_factory);
+        var client = _factory.CreateClient();
         var property = new Property
         {
             Title = "Imóvel Teste",
             Description = "Descrição teste",
             Price = -1000.00m, // Preço negativo
-            PropertyType = Core.Enums.EPropertyType.Apartment,
+            PropertyType = EPropertyType.Apartment,
             Bedroom = 2,
             Bathroom = 1,
             Garage = 1,
@@ -437,13 +426,13 @@ public class PropertyTests : IClassFixture<RealtyHubApiTests>
         var seller = await CreateValidSeller();
         var condominium = await CreateValidCondominium();
         
-        var client = MockData.CreateSimpleClient(_factory);
+        var client = _factory.CreateClient();
         var property = new Property
         {
             Title = new string('A', 121), // Título com mais de 120 caracteres (limite)
             Description = "Descrição teste",
             Price = 500000.00m,
-            PropertyType = Core.Enums.EPropertyType.Apartment,
+            PropertyType = EPropertyType.Apartment,
             Bedroom = 2,
             Bathroom = 1,
             Garage = 1,
@@ -476,12 +465,12 @@ public class PropertyTests : IClassFixture<RealtyHubApiTests>
         
         // Cria uma propriedade diretamente no banco para atualizar
         using var scope = _factory.Services.CreateScope();
-        var dbContext = scope.ServiceProvider.GetRequiredService<ApiService.Data.AppDbContext>();
+        var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
         var property = CreateValidProperty(seller.Id, condominium.Id, "Imóvel Original");
         await dbContext.Properties.AddAsync(property);
         await dbContext.SaveChangesAsync();
         
-        var client = MockData.CreateSimpleClient(_factory);
+        var client = _factory.CreateClient();
 
         var updatedProperty = new Property
         {
@@ -489,7 +478,7 @@ public class PropertyTests : IClassFixture<RealtyHubApiTests>
             Title = "Imóvel Atualizado",
             Description = "Descrição atualizada",
             Price = 600000.00m,
-            PropertyType = Core.Enums.EPropertyType.House,
+            PropertyType = EPropertyType.House,
             Bedroom = 4,
             Bathroom = 3,
             Garage = 2,
@@ -522,7 +511,7 @@ public class PropertyTests : IClassFixture<RealtyHubApiTests>
         result.Data.Should().NotBeNull();
         result.Data!.Title.Should().Be("Imóvel Atualizado");
         result.Data.Price.Should().Be(600000.00m);
-        result.Data.PropertyType.Should().Be(Core.Enums.EPropertyType.House);
+        result.Data.PropertyType.Should().Be(EPropertyType.House);
     }
 
     [Fact]
@@ -533,14 +522,14 @@ public class PropertyTests : IClassFixture<RealtyHubApiTests>
         var seller = await CreateValidSeller();
         var condominium = await CreateValidCondominium();
         
-        var client = MockData.CreateSimpleClient(_factory);
+        var client = _factory.CreateClient();
         var property = new Property
         {
             Id = 999,
             Title = "Imóvel Teste",
             Description = "Descrição teste",
             Price = 500000.00m,
-            PropertyType = Core.Enums.EPropertyType.Apartment,
+            PropertyType = EPropertyType.Apartment,
             Bedroom = 2,
             Bathroom = 1,
             Garage = 1,
@@ -573,12 +562,12 @@ public class PropertyTests : IClassFixture<RealtyHubApiTests>
         
         // Cria uma propriedade diretamente no banco para deletar
         using var scope = _factory.Services.CreateScope();
-        var dbContext = scope.ServiceProvider.GetRequiredService<ApiService.Data.AppDbContext>();
+        var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
         var property = CreateValidProperty(seller.Id, condominium.Id, "Imóvel Para Deletar");
         await dbContext.Properties.AddAsync(property);
         await dbContext.SaveChangesAsync();
         
-        var client = MockData.CreateSimpleClient(_factory);
+        var client = _factory.CreateClient();
 
         // Act
         var response = await client.DeleteAsync($"/v1/properties/{property.Id}");
@@ -596,7 +585,7 @@ public class PropertyTests : IClassFixture<RealtyHubApiTests>
     {
         // Arrange
         await CleanupDatabaseAndGetPreviousCount();
-        var client = MockData.CreateSimpleClient(_factory);
+        var client = _factory.CreateClient();
 
         // Act
         var response = await client.DeleteAsync("/v1/properties/999");
@@ -617,13 +606,13 @@ public class PropertyTests : IClassFixture<RealtyHubApiTests>
         var seller = await CreateValidSeller();
         var condominium = await CreateValidCondominium();
         
-        var client = MockData.CreateSimpleClient(_factory);
+        var client = _factory.CreateClient();
         var property = new Property
         {
             Title = "Imóvel Teste",
             Description = "Descrição teste",
             Price = 500000.00m,
-            PropertyType = Core.Enums.EPropertyType.Apartment,
+            PropertyType = EPropertyType.Apartment,
             Bedroom = -1, // Número negativo de quartos
             Bathroom = 1,
             Garage = 1,
@@ -650,13 +639,13 @@ public class PropertyTests : IClassFixture<RealtyHubApiTests>
         var seller = await CreateValidSeller();
         var condominium = await CreateValidCondominium();
         
-        var client = MockData.CreateSimpleClient(_factory);
+        var client = _factory.CreateClient();
         var property = new Property
         {
             Title = "Imóvel Teste",
             Description = "Descrição teste",
             Price = 500000.00m,
-            PropertyType = Core.Enums.EPropertyType.Apartment,
+            PropertyType = EPropertyType.Apartment,
             Bedroom = 2,
             Bathroom = 1,
             Garage = 1,
@@ -689,7 +678,7 @@ public class PropertyTests : IClassFixture<RealtyHubApiTests>
         
         // Act
         using var scope = _factory.Services.CreateScope();
-        var dbContext = scope.ServiceProvider.GetRequiredService<ApiService.Data.AppDbContext>();
+        var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
         
         var fakeProperties = PropertyFake.GetFakeProperties(3, (int)seller.Id, (int)condominium.Id);
         
@@ -712,7 +701,7 @@ public class PropertyTests : IClassFixture<RealtyHubApiTests>
     public void MockData_CreateSimpleClient_ShouldReturnClient()
     {
         // Arrange & Act
-        var client = MockData.CreateSimpleClient(_factory);
+        var client = _factory.CreateClient();
 
         // Assert
         client.Should().NotBeNull();

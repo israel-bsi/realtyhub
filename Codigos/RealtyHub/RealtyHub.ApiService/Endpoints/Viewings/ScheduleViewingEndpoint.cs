@@ -1,4 +1,5 @@
 ﻿using RealtyHub.ApiService.Common.Api;
+using RealtyHub.ApiService.Common.Validation;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Responses;
@@ -50,6 +51,10 @@ public class ScheduleViewingEndpoint : IEndpoint
         IViewingHandler handler,
         Viewing request)
     {
+        var validationResult = DataAnnotationValidator.ValidateRecursively(request);
+        if (validationResult != null)
+            return validationResult;
+
         request.UserId = user.Identity?.Name ?? string.Empty;
         var result = await handler.ScheduleAsync(request);
 

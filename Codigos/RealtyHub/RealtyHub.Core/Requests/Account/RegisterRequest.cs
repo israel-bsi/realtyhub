@@ -48,8 +48,6 @@ public class RegisterRequest : Request
     /// Confirmação da senha do usuário.
     /// </summary>    
     /// <value>A confirmação da senha do usuário.</value>
-    [Required(ErrorMessage = "Senha inválida")]
-    [MinLength(6, ErrorMessage = "A senha deve ter no mínimo 6 caracteres")]
     [JsonIgnore]
     public string ConfirmPassword { get; set; } = string.Empty;
 }

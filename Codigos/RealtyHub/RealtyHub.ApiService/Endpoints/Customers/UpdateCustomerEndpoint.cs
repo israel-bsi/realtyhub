@@ -58,25 +58,10 @@ public class UpdateCustomerEndpoint : IEndpoint
         Customer request,
         long id)
     {
-        // Validação APENAS dos Data Annotations
         var validationResult = DataAnnotationValidator.ValidateRecursively(request);
         if (validationResult != null)
-        {
-            return validationResult; // Retorna BadRequest com erros dos Data Annotations
-        }
+            return validationResult;
 
-        // Validação básica de consistência do ID
-        if (request.Id != 0 && request.Id != id)
-        {
-            return Results.BadRequest(new
-            {
-                Message = "ID do cliente na URL não coincide com o ID no corpo da requisição",
-                IsSuccess = false,
-                Code = 400
-            });
-        }
-
-        // Processamento normal
         request.Id = id;
         request.UserId = user.Identity?.Name ?? string.Empty;
         var result = await handler.UpdateAsync(request);

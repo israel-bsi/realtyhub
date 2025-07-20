@@ -36,12 +36,14 @@ public class Condominium : Entity
     /// Obtém ou define o número de unidades no condomínio.
     /// </summary>
     /// <value>Um valor inteiro representando o número de unidades.</value>
+    [Range(1, int.MaxValue, ErrorMessage = "O número de unidades deve ser maior que zero")]
     public int Units { get; set; }
 
     /// <summary>
     /// Obtém ou define o número de andares do condomínio.
     /// </summary>
     /// <value>Um valor inteiro representando o número de andares.</value>
+    [Range(1, int.MaxValue, ErrorMessage = "O número de andares deve ser maior que zero")]
     public int Floors { get; set; }
 
     /// <summary>

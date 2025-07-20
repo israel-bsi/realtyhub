@@ -1,16 +1,19 @@
-﻿using Microsoft.AspNetCore.Mvc.Testing;
+﻿using System.Security.Claims;
+using System.Text.Encodings.Web;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Logging;
-using System.Text.Encodings.Web;
+using Microsoft.Extensions.Options;
 using RealtyHub.ApiService.Data;
-using System.Security.Claims;
+using RealtyHub.Core.Requests.Emails;
+using RealtyHub.Core.Responses;
+using RealtyHub.Core.Services;
 
 namespace RealtyHub.Tests;
 
@@ -22,7 +25,7 @@ namespace RealtyHub.Tests;
 public class RealtyHubApiTests : WebApplicationFactory<ApiService.Program>
 {
     private readonly string _databaseName;
-    public const string TestUserId = "test-user-id";
+    public const string TestUserId = "1";
     public const string TestUserEmail = "test@test.com";
 
     public RealtyHubApiTests()
@@ -64,6 +67,13 @@ public class RealtyHubApiTests : WebApplicationFactory<ApiService.Program>
             {
                 options.UseInMemoryDatabase(_databaseName);
             });
+
+            // MOCK DO SERVIÇO DE EMAIL
+            // Remove o serviço de email real
+            services.RemoveAll<IEmailService>();
+            
+            // Adiciona o mock do serviço de email
+            services.AddSingleton<IEmailService, MockEmailService>();
 
             // CONFIGURAR AUTENTICAÇÃO FAKE ANTES DA AUTORIZAÇÃO
             // Remove existing authentication services
@@ -110,6 +120,31 @@ public class RealtyHubApiTests : WebApplicationFactory<ApiService.Program>
         dbContext.Customers.RemoveRange(customers);
         
         await dbContext.SaveChangesAsync();
+    }
+}
+
+/// <summary>
+/// Mock do serviço de email para testes.
+/// Simula o envio de emails sem realmente enviá-los.
+/// </summary>
+public class MockEmailService : IEmailService
+{
+    public Task<Response<bool>> SendConfirmationLinkAsync(ConfirmEmailMessage message)
+    {
+        // Simula sucesso no envio do email de confirmação
+        return Task.FromResult(new Response<bool>(true, 200, "Email de confirmação enviado com sucesso!"));
+    }
+
+    public Task<Response<bool>> SendResetPasswordLinkAsync(ResetPasswordMessage message)
+    {
+        // Simula sucesso no envio do email de reset de senha
+        return Task.FromResult(new Response<bool>(true, 200, "Email de redefinição de senha enviado com sucesso!"));
+    }
+
+    public Task<Response<bool>> SendContractAsync(AttachmentMessage message)
+    {
+        // Simula sucesso no envio do contrato
+        return Task.FromResult(new Response<bool>(true, 200, "Contrato enviado com sucesso!"));
     }
 }
 

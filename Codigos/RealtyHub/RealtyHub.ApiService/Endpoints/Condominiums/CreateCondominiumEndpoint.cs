@@ -1,5 +1,6 @@
 ﻿using System.Security.Claims;
 using RealtyHub.ApiService.Common.Api;
+using RealtyHub.ApiService.Common.Validation;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Responses;
@@ -47,8 +48,12 @@ public class CreateCondominiumEndpoint : IEndpoint
         ICondominiumHandler handler,
         Condominium request)
     {
+        var validationResult = DataAnnotationValidator.ValidateRecursively(request);
+        if (validationResult != null)
+            return validationResult;
+
         request.UserId = user.Identity?.Name ?? string.Empty;
-        Response<Condominium?> result = await handler.CreateAsync(request);
+        var result = await handler.CreateAsync(request);
 
         return result.IsSuccess
             ? Results.Created($"/{result.Data?.Id}", result)

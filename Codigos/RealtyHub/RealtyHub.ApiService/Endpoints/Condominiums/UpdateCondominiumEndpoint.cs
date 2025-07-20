@@ -1,8 +1,9 @@
-﻿using System.Security.Claims;
-using RealtyHub.ApiService.Common.Api;
+﻿using RealtyHub.ApiService.Common.Api;
+using RealtyHub.ApiService.Common.Validation;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Responses;
+using System.Security.Claims;
 
 namespace RealtyHub.ApiService.Endpoints.Condominiums;
 
@@ -55,6 +56,10 @@ public class UpdateCondominiumEndpoint : IEndpoint
     {
         request.Id = id;
         request.UserId = user.Identity?.Name ?? string.Empty;
+
+        var validationResult = DataAnnotationValidator.ValidateRecursively(request);
+        if (validationResult != null)
+            return validationResult;
 
         var result = await handler.UpdateAsync(request);
 
