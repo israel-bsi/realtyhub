@@ -1,10 +1,10 @@
 ﻿using System.Net.Http.Json;
 using FluentAssertions;
-using Microsoft.EntityFrameworkCore;
-using RealtyHub.ApiService.Data;
+using Moq;
 using RealtyHub.Core.Enums;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Responses;
+using RealtyHub.Tests.Common;
 
 namespace RealtyHub.Tests.Entities.Customers;
 
@@ -14,66 +14,10 @@ namespace RealtyHub.Tests.Entities.Customers;
 /// sem se preocupar com autenticação (que é bypassada).
 /// Cada teste é completamente isolado e limpa o banco antes da execução.
 /// </summary>
-public class CustomerTests : IClassFixture<RealtyHubApiTests>
+public class CustomerTests : BaseIntegrationTest
 {
-    private readonly RealtyHubApiTests _factory;
-
-    public CustomerTests(RealtyHubApiTests factory)
+    public CustomerTests(RealtyHubApiTests factory) : base(factory)
     {
-        _factory = factory;
-    }
-
-    /// <summary>
-    /// Limpa o banco de dados e retorna o número de clientes encontrados antes da limpeza.
-    /// </summary>
-    private async Task<int> CleanupDatabaseAndGetPreviousCount()
-    {
-        using var scope = _factory.Services.CreateScope();
-        var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-        
-        // Conta quantos clientes existiam antes da limpeza
-        var existingCount = await dbContext.Customers.CountAsync();
-        
-        // Remove todos os customers existentes
-        var existingCustomers = await dbContext.Customers.ToListAsync();
-        dbContext.Customers.RemoveRange(existingCustomers);
-        await dbContext.SaveChangesAsync();
-        
-        return existingCount;
-    }
-
-    /// <summary>
-    /// Cria um customer válido para uso nos testes.
-    /// </summary>
-    private static Customer CreateValidCustomer(
-        string name = "Cliente Teste", 
-        string email = "cliente@test.com",
-        EPersonType ePersonType = EPersonType.Individual)
-    {
-        return new Customer
-        {
-            Name = name,
-            Email = email,
-            Phone = "11999999999",
-            DocumentNumber = "12345678901",
-            CustomerType = ECustomerType.Buyer,
-            PersonType = ePersonType,
-            Occupation = "Teste",
-            Nationality = "Brasileira",
-            MaritalStatus = EMaritalStatus.Single,
-            UserId = RealtyHubApiTests.TestUserId, // Usa o mesmo UserId que será usado nos endpoints
-            Address = new Address
-            {
-                Street = "Rua Teste",
-                Number = "123",
-                Neighborhood = "Centro",
-                City = "São Paulo",
-                State = "SP",
-                Country = "Brasil",
-                ZipCode = "01234567"
-            },
-            IsActive = true
-        };
     }
 
     #region GET /v1/customers - GetAllCustomersEndpoint Tests
@@ -82,21 +26,19 @@ public class CustomerTests : IClassFixture<RealtyHubApiTests>
     public async Task GetAllCustomers_ShouldReturnPagedResponse()
     {
         // Arrange
-        await CleanupDatabaseAndGetPreviousCount();
-        using var scope = _factory.Services.CreateScope();
-        var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-        var customers = new List<Customer>();
+        await CleanupDatabaseAndGetPreviousCount<Customer>();
+        var (_, dbContext) = CreateDbContext();
 
         for (int i = 0; i < 5; i++)
         {
-            var customer = CreateValidCustomer($"Cliente {i + 1}", $"cliente{i + 1}@test.com");
-            customers.Add(customer);
+            var customer = MockData.GetValidCustomer(ECustomerType.Buyer);
+            customer.Name = $"Cliente {i + 1}";
+            customer.Email = $"cliente{i + 1}@test.com";
+            await dbContext.Customers.AddAsync(customer);
+            await dbContext.SaveChangesAsync();
         }
 
-        await dbContext.Customers.AddRangeAsync(customers);
-        await dbContext.SaveChangesAsync();
-
-        var client = _factory.CreateClient();
+        var client = Factory.CreateClient();
 
         // Act
         var response = await client.GetAsync("/v1/customers");
@@ -115,20 +57,19 @@ public class CustomerTests : IClassFixture<RealtyHubApiTests>
     public async Task GetAllCustomers_WithPagination_ShouldReturnCorrectPage()
     {
         // Arrange
-        await CleanupDatabaseAndGetPreviousCount();
-        using var scope = _factory.Services.CreateScope();
-        var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-        var customers = new List<Customer>();
+        await CleanupDatabaseAndGetPreviousCount<Customer>();
+        var (_, dbContext) = CreateDbContext();
 
         for (int i = 0; i < 15; i++)
         {
-            var customer = CreateValidCustomer($"Cliente {i + 1}", $"cliente{i + 1}@test.com");
-            customers.Add(customer);
+            var customer = MockData.GetValidCustomer(ECustomerType.Buyer);
+            customer.Name = $"Cliente {i + 1}";
+            customer.Email = $"cliente{i + 1}@test.com";
+            await dbContext.Customers.AddAsync(customer);
+            await dbContext.SaveChangesAsync();
         }
 
-        await dbContext.Customers.AddRangeAsync(customers);
-        await dbContext.SaveChangesAsync();
-        var client = _factory.CreateClient();
+        var client = Factory.CreateClient();
 
         // Act
         var response = await client.GetAsync("/v1/customers?pageNumber=1&pageSize=10");
@@ -147,20 +88,19 @@ public class CustomerTests : IClassFixture<RealtyHubApiTests>
     public async Task GetAllCustomers_WithSearchTerm_ShouldFilterResults()
     {
         // Arrange
-        await CleanupDatabaseAndGetPreviousCount();
-        using var scope = _factory.Services.CreateScope();
-        var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-        var customers = new List<Customer>();
+        await CleanupDatabaseAndGetPreviousCount<Customer>();
+        var (_, dbContext) = CreateDbContext();
 
         for (int i = 0; i < 5; i++)
         {
-            var customer = CreateValidCustomer($"Cliente {i + 1}", $"cliente{i + 1}@test.com");
-            customers.Add(customer);
+            var customer = MockData.GetValidCustomer(ECustomerType.Buyer);
+            customer.Name = $"Cliente {i + 1}";
+            customer.Email = $"cliente{i + 1}@test.com";
+            await dbContext.Customers.AddAsync(customer);
+            await dbContext.SaveChangesAsync();
         }
 
-        await dbContext.Customers.AddRangeAsync(customers);
-        await dbContext.SaveChangesAsync();
-        var client = _factory.CreateClient();
+        var client = Factory.CreateClient();
 
         // Act
         var response = await client.GetAsync("/v1/customers?searchTerm=empresa");
@@ -170,7 +110,6 @@ public class CustomerTests : IClassFixture<RealtyHubApiTests>
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         result.Should().NotBeNull();
         result!.IsSuccess.Should().BeTrue();
-        // O resultado pode variar dependendo dos dados gerados pelo CustomerFake
     }
 
     #endregion
@@ -181,30 +120,19 @@ public class CustomerTests : IClassFixture<RealtyHubApiTests>
     public async Task GetCustomerById_WithValidId_ShouldReturnCustomer()
     {
         // Arrange
-        await CleanupDatabaseAndGetPreviousCount();
+        await CleanupDatabaseAndGetPreviousCount<Customer>();
+        var (_, dbContext) = CreateDbContext();
         
-        // Cria um customer diretamente no banco
-        using var scope = _factory.Services.CreateScope();
-        var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-        var customer = CreateValidCustomer("Cliente Busca", "busca@test.com");
-        // UserId já está correto no CreateValidCustomer()
+        var customer = MockData.GetValidCustomer(ECustomerType.Buyer);
+        customer.Name = "Cliente Busca";
+        customer.Email = "busca@test.com";
         await dbContext.Customers.AddAsync(customer);
         await dbContext.SaveChangesAsync();
         
-        // Vamos verificar se o customer foi salvo com o UserId correto
-        var savedCustomer = await dbContext.Customers.FirstOrDefaultAsync(c => c.Id == customer.Id);
-        
-        var client = _factory.CreateClient();
+        var client = Factory.CreateClient();
 
         // Act
         var response = await client.GetAsync($"/v1/customers/{customer.Id}");
-        var content = await response.Content.ReadAsStringAsync();
-
-        // Debug: Se retornar BadRequest, vamos incluir na mensagem de erro
-        if (response.StatusCode == HttpStatusCode.BadRequest)
-        {
-            throw new Exception($"GetCustomerById returned BadRequest. Content: {content}. Customer ID: {customer.Id}. Customer UserId in DB: {savedCustomer?.UserId}. Expected UserId: {RealtyHubApiTests.TestUserId}");
-        }
 
         var result = await response.Content.ReadFromJsonAsync<Response<Customer>>();
 
@@ -221,8 +149,8 @@ public class CustomerTests : IClassFixture<RealtyHubApiTests>
     public async Task GetCustomerById_WithInvalidId_ShouldReturnBadRequest()
     {
         // Arrange
-        await CleanupDatabaseAndGetPreviousCount();
-        var client = _factory.CreateClient();
+        await CleanupDatabaseAndGetPreviousCount<Customer>();
+        var client = Factory.CreateClient();
 
         // Act
         var response = await client.GetAsync("/v1/customers/999");
@@ -239,34 +167,13 @@ public class CustomerTests : IClassFixture<RealtyHubApiTests>
     public async Task CreateCustomer_WithValidIndividualCustomer_ShouldReturnCreated()
     {
         // Arrange
-        await CleanupDatabaseAndGetPreviousCount();
-        var client = _factory.CreateClient();
-        var customer = new Customer
-        {
-            Name = "João Silva",
-            Email = "joao.silva@test.com",
-            Phone = "11999999999",
-            DocumentNumber = "12345678901",
-            CustomerType = ECustomerType.Buyer,
-            PersonType = EPersonType.Individual,
-            Occupation = "Engenheiro",
-            Nationality = "Brasileira",
-            MaritalStatus = EMaritalStatus.Single,
-            Rg = "123456789",
-            IssuingAuthority = "SSP/SP",
-            RgIssueDate = DateTime.Now.AddYears(-5),
-            Address = new Address
-            {
-                Street = "Rua das Flores",
-                Number = "123",
-                Complement = "Apto 101",
-                Neighborhood = "Centro",
-                City = "São Paulo",
-                State = "SP",
-                Country = "Brasil",
-                ZipCode = "01234-567"
-            }
-        };
+        await CleanupDatabaseAndGetPreviousCount<Customer>();
+        var client = Factory.CreateClient();
+
+        var customer = MockData.GetValidCustomer(ECustomerType.Buyer);
+        customer.Name = "João Silva";
+        customer.Email = "joao.silva@test.com";
+        customer.PersonType = EPersonType.Individual;
 
         // Act
         var response = await client.PostAsJsonAsync("/v1/customers", customer);
@@ -286,29 +193,13 @@ public class CustomerTests : IClassFixture<RealtyHubApiTests>
     public async Task CreateCustomer_WithValidBusinessCustomer_ShouldReturnCreated()
     {
         // Arrange
-        await CleanupDatabaseAndGetPreviousCount();
-        var client = _factory.CreateClient();
-        var customer = new Customer
-        {
-            Name = "Empresa ABC Ltda",
-            Email = "contato@empresaabc.com",
-            Phone = "1133334444",
-            DocumentNumber = "12345678000199",
-            CustomerType = ECustomerType.Seller,
-            PersonType = EPersonType.Business,
-            BusinessName = "Empresa ABC Ltda",
-            Address = new Address
-            {
-                Street = "Av. Paulista",
-                Number = "1000",
-                Complement = "Sala 501",
-                Neighborhood = "Bela Vista",
-                City = "São Paulo",
-                State = "SP",
-                Country = "Brasil",
-                ZipCode = "01310-100"
-            }
-        };
+        await CleanupDatabaseAndGetPreviousCount<Customer>();
+        var client = Factory.CreateClient();
+
+        var customer = MockData.GetValidCustomer(ECustomerType.Seller);
+        customer.Name = "Empresa ABC Ltda";
+        customer.PersonType = EPersonType.Business;
+        customer.BusinessName = "Empresa ABC Ltda";
 
         // Act
         var response = await client.PostAsJsonAsync("/v1/customers", customer);
@@ -328,14 +219,11 @@ public class CustomerTests : IClassFixture<RealtyHubApiTests>
     public async Task CreateCustomer_WithMissingRequiredFields_ShouldReturnBadRequest()
     {
         // Arrange
-        await CleanupDatabaseAndGetPreviousCount();
-        var client = _factory.CreateClient();
-        var customer = new Customer
-        {
-            // Name is missing - required field
-            Email = "test@test.com",
-            Phone = "11999999999"
-        };
+        await CleanupDatabaseAndGetPreviousCount<Customer>();
+        var client = Factory.CreateClient();
+
+        var customer = MockData.GetValidCustomer(ECustomerType.Buyer);
+        customer.Name = string.Empty; // Nome vazio
 
         // Act
         var response = await client.PostAsJsonAsync("/v1/customers", customer);
@@ -348,17 +236,11 @@ public class CustomerTests : IClassFixture<RealtyHubApiTests>
     public async Task CreateCustomer_WithInvalidEmail_ShouldReturnBadRequest()
     {
         // Arrange
-        await CleanupDatabaseAndGetPreviousCount();
-        var client = _factory.CreateClient();
-        var customer = new Customer
-        {
-            Name = "Test User",
-            Email = "invalid-email", // Invalid email format
-            Phone = "11999999999",
-            DocumentNumber = "12345678901",
-            CustomerType = ECustomerType.Buyer,
-            PersonType = EPersonType.Individual
-        };
+        await CleanupDatabaseAndGetPreviousCount<Customer>();
+        var client = Factory.CreateClient();
+       
+        var customer = MockData.GetValidCustomer(ECustomerType.Buyer);
+        customer.Email = "invalid-email"; // Email inválido
 
         // Act
         var response = await client.PostAsJsonAsync("/v1/customers", customer);
@@ -371,17 +253,11 @@ public class CustomerTests : IClassFixture<RealtyHubApiTests>
     public async Task CreateCustomer_WithMaxLengthExceeded_ShouldReturnBadRequest()
     {
         // Arrange
-        await CleanupDatabaseAndGetPreviousCount();
-        var client = _factory.CreateClient();
-        var customer = new Customer
-        {
-            Name = new string('A', 81), // Nome com mais de 80 caracteres (limite)
-            Email = "test@test.com",
-            Phone = "11999999999",
-            DocumentNumber = "12345678901",
-            CustomerType = ECustomerType.Buyer,
-            PersonType = EPersonType.Individual
-        };
+        await CleanupDatabaseAndGetPreviousCount<Customer>();
+        var client = Factory.CreateClient();
+
+        var customer = MockData.GetValidCustomer(ECustomerType.Buyer);
+        customer.Name = new string('A', 81); // Nome com mais de 80 caracteres (limite)
 
         // Act
         var response = await client.PostAsJsonAsync("/v1/customers", customer);
@@ -398,50 +274,24 @@ public class CustomerTests : IClassFixture<RealtyHubApiTests>
     public async Task UpdateCustomer_WithValidData_ShouldReturnOk()
     {
         // Arrange
-        await CleanupDatabaseAndGetPreviousCount();
+        await CleanupDatabaseAndGetPreviousCount<Customer>();
+        var (_, dbContext) = CreateDbContext();
         
-        // Cria um customer diretamente no banco para atualizar
-        using var scope = _factory.Services.CreateScope();
-        var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-        var customer = CreateValidCustomer("Cliente Original", "original@test.com");
-        // UserId já está correto no CreateValidCustomer()
+        var customer = MockData.GetValidCustomer(ECustomerType.Buyer);
+        customer.Name = "Cliente Original";
+        customer.Email = "original@test.com";
         await dbContext.Customers.AddAsync(customer);
         await dbContext.SaveChangesAsync();
         
-        var client = _factory.CreateClient();
+        var client = Factory.CreateClient();
 
-        var updatedCustomer = new Customer
-        {
-            Id = customer.Id,
-            Name = "João Silva Atualizado",
-            Email = "joao.atualizado@test.com",
-            Phone = "11888888888",
-            DocumentNumber = "12345678901",
-            CustomerType = ECustomerType.BuyerSeller,
-            PersonType = EPersonType.Individual,
-            Occupation = "Arquiteto",
-            Nationality = "Brasileira",
-            Address = new Address
-            {
-                Street = "Rua Nova",
-                Number = "456",
-                Neighborhood = "Novo Bairro",
-                City = "São Paulo",
-                State = "SP",
-                Country = "Brasil",
-                ZipCode = "01234-567"
-            }
-        };
+        var updatedCustomer = MockData.GetValidCustomer(ECustomerType.Buyer);
+        updatedCustomer.Id = customer.Id; // Mantém o ID do cliente existente
+        updatedCustomer.Name = "João Silva Atualizado";
+        updatedCustomer.Email = "joao.atualizado@test.com";
 
         // Act
         var response = await client.PutAsJsonAsync($"/v1/customers/{customer.Id}", updatedCustomer);
-        
-        // Debug se necessário
-        if (response.StatusCode == HttpStatusCode.BadRequest)
-        {
-            var content = await response.Content.ReadAsStringAsync();
-            throw new Exception($"UpdateCustomer returned BadRequest. Content: {content}. Customer ID: {customer.Id}. Expected UserId: {RealtyHubApiTests.TestUserId}");
-        }
         
         var result = await response.Content.ReadFromJsonAsync<Response<Customer>>();
 
@@ -458,24 +308,19 @@ public class CustomerTests : IClassFixture<RealtyHubApiTests>
     public async Task UpdateCustomer_WithInvalidId_ShouldReturnBadRequest()
     {
         // Arrange
-        await CleanupDatabaseAndGetPreviousCount();
-        var client = _factory.CreateClient();
-        var customer = new Customer
-        {
-            Id = 999,
-            Name = "Test User",
-            Email = "test@test.com",
-            Phone = "11999999999",
-            DocumentNumber = "12345678901",
-            CustomerType = ECustomerType.Buyer,
-            PersonType = EPersonType.Individual
-        };
+        await CleanupDatabaseAndGetPreviousCount<Customer>();
+        var client = Factory.CreateClient();
+       
+        var customer = MockData.GetValidCustomer(ECustomerType.Buyer);
+        customer.Id = 999; // ID inválido que não existe no banco
 
         // Act
-        var response = await client.PutAsJsonAsync("/v1/customers/999", customer);
+        var response = await client.PutAsJsonAsync($"/v1/customers/{customer.Id}", customer);
+        var message = await response.Content.ReadAsStringAsync();
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+        message.Should().Contain("não encontrado");
     }
 
     #endregion
@@ -486,48 +331,44 @@ public class CustomerTests : IClassFixture<RealtyHubApiTests>
     public async Task DeleteCustomer_WithValidId_ShouldReturnNoContent()
     {
         // Arrange
-        await CleanupDatabaseAndGetPreviousCount();
+        await CleanupDatabaseAndGetPreviousCount<Customer>();
+        var (_, dbContext) = CreateDbContext();
         
-        // Cria um customer diretamente no banco para deletar
-        using var scope = _factory.Services.CreateScope();
-        var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-        var customer = CreateValidCustomer("Cliente Para Deletar", "deletar@test.com");
-        // UserId já está correto no CreateValidCustomer()
+        var customer = MockData.GetValidCustomer(ECustomerType.Buyer);
+        customer.Name = "Cliente Para Deletar";
+        customer.Email = "deletar@test.com";
         await dbContext.Customers.AddAsync(customer);
         await dbContext.SaveChangesAsync();
         
-        var client = _factory.CreateClient();
+        var client = Factory.CreateClient();
 
         // Act
         var response = await client.DeleteAsync($"/v1/customers/{customer.Id}");
 
-        // Debug se necessário
-        if (response.StatusCode == HttpStatusCode.BadRequest)
-        {
-            var content = await response.Content.ReadAsStringAsync();
-            throw new Exception($"DeleteCustomer returned BadRequest. Content: {content}. Customer ID: {customer.Id}. Expected UserId: {RealtyHubApiTests.TestUserId}");
-        }
-
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.NoContent);
 
-        // Verify customer is soft deleted - should return BadRequest when trying to access
+        // Verifica se o cliente foi realmente removido
         var getResponse = await client.GetAsync($"/v1/customers/{customer.Id}");
         getResponse.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+        var message = await getResponse.Content.ReadAsStringAsync();
+        message.Should().Contain("não encontrado");
     }
 
     [Fact]
     public async Task DeleteCustomer_WithInvalidId_ShouldReturnBadRequest()
     {
         // Arrange
-        await CleanupDatabaseAndGetPreviousCount();
-        var client = _factory.CreateClient();
+        await CleanupDatabaseAndGetPreviousCount<Customer>();
+        var client = Factory.CreateClient();
 
         // Act
         var response = await client.DeleteAsync("/v1/customers/999");
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+        var message = await response.Content.ReadAsStringAsync();
+        message.Should().Contain("não encontrado");
     }
 
     #endregion
@@ -538,17 +379,11 @@ public class CustomerTests : IClassFixture<RealtyHubApiTests>
     public async Task CreateCustomer_WithInvalidPhoneNumber_ShouldReturnBadRequest()
     {
         // Arrange
-        await CleanupDatabaseAndGetPreviousCount();
-        var client = _factory.CreateClient();
-        var customer = new Customer
-        {
-            Name = "Test User",
-            Email = "test@test.com",
-            Phone = "invalid-phone", // Invalid phone format
-            DocumentNumber = "12345678901",
-            CustomerType = ECustomerType.Buyer,
-            PersonType = EPersonType.Individual
-        };
+        await CleanupDatabaseAndGetPreviousCount<Customer>();
+        var client = Factory.CreateClient();
+
+        var customer = MockData.GetValidCustomer(ECustomerType.Buyer);
+        customer.Phone = "invalid-phone"; // Número de telefone inválido
 
         // Act
         var response = await client.PostAsJsonAsync("/v1/customers", customer);
@@ -561,17 +396,11 @@ public class CustomerTests : IClassFixture<RealtyHubApiTests>
     public async Task CreateCustomer_WithDocumentNumberTooLong_ShouldReturnBadRequest()
     {
         // Arrange
-        await CleanupDatabaseAndGetPreviousCount();
-        var client = _factory.CreateClient();
-        var customer = new Customer
-        {
-            Name = "Test User",
-            Email = "test@test.com",
-            Phone = "11999999999",
-            DocumentNumber = "1234567891234567891234567", // Document with more than 20 characters
-            CustomerType = ECustomerType.Buyer,
-            PersonType = EPersonType.Individual
-        };
+        await CleanupDatabaseAndGetPreviousCount<Customer>();
+        var client = Factory.CreateClient();
+
+        var customer = MockData.GetValidCustomer(ECustomerType.Buyer);
+        customer.DocumentNumber = new string('1', 21); // Documento com mais de 20 caracteres
 
         // Act
         var response = await client.PostAsJsonAsync("/v1/customers", customer);
@@ -581,5 +410,4 @@ public class CustomerTests : IClassFixture<RealtyHubApiTests>
     }
 
     #endregion
-
 }

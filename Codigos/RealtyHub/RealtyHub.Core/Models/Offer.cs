@@ -22,6 +22,7 @@ public class Offer : Entity
     /// Obtém ou define o valor da proposta.
     /// </summary>
     /// <value>Um valor decimal representando o montante da proposta.</value>
+    [Range(0.01, double.MaxValue, ErrorMessage = "O valor da proposta deve ser maior que zero.")]
     [Required(ErrorMessage = "O valor da proposta é obrigatório")]
     public decimal Amount { get; set; }
 

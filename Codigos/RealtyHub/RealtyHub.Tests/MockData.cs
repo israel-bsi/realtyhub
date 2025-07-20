@@ -123,7 +123,6 @@ public static class MockData
             BuyerId = buyer.Id,
             PropertyId = property.Id,
             UserId = RealtyHubApiTests.TestUserId,
-            
             Payments = payments
         };
     }
@@ -144,6 +143,18 @@ public static class MockData
             SignatureDate = DateTime.Now.AddDays(7),
             FileId = Guid.NewGuid().ToString(),
             IsActive = true,
+            UserId = RealtyHubApiTests.TestUserId
+        };
+    }
+
+    public static Viewing GetValidViewing(Customer buyer, Property property)
+    {
+        return new Viewing
+        {
+            ViewingDate = DateTime.Now.AddDays(1),
+            ViewingStatus = EViewingStatus.Scheduled,
+            BuyerId = buyer.Id,
+            PropertyId = property.Id,
             UserId = RealtyHubApiTests.TestUserId
         };
     }

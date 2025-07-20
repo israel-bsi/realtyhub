@@ -51,6 +51,7 @@ public class Property : Entity
     /// </summary>
     /// <value>Um valor decimal representando o preço do imóvel.</value>
     [Required(ErrorMessage = "Preço é um campo obrigatório")]
+    [Range(0.01, double.MaxValue, ErrorMessage = "Preço deve ser um número positivo.")]
     public decimal Price { get; set; }
 
     /// <summary>
@@ -64,6 +65,7 @@ public class Property : Entity
     /// Obtém ou define a quantidade de quartos do imóvel.
     /// </summary>
     /// <value>Um valor inteiro representando o número de quartos.</value>
+    [Range(0, int.MaxValue, ErrorMessage = "Quartos deve ser um número não negativo.")]
     [Required(ErrorMessage = "Quartos é um campo obrigatório")]
     public int Bedroom { get; set; }
 
@@ -71,6 +73,7 @@ public class Property : Entity
     /// Obtém ou define a quantidade de banheiros do imóvel.
     /// </summary>
     /// <value>Um valor inteiro representando o número de banheiros.</value>
+    [Range(0, int.MaxValue, ErrorMessage = "Banheiros deve ser um número não negativo.")]
     [Required(ErrorMessage = "Banheiros é um campo obrigatório")]
     public int Bathroom { get; set; }
 
@@ -79,6 +82,7 @@ public class Property : Entity
     /// </summary>
     /// <value>Um valor inteiro representando o número de vagas na garagem.</value>
     [Required(ErrorMessage = "Garagem é um campo obrigatório")]
+    [Range(0, int.MaxValue, ErrorMessage = "Garagem deve ser um número não negativo.")]
     public int Garage { get; set; }
 
     /// <summary>
@@ -86,6 +90,7 @@ public class Property : Entity
     /// </summary>
     /// <value>Um valor double representando a área do imóvel.</value>
     [Required(ErrorMessage = "Área é um campo obrigatório")]
+    [Range(1, double.MaxValue, ErrorMessage = "Área deve ser um número positivo.")]
     public double Area { get; set; }
 
     /// <summary>

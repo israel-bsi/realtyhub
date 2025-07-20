@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using RealtyHub.Core.Models.Account;
 using RealtyHub.Core.Requests.Account;
 using RealtyHub.Core.Responses;
+using RealtyHub.Tests.Common;
 using User = RealtyHub.ApiService.Models.User;
 
 namespace RealtyHub.Tests.Identity;
@@ -17,21 +18,18 @@ namespace RealtyHub.Tests.Identity;
 /// sem se preocupar com autenticação (que é bypassada).
 /// Cada teste é completamente isolado e limpa o banco antes da execução.
 /// </summary>
-public class AuthenticationTests : IClassFixture<RealtyHubApiTests>
+public class AuthenticationTests : BaseIntegrationTest
 {
-    private readonly RealtyHubApiTests _factory;
-
-    public AuthenticationTests(RealtyHubApiTests factory)
+    public AuthenticationTests(RealtyHubApiTests factory) : base(factory)
     {
-        _factory = factory;
     }
 
     /// <summary>
-    /// Limpa o banco de dados
+    /// Limpa o banco de dados de usuários
     /// </summary>
-    private async Task CleanupDatabaseAndGetPreviousCount()
+    private async Task CleanupUsers()
     {
-        using var scope = _factory.Services.CreateScope();
+        using var scope = Factory.Services.CreateScope();
         var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
         
         // Remove todos os usuários existentes
@@ -43,7 +41,7 @@ public class AuthenticationTests : IClassFixture<RealtyHubApiTests>
     }
 
     /// <summary>
-    /// Cria um usuário válido para uso nos testes.
+    /// Cria um usuário válido para uso nos testes usando MockData pattern.
     /// </summary>
     private static RegisterRequest CreateValidRegisterRequest(string email = "teste@exemplo.com")
     {
@@ -57,7 +55,7 @@ public class AuthenticationTests : IClassFixture<RealtyHubApiTests>
     }
 
     /// <summary>
-    /// Cria um request de login válido.
+    /// Cria um request de login válido usando MockData pattern.
     /// </summary>
     private static LoginRequest CreateValidLoginRequest(string email = "teste@exemplo.com")
     {
@@ -74,8 +72,8 @@ public class AuthenticationTests : IClassFixture<RealtyHubApiTests>
     public async Task RegisterUser_WithValidData_ShouldReturnOk()
     {
         // Arrange
-        await CleanupDatabaseAndGetPreviousCount();
-        var client = _factory.CreateClient();
+        await CleanupUsers();
+        var client = Factory.CreateClient();
         var request = CreateValidRegisterRequest();
 
         // Act
@@ -89,8 +87,8 @@ public class AuthenticationTests : IClassFixture<RealtyHubApiTests>
     public async Task RegisterUser_WithMissingRequiredFields_ShouldReturnBadRequest()
     {
         // Arrange
-        await CleanupDatabaseAndGetPreviousCount();
-        var client = _factory.CreateClient();
+        await CleanupUsers();
+        var client = Factory.CreateClient();
         var request = new RegisterRequest
         {
             // Email is missing - required field
@@ -110,8 +108,8 @@ public class AuthenticationTests : IClassFixture<RealtyHubApiTests>
     public async Task RegisterUser_WithInvalidEmail_ShouldReturnBadRequest()
     {
         // Arrange
-        await CleanupDatabaseAndGetPreviousCount();
-        var client = _factory.CreateClient();
+        await CleanupUsers();
+        var client = Factory.CreateClient();
         var request = CreateValidRegisterRequest();
         request.Email = "email-invalido";
 
@@ -126,8 +124,8 @@ public class AuthenticationTests : IClassFixture<RealtyHubApiTests>
     public async Task RegisterUser_WithShortPassword_ShouldReturnBadRequest()
     {
         // Arrange
-        await CleanupDatabaseAndGetPreviousCount();
-        var client = _factory.CreateClient();
+        await CleanupUsers();
+        var client = Factory.CreateClient();
         var request = CreateValidRegisterRequest();
         request.Password = "123"; // Senha muito curta
 
@@ -142,8 +140,8 @@ public class AuthenticationTests : IClassFixture<RealtyHubApiTests>
     public async Task RegisterUser_WithDuplicateEmail_ShouldReturnBadRequest()
     {
         // Arrange
-        await CleanupDatabaseAndGetPreviousCount();
-        var client = _factory.CreateClient();
+        await CleanupUsers();
+        var client = Factory.CreateClient();
         var request = CreateValidRegisterRequest("duplicado@exemplo.com");
 
         // Registra o primeiro usuário
@@ -160,8 +158,8 @@ public class AuthenticationTests : IClassFixture<RealtyHubApiTests>
     public async Task RegisterUser_WithMissingCreci_ShouldReturnBadRequest()
     {
         // Arrange
-        await CleanupDatabaseAndGetPreviousCount();
-        var client = _factory.CreateClient();
+        await CleanupUsers();
+        var client = Factory.CreateClient();
         var request = CreateValidRegisterRequest();
         request.Creci = string.Empty;
 
@@ -176,8 +174,8 @@ public class AuthenticationTests : IClassFixture<RealtyHubApiTests>
     public async Task RegisterUser_WithMissingGivenName_ShouldReturnBadRequest()
     {
         // Arrange
-        await CleanupDatabaseAndGetPreviousCount();
-        var client = _factory.CreateClient();
+        await CleanupUsers();
+        var client = Factory.CreateClient();
         var request = CreateValidRegisterRequest();
         request.GivenName = string.Empty;
 
@@ -196,8 +194,8 @@ public class AuthenticationTests : IClassFixture<RealtyHubApiTests>
     public async Task Login_WithValidCredentials_ShouldReturnOk()
     {
         // Arrange
-        await CleanupDatabaseAndGetPreviousCount();
-        var client = _factory.CreateClient();
+        await CleanupUsers();
+        var client = Factory.CreateClient();
         
         // Registra um usuário primeiro
         var registerRequest = CreateValidRegisterRequest();
@@ -218,8 +216,8 @@ public class AuthenticationTests : IClassFixture<RealtyHubApiTests>
     public async Task Login_WithInvalidEmail_ShouldReturnUnauthorized()
     {
         // Arrange
-        await CleanupDatabaseAndGetPreviousCount();
-        var client = _factory.CreateClient();
+        await CleanupUsers();
+        var client = Factory.CreateClient();
         var request = CreateValidLoginRequest();
         request.Email = "inexistente@exemplo.com";
 
@@ -234,8 +232,8 @@ public class AuthenticationTests : IClassFixture<RealtyHubApiTests>
     public async Task Login_WithInvalidPassword_ShouldReturnUnauthorized()
     {
         // Arrange
-        await CleanupDatabaseAndGetPreviousCount();
-        var client = _factory.CreateClient();
+        await CleanupUsers();
+        var client = Factory.CreateClient();
         
         // Registra um usuário primeiro
         var registerRequest = CreateValidRegisterRequest();
@@ -257,8 +255,8 @@ public class AuthenticationTests : IClassFixture<RealtyHubApiTests>
     public async Task Login_WithMissingEmail_ShouldReturnUnauthorized()
     {
         // Arrange
-        await CleanupDatabaseAndGetPreviousCount();
-        var client = _factory.CreateClient();
+        await CleanupUsers();
+        var client = Factory.CreateClient();
         var request = CreateValidLoginRequest();
         request.Email = string.Empty;
 
@@ -273,8 +271,8 @@ public class AuthenticationTests : IClassFixture<RealtyHubApiTests>
     public async Task Login_WithMissingPassword_ShouldReturnUnauthorized()
     {
         // Arrange
-        await CleanupDatabaseAndGetPreviousCount();
-        var client = _factory.CreateClient();
+        await CleanupUsers();
+        var client = Factory.CreateClient();
         var request = CreateValidLoginRequest();
         request.Password = string.Empty;
 
@@ -293,15 +291,15 @@ public class AuthenticationTests : IClassFixture<RealtyHubApiTests>
     public async Task ConfirmEmail_WithValidToken_ShouldReturnOk()
     {
         // Arrange
-        await CleanupDatabaseAndGetPreviousCount();
-        var client = _factory.CreateClient();
+        await CleanupUsers();
+        var client = Factory.CreateClient();
         
         // Registra um usuário
         var registerRequest = CreateValidRegisterRequest();
         await client.PostAsJsonAsync("/v1/identity/register-user", registerRequest);
         
         // Obtém o usuário criado
-        using var scope = _factory.Services.CreateScope();
+        using var scope = Factory.Services.CreateScope();
         var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
         var user = await userManager.FindByEmailAsync(registerRequest.Email);
         user.Should().NotBeNull();
@@ -328,8 +326,8 @@ public class AuthenticationTests : IClassFixture<RealtyHubApiTests>
     public async Task ConfirmEmail_WithInvalidUserId_ShouldReturnNotFound()
     {
         // Arrange
-        await CleanupDatabaseAndGetPreviousCount();
-        var client = _factory.CreateClient();
+        await CleanupUsers();
+        var client = Factory.CreateClient();
 
         // Act
         var response = await client.GetAsync("/v1/identity/confirm-email?userId=999&token=invalid-token");
@@ -342,15 +340,15 @@ public class AuthenticationTests : IClassFixture<RealtyHubApiTests>
     public async Task ConfirmEmail_WithInvalidToken_ShouldReturnBadRequest()
     {
         // Arrange
-        await CleanupDatabaseAndGetPreviousCount();
-        var client = _factory.CreateClient();
+        await CleanupUsers();
+        var client = Factory.CreateClient();
         
         // Registra um usuário
         var registerRequest = CreateValidRegisterRequest();
         await client.PostAsJsonAsync("/v1/identity/register-user", registerRequest);
         
         // Obtém o usuário criado
-        using var scope = _factory.Services.CreateScope();
+        using var scope = Factory.Services.CreateScope();
         var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
         var user = await userManager.FindByEmailAsync(registerRequest.Email);
         user.Should().NotBeNull();
@@ -366,15 +364,15 @@ public class AuthenticationTests : IClassFixture<RealtyHubApiTests>
     public async Task ConfirmEmail_WithAlreadyConfirmedEmail_ShouldReturnBadRequest()
     {
         // Arrange
-        await CleanupDatabaseAndGetPreviousCount();
-        var client = _factory.CreateClient();
+        await CleanupUsers();
+        var client = Factory.CreateClient();
         
         // Registra um usuário
         var registerRequest = CreateValidRegisterRequest();
         await client.PostAsJsonAsync("/v1/identity/register-user", registerRequest);
         
         // Obtém o usuário criado
-        using var scope = _factory.Services.CreateScope();
+        using var scope = Factory.Services.CreateScope();
         var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
         var user = await userManager.FindByEmailAsync(registerRequest.Email);
         user.Should().NotBeNull();
@@ -404,8 +402,8 @@ public class AuthenticationTests : IClassFixture<RealtyHubApiTests>
     public async Task Logout_ShouldReturnOk()
     {
         // Arrange
-        await CleanupDatabaseAndGetPreviousCount();
-        var client = _factory.CreateClient();
+        await CleanupUsers();
+        var client = Factory.CreateClient();
 
         // Act
         var response = await client.PostAsync("/v1/identity/logout", null);
@@ -422,8 +420,8 @@ public class AuthenticationTests : IClassFixture<RealtyHubApiTests>
     public async Task ForgotPassword_WithValidEmail_ShouldReturnOk()
     {
         // Arrange
-        await CleanupDatabaseAndGetPreviousCount();
-        var client = _factory.CreateClient();
+        await CleanupUsers();
+        var client = Factory.CreateClient();
         
         // Registra um usuário primeiro
         var registerRequest = CreateValidRegisterRequest();
@@ -448,8 +446,8 @@ public class AuthenticationTests : IClassFixture<RealtyHubApiTests>
     public async Task ForgotPassword_WithInvalidEmail_ShouldReturnBadRequest()
     {
         // Arrange
-        await CleanupDatabaseAndGetPreviousCount();
-        var client = _factory.CreateClient();
+        await CleanupUsers();
+        var client = Factory.CreateClient();
         var request = new { Email = "inexistente@exemplo.com" };
 
         // Act
@@ -463,8 +461,8 @@ public class AuthenticationTests : IClassFixture<RealtyHubApiTests>
     public async Task ForgotPassword_WithEmptyEmail_ShouldReturnBadRequest()
     {
         // Arrange
-        await CleanupDatabaseAndGetPreviousCount();
-        var client = _factory.CreateClient();
+        await CleanupUsers();
+        var client = Factory.CreateClient();
         var request = new { Email = string.Empty };
 
         // Act
@@ -482,15 +480,15 @@ public class AuthenticationTests : IClassFixture<RealtyHubApiTests>
     public async Task ResetPassword_WithValidData_ShouldReturnOk()
     {
         // Arrange
-        await CleanupDatabaseAndGetPreviousCount();
-        var client = _factory.CreateClient();
+        await CleanupUsers();
+        var client = Factory.CreateClient();
         
         // Registra um usuário
         var registerRequest = CreateValidRegisterRequest();
         await client.PostAsJsonAsync("/v1/identity/register-user", registerRequest);
         
         // Obtém o usuário criado
-        using var scope = _factory.Services.CreateScope();
+        using var scope = Factory.Services.CreateScope();
         var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
         var user = await userManager.FindByEmailAsync(registerRequest.Email);
         user.Should().NotBeNull();
@@ -539,8 +537,8 @@ public class AuthenticationTests : IClassFixture<RealtyHubApiTests>
     public async Task ResetPassword_WithInvalidEmail_ShouldReturnBadRequest()
     {
         // Arrange
-        await CleanupDatabaseAndGetPreviousCount();
-        var client = _factory.CreateClient();
+        await CleanupUsers();
+        var client = Factory.CreateClient();
         var request = new ResetPasswordRequest
         {
             UserId = "0",
@@ -565,15 +563,15 @@ public class AuthenticationTests : IClassFixture<RealtyHubApiTests>
     public async Task ResetPassword_WithInvalidToken_ShouldReturnBadRequest()
     {
         // Arrange
-        await CleanupDatabaseAndGetPreviousCount();
-        var client = _factory.CreateClient();
+        await CleanupUsers();
+        var client = Factory.CreateClient();
         
         // Registra um usuário
         var registerRequest = CreateValidRegisterRequest();
         await client.PostAsJsonAsync("/v1/identity/register-user", registerRequest);
 
         // Obtém o usuário criado
-        using var scope = _factory.Services.CreateScope();
+        using var scope = Factory.Services.CreateScope();
         var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
         var user = await userManager.FindByEmailAsync(registerRequest.Email);
         user.Should().NotBeNull();
@@ -602,15 +600,15 @@ public class AuthenticationTests : IClassFixture<RealtyHubApiTests>
     public async Task ResetPassword_WithShortPassword_ShouldReturnBadRequest()
     {
         // Arrange
-        await CleanupDatabaseAndGetPreviousCount();
-        var client = _factory.CreateClient();
+        await CleanupUsers();
+        var client = Factory.CreateClient();
         
         // Registra um usuário
         var registerRequest = CreateValidRegisterRequest();
         await client.PostAsJsonAsync("/v1/identity/register-user", registerRequest);
         
         // Obtém o usuário criado
-        using var scope = _factory.Services.CreateScope();
+        using var scope = Factory.Services.CreateScope();
         var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
         var user = await userManager.FindByEmailAsync(registerRequest.Email);
         user.Should().NotBeNull();
@@ -647,8 +645,8 @@ public class AuthenticationTests : IClassFixture<RealtyHubApiTests>
     public async Task ManageInfo_WithoutAuthentication_ShouldReturnUnauthorized()
     {
         // Arrange
-        await CleanupDatabaseAndGetPreviousCount();
-        var client = _factory.CreateClient();
+        await CleanupUsers();
+        var client = Factory.CreateClient();
 
         // Act
         var response = await client.GetAsync("/v1/identity/manage-info");
@@ -665,8 +663,8 @@ public class AuthenticationTests : IClassFixture<RealtyHubApiTests>
     public async Task Login_WithUnconfirmedEmail_ShouldReturnUnauthorized()
     {
         // Arrange
-        await CleanupDatabaseAndGetPreviousCount();
-        var client = _factory.CreateClient();
+        await CleanupUsers();
+        var client = Factory.CreateClient();
         
         // Registra um usuário (email não confirmado por padrão)
         var registerRequest = CreateValidRegisterRequest();
@@ -686,15 +684,15 @@ public class AuthenticationTests : IClassFixture<RealtyHubApiTests>
     public async Task Login_WithConfirmedEmail_ShouldReturnOk()
     {
         // Arrange
-        await CleanupDatabaseAndGetPreviousCount();
-        var client = _factory.CreateClient();
+        await CleanupUsers();
+        var client = Factory.CreateClient();
         
         // Registra um usuário
         var registerRequest = CreateValidRegisterRequest();
         await client.PostAsJsonAsync("/v1/identity/register-user", registerRequest);
         
         // Confirma o email manualmente
-        using var scope = _factory.Services.CreateScope();
+        using var scope = Factory.Services.CreateScope();
         var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
         var user = await userManager.FindByEmailAsync(registerRequest.Email);
         user.Should().NotBeNull();
@@ -720,7 +718,7 @@ public class AuthenticationTests : IClassFixture<RealtyHubApiTests>
     public void MockData_CreateSimpleClient_ShouldReturnClient()
     {
         // Arrange & Act
-        var client = _factory.CreateClient();
+        var client = Factory.CreateClient();
 
         // Assert
         client.Should().NotBeNull();
@@ -730,7 +728,7 @@ public class AuthenticationTests : IClassFixture<RealtyHubApiTests>
     public async Task HealthCheck_ShouldAlwaysWork()
     {
         // Arrange
-        var client = _factory.CreateClient();
+        var client = Factory.CreateClient();
 
         // Act
         var response = await client.GetAsync("/");
@@ -748,7 +746,7 @@ public class AuthenticationTests : IClassFixture<RealtyHubApiTests>
     /// </summary>
     private async Task SetUserEmailAsConfirmed(string email)
     {
-        using var scope = _factory.Services.CreateScope();
+        using var scope = Factory.Services.CreateScope();
         var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
         var user = await userManager.FindByEmailAsync(email);
         user.Should().NotBeNull();

@@ -1,5 +1,5 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using RealtyHub.ApiService.Data;
 using RealtyHub.Core.Enums;
 using RealtyHub.Core.Models;
@@ -37,6 +37,8 @@ public abstract class BaseIntegrationTest : IClassFixture<RealtyHubApiTests>
             nameof(Property) => dbContext.Properties.Cast<TEntity>(),
             nameof(Customer) => dbContext.Customers.Cast<TEntity>(),
             nameof(Condominium) => dbContext.Condominiums.Cast<TEntity>(),
+            nameof(Viewing) => dbContext.Viewing.Cast<TEntity>(),
+            nameof(IdentityUser) => dbContext.Users.Cast<TEntity>(),
             _ => throw new ArgumentException($"Tipo {typeof(TEntity).Name} não suportado")
         };
 
