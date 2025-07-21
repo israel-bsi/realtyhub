@@ -1,0 +1,180 @@
+Summary
+  Generated on: 20/07/2025 - 14:06:21
+  Coverage date: 20/07/2025 - 14:06:08
+  Parser: Cobertura
+  Assemblies: 3
+  Classes: 154
+  Files: 155
+  Line coverage: 41.5%
+  Covered lines: 2727
+  Uncovered lines: 3840
+  Coverable lines: 6567
+  Total lines: 13838
+  Branch coverage: 53% (353 of 666)
+  Covered branches: 353
+  Total branches: 666
+  Method coverage: 75.2% (355 of 472)
+  Full method coverage: 65.4% (309 of 472)
+  Covered methods: 355
+  Fully covered methods: 309
+  Total methods: 472
+
+RealtyHub.ApiService                                                                  40.5%
+  Program                                                                             96.5%
+  RealtyHub.ApiService.Common.Api.AppExtension                                        36.5%
+  RealtyHub.ApiService.Common.Api.BuilderExtension                                      91%
+  RealtyHub.ApiService.Common.Documentation.ValidationDocumentation                      0%
+  RealtyHub.ApiService.Common.Validation.DataAnnotationValidator                       100%
+  RealtyHub.ApiService.Configuration                                                   100%
+  RealtyHub.ApiService.Data.AppDbContext                                               100%
+  RealtyHub.ApiService.Data.Mappings.CondominiumMapping                                100%
+  RealtyHub.ApiService.Data.Mappings.ContractMapping                                   100%
+  RealtyHub.ApiService.Data.Mappings.ContractTemplatesMapping                          100%
+  RealtyHub.ApiService.Data.Mappings.CustomerMapping                                   100%
+  RealtyHub.ApiService.Data.Mappings.Identity.IdentityRoleClaimMapping                 100%
+  RealtyHub.ApiService.Data.Mappings.Identity.IdentityRoleMapping                      100%
+  RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserClaimMapping                 100%
+  RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserLoginMapping                 100%
+  RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserMapping                      100%
+  RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserRoleMapping                  100%
+  RealtyHub.ApiService.Data.Mappings.Identity.IdentityUserTokenMapping                 100%
+  RealtyHub.ApiService.Data.Mappings.OfferMapping                                      100%
+  RealtyHub.ApiService.Data.Mappings.PaymentMapping                                    100%
+  RealtyHub.ApiService.Data.Mappings.PropertyMapping                                   100%
+  RealtyHub.ApiService.Data.Mappings.PropertyPhotosMapping                             100%
+  RealtyHub.ApiService.Data.Mappings.ViewingMapping                                    100%
+  RealtyHub.ApiService.Endpoints.Condominiums.CreateCondominiumEndpoint                100%
+  RealtyHub.ApiService.Endpoints.Condominiums.DeleteCondominiumEndpoint                100%
+  RealtyHub.ApiService.Endpoints.Condominiums.GetAllCondominiumsEndpoint               100%
+  RealtyHub.ApiService.Endpoints.Condominiums.GetCondominiumByIdEndpoint               100%
+  RealtyHub.ApiService.Endpoints.Condominiums.UpdateCondominiumEndpoint               94.4%
+  RealtyHub.ApiService.Endpoints.Contracts.CreateContractEndpoint                      100%
+  RealtyHub.ApiService.Endpoints.Contracts.DeleteContractEndpoint                      100%
+  RealtyHub.ApiService.Endpoints.Contracts.GetAllContractsEndpoint                     100%
+  RealtyHub.ApiService.Endpoints.Contracts.GetContractByIdEndpoint                     100%
+  RealtyHub.ApiService.Endpoints.Contracts.UpdateContractEndpoint                     94.4%
+  RealtyHub.ApiService.Endpoints.ContractsTemplates.GetAllContractTemplatesEndpoint     60%
+  RealtyHub.ApiService.Endpoints.Customers.CreateCustomerEndpoint                      100%
+  RealtyHub.ApiService.Endpoints.Customers.DeleteCustomerEndpoint                      100%
+  RealtyHub.ApiService.Endpoints.Customers.GetAllCustomersEndpoint                     100%
+  RealtyHub.ApiService.Endpoints.Customers.GetCustomerByIdEndpoint                     100%
+  RealtyHub.ApiService.Endpoints.Customers.UpdateCustomerEndpoint                     94.4%
+  RealtyHub.ApiService.Endpoints.Emails.SendContractEmailEndpoint                     40.9%
+  RealtyHub.ApiService.Endpoints.Endpoint                                              100%
+  RealtyHub.ApiService.Endpoints.Identity.ConfirmEmailEndpoint                         100%
+  RealtyHub.ApiService.Endpoints.Identity.ForgotPasswordEndpoint                       100%
+  RealtyHub.ApiService.Endpoints.Identity.LogoutEndpoint                               100%
+  RealtyHub.ApiService.Endpoints.Identity.ManageInfoEndpoint                          94.7%
+  RealtyHub.ApiService.Endpoints.Identity.RegisterUserEndpoint                        97.7%
+  RealtyHub.ApiService.Endpoints.Identity.ResetPasswordEndpoint                        100%
+  RealtyHub.ApiService.Endpoints.Offers.AcceptOfferEndpoint                            100%
+  RealtyHub.ApiService.Endpoints.Offers.CreateOfferEndpoint                            100%
+  RealtyHub.ApiService.Endpoints.Offers.GetAllOffersByCustomerEndpoint                 100%
+  RealtyHub.ApiService.Endpoints.Offers.GetAllOffersByPropertyEndpoint                 100%
+  RealtyHub.ApiService.Endpoints.Offers.GetAllOffersEndpoint                           100%
+  RealtyHub.ApiService.Endpoints.Offers.GetOfferAcceptedEndpoint                      38.8%
+  RealtyHub.ApiService.Endpoints.Offers.GetOfferByIdEndpoint                           100%
+  RealtyHub.ApiService.Endpoints.Offers.RejectOfferEndpoint                            100%
+  RealtyHub.ApiService.Endpoints.Offers.UpdateOfferEndpoint                            100%
+  RealtyHub.ApiService.Endpoints.Properties.CreatePropertyEndpoint                     100%
+  RealtyHub.ApiService.Endpoints.Properties.CreatePropertyPhotosEndpoint              42.8%
+  RealtyHub.ApiService.Endpoints.Properties.DeletePropertyEndpoint                     100%
+  RealtyHub.ApiService.Endpoints.Properties.DeletePropertyPhotoEndpoint               42.8%
+  RealtyHub.ApiService.Endpoints.Properties.GetAllPropertiesEndpoint                   100%
+  RealtyHub.ApiService.Endpoints.Properties.GetAllPropertyPhotosByPropertyEndpoint      45%
+  RealtyHub.ApiService.Endpoints.Properties.GetAllViewingsByPropertyEndpoint          31.8%
+  RealtyHub.ApiService.Endpoints.Properties.GetPropertyByIdEndpoint                    100%
+  RealtyHub.ApiService.Endpoints.Properties.UpdatePropertyEndpoint                    89.4%
+  RealtyHub.ApiService.Endpoints.Properties.UpdatePropertyPhotosEndpoint              42.8%
+  RealtyHub.ApiService.Endpoints.Reports.OfferReportEndpoint                          42.3%
+  RealtyHub.ApiService.Endpoints.Reports.PropertyReportEndpoint                       47.8%
+  RealtyHub.ApiService.Endpoints.Viewings.CancelViewingEndpoint                        100%
+  RealtyHub.ApiService.Endpoints.Viewings.DoneViewingEndpoint                          100%
+  RealtyHub.ApiService.Endpoints.Viewings.GetAllViewingsEndpoint                       100%
+  RealtyHub.ApiService.Endpoints.Viewings.GetViewingByIdEndpoint                       100%
+  RealtyHub.ApiService.Endpoints.Viewings.RescheduleViewingEndpoint                    100%
+  RealtyHub.ApiService.Endpoints.Viewings.ScheduleViewingEndpoint                     94.1%
+  RealtyHub.ApiService.Handlers.CondominiumHandler                                    83.8%
+  RealtyHub.ApiService.Handlers.ContractHandler                                       81.3%
+  RealtyHub.ApiService.Handlers.ContractTemplatesHandler                                 0%
+  RealtyHub.ApiService.Handlers.CustomerHandler                                       87.6%
+  RealtyHub.ApiService.Handlers.OfferHandler                                          74.1%
+  RealtyHub.ApiService.Handlers.PropertyHandler                                       71.3%
+  RealtyHub.ApiService.Handlers.PropertyPhotosHandler                                    0%
+  RealtyHub.ApiService.Handlers.ViewingHandler                                        80.2%
+  RealtyHub.ApiService.Migrations.AppDbContextModelSnapshot                              0%
+  RealtyHub.ApiService.Migrations.v1                                                     0%
+  RealtyHub.ApiService.Models.User                                                    66.6%
+  RealtyHub.ApiService.Services.ContractGenerator                                        0%
+  RealtyHub.ApiService.Services.EmailService                                             0%
+  RealtyHub.ApiService.Services.Reports.OfferReportService                               0%
+  RealtyHub.ApiService.Services.Reports.PropertyReportService                            0%
+  RealtyHub.ApiService.Services.VariablesContractMappings                                0%
+
+RealtyHub.AppHost                                                                        0%
+  Program                                                                                0%
+
+RealtyHub.Core                                                                        57.5%
+  RealtyHub.Core.Configuration                                                         100%
+  RealtyHub.Core.Extensions.DateTimeExtension                                            0%
+  RealtyHub.Core.Extensions.EnumExtension                                              100%
+  RealtyHub.Core.Extensions.IQueryableExtension                                          0%
+  RealtyHub.Core.Extensions.TypeExtension                                                0%
+  RealtyHub.Core.Models.Account.ConfirmEmailRequest                                      0%
+  RealtyHub.Core.Models.Account.PasswordResetModel                                     100%
+  RealtyHub.Core.Models.Account.RoleClaim                                                0%
+  RealtyHub.Core.Models.Account.User                                                     0%
+  RealtyHub.Core.Models.Address                                                        100%
+  RealtyHub.Core.Models.Condominium                                                    100%
+  RealtyHub.Core.Models.Contract                                                       100%
+  RealtyHub.Core.Models.ContractTemplate                                              83.3%
+  RealtyHub.Core.Models.Customer                                                       100%
+  RealtyHub.Core.Models.Entity                                                         100%
+  RealtyHub.Core.Models.FileData                                                         0%
+  RealtyHub.Core.Models.FilterOption                                                     0%
+  RealtyHub.Core.Models.Offer                                                          100%
+  RealtyHub.Core.Models.Payment                                                       52.9%
+  RealtyHub.Core.Models.PhotoItem                                                        0%
+  RealtyHub.Core.Models.Property                                                       100%
+  RealtyHub.Core.Models.PropertyPhoto                                                    0%
+  RealtyHub.Core.Models.Report                                                           0%
+  RealtyHub.Core.Models.Viewing                                                        100%
+  RealtyHub.Core.Requests.Account.ForgotPasswordRequest                                100%
+  RealtyHub.Core.Requests.Account.LoginRequest                                         100%
+  RealtyHub.Core.Requests.Account.RegisterRequest                                      100%
+  RealtyHub.Core.Requests.Account.ResetPasswordRequest                                 100%
+  RealtyHub.Core.Requests.Condominiums.DeleteCondominiumRequest                        100%
+  RealtyHub.Core.Requests.Condominiums.GetCondominiumByIdRequest                       100%
+  RealtyHub.Core.Requests.Contracts.DeleteContractRequest                              100%
+  RealtyHub.Core.Requests.Contracts.GetContractByIdRequest                             100%
+  RealtyHub.Core.Requests.Customers.DeleteCustomerRequest                              100%
+  RealtyHub.Core.Requests.Customers.GetCustomerByIdRequest                             100%
+  RealtyHub.Core.Requests.Emails.AttachmentMessage                                       0%
+  RealtyHub.Core.Requests.Emails.ConfirmEmailMessage                                   100%
+  RealtyHub.Core.Requests.Emails.EmailMessage                                          100%
+  RealtyHub.Core.Requests.Emails.ResetPasswordMessage                                  100%
+  RealtyHub.Core.Requests.Offers.AcceptOfferRequest                                    100%
+  RealtyHub.Core.Requests.Offers.GetAllOffersByCustomerRequest                         100%
+  RealtyHub.Core.Requests.Offers.GetAllOffersByPropertyRequest                         100%
+  RealtyHub.Core.Requests.Offers.GetOfferAcceptedByProperty                              0%
+  RealtyHub.Core.Requests.Offers.GetOfferByIdRequest                                   100%
+  RealtyHub.Core.Requests.Offers.RejectOfferRequest                                    100%
+  RealtyHub.Core.Requests.PagedRequest                                                 100%
+  RealtyHub.Core.Requests.Properties.DeletePropertyRequest                             100%
+  RealtyHub.Core.Requests.Properties.GetAllViewingsByPropertyRequest                     0%
+  RealtyHub.Core.Requests.Properties.GetPropertyByIdRequest                            100%
+  RealtyHub.Core.Requests.PropertiesPhotos.CreatePropertyPhotosRequest                   0%
+  RealtyHub.Core.Requests.PropertiesPhotos.DeletePropertyPhotoRequest                    0%
+  RealtyHub.Core.Requests.PropertiesPhotos.GetAllPropertyPhotosByPropertyRequest         0%
+  RealtyHub.Core.Requests.PropertiesPhotos.UpdatePropertyPhotosRequest                   0%
+  RealtyHub.Core.Requests.Request                                                      100%
+  RealtyHub.Core.Requests.Viewings.CancelViewingRequest                                100%
+  RealtyHub.Core.Requests.Viewings.DoneViewingRequest                                  100%
+  RealtyHub.Core.Requests.Viewings.GetViewingByIdRequest                               100%
+  RealtyHub.Core.Responses.PagedResponse<T>                                           91.6%
+  RealtyHub.Core.Responses.Response<T>                                                 100%
+  RealtyHub.Core.Responses.UserResponse                                                  0%
+  RealtyHub.Core.Responses.ViaCepResponse                                                0%
+  RealtyHub.Core.Utilities.FakeEntities.AddressFake                                    100%
+  RealtyHub.Core.Utilities.FakeEntities.CustomerFake                                     0%
+  RealtyHub.Core.Utilities.FakeEntities.PropertyFake                                   100%

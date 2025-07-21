@@ -18,9 +18,9 @@ namespace RealtyHub.Tests.Identity;
 /// sem se preocupar com autenticação (que é bypassada).
 /// Cada teste é completamente isolado e limpa o banco antes da execução.
 /// </summary>
-public class AuthenticationTests : BaseIntegrationTest
+public class IdentityTests : BaseIntegrationTest
 {
-    public AuthenticationTests(RealtyHubApiTests factory) : base(factory)
+    public IdentityTests(RealtyHubApiTests factory) : base(factory)
     {
     }
 
