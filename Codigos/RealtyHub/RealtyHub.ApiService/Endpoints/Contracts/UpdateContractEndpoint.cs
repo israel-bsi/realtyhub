@@ -1,4 +1,5 @@
 ﻿using RealtyHub.ApiService.Common.Api;
+using RealtyHub.ApiService.Common.Validation;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Responses;
@@ -53,6 +54,10 @@ public class UpdateContractEndpoint : IEndpoint
         Contract request,
         long id)
     {
+        var validationResult = DataAnnotationValidator.ValidateRecursively(request);
+        if (validationResult != null)
+            return validationResult;
+
         request.Id = id;
         request.UserId = user.Identity?.Name ?? string.Empty;
         var result = await handler.UpdateAsync(request);

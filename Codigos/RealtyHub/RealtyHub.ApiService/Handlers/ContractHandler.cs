@@ -52,6 +52,13 @@ public class ContractHandler : IContractHandler
     {
         try
         {
+            if (request.EffectiveDate.HasValue && request.EffectiveDate.Value.Date < DateTime.Now.Date)
+                return new Response<Contract?>(null, 400, "A data de vigência não pode ser anterior à data atual");
+
+            if (request.EffectiveDate.HasValue && request.TermEndDate.HasValue && 
+                request.TermEndDate.Value < request.EffectiveDate.Value)
+                return new Response<Contract?>(null, 400, "A data de término deve ser posterior à data de vigência");
+
             var offer = await _context
                 .Offers
                 .Include(o => o.Buyer)
@@ -65,6 +72,18 @@ public class ContractHandler : IContractHandler
 
             if (offer.OfferStatus != EOfferStatus.Accepted)
                 return new Response<Contract?>(null, 400, "A proposta precisa estar aceita para criar um contrato");
+
+            if (offer.Buyer is null || offer.Buyer.UserId != request.UserId)
+                return new Response<Contract?>(null, 400, "Comprador não encontrado ou não pertence ao usuário");
+
+            if (offer.Property?.Seller is null || offer.Property.Seller.UserId != request.UserId)
+                return new Response<Contract?>(null, 400, "Vendedor não encontrado ou não pertence ao usuário");
+
+            if (request.BuyerId != 0 && request.BuyerId != offer.Buyer.Id)
+                return new Response<Contract?>(null, 400, "ID do comprador não corresponde ao comprador da proposta");
+
+            if (request.SellerId != 0 && request.SellerId != offer.Property.SellerId)
+                return new Response<Contract?>(null, 400, "ID do vendedor não corresponde ao vendedor da proposta");
 
             _context.Attach(offer);
 
@@ -306,10 +325,13 @@ public class ContractHandler : IContractHandler
             .ContractTemplates
             .FirstOrDefaultAsync(cm => cm.Type == contractModelType);
 
-        var docxContractGenerator = new ContractGenerator();
-        var pathContactFile = Path.Combine(Configuration.ContractsPath, $"{contract.Id}.docx");
-        if (update)
-            File.Delete(pathContactFile);
-        docxContractGenerator.GenerateContract(contract, contractModel);
+        if (contractModel != null && !string.IsNullOrEmpty(Configuration.ContractsPath))
+        {
+            var docxContractGenerator = new ContractGenerator();
+            var pathContactFile = Path.Combine(Configuration.ContractsPath, $"{contract.Id}.docx");
+            if (update && File.Exists(pathContactFile))
+                File.Delete(pathContactFile);
+            docxContractGenerator.GenerateContract(contract, contractModel);
+        }
     }
 }

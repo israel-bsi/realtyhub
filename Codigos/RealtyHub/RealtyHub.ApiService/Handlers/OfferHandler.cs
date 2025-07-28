@@ -84,7 +84,6 @@ public class OfferHandler : IOfferHandler
                 return new Response<Offer?>(null, 400,
                     "O valor total dos pagamentos não corresponde ao valor da proposta");
 
-            request.Buyer!.IsActive = true;
             var offer = new Offer
             {
                 SubmissionDate = request.SubmissionDate,

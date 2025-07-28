@@ -1,5 +1,6 @@
 ﻿using System.Security.Claims;
 using RealtyHub.ApiService.Common.Api;
+using RealtyHub.ApiService.Common.Validation;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.PropertiesPhotos;
@@ -57,6 +58,12 @@ public class UpdatePropertyPhotosEndpoint : IEndpoint
     {
         request.PropertyId = id;
         request.UserId = user.Identity?.Name ?? string.Empty;
+        
+        var validationResult = DataAnnotationValidator.ValidateRecursively(request);
+        if (validationResult != null)
+        {
+            return validationResult;
+        }
 
         var result = await handler.UpdateAsync(request);
 

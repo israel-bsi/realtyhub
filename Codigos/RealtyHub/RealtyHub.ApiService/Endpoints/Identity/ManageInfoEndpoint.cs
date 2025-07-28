@@ -51,12 +51,12 @@ public class ManageInfoEndpoint : IEndpoint
         return user is null
             ? Results.Unauthorized()
             : Results.Ok(new UserResponse
-            {
-                GivenName = user.GivenName,
-                Creci = user.Creci,
-                Email = user.Email ?? string.Empty,
-                UserName = user.UserName ?? string.Empty,
-                Claims = claimsPrincipal.Claims.ToDictionary(c => c.Type, c => c.Value)
-            });
+        {
+            GivenName = user.GivenName,
+            Creci = user.Creci,
+            Email = user.Email ?? string.Empty,
+            UserName = user.UserName ?? string.Empty,
+            Claims = claimsPrincipal.Claims.ToDictionary(c => c.Type, c => c.Value)
+        });
     }
 }

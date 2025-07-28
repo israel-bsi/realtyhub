@@ -1,57 +1,161 @@
-﻿using RealtyHub.ApiService.Data;
-using RealtyHub.Core.Utilities.FakeEntities;
-using System.Net.Http.Json;
+﻿using RealtyHub.Core.Enums;
+using RealtyHub.Core.Extensions;
+using RealtyHub.Core.Models;
 
 namespace RealtyHub.Tests;
 
-public class MockData
+public static class MockData
 {
-    public static async Task CreateCustomers(RealtyHubApiTests application,
-        bool create, int quantityBusiness, int quantityIndividual)
+    public static Condominium GetValidCondominium()
     {
-        using var scope = application.Services.CreateScope();
-        var provider = scope.ServiceProvider;
-        await using var dbContext = provider.GetRequiredService<AppDbContext>();
-        await dbContext.Database.EnsureCreatedAsync();
-
-        if (create)
+        return new Condominium
         {
-            var customersBusinessToCreate = CustomerFake.GetFakeBusinessCustomers(quantityBusiness);
-            var customersIndividualToCreate = CustomerFake.GetFakeIndividualCustomers(quantityIndividual);
-            await dbContext.Customers.AddRangeAsync(customersBusinessToCreate);
-            await dbContext.Customers.AddRangeAsync(customersIndividualToCreate);
-            await dbContext.SaveChangesAsync();
-        }
+            Name = "Condomínio Teste",
+            Address = new Address
+            {
+                Street = "Rua do Condomínio",
+                Number = "789",
+                Neighborhood = "Vila Nova",
+                City = "São Paulo",
+                State = "SP",
+                Country = "Brasil",
+                ZipCode = "01234567"
+            },
+            Units = 50,
+            Floors = 10,
+            HasElevator = true,
+            HasSwimmingPool = true,
+            HasPartyRoom = false,
+            HasPlayground = true,
+            HasFitnessRoom = true,
+            CondominiumValue = 350.50m,
+            UserId = RealtyHubApiTests.TestUserId,
+            IsActive = true
+        };
     }
-    public static async Task<HttpClient> CreateClient(RealtyHubApiTests application)
+
+    public static Customer GetValidCustomer(ECustomerType customerType)
     {
-        var client = application.CreateClient();
-
-        const string registerUrl = "/v1/identity/register";
-        const string loginUrl = "/v1/identity/login?useCookies=true&useSessionCookies=true";
-
-        var login = new Login("israel@gmail.com", "!W92X+!Q@rOwC48+v.V3");
-
-        var registerResponse = await client.PostAsJsonAsync(registerUrl, login);
-        var loginResponse = await client.PostAsJsonAsync(loginUrl, login);
-
-        return client;
+        return new Customer
+        {
+            Name = $"{customerType.GetDisplayName()} Teste",
+            Email = $"{customerType.GetDisplayName().ToLower()}@test.com",
+            Phone = "11999999999",
+            DocumentNumber = "12345678901",
+            CustomerType = customerType,
+            PersonType = EPersonType.Individual,
+            Occupation = $"{customerType.GetDisplayName()}",
+            Nationality = "Brasileira",
+            MaritalStatus = EMaritalStatus.Single,
+            UserId = RealtyHubApiTests.TestUserId,
+            Address = new Address
+            {
+                Street = $"Rua do {customerType.GetDisplayName()}",
+                Number = "456",
+                Neighborhood = "Jardins",
+                City = "São Paulo",
+                State = "SP",
+                Country = "Brasil",
+                ZipCode = "01234567"
+            },
+            IsActive = true
+        };
     }
-    private record Login
+
+    public static Property GetValidProperty(Customer seller, Condominium condominium)
     {
-        public Login(string Email, string Password)
+        return new Property
         {
-            email = Email;
-            password = Password;
-        }
+            Title = "Imóvel Teste",
+            Description = "Descrição do imóvel teste",
+            Price = 500000.00m,
+            PropertyType = EPropertyType.Apartment,
+            Bedroom = 3,
+            Bathroom = 2,
+            Garage = 1,
+            Area = 120.5,
+            TransactionsDetails = "Detalhes da transação",
+            SellerId = seller.Id,
+            CondominiumId = condominium.Id,
+            RegistryNumber = "123456789",
+            RegistryRecord = "987654321",
+            IsNew = true,
+            ShowInHome = true,
+            IsActive = true,
+            UserId = RealtyHubApiTests.TestUserId,
+            Address = new Address
+            {
+                Street = "Rua do Imóvel",
+                Number = "999",
+                Neighborhood = "Centro",
+                City = "São Paulo",
+                State = "SP",
+                Country = "Brasil",
+                ZipCode = "01234567"
+            }
+        };
+    }
 
-        public string email { get; init; }
-        public string password { get; init; }
-
-        public void Deconstruct(out string email, out string password)
+    public static Offer GetValidOffer(Customer buyer, Property property)
+    {
+        var payments = new List<Payment>
         {
-            email = this.email;
-            password = this.password;
-        }
+            new Payment
+            {
+                Amount = decimal.Parse(Random.Shared.NextInt64(100, 100000).ToString()),
+                PaymentType = EPaymentType.Pix,
+                UserId = RealtyHubApiTests.TestUserId,
+                IsActive = true
+            },
+            new Payment
+            {
+                Amount = decimal.Parse(Random.Shared.NextInt64(100, 100000).ToString()),
+                PaymentType = EPaymentType.Cash,
+                UserId = RealtyHubApiTests.TestUserId,
+                IsActive = true
+            }
+        };
+        return new Offer
+        {
+            Amount = payments.Sum(c => c.Amount),
+            SubmissionDate = DateTime.Now.AddDays(-30),
+            OfferStatus = EOfferStatus.Accepted,
+            BuyerId = buyer.Id,
+            PropertyId = property.Id,
+            UserId = RealtyHubApiTests.TestUserId,
+            Payments = payments
+        };
+    }
+
+    public static Contract GetValidContract(Offer offer, Customer seller, Customer buyer)
+    {
+        return new Contract
+        {
+            SellerId = seller.Id,
+            Seller = seller,
+            BuyerId = buyer.Id,
+            Buyer = buyer,
+            OfferId = offer.Id,
+            Offer = offer,
+            IssueDate = DateTime.Now,
+            EffectiveDate = DateTime.Now.AddDays(30),
+            TermEndDate = DateTime.Now.AddYears(1),
+            SignatureDate = DateTime.Now.AddDays(7),
+            FileId = Guid.NewGuid().ToString(),
+            IsActive = true,
+            UserId = RealtyHubApiTests.TestUserId
+        };
+    }
+
+    public static Viewing GetValidViewing(Customer buyer, Property property)
+    {
+        return new Viewing
+        {
+            ViewingDate = DateTime.Now.AddDays(1),
+            ViewingStatus = EViewingStatus.Scheduled,
+            BuyerId = buyer.Id,
+            PropertyId = property.Id,
+            UserId = RealtyHubApiTests.TestUserId
+        };
     }
 }
