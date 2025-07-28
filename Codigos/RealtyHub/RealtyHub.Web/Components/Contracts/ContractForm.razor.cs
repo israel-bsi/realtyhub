@@ -142,6 +142,7 @@ public partial class ContractFormComponent : ComponentBase
                 success = response.IsSuccess;
                 if (response.IsSuccess)
                 {
+                    InputModel.Id = response.Data?.Id ?? 0;
                     Snackbar.Add("Contrato emitido com sucesso", Severity.Success);
                     await OnSubmitButtonClickedAsync();
                 }

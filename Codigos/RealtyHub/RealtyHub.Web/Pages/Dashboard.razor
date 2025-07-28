@@ -1,0 +1,291 @@
+﻿@page "/dashboard"
+@using RealtyHub.Core.Utilities
+@inherits DashboardPage
+
+<PageTitle>Dashboard - RealtyHub</PageTitle>
+
+@if (IsBusy)
+{
+    <div class="d-flex justify-center align-center" style="height: 50vh">
+        <MudProgressCircular Size="Size.Large" Color="Color.Primary" Indeterminate="true" />
+    </div>
+}
+else
+{
+    <MudContainer MaxWidth="MaxWidth.ExtraLarge">
+        <!-- Título e botão de atualizar -->
+        <MudGrid Class="mb-4">
+            <MudItem xs="12">
+                <div class="d-flex justify-space-between align-center">
+                    <MudText Typo="Typo.h4" Class="mb-0">
+                        <MudIcon Icon="@Icons.Material.Filled.Dashboard" Class="mr-2" />
+                        Dashboard
+                    </MudText>
+                    <MudButton StartIcon="@Icons.Material.Filled.Refresh"
+                               Color="Color.Primary"
+                               Variant="Variant.Outlined"
+                               OnClick="RefreshDashboardAsync"
+                               Disabled="IsBusy">
+                        Atualizar
+                    </MudButton>
+                </div>
+            </MudItem>
+        </MudGrid>
+
+        <!-- Cards de estatísticas -->
+        <MudGrid Class="mb-6">
+            <MudItem xs="12" sm="6" md="3">
+                <MudCard Elevation="2" Class="cursor-pointer" @onclick="NavigateToProperties">
+                    <MudCardContent>
+                        <div class="d-flex justify-space-between align-center">
+                            <div>
+                                <MudText Typo="Typo.h4" Color="Color.Primary">@TotalProperties</MudText>
+                                <MudText Typo="Typo.body2" Color="Color.Tertiary">Imóveis Cadastrados</MudText>
+                            </div>
+                            <MudIcon Icon="@Icons.Material.Filled.Home" Size="Size.Large" Color="Color.Primary" />
+                        </div>
+                    </MudCardContent>
+                </MudCard>
+            </MudItem>
+
+            <MudItem xs="12" sm="6" md="3">
+                <MudCard Elevation="2" Class="cursor-pointer" @onclick="NavigateToCustomers">
+                    <MudCardContent>
+                        <div class="d-flex justify-space-between align-center">
+                            <div>
+                                <MudText Typo="Typo.h4" Color="Color.Secondary">@TotalCustomers</MudText>
+                                <MudText Typo="Typo.body2" Color="Color.Tertiary">Clientes Cadastrados</MudText>
+                            </div>
+                            <MudIcon Icon="@Icons.Material.Filled.Person" Size="Size.Large" Color="Color.Secondary" />
+                        </div>
+                    </MudCardContent>
+                </MudCard>
+            </MudItem>
+
+            <MudItem xs="12" sm="6" md="3">
+                <MudCard Elevation="2" Class="cursor-pointer" @onclick="NavigateToOffers">
+                    <MudCardContent>
+                        <div class="d-flex justify-space-between align-center">
+                            <div>
+                                <MudText Typo="Typo.h4" Color="Color.Info">@TotalOffers</MudText>
+                                <MudText Typo="Typo.body2" Color="Color.Tertiary">Total de Propostas</MudText>
+                            </div>
+                            <MudIcon Icon="@Icons.Material.Filled.LocalOffer" Size="Size.Large" Color="Color.Info" />
+                        </div>
+                    </MudCardContent>
+                </MudCard>
+            </MudItem>
+
+            <MudItem xs="12" sm="6" md="3">
+                <MudCard Elevation="2" Class="cursor-pointer" @onclick="NavigateToOffers">
+                    <MudCardContent>
+                        <div class="d-flex justify-space-between align-center">
+                            <div>
+                                <MudText Typo="Typo.h4" Color="Color.Success">@AcceptedOffers</MudText>
+                                <MudText Typo="Typo.body2" Color="Color.Tertiary">Propostas Aceitas</MudText>
+                            </div>
+                            <MudIcon Icon="@Icons.Material.Filled.CheckCircle" Size="Size.Large" Color="Color.Success" />
+                        </div>
+                    </MudCardContent>
+                </MudCard>
+            </MudItem>
+        </MudGrid>
+
+        <!-- Seção de dados recentes -->
+        <MudGrid>
+            <!-- Imóveis Recentes -->
+            <MudItem xs="12" lg="6">
+                <MudPaper Elevation="2" Class="pa-4">
+                    <div class="d-flex justify-space-between align-center mb-4">
+                        <MudText Typo="Typo.h6">
+                            <MudIcon Icon="@Icons.Material.Filled.Home" Class="mr-2" />
+                            Imóveis Recentes
+                        </MudText>
+                        <MudButton Size="Size.Small" 
+                                   Color="Color.Primary" 
+                                   Variant="Variant.Text"
+                                   OnClick="NavigateToProperties">
+                            Ver todos
+                        </MudButton>
+                    </div>
+
+                    @if (RecentProperties.Any())
+                    {
+                        @foreach (var property in RecentProperties)
+                        {
+                            <MudCard Class="mb-3" Elevation="1">
+                                <MudCardContent>
+                                    <div class="d-flex align-center">
+                                        <MudImage Src="@GetPropertyPhotoUrl(property)"
+                                                  Width="80"
+                                                  Height="60"
+                                                  ObjectFit="ObjectFit.Cover"
+                                                  Class="mr-3 rounded" />
+                                        <div class="flex-1">
+                                            <MudText Typo="Typo.subtitle1" Class="fw-bold">
+                                                @property.Title
+                                            </MudText>
+                                            <MudText Typo="Typo.body2" Color="Color.Tertiary">
+                                                @property.Address.Neighborhood - @property.Address.City
+                                            </MudText>
+                                            <MudText Typo="Typo.subtitle2" Color="Color.Primary">
+                                                @property.Price.ToString("C")
+                                            </MudText>
+                                        </div>
+                                        <MudIconButton Icon="@Icons.Material.Filled.ArrowForward"
+                                                       Size="Size.Small"
+                                                       Color="Color.Primary"
+                                                       OnClick="@(() => NavigateToPropertyDetails(property.Id))" />
+                                    </div>
+                                </MudCardContent>
+                            </MudCard>
+                        }
+                    }
+                    else
+                    {
+                        <MudAlert Severity="Severity.Info">
+                            Nenhum imóvel cadastrado ainda.
+                        </MudAlert>
+                    }
+                </MudPaper>
+            </MudItem>
+
+            <!-- Propostas Recentes -->
+            <MudItem xs="12" lg="6">
+                <MudPaper Elevation="2" Class="pa-4">
+                    <div class="d-flex justify-space-between align-center mb-4">
+                        <MudText Typo="Typo.h6">
+                            <MudIcon Icon="@Icons.Material.Filled.LocalOffer" Class="mr-2" />
+                            Propostas Recentes
+                        </MudText>
+                        <MudButton Size="Size.Small" 
+                                   Color="Color.Primary" 
+                                   Variant="Variant.Text"
+                                   OnClick="NavigateToOffers">
+                            Ver todas
+                        </MudButton>
+                    </div>
+
+                    @if (RecentOffers.Any())
+                    {
+                        @foreach (var offer in RecentOffers)
+                        {
+                            <MudCard Class="mb-3" Elevation="1">
+                                <MudCardContent>
+                                    <div class="d-flex justify-space-between align-center">
+                                        <div>
+                                            <MudText Typo="Typo.subtitle1" Class="fw-bold">
+                                                @offer.Buyer?.Name
+                                            </MudText>
+                                            <MudText Typo="Typo.body2" Color="Color.Tertiary">
+                                                @offer.Property?.Title
+                                            </MudText>
+                                            <MudText Typo="Typo.subtitle2" Color="Color.Primary">
+                                                @offer.Amount.ToString("C")
+                                            </MudText>
+                                        </div>
+                                        <div class="text-right">
+                                            <MudChip T="string" 
+                                                     Size="Size.Small" 
+                                                     Color="@GetOfferStatusColor(offer.OfferStatus)"
+                                                     Text="@GetOfferStatusText(offer.OfferStatus)"
+                                                     Variant="Variant.Filled" />
+                                            <br />
+                                            <MudText Typo="Typo.caption" Color="Color.Tertiary">
+                                                @offer.CreatedAt.ToString("dd/MM/yyyy")
+                                            </MudText>
+                                        </div>
+                                    </div>
+                                </MudCardContent>
+                            </MudCard>
+                        }
+                    }
+                    else
+                    {
+                        <MudAlert Severity="Severity.Info">
+                            Nenhuma proposta cadastrada ainda.
+                        </MudAlert>
+                    }
+                </MudPaper>
+            </MudItem>
+
+            <!-- Clientes Recentes -->
+            <MudItem xs="12">
+                <MudPaper Elevation="2" Class="pa-4">
+                    <div class="d-flex justify-space-between align-center mb-4">
+                        <MudText Typo="Typo.h6">
+                            <MudIcon Icon="@Icons.Material.Filled.Person" Class="mr-2" />
+                            Clientes Recentes
+                        </MudText>
+                        <MudButton Size="Size.Small" 
+                                   Color="Color.Primary" 
+                                   Variant="Variant.Text"
+                                   OnClick="NavigateToCustomers">
+                            Ver todos
+                        </MudButton>
+                    </div>
+
+                    @if (RecentCustomers.Any())
+                    {
+                        <MudGrid>
+                            @foreach (var customer in RecentCustomers)
+                            {
+                                <MudItem xs="12" sm="6" md="4" lg="2">
+                                    <MudCard Elevation="1" Class="text-center pa-3">
+                                        <MudCardContent>
+                                            <MudAvatar Size="Size.Large" Color="Color.Primary" Class="mb-2">
+                                                @customer.Name.First()
+                                            </MudAvatar>
+                                            <MudText Typo="Typo.subtitle2" Class="fw-bold">
+                                                @customer.Name
+                                            </MudText>
+                                            <MudText Typo="Typo.caption" Color="Color.Primary">
+                                                @Helper.FormatarCpfCnpj(customer.DocumentNumber)
+                                            </MudText>
+                                        </MudCardContent>
+                                    </MudCard>
+                                </MudItem>
+                            }
+                        </MudGrid>
+                    }
+                    else
+                    {
+                        <MudAlert Severity="Severity.Info">
+                            Nenhum cliente cadastrado ainda.
+                        </MudAlert>
+                    }
+                </MudPaper>
+            </MudItem>
+        </MudGrid>
+    </MudContainer>
+}
+
+@code {
+    /// <summary>
+    /// Obtém a cor correspondente ao status da proposta
+    /// </summary>
+    private Color GetOfferStatusColor(EOfferStatus status)
+    {
+        return status switch
+        {
+            EOfferStatus.Analysis => Color.Warning,
+            EOfferStatus.Accepted => Color.Success,
+            EOfferStatus.Rejected => Color.Error,
+            _ => Color.Default
+        };
+    }
+
+    /// <summary>
+    /// Obtém o texto correspondente ao status da proposta
+    /// </summary>
+    private string GetOfferStatusText(EOfferStatus status)
+    {
+        return status switch
+        {
+            EOfferStatus.Analysis => "Em Análise",
+            EOfferStatus.Accepted => "Aceita",
+            EOfferStatus.Rejected => "Rejeitada",
+            _ => "Desconhecido"
+        };
+    }
+}

@@ -54,8 +54,7 @@ public class OfferHandler : IOfferHandler
             property = await _context
                 .Properties
                 .AsNoTracking()
-                .FirstOrDefaultAsync(p => p.Id == request.PropertyId
-                                          && p.IsActive);
+                .FirstOrDefaultAsync(p => p.Id == request.PropertyId && p.IsActive);
 
             if (property is null)
                 return new Response<Offer?>(null, 404, "Imóvel não encontrado");

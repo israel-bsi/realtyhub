@@ -54,8 +54,13 @@ public class EmailService : IEmailService
     {
         var result = await _httpClient.PostAsJsonAsync("v1/emails/contract", message);
 
+        var response = await result.Content.ReadFromJsonAsync<Response<bool>>();
+        var responseMessage = string.IsNullOrEmpty(response?.Message)
+            ? "Não foi possível enviar o contrato"
+            : response.Message;
+
         return result.IsSuccessStatusCode
-            ? new Response<bool>(true)
-            : new Response<bool>(false, (int)result.StatusCode, "Não foi possível enviar o contrato");
+            ? new Response<bool>(true, (int)result.StatusCode, responseMessage)
+            : new Response<bool>(false, (int)result.StatusCode, responseMessage);
     }
 }

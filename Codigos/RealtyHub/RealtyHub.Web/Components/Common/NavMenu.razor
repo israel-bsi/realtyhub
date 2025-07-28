@@ -8,6 +8,7 @@
         <MudText Typo="Typo.body1" Class="px-4">@Configuration.GivenName</MudText>
     </div>
     <MudDivider Class="my-2" />
+    <MudNavLink Icon="@Icons.Material.Filled.Dashboard" Href="/dashboard" Match="NavLinkMatch.All">Dashboard</MudNavLink>
     <MudNavGroup Icon="@Icons.Material.Filled.Person" Title="Clientes" @bind-Expanded="ExpandedCustomers">
         <MudNavLink Icon="@Icons.Material.Filled.PersonAddAlt1" Href="/clientes/adicionar" Match="NavLinkMatch.All">Cadastro</MudNavLink>
         <MudNavLink Icon="@Icons.Material.Filled.Person" Href="/clientes" Match="NavLinkMatch.All">Listar</MudNavLink>
@@ -31,10 +32,10 @@
         <MudNavLink Icon="fa-solid fa-file-contract" Href="/contratos" Match="NavLinkMatch.All">Listar</MudNavLink>
         <MudNavLink Icon="@Icons.Material.Filled.Settings" Href="/contratos/modelos" Match="NavLinkMatch.All">Modelos</MudNavLink>
     </MudNavGroup>
-    
+
 </MudNavMenu>
 
-@code 
+@code
 {
     [Parameter]
     public int MudNavMenuKey { get; set; }

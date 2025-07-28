@@ -58,7 +58,7 @@ public class SendContractEmailEndpoint : IEndpoint
             .FirstOrDefaultAsync(c => c.Id == request.ContractId);
 
         if (contract is null)
-            return Results.BadRequest(new Response<string>(null, 404, "Contrato não encontrado"));
+            return Results.BadRequest(new Response<bool>(false, 404, "Contrato não encontrado"));
 
         var attachmentPath = Path.Combine(Configuration.ContractsPath, $"{contract.FileId}.pdf");
 
@@ -67,7 +67,7 @@ public class SendContractEmailEndpoint : IEndpoint
         var result = await emailService.SendContractAsync(request);
 
         return result.IsSuccess
-            ? Results.Ok()
+            ? Results.Ok(result)
             : Results.BadRequest(result);
     }
 }

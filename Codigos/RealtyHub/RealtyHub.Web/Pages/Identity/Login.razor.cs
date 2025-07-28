@@ -67,7 +67,7 @@ public partial class LoginPage : ComponentBase
         var user = authState.User;
 
         if (user.Identity is { IsAuthenticated: true })
-            NavigationManager.NavigateTo("/");
+            NavigationManager.NavigateTo("/dashboard");
     }
 
     #endregion
@@ -79,7 +79,7 @@ public partial class LoginPage : ComponentBase
     /// </summary>
     /// <remarks>
     /// Define o estado de carregamento, envia os dados de login para o handler e, em caso de sucesso,
-    /// atualiza o estado de autenticação e redireciona o usuário para a página de listagem de imóveis.
+    /// atualiza o estado de autenticação e redireciona o usuário para a página inicial.
     /// Em caso de falha, exibe uma mensagem de erro utilizando o serviço de Snackbar.
     /// </remarks>
     public async Task OnValidSubmitAsync()
@@ -92,7 +92,7 @@ public partial class LoginPage : ComponentBase
             {
                 await AuthenticationStateProvider.GetAuthenticationStateAsync();
                 AuthenticationStateProvider.NotifyAuthenticationStateChanged();
-                NavigationManager.NavigateTo("/listar-imoveis");
+                NavigationManager.NavigateTo("/dashboard");
             }
             else
                 Snackbar.Add(result.Message ?? string.Empty, Severity.Error);

@@ -1,6 +1,5 @@
 ﻿using RealtyHub.Core.Enums;
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
 
 namespace RealtyHub.Core.Models;
 

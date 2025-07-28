@@ -121,6 +121,14 @@ public partial class OfferFormComponent : ComponentBase
         {
             string message;
             InputModel.Buyer!.Phone = Regex.Replace(InputModel.Buyer.Phone, Pattern, "");
+            InputModel.Buyer.IsActive = true;
+
+            if (InputModel.Payments.Count == 0)
+            {
+                Snackbar.Add("Adicione pelo menos um pagamento", Severity.Error);
+                return;
+            }
+
             if (OfferId == 0)
             {
                 var response = await OfferHandler.CreateAsync(InputModel);

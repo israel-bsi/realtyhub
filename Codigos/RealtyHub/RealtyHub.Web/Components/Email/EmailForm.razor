@@ -77,9 +77,9 @@
             if (OnEmailSent.HasDelegate)
                 await OnEmailSent.InvokeAsync();
         }
-        catch
+        catch (Exception e)
         {
-            Snackbar.Add("Erro ao enviar e-mail", Severity.Error);
+            Snackbar.Add(e.Message, Severity.Error);
         }
         finally
         {
@@ -98,7 +98,9 @@
         };
         var result = await EmailService.SendContractAsync(request);
         if (!result.IsSuccess)
-            Snackbar.Add("Erro ao enviar e-mail para o comprador", Severity.Error);
+        {
+            Snackbar.Add(result.Message ?? "Erro ao enviar e-mail para o comprador", Severity.Error);
+        }
 
         return result.IsSuccess;
     }
@@ -114,7 +116,9 @@
         };
         var result = await EmailService.SendContractAsync(request);
         if (!result.IsSuccess)
-            Snackbar.Add("Erro ao enviar e-mail para o vendedor", Severity.Error);
+        {
+            Snackbar.Add(result.Message ?? "Erro ao enviar e-mail para o vendedor", Severity.Error);
+        }
 
         return result.IsSuccess;
     }

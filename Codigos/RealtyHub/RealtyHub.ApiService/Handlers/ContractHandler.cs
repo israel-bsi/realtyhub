@@ -73,11 +73,11 @@ public class ContractHandler : IContractHandler
             if (offer.OfferStatus != EOfferStatus.Accepted)
                 return new Response<Contract?>(null, 400, "A proposta precisa estar aceita para criar um contrato");
 
-            if (offer.Buyer is null || offer.Buyer.UserId != request.UserId)
-                return new Response<Contract?>(null, 400, "Comprador não encontrado ou não pertence ao usuário");
+            if (offer.Buyer is null)
+                return new Response<Contract?>(null, 400, "Comprador não encontrado");
 
-            if (offer.Property?.Seller is null || offer.Property.Seller.UserId != request.UserId)
-                return new Response<Contract?>(null, 400, "Vendedor não encontrado ou não pertence ao usuário");
+            if (offer.Property?.Seller is null)
+                return new Response<Contract?>(null, 400, "Vendedor não encontrado");
 
             if (request.BuyerId != 0 && request.BuyerId != offer.Buyer.Id)
                 return new Response<Contract?>(null, 400, "ID do comprador não corresponde ao comprador da proposta");
