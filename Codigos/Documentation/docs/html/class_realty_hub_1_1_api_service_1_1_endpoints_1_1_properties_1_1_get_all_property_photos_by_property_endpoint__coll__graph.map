@@ -1,0 +1,5 @@
+<map id="RealtyHub.ApiService.Endpoints.Properties.GetAllPropertyPhotosByPropertyEndpoint" name="RealtyHub.ApiService.Endpoints.Properties.GetAllPropertyPhotosByPropertyEndpoint">
+<area shape="rect" id="Node000001" title="Endpoint responsável por recuperar todas as fotos de um imóvel." alt="" coords="5,96,281,155"/>
+<area shape="rect" id="Node000002" href="$interface_realty_hub_1_1_api_service_1_1_common_1_1_api_1_1_i_endpoint.html" title="Interface que define um endpoint para o aplicativo ASP.NET Core." alt="" coords="37,5,249,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="146,63,146,96,140,96,140,63"/>
+</map>

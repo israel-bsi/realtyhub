@@ -1,0 +1,5 @@
+<map id="RealtyHub.ApiService.Endpoints.Properties.GetAllViewingsByPropertyEndpoint" name="RealtyHub.ApiService.Endpoints.Properties.GetAllViewingsByPropertyEndpoint">
+<area shape="rect" id="Node000001" title="Endpoint responsável por listar todas as visitas de um imóvel." alt="" coords="5,96,244,155"/>
+<area shape="rect" id="Node000002" href="$interface_realty_hub_1_1_api_service_1_1_common_1_1_api_1_1_i_endpoint.html" title="Interface que define um endpoint para o aplicativo ASP.NET Core." alt="" coords="19,5,230,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="127,63,127,96,122,96,122,63"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="RealtyHub.ApiService.Endpoints.Contracts.GetAllContractsEndpoint" name="RealtyHub.ApiService.Endpoints.Contracts.GetAllContractsEndpoint">
+<area shape="rect" id="Node000001" title="Endpoint responsável por recuperar todos os contratos." alt="" coords="5,96,232,139"/>
+<area shape="rect" id="Node000002" href="$interface_realty_hub_1_1_api_service_1_1_common_1_1_api_1_1_i_endpoint.html" title="Interface que define um endpoint para o aplicativo ASP.NET Core." alt="" coords="13,5,224,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="121,64,121,96,116,96,116,64"/>
+</map>

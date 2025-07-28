@@ -1,0 +1,5 @@
+<map id="RealtyHub.ApiService.Endpoints.Condominiums.UpdateCondominiumEndpoint" name="RealtyHub.ApiService.Endpoints.Condominiums.UpdateCondominiumEndpoint">
+<area shape="rect" id="Node000001" title="Endpoint responsável por atualizar os dados de um condomínio existente." alt="" coords="5,96,291,139"/>
+<area shape="rect" id="Node000002" href="$interface_realty_hub_1_1_api_service_1_1_common_1_1_api_1_1_i_endpoint.html" title="Interface que define um endpoint para o aplicativo ASP.NET Core." alt="" coords="42,5,254,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="151,64,151,96,145,96,145,64"/>
+</map>

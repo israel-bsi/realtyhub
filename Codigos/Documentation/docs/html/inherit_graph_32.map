@@ -1,0 +1,19 @@
+<map id="Representação gráfica da hiearquia da classe" name="Representação gráfica da hiearquia da classe">
+<area shape="rect" id="Node000000" href="$class_realty_hub_1_1_core_1_1_models_1_1_entity.html" title="Representa uma entidade base com propriedades de data de criação e atualização." alt="" coords="5,183,205,209"/>
+<area shape="rect" id="Node000001" href="$class_realty_hub_1_1_core_1_1_models_1_1_condominium.html" title="Representa um condomínio no sistema." alt="" coords="253,5,498,32"/>
+<area shape="poly" id="edge119_Node000000_Node000001" title=" " alt="" coords="121,169,174,104,210,70,251,42,278,30,280,35,254,46,214,74,178,108,126,172"/>
+<area shape="rect" id="Node000002" href="$class_realty_hub_1_1_core_1_1_models_1_1_contract.html" title="Representa um contrato no sistema." alt="" coords="268,56,483,83"/>
+<area shape="poly" id="edge120_Node000000_Node000002" title=" " alt="" coords="132,170,185,130,217,109,252,92,286,81,287,86,254,97,220,114,188,134,135,174"/>
+<area shape="rect" id="Node000003" href="$class_realty_hub_1_1_core_1_1_models_1_1_customer.html" title="Representa um cliente no sistema." alt="" coords="264,107,486,133"/>
+<area shape="poly" id="edge121_Node000000_Node000003" title=" " alt="" coords="155,174,252,143,299,131,300,137,253,148,157,179"/>
+<area shape="rect" id="Node000004" href="$class_realty_hub_1_1_core_1_1_models_1_1_offer.html" title="Representa uma proposta de compra de um imóvel no sistema." alt="" coords="279,157,472,184"/>
+<area shape="poly" id="edge122_Node000000_Node000004" title=" " alt="" coords="220,183,278,177,278,182,221,188"/>
+<area shape="rect" id="Node000005" href="$class_realty_hub_1_1_core_1_1_models_1_1_payment.html" title="Representa um pagamento relacionado a uma proposta." alt="" coords="267,208,484,235"/>
+<area shape="poly" id="edge123_Node000000_Node000005" title=" " alt="" coords="221,204,266,208,266,214,220,209"/>
+<area shape="rect" id="Node000006" href="$class_realty_hub_1_1_core_1_1_models_1_1_property.html" title="Representa um imóvel no sistema." alt="" coords="268,259,482,285"/>
+<area shape="poly" id="edge124_Node000000_Node000006" title=" " alt="" coords="157,213,253,244,300,255,299,261,252,249,155,218"/>
+<area shape="rect" id="Node000007" href="$class_realty_hub_1_1_core_1_1_models_1_1_property_photo.html" title="Representa uma foto associada a um imóvel." alt="" coords="268,309,482,352"/>
+<area shape="poly" id="edge125_Node000000_Node000007" title=" " alt="" coords="136,217,189,257,254,295,282,306,280,311,251,300,186,261,132,222"/>
+<area shape="rect" id="Node000008" href="$class_realty_hub_1_1_core_1_1_models_1_1_viewing.html" title="Representa uma visita a um imóvel no sistema." alt="" coords="270,376,481,403"/>
+<area shape="poly" id="edge126_Node000000_Node000008" title=" " alt="" coords="124,221,146,254,176,293,212,330,254,362,279,373,277,378,251,366,209,334,172,296,142,258,120,224"/>
+</map>

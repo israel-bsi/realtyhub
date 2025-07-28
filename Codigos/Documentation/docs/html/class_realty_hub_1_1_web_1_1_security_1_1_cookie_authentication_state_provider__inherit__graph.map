@@ -1,0 +1,7 @@
+<map id="RealtyHub.Web.Security.CookieAuthenticationStateProvider" name="RealtyHub.Web.Security.CookieAuthenticationStateProvider">
+<area shape="rect" id="Node000001" title="Provedor de estado de autenticação baseado em cookies. Este provedor obtém informações do usuário e s..." alt="" coords="267,27,476,69"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="20,5,204,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="220,28,266,33,266,39,219,33"/>
+<area shape="rect" id="Node000003" href="$interface_realty_hub_1_1_web_1_1_security_1_1_i_cookie_authentication_state_provider.html" title="Interface que define o contrato para um provedor de estado de autenticação baseado em cookies." alt="" coords="5,56,219,99"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="234,61,266,57,266,63,234,66"/>
+</map>

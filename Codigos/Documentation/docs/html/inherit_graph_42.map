@@ -1,0 +1,7 @@
+<map id="Representação gráfica da hiearquia da classe" name="Representação gráfica da hiearquia da classe">
+<area shape="rect" id="Node000000" href="$interface_realty_hub_1_1_core_1_1_services_1_1_i_email_service.html" title="Interface que define os métodos para o serviço de envio de e&#45;mails." alt="" coords="5,39,180,81"/>
+<area shape="rect" id="Node000001" href="$class_realty_hub_1_1_api_service_1_1_services_1_1_email_service.html" title="Classe responsável pelo envio de e&#45;mails utilizando o protocolo SMTP." alt="" coords="228,5,437,48"/>
+<area shape="poly" id="edge164_Node000000_Node000001" title=" " alt="" coords="195,43,227,39,227,44,195,48"/>
+<area shape="rect" id="Node000002" href="$class_realty_hub_1_1_web_1_1_services_1_1_email_service.html" title="Serviço responsável por enviar e&#45;mails relacionados à confirmação de conta, recuperação de senha e en..." alt="" coords="230,72,435,115"/>
+<area shape="poly" id="edge165_Node000000_Node000002" title=" " alt="" coords="196,72,229,76,229,82,195,77"/>
+</map>

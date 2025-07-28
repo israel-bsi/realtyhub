@@ -1,0 +1,5 @@
+<map id="RealtyHub.Web.Handlers.ContractTemplateHandler" name="RealtyHub.Web.Handlers.ContractTemplateHandler">
+<area shape="rect" id="Node000001" title="Handler responsável pelas operações de modelos de contratos na aplicação web." alt="" coords="5,96,229,139"/>
+<area shape="rect" id="Node000002" href="$interface_realty_hub_1_1_core_1_1_handlers_1_1_i_contract_template_handler.html" title="Interface que define os métodos para manipulação de modelos de contrato." alt="" coords="29,5,205,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="120,64,120,96,114,96,114,64"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="RealtyHub.Core.Utilities.FakeEntities.CustomerFake.GetFakeIndividualCustomers" name="RealtyHub.Core.Utilities.FakeEntities.CustomerFake.GetFakeIndividualCustomers">
+<area shape="rect" id="Node000001" title="Gera uma lista de clientes individuais falsos." alt="" coords="5,5,244,64"/>
+<area shape="rect" id="Node000002" href="$class_realty_hub_1_1_core_1_1_utilities_1_1_fake_entities_1_1_address_fake.html#ad7f742989805f3beac341ec52ffca407" title="Gera um endereço falso para a entidade Address utilizando a biblioteca Bogus." alt="" coords="292,5,521,64"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="244,32,276,32,276,37,244,37"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="RealtyHub.Web.Handlers.CondominiumHandler" name="RealtyHub.Web.Handlers.CondominiumHandler">
+<area shape="rect" id="Node000001" title="Handler responsável pelas operações de condomínio na aplicação web." alt="" coords="5,96,259,139"/>
+<area shape="rect" id="Node000002" href="$interface_realty_hub_1_1_core_1_1_handlers_1_1_i_condominium_handler.html" title="Interface que define os métodos para manipulação de condomínios." alt="" coords="44,5,220,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="135,64,135,96,129,96,129,64"/>
+</map>

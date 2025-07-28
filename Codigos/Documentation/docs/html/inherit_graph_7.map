@@ -1,0 +1,7 @@
+<map id="Representação gráfica da hiearquia da classe" name="Representação gráfica da hiearquia da classe">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,47,91,73"/>
+<area shape="rect" id="Node000001" href="$class_realty_hub_1_1_api_service_1_1_services_1_1_reports_1_1_offer_report_service.html" title="Serviço que gera um relatório de propostas a imóveis utilizando a biblioteca QuestPDF." alt="" coords="139,5,348,48"/>
+<area shape="poly" id="edge30_Node000000_Node000001" title=" " alt="" coords="106,48,138,42,139,47,106,53"/>
+<area shape="rect" id="Node000002" href="$class_realty_hub_1_1_api_service_1_1_services_1_1_reports_1_1_property_report_service.html" title="Serviço que gera um relatório de imóveis utilizando a biblioteca QuestPDF." alt="" coords="139,72,348,115"/>
+<area shape="poly" id="edge31_Node000000_Node000002" title=" " alt="" coords="106,67,139,73,138,78,106,72"/>
+</map>

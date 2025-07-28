@@ -1,0 +1,5 @@
+<map id="RealtyHub.ApiService.Endpoints.Contracts.DeleteContractEndpoint" name="RealtyHub.ApiService.Endpoints.Contracts.DeleteContractEndpoint">
+<area shape="rect" id="Node000001" title="Endpoint responsável por deletar um contrato." alt="" coords="5,96,227,139"/>
+<area shape="rect" id="Node000002" href="$interface_realty_hub_1_1_api_service_1_1_common_1_1_api_1_1_i_endpoint.html" title="Interface que define um endpoint para o aplicativo ASP.NET Core." alt="" coords="10,5,222,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="119,64,119,96,113,96,113,64"/>
+</map>

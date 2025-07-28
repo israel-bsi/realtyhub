@@ -1,0 +1,5 @@
+<map id="RealtyHub.Core.Handlers.IPropertyHandler.DeleteAsync" name="RealtyHub.Core.Handlers.IPropertyHandler.DeleteAsync">
+<area shape="rect" id="Node000001" title="Exclui um imóvel existente." alt="" coords="305,5,503,48"/>
+<area shape="rect" id="Node000002" href="$class_realty_hub_1_1_api_service_1_1_endpoints_1_1_properties_1_1_delete_property_endpoint.html#ad850c85c53bcb363be5d0c308b458988" title="Mapeia o endpoint para deletar um imóvel." alt="" coords="5,5,257,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="289,29,257,29,257,24,289,24"/>
+</map>

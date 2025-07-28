@@ -1,0 +1,5 @@
+<map id="RealtyHub.Web.Services.ViaCepService" name="RealtyHub.Web.Services.ViaCepService">
+<area shape="rect" id="Node000001" title="Serviço responsável por buscar informações de endereço a partir do serviço ViaCep." alt="" coords="5,96,197,139"/>
+<area shape="rect" id="Node000002" href="$interface_realty_hub_1_1_core_1_1_services_1_1_i_via_cep_service.html" title="Define os métodos para buscar informações de endereço via CEP utilizando a API ViaCep." alt="" coords="14,5,188,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="104,64,104,96,98,96,98,64"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="RealtyHub.Web.Services.ViaCepService.SearchAddressAsync" name="RealtyHub.Web.Services.ViaCepService.SearchAddressAsync">
+<area shape="rect" id="Node000001" title="Busca as informações de endereço utilizando o CEP informado através da API ViaCep." alt="" coords="253,5,472,48"/>
+<area shape="rect" id="Node000002" href="$class_realty_hub_1_1_web_1_1_services_1_1_via_cep_service.html#a7fc05bac1ac886e3dbc55cf4a051560c" title="Retorna um objeto Address com base no CEP informado, realizando a busca através do serviço ViaCep." alt="" coords="5,5,205,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="237,29,205,29,205,24,237,24"/>
+</map>

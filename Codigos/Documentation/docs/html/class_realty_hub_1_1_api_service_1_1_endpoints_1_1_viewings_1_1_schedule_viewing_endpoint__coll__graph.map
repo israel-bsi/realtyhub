@@ -1,0 +1,5 @@
+<map id="RealtyHub.ApiService.Endpoints.Viewings.ScheduleViewingEndpoint" name="RealtyHub.ApiService.Endpoints.Viewings.ScheduleViewingEndpoint">
+<area shape="rect" id="Node000001" title="Endpoint responsável por agendar uma nova visita." alt="" coords="5,96,235,139"/>
+<area shape="rect" id="Node000002" href="$interface_realty_hub_1_1_api_service_1_1_common_1_1_api_1_1_i_endpoint.html" title="Interface que define um endpoint para o aplicativo ASP.NET Core." alt="" coords="14,5,226,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="123,64,123,96,117,96,117,64"/>
+</map>

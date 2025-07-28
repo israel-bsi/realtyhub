@@ -1,0 +1,5 @@
+<map id="RealtyHub.Core.Handlers.ICondominiumHandler.DeleteAsync" name="RealtyHub.Core.Handlers.ICondominiumHandler.DeleteAsync">
+<area shape="rect" id="Node000001" title="Exclui um condomínio existente." alt="" coords="364,5,593,48"/>
+<area shape="rect" id="Node000002" href="$class_realty_hub_1_1_api_service_1_1_endpoints_1_1_condominiums_1_1_delete_condominium_endpoint.html#a650f58307c5b4779abbdd746eb3c18bb" title="Mapeia o endpoint para a exclusão de condomínios." alt="" coords="5,5,316,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="348,29,316,29,316,24,348,24"/>
+</map>

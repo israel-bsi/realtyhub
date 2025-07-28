@@ -1,0 +1,5 @@
+<map id="RealtyHub.Core.Requests.Viewings.GetViewingByIdRequest" name="RealtyHub.Core.Requests.Viewings.GetViewingByIdRequest">
+<area shape="rect" id="Node000001" title="Representa uma requisição para obter uma visita a partir do seu identificador." alt="" coords="5,96,227,139"/>
+<area shape="rect" id="Node000002" href="$class_realty_hub_1_1_core_1_1_requests_1_1_request.html" title="Classe base para todas as requisições." alt="" coords="26,5,206,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="119,64,119,96,113,96,113,64"/>
+</map>

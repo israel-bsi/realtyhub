@@ -1,0 +1,9 @@
+<map id="RealtyHub.Core.Requests.Emails.EmailMessage" name="RealtyHub.Core.Requests.Emails.EmailMessage">
+<area shape="rect" id="Node000001" title="Classe abstrata que representa uma mensagem de e&#45;mail genérica." alt="" coords="5,72,185,115"/>
+<area shape="rect" id="Node000002" href="$class_realty_hub_1_1_core_1_1_requests_1_1_emails_1_1_attachment_message.html" title="Classe que representa uma mensagem de e&#45;mail com um anexo específico, associada a um contrato." alt="" coords="246,5,431,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="189,65,257,46,259,51,191,70"/>
+<area shape="rect" id="Node000003" href="$class_realty_hub_1_1_core_1_1_requests_1_1_emails_1_1_confirm_email_message.html" title="Classe que representa uma mensagem de e&#45;mail para confirmação de conta." alt="" coords="240,72,437,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="200,91,239,91,239,96,200,96"/>
+<area shape="rect" id="Node000004" href="$class_realty_hub_1_1_core_1_1_requests_1_1_emails_1_1_reset_password_message.html" title="Classe que representa uma mensagem de e&#45;mail para redefinição de senha." alt="" coords="233,139,444,181"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="191,117,259,135,257,141,189,122"/>
+</map>

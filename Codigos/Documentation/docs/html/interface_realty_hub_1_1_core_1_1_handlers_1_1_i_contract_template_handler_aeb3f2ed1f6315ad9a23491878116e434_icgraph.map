@@ -1,0 +1,7 @@
+<map id="RealtyHub.Core.Handlers.IContractTemplateHandler.GetAllAsync" name="RealtyHub.Core.Handlers.IContractTemplateHandler.GetAllAsync">
+<area shape="rect" id="Node000001" title="Recupera todos os modelos de contrato disponíveis." alt="" coords="678,5,876,64"/>
+<area shape="rect" id="Node000002" href="$class_realty_hub_1_1_api_service_1_1_endpoints_1_1_contracts_templates_1_1_get_all_contract_templates_endpoint.html#aa490c1c7fa9ae88569242b245a6b9679" title="Manipulador da rota que recebe a requisição para recuperar todos os modelos de contrato." alt="" coords="342,5,630,64"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="663,37,631,37,631,32,663,32"/>
+<area shape="rect" id="Node000003" href="$class_realty_hub_1_1_api_service_1_1_endpoints_1_1_contracts_templates_1_1_get_all_contract_templates_endpoint.html#ae37878884a01bcf515a6ff1c3b6a21c6" title="Mapeia o endpoint para recuperar todos os modelos de contrato." alt="" coords="5,5,294,64"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="326,37,294,37,294,32,326,32"/>
+</map>

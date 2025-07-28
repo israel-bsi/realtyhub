@@ -1,0 +1,7 @@
+<map id="Representação gráfica da hiearquia da classe" name="Representação gráfica da hiearquia da classe">
+<area shape="rect" id="Node000000" href="$interface_realty_hub_1_1_core_1_1_handlers_1_1_i_customer_handler.html" title="Interface que define os métodos para manipulação de clientes." alt="" coords="5,39,181,81"/>
+<area shape="rect" id="Node000001" href="$class_realty_hub_1_1_api_service_1_1_handlers_1_1_customer_handler.html" title="Responsável pelas operações relacionadas a clientes." alt="" coords="239,5,449,48"/>
+<area shape="poly" id="edge109_Node000000_Node000001" title=" " alt="" coords="196,44,238,38,239,43,196,49"/>
+<area shape="rect" id="Node000002" href="$class_realty_hub_1_1_web_1_1_handlers_1_1_customer_handler.html" title="Handler responsável pelas operações de clientes na aplicação web." alt="" coords="229,72,459,115"/>
+<area shape="poly" id="edge110_Node000000_Node000002" title=" " alt="" coords="196,71,229,75,228,81,196,76"/>
+</map>

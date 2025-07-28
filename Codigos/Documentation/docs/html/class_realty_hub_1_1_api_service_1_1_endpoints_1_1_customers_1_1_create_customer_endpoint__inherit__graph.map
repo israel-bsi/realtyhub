@@ -1,0 +1,5 @@
+<map id="RealtyHub.ApiService.Endpoints.Customers.CreateCustomerEndpoint" name="RealtyHub.ApiService.Endpoints.Customers.CreateCustomerEndpoint">
+<area shape="rect" id="Node000001" title="Endpoint responsável por criar novos clientes." alt="" coords="5,96,242,139"/>
+<area shape="rect" id="Node000002" href="$interface_realty_hub_1_1_api_service_1_1_common_1_1_api_1_1_i_endpoint.html" title="Interface que define um endpoint para o aplicativo ASP.NET Core." alt="" coords="18,5,229,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="126,64,126,96,121,96,121,64"/>
+</map>

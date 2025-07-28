@@ -1,0 +1,5 @@
+<map id="RealtyHub.Web.Handlers.AccountHandler" name="RealtyHub.Web.Handlers.AccountHandler">
+<area shape="rect" id="Node000001" title="Handler responsável pelas operações de autenticação e gerenciamento de conta de usuário na aplicação ..." alt="" coords="5,96,227,139"/>
+<area shape="rect" id="Node000002" href="$interface_realty_hub_1_1_core_1_1_handlers_1_1_i_account_handler.html" title="Interface que define os métodos para manipulação de contas de usuário." alt="" coords="28,5,204,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="119,64,119,96,113,96,113,64"/>
+</map>

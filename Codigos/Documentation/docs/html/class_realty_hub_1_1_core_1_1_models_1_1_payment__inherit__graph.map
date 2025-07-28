@@ -1,0 +1,5 @@
+<map id="RealtyHub.Core.Models.Payment" name="RealtyHub.Core.Models.Payment">
+<area shape="rect" id="Node000001" title="Representa um pagamento relacionado a uma proposta." alt="" coords="5,80,223,107"/>
+<area shape="rect" id="Node000002" href="$class_realty_hub_1_1_core_1_1_models_1_1_entity.html" title="Representa uma entidade base com propriedades de data de criação e atualização." alt="" coords="14,5,214,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="117,48,117,80,111,80,111,48"/>
+</map>

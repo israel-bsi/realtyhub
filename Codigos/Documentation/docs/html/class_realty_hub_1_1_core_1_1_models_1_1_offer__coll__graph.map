@@ -1,0 +1,5 @@
+<map id="RealtyHub.Core.Models.Offer" name="RealtyHub.Core.Models.Offer">
+<area shape="rect" id="Node000001" title="Representa uma proposta de compra de um imóvel no sistema." alt="" coords="8,80,202,107"/>
+<area shape="rect" id="Node000002" href="$class_realty_hub_1_1_core_1_1_models_1_1_entity.html" title="Representa uma entidade base com propriedades de data de criação e atualização." alt="" coords="5,5,205,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="108,48,108,80,102,80,102,48"/>
+</map>

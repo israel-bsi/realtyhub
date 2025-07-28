@@ -1,0 +1,5 @@
+<map id="RealtyHub.Web.Handlers.OfferHandler" name="RealtyHub.Web.Handlers.OfferHandler">
+<area shape="rect" id="Node000001" title="Handler responsável pelas operações relacionadas a propostas de compra de imóvel na aplicação web." alt="" coords="5,96,207,139"/>
+<area shape="rect" id="Node000002" href="$interface_realty_hub_1_1_core_1_1_handlers_1_1_i_offer_handler.html" title="Interface que define os métodos para manipulação de propostas." alt="" coords="18,5,194,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="109,64,109,96,103,96,103,64"/>
+</map>

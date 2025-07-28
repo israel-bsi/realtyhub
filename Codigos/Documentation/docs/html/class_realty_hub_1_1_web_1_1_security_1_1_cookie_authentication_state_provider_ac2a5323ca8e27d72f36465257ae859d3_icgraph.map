@@ -1,0 +1,7 @@
+<map id="RealtyHub.Web.Security.CookieAuthenticationStateProvider.CookieAuthenticationStateProvider" name="RealtyHub.Web.Security.CookieAuthenticationStateProvider.CookieAuthenticationStateProvider">
+<area shape="rect" id="Node000001" title="Inicializa uma nova instância de CookieAuthenticationStateProvider utilizando a fábrica de HttpClient..." alt="" coords="618,5,846,64"/>
+<area shape="rect" id="Node000002" href="$class_realty_hub_1_1_web_1_1_security_1_1_cookie_authentication_state_provider.html#a443ebef0ba97868f04dc8c0ebe9b6ec0" title="Obtém o estado atual de autenticação do usuário. Este método busca as informações do usuário a partir..." alt="" coords="279,5,570,64"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="603,37,570,37,570,32,603,32"/>
+<area shape="rect" id="Node000003" href="$class_realty_hub_1_1_web_1_1_security_1_1_cookie_authentication_state_provider.html#a24c28601f63c262a518444dd5021ecc6" title="Verifica se o usuário está autenticado, atualizando o estado de autenticação." alt="" coords="5,5,231,64"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="263,37,231,37,231,32,263,32"/>
+</map>

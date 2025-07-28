@@ -1,0 +1,23 @@
+<map id="RealtyHub.Core.Requests.PagedRequest" name="RealtyHub.Core.Requests.PagedRequest">
+<area shape="rect" id="Node000001" title="Classe base para solicitações paginadas." alt="" coords="233,312,412,355"/>
+<area shape="rect" id="Node000003" href="$class_realty_hub_1_1_core_1_1_requests_1_1_condominiums_1_1_get_all_condominiums_request.html" title="Classe que representa uma requisição para obter todos os condomínios com paginação." alt="" coords="462,5,697,64"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="331,296,348,247,374,187,411,127,433,99,458,74,474,62,478,67,462,78,437,102,415,130,379,190,353,249,336,298"/>
+<area shape="rect" id="Node000004" href="$class_realty_hub_1_1_core_1_1_requests_1_1_contracts_1_1_get_all_contracts_request.html" title="Classe que representa uma requisição para obter todos os contratos com paginação." alt="" coords="467,88,691,131"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="337,297,357,260,384,218,418,176,458,140,479,129,482,133,462,145,422,180,389,221,362,262,342,299"/>
+<area shape="rect" id="Node000005" href="$class_realty_hub_1_1_core_1_1_requests_1_1_customers_1_1_get_all_customers_request.html" title="Classe que representa uma solicitação para obter todos os clientes com paginação." alt="" coords="460,155,698,197"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="350,298,398,251,427,227,459,207,484,195,486,200,461,212,430,232,401,255,354,302"/>
+<area shape="rect" id="Node000006" href="$class_realty_hub_1_1_core_1_1_requests_1_1_offers_1_1_get_all_offers_by_customer_request.html" title="Classe que representa uma requisição para obter todas as propostas de um cliente." alt="" coords="477,221,681,280"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="405,304,485,278,486,283,406,309"/>
+<area shape="rect" id="Node000007" href="$class_realty_hub_1_1_core_1_1_requests_1_1_offers_1_1_get_all_offers_by_property_request.html" title="Classe que representa uma requisição para obter todas as propostas de um imóvel." alt="" coords="481,304,677,363"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="428,331,481,331,481,336,428,336"/>
+<area shape="rect" id="Node000008" href="$class_realty_hub_1_1_core_1_1_requests_1_1_offers_1_1_get_all_offers_request.html" title="Classe que representa uma requisição para obter todas as propostas." alt="" coords="489,387,669,429"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="410,357,461,372,501,384,499,389,459,377,409,362"/>
+<area shape="rect" id="Node000009" href="$class_realty_hub_1_1_core_1_1_requests_1_1_properties_1_1_get_all_properties_request.html" title="Representa uma requisição para obter uma lista paginada de imóveis." alt="" coords="465,453,693,496"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="358,363,405,403,461,439,487,450,485,455,459,444,402,407,355,368"/>
+<area shape="rect" id="Node000010" href="$class_realty_hub_1_1_core_1_1_requests_1_1_properties_1_1_get_all_viewings_by_property_request.html" title="Representa uma requisição para obter todas as visitas de um imóvel." alt="" coords="460,520,698,579"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="345,367,392,437,425,474,462,506,480,517,477,522,458,510,421,478,388,440,340,370"/>
+<area shape="rect" id="Node000011" href="$class_realty_hub_1_1_core_1_1_requests_1_1_viewings_1_1_get_all_viewings_request.html" title="Representa uma requisição para obter uma lista paginada de visitas." alt="" coords="471,603,687,645"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="335,369,352,419,378,478,414,538,436,565,462,589,479,600,476,604,458,593,433,569,410,541,373,481,347,421,330,371"/>
+<area shape="rect" id="Node000002" href="$class_realty_hub_1_1_core_1_1_requests_1_1_request.html" title="Classe base para todas as requisições." alt="" coords="5,312,185,355"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="200,331,232,331,232,336,200,336"/>
+</map>

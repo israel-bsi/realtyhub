@@ -1,0 +1,5 @@
+<map id="RealtyHub.Core.Requests.Emails.AttachmentMessage" name="RealtyHub.Core.Requests.Emails.AttachmentMessage">
+<area shape="rect" id="Node000001" title="Classe que representa uma mensagem de e&#45;mail com um anexo específico, associada a um contrato." alt="" coords="5,96,191,139"/>
+<area shape="rect" id="Node000002" href="$class_realty_hub_1_1_core_1_1_requests_1_1_emails_1_1_email_message.html" title="Classe abstrata que representa uma mensagem de e&#45;mail genérica." alt="" coords="8,5,188,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="101,64,101,96,95,96,95,64"/>
+</map>

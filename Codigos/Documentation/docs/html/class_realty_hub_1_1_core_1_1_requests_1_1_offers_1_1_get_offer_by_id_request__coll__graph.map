@@ -1,0 +1,5 @@
+<map id="RealtyHub.Core.Requests.Offers.GetOfferByIdRequest" name="RealtyHub.Core.Requests.Offers.GetOfferByIdRequest">
+<area shape="rect" id="Node000001" title="Classe que representa uma requisição para obter uma proposta específica." alt="" coords="5,96,191,139"/>
+<area shape="rect" id="Node000002" href="$class_realty_hub_1_1_core_1_1_requests_1_1_request.html" title="Classe base para todas as requisições." alt="" coords="8,5,188,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="101,64,101,96,95,96,95,64"/>
+</map>

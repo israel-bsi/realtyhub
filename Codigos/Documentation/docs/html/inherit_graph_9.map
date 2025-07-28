@@ -1,0 +1,9 @@
+<map id="Representação gráfica da hiearquia da classe" name="Representação gráfica da hiearquia da classe">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,56,80,83"/>
+<area shape="rect" id="Node000001" href="$class_realty_hub_1_1_api_service_1_1_migrations_1_1v1.html" title=" " alt="" coords="128,5,360,32"/>
+<area shape="poly" id="edge48_Node000000_Node000001" title=" " alt="" coords="94,51,127,41,175,30,176,35,128,47,95,56"/>
+<area shape="rect" id="Node000002" href="$class_realty_hub_1_1_api_service_1_1_migrations_1_1v2.html" title=" " alt="" coords="128,56,360,83"/>
+<area shape="poly" id="edge49_Node000000_Node000002" title=" " alt="" coords="96,67,127,67,127,72,96,72"/>
+<area shape="rect" id="Node000003" href="$class_realty_hub_1_1_api_service_1_1_migrations_1_1v3.html" title=" " alt="" coords="128,107,360,133"/>
+<area shape="poly" id="edge50_Node000000_Node000003" title=" " alt="" coords="95,83,128,92,176,104,175,109,127,97,94,88"/>
+</map>

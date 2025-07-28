@@ -1,0 +1,5 @@
+<map id="RealtyHub.Core.Requests.PropertiesPhotos.CreatePropertyPhotosRequest" name="RealtyHub.Core.Requests.PropertiesPhotos.CreatePropertyPhotosRequest">
+<area shape="rect" id="Node000001" title="Representa uma requisição para criar fotos de um imóvel." alt="" coords="5,96,219,155"/>
+<area shape="rect" id="Node000002" href="$class_realty_hub_1_1_core_1_1_requests_1_1_request.html" title="Classe base para todas as requisições." alt="" coords="22,5,202,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="115,63,115,96,109,96,109,63"/>
+</map>

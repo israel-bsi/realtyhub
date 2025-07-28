@@ -1,0 +1,5 @@
+<map id="RealtyHub.ApiService.Handlers.ContractHandler" name="RealtyHub.ApiService.Handlers.ContractHandler">
+<area shape="rect" id="Node000001" title="Responsável pelas operações relacionadas a contratos." alt="" coords="5,96,216,139"/>
+<area shape="rect" id="Node000002" href="$interface_realty_hub_1_1_core_1_1_handlers_1_1_i_contract_handler.html" title="Interface que define os métodos para manipulação de contratos." alt="" coords="23,5,198,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="113,64,113,96,108,96,108,64"/>
+</map>

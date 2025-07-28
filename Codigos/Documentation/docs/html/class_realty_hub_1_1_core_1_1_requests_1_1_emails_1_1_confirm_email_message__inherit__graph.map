@@ -1,0 +1,5 @@
+<map id="RealtyHub.Core.Requests.Emails.ConfirmEmailMessage" name="RealtyHub.Core.Requests.Emails.ConfirmEmailMessage">
+<area shape="rect" id="Node000001" title="Classe que representa uma mensagem de e&#45;mail para confirmação de conta." alt="" coords="5,96,203,139"/>
+<area shape="rect" id="Node000002" href="$class_realty_hub_1_1_core_1_1_requests_1_1_emails_1_1_email_message.html" title="Classe abstrata que representa uma mensagem de e&#45;mail genérica." alt="" coords="14,5,194,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="107,64,107,96,101,96,101,64"/>
+</map>

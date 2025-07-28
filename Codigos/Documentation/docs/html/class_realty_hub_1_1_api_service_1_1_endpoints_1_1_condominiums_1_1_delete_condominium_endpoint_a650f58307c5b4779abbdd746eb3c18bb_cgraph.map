@@ -1,0 +1,5 @@
+<map id="RealtyHub.ApiService.Endpoints.Condominiums.DeleteCondominiumEndpoint.Map" name="RealtyHub.ApiService.Endpoints.Condominiums.DeleteCondominiumEndpoint.Map">
+<area shape="rect" id="Node000001" title="Mapeia o endpoint para a exclusão de condomínios." alt="" coords="5,5,316,48"/>
+<area shape="rect" id="Node000002" href="$interface_realty_hub_1_1_core_1_1_handlers_1_1_i_condominium_handler.html#a7bd7247d44e3fafd37d1a510010606c0" title="Exclui um condomínio existente." alt="" coords="364,5,593,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="316,24,348,24,348,29,316,29"/>
+</map>

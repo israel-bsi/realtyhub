@@ -1,0 +1,7 @@
+<map id="RealtyHub.Core.Requests.Properties.GetAllPropertiesRequest" name="RealtyHub.Core.Requests.Properties.GetAllPropertiesRequest">
+<area shape="rect" id="Node000001" title="Representa uma requisição para obter uma lista paginada de imóveis." alt="" coords="5,187,234,229"/>
+<area shape="rect" id="Node000002" href="$class_realty_hub_1_1_core_1_1_requests_1_1_paged_request.html" title="Classe base para solicitações paginadas." alt="" coords="30,96,209,139"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="122,154,122,186,117,186,117,154"/>
+<area shape="rect" id="Node000003" href="$class_realty_hub_1_1_core_1_1_requests_1_1_request.html" title="Classe base para todas as requisições." alt="" coords="30,5,209,48"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="122,64,122,96,117,96,117,64"/>
+</map>

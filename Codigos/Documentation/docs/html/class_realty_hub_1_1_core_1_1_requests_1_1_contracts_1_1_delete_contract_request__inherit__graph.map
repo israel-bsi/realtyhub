@@ -1,0 +1,5 @@
+<map id="RealtyHub.Core.Requests.Contracts.DeleteContractRequest" name="RealtyHub.Core.Requests.Contracts.DeleteContractRequest">
+<area shape="rect" id="Node000001" title="Classe que representa uma requisição para excluir um contrato." alt="" coords="5,96,225,139"/>
+<area shape="rect" id="Node000002" href="$class_realty_hub_1_1_core_1_1_requests_1_1_request.html" title="Classe base para todas as requisições." alt="" coords="25,5,205,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="118,64,118,96,112,96,112,64"/>
+</map>

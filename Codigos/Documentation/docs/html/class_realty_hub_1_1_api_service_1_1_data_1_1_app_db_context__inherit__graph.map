@@ -1,0 +1,5 @@
+<map id="RealtyHub.ApiService.Data.AppDbContext" name="RealtyHub.ApiService.Data.AppDbContext">
+<area shape="rect" id="Node000001" title="Representa o contexto de dados da aplicação, integrando o ASP.NET Identity com as entidades do sistem..." alt="" coords="263,45,449,88"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,215,128"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="230,64,262,64,262,69,230,69"/>
+</map>

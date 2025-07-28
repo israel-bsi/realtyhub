@@ -1,0 +1,7 @@
+<map id="RealtyHub.Core.Services.IEmailService" name="RealtyHub.Core.Services.IEmailService">
+<area shape="rect" id="Node000001" title="Interface que define os métodos para o serviço de envio de e&#45;mails." alt="" coords="139,5,313,48"/>
+<area shape="rect" id="Node000002" href="$class_realty_hub_1_1_api_service_1_1_services_1_1_email_service.html" title="Classe responsável pelo envio de e&#45;mails utilizando o protocolo SMTP." alt="" coords="5,96,215,139"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="189,60,139,98,136,93,185,55"/>
+<area shape="rect" id="Node000003" href="$class_realty_hub_1_1_web_1_1_services_1_1_email_service.html" title="Serviço responsável por enviar e&#45;mails relacionados à confirmação de conta, recuperação de senha e en..." alt="" coords="239,96,445,139"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="267,55,316,93,313,98,263,60"/>
+</map>

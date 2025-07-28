@@ -1,0 +1,9 @@
+<map id="RealtyHub.Core.Utilities.FakeEntities.AddressFake.GetFakeAddress" name="RealtyHub.Core.Utilities.FakeEntities.AddressFake.GetFakeAddress">
+<area shape="rect" id="Node000001" title="Gera um endereço falso para a entidade Address utilizando a biblioteca Bogus." alt="" coords="292,88,521,147"/>
+<area shape="rect" id="Node000002" href="$class_realty_hub_1_1_core_1_1_utilities_1_1_fake_entities_1_1_customer_fake.html#a7dc46f3b8fadce4549e340af273ca851" title="Gera uma lista de clientes empresariais falsos." alt="" coords="5,5,244,64"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="289,86,226,67,228,62,290,81"/>
+<area shape="rect" id="Node000003" href="$class_realty_hub_1_1_core_1_1_utilities_1_1_fake_entities_1_1_customer_fake.html#ac41fc155cea3ae81476bbfcb5aef8934" title="Gera uma lista de clientes individuais falsos." alt="" coords="5,88,244,147"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="276,120,244,120,244,115,276,115"/>
+<area shape="rect" id="Node000004" href="$class_realty_hub_1_1_core_1_1_utilities_1_1_fake_entities_1_1_property_fake.html#a59cfdebca5405e93286221611e2c979a" title="Gera uma lista de imóveis falsas." alt="" coords="9,171,240,229"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="290,154,228,173,226,167,289,149"/>
+</map>

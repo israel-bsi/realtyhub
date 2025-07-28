@@ -1,0 +1,5 @@
+<map id="RealtyHub.Core.Models.PropertyPhoto" name="RealtyHub.Core.Models.PropertyPhoto">
+<area shape="rect" id="Node000001" title="Representa uma foto associada a um imóvel." alt="" coords="5,80,220,123"/>
+<area shape="rect" id="Node000002" href="$class_realty_hub_1_1_core_1_1_models_1_1_entity.html" title="Representa uma entidade base com propriedades de data de criação e atualização." alt="" coords="13,5,212,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="115,48,115,80,110,80,110,48"/>
+</map>

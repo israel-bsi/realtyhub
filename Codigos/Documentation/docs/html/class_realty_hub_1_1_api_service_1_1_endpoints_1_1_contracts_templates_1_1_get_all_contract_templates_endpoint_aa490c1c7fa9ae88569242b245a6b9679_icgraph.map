@@ -1,0 +1,5 @@
+<map id="RealtyHub.ApiService.Endpoints.ContractsTemplates.GetAllContractTemplatesEndpoint.HandlerAsync" name="RealtyHub.ApiService.Endpoints.ContractsTemplates.GetAllContractTemplatesEndpoint.HandlerAsync">
+<area shape="rect" id="Node000001" title="Manipulador da rota que recebe a requisição para recuperar todos os modelos de contrato." alt="" coords="342,5,630,64"/>
+<area shape="rect" id="Node000002" href="$class_realty_hub_1_1_api_service_1_1_endpoints_1_1_contracts_templates_1_1_get_all_contract_templates_endpoint.html#ae37878884a01bcf515a6ff1c3b6a21c6" title="Mapeia o endpoint para recuperar todos os modelos de contrato." alt="" coords="5,5,294,64"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="326,37,294,37,294,32,326,32"/>
+</map>
