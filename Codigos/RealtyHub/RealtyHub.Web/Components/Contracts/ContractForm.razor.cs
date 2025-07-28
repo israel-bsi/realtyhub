@@ -155,7 +155,6 @@ public partial class ContractFormComponent : ComponentBase
                 if (response.IsSuccess)
                 {
                     Snackbar.Add("Contrato alterado com sucesso", Severity.Success);
-                    NavigationManager.NavigateTo("/contratos");
                     await OnSubmitButtonClickedAsync();
                 }
                 else
@@ -163,7 +162,10 @@ public partial class ContractFormComponent : ComponentBase
             }
 
             if (success)
+            {
                 await OpenEmailDialog();
+                NavigationManager.NavigateTo("/contratos");
+            }
         }
         catch (Exception e)
         {
@@ -186,7 +188,7 @@ public partial class ContractFormComponent : ComponentBase
     {
         var parametersConfirm = new DialogParameters
         {
-            { "ContentText", "Deseja enviar os contrados via e-mail? " },
+            { "ContentText", "Deseja enviar os contratos via e-mail? " },
             { "ButtonText", "Confirmar" },
             { "ButtonColor", Color.Success }
         };
@@ -217,6 +219,11 @@ public partial class ContractFormComponent : ComponentBase
         };
         var dialog = await DialogService
             .ShowAsync<EmailDialog>("Enviar contrato por e-mail", parameters, options);
+        var result = await dialog.Result;
+        if (result is { Canceled: false, Data: string emailResult })
+        {
+            Snackbar.Add(emailResult, Severity.Success);
+        }
     }
 
     /// <summary>
@@ -477,6 +484,10 @@ public partial class ContractFormComponent : ComponentBase
     protected override async Task OnInitializedAsync()
     {
         IsBusy = true;
+        InputModel.IssueDate = DateTime.Now;
+        InputModel.EffectiveDate = DateTime.Now;
+        InputModel.TermEndDate = DateTime.Now.AddYears(1);
+        InputModel.SignatureDate = DateTime.Now;
         try
         {
             if (ContractId != 0)

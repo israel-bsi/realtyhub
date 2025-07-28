@@ -116,9 +116,7 @@ public class ContractHandler : IContractHandler
                 .Include(o => o.Buyer)
                 .Include(o => o.Offer)
                 .ThenInclude(o => o!.Property)
-                .FirstOrDefaultAsync(c => c.Id == request.Id
-                                          && c.UserId == request.UserId
-                                          && c.IsActive);
+                .FirstOrDefaultAsync(c => c.Id == request.Id && c.IsActive);
 
             if (contract is null)
                 return new Response<Contract?>(null, 404, "Contrato não encontrado");
@@ -173,9 +171,7 @@ public class ContractHandler : IContractHandler
         {
             var contract = await _context
                 .Contracts
-                .FirstOrDefaultAsync(c => c.Id == request.Id
-                                          && c.UserId == request.UserId
-                                          && c.IsActive);
+                .FirstOrDefaultAsync(c => c.Id == request.Id && c.IsActive);
 
             if (contract is null)
                 return new Response<Contract?>(null, 404, "Contrato não encontrado");
@@ -212,9 +208,7 @@ public class ContractHandler : IContractHandler
                 .ThenInclude(o => o!.Property)
                 .Include(c => c.Buyer)
                 .Include(c => c.Seller)
-                .FirstOrDefaultAsync(c => c.Id == request.Id
-                                          && c.UserId == request.UserId
-                                          && c.IsActive);
+                .FirstOrDefaultAsync(c => c.Id == request.Id && c.IsActive);
 
             if (contract is null)
                 return new Response<Contract?>(null, 404, "Contrato não encontrado");
@@ -253,7 +247,7 @@ public class ContractHandler : IContractHandler
                 .ThenInclude(o => o!.Property)
                 .Include(c => c.Buyer)
                 .Include(c => c.Seller)
-                .Where(c => c.UserId == request.UserId && c.IsActive);
+                .Where(c => c.IsActive);
 
             if (request.StartDate is not null && request.EndDate is not null)
             {

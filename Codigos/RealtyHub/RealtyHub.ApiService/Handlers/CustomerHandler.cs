@@ -102,9 +102,7 @@ public class CustomerHandler : ICustomerHandler
         {
             var customer = await _context
                 .Customers
-                .FirstOrDefaultAsync(c => c.Id == request.Id
-                                          && (string.IsNullOrEmpty(c.UserId) || c.UserId == request.UserId)
-                                          && c.IsActive);
+                .FirstOrDefaultAsync(c => c.Id == request.Id && c.IsActive);
 
             if (customer is null)
                 return new Response<Customer?>(null, 404, "Cliente não encontrado");
@@ -151,9 +149,7 @@ public class CustomerHandler : ICustomerHandler
         {
             var customer = await _context
                 .Customers
-                .FirstOrDefaultAsync(c => c.Id == request.Id
-                                          && (string.IsNullOrEmpty(c.UserId) || c.UserId == request.UserId)
-                                          && c.IsActive);
+                .FirstOrDefaultAsync(c => c.Id == request.Id && c.IsActive);
 
             if (customer is null)
                 return new Response<Customer?>(null, 404, "Cliente não encontrado");
@@ -187,9 +183,7 @@ public class CustomerHandler : ICustomerHandler
                 .Customers
                 .Include(c => c.Properties)
                 .AsNoTracking()
-                .FirstOrDefaultAsync(c => c.Id == request.Id
-                                          && (c.UserId == request.UserId || string.IsNullOrEmpty(c.UserId))
-                                          && c.IsActive);
+                .FirstOrDefaultAsync(c => c.Id == request.Id && c.IsActive);
 
             return customer is null
                 ? new Response<Customer?>(null, 404, "Cliente não encontrado")
@@ -219,8 +213,7 @@ public class CustomerHandler : ICustomerHandler
                 .Customers
                 .Include(c => c.Properties)
                 .AsNoTracking()
-                .Where(c => (c.UserId == request.UserId || string.IsNullOrEmpty(c.UserId))
-                            && c.IsActive);
+                .Where(c => c.IsActive);
 
             if (!string.IsNullOrEmpty(request.SearchTerm))
             {

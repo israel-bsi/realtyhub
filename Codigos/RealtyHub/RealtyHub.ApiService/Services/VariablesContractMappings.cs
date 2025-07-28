@@ -134,8 +134,8 @@ public class VariablesContractMappings
             { "rg_cliente_comprador", contract.Buyer.Rg },
             { "orgaoExpeditorRg_cliente_proprietario", contract.Seller.IssuingAuthority },
             { "orgaoExpeditorRg_cliente_comprador", contract.Buyer.IssuingAuthority },
-            { "dataemissaorg_cliente_proprietario", contract.Seller.RgIssueDate?.ToString("dd/MM/yyyy")! },
-            { "dataemissaorg_cliente_comprador", contract.Buyer.RgIssueDate?.ToString("dd/MM/yyyy")! }
+            { "dataemissaorg_cliente_proprietario", contract.Seller.RgIssueDate?.ToString("dd/MM/yyyy") ?? DateTime.MinValue.ToString(CultureInfo.CurrentCulture) },
+            { "dataemissaorg_cliente_comprador", contract.Buyer.RgIssueDate?.ToString("dd/MM/yyyy") ?? DateTime.MinValue.ToString(CultureInfo.CurrentCulture) }
         };
     }
 

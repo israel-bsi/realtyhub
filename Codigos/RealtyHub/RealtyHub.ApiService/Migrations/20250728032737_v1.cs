@@ -39,8 +39,8 @@ namespace RealtyHub.ApiService.Migrations
                     CondominiumValue = table.Column<decimal>(type: "numeric", nullable: false),
                     UserId = table.Column<string>(type: "text", nullable: false),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()"),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()")
                 },
                 constraints: table =>
                 {
@@ -146,7 +146,8 @@ namespace RealtyHub.ApiService.Migrations
                 name: "Property",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false),
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     SellerId = table.Column<long>(type: "bigint", nullable: false),
                     CondominiumId = table.Column<long>(type: "bigint", nullable: false),
                     Title = table.Column<string>(type: "character varying(120)", maxLength: 120, nullable: false),
@@ -181,12 +182,6 @@ namespace RealtyHub.ApiService.Migrations
                     table.ForeignKey(
                         name: "FK_Property_Condominium_CondominiumId",
                         column: x => x.CondominiumId,
-                        principalTable: "Condominium",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Property_Condominium_Id",
-                        column: x => x.Id,
                         principalTable: "Condominium",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);

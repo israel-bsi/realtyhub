@@ -55,10 +55,7 @@ public class PropertyPhotosHandler : IPropertyPhotosHandler
             var property = await _context
                 .Properties
                 .AsNoTracking()
-                .FirstOrDefaultAsync(p =>
-                    p.Id == request.PropertyId
-                    && p.UserId == request.UserId
-                    && p.IsActive);
+                .FirstOrDefaultAsync(p => p.Id == request.PropertyId && p.IsActive);
 
             if (property is null)
                 return new Response<PropertyPhoto?>(null, 404, "Imóvel não encontrado");
@@ -150,7 +147,6 @@ public class PropertyPhotosHandler : IPropertyPhotosHandler
                 await _context.PropertyPhotos
                     .Where(pi =>
                         pi.PropertyId == request.PropertyId
-                        && pi.UserId == request.UserId
                         && pi.IsActive
                         && pi.IsThumbnail)
                     .ForEachAsync(pi =>
@@ -167,7 +163,6 @@ public class PropertyPhotosHandler : IPropertyPhotosHandler
                     .PropertyPhotos
                     .FirstOrDefaultAsync(pi =>
                         pi.Id == photo.Id
-                        && pi.UserId == request.UserId
                         && pi.IsActive);
 
                 if (existingEntity is null)
@@ -203,10 +198,7 @@ public class PropertyPhotosHandler : IPropertyPhotosHandler
         {
             var propertyPhoto = await _context
                 .PropertyPhotos
-                .FirstOrDefaultAsync(pi =>
-                    pi.Id == request.Id
-                    && pi.UserId == request.UserId
-                    && pi.IsActive);
+                .FirstOrDefaultAsync(pi => pi.Id == request.Id && pi.IsActive);
 
             if (propertyPhoto is null)
                 return new Response<PropertyPhoto?>(null, 404, "Foto não encontrada");
@@ -243,10 +235,7 @@ public class PropertyPhotosHandler : IPropertyPhotosHandler
             var propertyPhotos = await _context
                 .PropertyPhotos
                 .AsNoTracking()
-                .Where(p =>
-                    p.PropertyId == request.PropertyId
-                    && p.UserId == request.UserId
-                    && p.IsActive)
+                .Where(p => p.PropertyId == request.PropertyId && p.IsActive)
                 .OrderBy(p => p.IsThumbnail)
                 .ToListAsync();
 

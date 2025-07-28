@@ -146,9 +146,7 @@ public class PropertyHandler : IPropertyHandler
         {
             var property = await _context
                 .Properties
-                .FirstOrDefaultAsync(p => p.Id == request.Id
-                                          && p.UserId == request.UserId
-                                          && p.IsActive);
+                .FirstOrDefaultAsync(p => p.Id == request.Id && p.IsActive);
 
             if (property is null)
                 return new Response<Property?>(null, 404, "Imóvel não encontrado");
@@ -219,9 +217,6 @@ public class PropertyHandler : IPropertyHandler
                 .Include(p => p.Seller)
                 .Include(p => p.PropertyPhotos.Where(photos => photos.IsActive))
                 .Where(p => p.IsActive);
-
-            if (!string.IsNullOrEmpty(request.UserId))
-                query = query.Where(v => v.UserId == request.UserId);
 
             if (!string.IsNullOrEmpty(request.FilterBy))
                 query = query.FilterByProperty(request.SearchTerm, request.FilterBy);

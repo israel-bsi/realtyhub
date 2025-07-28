@@ -56,18 +56,14 @@ public class ViewingHandler : IViewingHandler
         {
             var customer = await _context
                 .Customers
-                .FirstOrDefaultAsync(c => c.Id == request.BuyerId
-                                          && (string.IsNullOrEmpty(c.UserId) || c.UserId == request.UserId)
-                                          && c.IsActive);
+                .FirstOrDefaultAsync(c => c.Id == request.BuyerId && c.IsActive);
 
             if (customer is null)
                 return new Response<Viewing?>(null, 404, "Cliente não encontrado");
 
             var property = await _context
                 .Properties
-                .FirstOrDefaultAsync(p => p.Id == request.PropertyId
-                                          && (string.IsNullOrEmpty(p.UserId) || p.UserId == request.UserId)
-                                          && p.IsActive);
+                .FirstOrDefaultAsync(p => p.Id == request.PropertyId && p.IsActive);
 
             if (property is null)
                 return new Response<Viewing?>(null, 404, "Imóvel não encontrado");
@@ -120,8 +116,7 @@ public class ViewingHandler : IViewingHandler
                 .Viewing
                 .Include(v => v.Buyer)
                 .Include(v => v.Property)
-                .FirstOrDefaultAsync(v => v.Id == request.Id
-                                          && (string.IsNullOrEmpty(v.UserId) || v.UserId == request.UserId));
+                .FirstOrDefaultAsync(v => v.Id == request.Id);
 
             if (viewing is null)
                 return new Response<Viewing?>(null, 404, "Visita não encontrada");
@@ -166,8 +161,7 @@ public class ViewingHandler : IViewingHandler
                 .Viewing
                 .Include(v => v.Buyer)
                 .Include(v => v.Property)
-                .FirstOrDefaultAsync(v => v.Id == request.Id
-                                          && (string.IsNullOrEmpty(v.UserId) || v.UserId == request.UserId));
+                .FirstOrDefaultAsync(v => v.Id == request.Id);
 
             if (viewing is null)
                 return new Response<Viewing?>(null, 404, "Visita não encontrada");
@@ -211,8 +205,7 @@ public class ViewingHandler : IViewingHandler
                 .Viewing
                 .Include(v => v.Buyer)
                 .Include(v => v.Property)
-                .FirstOrDefaultAsync(v => v.Id == request.Id
-                                          && (string.IsNullOrEmpty(v.UserId) || v.UserId == request.UserId));
+                .FirstOrDefaultAsync(v => v.Id == request.Id);
 
             if (viewing is null)
                 return new Response<Viewing?>(null, 404, "Visita não encontrada");
@@ -258,8 +251,7 @@ public class ViewingHandler : IViewingHandler
                 .Include(v => v.Buyer)
                 .Include(v => v.Property)
                 .ThenInclude(p => p!.Seller)
-                .FirstOrDefaultAsync(v => v.Id == request.Id
-                                          && (string.IsNullOrEmpty(v.UserId) || v.UserId == request.UserId));
+                .FirstOrDefaultAsync(v => v.Id == request.Id);
 
             if (viewing is null)
                 return new Response<Viewing?>(null, 404, "Visita não encontrada");
@@ -292,7 +284,7 @@ public class ViewingHandler : IViewingHandler
                 .Include(v => v.Buyer)
                 .Include(v => v.Property)
                 .ThenInclude(p => p!.Seller)
-                .Where(v => string.IsNullOrEmpty(v.UserId) || v.UserId == request.UserId);
+                .Where(v => v.Id != 0);
 
             if (request.StartDate is not null && request.EndDate is not null)
             {

@@ -394,8 +394,7 @@ public class OfferHandler : IOfferHandler
             var property = await _context
                 .Properties
                 .AsNoTracking()
-                .FirstOrDefaultAsync(p => p.Id == request.PropertyId
-                                          && p.IsActive);
+                .FirstOrDefaultAsync(p => p.Id == request.PropertyId && p.IsActive);
 
             if (property is null)
                 return new PagedResponse<List<Offer>?>(null, 404,
@@ -459,8 +458,7 @@ public class OfferHandler : IOfferHandler
             var customer = await _context
                 .Customers
                 .AsNoTracking()
-                .FirstOrDefaultAsync(p => p.Id == request.CustomerId
-                                          && p.IsActive);
+                .FirstOrDefaultAsync(p => p.Id == request.CustomerId && p.IsActive);
 
             if (customer is null)
                 return new PagedResponse<List<Offer>?>(null, 404,
