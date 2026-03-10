@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using RealtyHub.ApiService.Data;
+using RealtyHub.Infrastructure.Data;
 using RealtyHub.Core.Requests.Emails;
 using RealtyHub.Core.Responses;
 using RealtyHub.Core.Services;

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace RealtyHub.ApiService.Models;
+namespace RealtyHub.Core.Models;
 
 /// <summary>
 /// Representa um usuário do sistema.

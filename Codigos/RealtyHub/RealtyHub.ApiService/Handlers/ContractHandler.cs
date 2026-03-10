@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RealtyHub.ApiService.Data;
+using RealtyHub.Infrastructure.Data;
 using RealtyHub.ApiService.Services;
 using RealtyHub.Core.Enums;
 using RealtyHub.Core.Handlers;

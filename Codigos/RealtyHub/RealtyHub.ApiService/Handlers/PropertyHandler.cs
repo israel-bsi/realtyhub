@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RealtyHub.ApiService.Data;
+using RealtyHub.Infrastructure.Data;
 using RealtyHub.Core.Extensions;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Models;

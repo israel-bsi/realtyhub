@@ -1,11 +1,10 @@
+using RealtyHub.Core.Models;
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using RealtyHub.ApiService.Models;
-using RealtyHub.Core.Models;
 using System.Reflection;
 
-namespace RealtyHub.ApiService.Data;
+namespace RealtyHub.Infrastructure.Data;
 
 /// <summary>
 /// Representa o contexto de dados da aplicação, integrando o ASP.NET Identity com as entidades do sistema.

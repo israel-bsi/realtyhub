@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
 using RealtyHub.ApiService.Common.Api;
-using RealtyHub.ApiService.Models;
+using RealtyHub.Core.Models;
 using RealtyHub.Core.Requests.Account;
 using RealtyHub.Core.Requests.Emails;
 using RealtyHub.Core.Responses;

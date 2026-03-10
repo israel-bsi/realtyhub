@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RealtyHub.ApiService.Common.Api;
-using RealtyHub.ApiService.Data;
+using RealtyHub.Infrastructure.Data;
 using RealtyHub.Core.Requests.Emails;
 using RealtyHub.Core.Responses;
 using RealtyHub.Core.Services;

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using RealtyHub.Core.Enums;
 using RealtyHub.Core.Models;
 
-namespace RealtyHub.ApiService.Data.Mappings;
+namespace RealtyHub.Infrastructure.Data.Mappings;
 
 /// <summary>
 /// Configura o mapeamento da entidade <c><see cref="ContractTemplate"/></c> para o modelo de dados.

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using QuestPDF.Fluent;
 using RealtyHub.ApiService.Common.Api;
-using RealtyHub.ApiService.Data;
+using RealtyHub.Infrastructure.Data;
 using RealtyHub.ApiService.Services.Reports;
 using RealtyHub.Core.Models;
 using RealtyHub.Core.Responses;

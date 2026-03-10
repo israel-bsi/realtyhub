@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using RealtyHub.ApiService.Common.Api;
-using RealtyHub.ApiService.Models;
+using RealtyHub.Core.Models;
 
 namespace RealtyHub.ApiService.Endpoints.Identity;
 

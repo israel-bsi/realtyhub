@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using RealtyHub.ApiService.Data;
+using RealtyHub.Infrastructure;
+using RealtyHub.Infrastructure.Data;
 using RealtyHub.ApiService.Handlers;
-using RealtyHub.ApiService.Models;
+using RealtyHub.Core.Models;
 using RealtyHub.ApiService.Services;
 using RealtyHub.Core.Handlers;
 using RealtyHub.Core.Services;
@@ -127,15 +128,7 @@ public static class BuilderExtension
     /// <param name="builder">Instância do construtor da aplicação.</param>
     public static void AddDataContexts(this WebApplicationBuilder builder)
     {
-        builder
-            .Services
-            .AddDbContext<AppDbContext>(
-                x =>
-                {
-                    x.UseNpgsql(Core.Configuration.ConnectionString)
-                        .EnableSensitiveDataLogging()
-                        .EnableDetailedErrors();
-                });
+        builder.Services.AddInfrastructure(builder.Configuration);
 
         builder.Services
             .AddIdentityCore<User>(options =>

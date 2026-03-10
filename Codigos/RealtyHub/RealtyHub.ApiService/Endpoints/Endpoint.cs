@@ -9,7 +9,7 @@ using RealtyHub.ApiService.Endpoints.Offers;
 using RealtyHub.ApiService.Endpoints.Properties;
 using RealtyHub.ApiService.Endpoints.Reports;
 using RealtyHub.ApiService.Endpoints.Viewings;
-using RealtyHub.ApiService.Models;
+using RealtyHub.Core.Models;
 
 namespace RealtyHub.ApiService.Endpoints;
 

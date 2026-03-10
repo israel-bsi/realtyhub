@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using RealtyHub.ApiService.Models;
+using RealtyHub.Core.Models;
 
-namespace RealtyHub.ApiService.Data.Mappings.Identity;
+namespace RealtyHub.Infrastructure.Data.Mappings.Identity;
 
 /// <summary>
 /// Configura o mapeamento da entidade <c><see cref="User"/></c> para o modelo de dados.

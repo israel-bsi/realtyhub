@@ -8,7 +8,7 @@ using RealtyHub.Core.Models.Account;
 using RealtyHub.Core.Requests.Account;
 using RealtyHub.Core.Responses;
 using RealtyHub.Tests.Common;
-using User = RealtyHub.ApiService.Models.User;
+using User = RealtyHub.Core.Models.User;
 
 namespace RealtyHub.Tests.Identity;
 

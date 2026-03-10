@@ -24,6 +24,7 @@
     <ProjectReference Include="..\RealtyHub.ApiService\RealtyHub.ApiService.csproj" />
     <ProjectReference Include="..\RealtyHub.AppHost\RealtyHub.AppHost.csproj" />
     <ProjectReference Include="..\RealtyHub.Core\RealtyHub.Core.csproj" />
+    <ProjectReference Include="..\RealtyHub.Infrastructure\RealtyHub.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

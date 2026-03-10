@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace RealtyHub.ApiService.Data.Mappings.Identity;
+namespace RealtyHub.Infrastructure.Data.Mappings.Identity;
 
 /// <summary>
 /// Configura o mapeamento da entidade <c><see cref="IdentityUserToken{TKey}"/></c> para o modelo de dados.
